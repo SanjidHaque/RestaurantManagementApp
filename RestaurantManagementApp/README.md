@@ -1,6 +1,6 @@
 # RestaurantManagementApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.3.
 
 ## Development server
 

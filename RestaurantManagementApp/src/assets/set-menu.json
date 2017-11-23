@@ -1,0 +1,49 @@
+[
+  {
+    "Name": "Set Menu A",
+    "Price": "230 BDT",
+    "FoodItems": [
+      {
+        "FoodItem1": "Fried Rice"
+      },
+      {
+        "FoodItem2": "Chicken Fry"
+      },
+      {
+        "FoodItem3": "CocaCola 250ml"
+      }
+    ]
+  },
+
+  {
+    "Name": "Set Menu B",
+    "Price": "340 BDT",
+    "FoodItems": [
+      {
+        "FoodItem1": "Fried rice with vegetable curry"
+      },
+      {
+        "FoodItem2": "Chicken fry with extra sausages"
+      },
+      {
+        "FoodItem3": "CocaCola 350ml"
+      }
+    ]
+  },
+
+  {
+    "Name": "Set Menu C",
+    "Price": "499 BDT",
+    "FoodItems": [
+      {
+        "FoodItem1": "Canadian fried rice with beef curry"
+      },
+      {
+        "FoodItem2": "Mutton fry"
+      },
+      {
+        "FoodItem3": "CocaCola 1000ml and mineral water 250ml "
+      }
+    ]
+  }
+]

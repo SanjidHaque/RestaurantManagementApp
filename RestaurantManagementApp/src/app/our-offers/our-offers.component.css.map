@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,YAAa;EACX,UAAU,EAAE,MAAM;EAClB,WAAW,EAAE,gBAAgB;EAC7B,SAAS,EAAE,IAAI;;AAGjB,iBAAiB;EACf,UAAU,EAAE,MAAM;EAClB,WAAW,EAAC,gBAAgB;EAC5B,SAAS,EAAC,IAAI",
+"sources": ["our-offers.component.scss"],
 "names": [],
 "file": "our-offers.component.css"
 }

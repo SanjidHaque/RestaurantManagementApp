@@ -3,8 +3,6 @@ import {Http} from '@angular/http';
 import { Response} from '@angular/http';
 
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
-
 
 
 @Injectable()

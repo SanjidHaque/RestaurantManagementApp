@@ -1,3 +1,11 @@
+.SetMenuName {
+  text-align: center;
+  font-family: "Berlin Sans FB";
+  font-size: 19px; }
 
+.our-offers-title {
+  text-align: center;
+  font-family: "Berlin Sans FB";
+  font-size: 25px; }
 
 /*# sourceMappingURL=our-offers.component.css.map */

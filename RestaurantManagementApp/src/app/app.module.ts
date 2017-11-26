@@ -5,10 +5,11 @@ import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { OurOffersComponent } from './our-offers/our-offers.component';
-import {AppRoutingModule} from './app-router.module';
+import {AppRoutingModule} from './app-routing.module';
 import {OurOffersService} from './our-offers/our-offers.service';
-import { OurOffersListComponent } from './our-offers/our-offers-list/our-offers-list.component';
-import { TComponent } from './t/t.component';
+import { FoodCartComponent } from './food-cart/food-cart.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { PurchasedFoodComponent } from './purchased-food/purchased-food.component';
 
 
 @NgModule({
@@ -16,8 +17,10 @@ import { TComponent } from './t/t.component';
     AppComponent,
     HeaderComponent,
     OurOffersComponent,
-    OurOffersListComponent,
-    TComponent
+    FoodCartComponent,
+    HomePageComponent,
+    PurchasedFoodComponent
+
   ],
   imports: [
     BrowserModule,

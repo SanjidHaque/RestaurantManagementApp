@@ -1,22 +1,53 @@
 <div class="row">
-  <div  class="col-md-6">
+  <div class="col-md-6 our-offers-title">
     Our offers for this winter!
     </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
-      <app-our-offers-list></app-our-offers-list>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12 panel panel-primary">
+        <div class="row" *ngFor="let setMenu of setMenus, let i = index">
+          <div class="col-md-12 panel-heading ">
+            <div class="col-md-12 SetMenuName panel-title " >
+              {{ setMenu.Name }}
+              <hr>
+            </div>
+          </div>
+
+          <div *ngFor="let foodItems of setMenu.FoodItems" class="col-md-12 panel-body">
+
+            <div class="col-md-12">
+              {{ foodItems.FoodItem1 }}
+            </div>
+
+            <div class="col-md-12">
+              {{ foodItems.FoodItem2 }}
+            </div>
+
+            <div class="col-md-12">
+              {{ foodItems.FoodItem3 }}
+            </div>
+
+          </div>
+          <div class="col-md-12 panel-footer">
+            <div class="col-md-8">
+              Price: {{ setMenu.Price }}
+            </div>
+            <div class="col-md-4">
+              <button type="button" class="btn btn-primary" (click)="purchasedFood(i)" style="cursor: pointer;">
+              Add to food cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
+  <div class="col-md-6">
+    <router-outlet>
+    </router-outlet>
   </div>
 </div>
 
 
-
-
-
-
-
-<!--
-
-<ul *ngFor="let setMenu of setMenus">
-  <li> {{ setMenu.name }}</li>
-</ul>-->

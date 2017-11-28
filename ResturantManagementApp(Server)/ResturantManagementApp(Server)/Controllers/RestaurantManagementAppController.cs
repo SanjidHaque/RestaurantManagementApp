@@ -16,6 +16,13 @@ namespace ResturantManagementApp_Server_.Controllers
         {
             _Context = new ApplicationDbContext();
         }
+        [Route("api/GetsSetMenus")]
+        public IEnumerable<SetMenu> GetsSetMenus()
+        {
+            return _Context.SetMenus.ToList();
+
+        }
+
         [Route("api/GetSetMenu/{id:int}")]
         public SetMenu GetSetMenu(int id)
         {

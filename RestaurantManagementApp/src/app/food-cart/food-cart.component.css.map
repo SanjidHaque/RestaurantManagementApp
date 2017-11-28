@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,qBAAqB;EACnB,WAAW,EAAC,qBAAqB;EACjC,SAAS,EAAC,IAAI",
+"sources": ["food-cart.component.scss"],
 "names": [],
 "file": "food-cart.component.css"
 }

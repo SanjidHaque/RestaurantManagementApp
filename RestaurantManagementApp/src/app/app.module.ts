@@ -10,6 +10,8 @@ import {OurOffersService} from './our-offers/our-offers.service';
 import { FoodCartComponent } from './food-cart/food-cart.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PurchasedFoodComponent } from './purchased-food/purchased-food.component';
+import { OurOffersListComponent } from './our-offers/our-offers-list/our-offers-list.component';
+import {DataStorageService} from './shared/data-storage.service';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { PurchasedFoodComponent } from './purchased-food/purchased-food.componen
     OurOffersComponent,
     FoodCartComponent,
     HomePageComponent,
-    PurchasedFoodComponent
+    PurchasedFoodComponent,
+    OurOffersListComponent
 
   ],
   imports: [
@@ -27,7 +30,7 @@ import { PurchasedFoodComponent } from './purchased-food/purchased-food.componen
     AppRoutingModule,
     HttpModule
   ],
-  providers: [OurOffersService],
+  providers: [OurOffersService, DataStorageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

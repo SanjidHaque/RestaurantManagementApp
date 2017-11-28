@@ -4,13 +4,13 @@
     "Price": "230 BDT",
     "FoodItems": [
       {
-        "FoodItem1": "Fried Rice"
+        "Name": "Fried Rice"
       },
       {
-        "FoodItem2": "Chicken Fry"
+        "Name": "Chicken Fry"
       },
       {
-        "FoodItem3": "CocaCola 250ml"
+        "Name": "CocaCola 250ml"
       }
     ]
   },
@@ -20,13 +20,13 @@
     "Price": "340 BDT",
     "FoodItems": [
       {
-        "FoodItem1": "Fried rice with vegetable curry"
+        "Name": "Fried rice with vegetable curry"
       },
       {
-        "FoodItem2": "Chicken fry with extra sausages"
+        "Name": "Chicken fry with extra sausages"
       },
       {
-        "FoodItem3": "CocaCola 350ml"
+        "Name": "CocaCola 350ml"
       }
     ]
   },
@@ -36,13 +36,13 @@
     "Price": "499 BDT",
     "FoodItems": [
       {
-        "FoodItem1": "Canadian fried rice with beef curry"
+        "Name": "Canadian fried rice with beef curry"
       },
       {
-        "FoodItem2": "Mutton fry"
+        "Name": "Mutton fry"
       },
       {
-        "FoodItem3": "CocaCola 1000ml and mineral water 250ml "
+        "Name": "CocaCola 1000ml and mineral water 250ml"
       }
     ]
   }

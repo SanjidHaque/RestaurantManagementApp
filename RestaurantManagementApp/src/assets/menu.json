@@ -1,0 +1,103 @@
+{
+  "FoodItem": [
+    {
+      "Name": "Fried rice",
+      "Id": "1",
+      "Price": "99 BDT"
+    },
+    {
+      "Name": "Fried rice with vegetable curry",
+      "Id": "2",
+      "Price": "120 BDT"
+    },
+    {
+      "Name": "Canadian fried rice with beef curry",
+      "Id": "3",
+      "Price": "130 BDT"
+    },
+    {
+      "Name": "Chicken fry",
+      "Id": "4",
+      "Price": "110 BDT"
+    },
+    {
+      "Name": "Chicken fry with extra sausages",
+      "Id": "5",
+      "Price": "150 BDT"
+    },
+    {
+      "Name": "Mutton fry",
+      "Id": "6",
+      "Price": "220 BDT"
+    },
+    {
+      "Name": "CocaCola 250ml",
+      "Id": "7",
+      "Price": "45 BDT"
+    },
+    {
+      "Name": "CocaCola 350ml",
+      "Id": "8",
+      "Price": "70 BDT"
+    },
+    {
+      "Name": "CocaCola 1000ml and 250ml mineral water",
+      "Id": "9",
+      "Price": "120 BDT"
+    }
+  ],
+
+
+
+  "SetMenu":[
+    {
+      "Name": "Set Menu A",
+      "Price": "239 BDT",
+      "FoodItems": [
+        {
+          "Name": "Fried Rice",
+          "Id": "1",
+          "Price": "99 BDT"
+        },
+        {
+          "Name": "Fried Rice",
+          "Id": "2",
+          "Price": "99 BDT"
+        }
+      ]
+    },
+
+    {
+      "Name": "Set Menu B",
+      "Price": "349 BDT",
+      "FoodItems": [
+        {
+          "Name": "Fried Rice",
+          "Id": "1"
+
+        },
+        {
+          "Name": "Fried Rice",
+          "Id": "2"
+        }
+      ]
+    },
+
+    {
+      "Name": "Set Menu B",
+      "Price": "499 BDT",
+      "FoodItems": [
+        {
+          "Name": "Fried Rice",
+          "Id": "1"
+
+        },
+        {
+          "Name": "Fried Rice",
+          "Id": "2"
+        }
+      ]
+    }
+  ]
+}
+

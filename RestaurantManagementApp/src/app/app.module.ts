@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { UuidModule } from 'ng2-uuid';
 
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
@@ -28,7 +29,8 @@ import {DataStorageService} from './shared/data-storage.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    UuidModule
   ],
   providers: [OurOffersService, DataStorageService ],
   bootstrap: [AppComponent]

@@ -1,26 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import {OurOffersService} from '../our-offers/our-offers.service';
-import { SetMenu } from '../our-offers/our-offers.model';
-
+import {OurOffers} from '../our-offers/our-offers.model';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 @Injectable()
 export class DataStorageService {
-  private _url = 'assets/set-menu.json';
-  constructor(private _http: Http, private ourOffersService: OurOffersService) {
-
-  }
-  getRecipes() {
-    this._http.get(this._url)
+  private _url = 'assets/menu.json';
+  constructor(private _http: Http, private ourOffersService: OurOffersService) { }
+  getMenu() {
+    return this._http.get(this._url)
       .map(
         (response: Response) => {
-           const setMenus: SetMenu[] = response.json();
-           return setMenus;
+           const menus: OurOffers = response.json();
+           return menus;
          }
-      )
-      .subscribe(
-        (setMenu: SetMenu[]) => {
-          this.ourOffersService.setOurOffers(setMenu);
-        }
       );
+      /*.subscribe(
+        (menus: OurOffers[] ) => {
+          this.ourOffersService.setOurOffers(menus);
+        }
+      );*/
   }
+
+ /* public getJson(): Observable<any> {
+    return this._http.get(this._url)
+      .map((res: any) =>
+      }
+    );
+
+  }*/
+
 }

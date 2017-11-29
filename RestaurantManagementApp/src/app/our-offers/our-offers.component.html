@@ -5,8 +5,8 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <app-our-offers-list *ngFor="let setMenu of setMenus, let i = index"
-    [setMenu]="setMenu"
+    <app-our-offers-list *ngFor="let menu of Menu.SetMenu, let i = index"
+    [menu]="menu"
     [index] ="i"
     >
 

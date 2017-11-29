@@ -1,14 +1,16 @@
-import {SetMenuIngredients} from '../shared/set-menu-ingredients.model';
 
-export class SetMenu {
-  public Name: string;
-  public Price: number;
+import {SetMenu} from '../shared/set-menu.model';
+import {FoodItem} from '../shared/food-item.model';
+
+export class OurOffers {
+  public SetMenu: SetMenu[];
+  public FoodItem: FoodItem[];
 
 
 
-  constructor(name: string, price: number) {
-    this.Name = name;
-    this.Price = price;
+  constructor(setMenu: SetMenu[] = [], foodItem: FoodItem[] = []) {
+    this.SetMenu = setMenu;
+    this.FoodItem = foodItem;
 
   }
 }

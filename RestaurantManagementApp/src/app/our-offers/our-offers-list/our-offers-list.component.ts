@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SetMenu} from '../our-offers.model';
+import {OurOffers} from '../our-offers.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OurOffersService} from '../our-offers.service';
 
@@ -9,7 +9,7 @@ import {OurOffersService} from '../our-offers.service';
   styleUrls: ['./our-offers-list.component.scss']
 })
 export class OurOffersListComponent implements OnInit {
-  @Input() setMenu: SetMenu;
+  @Input() menu: OurOffers;
   @Input() index: number;
 
   constructor(private _ourOfferService: OurOffersService,

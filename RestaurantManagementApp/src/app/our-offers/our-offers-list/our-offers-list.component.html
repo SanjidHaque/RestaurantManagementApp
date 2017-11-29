@@ -3,12 +3,12 @@
     <div class="row">
       <div class="col-md-12 panel-heading ">
         <div class="col-md-12 SetMenuName panel-title " >
-{{ setMenu.Name}}
+{{ menu.Name}}
           <hr>
         </div>
       </div>
 
-      <div *ngFor="let foodItems of setMenu.FoodItems" class="col-md-12 panel-body SetMenuDetails">
+      <div *ngFor="let foodItems of menu.FoodItems" class="col-md-12 panel-body SetMenuDetails">
 
         <div class="col-md-12">
           {{ foodItems.Name }}
@@ -24,7 +24,7 @@
       </div>
       <div class="col-md-12 panel-footer">
         <div class="col-md-8 SetMenuPrice">
-          Price: {{ setMenu.Price }}
+          Price: {{ menu.Price }}
         </div>
 
         <div class="col-md-4">

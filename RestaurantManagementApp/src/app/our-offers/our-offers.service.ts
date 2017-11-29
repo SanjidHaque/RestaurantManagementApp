@@ -4,25 +4,24 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/map';
 import {Subject} from 'rxjs/Subject';
-import { SetMenu} from './our-offers.model';
+import {OurOffers} from './our-offers.model';
 import {DataStorageService} from '../shared/data-storage.service';
 
 
 @Injectable()
 export class OurOffersService {
-  setMenuChanged = new Subject<SetMenu[]>();
+  menuChanged = new Subject<OurOffers>();
+  public menu: OurOffers;
 
-  public setMenu: SetMenu[];
-
-  constructor(){
+  constructor() {
   }
 
-  setOurOffers(setMenu: SetMenu[]) {
-    this.setMenu = setMenu;
-    this.setMenuChanged.next(this.setMenu.slice());
+  setOurOffers(menu: OurOffers) {
+    this.menu = menu;
+    this.menuChanged.next(this.menu/*.slice()*/);
   }
   getOurOffers() {
-      return this.setMenu/*.slice()*/;
+      return this.menu/*.slice()*/;
   }
 }
 

@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {OurOffersService} from './our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {SetMenu} from './our-offers.model';
+import {OurOffers} from './our-offers.model';
 import {DataStorageService} from '../shared/data-storage.service';
 
 @Component({
@@ -11,27 +11,32 @@ import {DataStorageService} from '../shared/data-storage.service';
   styleUrls: ['./our-offers.component.scss']
 })
 export class OurOffersComponent implements OnInit, OnDestroy {
-    setMenus: SetMenu[];
+    Menu: OurOffers;
     subscription: Subscription;
 
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+    this.Menu = new OurOffers();
+  }
 
       /*this._ourOfferService.getOurOffers()
         .subscribe(
           responseToSetMenu => this.setMenus = responseToSetMenu
         );*/
   ngOnInit() {
-    this.subscription = this._ourOfferService.setMenuChanged
+    this.subscription = this._ourOfferService.menuChanged
       .subscribe(
-        (setMenu: SetMenu[]) => {
-          this.setMenus = setMenu;
+        (Menu: OurOffers) => {
+          this.Menu = Menu;
         }
       );
-    this.setMenus = this._ourOfferService.getOurOffers();
-    this._dataStorageService.getRecipes();
+  /*  this.Menu = this._ourOfferService.getOurOffers();*/
+    this._dataStorageService.getMenu()
+      .subscribe((Menu: OurOffers ) => {
+      this.Menu = Menu;
+    });
   }
 
   ngOnDestroy() {

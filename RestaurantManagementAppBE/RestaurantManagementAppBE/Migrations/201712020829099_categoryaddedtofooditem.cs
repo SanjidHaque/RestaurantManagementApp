@@ -16,16 +16,16 @@ namespace RestaurantManagementAppBE.Migrations
                     })
                 .PrimaryKey(t => t.Id);
             
-            AddColumn("dbo.FoodItems", "CategoryId", c => c.Int(nullable: false));
-            CreateIndex("dbo.FoodItems", "CategoryId");
-            AddForeignKey("dbo.FoodItems", "CategoryId", "dbo.Categories", "Id", cascadeDelete: true);
+            AddColumn("dbo.FoodCategories", "CategoryId", c => c.Int(nullable: false));
+            CreateIndex("dbo.FoodCategories", "CategoryId");
+            AddForeignKey("dbo.FoodCategories", "CategoryId", "dbo.Categories", "Id", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.FoodItems", "CategoryId", "dbo.Categories");
-            DropIndex("dbo.FoodItems", new[] { "CategoryId" });
-            DropColumn("dbo.FoodItems", "CategoryId");
+            DropForeignKey("dbo.FoodCategories", "CategoryId", "dbo.Categories");
+            DropIndex("dbo.FoodCategories", new[] { "CategoryId" });
+            DropColumn("dbo.FoodCategories", "CategoryId");
             DropTable("dbo.Categories");
         }
     }

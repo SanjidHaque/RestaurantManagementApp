@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using RestaurantManagementAppBE.Models;
+using System.Data.Entity;
 
 namespace RestaurantManagementAppBE.Controllers
 {
@@ -23,10 +24,13 @@ namespace RestaurantManagementAppBE.Controllers
         {
 
             var foodItem = _Context.FoodItems.ToList();
-            var menu = new MenuViewModel {FoodItems = foodItem};
+            //MenuViewModel myModel = new MenuViewModel();
+            var setMenu = _Context.SetMenus.Include(a => a.SetMenuItems).ToList();
+            //var SetMenuItem = _Context.SetMenus.Include(a => a.SetMenuItems);
+            var menu = new MenuViewModel { FoodItems = foodItem, SetMenus = setMenu, };
             return menu;
         }
-
+        
         
     }
 }

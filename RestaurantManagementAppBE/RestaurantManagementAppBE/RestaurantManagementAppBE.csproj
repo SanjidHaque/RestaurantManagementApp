@@ -179,6 +179,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RestaurantManagementAppController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,6 +194,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FoodItem.cs" />
+    <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Models\SetMenu.cs" />
     <Compile Include="Models\SetMenuItem.cs" />

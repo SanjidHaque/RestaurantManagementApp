@@ -5,11 +5,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using RestaurantManagementAppBE.Models;
 using System.Data.Entity;
 
 namespace RestaurantManagementAppBE.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class RestaurantManagementAppController : ApiController
     {
         public MyDbContext _Context;

@@ -23,11 +23,9 @@ namespace RestaurantManagementAppBE.Controllers
         public MenuViewModel Menu()
         {
 
-            var foodItem = _Context.FoodItems.ToList();
-            //MenuViewModel myModel = new MenuViewModel();
+            var foodItem = _Context.FoodItems.GroupBy(p=>p.Category).ToDictionary(p=>p.Key.Name, p=>p.ToList());
             var setMenu = _Context.SetMenus.Include(a => a.SetMenuItems).ToList();
-            //var SetMenuItem = _Context.SetMenus.Include(a => a.SetMenuItems);
-            var menu = new MenuViewModel { FoodItems = foodItem, SetMenus = setMenu, };
+            var menu = new MenuViewModel {  SetMenus = setMenu, FoodCategories = foodItem};
             return menu;
         }
         

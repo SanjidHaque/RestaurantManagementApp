@@ -8,6 +8,6 @@ namespace RestaurantManagementAppBE.Models
     public class MenuViewModel
     {
         public List<SetMenu> SetMenus { get; set; }
-        public List<FoodItem> FoodItems { get; set; }
+        public Dictionary<string, List<FoodItem>> FoodCategories { get; set; }
     }
 }

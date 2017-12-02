@@ -11,6 +11,9 @@ namespace RestaurantManagementAppBE
         {
             // Web API configuration and services
             config.EnableCors();
+
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
             // Web API routes
             config.MapHttpAttributeRoutes();
 

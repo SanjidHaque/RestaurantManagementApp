@@ -1,9 +1,9 @@
 export class OrderedItems {
   public Id: string;
   public OrderId: string;
-  public FoodItemId: number;
+  public FoodItemId?: number;
   public Quantity: number;
-  public SetMenuId: number;
+  public SetMenuId?: number;
 
 
 

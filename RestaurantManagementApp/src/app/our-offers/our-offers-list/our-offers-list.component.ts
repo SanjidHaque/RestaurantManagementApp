@@ -3,6 +3,8 @@ import {OurOffers} from '../our-offers.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OurOffersService} from '../our-offers.service';
 import { Uuid } from 'ng2-uuid';
+import {Order} from '../../shared/order.model';
+import {OrderedItems} from '../../shared/ordered-items.model';
 
 
 @Component({
@@ -13,18 +15,27 @@ import { Uuid } from 'ng2-uuid';
 export class OurOffersListComponent implements OnInit {
   @Input() menu: OurOffers;
   @Input() index: number;
-  uuidCode: string = '';
+  order: Order[];
+  uuidCodeOne: string = '';
+  uuidCodeTwo: string = '';
   constructor(private _ourOfferService: OurOffersService,
               private router: Router,
               private route: ActivatedRoute,
               private uuid: Uuid) {
-    this.uuidCode = this.uuid.v1();
+    this.uuidCodeOne = this.uuid.v1();
+    this.uuidCodeTwo = this.uuid.v1();
   }
 
   ngOnInit() {
-
   }
-  OnAddToPurchasedFood() {
-    this.router.navigate(['purchased-food', { getUuid: this.uuidCode}], { relativeTo: this.route});
+
+  OnAddToPurchasedFood(id: number) {
+    let purchasedFoodId = this.uuidCodeOne;
+    let orderId = this.uuidCodeTwo;
+    let quantity = 1;
+    let setMenuId = id;
+    const purchaesdFood = new OrderedItems(purchasedFoodId,orderId,null,quantity,setMenuId);
+    this._ourOfferService.addToOrderedItemsList(purchaesdFood);
+    this.router.navigate(['purchased-food'], { relativeTo: this.route});
   }
 }

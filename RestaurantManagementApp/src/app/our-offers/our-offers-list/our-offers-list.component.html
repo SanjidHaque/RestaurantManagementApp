@@ -27,13 +27,9 @@
           Price: {{ menu.Price }}
 
         </div>
-        <div class="col-md-8 SetMenuPrice">
-        {{ uuidCode}}
-
-        </div>
 
         <div class="col-md-4">
-          <button type="button" class="btn btn-primary" (click)="OnAddToPurchasedFood()" style="cursor: pointer;">
+          <button type="button" class="btn btn-primary" (click)="OnAddToPurchasedFood(menu.Id)" style="cursor: pointer;">
             Add to food cart</button>
         </div>
       </div>

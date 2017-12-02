@@ -1,4 +1,6 @@
 <div class="col-md-offset-2 col-md-8 Added-To-Food-Cart">
   Added to your food cart!
-{{ getUuid}}
+  <div class="col-md-12" *ngFor="let purchasedFoods of PurchasedFoods">
+    {{ purchasedFoods.Id }}
+  </div>
 </div>

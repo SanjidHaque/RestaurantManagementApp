@@ -196,6 +196,8 @@
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\MyDbContext.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderedItem.cs" />
     <Compile Include="Models\SetMenu.cs" />
     <Compile Include="Models\SetMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

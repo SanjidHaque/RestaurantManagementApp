@@ -1,3 +1,4 @@
 obj
 /RestaurantManagementAppBE/RestaurantManagementAppBE/bin
 /RestaurantManagementAppBE/*.suo
+/RestaurantManagementAppBE/RestaurantManagementAppBE/App_Data

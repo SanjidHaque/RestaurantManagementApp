@@ -21,19 +21,33 @@ namespace RestaurantManagementAppBE.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-           
-            var coke = new FoodItem() { Name = "Coke", Price = 30 };
-            var chickenFry = new FoodItem() { Name = "Chicken Fry", Price = 80 };
-            var friedRice = new FoodItem() { Name = "Fried Rice", Price = 300 };
+            var drinksCategory = new Category() {Name = "Drinks"};
+            var fastFoodCategory = new Category() {Name = "Fast Food"};
+            var chineseCategory = new Category() {Name = "Chinese Food"};
+            var banglaCategory = new Category() {Name = "Bangla Food"};
+            var dessertCategory = new Category() {Name = "Dessert"};
+            
+            context.Categories.AddOrUpdate(
+                p=>p.Id,
+                drinksCategory,
+                fastFoodCategory,
+                chineseCategory,
+                banglaCategory,
+                dessertCategory
+                );
+
+            var coke = new FoodItem() { Name = "Coke", Price = 30, Category = drinksCategory};
+            var chickenFry = new FoodItem() { Name = "Chicken Fry", Price = 80 , Category = fastFoodCategory};
+            var friedRice = new FoodItem() { Name = "Fried Rice", Price = 300 , Category = chineseCategory};
 
             context.FoodItems.AddOrUpdate(
                 p => p.Id,
                 coke,
                 chickenFry,
                 friedRice,
-                new FoodItem { Name = "Khichuri", Price = 150 },
-                new FoodItem { Name = "Finni", Price = 30 },
-                new FoodItem { Name = "Water", Price = 15 });
+                new FoodItem { Name = "Khichuri", Price = 150 , Category = banglaCategory},
+                new FoodItem { Name = "Finni", Price = 30 , Category = dessertCategory},
+                new FoodItem { Name = "Water", Price = 15, Category = drinksCategory});
 
             context.SetMenus.AddOrUpdate(
                 p => p.Id,

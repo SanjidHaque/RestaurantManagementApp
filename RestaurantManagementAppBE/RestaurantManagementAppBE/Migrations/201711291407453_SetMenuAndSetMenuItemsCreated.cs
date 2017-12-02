@@ -17,7 +17,7 @@ namespace RestaurantManagementAppBE.Migrations
                         Quantity = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.FoodItems", t => t.FoodItemId, cascadeDelete: true)
+                .ForeignKey("dbo.FoodCategories", t => t.FoodItemId, cascadeDelete: true)
                 .ForeignKey("dbo.SetMenus", t => t.SetMenuId, cascadeDelete: true)
                 .Index(t => t.SetMenuId)
                 .Index(t => t.FoodItemId);
@@ -37,7 +37,7 @@ namespace RestaurantManagementAppBE.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.SetMenuItems", "SetMenuId", "dbo.SetMenus");
-            DropForeignKey("dbo.SetMenuItems", "FoodItemId", "dbo.FoodItems");
+            DropForeignKey("dbo.SetMenuItems", "FoodItemId", "dbo.FoodCategories");
             DropIndex("dbo.SetMenuItems", new[] { "FoodItemId" });
             DropIndex("dbo.SetMenuItems", new[] { "SetMenuId" });
             DropTable("dbo.SetMenus");

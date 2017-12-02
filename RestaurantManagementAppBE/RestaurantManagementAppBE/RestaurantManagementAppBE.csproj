@@ -192,7 +192,12 @@
     <Compile Include="Migrations\201711291407453_SetMenuAndSetMenuItemsCreated.Designer.cs">
       <DependentUpon>201711291407453_SetMenuAndSetMenuItemsCreated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712020829099_categoryaddedtofooditem.cs" />
+    <Compile Include="Migrations\201712020829099_categoryaddedtofooditem.Designer.cs">
+      <DependentUpon>201712020829099_categoryaddedtofooditem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\MyDbContext.cs" />
@@ -248,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711291407453_SetMenuAndSetMenuItemsCreated.resx">
       <DependentUpon>201711291407453_SetMenuAndSetMenuItemsCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712020829099_categoryaddedtofooditem.resx">
+      <DependentUpon>201712020829099_categoryaddedtofooditem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

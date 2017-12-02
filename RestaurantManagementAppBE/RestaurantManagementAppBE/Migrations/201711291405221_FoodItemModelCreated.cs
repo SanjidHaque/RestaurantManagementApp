@@ -8,7 +8,7 @@ namespace RestaurantManagementAppBE.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.FoodItems",
+                "dbo.FoodCategories",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -21,7 +21,7 @@ namespace RestaurantManagementAppBE.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.FoodItems");
+            DropTable("dbo.FoodCategories");
         }
     }
 }

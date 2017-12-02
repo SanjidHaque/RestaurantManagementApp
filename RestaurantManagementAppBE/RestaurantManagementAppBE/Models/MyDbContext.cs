@@ -11,6 +11,7 @@ namespace RestaurantManagementAppBE.Models
         public DbSet<SetMenu> SetMenus { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<SetMenuItem> SetMenuItems { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public MyDbContext()
             : base("MyDefaultConnection")
         {

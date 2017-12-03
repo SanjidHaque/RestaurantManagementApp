@@ -30,12 +30,12 @@ export class OurOffersListComponent implements OnInit {
   }
 
   OnAddToPurchasedFood(id: number) {
-    let purchasedFoodId = this.uuidCodeOne;
+    /*let purchasedFoodId = this.uuidCodeOne;
     let orderId = this.uuidCodeTwo;
     let quantity = 1;
     let setMenuId = id;
     const purchaesdFood = new OrderedItems(purchasedFoodId,orderId,null,quantity,setMenuId);
-    this._ourOfferService.addToOrderedItemsList(purchaesdFood);
+    this._ourOfferService.addToOrderedItemsList(purchaesdFood);*/
     this.router.navigate(['purchased-food'], { relativeTo: this.route});
   }
 }

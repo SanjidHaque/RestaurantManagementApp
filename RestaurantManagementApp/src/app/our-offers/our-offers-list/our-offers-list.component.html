@@ -3,28 +3,23 @@
     <div class="row">
       <div class="col-md-12 panel-heading ">
         <div class="col-md-12 SetMenuName panel-title " >
-{{ menu.Name}}
+{{ menu.Name }}
           <hr>
         </div>
       </div>
 
-      <div *ngFor="let foodItems of menu.FoodItems" class="col-md-12 panel-body SetMenuDetails">
+      <div *ngFor="let setMenuItems of menu.SetMenuItems" class="col-md-12 panel-body SetMenuDetails">
 
         <div class="col-md-12">
-          {{ foodItems.Name }}
+          {{ setMenuItems.FoodItem.Name }}
         </div>
 
-       <!-- <div class="col-md-12">
-          {{ foodItems.NameTwo }}
-        </div>
 
-        <div class="col-md-12">
-          {{ foodItems.NameThree }}
-        </div>-->
+        </div>
       </div>
       <div class="col-md-12 panel-footer">
         <div class="col-md-8 SetMenuPrice">
-          Price: {{ menu.Price }}
+          Price: {{ menu.Price }} BDT
 
         </div>
 

@@ -1,3 +1,71 @@
+.header {
+  background-color: #feff26; }
 
+.blocks-diner {
+  font-family: "Comic Sans MS";
+  font-size: 40px;
+  font-weight: bold;
+  padding-left: 38px; }
+
+.blocks-diner:focus {
+  outline: 0; }
+
+.our-offers {
+  font-family: "Berlin Sans FB";
+  font-size: 23px;
+  padding-top: 15px;
+  padding-left: 46px; }
+
+.our-offers-link {
+  color: #010100; }
+
+.login {
+  font-family: "Berlin Sans FB";
+  font-size: 20px;
+  padding-top: 15px; }
+
+.login-link {
+  color: #010100; }
+
+.register {
+  font-family: "Berlin Sans FB";
+  font-size: 20px;
+  padding-top: 15px; }
+
+.register-link {
+  color: #010100; }
+
+.home-page-link {
+  color: #010100; }
+
+.home-page-link:hover {
+  text-decoration: none; }
+
+a {
+  position: relative;
+  color: #000;
+  text-decoration: none; }
+
+a:hover {
+  color: #000; }
+
+a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s; }
+
+a:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1); }
 
 /*# sourceMappingURL=header.component.css.map */

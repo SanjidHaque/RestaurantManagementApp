@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular4-carousel": "^3.1.8",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "ng2-uuid": "0.0.3",

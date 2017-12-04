@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { UuidModule } from 'ng2-uuid';
+import { CarouselModule } from 'angular4-carousel';
 
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
@@ -13,6 +14,9 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { PurchasedFoodComponent } from './purchased-food/purchased-food.component';
 import { OurOffersListComponent } from './our-offers/our-offers-list/our-offers-list.component';
 import {DataStorageService} from './shared/data-storage.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -23,14 +27,18 @@ import {DataStorageService} from './shared/data-storage.service';
     FoodCartComponent,
     HomePageComponent,
     PurchasedFoodComponent,
-    OurOffersListComponent
+    OurOffersListComponent,
+    LoginComponent,
+    RegisterComponent,
+    FooterComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    UuidModule
+    UuidModule,
+    CarouselModule
   ],
   providers: [OurOffersService, DataStorageService ],
   bootstrap: [AppComponent]

@@ -15,7 +15,13 @@ import {OrderedItems} from '../../shared/ordered-items.model';
 export class OurOffersListComponent implements OnInit {
   @Input() menu: OurOffers;
   @Input() index: number;
+  public setMenuImage : string[] = [
+    'assets/ImageOne.jpg',
+    'assets/ImageTwo.jpg'
+  ];
   order: Order[];
+
+
   uuidCodeOne: string = '';
   uuidCodeTwo: string = '';
   constructor(private _ourOfferService: OurOffersService,

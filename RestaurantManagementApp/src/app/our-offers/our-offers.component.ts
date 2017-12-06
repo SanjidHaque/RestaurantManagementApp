@@ -14,6 +14,7 @@ export class OurOffersComponent implements OnInit, OnDestroy {
     Menu: OurOffers;
     subscription: Subscription;
 
+
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,

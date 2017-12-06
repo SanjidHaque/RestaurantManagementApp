@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { UuidModule } from 'ng2-uuid';
 import { CarouselModule } from 'angular4-carousel';
+import { CollapsibleModule } from 'angular4-collapsible';
 
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
@@ -17,6 +18,7 @@ import {DataStorageService} from './shared/data-storage.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     HttpModule,
     UuidModule,
-    CarouselModule
+    CarouselModule,
+    BrowserAnimationsModule,
+    CollapsibleModule
   ],
   providers: [OurOffersService, DataStorageService ],
   bootstrap: [AppComponent]

@@ -1,17 +1,41 @@
-.SetMenuName {
-  text-align: center;
-  font-family: "Berlin Sans FB";
-  font-size: 19px; }
+.set-menu-details {
+  border: 2px solid #feff26;
+  border-radius: 6px;
+  margin-top: 10px; }
 
-.SetMenuDetails {
-  text-align: center;
-  font-family: "Berlin Sans FB";
+.set-menu-name {
+  font-family: "Times New Roman";
+  font-size: 20px;
+  color: #feff26;
+  text-align: center; }
+
+.set-menu-items {
+  font-family: "SansSerif";
+  color: #feff26;
+  text-align: left;
   font-size: 16px; }
 
-.SetMenuPrice {
-  text-align: left;
-  font-family: "Verdana";
-  font-size: 17px;
-  font-weight: bold; }
+.set-menu-price {
+  font-family: "Times New Roman";
+  font-size: 20px;
+  color: #feff26;
+  text-align: center; }
+
+collapsible-header {
+  font-family: "Times New Roman";
+  font-size: 20px;
+  color: #feff26;
+  text-align: center;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  /*border: 2px solid #feff26;
+  border-radius: 6px;*/
+  /*border-bottom: none;*/ }
+
+collapsible-list {
+  border: none;
+  width: 100%;
+  height: 100%; }
 
 /*# sourceMappingURL=our-offers-list.component.css.map */

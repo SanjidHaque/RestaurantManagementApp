@@ -1,3 +1,4 @@
+<!--
 <div class="row">
   <div class="col-md-12 panel panel-primary">
     <div class="row">
@@ -31,12 +32,52 @@
     </div>
   </div>
 
-<!--
+&lt;!&ndash;
 </div>
--->
+&ndash;&gt;
 
-<!--
+&lt;!&ndash;
 
   <div *ngFor="let foodItem of setMenu.FoodItems, let i = index">
     {{foodItem.Name}}
-  </div>-->
+  </div>&ndash;&gt;
+-->
+
+
+<div class="row">
+  <div class="col-md-12 set-menu-details">
+    <div class="row">
+      <div class="col-md-12 set-menu-name">
+        {{ menu.Name }}
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let setMenuItems of menu.SetMenuItems" class="col-md-7 set-menu-items">
+        {{ setMenuItems.FoodItem.Name }}
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-12 set-menu-price">
+        Price: {{ menu.Price }} BDT
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12 set-menu-details">
+    <collapsible-list [type]="'expandable'">
+      <collapsible-list-item>
+        <collapsible-header class="waves-effect">
+          <div class="row">
+            <div class="col-md-12">
+              {{ menu.Name }}
+            </div>
+          </div>
+        </collapsible-header>
+      </collapsible-list-item>
+    </collapsible-list>
+  </div>
+</div>

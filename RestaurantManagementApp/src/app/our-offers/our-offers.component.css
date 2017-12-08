@@ -18,6 +18,13 @@
   border: 2px solid #feff26;
   border-radius: 6px;
   margin-top: 10px;
-  text-align: center; }
+  text-align: center;
+  padding-top: 6px;
+  padding-bottom: 6px; }
+
+.popup {
+  color: black;
+  font-family: "Berlin Sans FB";
+  font-size: 20px; }
 
 /*# sourceMappingURL=our-offers.component.css.map */

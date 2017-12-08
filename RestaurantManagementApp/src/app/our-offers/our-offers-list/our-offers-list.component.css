@@ -1,7 +1,7 @@
 .set-menu-details {
   border: 2px solid #feff26;
   border-radius: 6px;
-  margin-top: 10px; }
+  margin-top: 8px; }
 
 .set-menu-name {
   font-family: "Times New Roman";
@@ -13,13 +13,15 @@
   font-family: "SansSerif";
   color: #feff26;
   text-align: left;
-  font-size: 16px; }
+  font-size: 17px;
+  padding-top: 1px; }
 
 .set-menu-price {
   font-family: "Times New Roman";
   font-size: 20px;
   color: #feff26;
-  text-align: center; }
+  text-align: left;
+  padding-top: 24px; }
 
 collapsible-header {
   font-family: "Times New Roman";
@@ -27,15 +29,54 @@ collapsible-header {
   color: #feff26;
   text-align: center;
   background-color: black;
-  width: 100%;
-  height: 100%;
-  /*border: 2px solid #feff26;
-  border-radius: 6px;*/
-  /*border-bottom: none;*/ }
+  border-bottom: 1px groove #feff26; }
 
 collapsible-list {
-  border: none;
+  border: none; }
+
+collapsible-list-item {
+  border: none; }
+
+collapsible-body {
+  border: none; }
+
+.set-menu-image {
+  height: 120px;
+  width: 130px;
+  border: 2px groove white;
+  border-radius: 6px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease; }
+
+.set-menu-image:hover {
+  width: 176px;
+  height: 176px; }
+
+.smpbutton {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  font-family: "SansSerif";
+  color: #feff26;
+  background-color: black;
+  border: 1.2px solid  #feff26;
+  border-radius: 3px;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 22px; }
+
+.smpbutton:hover {
+  background-color: #feff26;
+  color: black;
+  font-family: "SansSerif";
+  font-weight: bold;
+  border: 1.2px solid black;
+  border-radius: 3px; }
+
+.smpbutton:focus {
+  outline: 0; }
 
 /*# sourceMappingURL=our-offers-list.component.css.map */

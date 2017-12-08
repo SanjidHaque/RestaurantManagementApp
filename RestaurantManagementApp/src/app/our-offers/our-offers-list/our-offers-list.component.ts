@@ -5,6 +5,8 @@ import {OurOffersService} from '../our-offers.service';
 import { Uuid } from 'ng2-uuid';
 import {Order} from '../../shared/order.model';
 import {OrderedItems} from '../../shared/ordered-items.model';
+import {Options} from 'selenium-webdriver/chrome';
+import {Popup} from 'ng2-opd-popup';
 
 
 @Component({
@@ -15,19 +17,19 @@ import {OrderedItems} from '../../shared/ordered-items.model';
 export class OurOffersListComponent implements OnInit {
   @Input() menu: OurOffers;
   @Input() index: number;
-  public setMenuImage : string[] = [
+  public setMenuImage: string[] = [
     'assets/ImageOne.jpg',
     'assets/ImageTwo.jpg'
   ];
   order: Order[];
 
-
-  uuidCodeOne: string = '';
-  uuidCodeTwo: string = '';
+  uuidCodeOne = '';
+  uuidCodeTwo = '';
   constructor(private _ourOfferService: OurOffersService,
               private router: Router,
               private route: ActivatedRoute,
-              private uuid: Uuid) {
+              private uuid: Uuid,
+              private popUp: Popup) {
     this.uuidCodeOne = this.uuid.v1();
     this.uuidCodeTwo = this.uuid.v1();
   }
@@ -43,5 +45,14 @@ export class OurOffersListComponent implements OnInit {
     const purchaesdFood = new OrderedItems(purchasedFoodId,orderId,null,quantity,setMenuId);
     this._ourOfferService.addToOrderedItemsList(purchaesdFood);*/
     this.router.navigate(['purchased-food'], { relativeTo: this.route});
+  }
+
+  AddToCart() {
+    this.popUp.options={
+      color: 'black',
+      showButtons: true,
+      cancleBtnContent: 'Cancel'
+    }
+    this.popUp.show();
   }
 }

@@ -44,7 +44,7 @@
 -->
 
 
-<div class="row">
+<!--<div class="row">
   <div class="col-md-12 set-menu-details">
     <div class="row">
       <div class="col-md-12 set-menu-name">
@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 
 <div class="row">
@@ -77,7 +77,30 @@
             </div>
           </div>
         </collapsible-header>
+        <collapsible-body [expanded]="true">
+        <div class="row">
+        <!--  <div class="col-md-12"  >-->
+              <div class="col-md-7 set-menu-items" *ngFor="let setMenuItems of menu.SetMenuItems">
+                {{ setMenuItems.FoodItem.Name }}
+              </div>
+            <div class="col-md-5 set-menu-image-div">
+              <img [src]="menu.SetMenuImage" class="set-menu-image">
+            </div>
+
+
+        </div>
+       <!-- </div>-->
+          <div class="row">
+            <div class="col-md-6 set-menu-price">
+             Price: {{ menu.Price }} BDT
+            </div>
+            <div class="col-md-offset-1 col-md-4 set-menu-price-button">
+              <button (click)="AddToCart()" class="smpbutton"> Add To Cart</button>
+            </div>
+          </div>
+        </collapsible-body>
       </collapsible-list-item>
     </collapsible-list>
   </div>
+
 </div>

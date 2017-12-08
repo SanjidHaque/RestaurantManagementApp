@@ -10,11 +10,24 @@
 .blocks-diner:focus {
   outline: 0; }
 
+.home {
+  font-family: "Berlin Sans FB";
+  font-size: 20px;
+  padding-top: 15px;
+  padding-left: 27px;
+  padding-right: 0px; }
+
 .our-offers {
   font-family: "Berlin Sans FB";
-  font-size: 23px;
+  font-size: 20px;
   padding-top: 15px;
-  padding-left: 46px; }
+  padding-left: 0px; }
+
+.contact-us {
+  font-family: "Berlin Sans FB";
+  font-size: 20px;
+  padding-top: 15px;
+  padding-left: 6px; }
 
 .our-offers-link {
   color: #010100; }

@@ -6,6 +6,7 @@ import {HomePageComponent} from './home-page/home-page.component';
 import {PurchasedFoodComponent} from './purchased-food/purchased-food.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {ContactUsComponent} from './contact-us/contact-us.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const appRoutes: Routes = [
   },
   { path: 'food-cart', component: FoodCartComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'contact-us', component: ContactUsComponent}
 
 ];
 

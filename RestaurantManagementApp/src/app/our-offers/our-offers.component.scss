@@ -14,10 +14,18 @@
 
 .set-menu-title {
   font-family: "Times New Roman";
-  font-size:22px;
+  font-size: 22px;
   color: #feff26;
   border: 2px solid #feff26;
   border-radius: 6px;
   margin-top:10px;
   text-align: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.popup{
+  color: black;
+  font-family: "Berlin Sans FB";
+  font-size:20px;
 }

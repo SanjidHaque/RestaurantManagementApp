@@ -17,13 +17,13 @@ export class HomePageComponent implements OnInit {
   ];
 
   public config: ICarouselConfig = {
-    verifyBeforeLoad: true,
+    verifyBeforeLoad: false,
     log: false,
     animation: true,
     animationType: AnimationConfig.SLIDE,
     autoplay: true,
     autoplayDelay: 3000,
-    stopAutoplayMinWidth: 768
+    stopAutoplayMinWidth: 768,
   };
 
   constructor() { }

@@ -19,7 +19,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import {CommonModule} from '@angular/common';
+import {PopupModule} from 'ng2-opd-popup';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     OurOffersListComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    ContactUsComponent
 
   ],
   imports: [
@@ -42,9 +46,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     UuidModule,
     CarouselModule,
     BrowserAnimationsModule,
-    CollapsibleModule
+    CollapsibleModule,
+    CommonModule,
+    PopupModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: ''
+
+    })
   ],
-  providers: [OurOffersService, DataStorageService ],
+  providers: [OurOffersService, DataStorageService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

@@ -17,10 +17,10 @@ import {Popup} from 'ng2-opd-popup';
 export class OurOffersListComponent implements OnInit {
   @Input() menu: OurOffers;
   @Input() index: number;
-  public setMenuImage: string[] = [
+ /* public setMenuImage: string[] = [
     'assets/ImageOne.jpg',
     'assets/ImageTwo.jpg'
-  ];
+  ];*/
   order: Order[];
 
   uuidCodeOne = '';
@@ -48,11 +48,13 @@ export class OurOffersListComponent implements OnInit {
   }
 
   AddToCart() {
-    this.popUp.options={
+    /*this.popUp.options={
       color: 'black',
       showButtons: true,
       cancleBtnContent: 'Cancel'
     }
-    this.popUp.show();
+    this.popUp.show();*/
+
+
   }
 }

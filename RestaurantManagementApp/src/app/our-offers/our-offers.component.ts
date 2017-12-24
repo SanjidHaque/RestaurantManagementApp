@@ -43,5 +43,4 @@ export class OurOffersComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

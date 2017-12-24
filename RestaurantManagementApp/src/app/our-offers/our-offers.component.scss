@@ -29,3 +29,30 @@
   font-family: "Berlin Sans FB";
   font-size:20px;
 }
+.smpbutton {
+  width:100%;
+  height:100%;
+  font-family:"SansSerif";
+  color: #feff26;
+  background-color: black;
+  border: 1.2px solid  #feff26;
+  border-radius: 3px;
+  font-size:20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 22px;
+}
+
+.smpbutton:hover{
+  background-color: #feff26;
+  color: black;
+  font-family:"SansSerif";
+  font-weight:bold;
+  border: 1.2px solid black;
+  border-radius: 3px;
+}
+
+.smpbutton:focus{
+  outline:0;
+}

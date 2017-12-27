@@ -133,7 +133,7 @@
     {
       "Name": "Set Menu C",
       "Price": "350",
-      "Id": "2",
+      "Id": "3",
       "SetMenuImage": "assets/set-menu-c.jpg",
       "SetMenuItems": [
         {
@@ -146,7 +146,7 @@
           "FoodItemId": "1",
           "Id": "1",
           "Quantity": "2",
-          "SetMenuId": "2"
+          "SetMenuId": "3"
         },
         {
           "FoodItem":
@@ -158,7 +158,7 @@
           "FoodItemId": "3",
           "Id": "2",
           "Quantity": "2",
-          "SetMenuId": "2"
+          "SetMenuId": "3"
         },
         {
           "FoodItem":
@@ -170,7 +170,7 @@
           "FoodItemId": "2",
           "Id": "3",
           "Quantity": "3",
-          "SetMenuId": "2"
+          "SetMenuId": "3"
         }
 
       ]
@@ -179,7 +179,7 @@
     {
       "Name": "Set Menu D",
       "Price": "160",
-      "Id": "2",
+      "Id": "4",
       "SetMenuImage": "assets/set-menu-d.jpg",
       "SetMenuItems": [
         {
@@ -192,7 +192,7 @@
           "FoodItemId": "1",
           "Id": "1",
           "Quantity": "2",
-          "SetMenuId": "2"
+          "SetMenuId": "4"
         },
         {
           "FoodItem":
@@ -204,7 +204,7 @@
           "FoodItemId": "2",
           "Id": "3",
           "Quantity": "3",
-          "SetMenuId": "2"
+          "SetMenuId": "4"
         }
 
       ]
@@ -213,7 +213,7 @@
     {
       "Name": "Set Menu E",
       "Price": "350",
-      "Id": "2",
+      "Id": "5",
       "SetMenuImage": "assets/set-menu-e.jpg",
       "SetMenuItems": [
         {
@@ -226,7 +226,7 @@
           "FoodItemId": "1",
           "Id": "1",
           "Quantity": "2",
-          "SetMenuId": "2"
+          "SetMenuId": "5"
         },
         {
           "FoodItem":
@@ -238,7 +238,7 @@
           "FoodItemId": "2",
           "Id": "3",
           "Quantity": "3",
-          "SetMenuId": "2"
+          "SetMenuId": "5"
         }
 
       ]

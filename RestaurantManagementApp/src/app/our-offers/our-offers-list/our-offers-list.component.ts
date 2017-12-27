@@ -25,6 +25,7 @@ export class OurOffersListComponent implements OnInit {
 
   uuidCodeOne = '';
   uuidCodeTwo = '';
+  uuidCodeThree = '';
   constructor(private _ourOfferService: OurOffersService,
               private router: Router,
               private route: ActivatedRoute,
@@ -32,6 +33,7 @@ export class OurOffersListComponent implements OnInit {
               private popUp: Popup) {
     this.uuidCodeOne = this.uuid.v1();
     this.uuidCodeTwo = this.uuid.v1();
+    this.uuidCodeThree = this.uuid.v1();
   }
 
   ngOnInit() {
@@ -47,14 +49,20 @@ export class OurOffersListComponent implements OnInit {
     this.router.navigate(['purchased-food'], { relativeTo: this.route});
   }
 
-  AddToCart() {
+  AddToCart(id: number) {
     /*this.popUp.options={
       color: 'black',
       showButtons: true,
       cancleBtnContent: 'Cancel'
     }
     this.popUp.show();*/
-
-
+    let purchasedFoodId = this.uuidCodeOne;
+    let orderId = this.uuidCodeTwo;
+    let quantity = 1;
+    let setMenuId = id;
+    const purchasedFood = new OrderedItems(purchasedFoodId, orderId, null, quantity, setMenuId);
+    this._ourOfferService.addToOrderedItemsList(purchasedFood);
   }
+
+
 }

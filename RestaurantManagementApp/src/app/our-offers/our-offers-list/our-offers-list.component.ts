@@ -22,6 +22,7 @@ export class OurOffersListComponent implements OnInit {
     'assets/ImageTwo.jpg'
   ];*/
   order: Order[];
+  /*totalPrice = 0;*/
 
   uuidCodeOne = '';
   uuidCodeTwo = '';
@@ -49,7 +50,7 @@ export class OurOffersListComponent implements OnInit {
     this.router.navigate(['purchased-food'], { relativeTo: this.route});
   }
 
-  AddToCart(id: number) {
+  AddToCart(id: number, price: number) {
     /*this.popUp.options={
       color: 'black',
       showButtons: true,
@@ -60,9 +61,15 @@ export class OurOffersListComponent implements OnInit {
     let orderId = this.uuidCodeTwo;
     let quantity = 1;
     let setMenuId = id;
-    const purchasedFood = new OrderedItems(purchasedFoodId, orderId, null, quantity, setMenuId);
+    let Price = price;
+    this._ourOfferService.totalPrice(price);
+
+
+  /*  this.totalPrice += price;*/
+    const purchasedFood = new OrderedItems(purchasedFoodId, orderId,  null, quantity, setMenuId, price);
     this._ourOfferService.addToOrderedItemsList(purchasedFood);
   }
 
 
 }
+

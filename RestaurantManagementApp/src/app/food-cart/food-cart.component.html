@@ -3,10 +3,14 @@
     Your purchased foods:
   </div>
   <div class="col-md-12 baal" *ngFor="let order of orderedItems">
-    {{ order.Id }}<br>
-    {{ order.OrderId }}<br>
-    {{ order.FoodItemId}}<br>
-    {{ order.Quantity }}<br>
-    {{ order.SetMenuId }}
+    ID: {{ order.Id }}<br>
+    Quantity: {{ order.Quantity }}<br>
+    Set Menu ID: {{ order.SetMenuId }}<br>
+    Price: {{ order.Price }}<br>
+
   </div>
+</div>
+
+<div class="col-md-12 baal">
+  {{ grandTotal }}
 </div>

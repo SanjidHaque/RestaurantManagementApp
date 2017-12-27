@@ -11,6 +11,7 @@ import {OrderedItems} from '../shared/ordered-items.model';
 
 @Injectable()
 export class OurOffersService {
+  public TotalPrice: number = 0;
   public menuChanged = new Subject<OurOffers>();
   public orderedItemsChanged = new Subject<OrderedItems[]>();
   public menu: OurOffers;
@@ -32,6 +33,11 @@ export class OurOffersService {
   addToOrderedItemsList(orderedItems: OrderedItems) {
     this.orderedItems.push(orderedItems);
     this.orderedItemsChanged.next(this.orderedItems.slice());
+  }
+
+   totalPrice(price: number){
+     this.TotalPrice = Number.parseInt(price.toString()) + Number.parseInt(this.TotalPrice.toString());
+     return this.TotalPrice;
   }
 }
 

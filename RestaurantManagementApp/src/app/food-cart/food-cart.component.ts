@@ -8,11 +8,13 @@ import {OrderedItems} from '../shared/ordered-items.model';
   styleUrls: ['./food-cart.component.scss']
 })
 export class FoodCartComponent implements OnInit {
+  public grandTotal: number;
   public orderedItems: OrderedItems[];
   constructor(private _ourOfferService: OurOffersService) { }
 
   ngOnInit() {
    this.orderedItems = this._ourOfferService.getOrderedItemsList();
+   this.grandTotal = this._ourOfferService.TotalPrice;
   }
 
 }

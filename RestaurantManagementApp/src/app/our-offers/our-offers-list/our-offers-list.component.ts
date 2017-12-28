@@ -50,7 +50,7 @@ export class OurOffersListComponent implements OnInit {
     this.router.navigate(['purchased-food'], { relativeTo: this.route});
   }
 
-  AddToCart(id: number, price: number) {
+  AddToCart(id: number, price: number, name: string) {
     /*this.popUp.options={
       color: 'black',
       showButtons: true,
@@ -61,15 +61,12 @@ export class OurOffersListComponent implements OnInit {
     let orderId = this.uuidCodeTwo;
     let quantity = 1;
     let setMenuId = id;
+    let setMenuName = name;
     let Price = price;
     this._ourOfferService.totalPrice(price);
-
-
-  /*  this.totalPrice += price;*/
-    const purchasedFood = new OrderedItems(purchasedFoodId, orderId,  null, quantity, setMenuId, price);
+    const purchasedFood = new OrderedItems(purchasedFoodId, orderId,  null, quantity, setMenuId, name, price);
     this._ourOfferService.addToOrderedItemsList(purchasedFood);
   }
-
 
 }
 

@@ -3,14 +3,22 @@
     Your purchased foods:
   </div>
   <div class="col-md-12 baal" *ngFor="let order of orderedItems">
-    ID: {{ order.Id }}<br>
+   <!-- ID: {{ order.Id }}<br>
     Quantity: {{ order.Quantity }}<br>
-    Set Menu ID: {{ order.SetMenuId }}<br>
+    Set Menu ID: {{ order.SetMenuId }}<br>-->
+     {{ order.SetMenuName }}<br>
     Price: {{ order.Price }}<br>
 
   </div>
 </div>
 
-<div class="col-md-12 baal">
-  {{ grandTotal }}
+<div class="col-md-12 baal" *ngIf="grandTotal==0; else itemIsSold">
+ You have not purchased any food yet!
 </div>
+
+<ng-template #itemIsSold>
+  <div class="col-md-12 baal">
+   Total Price: {{ grandTotal }}
+    <button routerLink="/our-offers" style="color: black;" class="smpbutton">Confirm Purchase</button>
+  </div>
+</ng-template>

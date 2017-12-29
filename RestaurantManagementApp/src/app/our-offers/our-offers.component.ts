@@ -13,6 +13,8 @@ import {DataStorageService} from '../shared/data-storage.service';
 export class OurOffersComponent implements OnInit, OnDestroy {
     Menu: OurOffers;
     subscription: Subscription;
+    toCheckOut = false;
+
 
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
@@ -43,4 +45,9 @@ export class OurOffersComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  allowToCheckOut() {
+    if (this._ourOfferService.TotalPrice > 0) {
+      return this.toCheckOut = true;
+    }  else { return this.toCheckOut = false; }
+  }
 }

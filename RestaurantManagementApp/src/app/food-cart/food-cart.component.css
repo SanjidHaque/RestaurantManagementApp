@@ -1,5 +1,11 @@
 .Your-Purchased-Foods {
   font-family: "Berlin Sans FB Demi";
-  font-size: 20px; }
+  font-size: 20px;
+  color: #feff26;
+  margin-top: 30px;
+  margin-left: 60px; }
+
+.baal {
+  color: #feff26; }
 
 /*# sourceMappingURL=food-cart.component.css.map */

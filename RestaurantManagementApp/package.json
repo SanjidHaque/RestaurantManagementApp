@@ -12,7 +12,8 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^4.2.4",
+    "@agm/core": "^1.0.0-beta.2",
+    "@angular/animations": "^4.4.6",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
     "@angular/core": "^4.2.4",
@@ -21,8 +22,11 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular4-carousel": "^3.1.8",
+    "angular4-collapsible": "0.0.41",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "ng2-opd-popup": "^1.1.21",
     "ng2-uuid": "0.0.3",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"

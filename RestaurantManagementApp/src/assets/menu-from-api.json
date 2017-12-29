@@ -1,0 +1,248 @@
+{
+  "FoodItems": [
+    {
+      "Name": "Fried rice",
+      "Id": "1",
+      "Price": "300"
+    },
+
+    {
+      "Name": "Coke",
+      "Id": "2",
+      "Price": "30"
+    },
+
+    {
+      "Name": "Chicken Fry",
+      "Id": "3",
+      "Price": "80"
+    },
+
+    {
+      "Name": "Khichuri",
+      "Id": "4",
+      "Price": "150"
+    },
+    {
+      "Name": "Finni",
+      "Id": "5",
+      "Price": "30"
+    },
+
+    {
+      "Name": "Water",
+      "Id": "6",
+      "Price": "15"
+    }
+  ],
+
+
+  "SetMenus":[
+    {
+      "Name": "Set Menu A",
+      "Price": "199",
+      "Id": "1",
+      "SetMenuImage": "assets/set-menu-a.jpg",
+      "SetMenuItems": [
+        {
+          "FoodItem":
+          {
+            "Id": "1",
+            "Name": "Fried Rice",
+            "Price": "99"
+          },
+          "FoodItemId": "1",
+          "Id": "1",
+          "Quantity": "1",
+          "SetMenuId": "1"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "3",
+            "Name": "Chicken Fry",
+            "Price": "80"
+          },
+          "FoodItemId": "3",
+          "Id": "2",
+          "Quantity": "1",
+          "SetMenuId": "1"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "2",
+            "Name": "CocaCola",
+            "Price": "30"
+          },
+          "FoodItemId": "2",
+          "Id": "3",
+          "Quantity": "2",
+          "SetMenuId": "1"
+        }
+
+      ]
+    },
+
+    {
+      "Name": "Set Menu B",
+      "Price": "299",
+      "Id": "2",
+      "SetMenuImage": "assets/set-menu-b.jpg",
+      "SetMenuItems": [
+        {
+          "FoodItem":
+          {
+            "Id": "1",
+            "Name": "Fried Rice with Vegetable Curry",
+            "Price": "300"
+          },
+          "FoodItemId": "1",
+          "Id": "1",
+          "Quantity": "2",
+          "SetMenuId": "2"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "3",
+            "Name": "Chicken Fry with Sausages",
+            "Price": "80"
+          },
+          "FoodItemId": "3",
+          "Id": "2",
+          "Quantity": "2",
+          "SetMenuId": "2"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "2",
+            "Name": "CocaCola",
+            "Price": "30"
+          },
+          "FoodItemId": "2",
+          "Id": "3",
+          "Quantity": "3",
+          "SetMenuId": "2"
+        }
+
+      ]
+    },
+
+    {
+      "Name": "Set Menu C",
+      "Price": "350",
+      "Id": "3",
+      "SetMenuImage": "assets/set-menu-c.jpg",
+      "SetMenuItems": [
+        {
+          "FoodItem":
+          {
+            "Id": "1",
+            "Name": "Indian Fried Rice",
+            "Price": "300"
+          },
+          "FoodItemId": "1",
+          "Id": "1",
+          "Quantity": "2",
+          "SetMenuId": "3"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "3",
+            "Name": "Chicken Fry",
+            "Price": "80"
+          },
+          "FoodItemId": "3",
+          "Id": "2",
+          "Quantity": "2",
+          "SetMenuId": "3"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "2",
+            "Name": "CocaCola",
+            "Price": "30"
+          },
+          "FoodItemId": "2",
+          "Id": "3",
+          "Quantity": "3",
+          "SetMenuId": "3"
+        }
+
+      ]
+    },
+
+    {
+      "Name": "Set Menu D",
+      "Price": "160",
+      "Id": "4",
+      "SetMenuImage": "assets/set-menu-d.jpg",
+      "SetMenuItems": [
+        {
+          "FoodItem":
+          {
+            "Id": "1",
+            "Name": "Beef Burger",
+            "Price": "300"
+          },
+          "FoodItemId": "1",
+          "Id": "1",
+          "Quantity": "2",
+          "SetMenuId": "4"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "2",
+            "Name": "CocaCola",
+            "Price": "30"
+          },
+          "FoodItemId": "2",
+          "Id": "3",
+          "Quantity": "3",
+          "SetMenuId": "4"
+        }
+
+      ]
+    },
+
+    {
+      "Name": "Set Menu E",
+      "Price": "350",
+      "Id": "5",
+      "SetMenuImage": "assets/set-menu-e.jpg",
+      "SetMenuItems": [
+        {
+          "FoodItem":
+          {
+            "Id": "1",
+            "Name": "Special Block's Burger",
+            "Price": "300"
+          },
+          "FoodItemId": "1",
+          "Id": "1",
+          "Quantity": "2",
+          "SetMenuId": "5"
+        },
+        {
+          "FoodItem":
+          {
+            "Id": "2",
+            "Name": "CocaCola",
+            "Price": "30"
+          },
+          "FoodItemId": "2",
+          "Id": "3",
+          "Quantity": "3",
+          "SetMenuId": "5"
+        }
+
+      ]
+    }
+  ]
+}
+

@@ -1,19 +1,54 @@
-<div class="row">
+<!--<div class="row">
   <div class="col-md-6 our-offers-title">
     Our offers for this winter!
     </div>
 </div>
 <div class="row">
   <div class="col-md-6">
-    <app-our-offers-list *ngFor="let menu of Menu.SetMenu, let i = index"
+    <app-our-offers-list *ngFor="let menu of Menu.SetMenus, let i = index"
     [menu]="menu"
     [index] ="i"
     >
 
     </app-our-offers-list>
 </div>
-  <div class="col-md-6">
-    <router-outlet>
-    </router-outlet>
+  -->
+
+
+<!--<div class="col-md-6">
+  <router-outlet>
+  </router-outlet>
+</div>-->
+<!--</div>-->
+
+<div class="row">
+  <div class="col-md-offset-1 col-md-5">
+    <div class="row">
+      <div class="col-md-12 set-menu-title">
+        Set Menus
+      </div>
+    </div>
+   <div class="row">
+     <div class="col-md-12">
+       <app-our-offers-list *ngFor="let menu of Menu.SetMenus, let i = index"
+                            [menu]="menu"
+                            [index] ="i"
+       >
+
+       </app-our-offers-list>
+
+     </div>
+
+   </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <button routerLink="/food-cart" class="smpbutton" [disabled]="!allowToCheckOut()">Proceed To Checkout</button>
+  </div>
+</div>
+
+<!--
+   <popup class="popup">This feature is not ready yet!</popup>
+-->

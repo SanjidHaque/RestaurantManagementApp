@@ -1,16 +1,15 @@
-
-import {SetMenu} from '../shared/set-menu.model';
-import {FoodItem} from '../shared/food-item.model';
+import {SetMenus} from '../shared/set-menu.model';
+import {FoodItems} from '../shared/food-item.model';
 
 export class OurOffers {
-  public SetMenu: SetMenu[];
-  public FoodItem: FoodItem[];
+  public SetMenus: SetMenus[];
+  public FoodItems: FoodItems[];
 
 
 
-  constructor(setMenu: SetMenu[] = [], foodItem: FoodItem[] = []) {
-    this.SetMenu = setMenu;
-    this.FoodItem = foodItem;
+  constructor(setMenu: SetMenus[] = [], foodItem: FoodItems[] = []) {
+    this.SetMenus = setMenu;
+    this.FoodItems = foodItem;
 
   }
 }

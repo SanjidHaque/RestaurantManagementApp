@@ -1,5 +1,5 @@
 {
-  "FoodItem": [
+  "FoodItems": [
     {
       "Name": "Fried rice",
       "Id": "1",
@@ -52,7 +52,7 @@
   ],
 
 
-  "SetMenu":[
+  "SetMenus":[
     {
       "Name": "Set Menu A",
       "Price": "239 BDT",
@@ -121,7 +121,6 @@
           "Id": "9",
           "Price": "120 BDT"
         }
-
       ]
     }
   ]

@@ -184,13 +184,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711291405221_FoodItemModelCreated.cs" />
-    <Compile Include="Migrations\201711291405221_FoodItemModelCreated.Designer.cs">
-      <DependentUpon>201711291405221_FoodItemModelCreated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711291407453_SetMenuAndSetMenuItemsCreated.cs" />
-    <Compile Include="Migrations\201711291407453_SetMenuAndSetMenuItemsCreated.Designer.cs">
-      <DependentUpon>201711291407453_SetMenuAndSetMenuItemsCreated.cs</DependentUpon>
+    <Compile Include="Migrations\201712281652525_NewDatabase.cs" />
+    <Compile Include="Migrations\201712281652525_NewDatabase.Designer.cs">
+      <DependentUpon>201712281652525_NewDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FoodItem.cs" />
@@ -201,10 +197,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-RestaurantManagementAppBE-20171129051622.mdf" />
-    <Content Include="App_Data\aspnet-RestaurantManagementAppBE-20171129051622_log.ldf">
-      <DependentUpon>aspnet-RestaurantManagementAppBE-20171129051622.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -232,7 +224,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -241,11 +235,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711291405221_FoodItemModelCreated.resx">
-      <DependentUpon>201711291405221_FoodItemModelCreated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711291407453_SetMenuAndSetMenuItemsCreated.resx">
-      <DependentUpon>201711291407453_SetMenuAndSetMenuItemsCreated.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712281652525_NewDatabase.resx">
+      <DependentUpon>201712281652525_NewDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

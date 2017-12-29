@@ -8,8 +8,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class DataStorageService {
 
-  private _url = 'assets/menu-from-api.json';
-  /*private _url = 'http://localhost:41293/api/menu';*/
+  /*private _url = 'assets/menu-from-api.json';*/
+  private _url = 'http://localhost:13292/api/menu';
   constructor(private _http: Http, private ourOffersService: OurOffersService) { }
   getMenu() {
     return this._http.get(this._url)

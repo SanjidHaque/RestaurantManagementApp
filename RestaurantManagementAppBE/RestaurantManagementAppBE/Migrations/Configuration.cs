@@ -21,7 +21,7 @@ namespace RestaurantManagementAppBE.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-           
+
             var coke = new FoodItem() { Name = "Coke", Price = 30 };
             var chickenFry = new FoodItem() { Name = "Chicken Fry", Price = 80 };
             var friedRice = new FoodItem() { Name = "Fried Rice", Price = 300 };

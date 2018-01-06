@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, ViewChild, Input, OnInit} from '@angular/core';
 import {OurOffers} from '../our-offers.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OurOffersService} from '../our-offers.service';
@@ -22,7 +22,9 @@ export class OurOffersListComponent implements OnInit {
     'assets/ImageTwo.jpg'
   ];*/
   order: Order[];
-  /*totalPrice = 0;*/
+  condition = false;
+  /*GrandTotalPrice = 0;*/
+  @ViewChild('amountInput') amountInputRef: ElementRef;
 
   uuidCodeOne = '';
   uuidCodeTwo = '';
@@ -31,10 +33,12 @@ export class OurOffersListComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private uuid: Uuid,
-              private popUp: Popup) {
+              private popUp: Popup
+              ) {
     this.uuidCodeOne = this.uuid.v1();
     this.uuidCodeTwo = this.uuid.v1();
     this.uuidCodeThree = this.uuid.v1();
+    /*this.condition = false;*/
   }
 
   ngOnInit() {
@@ -47,7 +51,7 @@ export class OurOffersListComponent implements OnInit {
     let setMenuId = id;
     const purchaesdFood = new OrderedItems(purchasedFoodId,orderId,null,quantity,setMenuId);
     this._ourOfferService.addToOrderedItemsList(purchaesdFood);*/
-    this.router.navigate(['purchased-food'], { relativeTo: this.route});
+    this.router.navigate(['cheff'], { relativeTo: this.route});
   }
 
   AddToCart(id: number, price: number, name: string) {
@@ -57,16 +61,24 @@ export class OurOffersListComponent implements OnInit {
       cancleBtnContent: 'Cancel'
     }
     this.popUp.show();*/
-    let purchasedFoodId = this.uuidCodeOne;
-    let orderId = this.uuidCodeTwo;
-    let quantity = 1;
+    let orderItemId = this.uuidCodeOne;
+    /*let orderId = this.uuidCodeTwo;*/
+    let quantity = this.amountInputRef.nativeElement.value;
     let setMenuId = id;
     let setMenuName = name;
     let Price = price;
-    this._ourOfferService.totalPrice(price);
-    const purchasedFood = new OrderedItems(purchasedFoodId, orderId,  null, quantity, setMenuId, name, price);
-    this._ourOfferService.addToOrderedItemsList(purchasedFood);
-  }
+    let subTotal = this._ourOfferService.subTotaLPrice(Price, quantity);
+     this._ourOfferService.grandTotalPrice(subTotal);
+    this.condition = this._ourOfferService.checkExistingSetMenu(setMenuId);
 
+     if ( this.condition /*this._ourOfferService.checkExistingSetMenu(setMenuId) */ ) {
+       this._ourOfferService.increaseOnExisting(setMenuId, quantity);
+      } else {
+       const purchasedFood = new OrderedItems(orderItemId,  null, quantity, setMenuId, name, price, subTotal);
+       this._ourOfferService.addToOrderedItemsList(purchasedFood);
+     }
+
+
+  }
 }
 

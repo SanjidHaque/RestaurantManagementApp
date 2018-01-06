@@ -12,7 +12,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {OurOffersService} from './our-offers/our-offers.service';
 import { FoodCartComponent } from './food-cart/food-cart.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { PurchasedFoodComponent } from './purchased-food/purchased-food.component';
 import { OurOffersListComponent } from './our-offers/our-offers-list/our-offers-list.component';
 import {DataStorageService} from './shared/data-storage.service';
 import { LoginComponent } from './login/login.component';
@@ -23,6 +22,9 @@ import {CommonModule} from '@angular/common';
 import {PopupModule} from 'ng2-opd-popup';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AgmCoreModule } from '@agm/core';
+import { ChefComponent } from './chef/chef.component';
+
+
 
 @NgModule({
   declarations: [
@@ -31,12 +33,12 @@ import { AgmCoreModule } from '@agm/core';
     OurOffersComponent,
     FoodCartComponent,
     HomePageComponent,
-    PurchasedFoodComponent,
     OurOffersListComponent,
     LoginComponent,
     RegisterComponent,
     FooterComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ChefComponent
 
   ],
   imports: [

@@ -7,6 +7,7 @@ import {Subject} from 'rxjs/Subject';
 import {OurOffers} from './our-offers.model';
 import {DataStorageService} from '../shared/data-storage.service';
 import {OrderedItems} from '../shared/ordered-items.model';
+import {forEach} from '@angular/router/src/utils/collection';
 
 
 @Injectable()
@@ -35,9 +36,50 @@ export class OurOffersService {
     this.orderedItemsChanged.next(this.orderedItems.slice());
   }
 
-   totalPrice(price: number){
+  grandTotalPrice(price: number){
      this.TotalPrice = Number.parseInt(price.toString()) + Number.parseInt(this.TotalPrice.toString());
      return this.TotalPrice;
+  }
+
+  subTotaLPrice(price: number, quantity: number) {
+    let subPrice = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
+      return subPrice;
+  }
+
+   checkExistingSetMenu(setMenuId: number) {
+     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+
+       if (this.orderedItems[i].SetMenuId === setMenuId) {
+         return true;
+       } /*else {
+         this.checkExistingSetMenu(setMenuId);
+
+        // return false;
+       }*/
+     }
+  /*  for (let check of this.orderedItems)
+    {
+      let i = 0;
+      if (check[i].SetMenuId === setMenuId) {
+        return true;
+      }
+      else {
+        this.checkExistingSetMenu(setMenuId);
+        return false;
+      }
+    }*/
+  }
+
+  increaseOnExisting(setMenuId: number, quantity: number) {
+    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+      if (this.orderedItems[i].SetMenuId === setMenuId) {
+
+        this.orderedItems[i].Quantity =
+          Number.parseInt(this.orderedItems[i].Quantity.toString())
+          + Number.parseInt(quantity.toString());
+          /*this.orderedItems[i].Quantity + quantity;*/
+      }
+    }
   }
 }
 

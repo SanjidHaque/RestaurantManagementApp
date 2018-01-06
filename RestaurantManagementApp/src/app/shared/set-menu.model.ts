@@ -5,7 +5,7 @@ export class SetMenus {
   public Price: number;
   public Id: number;
   public SetMenuItems: SetMenuItems;
-  public SetMenuImage: string
+  public SetMenuImage: string;
 
   constructor(name: string, price: number, id: number, setMenuItems: SetMenuItems, setMenuImage: string) {
     this.Name = name;

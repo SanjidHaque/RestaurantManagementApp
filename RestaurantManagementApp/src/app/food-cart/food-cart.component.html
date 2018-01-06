@@ -3,11 +3,11 @@
     Your purchased foods:
   </div>
   <div class="col-md-12 baal" *ngFor="let order of orderedItems">
-   <!-- ID: {{ order.Id }}<br>
+
+    Item: {{ order.SetMenuName }}<br>
+   Unit Price: {{ order.Price }}<br>
     Quantity: {{ order.Quantity }}<br>
-    Set Menu ID: {{ order.SetMenuId }}<br>-->
-     {{ order.SetMenuName }}<br>
-    Price: {{ order.Price }}<br>
+   Sub Total: {{ order.SubTotal }}<br><br>
 
   </div>
 </div>

@@ -91,10 +91,19 @@
         </div>
        <!-- </div>-->
           <div class="row">
-            <div class="col-md-6 set-menu-price">
+            <div class="col-md-4 set-menu-price">
              Price: {{ menu.Price }} BDT
             </div>
-            <div class="col-md-offset-1 col-md-4 set-menu-price-button">
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <input type="number"
+                       id="amount"
+                       class="form-control"
+                       #amountInput
+                >
+              </div>
+            </div>
+            <div class="col-md-4 set-menu-price-button">
               <button (click)="AddToCart(menu.Id, menu.Price, menu.Name)" class="smpbutton"> Add To Cart</button>
             </div>
           </div>

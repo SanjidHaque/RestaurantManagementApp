@@ -1,4 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import { Response } from '@angular/http';
 import {OurOffersService} from './our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
@@ -41,6 +42,14 @@ export class OurOffersComponent implements OnInit, OnDestroy {
     });
   }
 
+  saveOrders() {
+    this._dataStorageService.storeOrders()
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

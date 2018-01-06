@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,mBAAmB;EACjB,WAAW,EAAC,gBAAgB;EAC5B,SAAS,EAAC,IAAI",
-"sources": ["purchased-food.component.scss"],
-"names": [],
-"file": "purchased-food.component.css"
-}

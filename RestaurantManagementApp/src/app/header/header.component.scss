@@ -18,7 +18,6 @@
   font-size: 20px;
   padding-top: 15px;
   padding-left: 27px;
-  padding-right:0px;
 }
 .our-offers {
   font-family: "Berlin Sans FB";
@@ -30,7 +29,6 @@
   font-family: "Berlin Sans FB";
   font-size: 20px;
   padding-top: 15px;
-  padding-left: 6px;
 }
 
 .our-offers-link {
@@ -41,6 +39,7 @@
   font-family:"Berlin Sans FB";
   font-size: 20px;
   padding-top: 15px;
+  padding-left: 20px;
 }
 .login-link {
   color: #010100;
@@ -91,6 +90,10 @@ a:hover:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+.cart-icon{
+  padding-top: 16px;
 }
 
 

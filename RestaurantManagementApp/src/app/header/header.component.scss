@@ -17,18 +17,22 @@
   font-family: "Berlin Sans FB";
   font-size: 20px;
   padding-top: 15px;
-  padding-left: 27px;
+  text-align: center;
+ // padding-left: 27px;
 }
 .our-offers {
   font-family: "Berlin Sans FB";
   font-size: 20px;
   padding-top: 15px;
-  padding-left: 0px;
+ // padding-left: 0px;
+  text-align: center;
 }
 .contact-us {
   font-family: "Berlin Sans FB";
   font-size: 20px;
   padding-top: 15px;
+  text-align: center;
+ // margin-left: -5px;
 }
 
 .our-offers-link {
@@ -39,7 +43,8 @@
   font-family:"Berlin Sans FB";
   font-size: 20px;
   padding-top: 15px;
-  padding-left: 20px;
+  text-align: center;
+ // margin-left: -44px;
 }
 .login-link {
   color: #010100;
@@ -49,9 +54,18 @@
   font-family:"Berlin Sans FB";
   font-size: 20px;
   padding-top: 15px;
+  text-align: center;
+ // margin-left: -36px;
 }
 .register-link {
   color: #010100;
+}
+
+.admin{
+  font-family:"Berlin Sans FB";
+  font-size: 20px;
+  padding-top: 15px;
+  text-align: center;
 }
 
 .home-page-link {
@@ -96,4 +110,9 @@ a:hover:before {
   padding-top: 16px;
 }
 
+.cart-amount{
+  font-family: "Berlin Sans FB";
+  font-size:18px;
+  padding-top: 10px;
+}
 

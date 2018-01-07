@@ -9,9 +9,7 @@ import 'rxjs/add/operator/catch';
 export class DataStorageService {
 
   private _url = 'assets/menu-from-api.json';
-/*
-  private _url = 'http://localhost:1548/api/menu';
-*/
+  /*private _url = 'http://localhost:1548/api/menu';*/
   constructor(private _http: Http, private ourOffersService: OurOffersService) { }
   getMenu() {
     return this._http.get(this._url)

@@ -16,6 +16,7 @@ export class OurOffersService {
   public menuChanged = new Subject<OurOffers>();
   public orderedItemsChanged = new Subject<OrderedItems[]>();
   public menu: OurOffers;
+  public totalQuantity : number = 0;
   public orderedItems: OrderedItems[] = [];
   constructor() {
   }
@@ -42,6 +43,7 @@ export class OurOffersService {
   }
 
   subTotaLPrice(price: number, quantity: number) {
+    // this.totalQuantity =  Number.parseInt(this.totalQuantity .toString()) + Number.parseInt(quantity.toString());
     let subPrice = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
       return subPrice;
   }
@@ -73,7 +75,6 @@ export class OurOffersService {
   increaseOnExisting(setMenuId: number, quantity: number) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
       if (this.orderedItems[i].SetMenuId === setMenuId) {
-
         this.orderedItems[i].Quantity =
           Number.parseInt(this.orderedItems[i].Quantity.toString())
           + Number.parseInt(quantity.toString());

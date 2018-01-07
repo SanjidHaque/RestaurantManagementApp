@@ -15,6 +15,7 @@ export class OurOffersComponent implements OnInit, OnDestroy {
     Menu: OurOffers;
     subscription: Subscription;
     toCheckOut = false;
+    quantity: number = 0;
 
 
   constructor(private _ourOfferService: OurOffersService,
@@ -40,6 +41,8 @@ export class OurOffersComponent implements OnInit, OnDestroy {
       .subscribe((Menu: OurOffers ) => {
       this.Menu = Menu;
     });
+
+  this.quantity += this._ourOfferService.totalQuantity;
   }
 
   saveOrders() {

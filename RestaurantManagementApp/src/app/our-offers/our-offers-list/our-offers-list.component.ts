@@ -21,6 +21,8 @@ export class OurOffersListComponent implements OnInit {
     'assets/ImageOne.jpg',
     'assets/ImageTwo.jpg'
   ];*/
+
+  public totalQuantity: number = 0;
   order: Order[];
   condition = false;
   /*GrandTotalPrice = 0;*/
@@ -77,8 +79,10 @@ export class OurOffersListComponent implements OnInit {
        const purchasedFood = new OrderedItems(orderItemId,  null, quantity, setMenuId, name, price, subTotal);
        this._ourOfferService.addToOrderedItemsList(purchasedFood);
      }
-
-
+    this._ourOfferService.totalQuantity += this.amountInputRef.nativeElement.value;
+    /*  this.totalQuantity =
+      Number.parseInt(this.totalQuantity.toString())
+        + Number.parseInt(quantity.toString());*/
   }
 }
 

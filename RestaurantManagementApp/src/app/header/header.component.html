@@ -18,22 +18,41 @@
       <div  class="col-md-3 blocks-diner" routerLink="/home-page" style="cursor: pointer;">
         Block's Diner
       </div>
-      <div class="col-md-offset-3 col-md-6">
-        <div class="col-md-2 home">
+      <div class="col-md-7">
+        <div class="col-md-1 home">
           <a routerLink="/home-page" class="our-offers-link">Home</a>
         </div>
         <div class="col-md-2 our-offers">
           <a routerLink="/our-offers" class="our-offers-link">Our Offers</a>
         </div>
-        <div class="col-md-3 contact-us">
+        <div class="col-md-1 our-offers">
+          <a routerLink="/chef" class="our-offers-link">Chef</a>
+        </div>
+        <div class="col-md-2 contact-us">
           <a routerLink="/contact-us" class="our-offers-link">Contact Us</a>
         </div>
-        <div class="col-md-2 login">
+        <div class="col-md-1 login">
           <a routerLink="/login" class="login-link">Login</a>
         </div>
-        <div class="col-md-2 register"  >
+        <div class="col-md-2 register">
           <a routerLink="/register" class="register-link" >Register</a>
         </div>
+        <div class="col-md-2 admin"  >
+          <a routerLink="/admin" class="register-link" >Admin</a>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <a routerLink="/food-cart" class="register-link">
+        <div class=" col-md-3 cart-icon">
+          <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+        </div>
+        <div  class="col-md-1 cart-amount">
+          {{ quantity }}
+        </div>
+          <div class="col-md-8">
+            121 BDT
+          </div>
+        </a>
       </div>
 
     </div>

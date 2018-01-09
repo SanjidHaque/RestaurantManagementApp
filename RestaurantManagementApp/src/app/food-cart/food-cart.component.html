@@ -19,6 +19,6 @@
 <ng-template #itemIsSold>
   <div class="col-md-12 baal">
    Total Price: {{ grandTotal }}
-    <button routerLink="/our-offers" style="color: black;" class="smpbutton">Confirm Purchase</button>
+    <button routerLink="/our-offers" style="color: black;" class="smpbutton" (click)="AddToOrderedList();"  >Confirm Purchase</button>
   </div>
 </ng-template>

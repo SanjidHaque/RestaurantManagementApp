@@ -94,6 +94,13 @@ a:hover:before {
 .cart-amount {
   font-family: "Berlin Sans FB";
   font-size: 18px;
-  padding-top: 10px; }
+  padding-top: 10px;
+  margin-left: -20px; }
+
+.cart-price {
+  font-family: "Berlin Sans FB";
+  font-size: 18px;
+  padding-top: 10px;
+  margin-left: 20px; }
 
 /*# sourceMappingURL=header.component.css.map */

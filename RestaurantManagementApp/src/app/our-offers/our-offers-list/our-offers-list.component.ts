@@ -64,7 +64,7 @@ export class OurOffersListComponent implements OnInit {
     }
     this.popUp.show();*/
     let orderItemId = this.uuidCodeOne;
-    /*let orderId = this.uuidCodeTwo;*/
+    let orderId = this._ourOfferService.uuidCodeOne;
     let quantity = this.amountInputRef.nativeElement.value;
     let setMenuId = id;
     let setMenuName = name;
@@ -76,13 +76,17 @@ export class OurOffersListComponent implements OnInit {
      if ( this.condition /*this._ourOfferService.checkExistingSetMenu(setMenuId) */ ) {
        this._ourOfferService.increaseOnExisting(setMenuId, quantity);
       } else {
-       const purchasedFood = new OrderedItems(orderItemId,  null, quantity, setMenuId, name, price, subTotal);
+       const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, setMenuId, name, price, subTotal);
        this._ourOfferService.addToOrderedItemsList(purchasedFood);
      }
     this._ourOfferService.totalQuantity += this.amountInputRef.nativeElement.value;
     /*  this.totalQuantity =
       Number.parseInt(this.totalQuantity.toString())
         + Number.parseInt(quantity.toString());*/
+
+
+
+
   }
 }
 

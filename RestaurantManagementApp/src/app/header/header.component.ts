@@ -7,7 +7,7 @@ import {OurOffersService} from '../our-offers/our-offers.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public quantity : number = 0;
+  public quantity : number = 1211;
 
   constructor(private _ourOfferService: OurOffersService ) {
   }

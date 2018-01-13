@@ -8,17 +8,19 @@
   <div class="row">
     <table>
       <tr>
-        <th>Name</th>
-        <br>
         <th>Id</th>
         <br>
-        <th>Amount</th>
+        <th>Name</th>
+        <br>
+        <th>Price</th>
       </tr>
       <tr *ngFor="let item of foodItems">
-        <td>{{item.Name}}</td>
-        <br>
-        <td [id]="item.Id">{{item.Id}}</td>
-        <td>{{item.Price}}</td>
+        <a >
+          <td>{{item.Id}}</td>
+          <br>
+          <td [id]="item.Name">{{item.Id}}</td>
+          <td>{{item.Price}}</td>
+        </a>
       </tr>
     </table>
     <!--<div class="col-md-5">-->
@@ -36,6 +38,7 @@
   </div>
 </div>
 <div class="row" *ngIf="addNew">
+  <hr>
   <div class="col-md-6">
     <div class="row">
       <div class="col-xs-12">
@@ -51,13 +54,13 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
-          <input [(ngModel)]="foodItemImage" placeholder="Enter Image Url">
-        </div>
-      </div>
-    </div>
+    <!--<div class="row">-->
+      <!--<div class="col-xs-12">-->
+        <!--<div class="form-group">-->
+          <!--<input [(ngModel)]="foodItemImage" placeholder="Enter Image Url">-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
     <hr>
     <div class="row">
       <div class="col-xs-12">

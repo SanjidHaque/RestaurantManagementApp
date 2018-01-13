@@ -5,7 +5,7 @@ import {OurOffers} from '../our-offers/our-offers.model';
 import {OurOffersService} from '../our-offers/our-offers.service';
 import {Subject} from 'rxjs/Subject';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AdminDataService} from './admin-data.service';
+import {AdminDataService} from './data.service';
 import {Observable} from 'rxjs/Observable';
 
 @Component({

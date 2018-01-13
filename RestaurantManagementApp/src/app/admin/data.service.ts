@@ -13,7 +13,7 @@ export class AdminDataService {
 
   constructor(private _http: Http) { }
   getFoods() {
-    return this._http.get(this._url)
+    return this._http.get(this._url);
     // .map(
     //   (response: Response) => {
     //     const foods: FoodItems = response.json();

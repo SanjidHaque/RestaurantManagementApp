@@ -1,6 +1,6 @@
 export class OrderedItems {
   public OrderItemId: string;
- /* public OrderId: string;*/
+  public OrderId: string;
   public FoodItemId?: number;
   public Quantity: number;
   public SetMenuId?: number;
@@ -10,10 +10,10 @@ export class OrderedItems {
 
 
 
-  constructor(orderItemId: string/*, orderId: string*/, foodItemId: number, quantity: number,
+  constructor(orderItemId: string, orderId: string, foodItemId: number, quantity: number,
               setMenuId: number, setMenuName: string, price: number, subTotal: number) {
     this.OrderItemId = orderItemId;
-    /*this.OrderId = orderId;*/
+    this.OrderId = orderId;
     this.FoodItemId = foodItemId;
     this.Quantity = quantity;
     this.SetMenuId = setMenuId;

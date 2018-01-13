@@ -64,25 +64,29 @@ export class OurOffersListComponent implements OnInit {
     }
     this.popUp.show();*/
     let orderItemId = this.uuidCodeOne;
-    /*let orderId = this.uuidCodeTwo;*/
+    let orderId = this._ourOfferService.uuidCodeOne;
     let quantity = this.amountInputRef.nativeElement.value;
     let setMenuId = id;
     let setMenuName = name;
     let Price = price;
     let subTotal = this._ourOfferService.subTotaLPrice(Price, quantity);
-     this._ourOfferService.grandTotalPrice(subTotal);
+    this._ourOfferService.grandTotalPrice(subTotal);
     this.condition = this._ourOfferService.checkExistingSetMenu(setMenuId);
 
      if ( this.condition /*this._ourOfferService.checkExistingSetMenu(setMenuId) */ ) {
-       this._ourOfferService.increaseOnExisting(setMenuId, quantity);
+       this._ourOfferService.increaseOnExisting(setMenuId, quantity, subTotal );
       } else {
-       const purchasedFood = new OrderedItems(orderItemId,  null, quantity, setMenuId, name, price, subTotal);
+       const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, setMenuId, name, price, subTotal);
        this._ourOfferService.addToOrderedItemsList(purchasedFood);
      }
-    this._ourOfferService.totalQuantity += this.amountInputRef.nativeElement.value;
+    this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString()) + Number.parseInt(this.amountInputRef.nativeElement.value.toString());
     /*  this.totalQuantity =
       Number.parseInt(this.totalQuantity.toString())
         + Number.parseInt(quantity.toString());*/
+
+
+
+
   }
 }
 

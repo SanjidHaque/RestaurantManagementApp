@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NewTwice : DbMigration
+    public partial class OrderedItemsNameChangedAgainAgain : DbMigration
     {
         public override void Up()
         {
@@ -18,22 +18,35 @@ namespace RMS_Server_.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.OrderItems",
+                "dbo.OrderedItems",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        OrderItemId = c.String(),
+                        Id = c.String(nullable: false, maxLength: 128),
+                        OrderId = c.String(maxLength: 128),
                         FoodItemId = c.Int(),
+                        Quantity = c.Int(nullable: false),
                         SetMenuId = c.Int(),
                         SetMenuName = c.String(),
                         Price = c.Int(nullable: false),
-                        Quantity = c.Int(nullable: false),
+                        SubTotal = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.FoodItems", t => t.FoodItemId)
+                .ForeignKey("dbo.Orders", t => t.OrderId)
                 .ForeignKey("dbo.SetMenus", t => t.SetMenuId)
+                .Index(t => t.OrderId)
                 .Index(t => t.FoodItemId)
                 .Index(t => t.SetMenuId);
+            
+            CreateTable(
+                "dbo.Orders",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        TotalPrice = c.Int(nullable: false),
+                        IsServed = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.SetMenus",
@@ -136,10 +149,11 @@ namespace RMS_Server_.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.OrderItems", "SetMenuId", "dbo.SetMenus");
+            DropForeignKey("dbo.OrderedItems", "SetMenuId", "dbo.SetMenus");
             DropForeignKey("dbo.SetMenuItems", "SetMenuId", "dbo.SetMenus");
             DropForeignKey("dbo.SetMenuItems", "FoodItemId", "dbo.FoodItems");
-            DropForeignKey("dbo.OrderItems", "FoodItemId", "dbo.FoodItems");
+            DropForeignKey("dbo.OrderedItems", "OrderId", "dbo.Orders");
+            DropForeignKey("dbo.OrderedItems", "FoodItemId", "dbo.FoodItems");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -148,8 +162,9 @@ namespace RMS_Server_.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.SetMenuItems", new[] { "FoodItemId" });
             DropIndex("dbo.SetMenuItems", new[] { "SetMenuId" });
-            DropIndex("dbo.OrderItems", new[] { "SetMenuId" });
-            DropIndex("dbo.OrderItems", new[] { "FoodItemId" });
+            DropIndex("dbo.OrderedItems", new[] { "SetMenuId" });
+            DropIndex("dbo.OrderedItems", new[] { "FoodItemId" });
+            DropIndex("dbo.OrderedItems", new[] { "OrderId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -157,7 +172,8 @@ namespace RMS_Server_.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.SetMenuItems");
             DropTable("dbo.SetMenus");
-            DropTable("dbo.OrderItems");
+            DropTable("dbo.Orders");
+            DropTable("dbo.OrderedItems");
             DropTable("dbo.FoodItems");
         }
     }

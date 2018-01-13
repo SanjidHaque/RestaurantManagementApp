@@ -211,9 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712301428113_NewTwice.cs" />
-    <Compile Include="Migrations\201712301428113_NewTwice.Designer.cs">
-      <DependentUpon>201712301428113_NewTwice.cs</DependentUpon>
+    <Compile Include="Migrations\201801091635385_OrderedItemsNameChangedAgainAgain.cs" />
+    <Compile Include="Migrations\201801091635385_OrderedItemsNameChangedAgainAgain.Designer.cs">
+      <DependentUpon>201801091635385_OrderedItemsNameChangedAgainAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -221,7 +221,8 @@
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
-    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderedItems.cs" />
     <Compile Include="Models\SetMenu.cs" />
     <Compile Include="Models\SetMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -296,8 +297,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712301428113_NewTwice.resx">
-      <DependentUpon>201712301428113_NewTwice.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801091635385_OrderedItemsNameChangedAgainAgain.resx">
+      <DependentUpon>201801091635385_OrderedItemsNameChangedAgainAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

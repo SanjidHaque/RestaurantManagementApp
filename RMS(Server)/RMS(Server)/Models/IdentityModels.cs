@@ -23,8 +23,8 @@ namespace RMS_Server_.Models
     {
         public DbSet<SetMenu> SetMenus { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
-
-        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderedItems> OrderedItems { get; set; }
         public DbSet<SetMenuItem> SetMenuItems { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

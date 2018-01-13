@@ -26,6 +26,7 @@
     "angular4-collapsible": "0.0.41",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "font-awesome": "^4.7.0",
     "ng2-opd-popup": "^1.1.21",
     "ng2-uuid": "0.0.3",
     "rxjs": "^5.4.2",

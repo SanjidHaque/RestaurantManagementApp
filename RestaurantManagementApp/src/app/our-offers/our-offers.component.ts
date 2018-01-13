@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {OurOffers} from './our-offers.model';
 import {DataStorageService} from '../shared/data-storage.service';
+import {OrderedItems} from '../shared/ordered-items.model';
+import {Order} from '../shared/order.model';
 
 @Component({
   selector: 'app-our-offers',
@@ -16,6 +18,7 @@ export class OurOffersComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     toCheckOut = false;
     quantity: number = 0;
+  public orderedItems: OrderedItems[];
 
 
   constructor(private _ourOfferService: OurOffersService,
@@ -62,4 +65,14 @@ export class OurOffersComponent implements OnInit, OnDestroy {
       return this.toCheckOut = true;
     }  else { return this.toCheckOut = false; }
   }
+
+  /*AddToOrderedList() {
+    let orderId = this._ourOfferService.uuidCodeOne;
+    this.orderedItems = this._ourOfferService.getOrderedItemsList();
+    let totalPrice = this._ourOfferService.TotalPrice;
+    let isServed = false;
+    const order = new Order(orderId, this.orderedItems, totalPrice, isServed);
+    this._ourOfferService.addToOrderedList(order);
+  }
+*/
 }

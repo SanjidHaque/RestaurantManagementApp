@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,aAAa;EACX,WAAW,EAAC,qBAAqB;EACjC,SAAS,EAAC,IAAI;EACd,KAAK,EAAE,OAAO",
+"sources": ["chef.component.scss"],
 "names": [],
 "file": "chef.component.css"
 }

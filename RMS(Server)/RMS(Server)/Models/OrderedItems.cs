@@ -7,16 +7,18 @@ using System.Web;
 
 namespace RMS_Server_.Models
 {
-    public class OrderItem
+    public class OrderedItems
     {
-        public int Id { get; set; }
-        public string OrderItemId { get; set; }
+        public string Id { get; set; }
+        public Order Order { get; set; }
+        public string OrderId { get; set; }
         public FoodItem FoodItem { get; set; }
         public int? FoodItemId { get; set; }
+        public int Quantity { get; set; }
         public SetMenu SetMenu { get; set; }
         public int? SetMenuId { get; set; }
         public string SetMenuName { get; set; }
         public int Price { get; set; }
-        public int Quantity { get; set; }
+        public int SubTotal { get; set; }
     }
 }

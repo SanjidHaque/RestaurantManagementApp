@@ -1,3 +1,22 @@
-<p>
-  chef works!
-</p>
+<div class="row">
+  <div class="col-md-12 chefs-orders" *ngFor="let order of Orders">
+    <div class="col-md-12" *ngFor="let orderedItems of order.OrderedItems">
+      {{ orderedItems.SetMenuName }}
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="orderAccepted(order)">Accept</button>
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-danger">Reject</button>
+    </div>
+  </div>
+</div>
+
+
+<!--
+<div class="row">
+  <div class="col-md-4">
+
+  </div>
+</div>
+-->

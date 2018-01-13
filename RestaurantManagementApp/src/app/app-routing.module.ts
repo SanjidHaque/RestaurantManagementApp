@@ -8,12 +8,15 @@ import {RegisterComponent} from './register/register.component';
 import {ContactUsComponent} from './contact-us/contact-us.component';
 import {ChefComponent} from './chef/chef.component';
 import {AdminComponent} from './admin/admin.component';
+import {CheckingOrderComponent} from './checking-order/checking-order.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
   { path: 'home-page', component: HomePageComponent },
   { path: 'our-offers', component: OurOffersComponent },
-  { path: 'food-cart', component: FoodCartComponent },
+  { path: 'food-cart', component: FoodCartComponent, children: [
+    { path: 'checking-orders', component: CheckingOrderComponent }
+    ] },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'contact-us', component: ContactUsComponent},

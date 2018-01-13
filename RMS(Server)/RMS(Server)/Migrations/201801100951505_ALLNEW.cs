@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class OrderedItemsNameChangedAgainAgain : DbMigration
+    public partial class ALLNEW : DbMigration
     {
         public override void Up()
         {
@@ -21,7 +21,7 @@ namespace RMS_Server_.Migrations
                 "dbo.OrderedItems",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        OrderItemId = c.String(nullable: false, maxLength: 128),
                         OrderId = c.String(maxLength: 128),
                         FoodItemId = c.Int(),
                         Quantity = c.Int(nullable: false),
@@ -30,7 +30,7 @@ namespace RMS_Server_.Migrations
                         Price = c.Int(nullable: false),
                         SubTotal = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.OrderItemId)
                 .ForeignKey("dbo.FoodItems", t => t.FoodItemId)
                 .ForeignKey("dbo.Orders", t => t.OrderId)
                 .ForeignKey("dbo.SetMenus", t => t.SetMenuId)

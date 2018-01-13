@@ -7,13 +7,13 @@ namespace RMS_Server_.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class OrderedItemsNameChangedAgainAgain : IMigrationMetadata
+    public sealed partial class ALLNEW : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(OrderedItemsNameChangedAgainAgain));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ALLNEW));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801091635385_OrderedItemsNameChangedAgainAgain"; }
+            get { return "201801100951505_ALLNEW"; }
         }
         
         string IMigrationMetadata.Source

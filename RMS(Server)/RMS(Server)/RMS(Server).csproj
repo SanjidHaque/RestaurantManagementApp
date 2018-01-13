@@ -211,9 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801091635385_OrderedItemsNameChangedAgainAgain.cs" />
-    <Compile Include="Migrations\201801091635385_OrderedItemsNameChangedAgainAgain.Designer.cs">
-      <DependentUpon>201801091635385_OrderedItemsNameChangedAgainAgain.cs</DependentUpon>
+    <Compile Include="Migrations\201801100951505_ALLNEW.cs" />
+    <Compile Include="Migrations\201801100951505_ALLNEW.Designer.cs">
+      <DependentUpon>201801100951505_ALLNEW.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -297,8 +297,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801091635385_OrderedItemsNameChangedAgainAgain.resx">
-      <DependentUpon>201801091635385_OrderedItemsNameChangedAgainAgain.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801100951505_ALLNEW.resx">
+      <DependentUpon>201801100951505_ALLNEW.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

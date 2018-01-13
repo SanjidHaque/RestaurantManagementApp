@@ -16,9 +16,22 @@
  You have not purchased any food yet!
 </div>
 
+
 <ng-template #itemIsSold>
   <div class="col-md-12 baal">
    Total Price: {{ grandTotal }}
-    <button routerLink="/our-offers" style="color: black;" class="smpbutton" (click)="AddToOrderedList();"  >Confirm Purchase</button>
+    <button style="color: black;" class="btn btn-success" (click)="AddToOrderedList()">Confirm Purchase</button>
   </div>
+  <router-outlet>
+  </router-outlet>
+
 </ng-template>
+
+
+
+
+
+
+
+
+

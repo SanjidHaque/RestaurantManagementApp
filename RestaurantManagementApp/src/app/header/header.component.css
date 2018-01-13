@@ -1,5 +1,7 @@
 .header {
-  background-color: #feff26; }
+  background-color: #feff26;
+  position: fixed;
+  z-index: 999; }
 
 .blocks-diner {
   font-family: "Comic Sans MS";

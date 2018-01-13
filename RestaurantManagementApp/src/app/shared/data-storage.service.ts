@@ -9,10 +9,11 @@ import {Order} from './order.model';
 @Injectable()
 export class DataStorageService {
 
-  public Order: Order;
+  public order: Order;
    private _url = 'assets/menu-from-api.json';
  /* private _url = 'http://localhost:1548/api/menu';*/
-  constructor(private _http: Http, private _ourOffersService: OurOffersService) {
+  constructor(private _http: Http,
+              private _ourOffersService: OurOffersService) {
   }
 
  /* ngOnInit() {
@@ -44,5 +45,27 @@ export class DataStorageService {
     return this._http.post('http://localhost:1548/api/PostMenu',
      this._ourOffersService.orders);
   }
+
+  acceptOrders() {
+    return this._http.post('http://localhost:1548/api/AcceptOrders',
+      this._ourOffersService.getAcceptedOrder() ).map(
+        res => res.json())
+      .catch((error: any) => Observable.throw(error.json().error ||
+      'Server error'))
+      .subscribe();
+
+  }
+
+
+  getOrders() {
+    return this._http.get('http://localhost:1548/api/GetOrders')
+      .map(
+        (response: Response) => {
+          const orders: Order = response.json();
+          return orders;
+        }
+      );
+  }
+
 
 }

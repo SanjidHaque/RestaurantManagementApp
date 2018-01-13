@@ -10,6 +10,8 @@ import {Subscription} from 'rxjs/Subscription';
 
 import {SetMenus} from '../shared/set-menu.model';
 import {OurOffers} from '../our-offers/our-offers.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ChefServiceService} from '../chef/chef-service.service';
 
 
 @Component({
@@ -20,11 +22,16 @@ import {OurOffers} from '../our-offers/our-offers.model';
 export class FoodCartComponent implements OnInit {
   public grandTotal: number;
   public orderedItems: OrderedItems[];
+  public orders: Order;
+  checkOrder = false;
 
   uuidCodeOne = '';
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
+              private _chefService: ChefServiceService,
               private uuid: Uuid,
+              private route: ActivatedRoute,
+              private router: Router
               ) {
     this.uuidCodeOne = this.uuid.v1();
   }
@@ -35,6 +42,7 @@ export class FoodCartComponent implements OnInit {
   }
 
   AddToOrderedList() {
+
     let orderId = this._ourOfferService.uuidCodeOne;
     this.orderedItems = this._ourOfferService.orderedItems;
     let totalPrice = this._ourOfferService.TotalPrice;
@@ -47,6 +55,9 @@ export class FoodCartComponent implements OnInit {
           console.log(response);
         }
       );
+    // this.orders = this._dataStorageService.getOrders();
+    this.router.navigate(['checking-orders'], {relativeTo: this.route});
+    this.checkOrder = this._chefService.orderAccepted;
   }
 
   /*saveOrders() {

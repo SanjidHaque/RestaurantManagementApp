@@ -25,6 +25,8 @@ import { AgmCoreModule } from '@agm/core';
 import { ChefComponent } from './chef/chef.component';
 import {FormsModule} from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
+import { CheckingOrderComponent } from './checking-order/checking-order.component';
+import {ChefServiceService} from './chef/chef-service.service';
 
 
 
@@ -41,7 +43,8 @@ import { AdminComponent } from './admin/admin.component';
     FooterComponent,
     ContactUsComponent,
     ChefComponent,
-    AdminComponent
+    AdminComponent,
+    CheckingOrderComponent
 
   ],
   imports: [
@@ -60,7 +63,11 @@ import { AdminComponent } from './admin/admin.component';
 
     })
   ],
-  providers: [OurOffersService, DataStorageService],
+  providers: [
+    OurOffersService,
+    DataStorageService,
+    ChefServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

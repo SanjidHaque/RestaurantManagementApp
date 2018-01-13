@@ -14,17 +14,24 @@ import {Order} from '../shared/order.model';
 @Injectable()
 export class OurOffersService {
   public uuidCodeOne = '';
-  public TotalPrice: number = 0;
+  public TotalPrice = 0;
+  // public TotalPriceChanged = new Subject<number>();
   public menuChanged = new Subject<OurOffers>();
   public orderedItemsChanged = new Subject<OrderedItems[]>();
   public ordersChanged = new Subject<Order>();
   public menu: OurOffers;
-  public totalQuantity : number = 0;
+  public totalQuantity  = 0;
   public orderedItems: OrderedItems[] = [];
   public orders: Order;
+  public chefOrder: Order;
+  public subTotal = 0;
   constructor(private uuid: Uuid
             ) {    this.uuidCodeOne = this.uuid.v1();
   }
+
+  /*getTotalPrice() {
+    return this.TotalPriceChanged.next(this.TotalPrice);
+  }*/
 
  /* setOurOffers(menu: OurOffers) {
     this.menu = menu;
@@ -37,8 +44,14 @@ export class OurOffersService {
     return this.orderedItems.slice();
   }
 
+  getAccepted(order: Order) {
+    this.chefOrder = order;
+  }
   getOrdersList() {
     return this.orders;
+  }
+  getAcceptedOrder() {
+    return this.chefOrder;
   }
 
   addToOrderedItemsList(orderedItems: OrderedItems) {
@@ -51,15 +64,15 @@ export class OurOffersService {
     this.ordersChanged.next(order);
   }
 
-  grandTotalPrice(price: number){
+  grandTotalPrice(price: number) {
      this.TotalPrice = Number.parseInt(price.toString()) + Number.parseInt(this.TotalPrice.toString());
      return this.TotalPrice;
   }
 
   subTotaLPrice(price: number, quantity: number) {
-    // this.totalQuantity =  Number.parseInt(this.totalQuantity .toString()) + Number.parseInt(quantity.toString());
-    let subPrice = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
-      return subPrice;
+    //   this.totalQuantity =  Number.parseInt(this.totalQuantity .toString()) + Number.parseInt(quantity.toString());
+    this.subTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
+    return this.subTotal;
   }
 
    checkExistingSetMenu(setMenuId: number) {
@@ -86,13 +99,18 @@ export class OurOffersService {
     }*/
   }
 
-  increaseOnExisting(setMenuId: number, quantity: number) {
+  increaseOnExisting(setMenuId: number, quantity: number, subTotal: number) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+
       if (this.orderedItems[i].SetMenuId === setMenuId) {
+
         this.orderedItems[i].Quantity =
           Number.parseInt(this.orderedItems[i].Quantity.toString())
           + Number.parseInt(quantity.toString());
-          /*this.orderedItems[i].Quantity + quantity;*/
+
+        this.orderedItems[i].SubTotal =
+          Number.parseInt(this.orderedItems[i].SubTotal.toString())
+          + Number.parseInt(this.subTotal.toString());
       }
     }
   }

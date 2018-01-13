@@ -1,38 +1,63 @@
 {
   "FoodItems": [
     {
-      "Name": "Fried rice",
+      "Name": "Normal Fried rice",
       "Id": "1",
-      "Price": "300"
+      "Price": "180"
     },
 
     {
-      "Name": "Coke",
+      "Name": "Indian Fried Rice",
       "Id": "2",
-      "Price": "30"
+      "Price": "250"
+    },
+
+    {
+      "Name": "Vegetable Curry",
+      "Id": "3",
+      "Price": "220"
     },
 
     {
       "Name": "Chicken Fry",
-      "Id": "3",
+      "Id": "4",
+      "Price": "140"
+    },
+
+    {
+      "Name": "Chicken Wings",
+      "Id": "5",
+      "Price": "120"
+    },
+
+    {
+      "Name": "Sausages",
+      "Id": "6",
       "Price": "80"
     },
 
     {
-      "Name": "Khichuri",
-      "Id": "4",
-      "Price": "150"
-    },
-    {
-      "Name": "Finni",
-      "Id": "5",
-      "Price": "30"
+      "Name": "Beef Burger",
+      "Id": "7",
+      "Price": "110"
     },
 
     {
-      "Name": "Water",
-      "Id": "6",
-      "Price": "15"
+      "Name": "Special Block's Burger",
+      "Id": "8",
+      "Price": "180"
+    },
+
+    {
+      "Name": "CocaCola",
+      "Id": "9",
+      "Price": "35"
+    },
+
+    {
+      "Name": "Mineral Water",
+      "Id": "10",
+      "Price": "20"
     }
   ],
 

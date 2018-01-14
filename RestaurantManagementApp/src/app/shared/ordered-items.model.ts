@@ -8,8 +8,8 @@ export class OrderedItems {
   public SetMenuName?: string;
   public FoodItemName?: string;
   public Price: number;
-  public SetMenuSubTotal: number;
-  public FoodItemSubTotal: number;
+  public SetMenuSubTotal?: number;
+  public FoodItemSubTotal?: number;
 
 
 

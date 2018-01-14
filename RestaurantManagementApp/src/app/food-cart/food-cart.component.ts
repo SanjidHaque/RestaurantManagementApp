@@ -42,20 +42,22 @@ export class FoodCartComponent implements OnInit {
    this.orderedItems = this._ourOfferService.getOrderedItemsList();
    this.grandTotal = this._ourOfferService.TotalPrice;
   }
-f() {
+  f() {
     for ( let i = 0; i< this.orderedItems.length; i++) {
       if(this.orderedItems[i].FoodItemName != null) {
-        return this.foodItemCount ++;
+         this.foodItemCount += 1;
       }
     }
+    return this.foodItemCount
 }
 
   s() {
     for ( let i = 0; i< this.orderedItems.length; i++) {
       if(this.orderedItems[i].SetMenuName != null) {
-        return this.setMenuCount ++;
+         this.setMenuCount += 1;
       }
     }
+    return this.setMenuCount;
   }
 
   AddToOrderedList() {

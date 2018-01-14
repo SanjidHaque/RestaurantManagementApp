@@ -24,22 +24,13 @@ export class OurOffersService {
   public orderedItems: OrderedItems[] = [];
   public orders: Order;
   public chefOrder: Order;
-  public subTotal = 0;
+  public setMenuSubTotal = 0;
+  public foodItemSubTotal = 0;
   constructor(private uuid: Uuid
             ) {    this.uuidCodeOne = this.uuid.v1();
   }
 
-  /*getTotalPrice() {
-    return this.TotalPriceChanged.next(this.TotalPrice);
-  }*/
 
- /* setOurOffers(menu: OurOffers) {
-    this.menu = menu;
-    this.menuChanged.next(this.menu/!*.slice()*!/);
-  }
-  getOurOffers() {
-      return this.menu/!*.slice()*!/;
-  }*/
   getOrderedItemsList() {
     return this.orderedItems.slice();
   }
@@ -69,48 +60,60 @@ export class OurOffersService {
      return this.TotalPrice;
   }
 
-  subTotaLPrice(price: number, quantity: number) {
+  SetMenuSubTotaLPrice(price: number, quantity: number) {
     //   this.totalQuantity =  Number.parseInt(this.totalQuantity .toString()) + Number.parseInt(quantity.toString());
-    this.subTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
-    return this.subTotal;
+    this.setMenuSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
+    return this.setMenuSubTotal;
+  }
+  FoodItemSubTotaLPrice(price: number, quantity: number) {
+    this.foodItemSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
+    return this.foodItemSubTotal;
   }
 
    checkExistingSetMenu(setMenuId: number) {
      for (let i = 0 ; i < this.orderedItems.length; i++ ) {
-
        if (this.orderedItems[i].SetMenuId === setMenuId) {
          return true;
-       } /*else {
-         this.checkExistingSetMenu(setMenuId);
-
-        // return false;
-       }*/
+       }
      }
-  /*  for (let check of this.orderedItems)
-    {
-      let i = 0;
-      if (check[i].SetMenuId === setMenuId) {
-        return true;
-      }
-      else {
-        this.checkExistingSetMenu(setMenuId);
-        return false;
-      }
-    }*/
   }
 
-  increaseOnExisting(setMenuId: number, quantity: number, subTotal: number) {
+  checkExistingFoodItem(foodItemId: number) {
+    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+      if (this.orderedItems[i].FoodItemId === foodItemId) {
+        return true;
+      }
+    }
+  }
+
+  increaseOnExistingSetMenu(setMenuId: number, quantity: number, subTotal: number) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
 
       if (this.orderedItems[i].SetMenuId === setMenuId) {
 
-        this.orderedItems[i].Quantity =
-          Number.parseInt(this.orderedItems[i].Quantity.toString())
+        this.orderedItems[i].SetMenuQuantity =
+          Number.parseInt(this.orderedItems[i].SetMenuQuantity.toString())
           + Number.parseInt(quantity.toString());
 
-        this.orderedItems[i].SubTotal =
-          Number.parseInt(this.orderedItems[i].SubTotal.toString())
-          + Number.parseInt(this.subTotal.toString());
+        this.orderedItems[i].SetMenuSubTotal =
+          Number.parseInt(this.orderedItems[i].SetMenuSubTotal.toString())
+          + Number.parseInt(this.setMenuSubTotal.toString());
+      }
+    }
+  }
+
+  increaseOnExistingFoodItem(foodItemId: number, quantity: number, subTotal: number ) {
+    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+
+      if (this.orderedItems[i].FoodItemQuantity === foodItemId) {
+
+        this.orderedItems[i].FoodItemQuantity =
+          Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString())
+          + Number.parseInt(quantity.toString());
+
+        this.orderedItems[i].FoodItemSubTotal =
+          Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString())
+          + Number.parseInt(this.foodItemSubTotal.toString());
       }
     }
   }

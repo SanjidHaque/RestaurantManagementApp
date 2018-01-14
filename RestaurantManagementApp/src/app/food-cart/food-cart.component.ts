@@ -24,6 +24,8 @@ export class FoodCartComponent implements OnInit {
   public orderedItems: OrderedItems[];
   public orders: Order;
   checkOrder = false;
+  foodItemCount = 0;
+  setMenuCount = 0;
 
   uuidCodeOne = '';
   constructor(private _ourOfferService: OurOffersService,
@@ -39,6 +41,21 @@ export class FoodCartComponent implements OnInit {
   ngOnInit() {
    this.orderedItems = this._ourOfferService.getOrderedItemsList();
    this.grandTotal = this._ourOfferService.TotalPrice;
+  }
+f() {
+    for ( let i = 0; i< this.orderedItems.length; i++) {
+      if(this.orderedItems[i].FoodItemName != null) {
+        return this.foodItemCount ++;
+      }
+    }
+}
+
+  s() {
+    for ( let i = 0; i< this.orderedItems.length; i++) {
+      if(this.orderedItems[i].SetMenuName != null) {
+        return this.setMenuCount ++;
+      }
+    }
   }
 
   AddToOrderedList() {

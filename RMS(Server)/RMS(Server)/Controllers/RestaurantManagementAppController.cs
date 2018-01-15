@@ -61,7 +61,13 @@ namespace RMS_Server_.Controllers
 
             _context.SaveChanges();
         }
-     
 
+        [HttpPost]
+        [Route("api/AddNewFoodItem")]
+        public void FoodItemAdd(FoodItem foodItem)
+        {
+            _context.FoodItems.Add(foodItem);
+            _context.SaveChanges();
+        }
     }
 }

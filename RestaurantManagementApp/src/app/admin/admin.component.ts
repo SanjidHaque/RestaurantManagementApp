@@ -7,6 +7,7 @@ import {Subject} from 'rxjs/Subject';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdminDataService} from './data.service';
 import {Observable} from 'rxjs/Observable';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -17,6 +18,7 @@ export class AdminComponent implements OnInit {
   newFoodItem: FoodItems;
   addNew = false;
   viewItem = false;
+  editMode = false;
   itemForm: FormGroup;
   @Input() name: string;
   @Input() foodItemImage: string;
@@ -25,25 +27,25 @@ export class AdminComponent implements OnInit {
   foodItems: FoodItems[];
   itemAdded = new Subject<FoodItems[]>();
 
-  constructor( private dataService: AdminDataService) {
+  constructor( private dataService: AdminDataService,
+               private route: ActivatedRoute,
+               private router: Router) {
     // this.foodItems = this.dataService.getFoods();
   }
 
   ngOnInit() {
     // let foodItems = this.dataService.getFoods();
+    this.dataService.getFoodItems()
+      .subscribe(
+        (manu: OurOffers) => {
+          this.foodItems = manu.FoodItems;
+          console.log(this.foodItems);
+        }
+      );
   }
 
   onGetData() {
     this.viewItem = true;
-    this.dataService.getFoods()
-      .subscribe(
-        (responce: Response) => {
-          const data = responce.json();
-          // console.log(data);
-          this.foodItems = data.FoodItems;
-          return this.foodItems;
-        }
-      );
   }
 
 
@@ -58,19 +60,38 @@ export class AdminComponent implements OnInit {
   //   }
 
 
-  onAddItem() {
+  onAddItem(foodItem: FoodItems) {
     this.addNew = true;
+    if (this.editMode) {
+      this.name = this.foodItems[this.id].Name;
+      this.price = this.foodItems[this.id].Price;
+    }
   }
 
   onSubmit() {
+    if (this.editMode) {
+      // this.onAddNewItem(foodItem);
+    }
     const foodItem = new FoodItems(
-      this.name, this.id , this.price, this.foodItemImage
+      this.name, this.id , this.price
     );
-    this.onAddNewItem(foodItem);
+    this.onEditItem();
   }
+
   onAddNewItem(foodItem: FoodItems) {
-    this.foodItems.push(foodItem);
-    this.itemAdded.next(this.foodItems.slice());
+    this.dataService.postFoodItem(foodItem);
+  }
+
+  onEditItem() {
+    this.editMode = true;
+    // this.router.navigate(['edit-item'], {relativeTo: this.route});
+    // const foodItem = this.foodItems[this.id];
+    // // this.dataService.putFoodItem(foodItem);
+    // this.onAddItem(foodItem);
+  }
+
+  onDeleteItem() {
+    this.dataService.deleteFoodItem(this.id);
   }
 
   onCancel() {

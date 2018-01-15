@@ -17,7 +17,7 @@ export class OurOffersComponent implements OnInit, OnDestroy {
     Menu: OurOffers;
     subscription: Subscription;
     toCheckOut = false;
-    quantity: number = 0;
+    quantity = 0;
   public orderedItems: OrderedItems[];
 
 

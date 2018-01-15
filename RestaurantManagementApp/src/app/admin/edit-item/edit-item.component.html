@@ -1,0 +1,27 @@
+<div class="row">
+  <hr>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <input [(ngModel)]="name" placeholder="{{name}}">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <input [(ngModel)]="price" placeholder="{{price}}">
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="submit"
+                class="btn btn-success" (click)="onSubmit()">Save</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  </div>

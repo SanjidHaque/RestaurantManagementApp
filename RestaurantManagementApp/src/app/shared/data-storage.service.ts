@@ -10,8 +10,8 @@ import {Order} from './order.model';
 export class DataStorageService {
 
   public order: Order;
-   private _url = 'assets/menu-from-api.json';
- /* private _url = 'http://localhost:1548/api/menu';*/
+  private _url = 'assets/menu-from-api.json';
+  //    private _url = 'http://localhost:1548/api/menu';
   constructor(private _http: Http,
               private _ourOffersService: OurOffersService) {
   }
@@ -24,6 +24,7 @@ export class DataStorageService {
       .map(
         (response: Response) => {
            const menus: OurOffers = response.json();
+           console.log(menus);
            return menus;
          }
       );

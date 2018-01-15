@@ -25,12 +25,10 @@ import { AgmCoreModule } from '@agm/core';
 import { ChefComponent } from './chef/chef.component';
 import {FormsModule} from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
-<<<<<<< HEAD
 import {AdminDataService} from './admin/data.service';
-=======
 import { CheckingOrderComponent } from './checking-order/checking-order.component';
 import {ChefServiceService} from './chef/chef-service.service';
->>>>>>> master
+import { EditItemComponent } from './admin/edit-item/edit-item.component';
 
 
 
@@ -48,7 +46,8 @@ import {ChefServiceService} from './chef/chef-service.service';
     ContactUsComponent,
     ChefComponent,
     AdminComponent,
-    CheckingOrderComponent
+    CheckingOrderComponent,
+    EditItemComponent
 
   ],
   imports: [
@@ -67,15 +66,13 @@ import {ChefServiceService} from './chef/chef-service.service';
 
     })
   ],
-<<<<<<< HEAD
-  providers: [OurOffersService, DataStorageService, AdminDataService],
-=======
+
   providers: [
     OurOffersService,
     DataStorageService,
-    ChefServiceService
+    ChefServiceService,
+    AdminDataService
   ],
->>>>>>> master
   bootstrap: [AppComponent]
 })
 export class AppModule {

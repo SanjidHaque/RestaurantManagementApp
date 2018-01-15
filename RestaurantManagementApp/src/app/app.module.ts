@@ -28,7 +28,11 @@ import { AdminComponent } from './admin/admin.component';
 import {AdminDataService} from './admin/data.service';
 import { CheckingOrderComponent } from './checking-order/checking-order.component';
 import {ChefServiceService} from './chef/chef-service.service';
+<<<<<<< HEAD
 import { EditItemComponent } from './admin/edit-item/edit-item.component';
+=======
+import { FoodItemsComponent } from './our-offers/food-items/food-items.component';
+>>>>>>> master
 
 
 
@@ -47,7 +51,11 @@ import { EditItemComponent } from './admin/edit-item/edit-item.component';
     ChefComponent,
     AdminComponent,
     CheckingOrderComponent,
+<<<<<<< HEAD
     EditItemComponent
+=======
+    FoodItemsComponent
+>>>>>>> master
 
   ],
   imports: [

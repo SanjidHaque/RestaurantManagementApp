@@ -66,7 +66,7 @@
 </div>-->
 
 
-<div class="row start">
+<div class="row">
   <div class="col-md-12 set-menu-details">
     <collapsible-list [type]="'expandable'">
       <collapsible-list-item>
@@ -74,23 +74,32 @@
           <div class="row">
             <div class="col-md-12">
               {{ menu.Name }}
+
+
             </div>
           </div>
         </collapsible-header>
         <collapsible-body [expanded]="true">
-        <div class="row">
-              <div class="col-md-7 set-menu-items" *ngFor="let setMenuItems of menu.SetMenuItems">
-                {{ setMenuItems.FoodItem.Name }}
-              </div>
-            <div class="col-md-5 set-menu-image-div">
-              <img [src]="menu.SetMenuImage" class="set-menu-image">
-            </div>
-        </div>
-
           <div class="row">
-            <div class="col-md-4 set-menu-price">
-             Price: {{ menu.Price }} BDT
+            <!--  <div class="col-md-12"  >-->
+           <!-- <div class="col-md-7 set-menu-items" *ngFor="let setMenuItems of menu.FoodItems">
+              {{ setMenuItems.FoodItem.Name }}
+            </div>-->
+
+            <div class="col-md-5 set-menu-image-div">
+              <img [src]="menu.FoodItemImage" class="set-menu-image">
             </div>
+            <div class="col-md-4 set-menu-price">
+              Price: {{ menu.Price }} BDT
+            </div>
+
+          </div>
+          <!-- </div>-->
+          <div class="row">
+           <!-- <div class="col-md-4 set-menu-price">
+              Price: {{ menu.Price }} BDT
+            </div>-->
+            <div class="row">
               <div class="col-md-4 form-group">
                 <input type="number"
                        id="amount"
@@ -98,6 +107,7 @@
                        #amountInput
                 >
               </div>
+            </div>
             <div class="col-md-4 set-menu-price-button">
               <button (click)="AddToCart(menu.Id, menu.Price, menu.Name)" class="smpbutton"> Add To Cart</button>
             </div>

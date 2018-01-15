@@ -11,6 +11,36 @@
   font-size:25px;
   }
 */
+.start{
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+ /* margin-top: -100px;
+  padding-top: 100px;*/
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  will-change: overflow;
+}
+.set-menu::-webkit-scrollbar{
+  display: none;
+}
+.set-menu{
+  overflow: auto;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+}
+.food-item::-webkit-scrollbar{
+  display: none;
+}
+.food-item{
+  overflow: auto;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+}
+
 
 .set-menu-title {
   font-family: "Times New Roman";

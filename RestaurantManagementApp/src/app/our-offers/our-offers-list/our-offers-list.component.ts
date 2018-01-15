@@ -69,14 +69,14 @@ export class OurOffersListComponent implements OnInit {
     let setMenuId = id;
     let setMenuName = name;
     let Price = price;
-    let subTotal = this._ourOfferService.subTotaLPrice(Price, quantity);
+    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(Price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
     this.condition = this._ourOfferService.checkExistingSetMenu(setMenuId);
 
      if ( this.condition /*this._ourOfferService.checkExistingSetMenu(setMenuId) */ ) {
-       this._ourOfferService.increaseOnExisting(setMenuId, quantity, subTotal );
+       this._ourOfferService.increaseOnExistingSetMenu(setMenuId, quantity, subTotal );
       } else {
-       const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, setMenuId, name, price, subTotal);
+       const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, null , setMenuId, name, null, price, subTotal, null);
        this._ourOfferService.addToOrderedItemsList(purchasedFood);
      }
     this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString()) + Number.parseInt(this.amountInputRef.nativeElement.value.toString());

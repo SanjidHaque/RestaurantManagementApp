@@ -9,16 +9,20 @@ namespace RMS_Server_.Models
 {
     public class OrderedItems
     {
-        public string Id { get; set; }
+        [Key]
+        public string OrderItemId { get; set; }
         public Order Order { get; set; }
         public string OrderId { get; set; }
         public FoodItem FoodItem { get; set; }
         public int? FoodItemId { get; set; }
-        public int Quantity { get; set; }
+        public int? SetMenuQuantity { get; set; }
+        public int? FoodItemQuantity { get; set; }
         public SetMenu SetMenu { get; set; }
         public int? SetMenuId { get; set; }
         public string SetMenuName { get; set; }
+        public string FoodItemName { get; set; }
         public int Price { get; set; }
-        public int SubTotal { get; set; }
+        public int? SetMenuSubTotal { get; set; }
+        public int? FoodItemSubTotal { get; set; }
     }
 }

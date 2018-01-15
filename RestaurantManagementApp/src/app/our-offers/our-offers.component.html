@@ -21,8 +21,8 @@
 </div>-->
 <!--</div>-->
 
-<div class="row">
-  <div class="col-md-offset-1 col-md-5">
+<div class="row start">
+  <div class="col-md-5 set-menu">
     <div class="row">
       <div class="col-md-12 set-menu-title">
         Set Menus
@@ -41,13 +41,33 @@
 
    </div>
   </div>
+
+  <div class="col-md-offset-2 col-md-5 food-item">
+    <div class="row">
+      <div class="col-md-12 set-menu-title">
+        Regular
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-food-items *ngFor="let menu of Menu.FoodItems, let i = index"
+                             [menu]="menu"
+                             [index] ="i"
+        >
+
+        </app-food-items>
+
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<div class="row">
+<!--<div class="row">
   <div class="col-md-offset-4 col-md-4">
     <button routerLink="/food-cart" class="smpbutton" [disabled]="!allowToCheckOut()">Proceed To Checkout</button>
   </div>
-</div>
+</div>-->
 
 <!--
    <popup class="popup">This feature is not ready yet!</popup><!--(click)="saveOrders()"-->

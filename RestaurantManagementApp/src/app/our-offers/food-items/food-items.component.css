@@ -1,53 +1,44 @@
-
 .set-menu-details {
   border: 2px solid #feff26;
   border-radius: 6px;
-  margin-top:8px;
-
-}
+  margin-top: 8px; }
 
 .set-menu-name {
   font-family: "Times New Roman";
-  font-size:20px;
+  font-size: 20px;
   color: #feff26;
-  text-align: center;
-  }
+  text-align: center; }
+
 .set-menu-items {
   font-family: "SansSerif";
   color: #feff26;
   text-align: left;
-  font-size:17px;
-  padding-top: 1px;
-}
+  font-size: 17px;
+  padding-top: 1px; }
+
 .set-menu-price {
   font-family: "Times New Roman";
-  font-size:20px;
+  font-size: 20px;
   color: #feff26;
   text-align: left;
-  padding-top: 24px;
-}
+  padding-top: 24px; }
 
 collapsible-header {
   font-family: "Times New Roman";
-  font-size:20px;
+  font-size: 20px;
   color: #feff26;
   text-align: center;
   background-color: black;
-  border-bottom: 1px groove #feff26;
-}
+  border-bottom: 1px groove #feff26; }
 
-collapsible-list{
-  border: none;
-}
+collapsible-list {
+  border: none; }
 
-collapsible-list-item{
-  border: none;
-}
+collapsible-list-item {
+  border: none; }
 
-collapsible-body{
-  border: none;
-}
-
+collapsible-body {
+  border: none; }
 
 .set-menu-image {
   height: 120px;
@@ -57,45 +48,35 @@ collapsible-body{
   -webkit-transition: all .5s ease;
   -moz-transition: all .5s ease;
   -ms-transition: all .5s ease;
-  transition: all .5s ease;
-}
+  transition: all .5s ease; }
 
-.set-menu-image:hover{
+.set-menu-image:hover {
   width: 176px;
-  height: 176px;
-}
-
-
-.set-menu-price-button {
-
-}
+  height: 176px; }
 
 .smpbutton {
-  width:100%;
-  height:100%;
-  font-family:"SansSerif";
+  width: 100%;
+  height: 100%;
+  font-family: "SansSerif";
   color: #feff26;
   background-color: black;
   border: 1.2px solid  #feff26;
   border-radius: 3px;
-  font-size:16px;
+  font-size: 16px;
   padding-top: 5px;
   padding-bottom: 5px;
   margin-left: 5px;
-  margin-top: 22px;
-}
+  margin-top: 22px; }
 
-.smpbutton:hover{
+.smpbutton:hover {
   background-color: #feff26;
   color: black;
-  font-family:"SansSerif";
-  font-weight:bold;
+  font-family: "SansSerif";
+  font-weight: bold;
   border: 1.2px solid black;
-  border-radius: 3px;
-}
+  border-radius: 3px; }
 
-.smpbutton:focus{
-  outline:0;
-}
+.smpbutton:focus {
+  outline: 0; }
 
-
+/*# sourceMappingURL=food-items.component.css.map */

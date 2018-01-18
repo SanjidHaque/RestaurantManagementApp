@@ -17,15 +17,11 @@ import {Popup} from 'ng2-opd-popup';
 export class OurOffersListComponent implements OnInit {
   @Input() menu: OurOffers;
   @Input() index: number;
- /* public setMenuImage: string[] = [
-    'assets/ImageOne.jpg',
-    'assets/ImageTwo.jpg'
-  ];*/
 
   public totalQuantity: number = 0;
   order: Order[];
   condition = false;
-  /*GrandTotalPrice = 0;*/
+  quantity = 0;
   @ViewChild('amountInput') amountInputRef: ElementRef;
 
   uuidCodeOne = '';
@@ -35,58 +31,73 @@ export class OurOffersListComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private uuid: Uuid,
-              private popUp: Popup
               ) {
     this.uuidCodeOne = this.uuid.v1();
     this.uuidCodeTwo = this.uuid.v1();
     this.uuidCodeThree = this.uuid.v1();
-    /*this.condition = false;*/
   }
 
   ngOnInit() {
   }
 
-  OnAddToPurchasedFood(id: number) {
-    /*let purchasedFoodId = this.uuidCodeOne;
-    let orderId = this.uuidCodeTwo;
-    let quantity = 1;
-    let setMenuId = id;
-    const purchaesdFood = new OrderedItems(purchasedFoodId,orderId,null,quantity,setMenuId);
-    this._ourOfferService.addToOrderedItemsList(purchaesdFood);*/
-    this.router.navigate(['cheff'], { relativeTo: this.route});
-  }
-
-  AddToCart(id: number, price: number, name: string) {
-    /*this.popUp.options={
-      color: 'black',
-      showButtons: true,
-      cancleBtnContent: 'Cancel'
-    }
-    this.popUp.show();*/
+  UpdateCart(id: number, price: number, name: string, isAdd: boolean) {
     let orderItemId = this.uuidCodeOne;
     let orderId = this._ourOfferService.uuidCodeOne;
-    let quantity = this.amountInputRef.nativeElement.value;
+    this.quantity = this.amountInputRef.nativeElement.value;
     let setMenuId = id;
     let setMenuName = name;
     let Price = price;
-    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(Price, quantity);
+    if ( isAdd === true ) {
+      this.AddToCart( orderItemId, orderId, this.quantity, setMenuId,
+        setMenuName, Price );
+    } else {
+      this.RemoveFromCart(orderItemId, orderId, this.quantity,
+        setMenuId, setMenuName, Price );
+    }
+
+  }
+
+   AddToCart(orderItemId: string, orderId: string, quantity: number,
+                    setMenuId: number, setMenuName: string, price: number   )
+  {
+
+    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
     this.condition = this._ourOfferService.checkExistingSetMenu(setMenuId);
 
-     if ( this.condition /*this._ourOfferService.checkExistingSetMenu(setMenuId) */ ) {
-       this._ourOfferService.increaseOnExistingSetMenu(setMenuId, quantity, subTotal );
-      } else {
-       const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, null , setMenuId, name, null, price, subTotal, null);
-       this._ourOfferService.addToOrderedItemsList(purchasedFood);
-     }
+    if ( this.condition  ) {
+      this._ourOfferService.increaseOnExistingSetMenu(setMenuId, quantity, subTotal );
+    } else {
+      const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, null , setMenuId, setMenuName, null, price, subTotal, null);
+      this._ourOfferService.addToOrderedItemsList(purchasedFood);
+    }
     this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString()) + Number.parseInt(this.amountInputRef.nativeElement.value.toString());
-    /*  this.totalQuantity =
-      Number.parseInt(this.totalQuantity.toString())
-        + Number.parseInt(quantity.toString());*/
-
-
-
 
   }
+
+   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
+                         setMenuId: number, setMenuName: string, price: number ) {
+
+    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(price, quantity);
+
+    this.quantity= this._ourOfferService.removeFromSetMenuCart(setMenuId, quantity, subTotal);
+    this._ourOfferService.totalQuantity =
+      Number.parseInt(this._ourOfferService.totalQuantity.toString()) -
+      Number.parseInt(this.amountInputRef.nativeElement.value.toString());
+  }
+
 }
 
+/*
+let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(Price, quantity);
+this._ourOfferService.grandTotalPrice(subTotal);
+this.condition = this._ourOfferService.checkExistingSetMenu(setMenuId);
+
+if ( this.condition  ) {
+  this._ourOfferService.increaseOnExistingSetMenu(setMenuId, quantity, subTotal );
+} else {
+  const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, null , setMenuId, name, null, price, subTotal, null);
+  this._ourOfferService.addToOrderedItemsList(purchasedFood);
+}
+this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString())
+  + Number.parseInt(this.amountInputRef.nativeElement.value.toString());*/

@@ -1,22 +1,21 @@
-<div class="row">
-  <div class="col-md-12 chefs-orders" *ngFor="let order of Orders">
+
+<div *ngIf="Orders">
+<div class="row" >
+  <div class="col-md-12 chefs-orders" *ngFor="let order of Orders" >
+    <div *ngIf="order.OnChef === false">
+    Order Id: {{ order.Id }}
     <div class="col-md-12" *ngFor="let orderedItems of order.OrderedItems">
       {{ orderedItems.SetMenuName }}
+      {{ orderedItems.FoodItemName }}
     </div>
-    <div class="col-md-12">
-      <button class="btn btn-primary" (click)="orderAccepted(order)">Accept</button>
+    <div class="col-md-1">
+      <button class="btn btn-primary" (click)="orderAccepted(order)"  >Accept</button>
     </div>
-    <div class="col-md-12">
-      <button class="btn btn-danger">Reject</button>
+    <div class="col-md-1">
+      <button class="btn btn-danger" (click)="orderRejected(order)">Reject</button>
     </div>
+    <div class="col-md-12" style="color: #feff26">_________________________________________________</div>
   </div>
 </div>
-
-
-<!--
-<div class="row">
-  <div class="col-md-4">
-
-  </div>
 </div>
--->
+</div>

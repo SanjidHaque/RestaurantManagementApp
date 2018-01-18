@@ -23,11 +23,46 @@ export class OurOffersService {
   public totalQuantity  = 0;
   public orderedItems: OrderedItems[] = [];
   public orders: Order;
-  public chefOrder: Order;
+  public acceptedOrder: Order;
+  public rejectedOrder: Order;
   public setMenuSubTotal = 0;
   public foodItemSubTotal = 0;
   constructor(private uuid: Uuid
             ) {    this.uuidCodeOne = this.uuid.v1();
+  }
+
+  removeFromSetMenuCart(setMenuId: number, quantity: number, subTotal: number) {
+
+    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+        if ( this.orderedItems[i].SetMenuId === setMenuId) {
+          this.orderedItems[i].SetMenuQuantity =
+            this.orderedItems[i].SetMenuQuantity
+            - quantity;
+
+          this.orderedItems[i].SetMenuSubTotal =
+            this.orderedItems[i].SetMenuSubTotal
+            - subTotal;
+          this.TotalPrice -= Number.parseInt(subTotal.toString());
+          return this.orderedItems[i].SetMenuQuantity;
+        }
+     }
+  }
+
+  removeFromFoodItemCart(foodItemId: number, quantity: number, subTotal: number) {
+
+    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+      if ( this.orderedItems[i].FoodItemId === foodItemId) {
+        this.orderedItems[i].FoodItemQuantity =
+          this.orderedItems[i].FoodItemQuantity
+          - quantity;
+
+        this.orderedItems[i].FoodItemSubTotal =
+          this.orderedItems[i].FoodItemSubTotal
+          - subTotal;
+        this.TotalPrice -= Number.parseInt(subTotal.toString());
+        return this.orderedItems[i].FoodItemQuantity;
+      }
+    }
   }
 
 
@@ -36,13 +71,17 @@ export class OurOffersService {
   }
 
   getAccepted(order: Order) {
-    this.chefOrder = order;
+    this.acceptedOrder = order;
   }
-  getOrdersList() {
-    return this.orders;
+  getRejected(order: Order) {
+    this.rejectedOrder = order;
   }
   getAcceptedOrder() {
-    return this.chefOrder;
+    return this.acceptedOrder;
+  }
+
+  getRejectedOrder() {
+    return this.rejectedOrder;
   }
 
   addToOrderedItemsList(orderedItems: OrderedItems) {
@@ -61,10 +100,10 @@ export class OurOffersService {
   }
 
   SetMenuSubTotaLPrice(price: number, quantity: number) {
-    //   this.totalQuantity =  Number.parseInt(this.totalQuantity .toString()) + Number.parseInt(quantity.toString());
     this.setMenuSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
     return this.setMenuSubTotal;
   }
+
   FoodItemSubTotaLPrice(price: number, quantity: number) {
     this.foodItemSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
     return this.foodItemSubTotal;

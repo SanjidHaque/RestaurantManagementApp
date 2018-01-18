@@ -23,6 +23,7 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeOne = '';
   uuidCodeTwo = '';
   uuidCodeThree = '';
+  quantity = 0;
   constructor(private _ourOfferService: OurOffersService,
               private router: Router,
               private route: ActivatedRoute,
@@ -38,26 +39,53 @@ export class FoodItemsComponent implements OnInit {
   }
 
 
-  AddToCart(id: number, price: number, name: string) {
+  UpdateCart(id: number, price: number, name: string, isAdd: boolean) {
     let orderItemId = this.uuidCodeOne;
     let orderId = this._ourOfferService.uuidCodeOne;
-    let quantity = this.amountInputRef.nativeElement.value;
+    this.quantity = this.amountInputRef.nativeElement.value;
     let foodItemId = id;
-    let FoodItemName = name;
+    let foodItemName = name;
     let Price = price;
-    let subTotal = this._ourOfferService.FoodItemSubTotaLPrice(Price, quantity);
+    if ( isAdd === true ) {
+      this.AddToCart( orderItemId, orderId, this.quantity, foodItemId,
+        foodItemName, Price );
+    } else {
+      this.RemoveFromCart(orderItemId, orderId, this.quantity,
+        foodItemId, foodItemName, Price );
+    }
+
+  }
+
+  AddToCart(orderItemId: string, orderId: string, quantity: number,
+            foodItemId: number, foodItemName: string, price: number   )
+  {
+
+    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
-    this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
+    this.condition = this._ourOfferService.checkExistingSetMenu(foodItemId);
 
     if ( this.condition  ) {
-      this._ourOfferService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
+      this._ourOfferService.increaseOnExistingSetMenu(foodItemId, quantity, subTotal );
     } else {
-      const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId, null, quantity, null, null, name,  price, null, subTotal);
+
+      const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId, null,
+        quantity , null , null, foodItemName, price, null , subTotal);
+
       this._ourOfferService.addToOrderedItemsList(purchasedFood);
     }
-    this._ourOfferService.totalQuantity =
-      Number.parseInt(this._ourOfferService.totalQuantity.toString())
+    this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString())
       + Number.parseInt(this.amountInputRef.nativeElement.value.toString());
 
+  }
+
+  RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
+                 foodItemId: number, foodItemName: string, price: number ) {
+
+    let subTotal = this._ourOfferService.FoodItemSubTotaLPrice(price, quantity);
+
+    this.quantity= this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
+    this._ourOfferService.totalQuantity =
+      Number.parseInt(this._ourOfferService.totalQuantity.toString()) -
+      Number.parseInt(this.amountInputRef.nativeElement.value.toString());
   }
 }

@@ -99,7 +99,13 @@
                 >
               </div>
             <div class="col-md-4 set-menu-price-button">
-              <button (click)="AddToCart(menu.Id, menu.Price, menu.Name)" class="smpbutton"> Add To Cart</button>
+              <button (click)="UpdateCart(menu.Id, menu.Price, menu.Name, true)" class="smpbutton">Add To Cart</button>
+            </div>
+            <div style="color: #feff26">
+              {{ quantity }}
+            </div>
+            <div class="col-md-4 set-menu-price-button">
+              <button (click)="UpdateCart(menu.Id, menu.Price, menu.Name, false)" class="smpbutton">Remove From Cart</button>
             </div>
           </div>
         </collapsible-body>

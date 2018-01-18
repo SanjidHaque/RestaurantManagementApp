@@ -5,8 +5,6 @@ export class OurOffers {
   public SetMenus: SetMenus[];
   public FoodItems: FoodItems[];
 
-
-
   constructor(setMenu: SetMenus[] = [], foodItem: FoodItems[] = []) {
     this.SetMenus = setMenu;
     this.FoodItems = foodItem;

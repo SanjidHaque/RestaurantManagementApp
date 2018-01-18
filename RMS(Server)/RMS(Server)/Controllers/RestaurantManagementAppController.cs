@@ -89,7 +89,7 @@ namespace RMS_Server_.Controllers
         [Route("api/GetOrders")]
         public List<Order> Order()
         {
-            return _context.Orders.Where(p => p.IsServed == false).Include(b => b.OrderedItems).ToList();
+            return _context.Orders.Where(p => p.OnChef == false).Include(b => b.OrderedItems).ToList();
         }
 
         [HttpPost]
@@ -97,7 +97,17 @@ namespace RMS_Server_.Controllers
         public void OrderAccepted(Order order)
         {
              var acceptedOrder =  _context.Orders.FirstOrDefault(p => p.Id == order.Id);
+              acceptedOrder.OnChef = true;
              acceptedOrder.IsServed = true;
+            _context.SaveChanges();
+        }
+        [HttpPost]
+        [Route("api/RejectOrders")]
+        public void OrderRejected(Order order)
+        {
+            var rejectedOrder = _context.Orders.FirstOrDefault(p => p.Id == order.Id);
+            rejectedOrder.OnChef = true;
+            rejectedOrder.IsServed = false;
             _context.SaveChanges();
         }
 

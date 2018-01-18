@@ -10,6 +10,7 @@ namespace RMS_Server_.Models
         public string Id { get; set; }
         public List<OrderedItems> OrderedItems { get; set; }
         public int TotalPrice { get; set; }
+        public bool OnChef { get; set; }
         public bool IsServed { get; set; }
     }
 }

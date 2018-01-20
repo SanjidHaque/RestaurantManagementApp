@@ -1,27 +1,29 @@
-<div class="row">
-  <hr>
-  <div class="col-md-6">
-    <div class="row">
-      <div class="col-xs-12">
+<div class="row" style="color: #feff26">
+  <div class="col-md-3"></div>
+  <div class="col-md-8">
         <div class="form-group">
-          <input [(ngModel)]="name" placeholder="{{name}}">
+          <label>Enter Food Item Name:</label><br>
+          <input [(ngModel)]="name" placeholder="Enter name" class="col-md-5" style="color: indigo"><br>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
         <div class="form-group">
-          <input [(ngModel)]="price" placeholder="{{price}}">
-        </div>
+          <label>Enter Food Item Price:</label><br>
+          <input [(ngModel)]="price" placeholder="Enter price" class="col-md-5" style="color: indigo">
       </div>
-    </div>
-    <hr>
+    <!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+    <!--<div class="form-group">-->
+    <!--<input [(ngModel)]="foodItemImage" placeholder="Enter Image Url">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <br>
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-md-7">
         <button type="submit"
-                class="btn btn-success" (click)="onSubmit()">Save</button>
+                class="btn btn-success" (click)="onSubmit()"
+                [disabled]="!name||!price">Save</button>
         <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
       </div>
     </div>
   </div>
-  </div>
+</div>

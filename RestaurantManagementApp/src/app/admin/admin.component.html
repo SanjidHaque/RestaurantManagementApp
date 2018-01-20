@@ -1,68 +1,21 @@
-<div class="col-xs-12">
-  <hr>
-  <button type="button" class="btn btn-primary" (click)="onAddItem()">Add New Item</button>
-  <button type="button" class="btn btn-primary" (click)="onGetData()">View Item</button>
-</div>
-
-<div style="color: #feff26" class="col-md-6" *ngIf="viewItem">
-  <div class="row">
-    <table>
-      <tr>
-        <td>Id</td>
-        <td>Name</td>
-        <td>Price</td>
-      </tr>
-      <tr *ngFor="let item of foodItems">
-              <td>{{item.Id}}</td>
-              <td>{{item.Name}}</td>
-              <td>{{item.Price}}</td>
-        <button type="button" class="btn btn-primary"
-                routerLink="/{{item.Id}}/edit-item" (click)="onEditItem()">Edit</button>
-        <button type="button" class="btn btn-primary" >Delete</button>
-            </tr>
-  </table>
+<div class="row" style="color: #010100">
+  <div class="col-md-12">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" >
+          <ul class="nav navbar-nav" style="position: center">
+            <li routerLinkActive="active"><a routerLink="/admin/edit-item/:id">Add Food Item</a> </li>
+            <li routerLinkActive="active"><a routerLink="/admin/view-food-item">View Food Item</a> </li>
+            <li routerLinkActive="active"><a routerLink="/admin/add-set-menu">Add Set Menu</a> </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
 </div>
-<!--<div class="row" *ngIf="addNew">-->
-  <!--<hr>-->
-  <!--<div class="col-md-6">-->
-    <!--<div class="row">-->
-      <!--<div class="col-xs-12">-->
-        <!--<div class="form-group">-->
-          <!--<input [(ngModel)]="name" placeholder="Enter name">-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-      <!--<div class="col-xs-12">-->
-        <!--<div class="form-group">-->
-          <!--<input [(ngModel)]="price" placeholder="Enter price">-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-      <!--&lt;!&ndash;<div class="col-xs-12">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
-          <!--&lt;!&ndash;<input [(ngModel)]="foodItemImage" placeholder="Enter Image Url">&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--<hr>-->
-    <!--<div class="row">-->
-      <!--<div class="col-xs-12">-->
-        <!--<button type="submit"-->
-                <!--class="btn btn-success" (click)="onSubmit()">Save</button>-->
-        <!--<button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+<div class="row">
+  <div class="col-md-12" >
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
-
-<!--<form action="" *ngIf="!editMode" style="color: #feff26">-->
-  <!--<div *ngFor="let foodItem of foodItems">-->
-    <!--<input type="checkbox" name="foodItems" value="foodItem">{{foodItem.Name}}-->
-  <!--</div>-->
-  <!--<button type="submit" class="btn btn-success">Save</button>-->
-  <!--<button type="button" class="btn btn-primary">Cancel</button>-->
-<!--</form>-->

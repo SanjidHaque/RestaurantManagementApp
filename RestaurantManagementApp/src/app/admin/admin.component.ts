@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FoodItems} from '../shared/food-item.model';
-import {Http, Response} from '@angular/http';
 import {OurOffers} from '../our-offers/our-offers.model';
-import {OurOffersService} from '../our-offers/our-offers.service';
 import {Subject} from 'rxjs/Subject';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Form, FormArray, FormGroup, NgForm} from '@angular/forms';
 import {AdminDataService} from './data.service';
-import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SetMenuItems} from '../shared/set-menu-items.model';
+import {variable} from '@angular/compiler/src/output/output_ast';
+import index from '@angular/cli/lib/cli';
+import {SetFoodItemsArry} from './setMenuFoodItem.model';
 
 @Component({
   selector: 'app-admin',
@@ -15,16 +16,15 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  newFoodItem: FoodItems;
   addNew = false;
   viewItem = false;
   editMode = false;
-  itemForm: FormGroup;
+  addSetMenu = false;
   @Input() name: string;
-  @Input() foodItemImage: string;
   @Input() price: number;
   @Input() id: number;
   foodItems: FoodItems[];
+  setMenuItems: SetFoodItemsArry;
   itemAdded = new Subject<FoodItems[]>();
 
   constructor( private dataService: AdminDataService,
@@ -39,12 +39,12 @@ export class AdminComponent implements OnInit {
       .subscribe(
         (manu: OurOffers) => {
           this.foodItems = manu.FoodItems;
-          console.log(this.foodItems);
         }
       );
   }
 
   onGetData() {
+    this.onCancel();
     this.viewItem = true;
   }
 
@@ -60,42 +60,34 @@ export class AdminComponent implements OnInit {
   //   }
 
 
-  onAddItem(foodItem: FoodItems) {
-    this.addNew = true;
-    if (this.editMode) {
-      this.name = this.foodItems[this.id].Name;
-      this.price = this.foodItems[this.id].Price;
-    }
-  }
-
-  onSubmit() {
-    if (this.editMode) {
-      // this.onAddNewItem(foodItem);
-    }
-    const foodItem = new FoodItems(
-      this.name, this.id , this.price
-    );
-    this.onEditItem();
-  }
-
-  onAddNewItem(foodItem: FoodItems) {
-    this.dataService.postFoodItem(foodItem);
-  }
-
-  onEditItem() {
-    this.editMode = true;
-    // this.router.navigate(['edit-item'], {relativeTo: this.route});
-    // const foodItem = this.foodItems[this.id];
-    // // this.dataService.putFoodItem(foodItem);
-    // this.onAddItem(foodItem);
-  }
-
-  onDeleteItem() {
-    this.dataService.deleteFoodItem(this.id);
-  }
-
   onCancel() {
     this.addNew = false;
+    if (this.editMode) {
+      this.editMode = false;
+      this.name = '';
+      this.price = null;
+      this.router.navigate(['/admin']);
+    }
+    if (this.addSetMenu) {
+      this.addSetMenu = false;
+    }
   }
 
-}
+  onAddMenu() {
+    this.onCancel();
+    this.addSetMenu = true;
+  }
+
+  onSubmitSetMenu(formValue: NgForm) {
+  //   this.setMenuItems = [
+  //     {this.foodItems}
+  // }
+  //
+  //   ]
+  // }
+    const setFoodItems =  formValue.value;
+    if (setFoodItems.isSelected === true) {
+      this.setMenuItems.foodItems = setFoodItems.foodItems;
+    }
+
+}}

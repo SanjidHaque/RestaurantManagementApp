@@ -28,11 +28,10 @@ import { AdminComponent } from './admin/admin.component';
 import {AdminDataService} from './admin/data.service';
 import { CheckingOrderComponent } from './checking-order/checking-order.component';
 import {ChefServiceService} from './chef/chef-service.service';
-<<<<<<< HEAD
 import { EditItemComponent } from './admin/edit-item/edit-item.component';
-=======
 import { FoodItemsComponent } from './our-offers/food-items/food-items.component';
->>>>>>> master
+import { AddSetMenuComponent } from './admin/add-set-menu/add-set-menu.component';
+import { ViewFoodItemComponent } from './admin/view-food-item/view-food-item.component';
 
 
 
@@ -51,11 +50,10 @@ import { FoodItemsComponent } from './our-offers/food-items/food-items.component
     ChefComponent,
     AdminComponent,
     CheckingOrderComponent,
-<<<<<<< HEAD
-    EditItemComponent
-=======
-    FoodItemsComponent
->>>>>>> master
+    EditItemComponent,
+    FoodItemsComponent,
+    AddSetMenuComponent,
+    ViewFoodItemComponent
 
   ],
   imports: [

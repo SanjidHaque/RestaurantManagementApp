@@ -1,0 +1,27 @@
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6" style=" position: center; color: #feff26" >
+  <div class="row">
+    <table style=" position: center">
+      <thead>
+        <td>Id--</td>
+        <td>Name--</td>
+        <td>Price---</td>
+        <td>Option</td>
+        <hr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of foodItems; let i = index">
+        <td>{{item.Id}}--</td>
+        <td>{{item.Name}}--</td>
+        <td>{{item.Price}}</td>
+        <button type="button" class="btn btn-primary"
+                routerLink="/edit-item" (click)="onEditItem(item.Id)">Edit</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteItem(i)">Delete</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="col-md-3"></div>
+</div>

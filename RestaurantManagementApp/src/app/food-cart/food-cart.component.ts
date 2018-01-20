@@ -42,7 +42,7 @@ export class FoodCartComponent implements OnInit {
    this.orderedItems = this._ourOfferService.getOrderedItemsList();
    this.grandTotal = this._ourOfferService.TotalPrice;
   }
-  f() {
+  checkFoodItemCount() {
     for ( let i = 0; i< this.orderedItems.length; i++) {
       if(this.orderedItems[i].FoodItemName != null) {
          this.foodItemCount += 1;
@@ -51,7 +51,7 @@ export class FoodCartComponent implements OnInit {
     return this.foodItemCount
 }
 
-  s() {
+  checkSetMenuCount() {
     for ( let i = 0; i< this.orderedItems.length; i++) {
       if(this.orderedItems[i].SetMenuName != null) {
          this.setMenuCount += 1;
@@ -61,12 +61,11 @@ export class FoodCartComponent implements OnInit {
   }
 
   AddToOrderedList() {
-
     let orderId = this._ourOfferService.uuidCodeOne;
     this.orderedItems = this._ourOfferService.orderedItems;
     let totalPrice = this._ourOfferService.TotalPrice;
-    let isServed = false;
-    const order = new Order(orderId, this.orderedItems, totalPrice, isServed);
+    let orderStatus = 0;
+    const order = new Order(orderId, this.orderedItems, totalPrice, orderStatus);
     this._ourOfferService.addToOrderedList(order);
     this._dataStorageService.storeOrders()
       .subscribe(
@@ -76,7 +75,7 @@ export class FoodCartComponent implements OnInit {
       );
     // this.orders = this._dataStorageService.getOrders();
     this.router.navigate(['checking-orders'], {relativeTo: this.route});
-    this.checkOrder = this._chefService.orderAccepted;
+    // this.checkOrder = this._chefService.orderAccepted;
   }
 
   /*saveOrders() {

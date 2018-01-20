@@ -211,19 +211,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801100951505_ALLNEW.cs" />
-    <Compile Include="Migrations\201801100951505_ALLNEW.Designer.cs">
-      <DependentUpon>201801100951505_ALLNEW.cs</DependentUpon>
+    <Compile Include="Migrations\201801191316073_NewModelsAdded3.cs" />
+    <Compile Include="Migrations\201801191316073_NewModelsAdded3.Designer.cs">
+      <DependentUpon>201801191316073_NewModelsAdded3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801141747530_OrderedItemModelChanged.cs" />
-    <Compile Include="Migrations\201801141747530_OrderedItemModelChanged.Designer.cs">
-      <DependentUpon>201801141747530_OrderedItemModelChanged.cs</DependentUpon>
+    <Compile Include="Migrations\201801191437313_ImagePathAddedInFoodItemModel.cs" />
+    <Compile Include="Migrations\201801191437313_ImagePathAddedInFoodItemModel.Designer.cs">
+      <DependentUpon>201801191437313_ImagePathAddedInFoodItemModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191450158_ImagePathAddedInFoodItemModeldeletd.cs" />
+    <Compile Include="Migrations\201801191450158_ImagePathAddedInFoodItemModeldeletd.Designer.cs">
+      <DependentUpon>201801191450158_ImagePathAddedInFoodItemModeldeletd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191553456_ModelChanged.cs" />
+    <Compile Include="Migrations\201801191553456_ModelChanged.Designer.cs">
+      <DependentUpon>201801191553456_ModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191555428_ModelChangedgain.cs" />
+    <Compile Include="Migrations\201801191555428_ModelChangedgain.Designer.cs">
+      <DependentUpon>201801191555428_ModelChangedgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderedItems.cs" />
@@ -241,6 +255,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\FoodItemImages\nfr.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -303,11 +318,20 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801100951505_ALLNEW.resx">
-      <DependentUpon>201801100951505_ALLNEW.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801191316073_NewModelsAdded3.resx">
+      <DependentUpon>201801191316073_NewModelsAdded3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801141747530_OrderedItemModelChanged.resx">
-      <DependentUpon>201801141747530_OrderedItemModelChanged.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801191437313_ImagePathAddedInFoodItemModel.resx">
+      <DependentUpon>201801191437313_ImagePathAddedInFoodItemModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191450158_ImagePathAddedInFoodItemModeldeletd.resx">
+      <DependentUpon>201801191450158_ImagePathAddedInFoodItemModeldeletd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191553456_ModelChanged.resx">
+      <DependentUpon>201801191553456_ModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191555428_ModelChangedgain.resx">
+      <DependentUpon>201801191555428_ModelChangedgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

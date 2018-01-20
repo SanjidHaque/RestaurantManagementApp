@@ -27,9 +27,13 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
+    "immutable": "^3.8.2",
     "ng2-opd-popup": "^1.1.21",
+    "ng2-redux": "^5.1.2",
     "ng2-uuid": "0.0.3",
+    "redux": "^3.7.2",
     "rxjs": "^5.4.2",
+    "tassign": "^1.0.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

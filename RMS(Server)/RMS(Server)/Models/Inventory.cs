@@ -5,11 +5,12 @@ using System.Web;
 
 namespace RMS_Server_.Models
 {
-    public class FoodItem
+    public class Inventory
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public double Quantity { get; set; }
+        public int Unit { get; set; }
         public int Price { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
     }
 }

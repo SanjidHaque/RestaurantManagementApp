@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ALLNEW : DbMigration
+    public partial class NewModelsAdded3 : DbMigration
     {
         public override void Up()
         {
@@ -18,17 +18,47 @@ namespace RMS_Server_.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Ingredients",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Quantity = c.Int(nullable: false),
+                        InventoryId = c.Int(nullable: false),
+                        FooditemId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.FoodItems", t => t.FooditemId, cascadeDelete: true)
+                .ForeignKey("dbo.Inventories", t => t.InventoryId, cascadeDelete: true)
+                .Index(t => t.InventoryId)
+                .Index(t => t.FooditemId);
+            
+            CreateTable(
+                "dbo.Inventories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Quantity = c.Int(nullable: false),
+                        Unit = c.String(),
+                        Price = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.OrderedItems",
                 c => new
                     {
                         OrderItemId = c.String(nullable: false, maxLength: 128),
                         OrderId = c.String(maxLength: 128),
                         FoodItemId = c.Int(),
-                        Quantity = c.Int(nullable: false),
+                        SetMenuQuantity = c.Int(),
+                        FoodItemQuantity = c.Int(),
                         SetMenuId = c.Int(),
                         SetMenuName = c.String(),
+                        FoodItemName = c.String(),
                         Price = c.Int(nullable: false),
-                        SubTotal = c.Int(nullable: false),
+                        SetMenuSubTotal = c.Int(),
+                        FoodItemSubTotal = c.Int(),
                     })
                 .PrimaryKey(t => t.OrderItemId)
                 .ForeignKey("dbo.FoodItems", t => t.FoodItemId)
@@ -44,7 +74,7 @@ namespace RMS_Server_.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         TotalPrice = c.Int(nullable: false),
-                        IsServed = c.Boolean(nullable: false),
+                        OrderStatus = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -154,6 +184,8 @@ namespace RMS_Server_.Migrations
             DropForeignKey("dbo.SetMenuItems", "FoodItemId", "dbo.FoodItems");
             DropForeignKey("dbo.OrderedItems", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderedItems", "FoodItemId", "dbo.FoodItems");
+            DropForeignKey("dbo.Ingredients", "InventoryId", "dbo.Inventories");
+            DropForeignKey("dbo.Ingredients", "FooditemId", "dbo.FoodItems");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -165,6 +197,8 @@ namespace RMS_Server_.Migrations
             DropIndex("dbo.OrderedItems", new[] { "SetMenuId" });
             DropIndex("dbo.OrderedItems", new[] { "FoodItemId" });
             DropIndex("dbo.OrderedItems", new[] { "OrderId" });
+            DropIndex("dbo.Ingredients", new[] { "FooditemId" });
+            DropIndex("dbo.Ingredients", new[] { "InventoryId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -174,6 +208,8 @@ namespace RMS_Server_.Migrations
             DropTable("dbo.SetMenus");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderedItems");
+            DropTable("dbo.Inventories");
+            DropTable("dbo.Ingredients");
             DropTable("dbo.FoodItems");
         }
     }

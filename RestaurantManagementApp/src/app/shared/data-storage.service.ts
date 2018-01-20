@@ -54,7 +54,15 @@ export class DataStorageService {
       .catch((error: any) => Observable.throw(error.json().error ||
       'Server error'))
       .subscribe();
+  }
 
+  rejectOrders() {
+    return this._http.post('http://localhost:1548/api/RejectOrders',
+      this._ourOffersService.getRejectedOrder () ).map(
+      res => res.json())
+      .catch((error: any) => Observable.throw(error.json().error ||
+        'Server error'))
+      .subscribe();
   }
 
 

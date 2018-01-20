@@ -83,8 +83,8 @@
           "FoodItem":
           {
             "Id": "1",
-            "Name": "Fried Rice",
-            "Price": "99"
+            "Name": "Normal Fried Rice",
+            "Price": "180"
           },
           "FoodItemId": "1",
           "Id": "1",
@@ -94,9 +94,9 @@
         {
           "FoodItem":
           {
-            "Id": "3",
+            "Id": "4",
             "Name": "Chicken Fry",
-            "Price": "80"
+            "Price": "140"
           },
           "FoodItemId": "3",
           "Id": "2",
@@ -106,7 +106,7 @@
         {
           "FoodItem":
           {
-            "Id": "2",
+            "Id": "9",
             "Name": "CocaCola",
             "Price": "30"
           },
@@ -129,7 +129,7 @@
           "FoodItem":
           {
             "Id": "1",
-            "Name": "Fried Rice with Vegetable Curry",
+            "Name": "Normal Fried Rice",
             "Price": "300"
           },
           "FoodItemId": "1",
@@ -137,22 +137,24 @@
           "Quantity": "2",
           "SetMenuId": "2"
         },
-        {
+
+{
           "FoodItem":
           {
             "Id": "3",
-            "Name": "Chicken Fry with Sausages",
-            "Price": "80"
+            "Name": "Vegetable Curry",
+            "Price": "300"
           },
-          "FoodItemId": "3",
-          "Id": "2",
+          "FoodItemId": "1",
+          "Id": "1",
           "Quantity": "2",
           "SetMenuId": "2"
         },
+
         {
           "FoodItem":
           {
-            "Id": "2",
+            "Id": "9",
             "Name": "CocaCola",
             "Price": "30"
           },
@@ -174,31 +176,44 @@
         {
           "FoodItem":
           {
-            "Id": "1",
+            "Id": "2",
             "Name": "Indian Fried Rice",
             "Price": "300"
           },
           "FoodItemId": "1",
           "Id": "1",
-          "Quantity": "2",
+          "Quantity": "1",
+          "SetMenuId": "3"
+        },
+
+{
+          "FoodItem":
+          {
+            "Id": "3",
+            "Name": "Vegetable Curry",
+            "Price": "300"
+          },
+          "FoodItemId": "1",
+          "Id": "1",
+          "Quantity": "1",
           "SetMenuId": "3"
         },
         {
           "FoodItem":
           {
-            "Id": "3",
+            "Id": "4",
             "Name": "Chicken Fry",
             "Price": "80"
           },
           "FoodItemId": "3",
           "Id": "2",
-          "Quantity": "2",
+          "Quantity": "1",
           "SetMenuId": "3"
         },
         {
           "FoodItem":
           {
-            "Id": "2",
+            "Id": "9",
             "Name": "CocaCola",
             "Price": "30"
           },
@@ -220,7 +235,7 @@
         {
           "FoodItem":
           {
-            "Id": "1",
+            "Id": "7",
             "Name": "Beef Burger",
             "Price": "300"
           },
@@ -232,7 +247,7 @@
         {
           "FoodItem":
           {
-            "Id": "2",
+            "Id": "9",
             "Name": "CocaCola",
             "Price": "30"
           },
@@ -254,7 +269,7 @@
         {
           "FoodItem":
           {
-            "Id": "1",
+            "Id": "8",
             "Name": "Special Block's Burger",
             "Price": "300"
           },
@@ -266,7 +281,7 @@
         {
           "FoodItem":
           {
-            "Id": "2",
+            "Id": "9",
             "Name": "CocaCola",
             "Price": "30"
           },

@@ -16,7 +16,6 @@ export class ChefServiceService {
             this.Order = Orders;
           }
         );
-       this.Order.OnChef = true;
   }
 
 }

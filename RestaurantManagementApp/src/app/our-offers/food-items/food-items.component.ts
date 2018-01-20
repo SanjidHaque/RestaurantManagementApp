@@ -60,12 +60,12 @@ export class FoodItemsComponent implements OnInit {
             foodItemId: number, foodItemName: string, price: number   )
   {
 
-    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(price, quantity);
+    let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
-    this.condition = this._ourOfferService.checkExistingSetMenu(foodItemId);
+    this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
 
     if ( this.condition  ) {
-      this._ourOfferService.increaseOnExistingSetMenu(foodItemId, quantity, subTotal );
+      this._ourOfferService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
     } else {
 
       const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId, null,
@@ -81,7 +81,7 @@ export class FoodItemsComponent implements OnInit {
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
                  foodItemId: number, foodItemName: string, price: number ) {
 
-    let subTotal = this._ourOfferService.FoodItemSubTotaLPrice(price, quantity);
+    let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
 
     this.quantity= this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
     this._ourOfferService.totalQuantity =

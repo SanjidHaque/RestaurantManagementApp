@@ -43,19 +43,17 @@ export class ChefComponent implements OnInit, DoCheck {
       return myOrder.OnChef === false;
     })*/
   }
-
   ngDoCheck() {
-
   }
 
   orderAccepted(order: Order) {
-     order.OnChef = true;
+     order.OrderStatus = 1;
      this._ourOfferService.getAccepted(order) ;
      this._dataStorageService.acceptOrders();
   }
 
   orderRejected(order: Order) {
-    order.OnChef = true;
+    order.OrderStatus = 2;
     this._ourOfferService.getRejected(order) ;
     this._dataStorageService.rejectOrders();
   }

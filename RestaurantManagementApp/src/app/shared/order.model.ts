@@ -4,15 +4,13 @@ export class Order {
   public Id: string;
   public OrderedItems: OrderedItems[];
   public TotalPrice: number;
-  public OnChef: boolean;
-  public IsServed: boolean;
+  public OrderStatus: number;
 
   constructor(id: string, orderedItems: OrderedItems[],
-              totalPrice: number, onChef: boolean, isServed: boolean) {
+              totalPrice: number, orderStatus: number) {
     this.Id = id;
     this.OrderedItems = orderedItems;
     this.TotalPrice = totalPrice;
-    this.OnChef = onChef;
-    this.IsServed = isServed;
+    this.OrderStatus = orderStatus;
   }
 }

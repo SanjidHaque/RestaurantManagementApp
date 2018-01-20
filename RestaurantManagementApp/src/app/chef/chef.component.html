@@ -2,7 +2,7 @@
 <div *ngIf="Orders">
 <div class="row" >
   <div class="col-md-12 chefs-orders" *ngFor="let order of Orders" >
-    <div *ngIf="order.OnChef === false">
+    <div *ngIf="order.OrderStatus === 0">
     Order Id: {{ order.Id }}
     <div class="col-md-12" *ngFor="let orderedItems of order.OrderedItems">
       {{ orderedItems.SetMenuName }}

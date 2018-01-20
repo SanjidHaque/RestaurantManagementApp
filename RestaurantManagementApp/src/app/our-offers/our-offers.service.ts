@@ -99,12 +99,12 @@ export class OurOffersService {
      return this.TotalPrice;
   }
 
-  SetMenuSubTotaLPrice(price: number, quantity: number) {
+  SetMenuSubTotalPrice(price: number, quantity: number) {
     this.setMenuSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
     return this.setMenuSubTotal;
   }
 
-  FoodItemSubTotaLPrice(price: number, quantity: number) {
+  FoodItemSubTotalPrice(price: number, quantity: number) {
     this.foodItemSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
     return this.foodItemSubTotal;
   }
@@ -136,7 +136,7 @@ export class OurOffersService {
 
         this.orderedItems[i].SetMenuSubTotal =
           Number.parseInt(this.orderedItems[i].SetMenuSubTotal.toString())
-          + Number.parseInt(this.setMenuSubTotal.toString());
+          + Number.parseInt(subTotal.toString());
       }
     }
   }
@@ -144,15 +144,15 @@ export class OurOffersService {
   increaseOnExistingFoodItem(foodItemId: number, quantity: number, subTotal: number ) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
 
-      if (this.orderedItems[i].FoodItemQuantity === foodItemId) {
+      if (this.orderedItems[i].FoodItemId === foodItemId) {
 
         this.orderedItems[i].FoodItemQuantity =
           Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString())
           + Number.parseInt(quantity.toString());
 
         this.orderedItems[i].FoodItemSubTotal =
-          Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString())
-          + Number.parseInt(this.foodItemSubTotal.toString());
+          Number.parseInt(this.orderedItems[i].FoodItemSubTotal.toString())
+          + Number.parseInt(subTotal.toString());
       }
     }
   }

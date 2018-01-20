@@ -61,7 +61,7 @@ export class OurOffersListComponent implements OnInit {
                     setMenuId: number, setMenuName: string, price: number   )
   {
 
-    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(price, quantity);
+    let subTotal = this._ourOfferService.SetMenuSubTotalPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
     this.condition = this._ourOfferService.checkExistingSetMenu(setMenuId);
 
@@ -78,7 +78,7 @@ export class OurOffersListComponent implements OnInit {
    RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
                          setMenuId: number, setMenuName: string, price: number ) {
 
-    let subTotal = this._ourOfferService.SetMenuSubTotaLPrice(price, quantity);
+    let subTotal = this._ourOfferService.SetMenuSubTotalPrice(price, quantity);
 
     this.quantity= this._ourOfferService.removeFromSetMenuCart(setMenuId, quantity, subTotal);
     this._ourOfferService.totalQuantity =

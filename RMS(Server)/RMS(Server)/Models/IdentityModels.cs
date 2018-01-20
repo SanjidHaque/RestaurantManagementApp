@@ -24,6 +24,8 @@ namespace RMS_Server_.Models
         public DbSet<SetMenu> SetMenus { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
         public DbSet<OrderedItems> OrderedItems { get; set; }
         public DbSet<SetMenuItem> SetMenuItems { get; set; }
         public ApplicationDbContext()

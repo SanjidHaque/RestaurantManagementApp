@@ -7,13 +7,13 @@ namespace RMS_Server_.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ALLNEW : IMigrationMetadata
+    public sealed partial class NewModelsAdded3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ALLNEW));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewModelsAdded3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801100936556_ALLNEW"; }
+            get { return "201801191316073_NewModelsAdded3"; }
         }
         
         string IMigrationMetadata.Source

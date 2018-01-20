@@ -7,13 +7,13 @@ namespace RMS_Server_.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class OrderedItemModelChanged : IMigrationMetadata
+    public sealed partial class ImagePathAddedInFoodItemModeldeletd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(OrderedItemModelChanged));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ImagePathAddedInFoodItemModeldeletd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801141747530_OrderedItemModelChanged"; }
+            get { return "201801191450158_ImagePathAddedInFoodItemModeldeletd"; }
         }
         
         string IMigrationMetadata.Source

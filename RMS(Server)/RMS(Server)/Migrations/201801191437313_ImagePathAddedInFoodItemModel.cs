@@ -3,16 +3,16 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class OrderModelChanged : DbMigration
+    public partial class ImagePathAddedInFoodItemModel : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Orders", "OnChef", c => c.Boolean(nullable: false));
+            AddColumn("dbo.FoodItems", "ImagePath", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Orders", "OnChef");
+            DropColumn("dbo.FoodItems", "ImagePath");
         }
     }
 }

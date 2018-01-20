@@ -28,7 +28,10 @@ import { AdminComponent } from './admin/admin.component';
 import {AdminDataService} from './admin/data.service';
 import { CheckingOrderComponent } from './checking-order/checking-order.component';
 import {ChefServiceService} from './chef/chef-service.service';
+import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { FoodItemsComponent } from './our-offers/food-items/food-items.component';
+import { AddSetMenuComponent } from './admin/add-set-menu/add-set-menu.component';
+import { ViewFoodItemComponent } from './admin/view-food-item/view-food-item.component';
 
 
 
@@ -47,7 +50,10 @@ import { FoodItemsComponent } from './our-offers/food-items/food-items.component
     ChefComponent,
     AdminComponent,
     CheckingOrderComponent,
-    FoodItemsComponent
+    EditItemComponent,
+    FoodItemsComponent,
+    AddSetMenuComponent,
+    ViewFoodItemComponent
 
   ],
   imports: [

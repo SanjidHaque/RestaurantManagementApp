@@ -1,4 +1,5 @@
 import {SetMenuItems} from './set-menu-items.model';
+import {FoodItems} from './food-item.model';
 
 export class SetMenus {
   public Name: string;
@@ -15,3 +16,5 @@ export class SetMenus {
     this.SetMenuImage = setMenuImage;
   }
 }
+
+

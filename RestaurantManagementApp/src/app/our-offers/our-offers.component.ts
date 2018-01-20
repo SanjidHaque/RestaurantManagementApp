@@ -17,8 +17,13 @@ export class OurOffersComponent implements OnInit, OnDestroy {
     Menu: OurOffers;
     subscription: Subscription;
     toCheckOut = false;
+<<<<<<< HEAD
     quantity: number = 0;
     public orderedItems: OrderedItems[];
+=======
+    quantity = 0;
+  public orderedItems: OrderedItems[];
+>>>>>>> master
 
 
   constructor(private _ourOfferService: OurOffersService,

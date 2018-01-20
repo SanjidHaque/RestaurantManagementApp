@@ -9,6 +9,9 @@ import {ContactUsComponent} from './contact-us/contact-us.component';
 import {ChefComponent} from './chef/chef.component';
 import {AdminComponent} from './admin/admin.component';
 import {CheckingOrderComponent} from './checking-order/checking-order.component';
+import {EditItemComponent} from './admin/edit-item/edit-item.component';
+import {AddSetMenuComponent} from './admin/add-set-menu/add-set-menu.component';
+import {ViewFoodItemComponent} from './admin/view-food-item/view-food-item.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -21,7 +24,12 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'contact-us', component: ContactUsComponent},
   { path: 'chef', component: ChefComponent},
-  { path: 'admin', component: AdminComponent}
+  { path: 'admin', component: AdminComponent, children: [
+      { path: 'edit-item/:id' , component: EditItemComponent},
+      { path: 'add-set-menu', component: AddSetMenuComponent},
+      { path: 'view-food-item', component: ViewFoodItemComponent}
+    ] },
+
 ];
 
 

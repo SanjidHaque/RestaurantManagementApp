@@ -132,143 +132,145 @@ namespace RMS_Server_.Migrations
             //var beef = new Inventory() { Name = "Beef", Quantity = 10, Unit = 1, Price = 390 };
             //var cocacola250ml = new Inventory() { Name = "CocaCola", Quantity = 10, Unit = 4, Price = 45 };
             //var mineralWater500ml = new Inventory() { Name = "Mineral Water", Quantity = 10, Unit = 4, Price = 20 };
-          /*  context.Inventories.AddOrUpdate(
-                i => i.Id,
-                new Inventory() { Name = "Chicken", Quantity = 50 , Unit = 1, Price = 110});*/
-       /*     context.Inventories.AddOrUpdate(
-                i => i.Id,
-                rice,
-                salt,
-                soybeanOil,
-                beef,
-                bellPepper,
-                cabbage,
-                cardamom,
-                cauliflower,
-                cornStarch,
-                cinnamon,
-                mayonnaise,
-                vinegar,
-                flour,
-                ginger,
-                bread,
-                lettuce,
-                parsley,
-                onion,
-                carrot,
-                egg,
-                garlic,
-                mineralWater500ml,
-                cocacola250ml
-                );*/
+
+
+            //context.Inventories.AddOrUpdate(
+            //    i => i.Id,
+            //    rice,
+            //    salt,
+            //    soybeanOil,
+            //    beef,
+            //    bellPepper,
+            //    cabbage,
+            //    cardamom,
+            //    cauliflower,
+            //    cornStarch,
+            //    cinnamon,
+            //    mayonnaise,
+            //    vinegar,
+            //    flour,
+            //    ginger,
+            //    bread,
+            //    lettuce,
+            //    parsley,
+            //    onion,
+            //    carrot,
+            //    egg,
+            //    garlic,
+            //    mineralWater500ml,
+            //    cocacola250ml
+            //    );
+
+
+
+
+            //context.Inventories.AddOrUpdate(
+            //    i => i.Id,
+            //    new Inventory() { Name = "Chicken", Quantity = 50, Unit = 1, Price = 110 });
+
+
+
+            //var normalFriedRice = new FoodItem() { Name = "Normal Fried Rice", Price = 180, };
+            //var indianFriedRice = new FoodItem() { Name = "Indian Fried Rice", Price = 250 };
+            //var vegetableCurry = new FoodItem() { Name = "Vegetable Curry", Price = 220 };
+            //var chickenFry = new FoodItem() { Name = "Chicken Fry", Price = 140 };
+            //var chickenWings = new FoodItem() { Name = "Chicken Wings", Price = 120 };
+            //var sausages = new FoodItem() { Name = "Sausages", Price = 80 };
+            //var beefBurger = new FoodItem() { Name = "Beef Burger", Price = 110 };
+            //var specialBlocksBurger = new FoodItem() { Name = "Special Block's Burger", Price = 180 };
+            //var cocaCola = new FoodItem() { Name = "CocaCola", Price = 35 };
+            //var mineralWater = new FoodItem() { Name = "Mineral Water", Price = 20 };
 
 
 
 
 
+            //context.FoodItems.AddOrUpdate(
+            //    p => p.Id,
+            //    normalFriedRice,
+            //    indianFriedRice,
+            //    vegetableCurry,
+            //    chickenFry,
+            //    chickenWings,
+            //    sausages,
+            //    beefBurger,
+            //    specialBlocksBurger,
+            //    cocaCola,
+            //    mineralWater
+            //    );
+
+            //context.SetMenus.AddOrUpdate(
+            //    p => p.Id,
+            //    new SetMenu
+            //    {
+            //        Name = "Set Menu A",
+            //        Price = 199,
+            //        SetMenuItems = new List<SetMenuItem>()
+            //          {
+            //              new SetMenuItem()
+            //              {
+            //                  FoodItem = normalFriedRice,
+            //                  Quantity = 1
+            //              },
+            //              new SetMenuItem()
+            //              {
+            //                  FoodItem = chickenFry,
+            //                  Quantity = 1
+            //              },
+            //              new SetMenuItem()
+            //              {
+            //                  FoodItem = cocaCola,
+            //                  Quantity = 1
+            //              }
+            //          }
+            //    },
+            //    new SetMenu()
+            //    {
+            //        Name = "Set Menu B",
+            //        Price = 299,
+            //        SetMenuItems = new List<SetMenuItem>()
+            //          {
+            //              new SetMenuItem {FoodItem = normalFriedRice,Quantity = 1},
+            //              new SetMenuItem {FoodItem = vegetableCurry,Quantity = 1},
+            //              new SetMenuItem {FoodItem = cocaCola,Quantity = 1}
+            //          }
+            //    },
 
 
-          /*  var normalFriedRice = new FoodItem() { Name = "Normal Fried Rice", Price = 180, };
-            var indianFriedRice = new FoodItem() { Name = "Indian Fried Rice", Price = 250 };
-            var vegetableCurry = new FoodItem() { Name = "Vegetable Curry", Price = 220 };
-            var chickenFry = new FoodItem() { Name = "Chicken Fry", Price = 140 };
-            var chickenWings = new FoodItem() { Name = "Chicken Wings", Price = 120 };
-            var sausages = new FoodItem() { Name = "Sausages", Price = 80 };
-            var beefBurger = new FoodItem() { Name = "Beef Burger", Price = 110 };
-            var specialBlocksBurger = new FoodItem() { Name = "Special Block's Burger", Price = 180 };
-            var cocaCola = new FoodItem() { Name = "CocaCola", Price = 35 };
-            var mineralWater = new FoodItem() { Name = "Mineral Water", Price = 20 };
+            //     new SetMenu()
+            //     {
+            //         Name = "Set Menu C",
+            //         Price = 350,
+            //         SetMenuItems = new List<SetMenuItem>()
+            //          {
+            //              new SetMenuItem {FoodItem = indianFriedRice,Quantity = 1},
+            //              new SetMenuItem {FoodItem = vegetableCurry,Quantity = 1},
+            //              new SetMenuItem {FoodItem = chickenFry,Quantity = 1},
+            //              new SetMenuItem {FoodItem = cocaCola,Quantity = 1}
+            //          }
+            //     },
 
-
-
-
-
-            context.FoodItems.AddOrUpdate(
-                p => p.Id,
-                normalFriedRice,
-                indianFriedRice,
-                vegetableCurry,
-                chickenFry,
-                chickenWings,
-                sausages,
-                beefBurger,
-                specialBlocksBurger,
-                cocaCola,
-                mineralWater
-                );
-
-            context.SetMenus.AddOrUpdate(
-                p => p.Id,
-                new SetMenu
-                {
-                    Name = "Set Menu A",
-                    Price = 199,
-                    SetMenuItems = new List<SetMenuItem>()
-                    {
-                        new SetMenuItem()
-                        {
-                            FoodItem = normalFriedRice,
-                            Quantity = 1
-                        },
-                        new SetMenuItem()
-                        {
-                            FoodItem = chickenFry,
-                            Quantity = 1
-                        },
-                        new SetMenuItem()
-                        {
-                            FoodItem = cocaCola,
-                            Quantity = 1
-                        }
-                    }
-                },
-                new SetMenu()
-                {
-                    Name = "Set Menu B",
-                    Price = 299,
-                    SetMenuItems = new List<SetMenuItem>()
-                    {
-                        new SetMenuItem {FoodItem = normalFriedRice,Quantity = 1},
-                        new SetMenuItem {FoodItem = vegetableCurry,Quantity = 1},
-                        new SetMenuItem {FoodItem = cocaCola,Quantity = 1}
-                    }
-                },
-
-
-                 new SetMenu()
-                 {
-                     Name = "Set Menu C",
-                     Price = 350,
-                     SetMenuItems = new List<SetMenuItem>()
-                    {
-                        new SetMenuItem {FoodItem = indianFriedRice,Quantity = 1},
-                        new SetMenuItem {FoodItem = vegetableCurry,Quantity = 1},
-                        new SetMenuItem {FoodItem = chickenFry,Quantity = 1},
-                        new SetMenuItem {FoodItem = cocaCola,Quantity = 1}
-                    }
-                 },
-
-                  new SetMenu()
-                  {
-                      Name = "Set Menu D",
-                      Price = 160,
-                      SetMenuItems = new List<SetMenuItem>()
-                    {
-                        new SetMenuItem {FoodItem = beefBurger,Quantity = 1},
-                        new SetMenuItem {FoodItem = cocaCola,Quantity = 1},
-                    }
-                  },
-                   new SetMenu()
-                   {
-                       Name = "Set Menu E",
-                       Price = 350,
-                       SetMenuItems = new List<SetMenuItem>()
-                       {
-                           new SetMenuItem {FoodItem = specialBlocksBurger,Quantity = 1},
-                           new SetMenuItem {FoodItem = cocaCola,Quantity = 1},
-                       }
-                   }
-                );*/
+            //      new SetMenu()
+            //      {
+            //          Name = "Set Menu D",
+            //          Price = 160,
+            //          SetMenuItems = new List<SetMenuItem>()
+            //          {
+            //              new SetMenuItem {FoodItem = beefBurger,Quantity = 1},
+            //              new SetMenuItem {FoodItem = cocaCola,Quantity = 1},
+            //          }
+            //      },
+            //       new SetMenu()
+            //       {
+            //           Name = "Set Menu E",
+            //           Price = 350,
+            //           SetMenuItems = new List<SetMenuItem>()
+            //             {
+            //                 new SetMenuItem {FoodItem = specialBlocksBurger,Quantity = 1},
+            //                 new SetMenuItem {FoodItem = cocaCola,Quantity = 1},
+            //             }
+            //       }
+            //    );
         }
     }
 }

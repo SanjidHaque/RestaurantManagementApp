@@ -116,5 +116,25 @@ namespace RMS_Server_.Controllers
             _context.FoodItems.Add(foodItem);
             _context.SaveChanges();
         }
+
+
+        [HttpPost]
+        [Route("api/EditFoodItem")]
+        public void FoodItemEdit(FoodItem foodItem)
+        {
+            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+            editedFoodItem.Name = foodItem.Name;
+            editedFoodItem.Price = foodItem.Price;
+            _context.SaveChanges();
+        }
+
+        [HttpPost]
+        [Route("api/DeleteFoodItem")]
+        public void FoodItemDelete(FoodItem foodItem)
+        {
+            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Name == foodItem.Name);
+            _context.FoodItems.Remove(editedFoodItem);
+            _context.SaveChanges();
+        }
     }
 }

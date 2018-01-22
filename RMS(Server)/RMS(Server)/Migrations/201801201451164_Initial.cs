@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NewModelsAdded3 : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -22,7 +22,8 @@ namespace RMS_Server_.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Quantity = c.Int(nullable: false),
+                        Quantity = c.Double(nullable: false),
+                        Unit = c.Int(nullable: false),
                         InventoryId = c.Int(nullable: false),
                         FooditemId = c.Int(nullable: false),
                     })
@@ -38,8 +39,8 @@ namespace RMS_Server_.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Quantity = c.Int(nullable: false),
-                        Unit = c.String(),
+                        Quantity = c.Double(nullable: false),
+                        Unit = c.Int(nullable: false),
                         Price = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);

@@ -6,19 +6,19 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Order} from './order.model';
+import {Inventory} from './inventory.model';
+import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class DataStorageService {
 
   public order: Order;
- private _url = 'assets/menu-from-api.json';
+  private _url = 'assets/menu-from-api.json';
  //      private _url = 'http://localhost:1548/api/menu';
   constructor(private _http: Http,
               private _ourOffersService: OurOffersService) {
   }
 
- /* ngOnInit() {
-    this.Order = this._ourOffersService.orders;
-  }*/
+
   getMenu() {
     return this._http.get(this._url)
       .map(
@@ -28,20 +28,8 @@ export class DataStorageService {
            return menus;
          }
       );
-      /*.subscribe(
-        (menus: OurOffers[] ) => {
-          this.ourOffersService.setOurOffers(menus);
-        }
-      );*/
   }
 
- /* public getJson(): Observable<any> {
-    return this._http.get(this._url)
-      .map((res: any) =>
-      }
-    );
-
-  }*/
   storeOrders() {
     return this._http.post('http://localhost:1548/api/PostMenu',
      this._ourOffersService.orders);
@@ -72,6 +60,37 @@ export class DataStorageService {
         (response: Response) => {
           const orders: Order = response.json();
           return orders;
+        }
+      );
+  }
+
+  getInventories() {
+    return this._http.get('http://localhost:1548/api/GetInventories')
+      .map(
+        (response: Response) => {
+          const inventories: Inventory[] = response.json();
+          console.log(inventories);
+         return inventories;
+        }
+      );
+  }
+
+  addNewInventoryItem(inventory: Inventory) {
+    return this._http.post('http://localhost:1548/api/AddNewInventory',
+      inventory)
+      .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
+  }
+
+  deleteInventoryItem(inventory: Inventory) {
+    return this._http.post('http://localhost:1548/api/DeleteInventoryItem',
+      inventory)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
         }
       );
   }

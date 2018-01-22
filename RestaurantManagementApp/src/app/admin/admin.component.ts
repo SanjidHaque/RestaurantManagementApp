@@ -78,7 +78,7 @@ export class AdminComponent implements OnInit {
     this.addSetMenu = true;
   }
 
-  onSubmitSetMenu(formValue: NgForm) {
+ /* onSubmitSetMenu(formValue: NgForm) {
   //   this.setMenuItems = [
   //     {this.foodItems}
   // }
@@ -87,7 +87,7 @@ export class AdminComponent implements OnInit {
   // }
     const setFoodItems =  formValue.value;
     if (setFoodItems.isSelected === true) {
-      this.setMenuItems.foodItems = setFoodItems.foodItems;
-    }
+      // this.setMenuItems.foodItems = setFoodItems.foodItems;
+    }*/
 
-}}
+}

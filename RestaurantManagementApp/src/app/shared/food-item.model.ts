@@ -1,30 +1,20 @@
 import {Ingredients} from './ingredients.model';
 
 export class FoodItems {
+  public Id: string;
   public Name: string;
-  public Id: number;
   public Price: number;
-<<<<<<< HEAD
-  public FoodItemImage: string;
   public Ingredients: Ingredients[];
+  public FoodItemImage: string;
 
-  constructor(name: string, id: number, price: number, foodItemImage: string, ingredients: Ingredients[]) {
-=======
-/*
-    public FoodItemImage: string;
-  */
+  constructor(id: string, name: string,  price: number,
+              ingredients: Ingredients[], foodItemImage: string) {
 
-  constructor(name: string, id: number, price: number) {
->>>>>>> master
-    this.Name = name;
     this.Id = id;
+    this.Name = name;
     this.Price = price;
-/*
-    this.FoodItemImage = foodItemImage;
-<<<<<<< HEAD
     this.Ingredients = ingredients;
-=======
-*/
->>>>>>> master
+    this.FoodItemImage = foodItemImage;
+
   }
 }

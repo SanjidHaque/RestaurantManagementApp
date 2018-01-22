@@ -1,13 +1,14 @@
 import {Inventory} from './inventory.model';
 
 export class Ingredients {
-  public Id: number;
+  public Id: string;
   public Quantity: number;
   public Unit: number;
-  public InventoryId: number;
-  public FoodItemId: number;
+  public InventoryId: string;
+  public FoodItemId: string;
 
-  constructor(id: number, quantity: number, unit: number, inventoryId: number, foodItemId: number) {
+  constructor(id: string, quantity: number, unit: number,
+              inventoryId: string, foodItemId: string) {
     this.Id = id;
     this.Quantity = quantity;
     this.Unit = unit;

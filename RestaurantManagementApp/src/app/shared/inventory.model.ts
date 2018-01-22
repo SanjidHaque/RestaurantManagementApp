@@ -1,11 +1,11 @@
 export class Inventory {
-   public Id: number;
+   public Id: string;
    public Name: string;
    public Quantity: number;
    public Unit: number;
    public Price: number;
 
-   constructor(id: number, name: string, quantity: number, unit: number, price: number) {
+   constructor(id: string, name: string, quantity: number, unit: number, price: number) {
      this.Id = id;
      this.Name = name;
      this.Quantity = quantity;

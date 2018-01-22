@@ -1,0 +1,59 @@
+<div class="col-md-12" style="color: #feff26; font-family: 'Times New Roman'">
+  <form (ngSubmit) = "onAddNewItem(newItem)" #newItem = "ngForm">
+    <div id="user-data">
+      <div class="form-group">
+        <label for="name">Item Name:</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          ngModel
+          name="name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          class="form-control"
+          ngModel
+          name="price"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="unit">Unit:</label>
+        <input
+          type="text"
+          id="unit"
+          class="form-control"
+          ngModel
+          name="unit"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input
+          type="number"
+          id="quantity"
+          class="form-control"
+          ngModel
+          name="quantity"
+          required
+        >
+        <div>
+          <button class="btn btn-success"
+                  type="submit"
+                  [disabled]="!newItem.valid">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

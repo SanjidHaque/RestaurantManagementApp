@@ -17,7 +17,7 @@
         <td>{{item.Price}}</td>
         <button type="button" class="btn btn-primary"
                 routerLink="/edit-item" (click)="onEditItem(item.Id)">Edit</button>
-        <button type="button" class="btn btn-primary" (click)="onDeleteItem(i)">Delete</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteItem(item)">Delete</button>
       </tr>
       </tbody>
     </table>

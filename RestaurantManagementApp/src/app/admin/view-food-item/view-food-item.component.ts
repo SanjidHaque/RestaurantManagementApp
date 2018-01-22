@@ -52,8 +52,8 @@ export class ViewFoodItemComponent implements OnInit {
     }
   }
 
-  onDeleteItem(id: number) {
-    this.dataService.deleteFoodItem(id);
+  onDeleteItem(foodItem: FoodItems) {
+    this.dataService.deleteFoodItem(foodItem);
   }
 
 }

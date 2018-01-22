@@ -7,9 +7,10 @@ namespace RMS_Server_.Models
 {
     public class FoodItem
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
         public List<Ingredient> Ingredients { get; set; }
+        public string FooditemImage { get; set; }
     }
 }

@@ -116,5 +116,64 @@ namespace RMS_Server_.Controllers
             _context.FoodItems.Add(foodItem);
             _context.SaveChanges();
         }
+
+        [HttpGet]
+        [Route("api/GetInventories")]
+        public List<Inventory> GetInventories()
+        {
+            return _context.Inventories.ToList();
+        }
+
+        [HttpPost]
+        [Route("api/AddNewInventory")]
+        public void AddInventoryItem(Inventory inventory)
+        {
+            try
+            {
+                _context.Inventories.Add(inventory);
+                _context.SaveChanges();
+            }
+            
+             catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/DeleteInventoryItem")]
+        public void DeleteInventoryItem(Inventory inventory)
+        {
+            try
+            {
+            var getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+            _context.Inventories.Remove(getDeleted);
+            _context.SaveChanges();
+            }
+             catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+        }
     }
 }

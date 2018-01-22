@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NewModelsAdded3 : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -11,9 +11,10 @@ namespace RMS_Server_.Migrations
                 "dbo.FoodItems",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
                         Price = c.Int(nullable: false),
+                        FooditemImage = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -21,14 +22,15 @@ namespace RMS_Server_.Migrations
                 "dbo.Ingredients",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Quantity = c.Int(nullable: false),
-                        InventoryId = c.Int(nullable: false),
-                        FooditemId = c.Int(nullable: false),
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Quantity = c.Double(nullable: false),
+                        Unit = c.Int(nullable: false),
+                        InventoryId = c.String(maxLength: 128),
+                        FooditemId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.FoodItems", t => t.FooditemId, cascadeDelete: true)
-                .ForeignKey("dbo.Inventories", t => t.InventoryId, cascadeDelete: true)
+                .ForeignKey("dbo.FoodItems", t => t.FooditemId)
+                .ForeignKey("dbo.Inventories", t => t.InventoryId)
                 .Index(t => t.InventoryId)
                 .Index(t => t.FooditemId);
             
@@ -36,10 +38,10 @@ namespace RMS_Server_.Migrations
                 "dbo.Inventories",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
-                        Quantity = c.Int(nullable: false),
-                        Unit = c.String(),
+                        Quantity = c.Double(nullable: false),
+                        Unit = c.Int(nullable: false),
                         Price = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
@@ -50,10 +52,10 @@ namespace RMS_Server_.Migrations
                     {
                         OrderItemId = c.String(nullable: false, maxLength: 128),
                         OrderId = c.String(maxLength: 128),
-                        FoodItemId = c.Int(),
+                        FoodItemId = c.String(maxLength: 128),
                         SetMenuQuantity = c.Int(),
                         FoodItemQuantity = c.Int(),
-                        SetMenuId = c.Int(),
+                        SetMenuId = c.String(maxLength: 128),
                         SetMenuName = c.String(),
                         FoodItemName = c.String(),
                         Price = c.Int(nullable: false),
@@ -82,9 +84,10 @@ namespace RMS_Server_.Migrations
                 "dbo.SetMenus",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
                         Price = c.Int(nullable: false),
+                        SetMenuImage = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -92,14 +95,14 @@ namespace RMS_Server_.Migrations
                 "dbo.SetMenuItems",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        SetMenuId = c.Int(nullable: false),
-                        FoodItemId = c.Int(nullable: false),
+                        Id = c.String(nullable: false, maxLength: 128),
+                        SetMenuId = c.String(maxLength: 128),
+                        FoodItemId = c.String(maxLength: 128),
                         Quantity = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.FoodItems", t => t.FoodItemId, cascadeDelete: true)
-                .ForeignKey("dbo.SetMenus", t => t.SetMenuId, cascadeDelete: true)
+                .ForeignKey("dbo.FoodItems", t => t.FoodItemId)
+                .ForeignKey("dbo.SetMenus", t => t.SetMenuId)
                 .Index(t => t.SetMenuId)
                 .Index(t => t.FoodItemId);
             

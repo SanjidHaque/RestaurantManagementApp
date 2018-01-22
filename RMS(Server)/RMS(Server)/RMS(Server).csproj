@@ -211,25 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801191316073_NewModelsAdded3.cs" />
-    <Compile Include="Migrations\201801191316073_NewModelsAdded3.Designer.cs">
-      <DependentUpon>201801191316073_NewModelsAdded3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801191437313_ImagePathAddedInFoodItemModel.cs" />
-    <Compile Include="Migrations\201801191437313_ImagePathAddedInFoodItemModel.Designer.cs">
-      <DependentUpon>201801191437313_ImagePathAddedInFoodItemModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801191450158_ImagePathAddedInFoodItemModeldeletd.cs" />
-    <Compile Include="Migrations\201801191450158_ImagePathAddedInFoodItemModeldeletd.Designer.cs">
-      <DependentUpon>201801191450158_ImagePathAddedInFoodItemModeldeletd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801191553456_ModelChanged.cs" />
-    <Compile Include="Migrations\201801191553456_ModelChanged.Designer.cs">
-      <DependentUpon>201801191553456_ModelChanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801191555428_ModelChangedgain.cs" />
-    <Compile Include="Migrations\201801191555428_ModelChangedgain.Designer.cs">
-      <DependentUpon>201801191555428_ModelChangedgain.cs</DependentUpon>
+    <Compile Include="Migrations\201801202005525_init.cs" />
+    <Compile Include="Migrations\201801202005525_init.Designer.cs">
+      <DependentUpon>201801202005525_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -314,24 +298,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801191316073_NewModelsAdded3.resx">
-      <DependentUpon>201801191316073_NewModelsAdded3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801191437313_ImagePathAddedInFoodItemModel.resx">
-      <DependentUpon>201801191437313_ImagePathAddedInFoodItemModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801191450158_ImagePathAddedInFoodItemModeldeletd.resx">
-      <DependentUpon>201801191450158_ImagePathAddedInFoodItemModeldeletd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801191553456_ModelChanged.resx">
-      <DependentUpon>201801191553456_ModelChanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801191555428_ModelChangedgain.resx">
-      <DependentUpon>201801191555428_ModelChangedgain.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801202005525_init.resx">
+      <DependentUpon>201801202005525_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

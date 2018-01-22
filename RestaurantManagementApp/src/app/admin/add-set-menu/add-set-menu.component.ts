@@ -20,7 +20,7 @@ export class AddSetMenuComponent implements OnInit {
   @Input() editMode: boolean;
   @Input() addNewItem: boolean;
   foodItems: FoodItems[];
-  setMenuFoodItems: SetFoodItemsArry[]= [];
+  setMenuFoodItems: SetFoodItemsArry[];
   setMenu: SetMenus;
   foodItem: FoodItems;
 z
@@ -32,6 +32,7 @@ z
       .subscribe(
         (menu: OurOffers) => {
           this.foodItems = menu.FoodItems;
+<<<<<<< HEAD
           for ( let i = 0 ; i < menu.FoodItems.length; i++) {
          //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
             this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
@@ -40,16 +41,29 @@ z
             console.log(this.setMenuFoodItems[i]);
 
           }
+=======
+          // for ( let i = 0 ; i < menu.FoodItems.length; i++) {
+          //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
+          //   this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
+          //   this.setMenuFoodItems[i].Price = this.foodItems[i].Price;
+          //   this.setMenuFoodItems[i].isSelected = false;
+          //   console.log(this.setMenuFoodItems[i]);
+          //
+          // }
+>>>>>>> master
 
           // this.setMenuFoodItems = menu.FoodItems;
           }
       );
   }
 
-  onSubmitSetMenu(setMenu: NgForm) {
-    this.setMenu.Name = this.name;
-    this.setMenu.Price = this.price;
-    this.setMenu.SetMenuItems = setMenu.value.foodItems;
+  onSubmitSetMenu(setItem: SetMenus) {
+      setItem.Name = this.name;
+    // this.setMenu.Name = this.name;
+    // this.setMenu.Price = this.price;
+    // console.log(this.price);
+    // console.log(this.name);
+    // this.setMenu.SetMenuItems = this.foodItems;
 
   }
 

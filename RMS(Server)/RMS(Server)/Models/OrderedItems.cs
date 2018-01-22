@@ -14,11 +14,11 @@ namespace RMS_Server_.Models
         public Order Order { get; set; }
         public string OrderId { get; set; }
         public FoodItem FoodItem { get; set; }
-        public int? FoodItemId { get; set; }
+        public string FoodItemId { get; set; }
         public int? SetMenuQuantity { get; set; }
         public int? FoodItemQuantity { get; set; }
         public SetMenu SetMenu { get; set; }
-        public int? SetMenuId { get; set; }
+        public string SetMenuId { get; set; }
         public string SetMenuName { get; set; }
         public string FoodItemName { get; set; }
         public int Price { get; set; }

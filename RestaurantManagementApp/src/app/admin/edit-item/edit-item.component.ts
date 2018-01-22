@@ -45,7 +45,11 @@ export class EditItemComponent implements OnInit {
 
   onSubmit() {
     const foodItem = new FoodItems(
+<<<<<<< HEAD
       this.name, this.id , this.price, null, null
+=======
+      this.name, null, this.price, null, null
+>>>>>>> master
     );
     if (this.editMode) {
       this.dataService.putFoodItem(foodItem);

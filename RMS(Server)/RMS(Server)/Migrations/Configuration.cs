@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using RMS_Server_.Models;
-
 namespace RMS_Server_.Migrations
 {
     using System;
@@ -17,6 +14,7 @@ namespace RMS_Server_.Migrations
 
         protected override void Seed(RMS_Server_.Models.ApplicationDbContext context)
         {
+<<<<<<< HEAD
 
         //    context.Authors.AddOrUpdate(x => x.Id,
         //new Author() { Id = 1, Name = "Jane Austen" },
@@ -271,6 +269,20 @@ namespace RMS_Server_.Migrations
             //             }
             //       }
             //    );
+=======
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data. E.g.
+            //
+            //    context.People.AddOrUpdate(
+            //      p => p.FullName,
+            //      new Person { FullName = "Andrew Peters" },
+            //      new Person { FullName = "Brice Lambson" },
+            //      new Person { FullName = "Rowan Miller" }
+            //    );
+            //
+>>>>>>> master
         }
     }
 }

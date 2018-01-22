@@ -9,13 +9,13 @@ import {DataStorageService} from '../shared/data-storage.service';
 import {OrderedItems} from '../shared/ordered-items.model';
 import {forEach} from '@angular/router/src/utils/collection';
 import {Order} from '../shared/order.model';
+import {Inventory} from '../shared/inventory.model';
 
 
 @Injectable()
 export class OurOffersService {
   public uuidCodeOne = '';
   public TotalPrice = 0;
-  // public TotalPriceChanged = new Subject<number>();
   public menuChanged = new Subject<OurOffers>();
   public orderedItemsChanged = new Subject<OrderedItems[]>();
   public ordersChanged = new Subject<Order>();
@@ -23,13 +23,29 @@ export class OurOffersService {
   public totalQuantity  = 0;
   public orderedItems: OrderedItems[] = [];
   public orders: Order;
+  public inventory: Inventory[] = [];
+  public inventoryChanged = new Subject<Inventory[]>();
   public acceptedOrder: Order;
   public rejectedOrder: Order;
   public setMenuSubTotal = 0;
   public foodItemSubTotal = 0;
-  constructor(private uuid: Uuid
-            ) {    this.uuidCodeOne = this.uuid.v1();
+  constructor(private uuid: Uuid,
+            )
+  {    this.uuidCodeOne = this.uuid.v1();
+
   }
+
+  addToInventoryList(inventory: Inventory) {
+  /*  this.inventory = inventory;
+    this.inventoryChanged.next(inventory);*/
+    this.inventory.push(inventory);
+    this.inventoryChanged.next(this.inventory.slice());
+  }
+
+  getInventories() {
+    return this.inventory.slice();
+  }
+
 
   removeFromSetMenuCart(setMenuId: number, quantity: number, subTotal: number) {
 

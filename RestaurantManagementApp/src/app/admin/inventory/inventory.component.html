@@ -1,0 +1,22 @@
+<div class="row" *ngIf="inventories" style="color: #feff26">
+  <div class="col-md-12" *ngFor="let inventory of inventories; let i = index">
+    <div class="col-md-2">{{ inventory.Name }} </div>
+    <div class="col-md-1">{{ inventory.Price }}</div>
+    <div class="col-md-1">{{ inventory.Unit }}</div>
+    <div class="col-md-1">{{ inventory.Quantity }}</div>
+    <div class="col-md-1">
+        <button class="btn btn-primary" (click)="editItem(inventory)">Edit</button>
+  </div>
+    <div class="col-md-1">
+      <button class="btn btn-danger" (click)="deleteItem(inventory,i)">Delete</button>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <button class="btn btn-primary" (click)="AddNewItem()">Add New Item</button>
+</div>
+<div class="col-md-12">
+  <router-outlet></router-outlet>
+</div>
+
+

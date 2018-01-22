@@ -32,6 +32,16 @@ z
       .subscribe(
         (menu: OurOffers) => {
           this.foodItems = menu.FoodItems;
+<<<<<<< HEAD
+          for ( let i = 0 ; i < menu.FoodItems.length; i++) {
+         //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
+            this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
+            this.setMenuFoodItems[i].Price = this.foodItems[i].Price;
+            this.setMenuFoodItems[i].isSelected = false;
+            console.log(this.setMenuFoodItems[i]);
+
+          }
+=======
           // for ( let i = 0 ; i < menu.FoodItems.length; i++) {
           //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
           //   this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
@@ -40,6 +50,7 @@ z
           //   console.log(this.setMenuFoodItems[i]);
           //
           // }
+>>>>>>> master
 
           // this.setMenuFoodItems = menu.FoodItems;
           }

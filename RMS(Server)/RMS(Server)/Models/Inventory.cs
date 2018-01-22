@@ -7,7 +7,7 @@ namespace RMS_Server_.Models
 {
     public class Inventory
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public double Quantity { get; set; }
         public int Unit { get; set; }

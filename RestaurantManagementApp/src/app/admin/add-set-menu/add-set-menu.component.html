@@ -5,12 +5,12 @@
     <form #setMenu="ngForm" (ngSubmit)="onSubmitSetMenu(setMenu)">
   <label for="name">Enter Set Menu Name:</label>
   <br>
-  <input type="text" id="name" placeholder="Enter Name"  class="col-md-5" style="color: #010100" ngModel>
+  <input type="text" name="name" placeholder="Enter Name"  class="col-md-5" style="color: #010100" [(ngModel)]="name">
   <br>
   <br>
   <label for="price">Enter Set Menu Price:</label>
   <br>
-  <input type="number" id="price" placeholder="Enter Price"  class="col-md-5" style="color: #010100" ngModel>
+  <input type="number" id="price" placeholder="Enter Price"  class="col-md-5" style="color: #010100" [ngModel]>
   <br><br>
   <div *ngFor="let setItem of foodItems">
     <input type="checkbox" name="setMenuFoodItems" [value]="setItem">{{setItem.Name}}

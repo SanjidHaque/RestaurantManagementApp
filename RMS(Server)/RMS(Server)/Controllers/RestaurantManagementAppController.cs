@@ -117,6 +117,26 @@ namespace RMS_Server_.Controllers
             _context.SaveChanges();
         }
 
+<<<<<<< HEAD
+
+        [HttpPost]
+        [Route("api/EditFoodItem")]
+        public void FoodItemEdit(FoodItem foodItem)
+        {
+            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+            editedFoodItem.Name = foodItem.Name;
+            editedFoodItem.Price = foodItem.Price;
+            _context.SaveChanges();
+        }
+
+        [HttpPost]
+        [Route("api/DeleteFoodItem")]
+        public void FoodItemDelete(FoodItem foodItem)
+        {
+            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Name == foodItem.Name);
+            _context.FoodItems.Remove(editedFoodItem);
+            _context.SaveChanges();
+=======
         [HttpGet]
         [Route("api/GetInventories")]
         public List<Inventory> GetInventories()
@@ -206,6 +226,7 @@ namespace RMS_Server_.Controllers
                 }
                 throw;
             }
+>>>>>>> master
         }
     }
 }

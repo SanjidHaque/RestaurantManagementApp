@@ -56,6 +56,7 @@ z
 
  /* onSubmitSetMenu(setItem: SetMenus) {
       setItem.Name = this.name;
+      setItem.Price = this.price;
     // this.setMenu.Name = this.name;
     // this.setMenu.Price = this.price;
     // console.log(this.price);

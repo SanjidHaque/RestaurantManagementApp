@@ -1,23 +1,28 @@
 <div class="row">
   <div class="col-md-3"></div>
+  <form setMenu (ngSubmit)="onSubmitSetMenu(setMenu.value)">
   <div class="col-md-8">
   <br>
-    <form #setMenu="ngForm" (ngSubmit)="onSubmitSetMenu(setMenu)">
-  <label for="name">Enter Set Menu Name:</label>
-  <br>
-  <input type="text" name="name" placeholder="Enter Name"  class="col-md-5" style="color: #010100" [(ngModel)]="name">
-  <br>
-  <br>
-  <label for="price">Enter Set Menu Price:</label>
-  <br>
-  <input type="number" id="price" placeholder="Enter Price"  class="col-md-5" style="color: #010100" [ngModel]>
+  <label>Enter Set Menu Name:
+  <input type="text"
+         name="name"
+         placeholder="Enter Name"
+         ngModel>
+  </label>
+    <br>
+  <label>Enter Set Menu Price:
+  <input type="number"
+         name="price"
+         placeholder="Enter Price"
+         ngModel>
+  </label>
   <br><br>
   <div *ngFor="let setItem of foodItems">
     <input type="checkbox" name="setMenuFoodItems" [value]="setItem">{{setItem.Name}}
   </div>
-  <button type="submit" class="btn btn-success" (click)="onSubmitSetMenu()">Save</button>
+  <button type="submit" class="btn btn-success">Save</button>
   <button type="button" class="btn btn-primary" (click)="onCancel()">Cancel</button>
-    </form>
   </div>
+</form>
   <div class="col-md-3"></div>
 </div>

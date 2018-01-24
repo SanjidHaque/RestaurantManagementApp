@@ -10,7 +10,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
   styleUrls: ['./edit-item.component.scss']
 })
 export class EditItemComponent implements OnInit {
-  @Input() id: number;
+  @Input() id: string;
   @Input() name: string;
   @Input() price: number;
   @Input() editMode: boolean;
@@ -26,7 +26,7 @@ export class EditItemComponent implements OnInit {
     this.route.params
       .subscribe(
         ( params: Params) => {
-          this.id = +params['id'];
+          this.id = params['id'];
         }
       );
     this.dataService.getFoodItems()
@@ -34,7 +34,7 @@ export class EditItemComponent implements OnInit {
         (manu: OurOffers) => {
           this.foodItems = manu.FoodItems;
           if (this.id) {
-            this.foodItem = this.foodItems[this.id - 1];
+            this.foodItem = this.foodItems[this.id];
             this.name = this.foodItem.Name;
             this.price = this.foodItem.Price;
             this.editMode = true;
@@ -45,11 +45,7 @@ export class EditItemComponent implements OnInit {
 
   onSubmit() {
     const foodItem = new FoodItems(
-<<<<<<< HEAD
       this.name, this.id , this.price, null, null
-=======
-      this.name, null, this.price, null, null
->>>>>>> master
     );
     if (this.editMode) {
       this.dataService.putFoodItem(foodItem);

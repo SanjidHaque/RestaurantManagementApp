@@ -9,9 +9,8 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class AdminDataService {
 
-  // private _url = 'assets/menu-from-api.json';
-   // private _url = 'http://localhost:1548/api/FoodItems';
-  private _url = 'http://localhost:1548/api/menu';
+  private _url = 'assets/menu-from-api.json';
+  // private _url = 'http://localhost:1548/api/menu';
   private _postUrl = 'http://localhost:1548/api/AddNewFoodItem';
     foodItems: FoodItems[];
     foodItemChange = new Subject<FoodItems[]>();

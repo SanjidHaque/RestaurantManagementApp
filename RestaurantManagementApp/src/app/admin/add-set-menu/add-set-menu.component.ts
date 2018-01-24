@@ -7,6 +7,7 @@ import {SetFoodItemsArry} from '../setMenuFoodItem.model';
 import {SetMenuItems} from '../../shared/set-menu-items.model';
 import {SetMenus} from '../../shared/set-menu.model';
 import {NgForm} from '@angular/forms';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-add-set-menu',
@@ -14,9 +15,9 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./add-set-menu.component.scss']
 })
 export class AddSetMenuComponent implements OnInit {
-  @Input() id: number;
-  @Input() name: string;
-  @Input() price: number;
+ id: number;
+ name: string;
+ price: number;
   @Input() editMode: boolean;
   @Input() addNewItem: boolean;
   foodItems: FoodItems[];
@@ -32,40 +33,18 @@ z
       .subscribe(
         (menu: OurOffers) => {
           this.foodItems = menu.FoodItems;
-<<<<<<< HEAD
-          for ( let i = 0 ; i < menu.FoodItems.length; i++) {
-         //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
-            this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
-            this.setMenuFoodItems[i].Price = this.foodItems[i].Price;
-            this.setMenuFoodItems[i].isSelected = false;
-            console.log(this.setMenuFoodItems[i]);
-
-          }
-=======
-          // for ( let i = 0 ; i < menu.FoodItems.length; i++) {
-          //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
-          //   this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
-          //   this.setMenuFoodItems[i].Price = this.foodItems[i].Price;
-          //   this.setMenuFoodItems[i].isSelected = false;
-          //   console.log(this.setMenuFoodItems[i]);
-          //
-          // }
->>>>>>> master
-
-          // this.setMenuFoodItems = menu.FoodItems;
           }
       );
   }
 
-  onSubmitSetMenu(setItem: SetMenus) {
-      setItem.Name = this.name;
-      setItem.Price = this.price;
-    // this.setMenu.Name = this.name;
-    // this.setMenu.Price = this.price;
-    // console.log(this.price);
-    // console.log(this.name);
-    // this.setMenu.SetMenuItems = this.foodItems;
-
+  onSubmitSetMenu() {
+      this.setMenu.Name = this.name;
+      this.setMenu.Price = this.price;
+        for (let i = 0; i < this.foodItems.length; i++) {
+        this.setMenu.SetMenuItems.FoodItem = this.foodItems[i];
+        this.setMenu.SetMenuItems.FoodItemId = this.foodItems[i].Id;
+        this.setMenu.SetMenuItems.Id = this.foodItems[i].Id;
+          }
   }
 
   onCancel() {

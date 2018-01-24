@@ -4,14 +4,16 @@ export class FoodItems {
   public Id: string;
   public Name: string;
   public Price: number;
-  public Ingredients: Ingredients[];
   public FoodItemImage: string;
 
-  constructor(name: string, id: string, price: number, foodItemImage: string, ingredients: Ingredients[]) {
-    this.Name = name;
+  public Ingredients: Ingredients[];
+  constructor(id: string, name: string,  price: number, foodItemImage: string,
+              ingredients: Ingredients[]) {
+
     this.Id = id;
     this.Name = name;
     this.Price = price;
+
     this.Ingredients = ingredients;
     this.FoodItemImage = foodItemImage;
   }

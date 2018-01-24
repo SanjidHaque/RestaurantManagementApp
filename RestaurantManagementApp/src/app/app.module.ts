@@ -28,13 +28,12 @@ import { AdminComponent } from './admin/admin.component';
 import {AdminDataService} from './admin/data.service';
 import { CheckingOrderComponent } from './checking-order/checking-order.component';
 import {ChefServiceService} from './chef/chef-service.service';
-import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { FoodItemsComponent } from './our-offers/food-items/food-items.component';
 import { AddSetMenuComponent } from './admin/add-set-menu/add-set-menu.component';
-import { ViewFoodItemComponent } from './admin/view-food-item/view-food-item.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { AddNewInventoryComponent } from './admin/inventory/add-new-inventory/add-new-inventory.component';
 import { EditInventoryItemComponent } from './admin/inventory/edit-inventory-item/edit-inventory-item.component';
+import { FoodItemComponent } from './admin/food-item/food-item.component';
 
 
 
@@ -53,13 +52,12 @@ import { EditInventoryItemComponent } from './admin/inventory/edit-inventory-ite
     ChefComponent,
     AdminComponent,
     CheckingOrderComponent,
-    EditItemComponent,
     FoodItemsComponent,
     AddSetMenuComponent,
-    ViewFoodItemComponent,
     InventoryComponent,
     AddNewInventoryComponent,
-    EditInventoryItemComponent
+    EditInventoryItemComponent,
+    FoodItemComponent
 
   ],
   imports: [

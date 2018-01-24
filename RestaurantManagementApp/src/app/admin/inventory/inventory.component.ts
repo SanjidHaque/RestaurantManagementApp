@@ -43,18 +43,14 @@ export class InventoryComponent implements OnInit {
  }
 
   editItem(inventory: Inventory) {
-    this.router.navigate(['admin/inventory/edit-inventory-item', inventory.Id]);
+    const id = inventory.Id;
+    this.router.navigate(['admin/inventory/edit-inventory-item', id ]);
  }
 
  deleteItem(inventory: Inventory, index: number) {
    this._dataStorageService.deleteInventoryItem(inventory);
    this.inventories.splice(index, 1);
+   this._ourOfferService.inventory.splice(index, 1);
  }
-/*  this.route.params
-.subscribe(
-(params: Params) => {
-  this.id = +params['id'];
-  this.recipe = this.recipeService.getRecipe(this.id);
-}
-);*/
+
 }

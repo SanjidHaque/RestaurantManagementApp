@@ -29,11 +29,13 @@ z
                private dataService: AdminDataService ) { }
 
   ngOnInit() {
-    this.dataService.getFoodItems()
+    /*this.dataService.getFoodItems()
       .subscribe(
         (menu: OurOffers) => {
           this.foodItems = menu.FoodItems;
           }
+
+
       );
   }
 
@@ -49,6 +51,6 @@ z
 
   onCancel() {
       this.router.navigate(['/admin/view-food-item']);
-    }
+    }*/
 
 }

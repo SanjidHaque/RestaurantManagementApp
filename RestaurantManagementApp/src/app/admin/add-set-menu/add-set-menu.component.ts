@@ -28,11 +28,10 @@ z
                private dataService: AdminDataService ) { }
 
   ngOnInit() {
-    this.dataService.getFoodItems()
+    /*this.dataService.getFoodItems()
       .subscribe(
         (menu: OurOffers) => {
           this.foodItems = menu.FoodItems;
-<<<<<<< HEAD
           for ( let i = 0 ; i < menu.FoodItems.length; i++) {
          //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
             this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
@@ -41,7 +40,6 @@ z
             console.log(this.setMenuFoodItems[i]);
 
           }
-=======
           // for ( let i = 0 ; i < menu.FoodItems.length; i++) {
           //   this.setMenuFoodItems[i].Id = this.foodItems[i].Id;
           //   this.setMenuFoodItems[i].Name = this.foodItems[i].Name;
@@ -50,14 +48,13 @@ z
           //   console.log(this.setMenuFoodItems[i]);
           //
           // }
->>>>>>> master
 
           // this.setMenuFoodItems = menu.FoodItems;
-          }
-      );
+          }*//*
+      );*/
   }
 
-  onSubmitSetMenu(setItem: SetMenus) {
+ /* onSubmitSetMenu(setItem: SetMenus) {
       setItem.Name = this.name;
     // this.setMenu.Name = this.name;
     // this.setMenu.Price = this.price;
@@ -69,6 +66,6 @@ z
 
   onCancel() {
       this.router.navigate(['/admin/view-food-item']);
-    }
+    }*/
 
 }

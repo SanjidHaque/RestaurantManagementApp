@@ -20,14 +20,15 @@ export class AddNewInventoryComponent implements OnInit {
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService) {
-    this.uuidCodeOne = this.uuid.v1();
+   // this.uuidCodeOne = this.uuid.v1();
   }
 
   ngOnInit() {
   }
 
   onAddNewItem(form: NgForm) {
-      const id = this.uuidCodeOne;
+      const id = this.uuid.v1();
+      // const id = this.uuidCodeOne;
       const name = form.value.name;
       const quantity = form.value.quantity;
       if( form.value.unit === 'Kg' || form.value.unit === 'kg' ) {

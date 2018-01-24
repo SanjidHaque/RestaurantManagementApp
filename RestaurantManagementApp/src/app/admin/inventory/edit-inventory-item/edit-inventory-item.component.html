@@ -7,7 +7,7 @@
           type="text"
           id="name"
           class="form-control"
-          ngModel
+          [ngModel] ="name"
           name="name"
           required
         >
@@ -19,7 +19,7 @@
           type="number"
           id="price"
           class="form-control"
-          ngModel
+          [ngModel] = "price"
           name="price"
           required
         >
@@ -43,7 +43,7 @@
           type="number"
           id="quantity"
           class="form-control"
-          ngModel
+          [ngModel] = "quantity"
           name="quantity"
           required
         >

@@ -34,6 +34,9 @@ import { InventoryComponent } from './admin/inventory/inventory.component';
 import { AddNewInventoryComponent } from './admin/inventory/add-new-inventory/add-new-inventory.component';
 import { EditInventoryItemComponent } from './admin/inventory/edit-inventory-item/edit-inventory-item.component';
 import { FoodItemComponent } from './admin/food-item/food-item.component';
+import { AddNewFoodItemComponent } from './admin/food-item/add-new-food-item/add-new-food-item.component';
+import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-food-item.component';
+import { AddIngredientsComponent } from './admin/food-item/add-new-food-item/add-ingredients/add-ingredients.component';
 
 
 
@@ -57,7 +60,10 @@ import { FoodItemComponent } from './admin/food-item/food-item.component';
     InventoryComponent,
     AddNewInventoryComponent,
     EditInventoryItemComponent,
-    FoodItemComponent
+    FoodItemComponent,
+    AddNewFoodItemComponent,
+    EditFoodItemComponent,
+    AddIngredientsComponent
 
   ],
   imports: [

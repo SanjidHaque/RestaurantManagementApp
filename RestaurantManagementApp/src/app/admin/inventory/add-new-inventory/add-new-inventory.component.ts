@@ -20,7 +20,6 @@ export class AddNewInventoryComponent implements OnInit {
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService) {
-   // this.uuidCodeOne = this.uuid.v1();
   }
 
   ngOnInit() {

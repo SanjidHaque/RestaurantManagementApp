@@ -15,18 +15,20 @@ import {forEach} from '@angular/router/src/utils/collection';
   styleUrls: ['./add-set-menu.component.scss']
 })
 export class AddSetMenuComponent implements OnInit {
- id: number;
- name: string;
- price: number;
+  id: number;
+  name: string;
+  price: number;
   @Input() editMode: boolean;
   @Input() addNewItem: boolean;
   foodItems: FoodItems[];
   setMenuFoodItems: SetFoodItemsArry[];
   setMenu: SetMenus;
   foodItem: FoodItems;
-z
-  constructor( private router: Router,
-               private dataService: AdminDataService ) { }
+
+
+  constructor(private router: Router,
+              private dataService: AdminDataService) {
+  }
 
   ngOnInit() {
     /*this.dataService.getFoodItems()
@@ -53,4 +55,5 @@ z
       this.router.navigate(['/admin/view-food-item']);
     }*/
 
+  }
 }

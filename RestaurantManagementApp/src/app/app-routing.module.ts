@@ -15,6 +15,9 @@ import {AddNewInventoryComponent} from './admin/inventory/add-new-inventory/add-
 import {EditInventoryItemComponent} from './admin/inventory/edit-inventory-item/edit-inventory-item.component';
 import {FoodItemsComponent} from './our-offers/food-items/food-items.component';
 import {FoodItemComponent} from './admin/food-item/food-item.component';
+import {AddNewFoodItemComponent} from './admin/food-item/add-new-food-item/add-new-food-item.component';
+import {EditFoodItemComponent} from './admin/food-item/edit-food-item/edit-food-item.component';
+import {AddIngredientsComponent} from './admin/food-item/add-new-food-item/add-ingredients/add-ingredients.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -28,7 +31,14 @@ const appRoutes: Routes = [
   { path: 'contact-us', component: ContactUsComponent},
   { path: 'chef', component: ChefComponent},
   { path: 'admin', component: AdminComponent, children: [
-      { path: 'food-item', component: FoodItemComponent},
+      { path: 'food-item', component: FoodItemComponent ,
+       children: [
+         { path: 'add-new-food-item', component: AddNewFoodItemComponent,
+         children: [
+           { path: 'add-ingredients/:id', component: AddIngredientsComponent }
+         ]},
+         { path: 'edit-food-item/:id', component: EditFoodItemComponent }
+       ]},
       { path: 'set-menu', component: AddSetMenuComponent},
       { path: 'inventory', component: InventoryComponent ,
         children: [

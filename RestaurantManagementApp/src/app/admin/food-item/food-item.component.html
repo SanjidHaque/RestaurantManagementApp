@@ -1,3 +1,25 @@
-<p>
-  food-item works!
-</p>
+<div class="row" *ngIf="FoodItem" style="color: #feff26">
+  <div class="col-md-12" *ngFor="let foodItem of FoodItem; let i = index">
+    <div class="col-md-2">{{ foodItem.Name }} </div>
+    <div class="col-md-1">{{ foodItem.Price }}</div>
+    <div *ngIf="foodItem.Ingredients">
+    <div class="col-md-1" *ngFor="let ingredients of foodItem.Ingredients">
+    Quantity:  {{ ingredients.Quantity }}
+    </div>
+  </div>
+    <div class="col-md-1">
+      <button class="btn btn-primary" (click)="editItem(fooditem)">Edit</button>
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-danger" (click)="deleteItem(fooditem,i)">Delete</button>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <button class="btn btn-primary" (click)="addNewItem()">Add New Item</button>
+</div>
+<div class="col-md-12">
+  <router-outlet></router-outlet>
+</div>
+
+

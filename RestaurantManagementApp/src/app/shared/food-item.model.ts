@@ -5,15 +5,14 @@ export class FoodItems {
   public Name: string;
   public Price: number;
   public FoodItemImage: string;
-
   public Ingredients: Ingredients[];
-  constructor(id: string, name: string,  price: number, foodItemImage: string,
-              ingredients: Ingredients[]) {
+
+  constructor(id: string, name: string,  price: number,
+              foodItemImage: string, ingredients: Ingredients[]) {
 
     this.Id = id;
     this.Name = name;
     this.Price = price;
-
     this.Ingredients = ingredients;
     this.FoodItemImage = foodItemImage;
   }

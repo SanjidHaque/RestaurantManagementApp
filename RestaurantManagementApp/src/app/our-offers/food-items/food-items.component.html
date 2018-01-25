@@ -97,16 +97,21 @@
             </div>
               <div class="col-md-3 form-group">
                 <input type="number"
+                       min="1"
                        id="amount"
                        class="form-control"
+                       required
                        #amountInput
                 >
               </div>
             <div class="col-md-3" style="color: #feff26;">
-              {{ quantity }}
+              {{ quantity}}
             </div>
             <div class="col-md-3 set-menu-price-button">
-              <button (click)="UpdateCart(menu.Id, menu.Price, menu.Name,false)" class="smpbutton">Remove From Cart</button>
+              <button
+                       (click)="UpdateCart(menu.Id, menu.Price, menu.Name,false)"
+                       class="smpbutton"
+                        >Remove From Cart</button>
             </div>
           </div>
         </collapsible-body>

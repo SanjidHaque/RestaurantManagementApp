@@ -1,5 +1,5 @@
 <div class="col-md-12" style="color: #feff26; font-family: 'Times New Roman'">
-  <form (ngSubmit) = "onEditItem(editItem)" #editItem = "ngForm">
+  <form (ngSubmit) = "onAddNewFoodItem(newFoodItem)" #newFoodItem = "ngForm">
     <div id="user-data">
       <div class="form-group">
         <label for="name">Item Name:</label>
@@ -7,7 +7,7 @@
           type="text"
           id="name"
           class="form-control"
-          [ngModel] ="name"
+          ngModel
           name="name"
           required
         >
@@ -20,42 +20,19 @@
           min="1"
           id="price"
           class="form-control"
-          [ngModel] = "price"
+          ngModel
           name="price"
           required
         >
       </div>
-
-      <div class="form-group">
-        <label for="unit">Unit:</label>
-        <input
-          type="text"
-          id="unit"
-          class="form-control"
-          ngModel
-          name="unit"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="quantity">Quantity:</label>
-        <input
-          type="number"
-          min="1"
-          id="quantity"
-          class="form-control"
-          [ngModel] = "quantity"
-          name="quantity"
-          required
-        >
         <div>
           <button class="btn btn-success"
                   type="submit"
-                  [disabled]="!editItem.valid">Save</button>
+                  [disabled]="!newFoodItem.valid">Add Ingredients</button>
+          <router-outlet></router-outlet>
           <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+          <button class="btn btn-success" type="submit" (click)="onSaveFoodItem()">Save</button>
         </div>
       </div>
-    </div>
   </form>
 </div>

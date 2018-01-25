@@ -10,6 +10,8 @@ import {OrderedItems} from '../shared/ordered-items.model';
 import {forEach} from '@angular/router/src/utils/collection';
 import {Order} from '../shared/order.model';
 import {Inventory} from '../shared/inventory.model';
+import {FoodItems} from '../shared/food-item.model';
+import {Ingredients} from '../shared/ingredients.model';
 
 
 @Injectable()
@@ -29,15 +31,18 @@ export class OurOffersService {
   public rejectedOrder: Order;
   public setMenuSubTotal = 0;
   public foodItemSubTotal = 0;
-  constructor(private uuid: Uuid,
-            )
-  {    this.uuidCodeOne = this.uuid.v1();
 
-  }
+  ingredients: Ingredients[] = [];
+  ingredientsChanged = new Subject<Ingredients[]>();
+  FoodItem: FoodItems[] = [];
+  foodItemChanged = new Subject<FoodItems[]>();
+
+
+  constructor(private uuid: Uuid,
+            ) { this.uuidCodeOne = this.uuid.v1(); }
+
 
   addToInventoryList(inventory: Inventory) {
-  /*  this.inventory = inventory;
-    this.inventoryChanged.next(inventory);*/
     this.inventory.push(inventory);
     this.inventoryChanged.next(this.inventory.slice());
   }
@@ -46,6 +51,19 @@ export class OurOffersService {
     return this.inventory.slice();
   }
 
+  addToFoodItemList(foodItem: FoodItems) {
+    this.FoodItem.push(foodItem);
+    this.foodItemChanged.next(this.FoodItem.slice());
+  }
+
+  getIngredients() {
+    return this.ingredients.slice();
+  }
+
+  addToIngredientList(ingredient: Ingredients) {
+    this.ingredients.push(ingredient);
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
 
   removeFromSetMenuCart(setMenuId: number, quantity: number, subTotal: number) {
 

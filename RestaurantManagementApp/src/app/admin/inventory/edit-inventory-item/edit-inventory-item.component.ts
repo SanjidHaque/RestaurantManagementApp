@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {Inventory} from '../../../shared/inventory.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-inventory-item',
@@ -31,10 +32,15 @@ export class EditInventoryItemComponent implements OnInit {
                this.quantity = this._ourOfferService.inventory[i].Quantity;
             }
           }
-
         }
       );
+  }
+
+  onEditItem(form: NgForm) {
 
   }
 
+  onCancel() {
+
+  }
 }

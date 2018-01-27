@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -39,51 +40,62 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public void PostMenu(Order orders)
         {
-            try
-            {
-                _context.OrderedItems.AddRange(orders.OrderedItems);
-                _context.Orders.Add(orders);
-                _context.SaveChanges();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+           try
+             {
+                 _context.OrderedItems.AddRange(orders.OrderedItems);
+                 _context.Orders.Add(orders);
+                 _context.SaveChanges();
+             }
+             catch (DbEntityValidationException e)
+             {
+                 foreach (var eve in e.EntityValidationErrors)
+                 {
+                     Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                         eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                     foreach (var ve in eve.ValidationErrors)
+                     {
+                         Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                             ve.PropertyName, ve.ErrorMessage);
+                     }
+                 }
+               //  throw;
+                
+             }
+           catch (DbUpdateException e)
+           {
 
+           }
             
-           /* var apiOrder = new Order();
-            apiOrder.Id = orders.Id;
-            apiOrder.IsServed = orders.IsServed;
-            apiOrder.TotalPrice = orders.TotalPrice;
-            for(int i = 0; i < orders.OrderedItems.Count; i++)
-            {
-                var apiOrderedItems = new OrderedItems();
-                apiOrderedItems.Id = orders.OrderedItems[i].Id;
-                apiOrderedItems.OrderId = orders.OrderedItems[i].OrderId;
-                apiOrderedItems.Price = orders.OrderedItems[i].Price;
-                apiOrderedItems.Quantity = orders.OrderedItems[i].Quantity;
-                apiOrderedItems.SetMenuId = orders.OrderedItems[i].SetMenuId;
-                apiOrderedItems.SetMenuName = orders.OrderedItems[i].SetMenuName;
-                apiOrderedItems.SubTotal = orders.OrderedItems[i].SubTotal;
-                apiOrderedItems.FoodItemId = orders.OrderedItems[i].FoodItemId;
-                _context.OrderedItems.Add(apiOrderedItems);
-            }*/
-            //_context.OrderedItems.AddRange(orders.OrderedItems);
-            //_context.Orders.Add(orders);
-                      //  _context.Orders.Add(apiOrder);
-                    //    _context.SaveChanges();
+ 
+            
+         //   var apiOrder = new Order();
+         //   apiOrder.Id = orders.Id;
+         //   apiOrder.OrderStatus = orders.OrderStatus;
+         //   apiOrder.TotalPrice = orders.TotalPrice;
+         //   for(int i = 0; i < orders.OrderedItems.Count; i++)
+         //   {
+         //       var apiOrderedItems = new OrderedItems();
+         //       apiOrderedItems.OrderItemId = orders.OrderedItems[i].OrderItemId;
+         //       apiOrderedItems.OrderId = orders.OrderedItems[i].OrderId;
+         //       apiOrderedItems.Price = orders.OrderedItems[i].Price;
+         //       apiOrderedItems.SetMenuQuantity = orders.OrderedItems[i].SetMenuQuantity;
+         //       apiOrderedItems.SetMenuId = orders.OrderedItems[i].SetMenuId;
+         //       apiOrderedItems.SetMenuName = orders.OrderedItems[i].SetMenuName;
+         //       apiOrderedItems.SetMenuSubTotal = orders.OrderedItems[i].SetMenuSubTotal;
+         //       apiOrderedItems.FoodItemId = orders.OrderedItems[i].FoodItemId;
+         //       apiOrderedItems.FoodItemQuantity = orders.OrderedItems[i].FoodItemQuantity;
+         //       apiOrderedItems.FoodItemSubTotal = orders.OrderedItems[i].FoodItemSubTotal;
+         //       apiOrderedItems.FoodItemName = orders.OrderedItems[i].FoodItemName;
+         //      // apiOrderedItems.FoodItemId = orders.OrderedItems[i].FoodItemId;
+         //       _context.OrderedItems.Add(apiOrderedItems);
+         //       _context.SaveChanges();
+         //   }
+         ////   _context.OrderedItems.AddRange(orders.OrderedItems);
+         //  // _context.Orders.Add(orders);
+         //   _context.Orders.Add(apiOrder);
+            
 
-            //_context.SaveChanges();
+         //   _context.SaveChanges();
         }
         [HttpGet]
         [Route("api/GetOrders")]
@@ -227,5 +239,35 @@ namespace RMS_Server_.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [Route("api/AddFoodItem")]
+        public void AddFoodItem(FoodItem foodItem)
+        {
+            try
+            {  
+                _context.Ingredients.AddRange(foodItem.Ingredients);
+                _context.FoodItems.Add(foodItem);
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+        }
+
+
+
+        
     }
 }

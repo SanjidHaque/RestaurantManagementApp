@@ -18,6 +18,8 @@ import {FoodItemComponent} from './admin/food-item/food-item.component';
 import {AddNewFoodItemComponent} from './admin/food-item/add-new-food-item/add-new-food-item.component';
 import {EditFoodItemComponent} from './admin/food-item/edit-food-item/edit-food-item.component';
 import {AddIngredientsComponent} from './admin/food-item/add-new-food-item/add-ingredients/add-ingredients.component';
+import {BillOfMaterialsComponent} from './admin/bill-of-materials/bill-of-materials.component';
+import {SummaryComponent} from './admin/bill-of-materials/summary/summary.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -40,6 +42,10 @@ const appRoutes: Routes = [
          { path: 'edit-food-item/:id', component: EditFoodItemComponent }
        ]},
       { path: 'set-menu', component: AddSetMenuComponent},
+      { path: 'reports', component: BillOfMaterialsComponent,
+      children: [
+        { path: 'inventories', component: SummaryComponent }
+      ]},
       { path: 'inventory', component: InventoryComponent ,
         children: [
         {path: 'add-new-inventory', component: AddNewInventoryComponent },

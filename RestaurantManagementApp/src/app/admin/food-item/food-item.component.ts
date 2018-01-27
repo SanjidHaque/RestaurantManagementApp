@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Http} from '@angular/http';
 import {Subscription} from 'rxjs/Subscription';
+import {Ingredients} from '../../shared/ingredients.model';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class FoodItemComponent implements OnInit {
  // Menu: OurOffers;
   public menuChanged = new Subject<OurOffers>();
   FoodItem: FoodItems[] = [];
+  // ingredients: Ingredients[] = [];
   // subscription = Subscription;
 
 
@@ -50,11 +52,14 @@ export class FoodItemComponent implements OnInit {
   }
 
   deleteItem(foodItem: FoodItems, index: number) {
-
+  //  this._dataStorageService.deleteInventoryItem(foodItem);
+    this.FoodItem.splice(index, 1);
+    this._ourOfferService.FoodItem.splice(index, 1);
   }
 
   addNewItem(foodItem: FoodItems) {
     this.router.navigate(['admin/food-item/add-new-food-item']);
+    this._ourOfferService.ingredients = [];
   }
 
 }

@@ -37,6 +37,8 @@ import { FoodItemComponent } from './admin/food-item/food-item.component';
 import { AddNewFoodItemComponent } from './admin/food-item/add-new-food-item/add-new-food-item.component';
 import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-food-item.component';
 import { AddIngredientsComponent } from './admin/food-item/add-new-food-item/add-ingredients/add-ingredients.component';
+import { BillOfMaterialsComponent } from './admin/bill-of-materials/bill-of-materials.component';
+import { SummaryComponent } from './admin/bill-of-materials/summary/summary.component';
 
 
 
@@ -63,7 +65,9 @@ import { AddIngredientsComponent } from './admin/food-item/add-new-food-item/add
     FoodItemComponent,
     AddNewFoodItemComponent,
     EditFoodItemComponent,
-    AddIngredientsComponent
+    AddIngredientsComponent,
+    BillOfMaterialsComponent,
+    SummaryComponent
 
   ],
   imports: [

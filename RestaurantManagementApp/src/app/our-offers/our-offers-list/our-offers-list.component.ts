@@ -17,8 +17,6 @@ import {Popup} from 'ng2-opd-popup';
 export class OurOffersListComponent implements OnInit {
   @Input() menu: OurOffers;
   @Input() index: number;
-
-  public totalQuantity: number = 0;
   order: Order[];
   condition = false;
   quantity = 0;

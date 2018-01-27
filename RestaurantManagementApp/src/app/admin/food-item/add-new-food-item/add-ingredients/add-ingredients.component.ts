@@ -18,7 +18,8 @@ export class AddIngredientsComponent implements OnInit {
   foodItemId: string;
   inventories: Inventory[] = [];
   ingredients: Ingredients[] = [];
-
+  unit: number;
+  defaultUnit = 'Kilogram';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -36,15 +37,39 @@ export class AddIngredientsComponent implements OnInit {
       );
   }
 
+  getInventoryItemName(inventoryId: string) {
+    for (let i = 0; i < this.inventories.length; i++) {
+      if ( this.inventories[i].Id === inventoryId) {
+        return this.inventories[i].Name;
+      }
+    }
+  }
+
   onAddIngredients(form: NgForm) {
       const id = this.uuid.v1();
       const inventoryId = form.value.name;
+      const name = this.getInventoryItemName(inventoryId);
       const foodItemId = this.foodItemId;
       const quantity = form.value.quantity;
-      const unit = 1;
-      const addIngredient = new Ingredients(id, quantity, unit, inventoryId, foodItemId);
+      if ( form.value.unit === 'Kilogram' ) {
+          this.unit = 1;
+          }
+      if ( form.value.unit === 'Litre') {
+          this.unit = 2;
+          }
+      if ( form.value.unit === 'Piece') {
+          this.unit = 3;
+          }
+      if ( form.value.unit === 'Bottle') {
+          this.unit = 4;
+          }
+      const addIngredient = new Ingredients(id, name, quantity, this.unit, inventoryId, foodItemId);
       this._ourOfferService.addToIngredientList(addIngredient);
       form.reset();
       this.router.navigate(['admin/food-item/add-new-food-item']);
+  }
+
+  onCancel() {
+    this.router.navigate(['admin/food-item/add-new-food-item']);
   }
 }

@@ -1,4 +1,3 @@
-import {Inventory} from './inventory.model';
 
 export class Ingredients {
   public Id: string;

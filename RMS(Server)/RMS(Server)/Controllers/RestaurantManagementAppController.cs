@@ -117,8 +117,6 @@ namespace RMS_Server_.Controllers
             _context.SaveChanges();
         }
 
-<<<<<<< HEAD
-
         [HttpPost]
         [Route("api/EditFoodItem")]
         public void FoodItemEdit(FoodItem foodItem)
@@ -136,7 +134,8 @@ namespace RMS_Server_.Controllers
             var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Name == foodItem.Name);
             _context.FoodItems.Remove(editedFoodItem);
             _context.SaveChanges();
-=======
+        }
+
         [HttpGet]
         [Route("api/GetInventories")]
         public List<Inventory> GetInventories()
@@ -226,7 +225,14 @@ namespace RMS_Server_.Controllers
                 }
                 throw;
             }
->>>>>>> master
+        }
+
+        [HttpPost]
+        [Route("api/AddSetMenu")]
+        public void AddSetMenu(SetMenu setMenu)
+        {
+            _context.SetMenus.Add(setMenu);
+           // _context.SaveChanges();
         }
     }
 }

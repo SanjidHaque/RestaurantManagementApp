@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {OurOffers} from '../our-offers.model';
 import {Order} from '../../shared/order.model';
 import {OurOffersService} from '../our-offers.service';
@@ -12,9 +12,10 @@ import { Uuid } from 'ng2-uuid';
   templateUrl: './food-items.component.html',
   styleUrls: ['./food-items.component.scss']
 })
-export class FoodItemsComponent implements OnInit {
+export class FoodItemsComponent implements OnInit, DoCheck {
   @Input() menu: OurOffers;
   @Input() index: number;
+  public orderedItems: OrderedItems[] = [];
 
   order: Order[];
   condition = false;
@@ -36,8 +37,12 @@ export class FoodItemsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.orderedItems = this._ourOfferService.orderedItems;
   }
 
+  ngDoCheck() {
+    this.orderedItems = this._ourOfferService.orderedItems;
+  }
 
   UpdateCart(id: number, price: number, name: string, isAdd: boolean) {
     let orderItemId = this.uuidCodeOne;
@@ -57,8 +62,7 @@ export class FoodItemsComponent implements OnInit {
   }
 
   AddToCart(orderItemId: string, orderId: string, quantity: number,
-            foodItemId: number, foodItemName: string, price: number   )
-  {
+            foodItemId: number, foodItemName: string, price: number ) {
 
     let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);

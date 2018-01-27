@@ -8,12 +8,13 @@ import 'rxjs/add/operator/catch';
 import {Order} from './order.model';
 import {Inventory} from './inventory.model';
 import {Subject} from 'rxjs/Subject';
+import {FoodItems} from './food-item.model';
 @Injectable()
 export class DataStorageService {
 
   public order: Order;
   private _url = 'assets/menu-from-api.json';
- //      private _url = 'http://localhost:1548/api/menu';
+ // private _url = 'http://localhost:1548/api/menu';
   constructor(private _http: Http,
               private _ourOffersService: OurOffersService) {
   }
@@ -85,6 +86,17 @@ export class DataStorageService {
     );
   }
 
+  editInventoryItem(inventory: Inventory) {
+    return this._http.post('http://localhost:1548/api/EditInventoryItem',
+      inventory)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
+
+
   deleteInventoryItem(inventory: Inventory) {
     return this._http.post('http://localhost:1548/api/DeleteInventoryItem',
       inventory)
@@ -94,6 +106,27 @@ export class DataStorageService {
         }
       );
   }
+
+  deleteFoodItem(foodItem: FoodItems) {
+    return this._http.post('http://localhost:1548/api/DeleteFoodItem',
+      foodItem)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
+
+  editFoodItem(foodItem: FoodItems) {
+    return this._http.post('http://localhost:1548/api/DeleteInventoryItem',
+      foodItem)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
+
 
 
 }

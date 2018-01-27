@@ -1,4 +1,4 @@
-<div class="col-md-12" style="color: #feff26; font-family: 'Times New Roman'">
+<div class="col-md-12" style="color: #feff26; font-family: 'Arial'">
   <form (ngSubmit) = "onAddNewItem(newItem)" #newItem = "ngForm">
     <div id="user-data">
       <div class="form-group">
@@ -17,6 +17,7 @@
         <label for="price">Price:</label>
         <input
           type="number"
+          min="1"
           id="price"
           class="form-control"
           ngModel
@@ -26,40 +27,31 @@
       </div>
 
       <div class="form-group">
-        <label for="unit">Unit:</label>
-        <input
-          type="text"
-          id="unit"
-          class="form-control"
-          ngModel
-          name="unit"
-          required
-        >
-      </div>
 
-      <div class="form-group">
         <label for="quantity">Quantity:</label>
         <input
           type="number"
+          min="1"
           id="quantity"
           class="form-control"
           ngModel
           name="quantity"
           required
         >
-        <!--<div class="form-group">
-          <label for="Dunit">Select an Unit</label>
+        <div class="form-group">
+          <label for="unit">Select an Unit</label>
           <select
-            id="Dunit"
+            id="unit"
             class="form-control"
-            ngModel
-            name="Dunit">
-            <option selected value="Kilogram">Kg</option>
+            [ngModel]="defaultUnit"
+            required
+            name="unit">
+            <option value="Kilogram">Kilogram</option>
             <option value="Litre">Litre</option>
             <option value="Piece">Piece</option>
             <option value="Bottle">Bottle</option>
           </select>
-        </div>-->
+        </div>
 
         <div>
           <button class="btn btn-success"

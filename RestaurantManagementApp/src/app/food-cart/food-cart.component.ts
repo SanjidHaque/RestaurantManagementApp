@@ -73,19 +73,8 @@ export class FoodCartComponent implements OnInit {
           console.log(response);
         }
       );
-    // this.orders = this._dataStorageService.getOrders();
     this.router.navigate(['checking-orders'], {relativeTo: this.route});
-    // this.checkOrder = this._chefService.orderAccepted;
+
   }
-
-  /*saveOrders() {
-    this._dataStorageService.storeOrders()
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );*/
-//  }
-
 
 }

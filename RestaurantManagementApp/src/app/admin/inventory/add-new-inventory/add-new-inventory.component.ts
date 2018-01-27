@@ -14,13 +14,13 @@ import {DataStorageService} from '../../../shared/data-storage.service';
 export class AddNewInventoryComponent implements OnInit {
   uuidCodeOne = '';
   unit : number;
+  defaultUnit = 'Kilogram';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService) {
-   // this.uuidCodeOne = this.uuid.v1();
   }
 
   ngOnInit() {
@@ -28,17 +28,29 @@ export class AddNewInventoryComponent implements OnInit {
 
   onAddNewItem(form: NgForm) {
       const id = this.uuid.v1();
-      // const id = this.uuidCodeOne;
       const name = form.value.name;
       const quantity = form.value.quantity;
-      if( form.value.unit === 'Kg' || form.value.unit === 'kg' ) {
+      if ( form.value.unit === 'Kilogram' ) {
         this.unit = 1;
+      }
+      if ( form.value.unit === 'Litre') {
+      this.unit = 2;
+      }
+      if ( form.value.unit === 'Piece') {
+      this.unit = 3;
+      }
+      if ( form.value.unit === 'Bottle') {
+      this.unit = 4;
       }
       const price = form.value.price;
       const newItem = new Inventory(id, name, quantity, this.unit, price);
       this._ourOfferService.addToInventoryList(newItem);
       this._dataStorageService.addNewInventoryItem(newItem);
-      form.reset();
+
+      form.controls['quantity'].reset();
+      form.controls['name'].reset();
+      form.controls['price'].reset();
+
   }
 
 

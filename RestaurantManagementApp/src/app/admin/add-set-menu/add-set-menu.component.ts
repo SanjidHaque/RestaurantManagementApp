@@ -18,9 +18,9 @@ import {SetMenuDataStoreService} from './set-menu-data-store-.service';
   providers: [SetMenuDataStoreService]
 })
 export class AddSetMenuComponent implements OnInit {
- id: number;
- name: string;
- price: number;
+  id: number;
+  name: string;
+  price: number;
   @Input() editMode: boolean;
    setMenuFoodItem: SetMenuItems[] = []
   @Input() addNewItem: boolean;

@@ -129,7 +129,6 @@ namespace RMS_Server_.Controllers
             _context.SaveChanges();
         }
 
-
         [HttpPost]
         [Route("api/EditFoodItem")]
         public void FoodItemEdit(FoodItem foodItem)
@@ -269,5 +268,13 @@ namespace RMS_Server_.Controllers
 
 
         
+
+        [HttpPost]
+        [Route("api/AddSetMenu")]
+        public void AddSetMenu(SetMenu setMenu)
+        {
+            _context.SetMenus.Add(setMenu);
+           // _context.SaveChanges();
+        }
     }
 }

@@ -14,7 +14,6 @@ namespace RMS_Server_.Migrations
 
         protected override void Seed(RMS_Server_.Models.ApplicationDbContext context)
         {
-<<<<<<< HEAD
 
         //    context.Authors.AddOrUpdate(x => x.Id,
         //new Author() { Id = 1, Name = "Jane Austen" },
@@ -269,7 +268,6 @@ namespace RMS_Server_.Migrations
             //             }
             //       }
             //    );
-=======
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -282,7 +280,6 @@ namespace RMS_Server_.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
->>>>>>> master
         }
     }
 }

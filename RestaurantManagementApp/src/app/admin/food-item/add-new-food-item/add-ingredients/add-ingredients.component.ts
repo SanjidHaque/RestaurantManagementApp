@@ -6,6 +6,7 @@ import { Uuid } from 'ng2-uuid';
 import {Ingredients} from '../../../../shared/ingredients.model';
 import {Inventory} from '../../../../shared/inventory.model';
 import {NgForm} from '@angular/forms';
+import {IngredientServiceService} from './ingredient-service.service';
 
 
 @Component({
@@ -25,10 +26,18 @@ export class AddIngredientsComponent implements OnInit {
               private router: Router,
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService) { }
+              private _dataStorageService: DataStorageService,
+              private _ingredientService: IngredientServiceService) { }
 
   ngOnInit() {
-    this.inventories = this._ourOfferService.getInventories();
+   // this.inventories = this._ourOfferService.getInventories();
+    this._dataStorageService.getInventories()
+      .subscribe(
+        (inventories: Inventory[]) => {
+          this._ourOfferService.inventory = inventories;
+        }
+      );
+     this.inventories = this._ourOfferService.getInventories();
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -65,11 +74,11 @@ export class AddIngredientsComponent implements OnInit {
           }
       const addIngredient = new Ingredients(id, name, quantity, this.unit, inventoryId, foodItemId);
       this._ourOfferService.addToIngredientList(addIngredient);
-      form.reset();
-      this.router.navigate(['admin/food-item/add-new-food-item']);
+      this.router.navigate(['admin/food-item/add-new-food-item', foodItemId ]);
+     // form.reset();
   }
 
   onCancel() {
-    this.router.navigate(['admin/food-item/add-new-food-item']);
+    this.router.navigate(['admin/food-item/add-new-food-item', this.foodItemId]);
   }
 }

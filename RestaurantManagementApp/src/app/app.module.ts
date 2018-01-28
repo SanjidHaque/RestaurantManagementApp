@@ -40,6 +40,7 @@ import { AddIngredientsComponent } from './admin/food-item/add-new-food-item/add
 import { BillOfMaterialsComponent } from './admin/bill-of-materials/bill-of-materials.component';
 import { SummaryComponent } from './admin/bill-of-materials/summary/summary.component';
 import { SetMenuComponent } from './admin/set-menu/set-menu.component';
+import {IngredientServiceService} from './admin/food-item/add-new-food-item/add-ingredients/ingredient-service.service';
 
 
 
@@ -93,7 +94,8 @@ import { SetMenuComponent } from './admin/set-menu/set-menu.component';
     OurOffersService,
     DataStorageService,
     ChefServiceService,
-    AdminDataService
+    AdminDataService,
+    IngredientServiceService
   ],
   bootstrap: [AppComponent]
 })

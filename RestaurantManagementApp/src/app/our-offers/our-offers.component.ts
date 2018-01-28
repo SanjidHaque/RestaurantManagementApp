@@ -40,6 +40,7 @@ export class OurOffersComponent implements OnInit, OnDestroy {
           this.Menu = Menu;
         }
       );
+
   /*  this.Menu = this._ourOfferService.getOurOffers();*/
     this._dataStorageService.getMenu()
       .subscribe((Menu: OurOffers ) => {

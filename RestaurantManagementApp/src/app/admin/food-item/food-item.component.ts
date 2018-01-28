@@ -8,6 +8,7 @@ import {Subject} from 'rxjs/Subject';
 import {Http} from '@angular/http';
 import {Subscription} from 'rxjs/Subscription';
 import {Ingredients} from '../../shared/ingredients.model';
+import { Uuid } from 'ng2-uuid';
 
 
 @Component({
@@ -23,8 +24,8 @@ export class FoodItemComponent implements OnInit {
   // subscription = Subscription;
 
 
-
   constructor(private route: ActivatedRoute,
+              private uuid: Uuid,
               private router: Router,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
@@ -52,13 +53,14 @@ export class FoodItemComponent implements OnInit {
   }
 
   deleteItem(foodItem: FoodItems, index: number) {
-  //  this._dataStorageService.deleteInventoryItem(foodItem);
+    this._dataStorageService.deleteFoodItem(foodItem);
     this.FoodItem.splice(index, 1);
     this._ourOfferService.FoodItem.splice(index, 1);
   }
 
   addNewItem(foodItem: FoodItems) {
-    this.router.navigate(['admin/food-item/add-new-food-item']);
+    const foodItemId = this.uuid.v1();
+    this.router.navigate(['admin/food-item/add-new-food-item', foodItemId]);
     this._ourOfferService.ingredients = [];
   }
 

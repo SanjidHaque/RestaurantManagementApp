@@ -13,8 +13,8 @@ import {FoodItems} from './food-item.model';
 export class DataStorageService {
 
   public order: Order;
-  private _url = 'assets/menu-from-api.json';
- // private _url = 'http://localhost:1548/api/menu';
+ // private _url = 'assets/menu-from-api.json';
+  private _url = 'http://localhost:1548/api/menu';
   constructor(private _http: Http,
               private _ourOffersService: OurOffersService) {
   }
@@ -106,7 +106,15 @@ export class DataStorageService {
         }
       );
   }
-
+  addFoodItem(foodItem: FoodItems) {
+    return this._http.post('http://localhost:1548/api/AddFoodItem',
+      foodItem)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
   deleteFoodItem(foodItem: FoodItems) {
     return this._http.post('http://localhost:1548/api/DeleteFoodItem',
       foodItem)

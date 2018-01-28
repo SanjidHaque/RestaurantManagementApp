@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent, children: [
       { path: 'food-item', component: FoodItemComponent ,
        children: [
-         { path: 'add-new-food-item', component: AddNewFoodItemComponent,
+         { path: 'add-new-food-item/:id', component: AddNewFoodItemComponent,
          children: [
            { path: 'add-ingredients/:id', component: AddIngredientsComponent }
          ]},

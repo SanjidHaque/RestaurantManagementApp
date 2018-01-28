@@ -96,6 +96,7 @@ namespace RMS_Server_.Controllers
             
 
          //   _context.SaveChanges();
+
         }
         [HttpGet]
         [Route("api/GetOrders")]
@@ -104,14 +105,24 @@ namespace RMS_Server_.Controllers
             return _context.Orders.Where(p => p.OrderStatus == 0).Include(b => b.OrderedItems).ToList();
         }
 
-        [HttpPost]
-        [Route("api/AcceptOrders")]
-        public void OrderAccepted(Order order)
-        {
-             var acceptedOrder =  _context.Orders.FirstOrDefault(p => p.Id == order.Id);
-              acceptedOrder.OrderStatus = 1;
-             _context.SaveChanges();
-        }
+        //[HttpPost]
+        //[Route("api/AcceptOrders")]
+        //public void OrderAccepted(Order order)
+        //{
+        //     var acceptedOrder =  _context.Orders.FirstOrDefault(p => p.Id == order.Id);
+        //      acceptedOrder.OrderStatus = 1;
+        //     _context.SaveChanges();
+        //    var i = 0;
+        //    var getFoodItemId = acceptedOrder.OrderedItems[i].FoodItemId;
+        //    var getIng = _context.Ingredients.FirstOrDefault(p => p.FooditemId == getFoodItemId);
+        //    var getId = getIng.InventoryId;
+        //    var getInv = _context.Inventories.FirstOrDefault(p => p.Id == getId);
+
+        //    getInv.Quantity -= 
+
+
+    //    }
+
         [HttpPost]
         [Route("api/RejectOrders")]
         public void OrderRejected(Order order)
@@ -143,8 +154,27 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteFoodItem")]
         public void FoodItemDelete(FoodItem foodItem)
         {
-            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Name == foodItem.Name);
-            _context.FoodItems.Remove(editedFoodItem);
+            var getOrderId =
+                _context.OrderedItems.FirstOrDefault(p => p.FoodItemId == foodItem.Id);
+            if (getOrderId != null)
+            {
+                var orderId = getOrderId.OrderId;
+
+                var deleteOrderedItemsRelatedToThisFoodItem =
+                    _context.OrderedItems.Where(p => p.OrderId == orderId).ToList();
+
+
+                _context.OrderedItems.RemoveRange(deleteOrderedItemsRelatedToThisFoodItem);
+
+                var deleteOrderRelatedToThisFoodItem =
+                    _context.Orders.FirstOrDefault(p => p.Id == orderId);
+                _context.Orders.Remove(deleteOrderRelatedToThisFoodItem);
+                _context.SaveChanges();
+            }
+            var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
+            _context.Ingredients.RemoveRange(deleteIngredients);
+            var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+            _context.FoodItems.Remove(deleteFoodItem);
             _context.SaveChanges();
         }
 
@@ -219,9 +249,11 @@ namespace RMS_Server_.Controllers
         {
             try
             {
-            var getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-            _context.Inventories.Remove(getDeleted);
-            _context.SaveChanges();
+                var getIngredientsDeleted = _context.Ingredients.Where(p => p.InventoryId == inventory.Id).ToList();
+                _context.Ingredients.RemoveRange(getIngredientsDeleted);
+                var getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+                _context.Inventories.Remove(getDeleted);
+                _context.SaveChanges();
             }
              catch (DbEntityValidationException e)
             {
@@ -274,7 +306,34 @@ namespace RMS_Server_.Controllers
         public void AddSetMenu(SetMenu setMenu)
         {
             _context.SetMenus.Add(setMenu);
-           // _context.SaveChanges();
+            _context.SaveChanges();
         }
+
+
+      /*  public void CalculateInventories()
+        {
+            List<SummaryOfInventory> dataList = new List<SummaryOfInventory>();
+            
+            var totalOrderedItems = _context.OrderedItems.ToList();
+
+            var i = 0;
+            foreach (var totalOrderedItem in totalOrderedItems)
+            {
+                var id = totalOrderedItems[i].FoodItem.Ingredients
+                var inventoryId = totalOrderedItems.
+                dataList.Add(new SummaryOfInventory { ItemUsedId = ""});
+            }
+        }
+*/
+       /* public List<SummaryOfInventory> SummaryOfInventories()
+        {
+            var totalOrderedItems = _context.OrderedItems.ToList();
+
+            foreach (var totalOrderedItem in totalOrderedItems)
+            {
+                
+            }
+
+        }*/
     }
 }

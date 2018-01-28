@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201801271814033_a.Designer.cs">
       <DependentUpon>201801271814033_a.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801281032238_SummaryOfInventoriesAdded.cs" />
+    <Compile Include="Migrations\201801281032238_SummaryOfInventoriesAdded.Designer.cs">
+      <DependentUpon>201801281032238_SummaryOfInventoriesAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -227,6 +231,7 @@
     <Compile Include="Models\OrderedItems.cs" />
     <Compile Include="Models\SetMenu.cs" />
     <Compile Include="Models\SetMenuItem.cs" />
+    <Compile Include="Models\SummaryOfInventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -301,6 +306,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801271814033_a.resx">
       <DependentUpon>201801271814033_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281032238_SummaryOfInventoriesAdded.resx">
+      <DependentUpon>201801281032238_SummaryOfInventoriesAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -28,6 +28,7 @@ namespace RMS_Server_.Models
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<OrderedItems> OrderedItems { get; set; }
         public DbSet<SetMenuItem> SetMenuItems { get; set; }
+        public DbSet<SummaryOfInventory> SummaryOfInventories { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

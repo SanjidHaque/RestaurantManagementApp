@@ -13,7 +13,7 @@ namespace RMS_Server_.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201801201451164_Initial"; }
+            get { return "201801271502552_Initial"; }
         }
         
         string IMigrationMetadata.Source

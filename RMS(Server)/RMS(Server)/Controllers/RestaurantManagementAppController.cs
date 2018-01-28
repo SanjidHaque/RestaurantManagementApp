@@ -232,7 +232,7 @@ namespace RMS_Server_.Controllers
         public void AddSetMenu(SetMenu setMenu)
         {
             _context.SetMenus.Add(setMenu);
-           // _context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

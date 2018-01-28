@@ -39,6 +39,7 @@ import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-foo
 import { AddIngredientsComponent } from './admin/food-item/add-new-food-item/add-ingredients/add-ingredients.component';
 import { BillOfMaterialsComponent } from './admin/bill-of-materials/bill-of-materials.component';
 import { SummaryComponent } from './admin/bill-of-materials/summary/summary.component';
+import { SetMenuComponent } from './admin/set-menu/set-menu.component';
 
 
 
@@ -67,7 +68,8 @@ import { SummaryComponent } from './admin/bill-of-materials/summary/summary.comp
     EditFoodItemComponent,
     AddIngredientsComponent,
     BillOfMaterialsComponent,
-    SummaryComponent
+    SummaryComponent,
+    SetMenuComponent
 
   ],
   imports: [

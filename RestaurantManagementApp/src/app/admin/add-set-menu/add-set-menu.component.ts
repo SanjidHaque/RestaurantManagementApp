@@ -57,6 +57,7 @@ export class AddSetMenuComponent implements OnInit {
   }
 
   onSubmitSetMenu(setMenu: NgForm) {
+    const setMenuId: string = this.uuid.v1();
     for (let i = 0; i < this.setMenuFoodItems.length; i++) {
    if (this.setMenuFoodItems[i].isSelected === true) {
      const foodItem = new FoodItems(
@@ -70,16 +71,16 @@ export class AddSetMenuComponent implements OnInit {
       // this.setMenu.SetMenuItems = new SetMenuItems(
         foodItem,
         this.setMenuFoodItems[i].Id,
-        null,
+        this.uuid.v1(),
         1,
-        null
+        setMenuId
      );
      this.setMenuFoodItem.push(this.setMenuFood);
    }
 
     }
     this.setMenu = new SetMenus(
-      this.uuid.v1(),
+      setMenuId,
       setMenu.value.name,
       setMenu.value.price,
       this.setMenuFoodItem,

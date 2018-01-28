@@ -42,6 +42,16 @@ export class OurOffersService {
             ) { this.uuidCodeOne = this.uuid.v1(); }
 
 
+   updateInventoryList(inventoryId: string, editedInventoryItem: Inventory) {
+
+    for ( let i = 0; i< this.inventory.length; i++) {
+      if ( this.inventory[i].Id === inventoryId ) {
+        this.inventory[i] = editedInventoryItem;
+        this.inventoryChanged.next(this.inventory.slice());
+      }
+    }
+   }
+
   addToInventoryList(inventory: Inventory) {
     this.inventory.push(inventory);
     this.inventoryChanged.next(this.inventory.slice());

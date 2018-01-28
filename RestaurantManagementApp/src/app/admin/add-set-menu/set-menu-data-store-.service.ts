@@ -9,8 +9,8 @@ import {OurOffers} from '../../our-offers/our-offers.model';
 @Injectable()
 export class SetMenuDataStoreService {
 
-  private _url = 'assets/menu-from-api.json';
-  //      private _url = 'http://localhost:1548/api/menu';
+  // private _url = 'assets/menu-from-api.json';
+  private _url = 'http://localhost:1548/api/menu';
   constructor(private _http: Http) {}
 
   getFoodItems() {

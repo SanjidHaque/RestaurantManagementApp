@@ -53,7 +53,7 @@ export class FoodItemComponent implements OnInit {
   }
 
   deleteItem(foodItem: FoodItems, index: number) {
-  //  this._dataStorageService.deleteInventoryItem(foodItem);
+    this._dataStorageService.deleteFoodItem(foodItem);
     this.FoodItem.splice(index, 1);
     this._ourOfferService.FoodItem.splice(index, 1);
   }

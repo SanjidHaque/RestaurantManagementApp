@@ -40,6 +40,7 @@ import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-foo
 import { AddIngredientsComponent } from './admin/food-item/add-new-food-item/add-ingredients/add-ingredients.component';
 import { BillOfMaterialsComponent } from './admin/bill-of-materials/bill-of-materials.component';
 import { SummaryComponent } from './admin/bill-of-materials/summary/summary.component';
+import { SetMenuComponent } from './admin/set-menu/set-menu.component';
 import {IngredientServiceService} from './admin/food-item/add-new-food-item/add-ingredients/ingredient-service.service';
 import { CashFlowComponent } from './admin/bill-of-materials/cash-flow/cash-flow.component';
 import { AllCategoriesComponent } from './our-offers/all-categories/all-categories.component';
@@ -72,6 +73,7 @@ import { AllCategoriesComponent } from './our-offers/all-categories/all-categori
     AddIngredientsComponent,
     BillOfMaterialsComponent,
     SummaryComponent,
+    SetMenuComponent
     CashFlowComponent,
     AllCategoriesComponent
 

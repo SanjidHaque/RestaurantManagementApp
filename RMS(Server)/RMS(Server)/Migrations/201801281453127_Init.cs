@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -130,6 +130,22 @@ namespace RMS_Server_.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.SummaryOfInventories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ItemUsedName = c.String(),
+                        ItemTotal = c.Double(nullable: false),
+                        ItemUsedToday = c.Double(nullable: false),
+                        ItemRemaining = c.Double(nullable: false),
+                        InventoryId = c.String(maxLength: 128),
+                        Unit = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Inventories", t => t.InventoryId)
+                .Index(t => t.InventoryId);
+            
+            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
@@ -181,6 +197,7 @@ namespace RMS_Server_.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.SummaryOfInventories", "InventoryId", "dbo.Inventories");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.OrderedItems", "SetMenuId", "dbo.SetMenus");
             DropForeignKey("dbo.SetMenuItems", "SetMenuId", "dbo.SetMenus");
@@ -192,6 +209,7 @@ namespace RMS_Server_.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.SummaryOfInventories", new[] { "InventoryId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
@@ -205,6 +223,7 @@ namespace RMS_Server_.Migrations
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.SummaryOfInventories");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.SetMenuItems");

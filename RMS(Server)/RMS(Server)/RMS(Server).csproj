@@ -211,17 +211,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801271814033_a.cs" />
-    <Compile Include="Migrations\201801271814033_a.Designer.cs">
-      <DependentUpon>201801271814033_a.cs</DependentUpon>
+    <Compile Include="Migrations\201801281453127_Init.cs" />
+    <Compile Include="Migrations\201801281453127_Init.Designer.cs">
+      <DependentUpon>201801281453127_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801281032238_SummaryOfInventoriesAdded.cs" />
-    <Compile Include="Migrations\201801281032238_SummaryOfInventoriesAdded.Designer.cs">
-      <DependentUpon>201801281032238_SummaryOfInventoriesAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201801281512429_Init2.cs" />
+    <Compile Include="Migrations\201801281512429_Init2.Designer.cs">
+      <DependentUpon>201801281512429_Init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801281517476_Init3.cs" />
+    <Compile Include="Migrations\201801281517476_Init3.Designer.cs">
+      <DependentUpon>201801281517476_Init3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CashFlow.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingredient.cs" />
@@ -304,11 +309,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801271814033_a.resx">
-      <DependentUpon>201801271814033_a.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801281453127_Init.resx">
+      <DependentUpon>201801281453127_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801281032238_SummaryOfInventoriesAdded.resx">
-      <DependentUpon>201801281032238_SummaryOfInventoriesAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801281512429_Init2.resx">
+      <DependentUpon>201801281512429_Init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281517476_Init3.resx">
+      <DependentUpon>201801281517476_Init3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

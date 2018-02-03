@@ -12,5 +12,6 @@ namespace RMS_Server_.Models
         public double Quantity { get; set; }
         public int Unit { get; set; }
         public int Price { get; set; }
+        
     }
 }

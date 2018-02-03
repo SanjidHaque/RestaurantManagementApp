@@ -40,31 +40,12 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public void PostMenu(Order orders)
         {
-           try
-             {
-                 _context.OrderedItems.AddRange(orders.OrderedItems);
-                 _context.Orders.Add(orders);
-                 _context.SaveChanges();
-             }
-             catch (DbEntityValidationException e)
-             {
-                 foreach (var eve in e.EntityValidationErrors)
-                 {
-                     Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                         eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                     foreach (var ve in eve.ValidationErrors)
-                     {
-                         Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                             ve.PropertyName, ve.ErrorMessage);
-                     }
-                 }
-               //  throw;
+            _context.OrderedItems.AddRange(orders.OrderedItems);
+            _context.Orders.Add(orders);
+            _context.SaveChanges();
+        }
                 
-             }
-           catch (DbUpdateException e)
-           {
-
-           }
+             
             
  
             
@@ -97,7 +78,7 @@ namespace RMS_Server_.Controllers
 
          //   _context.SaveChanges();
 
-        }
+        
         [HttpGet]
         [Route("api/GetOrders")]
         public List<Order> Order()
@@ -105,23 +86,110 @@ namespace RMS_Server_.Controllers
             return _context.Orders.Where(p => p.OrderStatus == 0).Include(b => b.OrderedItems).ToList();
         }
 
-        //[HttpPost]
-        //[Route("api/AcceptOrders")]
-        //public void OrderAccepted(Order order)
-        //{
-        //     var acceptedOrder =  _context.Orders.FirstOrDefault(p => p.Id == order.Id);
-        //      acceptedOrder.OrderStatus = 1;
-        //     _context.SaveChanges();
-        //    var i = 0;
-        //    var getFoodItemId = acceptedOrder.OrderedItems[i].FoodItemId;
-        //    var getIng = _context.Ingredients.FirstOrDefault(p => p.FooditemId == getFoodItemId);
-        //    var getId = getIng.InventoryId;
-        //    var getInv = _context.Inventories.FirstOrDefault(p => p.Id == getId);
+        [HttpPost]
+        [Route("api/AcceptOrders")]
+        public void OrderAccepted(Order order)
+        {
+            var acceptedOrder = _context.Orders.FirstOrDefault(p => p.Id == order.Id);
+            acceptedOrder.OrderStatus = 1;
+            _context.SaveChanges();
 
-        //    getInv.Quantity -= 
+            var orderedItems = _context.OrderedItems.Where(p => p.OrderId == order.Id).ToList();
+
+            for (int i = 0; i < orderedItems.Count; i++)
+            {
+
+                var getFoodItemId = acceptedOrder.OrderedItems[i].FoodItemId;
+                var getIngredient = _context.Ingredients.Where(p => p.FooditemId == getFoodItemId).ToList();
+                for (int j = 0; j < getIngredient.Count; j++)
+                {
+                    var getInventoryId = getIngredient[j].InventoryId;
+                    var getInventory = _context.Inventories.FirstOrDefault(p => p.Id == getInventoryId);
+                    getInventory.Quantity -= getIngredient[j].Quantity;
+                    _context.SaveChanges();
 
 
-    //    }
+                    var sumOfInv = _context.SummaryOfInventories.FirstOrDefault(p => p.InventoryId == getInventoryId);
+                    sumOfInv.ItemUsedName = getInventory.Name;
+
+                    sumOfInv.ItemUsedToday += getIngredient[j].Quantity;
+                    sumOfInv.ItemRemaining = sumOfInv.ItemTotal - sumOfInv.ItemUsedToday;
+                    _context.SaveChanges();
+                }
+
+
+            }
+
+            var cashFlow = new CashFlow();
+            cashFlow.OrderId = order.Id;
+            cashFlow.OrderPrice = order.TotalPrice;
+
+
+            var getFoodItemList = _context.OrderedItems.Where(p => p.OrderId == order.Id).ToList();
+            for (int i = 0; i < getFoodItemList.Count; i++)
+            {
+                var getCertainFoodItemId = getFoodItemList[i].FoodItemId;
+                if (getCertainFoodItemId != null)
+                {
+                    var getIngList = _context.Ingredients.Where(p => p.FooditemId == getCertainFoodItemId).ToList();
+                    for (int j = 0; j < getIngList.Count; j++)
+                    {
+                        var getInvId = getIngList[j].InventoryId;
+                        var getInvRow = _context.Inventories.FirstOrDefault(p => p.Id == getInvId);
+                        var invPrice = getInvRow.Price;
+                        var ingSubTotal = getIngList[j].Quantity*invPrice;
+
+                        cashFlow.InventoryCost += System.Math.Round(ingSubTotal, 2);
+                    }
+                }
+            }
+            for (int i = 0; i < getFoodItemList.Count; i++)
+            {
+                var getCertainSetMenuId = getFoodItemList[i].SetMenuId;
+                if (getCertainSetMenuId != null)
+                {
+                    var setMenuList = _context.SetMenuItems.Where(p => p.SetMenuId == getCertainSetMenuId).ToList();
+                    for (int j = 0; j < setMenuList.Count; j++)
+                    {
+                        var getFoodItemId = setMenuList[j].FoodItemId;
+                        var getIngList = _context.Ingredients.Where(p => p.FooditemId
+                                                                         == getFoodItemId).ToList();
+
+                        for (int k = 0; k < getIngList.Count; k++)
+                        {
+                            var getInvId = getIngList[k].InventoryId;
+                            var getInvRow = _context.Inventories.FirstOrDefault(p => p.Id == getInvId);
+                            var invPrice = getInvRow.Price;
+                            var ingSubTotal = getIngList[k].Quantity*invPrice;
+                            cashFlow.InventoryCost += System.Math.Round(ingSubTotal, 2);
+                        }
+                    }
+                }
+            }
+
+            var profit = cashFlow.OrderPrice - cashFlow.InventoryCost;
+            cashFlow.Profit = System.Math.Round(profit, 2);
+            _context.CashFlows.Add(cashFlow);
+            _context.SaveChanges();
+        }
+
+
+        [HttpGet]
+        [Route("api/GetCashFlow")]
+        public List<CashFlow> CashFlow()
+        {
+            return _context.CashFlows.ToList();
+        }
+
+
+
+        [HttpGet]
+        [Route("api/GetSummaryOfInventories")]
+        public List<SummaryOfInventory> SummaryOfInventories()
+        {
+            return _context.SummaryOfInventories.Include(c => c.Inventory).ToList();
+        }
+
 
         [HttpPost]
         [Route("api/RejectOrders")]
@@ -155,28 +223,34 @@ namespace RMS_Server_.Controllers
         public void FoodItemDelete(FoodItem foodItem)
         {
             var getOrderId =
-                _context.OrderedItems.FirstOrDefault(p => p.FoodItemId == foodItem.Id);
-            if (getOrderId != null)
-            {
-                var orderId = getOrderId.OrderId;
+                _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
+            
+                for (int k = 0; k < getOrderId.Count; k++)
+                {
+                    if (getOrderId[k] != null)
+                    {
+                        var orderId = getOrderId[k].OrderId;
 
-                var deleteOrderedItemsRelatedToThisFoodItem =
-                    _context.OrderedItems.Where(p => p.OrderId == orderId).ToList();
+                        var deleteOrderedItemsRelatedToThisFoodItem =
+                            _context.OrderedItems.Where(p => p.OrderId == orderId).ToList();
 
 
-                _context.OrderedItems.RemoveRange(deleteOrderedItemsRelatedToThisFoodItem);
+                        _context.OrderedItems.RemoveRange(deleteOrderedItemsRelatedToThisFoodItem);
 
-                var deleteOrderRelatedToThisFoodItem =
-                    _context.Orders.FirstOrDefault(p => p.Id == orderId);
-                _context.Orders.Remove(deleteOrderRelatedToThisFoodItem);
-                _context.SaveChanges();
-            }
-            var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
-            _context.Ingredients.RemoveRange(deleteIngredients);
-            var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
-            _context.FoodItems.Remove(deleteFoodItem);
-            _context.SaveChanges();
-        }
+                        var deleteOrderRelatedToThisFoodItem =
+                            _context.Orders.FirstOrDefault(p => p.Id == orderId);
+                        _context.Orders.Remove(deleteOrderRelatedToThisFoodItem);
+                        _context.SaveChanges();
+                    }
+                    var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
+                    _context.Ingredients.RemoveRange(deleteIngredients);
+                    var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+                    _context.FoodItems.Remove(deleteFoodItem);
+                    _context.SaveChanges();
+ 
+                }
+            
+              }
 
         [HttpGet]
         [Route("api/GetInventories")]
@@ -192,6 +266,11 @@ namespace RMS_Server_.Controllers
             try
             {
                 _context.Inventories.Add(inventory);
+                var sumOfInv = new SummaryOfInventory();
+                sumOfInv.InventoryId = inventory.Id;
+                sumOfInv.ItemTotal = inventory.Quantity;
+                sumOfInv.Unit = inventory.Unit;
+                _context.SummaryOfInventories.Add(sumOfInv);
                 _context.SaveChanges();
             }
             

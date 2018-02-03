@@ -101,4 +101,21 @@ export class AdminComponent implements OnInit {
   //   if (setFoodItems.isSelected === true) {
   //     this.setMenuItems.foodItems = setFoodItems.foodItems;
   //   }
+
+  goToSetMenu() {
+    this.router.navigate(['admin/set-menu']);
+  }
+
+  goToRegulars() {
+    this.router.navigate(['admin/food-item']);
+  }
+
+  goToReports() {
+    this.router.navigate(['admin/reports']);
+
+  }
+
+  goToInventories() {
+    this.router.navigate(['admin/inventory']);
+  }
 }

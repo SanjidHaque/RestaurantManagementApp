@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Inventory} from '../../shared/inventory.model';
 import {Http} from '@angular/http';
@@ -15,6 +15,7 @@ export class InventoryComponent implements OnInit {
 
   public inventories: Inventory[] ;
   subscription: Subscription;
+
 
   constructor(private route: ActivatedRoute,
               private router: Router,

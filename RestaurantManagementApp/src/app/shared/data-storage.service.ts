@@ -9,16 +9,46 @@ import {Order} from './order.model';
 import {Inventory} from './inventory.model';
 import {Subject} from 'rxjs/Subject';
 import {FoodItems} from './food-item.model';
+import {SummaryOfInventory} from './summary-of-inventory';
+import {CashFlow} from './cash-flow';
 @Injectable()
 export class DataStorageService {
 
   public order: Order;
- // private _url = 'assets/menu-from-api.json';
-  private _url = 'http://localhost:1548/api/menu';
+   private _url = 'assets/menu-from-api.json';
+  // private _url = 'http://localhost:1548/api/menu';
+
+  private _inventoryJson = 'assets/inventories.json';
+  private _inventoryApi = 'http://localhost:1548/api/GetInventories';
+  private _cashFlowJson = 'assets/cash-flow.json';
+  private _sumOfInventoryJson = 'assets/sum-of-inventory.json';
+
+  private _orderJson  = 'assets/order.json';
+
   constructor(private _http: Http,
               private _ourOffersService: OurOffersService) {
   }
 
+
+  getSummaryOfInventories() {
+    return this._http.get(this._sumOfInventoryJson)
+      .map(
+        (response: Response) => {
+          const sumOfInv: SummaryOfInventory[] = response.json();
+          return sumOfInv;
+        }
+      );
+  }
+
+  getCashFlow() {
+    return this._http.get(this._cashFlowJson)
+      .map(
+        (response: Response) => {
+          const cashFlow: CashFlow[] = response.json();
+          return cashFlow;
+        }
+      );
+  }
 
   getMenu() {
     return this._http.get(this._url)
@@ -56,17 +86,17 @@ export class DataStorageService {
 
 
   getOrders() {
-    return this._http.get('http://localhost:1548/api/GetOrders')
+    return this._http.get(this._orderJson)
       .map(
         (response: Response) => {
-          const orders: Order = response.json();
+          const orders: Order[] = response.json();
           return orders;
         }
       );
   }
 
   getInventories() {
-    return this._http.get('http://localhost:1548/api/GetInventories')
+    return this._http.get(this._inventoryJson)
       .map(
         (response: Response) => {
           const inventories: Inventory[] = response.json();

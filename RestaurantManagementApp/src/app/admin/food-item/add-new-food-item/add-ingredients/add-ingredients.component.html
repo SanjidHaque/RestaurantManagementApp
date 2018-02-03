@@ -1,4 +1,4 @@
-<div class="col-md-12" style="color: #feff26; font-family: 'Times New Roman'">
+<div class="col-md-12 name">
   <form (ngSubmit) = "onAddIngredients(newIngredients)" #newIngredients = "ngForm">
     <div id="user-data">
 
@@ -40,10 +40,14 @@
         </select>
       </div>
       <div>
-        <button class="btn btn-success"
+        <div class="action">
+        <button class="all-categories-button"
                 type="submit"
                 [disabled]="!newIngredients.valid">Add to Food Item List</button>
-        <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+        <div class="action">
+        <button class="all-categories-button" type="button" (click)="onCancel()">Cancel</button>
+        </div>
       </div>
     </div>
   </form>

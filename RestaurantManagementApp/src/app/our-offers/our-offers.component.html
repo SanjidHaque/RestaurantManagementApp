@@ -1,74 +1,118 @@
-<!--<div class="row">
-  <div class="col-md-6 our-offers-title">
-    Our offers for this winter!
-    </div>
-</div>
+
+
 <div class="row">
-  <div class="col-md-6">
-    <app-our-offers-list *ngFor="let menu of Menu.SetMenus, let i = index"
-    [menu]="menu"
-    [index] ="i"
-    >
 
-    </app-our-offers-list>
-</div>
-  -->
-
-
-<!--<div class="col-md-6">
-  <router-outlet>
-  </router-outlet>
-</div>-->
-<!--</div>-->
-
-<div class="row start">
-  <div class="col-md-5 set-menu">
-    <div class="row">
-      <div class="col-md-12 set-menu-title">
-        Set Menus
-      </div>
-    </div>
-   <div class="row">
-     <div class="col-md-12">
-       <app-our-offers-list *ngFor="let menu of Menu.SetMenus, let i = index"
-                            [menu]="menu"
-                            [index] ="i"
-       >
-
-       </app-our-offers-list>
-
-     </div>
-
-   </div>
+  <div class="col-md-9">
+    <app-food-items></app-food-items>
   </div>
 
-  <div class="col-md-offset-2 col-md-5 food-item">
+  <div class="col-md-3">
     <div class="row">
-      <div class="col-md-12 set-menu-title">
-        Regular
-      </div>
+
+        <div class="col-md-12 cart-empty" *ngIf="grandTotal==0; else itemIsSold">
+          Your food cart is empty!
+        </div>
+
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <app-food-items *ngFor="let menu of Menu.FoodItems, let i = index"
-                             [menu]="menu"
-                             [index] ="i"
-        >
 
-        </app-food-items>
+      <ng-template #itemIsSold>
+        <div class="whole">
+        <div class="row">
+          <div class="col-md-12 your-purchased-Foods">
+            Your purchased foods:
+          </div>
+        </div>
+       <div class="row">
+          <div class="col-md-12" *ngIf="checkSetMenuCount()!= 0">
+            <div class="col-md-12 list-title">
+              Set Menus:
+            </div>
+            <div class="col-md-12 list-detail" *ngFor="let order of orderedItems">
 
-      </div>
+              <div class="col-md-3">
+                {{ order.SetMenuName }}
+              </div>
+              <div class="col-md-1">
+                x
+              </div>
+              <div class="col-md-2">
+                {{ order.Price }}
+              </div>
+              <div class="col-md-2">
+                {{ order.SetMenuQuantity }}
+              </div>
+              <div class="col-md-3">
+               = {{ order.SetMenuSubTotal }}BDT
+              </div>
+            </div>
+          </div>
+
+         <div *ngIf="checkFoodItemCount()!=0">
+
+            <div class="row">
+               <div class="col-md-12 list-title">
+                  Regulars
+               </div>
+            </div>
+
+            <div class="row list-detail" *ngFor="let order of orderedItems; let i = index">
+
+              <div class="col-md-4 name">
+               {{ i+1 }}. {{ order.FoodItemName }}
+              </div>
+              <div class="col-md-1 price">
+                {{ order.Price }}
+              </div>
+              <div class="col-md-1 mul">
+                 x
+              </div>
+              <div class="col-md-1 quantity">
+                {{ order.FoodItemQuantity }}
+              </div>
+              <div class="col-md-1">
+                =
+              </div>
+              <div class="col-md-3 sub-total">
+                 {{ order.FoodItemSubTotal }} BDT
+              </div>
+
+            </div>
+          </div>
+
+          </div>
+         <div class="row">
+           <div class="col-md-12 grand-total">
+             Total Price: {{ grandTotal }} BDT
+           </div>
+         </div>
+
+         <div class="row">
+           <div class="col-md-12 confirm-purchase-div" *ngIf="onCheck==0">
+             <button class="confirm-purchase" (click)="AddToOrderedList()">Confirm Purchase</button>
+           </div>
+         </div>
+
+        <div class="row confirm-purchase-div" *ngIf="onCheck==1">
+          <div class="col-md-8 please-wait">
+            Please wait while chef is checking your order
+          </div>
+          <div class="col-md-4 sk-circle">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+          </div>
+        </div>
+        </div>
+      </ng-template>
 
     </div>
   </div>
-</div>
-
-<!--<div class="row">
-  <div class="col-md-offset-4 col-md-4">
-    <button routerLink="/food-cart" class="smpbutton" [disabled]="!allowToCheckOut()">Proceed To Checkout</button>
-  </div>
-</div>-->
-
-<!--
-   <popup class="popup">This feature is not ready yet!</popup><!--(click)="saveOrders()"-->
-

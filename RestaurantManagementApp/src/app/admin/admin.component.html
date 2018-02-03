@@ -1,3 +1,4 @@
+<!--
 <div class="row" style="color: #010100">
   <div class="col-md-12">
     <nav class="navbar navbar-default">
@@ -19,4 +20,23 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+-->
 
+<div class="row">
+  <div class="col-md-2 buttons">
+    <div class="col-md-12 regulars">
+      <button class="all-categories-button" (click)="goToRegulars()">Food Items</button>
+    </div>
+    <div class="col-md-12 regulars">
+      <button class="all-categories-button" (click)="goToSetMenu()">Set Menus</button>
+    </div>
+    <div class="col-md-12 regulars">
+      <button class="all-categories-button" (click)="goToInventories()">Inventories</button>
+    </div>
+    <div class="col-md-12 regulars">
+      <button class="all-categories-button" (click)="goToReports()">Reports</button>
+    </div>
+  </div>
+  <div class="col-md-10 go-left">
+    <router-outlet></router-outlet>
+  </div>

@@ -1,4 +1,4 @@
-<div class="col-md-12" style="color: #feff26; font-family: 'Times New Roman'">
+<div class="col-md-12 name">
   <form (ngSubmit) = "onAddNewFoodItem(newFoodItem)" #newFoodItem = "ngForm">
     <div id="user-data">
       <div class="form-group">
@@ -26,25 +26,35 @@
         >
       </div>
         <div>
-          <div *ngIf = "checkIfIngredientsExist() === 0; else addMoreIngredients">
-          <button class="btn btn-success"
+          <div class="action" *ngIf = "checkIfIngredientsExist() === 0; else addMoreIngredients">
+          <button class="all-categories-button"
                   type="submit"
                   [disabled]="!newFoodItem.valid">Add Ingredients</button>
           </div>
 
           <ng-template #addMoreIngredients>
-            <button class="btn btn-success"
+            <div class="action">
+            <button class="all-categories-button"
                     type="submit"
                     [disabled]="!newFoodItem.valid">Add Another Ingredient</button>
+            </div>
+            <div class="action">
             <button [disabled]="!newFoodItem.valid"
-                    class="btn btn-success"
+                    class="all-categories-button"
                     type="submit"
                     (click)="onSaveFoodItem()">Save</button>
+            </div>
           </ng-template>
-          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
-
+          <div class="action">
+          <button class="all-categories-button" type="button" (click)="onCancel()">Cancel</button>
+          </div>
         </div>
       </div>
   </form>
 </div>
-<router-outlet></router-outlet>
+<div class="row">
+  <div class="col-md-offset-2 col-md-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

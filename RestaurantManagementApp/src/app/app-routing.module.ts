@@ -20,14 +20,21 @@ import {EditFoodItemComponent} from './admin/food-item/edit-food-item/edit-food-
 import {AddIngredientsComponent} from './admin/food-item/add-new-food-item/add-ingredients/add-ingredients.component';
 import {BillOfMaterialsComponent} from './admin/bill-of-materials/bill-of-materials.component';
 import {SummaryComponent} from './admin/bill-of-materials/summary/summary.component';
+import {CashFlowComponent} from './admin/bill-of-materials/cash-flow/cash-flow.component';
+import {OurOffersListComponent} from './our-offers/our-offers-list/our-offers-list.component';
+import {AllCategoriesComponent} from './our-offers/all-categories/all-categories.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/home-page', pathMatch: 'full' },
-  { path: 'home-page', component: HomePageComponent },
-  { path: 'our-offers', component: OurOffersComponent },
-  { path: 'food-cart', component: FoodCartComponent, children: [
-    { path: 'checking-orders', component: CheckingOrderComponent }
-    ] },
+  { path: '', redirectTo: '/our-offers/regulars', pathMatch: 'full' },
+  /*{ path: 'home-page', component: HomePageComponent },*/
+  { path: 'our-offers', component: OurOffersComponent,
+  children: [
+    { path: 'all-categories', component: AllCategoriesComponent },
+    { path: 'set-menu', component: OurOffersListComponent },
+    { path: 'regulars', component: FoodItemsComponent }
+  ]
+  },
+
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'contact-us', component: ContactUsComponent},
@@ -44,13 +51,13 @@ const appRoutes: Routes = [
       { path: 'set-menu', component: AddSetMenuComponent},
       { path: 'reports', component: BillOfMaterialsComponent,
       children: [
-        { path: 'inventories', component: SummaryComponent }
+        { path: 'inventories', component: SummaryComponent },
+        { path: 'cash-flow', component: CashFlowComponent }
       ]},
-      { path: 'inventory', component: InventoryComponent ,
+              { path: 'inventory', component: InventoryComponent ,
         children: [
         {path: 'add-new-inventory', component: AddNewInventoryComponent },
         {path: 'edit-inventory-item/:id', component: EditInventoryItemComponent }
-
       ]}
     ] },
 ];

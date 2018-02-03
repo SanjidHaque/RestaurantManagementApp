@@ -1,58 +1,42 @@
-<!--<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div routerLinkActive="active" class="navbar-header">
-      <a routerLink="/home-page"  class="navbar-brand" >Le Restrou</a>
-    </div>
 
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a  [routerLink]="['/our-offers']" >Our Offers</a> </li>
-        <li routerLinkActive="active"><a  routerLink="/food-cart" >Food Cart</a> </li>
-      </ul>
-    </div>
-  </div>
-</nav>-->
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 header">
-      <div  class="col-md-3 blocks-diner" routerLink="/home-page" style="cursor: pointer;">
-        Block's Diner
+      <div  class="col-md-3 blocks-inn" routerLink="/our-offers/regulars" style="cursor: pointer;">
+        Block's Inn
       </div>
       <div class="col-md-7">
         <div class="col-md-1 home">
-          <a routerLink="/home-page" class="our-offers-link">Home</a>
-        </div>
-        <div class="col-md-2 our-offers">
-          <a routerLink="/our-offers" class="our-offers-link">Our Offers</a>
+          <a routerLink="/our-offers/regulars" routerLinkActive="active-link" class="our-offers-link">Home</a>
         </div>
         <div class="col-md-1 our-offers">
-          <a routerLink="/chef" class="our-offers-link">Chef</a>
+          <a routerLink="/chef" routerLinkActive="active-link" class="our-offers-link">Chef</a>
+        </div>
+        <div class="col-md-1 admin"  >
+           <a routerLink="/admin/food-item" routerLinkActive="active-link" class="register-link" >Admin</a>
         </div>
         <div class="col-md-2 contact-us">
-          <a routerLink="/contact-us" class="our-offers-link">Contact Us</a>
+          <a routerLink="/contact-us" routerLinkActive="active-link" class="our-offers-link">Contact Us</a>
         </div>
         <div class="col-md-1 login">
-          <a routerLink="/login" class="login-link">Login</a>
+          <a routerLink="/login" routerLinkActive="active-link" class="login-link">Login</a>
         </div>
-        <div class="col-md-2 register">
-          <a routerLink="/register" class="register-link" >Register</a>
-        </div>
-        <div class="col-md-2 admin"  >
-          <a routerLink="/admin" class="register-link" >Admin</a>
+        <div class="col-md-1 register">
+          <a routerLink="/register" routerLinkActive="active-link" class="register-link" >Register</a>
         </div>
       </div>
       <div class="col-md-2">
-        <a routerLink="/food-cart" class="register-link">
+
         <div class=" col-md-3 cart-icon">
-          <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+          <i class="fa fa-shopping-cart fa-2x cart" aria-hidden="true"></i>
         </div>
-        <div  class="col-md-1 cart-amount">
+        <div  class="col-md-2 cart-amount">
           {{ quantity }}
         </div>
           <div class="col-md-7 cart-price">
             {{ totalPrice }} BDT
           </div>
-        </a>
+
       </div>
 
     </div>
@@ -60,18 +44,3 @@
 </div>
 
 
-      <!--<div class=" col-md-5">
-        <div class="col-md-6 cart-icon">
-          <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-        </div>
-        <div class="col-md-3 login">
-          <a routerLink="/login" class="login-link">Login</a>
-        </div>
-        <div class="col-md-3 register"  >
-          <a routerLink="/register" class="register-link" >Register</a>
-        </div>
-      </div>-->
-   <!-- </div>
-  </div>
-</div>
--->

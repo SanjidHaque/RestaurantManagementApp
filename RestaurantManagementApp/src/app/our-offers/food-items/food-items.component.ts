@@ -6,26 +6,32 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Popup} from 'ng2-opd-popup';
 import {OrderedItems} from '../../shared/ordered-items.model';
 import { Uuid } from 'ng2-uuid';
+import {Subscription} from 'rxjs/Subscription';
+import {DataStorageService} from '../../shared/data-storage.service';
+import {FoodItems} from '../../shared/food-item.model';
 
 @Component({
   selector: 'app-food-items',
   templateUrl: './food-items.component.html',
   styleUrls: ['./food-items.component.scss']
 })
-export class FoodItemsComponent implements OnInit, DoCheck {
-  @Input() menu: OurOffers;
-  @Input() index: number;
+export class FoodItemsComponent implements OnInit {
+  Menu: OurOffers;
+  index: number;
+  FoodItem: FoodItems[] = [];
   public orderedItems: OrderedItems[] = [];
+  selectedQuantity = [];
 
   order: Order[];
   condition = false;
   @ViewChild('amountInput') amountInputRef: ElementRef;
-
   uuidCodeOne = '';
   uuidCodeTwo = '';
   uuidCodeThree = '';
-  quantity = 0;
+  quantity : number;
+  subscription: Subscription;
   constructor(private _ourOfferService: OurOffersService,
+              private _dataStorageService: DataStorageService,
               private router: Router,
               private route: ActivatedRoute,
               private uuid: Uuid,
@@ -37,25 +43,39 @@ export class FoodItemsComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    this.orderedItems = this._ourOfferService.orderedItems;
+
+    this._dataStorageService.getMenu()
+      .subscribe(
+        (Menu: OurOffers ) => {
+          this._ourOfferService.FoodItem = Menu.FoodItems;
+        });
+    this.FoodItem = this._ourOfferService.FoodItem;
+
+    this._ourOfferService.foodItemChanged
+      .subscribe(
+        (FoodItem: FoodItems[]) => {
+          this.FoodItem = FoodItem;
+        }
+      );
+    // this.orderedItems = this._ourOfferService.orderedItems;
   }
 
-  ngDoCheck() {
-    this.orderedItems = this._ourOfferService.orderedItems;
-  }
+ /* ngDoCheck() {
+    // this.orderedItems = this._ourOfferService.orderedItems;
+  }*/
 
-  UpdateCart(id: number, price: number, name: string, isAdd: boolean) {
+  UpdateCart(id: number, price: number, name: string, isAdd: boolean, index: any) {
     let orderItemId = this.uuidCodeOne;
     let orderId = this._ourOfferService.uuidCodeOne;
-    this.quantity = this.amountInputRef.nativeElement.value;
+    this.quantity = this.selectedQuantity[index];
     let foodItemId = id;
     let foodItemName = name;
     let Price = price;
     if ( isAdd === true ) {
-      this.AddToCart( orderItemId, orderId, this.quantity, foodItemId,
+      this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
         foodItemName, Price );
     } else {
-      this.RemoveFromCart(orderItemId, orderId, this.quantity,
+      this.RemoveFromCart(orderItemId, orderId,  this.quantity,
         foodItemId, foodItemName, Price );
     }
 
@@ -77,8 +97,10 @@ export class FoodItemsComponent implements OnInit, DoCheck {
 
       this._ourOfferService.addToOrderedItemsList(purchasedFood);
     }
-    this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString())
-      + Number.parseInt(this.amountInputRef.nativeElement.value.toString());
+    this._ourOfferService.totalQuantity
+      = Number.parseInt(this._ourOfferService.totalQuantity.toString())
+      + Number.parseInt(quantity.toString());
+    /*debugger*/
 
   }
 
@@ -90,6 +112,7 @@ export class FoodItemsComponent implements OnInit, DoCheck {
     this.quantity= this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
     this._ourOfferService.totalQuantity =
       Number.parseInt(this._ourOfferService.totalQuantity.toString()) -
-      Number.parseInt(this.amountInputRef.nativeElement.value.toString());
+      Number.parseInt(quantity.toString());
+    /*debugger*/
   }
 }

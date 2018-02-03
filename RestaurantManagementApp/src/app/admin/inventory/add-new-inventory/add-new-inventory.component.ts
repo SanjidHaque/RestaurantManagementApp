@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import { Uuid } from 'ng2-uuid';
@@ -25,7 +25,7 @@ export class AddNewInventoryComponent implements OnInit {
 
   ngOnInit() {
   }
-
+ // @ViewChild('amountInput') amountInputRef: ElementRef;
   onAddNewItem(form: NgForm) {
       const id = this.uuid.v1();
       const name = form.value.name;
@@ -42,6 +42,7 @@ export class AddNewInventoryComponent implements OnInit {
       if ( form.value.unit === 'Bottle') {
       this.unit = 4;
       }
+     // const w = this.amountInputRef.nativeElement.value;
       const price = form.value.price;
       const newItem = new Inventory(id, name, quantity, this.unit, price);
       this._ourOfferService.addToInventoryList(newItem);

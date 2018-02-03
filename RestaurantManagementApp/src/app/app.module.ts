@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { UuidModule } from 'ng2-uuid';
 import { CarouselModule } from 'angular4-carousel';
 import { CollapsibleModule } from 'angular4-collapsible';
+import { LoadingModule } from 'ngx-loading';
 
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
@@ -40,6 +41,8 @@ import { AddIngredientsComponent } from './admin/food-item/add-new-food-item/add
 import { BillOfMaterialsComponent } from './admin/bill-of-materials/bill-of-materials.component';
 import { SummaryComponent } from './admin/bill-of-materials/summary/summary.component';
 import {IngredientServiceService} from './admin/food-item/add-new-food-item/add-ingredients/ingredient-service.service';
+import { CashFlowComponent } from './admin/bill-of-materials/cash-flow/cash-flow.component';
+import { AllCategoriesComponent } from './our-offers/all-categories/all-categories.component';
 
 
 
@@ -68,7 +71,9 @@ import {IngredientServiceService} from './admin/food-item/add-new-food-item/add-
     EditFoodItemComponent,
     AddIngredientsComponent,
     BillOfMaterialsComponent,
-    SummaryComponent
+    SummaryComponent,
+    CashFlowComponent,
+    AllCategoriesComponent
 
   ],
   imports: [
@@ -81,6 +86,7 @@ import {IngredientServiceService} from './admin/food-item/add-new-food-item/add-
     CollapsibleModule,
     CommonModule,
     FormsModule,
+    LoadingModule,
     PopupModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: ''

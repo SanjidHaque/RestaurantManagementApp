@@ -1,122 +1,52 @@
-<!--
-<div class="row">
-  <div class="col-md-12 panel panel-primary">
-    <div class="row">
-      <div class="col-md-12 panel-heading ">
-        <div class="col-md-12 SetMenuName panel-title " >
-{{ menu.Name }}
-          <hr>
+
+<div class="row" >
+    <div class="col-md-4" *ngFor="let foodItems of FoodItem; let i = index">
+      <div class="row">
+        <div class="col-md-8 name">
+          {{ foodItems.Name }}
+        </div>
+        <div class="col-md-4 price">
+          {{ foodItems.Price }} BDT
         </div>
       </div>
-
-      <div *ngFor="let setMenuItems of menu.SetMenuItems" class="col-md-12 panel-body SetMenuDetails">
-
+      <div class="row">
         <div class="col-md-12">
-          {{ setMenuItems.FoodItem.Name }}
-        </div>
+          <img [src]="foodItems.FoodItemImage"
+               class="img-responsive image"
+               style= "height: 260px"
+          >
 
 
         </div>
       </div>
-      <div class="col-md-12 panel-footer">
-        <div class="col-md-8 SetMenuPrice">
-          Price: {{ menu.Price }} BDT
-
+      <div class="row">
+        <div class="col-md-4 test">
+          <button
+            class="all-categories-button"
+            (click)="UpdateCart(foodItems.Id, foodItems.Price, foodItems.Name, true, i)">
+            Add
+          </button>
         </div>
 
-        <div class="col-md-4">
-          <button type="button" class="btn btn-primary" (click)="OnAddToPurchasedFood(menu.Id)" style="cursor: pointer;">
-            Add to food cart</button>
+        <div class="col-md-4 test">
+          <input type="number"
+                 min="1"
+                 id="amount"
+                 class="form-control"
+                 [(ngModel)]="selectedQuantity[i]"
+                 #amountInput
+          >
+        </div>
+
+        <div class="col-md-4 test">
+          <button
+            class="all-categories-button"
+            (click)="UpdateCart(foodItems.Id, foodItems.Price,foodItems.Name, false, i)">
+            Remove
+          </button>
         </div>
       </div>
+
     </div>
-  </div>
 
-&lt;!&ndash;
 </div>
-&ndash;&gt;
-
-&lt;!&ndash;
-
-  <div *ngFor="let foodItem of setMenu.FoodItems, let i = index">
-    {{foodItem.Name}}
-  </div>&ndash;&gt;
--->
-
-
-<!--<div class="row">
-  <div class="col-md-12 set-menu-details">
-    <div class="row">
-      <div class="col-md-12 set-menu-name">
-        {{ menu.Name }}
-      </div>
-    </div>
-    <div class="row">
-      <div *ngFor="let setMenuItems of menu.SetMenuItems" class="col-md-7 set-menu-items">
-        {{ setMenuItems.FoodItem.Name }}
-      </div>
-
-    </div>
-    <div class="row">
-      <div class="col-md-12 set-menu-price">
-        Price: {{ menu.Price }} BDT
-      </div>
-    </div>
-  </div>
-</div>-->
-
-
-<div class="row">
-  <div class="col-md-12 set-menu-details">
-    <collapsible-list [type]="'expandable'">
-      <collapsible-list-item>
-        <collapsible-header class="waves-effect">
-          <div class="row">
-            <div class="col-md-12">
-              {{ menu.Name }}
-
-
-            </div>
-          </div>
-        </collapsible-header>
-        <collapsible-body [expanded]="true">
-          <div class="row">
-
-
-            <div class="col-md-5 set-menu-image-div">
-              <img [src]="menu.FoodItemImage" class="set-menu-image">
-            </div>
-            <div class="col-md-4 set-menu-price">
-              Price: {{ menu.Price }} BDT
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col-md-3 set-menu-price-button">
-              <button (click)="UpdateCart(menu.Id, menu.Price, menu.Name, true)" class="smpbutton"> Add To Cart</button>
-            </div>
-              <div class="col-md-3 form-group">
-                <input type="number"
-                       min="1"
-                       id="amount"
-                       class="form-control"
-                       required
-                       #amountInput
-                >
-              </div>
-            <div class="col-md-3" style="color: #feff26;">
-              {{ quantity}}
-            </div>
-            <div class="col-md-3 set-menu-price-button">
-              <button
-                       (click)="UpdateCart(menu.Id, menu.Price, menu.Name,false)"
-                       class="smpbutton"
-                        >Remove From Cart</button>
-            </div>
-          </div>
-        </collapsible-body>
-      </collapsible-list-item>
-    </collapsible-list>
-  </div>
-</div>
-

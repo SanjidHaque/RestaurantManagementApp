@@ -44,7 +44,7 @@ export class OurOffersService {
 
    updateInventoryList(inventoryId: string, editedInventoryItem: Inventory) {
 
-    for ( let i = 0; i< this.inventory.length; i++) {
+    for ( let i = 0; i < this.inventory.length; i++) {
       if ( this.inventory[i].Id === inventoryId ) {
         this.inventory[i] = editedInventoryItem;
         this.inventoryChanged.next(this.inventory.slice());
@@ -53,7 +53,7 @@ export class OurOffersService {
    }
 
   addToInventoryList(inventory: Inventory) {
-    this.inventory.push(inventory);
+    this.inventory.unshift(inventory);
     this.inventoryChanged.next(this.inventory.slice());
   }
 
@@ -62,7 +62,8 @@ export class OurOffersService {
   }
 
   addToFoodItemList(foodItem: FoodItems) {
-    this.FoodItem.push(foodItem);
+  //  this.FoodItem.push(foodItem); for any problem change unshift to push again
+    this.FoodItem.unshift(foodItem);
     this.foodItemChanged.next(this.FoodItem.slice());
   }
 

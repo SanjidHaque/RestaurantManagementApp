@@ -25,7 +25,7 @@ export class FoodCartComponent implements OnInit {
   public orders: Order;
   checkOrder = false;
   foodItemCount = 0;
-  setMenuCount = 0;
+  setMenuCount =  0;
 
   uuidCodeOne = '';
   constructor(private _ourOfferService: OurOffersService,
@@ -74,7 +74,6 @@ export class FoodCartComponent implements OnInit {
         }
       );
     this.router.navigate(['checking-orders'], {relativeTo: this.route});
-
   }
 
 }

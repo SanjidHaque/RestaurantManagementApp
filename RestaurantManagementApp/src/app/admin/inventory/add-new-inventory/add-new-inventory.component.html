@@ -1,4 +1,4 @@
-<div class="col-md-12" style="color: #feff26; font-family: 'Arial'">
+<div class="col-md-12 name">
   <form (ngSubmit) = "onAddNewItem(newItem)" #newItem = "ngForm">
     <div id="user-data">
       <div class="form-group">
@@ -53,11 +53,13 @@
           </select>
         </div>
 
-        <div>
-          <button class="btn btn-success"
+        <div class="action">
+          <button class="all-categories-button"
                   type="submit"
           [disabled]="!newItem.valid">Save</button>
-          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+        <div class="action">
+          <button class="all-categories-button" type="button" (click)="onCancel()">Cancel</button>
         </div>
       </div>
     </div>

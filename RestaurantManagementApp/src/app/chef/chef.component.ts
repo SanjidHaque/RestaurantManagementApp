@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ChefComponent implements OnInit, DoCheck {
   subscription: Subscription;
-  Orders: Order;
+  Orders: Order[] = [];
   MyOrders: Order[];
 
   constructor(private _dataStorageService: DataStorageService,
@@ -27,18 +27,19 @@ export class ChefComponent implements OnInit, DoCheck {
 
 
   ngOnInit() {
-    this.subscription = this._ourOfferService.ordersChanged
-      .subscribe(
-        (Orders: Order) => {
-          this.Orders = Orders;
-        }
-      );
+
     this._dataStorageService.getOrders()
       .subscribe(
-        (Orders: Order) => {
+        (Orders: Order[]) => {
           this.Orders = Orders;
         }
       );
+   /* this.subscription = this._ourOfferService.ordersChanged
+      .subscribe(
+        (Orders: Order) => {
+          this.Orders = Orders;
+        }
+      );*/
    /* this.MyOrders.filter((myOrder)=>{
       return myOrder.OnChef === false;
     })*/
@@ -49,7 +50,7 @@ export class ChefComponent implements OnInit, DoCheck {
   orderAccepted(order: Order) {
      order.OrderStatus = 1;
      this._ourOfferService.getAccepted(order) ;
-     this._dataStorageService.acceptOrders();
+    this._dataStorageService.acceptOrders();
   }
 
   orderRejected(order: Order) {

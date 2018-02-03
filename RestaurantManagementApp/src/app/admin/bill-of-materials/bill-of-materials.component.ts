@@ -21,4 +21,7 @@ export class BillOfMaterialsComponent implements OnInit {
   goToSummary() {
     this.router.navigate(['admin/reports/inventories'])
   }
+  goToCashFlow() {
+    this.router.navigate(['admin/reports/cash-flow'])
+  }
 }

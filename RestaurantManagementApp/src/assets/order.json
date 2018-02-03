@@ -1,0 +1,73 @@
+[
+  {
+    "Id": "123",
+    "TotalPrice": "240",
+    "OrderStatus" : "0",
+    "OrderedItems": [
+      {
+        "Id": "1",
+        "Name": "Fried Rice"
+      }
+    ]
+  },
+
+  {
+    "Id": "216",
+    "TotalPrice": "270",
+    "OrderStatus" : "0",
+    "OrderedItems": [
+      {
+        "Id": "1",
+        "Name": "Chicken Fry"
+      }
+    ]
+  },
+
+  {
+    "Id": "121",
+    "TotalPrice": "180",
+    "OrderStatus" : "0",
+    "OrderedItems": [
+      {
+        "Id": "1",
+        "Name": "Sausages"
+      }
+    ]
+  },
+
+  {
+    "Id": "233",
+    "TotalPrice": "140",
+    "OrderStatus" : "0",
+    "OrderedItems": [
+      {
+        "Id": "1",
+        "Name": "Chicken Wings"
+      }
+    ]
+  },
+
+  {
+    "Id": "213",
+    "TotalPrice": "140",
+    "OrderStatus" : "0",
+    "OrderedItems": [
+      {
+        "Id": "1",
+        "Name": "Beef Burger"
+      }
+    ]
+  },
+
+  {
+    "Id": "243",
+    "TotalPrice": "240",
+    "OrderStatus" : "0",
+    "OrderedItems": [
+      {
+        "Id": "1",
+        "Name": "Indian Fried Rice"
+      }
+    ]
+  }
+]

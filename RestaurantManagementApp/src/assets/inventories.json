@@ -1,0 +1,65 @@
+[
+  {
+    "Id": "1",
+    "Name": "Rice",
+    "Quantity": "100",
+    "Unit": "1",
+    "Price": "55"
+  },
+
+  {
+    "Id": "2",
+    "Name": "Chicken",
+    "Quantity": "50",
+    "Unit": "1",
+    "Price": "110"
+  },
+
+  {
+    "Id": "3",
+    "Name": "Beef",
+    "Quantity": "10",
+    "Unit": "1",
+    "Price": "320"
+  },
+
+  {
+    "Id": "4",
+    "Name": "Garlic",
+    "Quantity": "40",
+    "Unit": "1",
+    "Price": "150"
+  },
+
+  {
+    "Id": "5",
+    "Name": "Onion",
+    "Quantity": "40",
+    "Unit": "1",
+    "Price": "120"
+  },
+
+  {
+    "Id": "6",
+    "Name": "Egg",
+    "Quantity": "200",
+    "Unit": "3",
+    "Price": "8"
+  },
+
+  {
+    "Id": "7",
+    "Name": "CocaCola 250 ml",
+    "Quantity": "100",
+    "Unit": "4",
+    "Price": "35"
+  },
+
+  {
+    "Id": "8",
+    "Name": "Mineral water 250 ml",
+    "Quantity": "100",
+    "Unit": "4",
+    "Price": "20"
+  }
+]

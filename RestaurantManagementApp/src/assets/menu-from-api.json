@@ -1,73 +1,271 @@
 {
   "FoodItems": [
     {
-      "Name": "Normal Fried rice",
+      "Name": "Normal Fried Rice",
       "Id": "1",
       "Price": "180",
-      "FoodItemImage": "assets/nfr.jpg"
+      "FoodItemImage": "assets/nfr.jpg",
+      "Ingredients": [
+        {
+          "Name": "Rice",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "Indian Fried Rice",
       "Id": "2",
       "Price": "250",
-      "FoodItemImage": "assets/ifr.jpg"
+      "FoodItemImage": "assets/ifr.jpg",
+      "Ingredients": [
+        {
+          "Name": "Rice",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "Vegetable Curry",
       "Id": "3",
       "Price": "220",
-      "FoodItemImage": "assets/vc.jpg"
+      "FoodItemImage": "assets/vc.jpg",
+      "Ingredients": [
+        {
+          "Name": "Parsley",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "Chicken Fry",
       "Id": "4",
       "Price": "140",
-      "FoodItemImage": "assets/cr.jpg"
+      "FoodItemImage": "assets/cr.jpg",
+      "Ingredients": [
+        {
+          "Name": "Chicken",
+          "Quantity": ".1",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "Chicken Wings",
       "Id": "5",
       "Price": "120",
-      "FoodItemImage": "assets/cw.jpeg"
+      "FoodItemImage": "assets/cw.jpeg",
+      "Ingredients": [
+        {
+          "Name": "Chicken",
+          "Quantity": ".08",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "Sausages",
       "Id": "6",
       "Price": "80",
-      "FoodItemImage": "assets/sausage.jpg"
+      "FoodItemImage": "assets/sausage.jpg",
+      "Ingredients": [
+        {
+          "Name": "Beef",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "Beef Burger",
       "Id": "7",
       "Price": "110",
-      "FoodItemImage": "assets/set-menu-d.jpg"
+      "FoodItemImage": "assets/set-menu-d.jpg",
+      "Ingredients": [
+        {
+          "Name": "Beef",
+          "Quantity": ".12",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "Special Block's Burger",
       "Id": "8",
       "Price": "180",
-      "FoodItemImage": "assets/set-menu-e.jpg"
+      "FoodItemImage": "assets/set-menu-e.jpg",
+      "Ingredients": [
+        {
+          "Name": "Beef",
+          "Quantity": ".19",
+          "Unit": "1"
+        },
+
+        {
+          "Name": "Onion",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Garlic",
+          "Quantity": ".01",
+          "Unit": "1"
+        },
+        {
+          "Name": "Soybean Oil",
+          "Quantity": ".01",
+          "Unit": "2"
+        }
+      ]
     },
 
     {
       "Name": "CocaCola",
       "Id": "9",
       "Price": "35",
-      "FoodItemImage": "assets/newcoke.jpg"
+      "FoodItemImage": "assets/newcoke.jpg",
+      "Ingredients": [
+        {
+          "Name": "CocaCola 250 ml",
+          "Quantity": "1",
+          "Unit": "4"
+        }
+      ]
     },
 
     {
       "Name": "Mineral Water",
       "Id": "10",
       "Price": "20",
-      "FoodItemImage": "assets/mw.jpeg"
+      "FoodItemImage": "assets/mw.jpeg",
+      "Ingredients": [
+        {
+          "Name": "Mineral water 250 ml",
+          "Quantity": "1",
+          "Unit": "4"
+        }
+      ]
     }
   ],
 

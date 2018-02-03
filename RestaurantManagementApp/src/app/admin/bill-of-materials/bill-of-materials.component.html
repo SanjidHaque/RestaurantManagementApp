@@ -1,8 +1,19 @@
 <div class="row">
-  <div class="col-md-12">
-<button class="btn btn-primary" (click)="goToSummary()">Inventories</button>
+  <div class="col-md-offset-3 col-md-3">
+    <button
+      class="all-categories-button"
+      (click)="goToSummary()">Summary of Inventories
+    </button>
+  </div>
+
+  <div class="col-md-3">
+    <button routerLinkActive="all-categories-button"
+            class="all-categories-button"
+            (click)="goToCashFlow()">Cash Flow
+    </button>
   </div>
 </div>
+
 <div class="row">
   <div class="col-md-12">
     <router-outlet></router-outlet>

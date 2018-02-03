@@ -9,14 +9,14 @@ export class ChefServiceService {
 
   constructor(private __dataStorageService: DataStorageService) { }
 
-  ordersChanged(order: Order) {
+ /* ordersChanged(order: Order) {
        this.__dataStorageService.getOrders()
         .subscribe(
           (Orders: Order) => {
             this.Order = Orders;
           }
         );
-  }
+  }*/
 
 }
 

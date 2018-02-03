@@ -57,17 +57,6 @@ export class EditInventoryItemComponent implements OnInit {
       this.unit = 4;
     }
     const price = form.value.price;
-
-    /*for (let i = 0; i< this._ourOfferService.inventory.length; i++) {
-      if ( this._ourOfferService.inventory[i].Id === this.id ) {
-
-        this._ourOfferService.inventory[i].Name = name;
-        this._ourOfferService.inventory[i].Price = price;
-        this._ourOfferService.inventory[i].Quantity = this.quantity;
-        this._ourOfferService.inventory[i].Unit = this.unit;
-      }*/
-   // }
-
     const editedInventoryItem = new Inventory(this.id, name, quantity, this.unit, price);
     this._ourOfferService.updateInventoryList(this.id, editedInventoryItem);
    this._dataStorageService.editInventoryItem(editedInventoryItem);

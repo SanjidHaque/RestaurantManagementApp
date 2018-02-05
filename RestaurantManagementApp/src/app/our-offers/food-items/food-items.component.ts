@@ -65,7 +65,7 @@ export class FoodItemsComponent implements OnInit {
   }*/
 
   UpdateCart(id: number, price: number, name: string, isAdd: boolean, index: any) {
-    let orderItemId = this.uuidCodeOne;
+    let orderItemId = this.uuid.v1();
     let orderId = this._ourOfferService.uuidCodeOne;
     this.quantity = this.selectedQuantity[index];
     let foodItemId = id;

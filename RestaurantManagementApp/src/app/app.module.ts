@@ -73,7 +73,7 @@ import { AllCategoriesComponent } from './our-offers/all-categories/all-categori
     AddIngredientsComponent,
     BillOfMaterialsComponent,
     SummaryComponent,
-    SetMenuComponent
+    SetMenuComponent,
     CashFlowComponent,
     AllCategoriesComponent
 

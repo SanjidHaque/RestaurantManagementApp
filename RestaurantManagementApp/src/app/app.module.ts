@@ -4,6 +4,8 @@ import { UuidModule } from 'ng2-uuid';
 import { CarouselModule } from 'angular4-carousel';
 import { CollapsibleModule } from 'angular4-collapsible';
 import { LoadingModule } from 'ngx-loading';
+import { DatePipe } from '@angular/common';
+
 
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
@@ -18,9 +20,7 @@ import {DataStorageService} from './shared/data-storage.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-import {PopupModule} from 'ng2-opd-popup';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AgmCoreModule } from '@agm/core';
 import { ChefComponent } from './chef/chef.component';
@@ -44,6 +44,11 @@ import { SetMenuComponent } from './admin/set-menu/set-menu.component';
 import {IngredientServiceService} from './admin/food-item/add-new-food-item/add-ingredients/ingredient-service.service';
 import { CashFlowComponent } from './admin/bill-of-materials/cash-flow/cash-flow.component';
 import { AllCategoriesComponent } from './our-offers/all-categories/all-categories.component';
+import { SearchPipe } from './shared/search.pipe';
+import { FilterPipe } from './our-offers/filter.pipe';
+import { PaymentComponent } from './our-offers/payment/payment.component';
+import { ReceiptComponent } from './our-offers/receipt/receipt.component';
+
 
 
 
@@ -75,7 +80,11 @@ import { AllCategoriesComponent } from './our-offers/all-categories/all-categori
     SummaryComponent,
     SetMenuComponent,
     CashFlowComponent,
-    AllCategoriesComponent
+    AllCategoriesComponent,
+    SearchPipe,
+    FilterPipe,
+    PaymentComponent,
+    ReceiptComponent
 
   ],
   imports: [
@@ -84,12 +93,10 @@ import { AllCategoriesComponent } from './our-offers/all-categories/all-categori
     HttpModule,
     UuidModule,
     CarouselModule,
-    BrowserAnimationsModule,
     CollapsibleModule,
     CommonModule,
     FormsModule,
     LoadingModule,
-    PopupModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: ''
 

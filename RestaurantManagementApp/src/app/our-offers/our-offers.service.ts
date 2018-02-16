@@ -42,6 +42,10 @@ export class OurOffersService {
             ) { this.uuidCodeOne = this.uuid.v1(); }
 
 
+
+   clearOrders() {
+    this.orderedItems = [];
+   }
    updateInventoryList(inventoryId: string, editedInventoryItem: Inventory) {
 
     for ( let i = 0; i < this.inventory.length; i++) {
@@ -105,9 +109,20 @@ export class OurOffersService {
           this.orderedItems[i].FoodItemSubTotal
           - subTotal;
         this.TotalPrice -= Number.parseInt(subTotal.toString());
+        this.totalQuantity -= Number.parseInt(quantity.toString());
         return this.orderedItems[i].FoodItemQuantity;
       }
     }
+  }
+
+  checkIfOrderedItemExist(foodItemId: number, orderId: string) {
+    for (let i = 0; i < this.orderedItems.length; i++) {
+      if (this.orderedItems[i].FoodItemId === foodItemId
+        && this.orderedItems[i].OrderId === orderId) {
+        return this.orderedItems[i].OrderItemId;
+      }
+    }
+    return null;
   }
 
 

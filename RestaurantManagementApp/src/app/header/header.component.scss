@@ -3,15 +3,27 @@
   position: fixed;
   z-index: 999;
   color: #b00003;
-  -webkit-box-shadow: 0px 10px 34px 1px rgba(176,0,3,0.51);
-  -moz-box-shadow: 0px 10px 34px 1px rgba(176,0,3,0.51);
-  box-shadow: 0px 10px 34px 1px rgba(176,0,3,0.51);
+  -webkit-box-shadow: 3px 10px 20px -1px rgba(148,138,133,0.64);
+  -moz-box-shadow: 3px 10px 20px -1px rgba(148,138,133,0.64);
+  box-shadow: 3px 10px 20px -1px rgba(148,138,133,0.64);
   }
 
+@import url('https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt');
+
+/*font-family: 'Righteous', cursive;
+font-family: 'Fredoka One', cursive;
+font-family: 'Rock Salt', cursive;
+font-family: 'Chewy', cursive;
+font-family: 'Cabin Sketch', cursive;
+font-family: 'Aladin', cursive;
+font-family: 'Londrina Solid', cursive;
+font-family: 'Lobster', cursive;
+font-family: 'Acme', sans-serif;
+font-family: 'Berkshire Swash', cursive;
+font-family: 'Kanit', sans-serif;*/
 .blocks-inn {
-  font-family:"Comic Sans MS";
+  font-family: 'Berkshire Swash', cursive;
   font-size:40px;
-  font-weight:bold;
   padding-left: 38px;
 }
 
@@ -21,19 +33,19 @@
 
 .home {
   font-family: "Berlin Sans FB";
-  font-size: 19px;
+  font-size: 17px;
   padding-top: 15px;
 }
 .our-offers {
   font-family: "Berlin Sans FB";
-  font-size: 19px;
+  font-size: 17px;
   padding-top: 15px;
   padding-left: 22px;
 
 }
 .contact-us {
   font-family: "Berlin Sans FB";
-  font-size: 19px;
+  font-size: 17px;
   padding-top: 15px;
   padding-left: 22px;
   text-align: right;
@@ -45,7 +57,7 @@
 
 .login{
   font-family:"Berlin Sans FB";
-  font-size: 19px;
+  font-size: 17px;
   padding-top: 15px;
   padding-right: 9px;
   padding-left: 0px;
@@ -57,7 +69,7 @@
 
 .register{
   font-family:"Berlin Sans FB";
-  font-size: 19px;
+  font-size: 17px;
   padding-top: 15px;
   padding-right: 0px;
   padding-left: 0px;
@@ -68,7 +80,7 @@
 
 .admin{
   font-family:"Berlin Sans FB";
-  font-size: 19px;
+  font-size: 17px;
   padding-top: 15px;
 
 }
@@ -114,26 +126,38 @@ a:hover:before {
 
 .cart-icon{
   padding-top: 16px;
+  padding-right:0px;
+  padding-left: 27px;
 }
 
 .cart-amount{
-  font-family: "Berlin Sans FB";
+  font-family: "Times New Roman";
   font-size:18px;
   padding-top: 10px;
   margin-left: -20px;
   color: #b40000;
+  padding-left:0px;
+  padding-right: 0px;
+  font-weight: bold;
 }
 
 .cart-price{
-  font-family: "Berlin Sans FB";
+  font-family: "Times New Roman";
   font-size:18px;
   padding-top: 10px;
   margin-left: 20px;
   color: #b40000;
+  padding-right:0px;
+  margin-left: 0px;
+  font-weight: bold;
 }
 
 .cart {
   color: #b40000;
+}
+
+.whole-cart{
+  padding-right: 0px;
 }
 
 

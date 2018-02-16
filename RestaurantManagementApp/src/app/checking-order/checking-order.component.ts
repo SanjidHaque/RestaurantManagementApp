@@ -13,7 +13,6 @@ export class CheckingOrderComponent implements OnInit {
   constructor(private _chefService: ChefServiceService ) { }
 
   ngOnInit() {
-
   }
 
-}
+ }

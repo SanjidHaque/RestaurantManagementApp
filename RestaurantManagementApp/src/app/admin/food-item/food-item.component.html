@@ -9,13 +9,17 @@
     <div class="col-md-4 price">
       Price
     </div>
+    <div class="col-md-4 price">
+      <span class="fa fa-search"></span>
+      <input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">
+    </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-8 body">
 
-    <div class="row" *ngFor="let foodItem of FoodItem; let i = index">
+    <div class="row" *ngFor="let foodItem of FoodItem | filter:term; let i = index">
 
       <div class="col-md-12 f-name">
 
@@ -25,10 +29,10 @@
         <div class="col-md-4 ">
           {{ foodItem.Price }} BDT
         </div>
-        <div class="col-md-2 ">
+        <div class="col-md-2 edit-delete">
           <button class="all-categories-button" (click)="editItem(foodItem)">Edit</button>
         </div>
-        <div class="col-md-2 ">
+        <div class="col-md-2 edit-delete">
           <button class="all-categories-button" (click)="deleteItem(foodItem,i)">Delete</button>
         </div>
 
@@ -39,7 +43,7 @@
 
 
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 ">
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
         <button class="all-categories-button" (click)="addNewItem()">Add New Item</button>

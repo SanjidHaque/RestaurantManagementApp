@@ -1,0 +1,174 @@
+.change {
+  margin-top: 37px;
+  font-size: 25px;
+  color: #7e0000;
+  font-family: "Arial Narrow";
+  text-align: center;
+  font-weight: bold; }
+
+#print-section {
+  background-color: white;
+  border: 1px solid #cbc6cb;
+  margin-top: 10px; }
+
+.print-row {
+  padding-left: 92px; }
+
+hr {
+  border-top: 1px solid #cbc6cb;
+  margin: 1em 0;
+  padding: 0; }
+
+.receipt {
+  text-align: center; }
+
+.back {
+  width: 50%;
+  height: 100%;
+  font-family: "Arial Narrow";
+  color: #d32039;
+  background-color: #ffffdf;
+  border: 1.2px solid #ae0000;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 22px;
+  font-weight: bold; }
+
+.back:hover {
+  background-color: #d32039;
+  color: #ffffdf;
+  font-family: "Arial Narrow";
+  font-weight: bold;
+  border: 1.2px solid #ffffdf;
+  border-radius: 5px; }
+
+.back:focus {
+  outline: 0; }
+
+.next-order-div {
+  margin-top: 10px; }
+
+.intro {
+  text-align: center;
+  margin-top: 15px; }
+
+.date-time {
+  padding-right: 0px;
+  padding-left: 0px;
+  font-family: "Inconsolata";
+  font-size: 11px; }
+
+.id {
+  padding-right: 0px;
+  padding-left: 0px;
+  font-family: "Inconsolata";
+  font-size: 11px; }
+
+.name, .price, .quantity, .equal, .sub-total, .mul {
+  padding-right: 0px;
+  padding-left: 0px;
+  font-family: "Inconsolata";
+  font-size: 11px;
+  padding-top: 2px;
+  padding-bottom: 2px; }
+
+.price {
+  text-align: right; }
+
+.quantity {
+  padding-left: 20px; }
+
+.mul {
+  padding-left: 20px; }
+
+.main {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 2px;
+  padding-bottom: 4px; }
+
+.hodoo {
+  font-family: "Inconsolata";
+  font-size: 13px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 8px; }
+
+.choosing-hodoo {
+  font-family: "Inconsolata";
+  font-size: 11px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 20px; }
+
+.change-bdt {
+  font-family: "Inconsolata";
+  font-size: 11px;
+  text-align: right; }
+
+.change-cash {
+  font-family: "Inconsolata";
+  font-size: 11px;
+  text-align: left; }
+
+.tendered {
+  font-family: "Inconsolata";
+  font-size: 11px;
+  text-align: left; }
+
+.intro {
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
+.tendered-bdt {
+  font-family: "Inconsolata";
+  font-size: 11px;
+  text-align: right; }
+
+.total-div {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center; }
+
+.total {
+  font-family: "Inconsolata";
+  font-size: 16px;
+  text-align: left; }
+
+.total-bdt {
+  font-family: "Inconsolata";
+  font-size: 16px;
+  text-align: right; }
+
+.change-div {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center; }
+
+.tendered-div {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center; }
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+@media print {
+  #print-section {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1em;
+    color: #333333;
+    margin-top: 2cm;
+    margin-right: 2cm;
+    margin-bottom: 1.5cm;
+    margin-left: 2cm; } }
+
+/*# sourceMappingURL=receipt.component.css.map */

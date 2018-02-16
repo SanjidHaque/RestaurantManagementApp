@@ -53,3 +53,54 @@
   font-family:"Berlin Sans FB";
   font-size: 21px;
 }
+
+
+.body{
+  height: 400px;
+  overflow-y: scroll;
+  border: 1px solid #cbc6cb;
+  border-radius: 5px;
+}
+
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.61);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+.box{
+  width: 200px;
+  height: 30px;
+  background: #fcfcfc;
+  border: 2px solid #9c0000;
+  border-radius: 15px;
+  text-indent: 32px;
+  color: #9c0000;
+  font-size: 12px;
+  font-family: "Lato","Lucida Grande", "Helvetica", "Verdana", "Arial";
+}
+
+.box:focus{
+  outline: 0;
+}
+
+.fa-search {
+  position: absolute;
+  top: 26px;
+  left: 30px;
+  font-size: 13px;
+}
+
+.edit-delete{
+  padding-bottom: 10px;
+}

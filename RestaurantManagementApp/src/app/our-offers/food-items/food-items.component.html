@@ -1,6 +1,27 @@
 
-<div class="row" >
-    <div class="col-md-4" *ngFor="let foodItems of FoodItem; let i = index">
+<!--<div class="row">
+  <div class="col-md-offset-8 col-md-4 food-body">
+    <div class="search">
+      <span class="fa fa-search"></span>
+      <input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">
+    </div>
+  </div>
+</div>-->
+
+
+<div class="row">
+  <div class="col-md-8 food-body">
+      <span class="fa fa-search"></span>
+      <input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">
+  </div>
+</div>
+
+
+
+<div class="row left">
+    <div class="col-md-4"
+         *ngFor="let foodItems of FoodItem | filter:term
+        ; let i = index">
       <div class="row ">
         <div class="col-md-8 name">
           {{ foodItems.Name }}
@@ -15,7 +36,6 @@
                class="img-responsive image"
                style= "height: 260px"
           >
-
 
         </div>
       </div>
@@ -50,3 +70,6 @@
     </div>
 
 </div>
+
+<!--
+[disabled] = "checkNegativeQuantity(foodItems.Id)"-->

@@ -1,3 +1,5 @@
+<div class="add-new-item">
+
 <div class="col-md-12 name">
   <form (ngSubmit) = "onAddNewFoodItem(newFoodItem)" #newFoodItem = "ngForm">
     <div id="user-data">
@@ -25,7 +27,9 @@
           required
         >
       </div>
-        <div>
+
+
+      <div>
           <div class="action" *ngIf = "checkIfIngredientsExist() === 0; else addMoreIngredients">
           <button class="all-categories-button"
                   type="submit"
@@ -56,5 +60,6 @@
   <div class="col-md-offset-2 col-md-10">
     <router-outlet></router-outlet>
   </div>
+</div>
 </div>
 

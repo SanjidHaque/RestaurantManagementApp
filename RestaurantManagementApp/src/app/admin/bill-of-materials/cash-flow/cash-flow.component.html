@@ -1,26 +1,5 @@
-<!--
-<div class="row">
-  <div class="col md-12" *ngFor="let cash of cashFlow">
 
-    <div class="col-md-2"> {{ cash.OrderId }} </div>
-    <div class="col-md-2"> {{ cash.OrderPrice }} </div>
-    <div class="col-md-2">{{ cash.InventoryCost }}</div>
-    <div class="col-md-2">{{ cash.Profit }}</div>
 
-  </div>
-</div>
--->
-
-<!--<div class="row">
-  <div class="col md-5" *ngFor="let sumOfInv of summaryOfInventories">
-
-    <div class="col-md-2"> {{ sumOfInv.ItemUsedName }} </div>
-    <div class="col-md-2"> {{ sumOfInv.ItemTotal }} </div>
-    <div class="col-md-2">{{ sumOfInv.ItemUsedToday }}</div>
-    <div class="col-md-2">{{ sumOfInv.ItemRemaining }}</div>
-
-  </div>
-</div>-->
 <div class="whole">
   <div class="row">
     <div class="col-md-offset-4 col-md-4 sum-of-inv">
@@ -49,7 +28,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 body">
         <div class="row" *ngFor="let cash of cashFlow">
           <div class="col-md-12 f-name">
             <div class="col-md-3 ">

@@ -7,6 +7,8 @@ import { Uuid } from 'ng2-uuid';
 import {FoodItems} from '../../../shared/food-item.model';
 import {Ingredients} from '../../../shared/ingredients.model';
 import {IngredientServiceService} from './add-ingredients/ingredient-service.service';
+import {Observable} from 'rxjs/Observable';
+import {Http, RequestOptions} from '@angular/http';
 
 @Component({
   selector: 'app-add-new-food-item',
@@ -25,6 +27,7 @@ export class AddNewFoodItemComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
+              private _http: Http,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private _ingredientService: IngredientServiceService) {

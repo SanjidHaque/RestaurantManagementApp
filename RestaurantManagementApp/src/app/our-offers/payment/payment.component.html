@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-2">
+    <button
+      class="back"
+      (click)="back()">
+      <i class="fa fa-angle-double-left"></i>
+       Back</button>
+  </div>
+  <div class="col-md-4 payment">
+    Payment
+  </div>
+  <!--[ngStyle]="{'background-color': checkCertainAmount() === false ? 'green' : 'red' }"-->
+  <div class="col-md-2">
+    <button
+      class="back"
+      [ngClass]="[!checkCertainAmount() ? 'back' : 'un-back']"
+      [disabled] = "!checkCertainAmount()"
+      (click)="validate()">
+      Validate
+      <i class="fa fa-angle-double-right"></i></button>
+  </div>
+</div>
+
+<!--<div [ngStyle]="{'background-color':person.country === 'UK' ? 'green' : 'red' }"></<div>-->
+
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-6 grand-total">
+    {{ grandTotal }} BDT
+  </div>
+</div>
+
+<div class="bar">
+
+<div class="row title-row">
+  <div class="col-md-offset-2 col-md-8 title">
+    <div class="col-md-3 due">
+      Due
+    </div>
+    <div class="col-md-3 change">
+      Remaining
+    </div>
+    <div class="col-md-3 tendered">
+      Tendered
+    </div>
+    <div class="col-md-3 change">
+      Change
+    </div>
+  </div>
+</div>
+
+<div class="row content-row">
+  <div class="col-md-offset-2 col-md-8 content">
+    <div class="col-md-3 due-box">
+      {{ grandTotal }}
+    </div>
+    <div class="col-md-3 due-box" *ngIf="!checkCertainChange(); else showZero">
+      {{ grandTotal - tendered }}
+    </div>
+      <ng-template #showZero>
+        <div class="col-md-3 due-box">
+          0
+        </div>
+      </ng-template>
+    <div class="col-md-3 tendered-box">
+      <input type="number"
+             min="0"
+             id="amount"
+             class="form-control"
+             [(ngModel)]="tendered"
+      >
+    </div>
+    <div class="col-md-3 change-box" *ngIf="checkCertainAmount()">
+      {{ tendered - grandTotal }}
+    </div>
+  </div>
+</div>
+</div>
+<!--<div class="row content-row" *ngIf="!checkCertainChange()">
+  <div class="col-md-offset-2 col-md-2 content">
+    <div class="col-md-4 due-box">
+      {{ grandTotal - tendered }}
+    </div>
+  </div>
+</div>-->

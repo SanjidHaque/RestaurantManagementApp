@@ -1,27 +1,44 @@
 
+<!--<mat-card class="card1">
+  <mat-card-header>
+    <mat-card-title><h1>Dialog Demo</h1></mat-card-title>
+  </mat-card-header>
+  <hr>
+  <mat-card-content>
+    <button mat-raised-button (click)="openDialog()">Open Dialog</button>
+    <hr>
+    <strong>Result: {{dialogResult}}</strong>
+  </mat-card-content>
+</mat-card>-->
+
+
 
 <div class="row">
-
   <div class="col-md-9">
     <app-food-items></app-food-items>
   </div>
 
   <div class="col-md-3">
     <div class="row">
-
         <div class="col-md-12 cart-empty" *ngIf="grandTotal==0; else itemIsSold">
-          Your food cart is empty!
+          <div class="col-md-12">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <div class="col-md-12 text">
+            Your food cart is empty!
+          </div>
         </div>
 
     </div>
 
       <ng-template #itemIsSold>
-        <div class="whole">
+        <div class="whole" >
         <div class="row">
           <div class="col-md-12 your-purchased-Foods">
             Your purchased foods:
           </div>
         </div>
+          <div class="cash-memo" >
        <div class="row">
           <div class="col-md-12" *ngIf="checkSetMenuCount()!= 0">
             <div class="col-md-12 list-title">
@@ -48,37 +65,36 @@
           </div>
 
          <div *ngIf="checkFoodItemCount()!=0">
+<!--
 
             <div class="row">
                <div class="col-md-12 list-title">
                   Regulars
                </div>
             </div>
+-->
 
             <div class="row list-detail" *ngFor="let order of orderedItems; let i = index">
-
-              <div class="col-md-4 name">
-               {{ i+1 }}. {{ order.FoodItemName }}
+              <div *ngIf="order.FoodItemQuantity !== 0">
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-7 name">
+                    {{ order.FoodItemName }}
+                  </div>
+                  <div class="col-md-3 sub-total">
+                    {{ order.FoodItemSubTotal }} BDT
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-offset-2 col-md-10 quantity">
+                    {{ order.FoodItemQuantity }} Unit(s) at {{ order.Price }} BDT/Unit(s)
+                  </div>
+                </div>
+              <hr class="content">
               </div>
-              <div class="col-md-1 price">
-                {{ order.Price }}
-              </div>
-              <div class="col-md-1 mul">
-                 x
-              </div>
-              <div class="col-md-1 quantity">
-                {{ order.FoodItemQuantity }}
-              </div>
-              <div class="col-md-1">
-                =
-              </div>
-              <div class="col-md-3 sub-total">
-                 {{ order.FoodItemSubTotal }} BDT
-              </div>
-
             </div>
           </div>
 
+          </div>
           </div>
          <div class="row">
            <div class="col-md-12 grand-total">
@@ -86,13 +102,18 @@
            </div>
          </div>
 
-         <div class="row">
-           <div class="col-md-12 confirm-purchase-div" *ngIf="onCheck==0">
-             <button class="confirm-purchase" (click)="AddToOrderedList()">Confirm Purchase</button>
+
+         <div class="row cash-memo-buttons">
+           <div class="col-md-6 confirm-div">
+             <button class="confirm-purchase" (click)="AddToOrderedList()">Payment</button>
+           </div>
+           <div class="col-md-6 discard-div">
+             <button class="confirm-purchase" (click)="DiscardOrder()">Discard</button>
            </div>
          </div>
 
-        <div class="row confirm-purchase-div" *ngIf="onCheck==1">
+        <!--<div class="row confirm-purchase-div" *ngIf="onCheck==1">
+        *ngIf="onCheck==0
           <div class="col-md-8 please-wait">
             Please wait while chef is checking your order
           </div>
@@ -110,9 +131,10 @@
             <div class="sk-circle11 sk-child"></div>
             <div class="sk-circle12 sk-child"></div>
           </div>
-        </div>
+        </div>-->
         </div>
       </ng-template>
 
     </div>
   </div>
+

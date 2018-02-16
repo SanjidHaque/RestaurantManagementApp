@@ -58,7 +58,7 @@ export class DataStorageService {
            console.log(menus);
            return menus;
          }
-      );
+      )
   }
 
   storeOrders() {

@@ -8,6 +8,10 @@ import {DataStorageService} from '../shared/data-storage.service';
 import {OrderedItems} from '../shared/ordered-items.model';
 import {Order} from '../shared/order.model';
 import { Uuid } from 'ng2-uuid';
+import {element} from 'protractor';
+import { Inject} from '@angular/core';
+
+
 
 @Component({
   selector: 'app-our-offers',
@@ -21,6 +25,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
     quantity: number = 0;
     uuidCodeOne = '';
     onCheck = 0;
+    dialogResult = "";
 
   public grandTotal: number;
   public orderedItems: OrderedItems[];
@@ -34,23 +39,14 @@ export class OurOffersComponent implements OnInit, DoCheck {
               private _dataStorageService: DataStorageService,
               private router: Router,
               private route: ActivatedRoute,
-              private uuid: Uuid,
-
+              private uuid: Uuid
   ) {
     this.Menu = new OurOffers();
     this.uuidCodeOne = this.uuid.v1();
-
-
   }
 
-    /*this._ourOfferService.getOurOffers()
-        .subscribe(
-          responseToSetMenu => this.setMenus = responseToSetMenu
-        );*/
 
   ngOnInit() {
-
-
     this.orderedItems = this._ourOfferService.getOrderedItemsList();
     this.grandTotal = this._ourOfferService.TotalPrice;
     this.quantity += this._ourOfferService.totalQuantity;
@@ -59,18 +55,6 @@ export class OurOffersComponent implements OnInit, DoCheck {
     this.orderedItems = this._ourOfferService.getOrderedItemsList();
     this.grandTotal = this._ourOfferService.TotalPrice;
   }
-
- /* saveOrders() {
-    this._dataStorageService.storeOrders()
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
-  }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }*/
 
 
 
@@ -104,31 +88,38 @@ export class OurOffersComponent implements OnInit, DoCheck {
     this.router.navigate(['our-offers/regulars']);
   }
   AddToOrderedList() {
-    let orderId = this._ourOfferService.uuidCodeOne;
+    /*let orderId = this._ourOfferService.uuidCodeOne;
     this.onCheck  = 1;
     this.orderedItems = this._ourOfferService.orderedItems;
     let totalPrice = this._ourOfferService.TotalPrice;
     let orderStatus = 0;
-    const order = new Order(orderId, this.orderedItems, totalPrice, orderStatus);
-    this._ourOfferService.addToOrderedList(order);
+    this.orders = new Order(orderId, this.orderedItems, totalPrice, orderStatus);
+    this._ourOfferService.addToOrderedList(this.orders);
     this._dataStorageService.storeOrders()
       .subscribe(
         (response: Response) => {
           console.log(response);
         }
-      );
+      );*/
+    this.router.navigate(['payment']);
+
   }
-  /*
-      this._dataStorageService.getMenu()
-        .subscribe((Menu: OurOffers ) => {
-        this.Menu = Menu;
-      });
+ /* openDialog() {
+    let dialogRef = this.dialog.open(OurOffersComponent, {
+      width: '600px',
+      data: 'This text is passed into the dialog!'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+    });
+  }*/
 
-      this.subscription = this._ourOfferService.menuChanged
-        .subscribe(
-          (Menu: OurOffers) => {
-            this.Menu = Menu;
-          }
-        );*/
 
+  DiscardOrder() {
+    this._ourOfferService.clearOrders();
+    this._ourOfferService.TotalPrice = 0;
+    this._ourOfferService.totalQuantity = 0;
+
+  }
 }

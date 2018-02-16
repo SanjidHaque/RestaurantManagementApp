@@ -6,7 +6,6 @@ import { Uuid } from 'ng2-uuid';
 import {Order} from '../../shared/order.model';
 import {OrderedItems} from '../../shared/ordered-items.model';
 import {Options} from 'selenium-webdriver/chrome';
-import {Popup} from 'ng2-opd-popup';
 
 
 @Component({

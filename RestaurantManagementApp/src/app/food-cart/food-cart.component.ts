@@ -65,8 +65,8 @@ export class FoodCartComponent implements OnInit {
     this.orderedItems = this._ourOfferService.orderedItems;
     let totalPrice = this._ourOfferService.TotalPrice;
     let orderStatus = 0;
-    const order = new Order(orderId, this.orderedItems, totalPrice, orderStatus);
-    this._ourOfferService.addToOrderedList(order);
+ //   const order = new Order(orderId, this.orderedItems, totalPrice, orderStatus);
+//    this._ourOfferService.addToOrderedList(order);
     this._dataStorageService.storeOrders()
       .subscribe(
         (response: Response) => {

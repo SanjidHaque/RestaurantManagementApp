@@ -3,7 +3,6 @@ import {OurOffers} from '../our-offers.model';
 import {Order} from '../../shared/order.model';
 import {OurOffersService} from '../our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Popup} from 'ng2-opd-popup';
 import {OrderedItems} from '../../shared/ordered-items.model';
 import { Uuid } from 'ng2-uuid';
 import {Subscription} from 'rxjs/Subscription';
@@ -29,13 +28,14 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeTwo = '';
   uuidCodeThree = '';
   quantity : number;
+  orderItemId = '';
   subscription: Subscription;
+  searchedItems = '';
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
               private route: ActivatedRoute,
-              private uuid: Uuid,
-              private popUp: Popup
+              private uuid: Uuid
   ) {
     this.uuidCodeOne = this.uuid.v1();
     this.uuidCodeTwo = this.uuid.v1();
@@ -64,22 +64,50 @@ export class FoodItemsComponent implements OnInit {
     // this.orderedItems = this._ourOfferService.orderedItems;
   }*/
 
+  checkNegativeQuantity(foodItemId: number) {
+    for (let i = 0; i < this.orderedItems.length; i++) {
+      if (this.orderedItems[i].FoodItemId === foodItemId) {
+        if ( this.orderedItems[i].FoodItemQuantity < this.quantity) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  }
+
   UpdateCart(id: number, price: number, name: string, isAdd: boolean, index: any) {
-    let orderItemId = this.uuid.v1();
-    let orderId = this._ourOfferService.uuidCodeOne;
     this.quantity = this.selectedQuantity[index];
     let foodItemId = id;
     let foodItemName = name;
     let Price = price;
-    if ( isAdd === true ) {
-      this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-        foodItemName, Price );
-    } else {
-      this.RemoveFromCart(orderItemId, orderId,  this.quantity,
-        foodItemId, foodItemName, Price );
+    let orderId = this._ourOfferService.uuidCodeOne;
+    if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
+     let orderItemId = this.uuid.v1();
+      if ( isAdd === true ) {
+        this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
+          foodItemName, Price );
+      } else {
+        this.RemoveFromCart(orderItemId, orderId,  this.quantity,
+          foodItemId, foodItemName, Price );
+      }
+    }
+    else {
+      let orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
+      if ( isAdd === true ) {
+        this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
+          foodItemName, Price );
+      } else {
+        this.RemoveFromCart(orderItemId, orderId,  this.quantity,
+          foodItemId, foodItemName, Price );
+      }
     }
 
+
+
   }
+
+
 
   AddToCart(orderItemId: string, orderId: string, quantity: number,
             foodItemId: number, foodItemName: string, price: number ) {
@@ -100,19 +128,19 @@ export class FoodItemsComponent implements OnInit {
     this._ourOfferService.totalQuantity
       = Number.parseInt(this._ourOfferService.totalQuantity.toString())
       + Number.parseInt(quantity.toString());
-    /*debugger*/
+
 
   }
 
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
                  foodItemId: number, foodItemName: string, price: number ) {
 
+
     let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
 
     this.quantity= this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
-    this._ourOfferService.totalQuantity =
+   /* this._ourOfferService.totalQuantity =
       Number.parseInt(this._ourOfferService.totalQuantity.toString()) -
-      Number.parseInt(quantity.toString());
-    /*debugger*/
+      Number.parseInt(quantity.toString());*/
   }
 }

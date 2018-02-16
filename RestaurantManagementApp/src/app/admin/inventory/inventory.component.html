@@ -76,13 +76,17 @@
     <div class="col-md-2 quantity">
       Quantity
     </div>
+    <div class="col-md-offset-1 col-md-2 quantity">
+      <span class="fa fa-search"></span>
+      <input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">
+    </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-8 body">
 
-    <div class="row" *ngFor="let inventory of inventories; let i = index">
+    <div class="row" *ngFor="let inventory of inventories | filter:term; let i = index">
 
       <div class="col-md-12 f-name">
 
@@ -104,13 +108,15 @@
         <div class="col-md-3" *ngIf="inventory.Unit == 4">
           {{ inventory.Quantity }}  Bottles
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 edit-delete">
+
           <div class="col-md-6 ">
             <button class="all-categories-button" (click)="editItem(inventory)">Edit</button>
           </div>
           <div class="col-md-6 ">
             <button class="all-categories-button" (click)="deleteItem(inventory,i)">Delete</button>
           </div>
+
         </div>
 
 

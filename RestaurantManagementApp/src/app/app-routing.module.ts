@@ -23,10 +23,13 @@ import {SummaryComponent} from './admin/bill-of-materials/summary/summary.compon
 import {CashFlowComponent} from './admin/bill-of-materials/cash-flow/cash-flow.component';
 import {OurOffersListComponent} from './our-offers/our-offers-list/our-offers-list.component';
 import {AllCategoriesComponent} from './our-offers/all-categories/all-categories.component';
+import {PaymentComponent} from './our-offers/payment/payment.component';
+import {ReceiptComponent} from './our-offers/receipt/receipt.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/our-offers/regulars', pathMatch: 'full' },
-  /*{ path: 'home-page', component: HomePageComponent },*/
+  { path: 'payment', component: PaymentComponent },
+  { path: 'receipt', component: ReceiptComponent },
   { path: 'our-offers', component: OurOffersComponent,
   children: [
     { path: 'all-categories', component: AllCategoriesComponent },

@@ -317,7 +317,9 @@ input:focus{
 }
 
 .left{
-  height: 510px;
+  height: 80vh; // vh means current window's height
+  /*height: calc(510px - 2px);*/
+  box-sizing: border-box;
   overflow: auto;
   margin-top: 60px;
 }

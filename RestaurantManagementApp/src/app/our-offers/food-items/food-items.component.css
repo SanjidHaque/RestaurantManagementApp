@@ -295,7 +295,9 @@ input:focus{
   padding-top: 30px; }
 
 .left {
-  height: 510px;
+  height: 80vh;
+  /*height: calc(510px - 2px);*/
+  box-sizing: border-box;
   overflow: auto;
   margin-top: 60px; }
 

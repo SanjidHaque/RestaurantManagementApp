@@ -51,7 +51,6 @@ import { ReceiptComponent } from './our-offers/receipt/receipt.component';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

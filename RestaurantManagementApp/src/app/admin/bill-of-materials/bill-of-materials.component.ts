@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./bill-of-materials.component.scss']
 })
 export class BillOfMaterialsComponent implements OnInit {
-
+public vs: number;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,

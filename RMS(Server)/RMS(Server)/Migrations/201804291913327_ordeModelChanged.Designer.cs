@@ -6,14 +6,14 @@ namespace RMS_Server_.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Init3 : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class ordeModelChanged : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ordeModelChanged));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801281517476_Init3"; }
+            get { return "201804291913327_ordeModelChanged"; }
         }
         
         string IMigrationMetadata.Source

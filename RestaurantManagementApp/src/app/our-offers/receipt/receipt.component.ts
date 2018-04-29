@@ -161,6 +161,12 @@ text-align: right;
     font-size: 21px;
     display: inline-block;
   }
+  .table-no{
+    text-align: center;
+    font-family:"Inconsolata";
+    font-size: 21px;
+
+  }
  }
 </style>
         </head>

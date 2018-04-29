@@ -11,6 +11,6 @@ namespace RMS_Server_.Models
         public string Name { get; set; }
         public int Price { get; set; }
         public List<Ingredient> Ingredients { get; set; }
-        public string FooditemImage { get; set; }
+        public string FoodItemImage { get; set; }
     }
 }

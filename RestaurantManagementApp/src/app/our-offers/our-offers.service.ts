@@ -65,7 +65,7 @@ export class OurOffersService {
   }
 
   addToTableList(table: Table) {
-    this.table.unshift(table);
+    this.table.push(table);
     this.tableChanged.next(this.table.slice());
   }
 

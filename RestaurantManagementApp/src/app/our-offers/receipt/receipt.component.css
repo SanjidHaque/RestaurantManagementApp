@@ -12,6 +12,11 @@
     border: 1px solid #cbc6cb;
     margin-top: 10px; }
 
+  .table-no {
+    text-align: center;
+    font-family: "Inconsolata";
+    font-size: 11px; }
+
   .print-row {
     padding-left: 72px; }
 
@@ -160,7 +165,12 @@
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; } }
+    -moz-osx-font-smoothing: grayscale; }
+
+  .table-no {
+    text-align: center;
+    font-family: "Inconsolata";
+    font-size: 11px; } }
 @media print {
   header nav, footer {
     display: none; }

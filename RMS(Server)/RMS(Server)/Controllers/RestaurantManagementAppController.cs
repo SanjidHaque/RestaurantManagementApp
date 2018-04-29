@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Data.Entity;
 using RMS_Server_.Models;
@@ -30,7 +32,7 @@ namespace RMS_Server_.Controllers
         public MenuViewModel Menu()
         {
 
-            var foodItem = _context.FoodItems.ToList();
+            var foodItem = _context.FoodItems.Include(c => c.Ingredients).ToList();
             var setMenu = _context.SetMenus.Include(a => a.SetMenuItems).ToList();
             var menu = new MenuViewModel { FoodItems = foodItem, SetMenus = setMenu, };
             return menu;
@@ -259,6 +261,33 @@ namespace RMS_Server_.Controllers
             return _context.Inventories.ToList();
         }
 
+        [HttpGet]
+        [Route("api/GetTables")]
+        public List<Table> GetTables()
+        {
+            return _context.Tables.ToList();
+        }
+
+        [HttpPost]
+        [Route("api/AddNewTable")]
+        public void AddNewTable(Table table)
+        {
+            _context.Tables.Add(table);
+            _context.SaveChanges();
+        }
+
+        [HttpPost]
+        [Route("api/DeleteTable")]
+        public void DeleteTable(Table table)
+        {
+            var deleteTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+            _context.Tables.Remove(deleteTable);
+            _context.SaveChanges();
+        }
+
+
+       
+
         [HttpPost]
         [Route("api/AddNewInventory")]
         public void AddInventoryItem(Inventory inventory)
@@ -351,29 +380,111 @@ namespace RMS_Server_.Controllers
         }
 
         [HttpPost]
+        [Route("api/UploadImage")]
+        public HttpResponseMessage UploadImage()
+        {
+            string imageName = null;
+            var httpRequest = HttpContext.Current.Request;
+            //Upload Image
+            var postedFile = httpRequest.Files["Image"];
+            //Create custom filename
+            imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
+            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
+            var filePath = HttpContext.Current.Server.MapPath("~/Image/" + imageName);
+            postedFile.SaveAs(filePath);
+
+            //Save to DB
+            //using (DBModel db = new DBModel())
+            //{
+            //    Image image = new Image()
+            //    {
+            //        ImageCaption = httpRequest["ImageCaption"],
+            //        ImageName = imageName
+            //    };
+            //    db.Images.Add(image);
+            //    db.SaveChanges();
+            //}
+            //var image = new FileUpload();
+            //image.CourseFile = imageName;
+            //_context.FileUploads.Add(image);
+
+           // var uploadImage = new FoodItemImage();
+
+
+          var  uploadedImageId = httpRequest["FoodItemId"];
+            //var foodItemImage = new FoodItemImage();
+            //foodItemImage.FoodItemId = uploadedImageId;
+            //foodItemImage.ImagePath = imageName;
+            //_context.FoodItemImages.Add(foodItemImage);
+            //_context.SaveChanges();
+
+
+
+            FoodItem foodItem = new FoodItem();
+            foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
+            foodItem.FoodItemImage = imageName;
+            _context.SaveChanges();
+
+        /*  var getEdited = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
+          getEdited.FoodItemImage = imageName; */
+         //   var foodItem = new FoodItemImage();
+         //   foodItem.FoodItemId = uploadedImageId;
+        //    foodItem.ImagePath = imageName;
+       //     _context.FoodItemImages.Add(foodItem);  
+         //   _context.SaveChanges();
+
+         //   var uploadImage = new FoodItemImage();
+        //    uploadImage.FoodItemId = httpRequest["FoodItemId"];
+          //  uploadImage.ImagePath = imageName;
+     //       _context.FoodItemImages.Add(uploadImage);        
+           
+
+
+            return Request.CreateResponse(HttpStatusCode.Created);
+        }
+
+        [HttpPost]
         [Route("api/AddFoodItem")]
         public void AddFoodItem(FoodItem foodItem)
         {
-            try
-            {  
-                _context.Ingredients.AddRange(foodItem.Ingredients);
-                _context.FoodItems.Add(foodItem);
-                _context.SaveChanges();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+            //var foodItemToSave = _context.FoodItems.First(p => p.Id == foodItem.Id);
+            //foodItemToSave.Name = foodItem.Name;
+            //foodItemToSave.Price = foodItem.Price;
+
+
+            _context.Ingredients.AddRange(foodItem.Ingredients);
+            _context.FoodItems.Add(foodItem);
+            _context.SaveChanges();
+
+
+           /* _context.Ingredients.AddRange(foodItem.Ingredients);
+            var imagePath = _context.FoodItemImages.FirstOrDefault(q => q.FoodItemId == foodItem.Id);
+            var foodItemToSave = new FoodItem();
+            foodItemToSave.Name = foodItem.Name;
+            foodItemToSave.Price = foodItem.Price;
+            foodItemToSave.FoodItemImage = imagePath.ImagePath;
+            _context.FoodItems.Add(foodItemToSave);
+            _context.SaveChanges();*/
+            //try
+            //{  
+            //    _context.Ingredients.AddRange(foodItem.Ingredients);
+            //    _context.FoodItems.Add(foodItem);
+            //    _context.SaveChanges();
+            //}
+            //catch (DbEntityValidationException e)
+            //{
+            //    foreach (var eve in e.EntityValidationErrors)
+            //    {
+            //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
+            //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+            //                ve.PropertyName, ve.ErrorMessage);
+            //        }
+            //    }
+            //    throw;
+            //}
         }
 
 

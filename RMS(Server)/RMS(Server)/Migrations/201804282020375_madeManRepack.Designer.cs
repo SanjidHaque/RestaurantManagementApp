@@ -7,13 +7,13 @@ namespace RMS_Server_.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class fileupload : IMigrationMetadata
+    public sealed partial class madeManRepack : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fileupload));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(madeManRepack));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802081323024_fileupload"; }
+            get { return "201804282020375_madeManRepack"; }
         }
         
         string IMigrationMetadata.Source

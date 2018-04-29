@@ -14,6 +14,5 @@ namespace RMS_Server_.Models
         public string InventoryId { get; set; }
         public FoodItem FoodItem { get; set; }
         public string FooditemId { get; set; }
-
     }
 }

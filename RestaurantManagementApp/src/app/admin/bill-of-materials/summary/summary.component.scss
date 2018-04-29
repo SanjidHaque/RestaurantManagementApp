@@ -5,11 +5,12 @@
   font-size: 20px;
 }
 .whole{
-  margin-top: 20px;
+ /* margin-top: 20px;*/
 }
 .sum-of-inv-body{
   padding-right: 0;
   padding-left: 155px;
+
 }
 .f-name {
   padding-top: 20px;
@@ -51,7 +52,7 @@
 }
 
 .sum-of-inv{
-  color: #ae0000;
+  color: #770000;
   font-size: 21px;
   font-family: "Berlin Sans FB";
   text-align: center;
@@ -60,7 +61,9 @@
   box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
   margin-top: 10px;
   border:1px;
-  border-radius: 10px;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 

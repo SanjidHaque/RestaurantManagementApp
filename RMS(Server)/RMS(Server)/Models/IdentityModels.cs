@@ -31,6 +31,8 @@ namespace RMS_Server_.Models
         public DbSet<SummaryOfInventory> SummaryOfInventories { get; set; }
         public DbSet<CashFlow> CashFlows { get; set; }
         public DbSet<FileUpload> FileUploads { get; set; }
+        public DbSet<FoodItemImage> FoodItemImages { get; set; }
+        public DbSet<Table> Tables { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

@@ -18,10 +18,10 @@ public vs: number;
   ngOnInit() {
   }
 
-  goToSummary() {
+  /*goToSummary() {
     this.router.navigate(['admin/reports/inventories'])
   }
   goToCashFlow() {
     this.router.navigate(['admin/reports/cash-flow'])
-  }
+  }*/
 }

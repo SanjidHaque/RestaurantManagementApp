@@ -150,3 +150,52 @@ input:focus{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.table{
+  text-align: center;
+  margin-top: 5px;
+
+}
+
+.from-table{
+  text-align: right;
+  font-family:"Arial Narrow";
+  color: #7e0000;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 3px;
+}
+
+.dropdown{
+  text-align: left;
+}
+select{
+  background-color: #ffffdf;
+  color: #7e0000;
+  font-family:"Arial Narrow";
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #7e0000;
+  border-radius: 3px;
+  outline:none;
+  /*display: inline-block;
+  -webkit-appearance:none;
+  -moz-appearance:none;*/
+ /* appearance:none;*/
+  cursor:pointer;
+  padding-right: 60px;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+option{
+  color: #7e0000;
+  text-align: center;
+  cursor:pointer;
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}

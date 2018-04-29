@@ -24,21 +24,40 @@
 
 <div class="row">
   <div class="col-md-2 buttons">
+
+    <a routerLink = "/admin/food-item" routerLinkActive = "active-link">
     <div class="col-md-12 regulars">
-      <button class="all-categories-button" (click)="goToRegulars()">Food Items</button>
+      Food Items
     </div>
-    <div class="col-md-12 regulars">
-      <button class="all-categories-button" (click)="goToSetMenu()">Set Menus</button>
-    </div>
-    <div class="col-md-12 regulars">
-      <button class="all-categories-button" (click)="goToInventories()">Inventories</button>
-    </div>
-    <div class="col-md-12 regulars">
-      <button class="all-categories-button" (click)="goToReports()">Reports</button>
-    </div>
-    <div class="col-md-12 regulars">
-      <button class="all-categories-button" (click)="goToTables()">Tables</button>
-    </div>
+    </a>
+
+    <a routerLink = "/admin/inventory" routerLinkActive = "active-link">
+      <div class="col-md-12 regulars">
+        Inventories
+      </div>
+    </a>
+
+    <a routerLink = "/admin/tables" routerLinkActive = "active-link">
+      <div class="col-md-12 regulars">
+        Tables
+      </div>
+    </a>
+
+    <a routerLink = "/admin/orders" routerLinkActive = "active-link ">
+      <div class="col-md-12 regulars ">
+       Orders
+      </div>
+    </a>
+
+    <a routerLink = "/admin/summary-of-inventories" routerLinkActive = "active-link">
+      <div class="col-md-12 regulars">
+        Summary of Inventories
+      </div>
+    </a>
+
+
+
+
   </div>
   <div class="col-md-10 go-left">
     <router-outlet></router-outlet>

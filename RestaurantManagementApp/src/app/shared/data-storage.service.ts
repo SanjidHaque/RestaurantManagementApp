@@ -11,7 +11,7 @@ import {Subject} from 'rxjs/Subject';
 import {FoodItems} from './food-item.model';
 import {SummaryOfInventory} from './summary-of-inventory';
 import {CashFlow} from './cash-flow';
-import {Table} from "./table.model";
+import {Table} from './table.model';
 @Injectable()
 export class DataStorageService {
 

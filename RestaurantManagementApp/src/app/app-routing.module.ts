@@ -25,7 +25,7 @@ import {OurOffersListComponent} from './our-offers/our-offers-list/our-offers-li
 import {AllCategoriesComponent} from './our-offers/all-categories/all-categories.component';
 import {PaymentComponent} from './our-offers/payment/payment.component';
 import {ReceiptComponent} from './our-offers/receipt/receipt.component';
-import {TablesComponent} from "./admin/tables/tables.component";
+import {TablesComponent} from './admin/tables/tables.component';
 import {AddNewTableComponent} from './admin/tables/add-new-table/add-new-table.component';
 
 const appRoutes: Routes = [
@@ -54,17 +54,19 @@ const appRoutes: Routes = [
          { path: 'edit-food-item/:id', component: EditFoodItemComponent }
        ]},
       { path: 'set-menu', component: AddSetMenuComponent},
+    { path: 'orders', component: CashFlowComponent },
+    { path: 'summary-of-inventories', component: SummaryComponent },
     { path: 'tables', component: TablesComponent, children:
     [
       { path: 'add-new-table', component: AddNewTableComponent }
       ]
 
     },
-      { path: 'reports', component: BillOfMaterialsComponent,
+      /*{ path: 'reports', component: BillOfMaterialsComponent,
       children: [
-        { path: 'inventories', component: SummaryComponent },
-        { path: 'cash-flow', component: CashFlowComponent }
-      ]},
+        { path: 'summary-of-inventories', component: SummaryComponent }
+        /!*{ path: 'orders', component: CashFlowComponent }*!/
+      ]},*/
               { path: 'inventory', component: InventoryComponent ,
         children: [
         {path: 'add-new-inventory', component: AddNewInventoryComponent },

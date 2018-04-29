@@ -75,6 +75,26 @@
     </div>
   </div>
 </div>
+
+  <div class="row table">
+    <div class="col-md-6 from-table">
+      From Table:
+    </div>
+    <div class="col-md-6 dropdown">
+
+      <div class="form-group">
+      <select
+        (change)="selectChangeHandler($event)">
+        <option value="">No Table</option>
+        <option *ngFor="let table of tables" value="{{ table.Name }}"
+                > {{ table.Name }} </option>
+      </select>
+    </div>
+
+    </div>
+  </div>
+
+
 </div>
 <!--<div class="row content-row" *ngIf="!checkCertainChange()">
   <div class="col-md-offset-2 col-md-2 content">
@@ -83,3 +103,6 @@
     </div>
   </div>
 </div>-->
+
+
+

@@ -8,9 +8,11 @@ export class Order {
   public Change: number;
   public OrderStatus: number;
   public DateTime: string;
+  public TableNo: string;
 
   constructor(id: string, orderedItems: OrderedItems[], totalPrice: number,
-              tendered: number, change: number, orderStatus: number, dateTime: string) {
+              tendered: number, change: number,
+              orderStatus: number, dateTime: string, tableNo: string) {
     this.Id = id;
     this.OrderedItems = orderedItems;
     this.TotalPrice = totalPrice;
@@ -18,5 +20,6 @@ export class Order {
     this.Change = change;
     this.OrderStatus = orderStatus;
     this.DateTime = dateTime;
+    this.TableNo = tableNo;
   }
 }

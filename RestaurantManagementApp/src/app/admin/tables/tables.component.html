@@ -1,0 +1,54 @@
+
+<div class="row title">
+  <div class="col-md-8">
+    <div class="col-md-offset-8 col-md-2 quantity">
+      <span class="fa fa-search"></span>
+      <input class="box" type="text" [(ngModel)]="term" placeholder="Search Tables...">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 body">
+
+    <div class="row" >
+
+      <div class="col-md-6 f-name" *ngFor="let table of tables | filter:term; let i = index">
+
+        <div class="col-md-8 ">
+          {{ table.Name }}
+        </div>
+
+        <div class="col-md-4 edit-delete">
+
+
+            <button class="all-categories-button" (click)="deleteTable(table,i)">Delete</button>
+
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <button class="all-categories-button" (click)="addNewTable()">Add New Table</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

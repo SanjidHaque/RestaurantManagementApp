@@ -12,6 +12,7 @@ import {Order} from '../shared/order.model';
 import {Inventory} from '../shared/inventory.model';
 import {FoodItems} from '../shared/food-item.model';
 import {Ingredients} from '../shared/ingredients.model';
+import {Table} from "../shared/table.model";
 
 
 @Injectable()
@@ -25,8 +26,6 @@ export class OurOffersService {
   public totalQuantity  = 0;
   public orderedItems: OrderedItems[] = [];
   public orders: Order;
-  public inventory: Inventory[] = [];
-  public inventoryChanged = new Subject<Inventory[]>();
   public acceptedOrder: Order;
   public rejectedOrder: Order;
   public setMenuSubTotal = 0;
@@ -36,6 +35,10 @@ export class OurOffersService {
   ingredientsChanged = new Subject<Ingredients[]>();
   FoodItem: FoodItems[] = [];
   foodItemChanged = new Subject<FoodItems[]>();
+  public inventory: Inventory[] = [];
+  public inventoryChanged = new Subject<Inventory[]>();
+  public table: Table[] = [];
+  public tableChanged = new Subject<Table[]>();
 
 
   constructor(private uuid: Uuid,
@@ -61,8 +64,17 @@ export class OurOffersService {
     this.inventoryChanged.next(this.inventory.slice());
   }
 
+  addToTableList(table: Table) {
+    this.table.unshift(table);
+    this.tableChanged.next(this.table.slice());
+  }
+
   getInventories() {
     return this.inventory.slice();
+  }
+
+  getTables() {
+    return this.table.slice();
   }
 
   addToFoodItemList(foodItem: FoodItems) {

@@ -1,4 +1,5 @@
 import {Ingredients} from './ingredients.model';
+import { FoodItemImage } from './food-item-image.model';
 
 export class FoodItems {
   public Id: string;
@@ -9,7 +10,6 @@ export class FoodItems {
 
   constructor(id: string, name: string,  price: number,
               foodItemImage: string, ingredients: Ingredients[]) {
-
     this.Id = id;
     this.Name = name;
     this.Price = price;

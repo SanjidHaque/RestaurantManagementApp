@@ -23,8 +23,9 @@ export class AddNewFoodItemComponent implements OnInit {
   foodItemId : string;
   ingredients: Ingredients[] = [];
   @ViewChild('newFoodItem') form: NgForm;
+  imageUrl = '/assets/no-image.jpg';
 
-  constructor(private route: ActivatedRoute,
+  fileToUpload: File = null;  constructor(private route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
               private _http: Http,
@@ -48,6 +49,27 @@ export class AddNewFoodItemComponent implements OnInit {
    return this.ingredients.length;
   }
 
+  handleFileInput(file: FileList) {
+    this.fileToUpload = file.item(0);
+
+    // Show image preview
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+  }
+
+  OnSubmit(Image) {
+    this._dataStorageService.postFile( this.foodItemId, this.fileToUpload).subscribe(
+      data => {
+        console.log('done');
+        Image.value = null;
+        this.imageUrl = '/assets/no-image.jpg';
+      }
+    );
+  }
+
   onAddNewFoodItem() {
     this.name  = this.form.value.name;
     this.price = this.form.value.price;
@@ -58,9 +80,10 @@ export class AddNewFoodItemComponent implements OnInit {
       {relativeTo: this.route})
   }
 
-  onSaveFoodItem() {
-    const  foodItemIngredients = this._ourOfferService.getIngredients();
+  onSaveFoodItem(Image) {
+    const foodItemIngredients = this._ourOfferService.getIngredients();
     const foodItemId = this.foodItemId;
+   /* const image = this.fileToUpload;*/
     const newFoodItem =
       new FoodItems(foodItemId, this.name, this.price,
       null, foodItemIngredients );

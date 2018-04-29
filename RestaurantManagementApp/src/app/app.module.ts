@@ -48,6 +48,8 @@ import { SearchPipe } from './shared/search.pipe';
 import { FilterPipe } from './our-offers/filter.pipe';
 import { PaymentComponent } from './our-offers/payment/payment.component';
 import { ReceiptComponent } from './our-offers/receipt/receipt.component';
+import { TablesComponent } from './admin/tables/tables.component';
+import { AddNewTableComponent } from './admin/tables/add-new-table/add-new-table.component';
 
 
 
@@ -83,7 +85,9 @@ import { ReceiptComponent } from './our-offers/receipt/receipt.component';
     SearchPipe,
     FilterPipe,
     PaymentComponent,
-    ReceiptComponent
+    ReceiptComponent,
+    TablesComponent,
+    AddNewTableComponent
 
   ],
   imports: [

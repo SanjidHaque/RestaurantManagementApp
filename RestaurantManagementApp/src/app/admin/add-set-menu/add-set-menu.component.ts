@@ -37,7 +37,7 @@ export class AddSetMenuComponent implements OnInit {
                private uuid: Uuid) { }
 
   ngOnInit() {
-   this.dataService.getFoodItems()
+  /* this.dataService.getFoodItems()
       .subscribe(
         (menu: OurOffers) => {
           this.setMenus = menu.SetMenus;
@@ -53,12 +53,12 @@ export class AddSetMenuComponent implements OnInit {
             this.setMenuFoodItems.push(foodItem);
           }
           }
-      );
+      );*/
   }
 
   onSubmitSetMenu(setMenu: NgForm) {
     const setMenuId: string = this.uuid.v1();
-    for (let i = 0; i < this.setMenuFoodItems.length; i++) {
+  /*  for (let i = 0; i < this.setMenuFoodItems.length; i++) {
    if (this.setMenuFoodItems[i].isSelected === true) {
      const foodItem = new FoodItems(
        this.setMenuFoodItems[i].Id,
@@ -78,7 +78,7 @@ export class AddSetMenuComponent implements OnInit {
      this.setMenuFoodItem.push(this.setMenuFood);
    }
 
-    }
+    }*/
     this.setMenu = new SetMenus(
       setMenuId,
       setMenu.value.name,

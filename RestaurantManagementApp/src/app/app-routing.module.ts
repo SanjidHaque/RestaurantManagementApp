@@ -25,6 +25,8 @@ import {OurOffersListComponent} from './our-offers/our-offers-list/our-offers-li
 import {AllCategoriesComponent} from './our-offers/all-categories/all-categories.component';
 import {PaymentComponent} from './our-offers/payment/payment.component';
 import {ReceiptComponent} from './our-offers/receipt/receipt.component';
+import {TablesComponent} from "./admin/tables/tables.component";
+import {AddNewTableComponent} from './admin/tables/add-new-table/add-new-table.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/our-offers/regulars', pathMatch: 'full' },
@@ -52,6 +54,12 @@ const appRoutes: Routes = [
          { path: 'edit-food-item/:id', component: EditFoodItemComponent }
        ]},
       { path: 'set-menu', component: AddSetMenuComponent},
+    { path: 'tables', component: TablesComponent, children:
+    [
+      { path: 'add-new-table', component: AddNewTableComponent }
+      ]
+
+    },
       { path: 'reports', component: BillOfMaterialsComponent,
       children: [
         { path: 'inventories', component: SummaryComponent },

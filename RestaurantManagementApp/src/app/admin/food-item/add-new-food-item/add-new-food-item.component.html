@@ -4,7 +4,7 @@
   <form (ngSubmit) = "onAddNewFoodItem(newFoodItem)" #newFoodItem = "ngForm">
     <div id="user-data">
       <div class="form-group">
-        <label for="name">Item Name:</label>
+        <label for="name">Item's Name:</label>
         <input
           type="text"
           id="name"
@@ -27,6 +27,25 @@
           required
         >
       </div>
+
+
+     <!-- <form (ngSubmit) = "OnSubmit(Image)" #imageForm = ngForm>-->
+        <!--<div class="form-group">
+
+          <img [src]="imageUrl"
+               style="width:230px;height:200px">
+          <input type="file"
+                 #Image
+                 accept="image/*"
+                 (change)="handleFileInput($event.target.files)">
+
+         &lt;!&ndash; <button
+            type="submit"
+            class="btn-large btn-submit"
+            [disabled]=" Image.value=='' ">Upload</button>&ndash;&gt;
+
+        </div>-->
+    <!--  </form>-->
 
 
       <div>

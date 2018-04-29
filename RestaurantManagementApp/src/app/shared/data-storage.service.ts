@@ -11,6 +11,7 @@ import {Subject} from 'rxjs/Subject';
 import {FoodItems} from './food-item.model';
 import {SummaryOfInventory} from './summary-of-inventory';
 import {CashFlow} from './cash-flow';
+import {Table} from "./table.model";
 @Injectable()
 export class DataStorageService {
 
@@ -20,6 +21,8 @@ export class DataStorageService {
 
   private _inventoryJson = 'assets/inventories.json';
   private _inventoryApi = 'http://localhost:1548/api/GetInventories';
+  private _tableJson = 'assets/tables.json';
+  private _tableApi = 'http://localhost:1548/api/GetTables';
   private _cashFlowJson = 'assets/cash-flow.json';
   private _sumOfInventoryJson = 'assets/sum-of-inventory.json';
 
@@ -29,6 +32,15 @@ export class DataStorageService {
               private _ourOffersService: OurOffersService) {
   }
 
+
+  postFile(foodItemId: string, fileToUpload: File ) {
+    const endpoint = 'http://localhost:1548/api/UploadImage';
+    const formData: FormData = new FormData();
+    formData.append('Image', fileToUpload, fileToUpload.name);
+    formData.append('FoodItemId', foodItemId);
+    return this._http
+      .post(endpoint, formData );
+  }
 
   getSummaryOfInventories() {
     return this._http.get(this._sumOfInventoryJson)
@@ -101,11 +113,41 @@ export class DataStorageService {
         (response: Response) => {
           const inventories: Inventory[] = response.json();
           console.log(inventories);
-         return inventories;
+          return inventories;
         }
       );
   }
 
+  getTables() {
+    return this._http.get(this._tableJson)
+      .map(
+        (response: Response) => {
+          const tables: Table[] = response.json();
+          console.log(tables);
+          return tables;
+        }
+      );
+  }
+
+  addNewTable(table: Table) {
+    return this._http.post('http://localhost:1548/api/AddNewTable',
+      table)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
+
+  deleteTable(table: Table) {
+    return this._http.post('http://localhost:1548/api/DeleteTable',
+      table)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
   addNewInventoryItem(inventory: Inventory) {
     return this._http.post('http://localhost:1548/api/AddNewInventory',
       inventory)

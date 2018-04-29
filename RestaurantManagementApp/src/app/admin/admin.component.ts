@@ -105,17 +105,18 @@ export class AdminComponent implements OnInit {
   goToSetMenu() {
     this.router.navigate(['admin/set-menu']);
   }
-
   goToRegulars() {
     this.router.navigate(['admin/food-item']);
   }
-
   goToReports() {
     this.router.navigate(['admin/reports']);
 
   }
-
   goToInventories() {
     this.router.navigate(['admin/inventory']);
+  }
+
+  goToTables() {
+    this.router.navigate(['admin/tables']);
   }
 }

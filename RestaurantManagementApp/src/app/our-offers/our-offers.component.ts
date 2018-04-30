@@ -10,7 +10,7 @@ import {Order} from '../shared/order.model';
 import { Uuid } from 'ng2-uuid';
 import {element} from 'protractor';
 import { Inject} from '@angular/core';
-
+import {Popup} from 'ng2-opd-popup';
 
 
 @Component({
@@ -25,7 +25,6 @@ export class OurOffersComponent implements OnInit, DoCheck {
     quantity: number = 0;
     uuidCodeOne = '';
     onCheck = 0;
-    dialogResult = "";
 
   public grandTotal: number;
   public orderedItems: OrderedItems[];
@@ -39,7 +38,8 @@ export class OurOffersComponent implements OnInit, DoCheck {
               private _dataStorageService: DataStorageService,
               private router: Router,
               private route: ActivatedRoute,
-              private uuid: Uuid
+              private uuid: Uuid,
+              private popup: Popup
   ) {
     this.Menu = new OurOffers();
     this.uuidCodeOne = this.uuid.v1();
@@ -104,22 +104,34 @@ export class OurOffersComponent implements OnInit, DoCheck {
     this.router.navigate(['payment']);
 
   }
- /* openDialog() {
-    let dialogRef = this.dialog.open(OurOffersComponent, {
-      width: '600px',
-      data: 'This text is passed into the dialog!'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      this.dialogResult = result;
-    });
-  }*/
+
+
 
 
   DiscardOrder() {
+    this.popup.options = {
+      header: 'Destroy Current Order?',
+      color: '#760000', // red, blue....
+      widthProsentage: 40, // The with of the popou measured by browser width
+      animationDuration: 1, // in seconds, 0 = no animation
+      showButtons: true, // You can hide this in case you want to use custom buttons
+      confirmBtnContent: 'Confirm', // The text on your confirm button
+      cancleBtnContent: 'Cancel', // the text on your cancel button
+      confirmBtnClass: 'btn btn-default', // your class for styling the confirm button
+      cancleBtnClass: 'btn btn-default', // you class for styling the cancel button
+      animation: 'bounceIn' // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+    };
+    this.popup.show();
+  }
+
+  ConfirmEvent() {
     this._ourOfferService.clearOrders();
     this._ourOfferService.TotalPrice = 0;
     this._ourOfferService.totalQuantity = 0;
+    this.popup.hide();
+  }
 
+  CancelEvent() {
+    this.popup.hide();
   }
 }

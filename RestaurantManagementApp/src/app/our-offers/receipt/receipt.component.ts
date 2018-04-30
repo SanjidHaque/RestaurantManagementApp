@@ -5,6 +5,7 @@ import {OurOffersService} from '../our-offers.service';
 import { Uuid } from 'ng2-uuid';
 import {Order} from '../../shared/order.model';
 import * as jsPDF from 'jspdf'
+import {Popup} from 'ng2-opd-popup';
 
 
 @Component({
@@ -19,10 +20,37 @@ export class ReceiptComponent implements OnInit {
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
+              private popup: Popup,
               private route: ActivatedRoute,
               private uuid: Uuid) {
   }
+  discardOrder() {
+    this.popup.options = {
+      header: 'Destroy Current Order?',
+      color: '#760000', // red, blue....
+      widthProsentage: 40, // The with of the popou measured by browser width
+      animationDuration: 1, // in seconds, 0 = no animation
+      showButtons: true, // You can hide this in case you want to use custom buttons
+      confirmBtnContent: 'Confirm', // The text on your confirm button
+      cancleBtnContent: 'Cancel', // the text on your cancel button
+      confirmBtnClass: 'btn btn-default', // your class for styling the confirm button
+      cancleBtnClass: 'btn btn-default', // you class for styling the cancel button
+      animation: 'bounceIn' // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+    };
+    this.popup.show();
+  }
 
+  confirmEvent(order: Order) {
+    this._ourOfferService.clearOrders();
+    this._ourOfferService.TotalPrice = 0;
+    this._ourOfferService.totalQuantity = 0;
+    this.router.navigate(['our-offers/regulars']);
+    this.popup.hide();
+    this._dataStorageService.deleteOrder(order);
+  }
+  cancelEvent() {
+    this.popup.hide();
+  }
   ngOnInit() {
     this.change = this._ourOfferService.orders.Change;
     this.order = this._ourOfferService.orders;

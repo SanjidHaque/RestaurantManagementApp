@@ -1,8 +1,9 @@
 .body-content {
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 60px;
-  position: relative;
-  z-index: 99; }
+  padding-left: 70px;
+  padding-right: 70px;
+  /* padding-top: 60px;*/
+  /* position: relative;
+   z-index: 99;*/
+  overflow-x: hidden; }
 
 /*# sourceMappingURL=app.component.css.map */

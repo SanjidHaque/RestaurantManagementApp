@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt");
+.hodoo {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 100px;
+  padding-left: 38px;
+  text-align: center;
+  color: #7e0000;
+  padding-top: 40px; }
+
+.hodoo:focus {
+  outline: 0; }
+
+.pos, .admin {
+  font-family: "Berlin Sans FB";
+  font-size: 60px;
+  text-align: center;
+  color: #aa0909; }
+
+.pos:hover, .admin:hover {
+  color: #6a0d0e; }
+
+/*# sourceMappingURL=control-panel.component.css.map */

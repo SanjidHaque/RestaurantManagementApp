@@ -65,11 +65,28 @@
 
 
 -->
+<!--
 <div class="row">
   <div class="col-md-12 header">
     Manage Your Inventory
   </div>
 </div>
+-->
+
+<div class="row main-row">
+  <div class="col-md-8 header">
+    Manage Your Inventory
+  </div>
+  <a routerLink="/control-panel">
+    <div class="col-md-2 dashboard">
+      <i class="fa fa-power-off" aria-hidden="true"></i> Back to Dashboard
+    </div>
+  </a>
+  <div class="col-md-1 hodoo">
+    hodoo
+  </div>
+</div>
+
 <div class="row title">
   <div class="col-md-8">
     <div class="col-md-3 name">
@@ -93,7 +110,7 @@
 
     <div class="row" *ngFor="let inventory of inventories | filter:term; let i = index">
 
-      <div class="col-md-12 f-name">
+      <div class="col-md-12 f-name table-bordered">
 
         <div class="col-md-3 ">
           {{ inventory.Name }}

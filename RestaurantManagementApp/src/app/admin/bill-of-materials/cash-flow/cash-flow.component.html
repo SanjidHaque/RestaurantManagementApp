@@ -1,9 +1,17 @@
 
 
 <div class="whole">
-  <div class="row">
-    <div class="col-md-12 header">
+  <div class="row main-row">
+    <div class="col-md-8 header">
       Order History
+    </div>
+    <a routerLink="/control-panel">
+      <div class="col-md-2 dashboard">
+        <i class="fa fa-power-off" aria-hidden="true"></i> Back to Dashboard
+      </div>
+    </a>
+    <div class="col-md-1 hodoo">
+      hodoo
     </div>
   </div>
 
@@ -30,7 +38,7 @@
     <div class="row">
       <div class="col-md-12 body">
         <div class="row" *ngFor="let cash of cashFlow">
-          <div class="col-md-12 f-name">
+          <div class="col-md-12 f-name table-bordered">
             <div class="col-md-3 ">
               {{ cash.OrderId }}
             </div>

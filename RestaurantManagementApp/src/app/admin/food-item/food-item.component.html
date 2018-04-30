@@ -1,6 +1,14 @@
-<div class="row">
-  <div class="col-md-12 header">
+<div class="row main-row">
+  <div class="col-md-8 header">
     Manage Your Food Items
+  </div>
+  <a routerLink="/control-panel">
+  <div class="col-md-2 dashboard">
+    <i class="fa fa-power-off" aria-hidden="true"></i> Back to Dashboard
+  </div>
+  </a>
+  <div class="col-md-1 hodoo">
+    hodoo
   </div>
 </div>
 
@@ -25,7 +33,7 @@
 
     <div class="row" *ngFor="let foodItem of FoodItem | filter:term; let i = index">
 
-      <div class="col-md-12 f-name">
+      <div class="col-md-12 f-name table-bordered">
 
         <div class="col-md-4 ">
           {{ foodItem.Name }}

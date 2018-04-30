@@ -1,3 +1,22 @@
+<div class="row main-row">
+<div class="col-md-offset-9 col-md-3">
+
+  <a style="cursor: pointer"
+     (click)="discardOrder()"
+     title="Destroy Current Order">
+    <div class="col-md-1 dashboard">
+      <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+    </div>
+  </a>
+  <div class="col-md-2 hodoo">
+    hodoo
+  </div>
+</div>
+</div>
+
+
+
+
 <div class="row">
   <div class="col-md-offset-2 col-md-2">
     <button
@@ -77,15 +96,15 @@
 </div>
 
   <div class="row table">
-    <div class="col-md-6 from-table">
+   <!-- <div class="col-md-6 from-table">
       From Table:
-    </div>
-    <div class="col-md-6 dropdown">
+    </div>-->
+    <div class="col-md-12 drop-down">
 
       <div class="form-group">
       <select
         (change)="selectChangeHandler($event)">
-        <option value="">No Table</option>
+        <option value="">Select a Table</option>
         <option *ngFor="let table of tables" value="{{ table.Name }}"
                 > {{ table.Name }} </option>
       </select>
@@ -105,4 +124,6 @@
 </div>-->
 
 
-
+<popup class="pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
+  You'll lose any data associated with the current order
+</popup>

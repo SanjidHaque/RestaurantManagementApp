@@ -95,7 +95,15 @@ export class DataStorageService {
         'Server error'))
       .subscribe();
   }
-
+  deleteOrder(order: Order) {
+    return this._http.post('http://localhost:1548/api/DeleteOrder',
+      order)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
 
   getOrders() {
     return this._http.get(this._orderJson)

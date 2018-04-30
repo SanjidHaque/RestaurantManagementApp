@@ -8,6 +8,7 @@ import {OrderedItems} from '../../shared/ordered-items.model';
 import { Uuid } from 'ng2-uuid';
 import {Table} from '../../shared/table.model';
 import {Subscription} from 'rxjs/Subscription';
+import {Popup} from 'ng2-opd-popup';
 
 @Component({
   selector: 'app-payment',
@@ -32,7 +33,8 @@ export class PaymentComponent implements OnInit, DoCheck {
               private _dataStorageService: DataStorageService,
               private router: Router,
               private route: ActivatedRoute,
-              private uuid: Uuid) {
+              private uuid: Uuid,
+              private popup: Popup) {
     this.tendered = 0;
   }
 
@@ -56,7 +58,33 @@ export class PaymentComponent implements OnInit, DoCheck {
   ngDoCheck() {
 
   }
+  discardOrder() {
+    this.popup.options = {
+      header: 'Destroy Current Order?',
+      color: '#760000', // red, blue....
+      widthProsentage: 40, // The with of the popou measured by browser width
+      animationDuration: 1, // in seconds, 0 = no animation
+      showButtons: true, // You can hide this in case you want to use custom buttons
+      confirmBtnContent: 'Confirm', // The text on your confirm button
+      cancleBtnContent: 'Cancel', // the text on your cancel button
+      confirmBtnClass: 'btn btn-default', // your class for styling the confirm button
+      cancleBtnClass: 'btn btn-default', // you class for styling the cancel button
+      animation: 'bounceIn' // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+    };
+    this.popup.show();
+  }
 
+  confirmEvent() {
+    this._ourOfferService.clearOrders();
+    this._ourOfferService.TotalPrice = 0;
+    this._ourOfferService.totalQuantity = 0;
+    this.router.navigate(['our-offers/regulars']);
+    this.popup.hide();
+  }
+
+  cancelEvent() {
+    this.popup.hide();
+  }
   back() {
       this.router.navigate(['our-offers']);
   }
@@ -79,6 +107,9 @@ export class PaymentComponent implements OnInit, DoCheck {
     }
   }
 
+  destroyOrder() {
+
+  }
 
 
   validate() {
@@ -87,7 +118,7 @@ export class PaymentComponent implements OnInit, DoCheck {
     this.orderedItems = this._ourOfferService.orderedItems;
     const totalPrice = this._ourOfferService.TotalPrice;
     const orderStatus = 0;
-    if ( this.selectedTable === '' || this.selectedTable === 'No Table' ) {
+    if ( this.selectedTable === '' || this.selectedTable === 'Select a Table' ) {
       this.table  =  'No Table';
     } else {
       this.table = this.selectedTable;

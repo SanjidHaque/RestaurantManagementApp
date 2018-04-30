@@ -63,6 +63,9 @@ export class FoodItemsComponent implements OnInit {
  /* ngDoCheck() {
     // this.orderedItems = this._ourOfferService.orderedItems;
   }*/
+  goToControlPanel() {
+    this.router.navigate(['control-panel']);
+  }
 
   checkNegativeQuantity(foodItemId: number) {
     for (let i = 0; i < this.orderedItems.length; i++) {

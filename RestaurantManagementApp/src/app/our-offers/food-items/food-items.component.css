@@ -228,6 +228,31 @@ collapsible-body{
 .all-categories-button:focus {
   outline: 0; }
 
+.close-this-session {
+  width: 25%;
+  height: 100%;
+  font-family: "Arial Narrow";
+  color: #d32039;
+  background-color: #ffffdf;
+  border: 2px solid #ae0000;
+  border-radius: 28px;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold;
+  margin-left: 30px; }
+
+.close-this-session:hover {
+  background-color: #d32039;
+  color: #ffffdf;
+  font-family: "Arial Narrow";
+  font-weight: bold;
+  border: 2px solid #ffffdf;
+  border-radius: 28px; }
+
+.close-this-session:focus {
+  outline: 0; }
+
 .name {
   color: #8e0017;
   font-family: "Times New Roman";
@@ -248,39 +273,6 @@ collapsible-body{
   border: 1px solid ghostwhite;
   border-radius: 10px; }
 
-/*
-body { margin: 30px; }
-.search {
-  color: #9c0000;
-  font-size: 14px;
-  font-family: "Lato","Lucida Grande", "Helvetica", "Verdana", "Arial";
-  position: fixed;
-  z-index: 999;
-
-}
-
-
-
-.search input {
-  width: 250px;
-  height: 35px;
-
-  background: #fcfcfc;
-  border: 2px solid #9c0000;
-  border-radius: 30px;
-}
-
-input:focus{
-  outline: 0;
-}
-
-.search input { text-indent: 32px;}
-.search .fa-search {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-*/
 .food-body {
   position: fixed;
   z-index: 999;
@@ -290,25 +282,25 @@ input:focus{
   margin-top: -2px; }
 
 .food-content {
-  position: relative;
+  /*position: relative;
   z-index: 99;
-  padding-top: 30px; }
+  padding-top: 30px;*/ }
 
 .left {
-  height: 80vh;
+  height: 90vh;
   /*height: calc(510px - 2px);*/
   box-sizing: border-box;
   overflow: auto;
-  margin-top: 60px; }
+  margin-top: 50px; }
 
 .fa-search {
   position: absolute;
-  top: 20px;
+  top: 19px;
   left: 30px; }
 
 .box {
   width: 250px;
-  height: 35px;
+  height: 32px;
   background: #fcfcfc;
   border: 2px solid #9c0000;
   border-radius: 28px;

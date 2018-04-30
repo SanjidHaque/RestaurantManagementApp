@@ -27,9 +27,11 @@ import {PaymentComponent} from './our-offers/payment/payment.component';
 import {ReceiptComponent} from './our-offers/receipt/receipt.component';
 import {TablesComponent} from './admin/tables/tables.component';
 import {AddNewTableComponent} from './admin/tables/add-new-table/add-new-table.component';
+import {ControlPanelComponent} from './control-panel/control-panel.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/our-offers/regulars', pathMatch: 'full' },
+  { path: 'control-panel', component: ControlPanelComponent },
+  { path: '', redirectTo: '/control-panel', pathMatch: 'full' },
   { path: 'payment', component: PaymentComponent },
   { path: 'receipt', component: ReceiptComponent },
   { path: 'our-offers', component: OurOffersComponent,

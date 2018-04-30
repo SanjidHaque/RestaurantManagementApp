@@ -204,6 +204,70 @@
     font-size: 11px;
 
   }
+
+  @import url('https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt');
+  .hodoo-logo {
+    font-family: 'Berkshire Swash', cursive;
+    font-size:40px;
+    // padding-left: 38px;
+    text-align: right;
+    color: #7e0000;
+    padding-top: 5px;
+  }
+
+  .hodoo:focus {
+    outline: 0;
+  }
+
+  .dashboard{
+    width:20%;
+    height:100%;
+    font-family:"Arial Narrow";
+    color: #aa0909;
+    background-color: ghostwhite;
+    /*border: 1.2px solid #ae0000;
+    border-radius: 5px;*/
+    font-size:33px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+
+
+  .dashboard:hover{
+    color: #6a0d0e;
+    background-color: ghostwhite;
+    font-family:"Arial Narrow";
+    font-weight:bold;
+    /* border: 1.2px solid #ffffdf;
+     border-radius: 5px;*/
+  }
+
+
+  .pop-up{
+    color: #7e0000;
+    font-size: 19px;
+    font-family: "Berlin Sans FB";
+    text-align: center;
+  }
+
+  .main-row{
+    border-bottom: 2px double #dfdfdf;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

@@ -50,6 +50,8 @@ import { PaymentComponent } from './our-offers/payment/payment.component';
 import { ReceiptComponent } from './our-offers/receipt/receipt.component';
 import { TablesComponent } from './admin/tables/tables.component';
 import { AddNewTableComponent } from './admin/tables/add-new-table/add-new-table.component';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
+import {PopupModule} from 'ng2-opd-popup';
 
 
 
@@ -87,7 +89,8 @@ import { AddNewTableComponent } from './admin/tables/add-new-table/add-new-table
     PaymentComponent,
     ReceiptComponent,
     TablesComponent,
-    AddNewTableComponent
+    AddNewTableComponent,
+    ControlPanelComponent
 
   ],
   imports: [
@@ -100,6 +103,7 @@ import { AddNewTableComponent } from './admin/tables/add-new-table/add-new-table
     CommonModule,
     FormsModule,
     LoadingModule,
+    PopupModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: ''
 

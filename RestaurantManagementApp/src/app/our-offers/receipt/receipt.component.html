@@ -4,6 +4,21 @@
   {{ change }}
 </div>
 <button (click)="print()">print</button>-->
+<div class="row main-row">
+  <div class="col-md-offset-9 col-md-3">
+
+    <a style="cursor: pointer"
+       (click)="discardOrder()"
+       title="Destroy Current Order">
+      <div class="col-md-1 dashboard">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </div>
+    </a>
+    <div class="col-md-2 hodoo-logo">
+      hodoo
+    </div>
+  </div>
+</div>
 
 
 <div class="row upper-div">
@@ -19,7 +34,7 @@ Change: {{ change }} BDT
   </div>
 </div>
 
-<hr>
+
 <div class="row">
   <div class="col-md-offset-2 col-md-8 receipt">
     <button (click)="print()" class="back"><i class="fa fa-print"></i> Print Receipt</button>
@@ -72,3 +87,7 @@ Change: {{ change }} BDT
         </div>
   </div>
 </div>
+
+<popup class="pop-up" (confirmClick)="confirmEvent(order)" (cancelClick)="cancelEvent()">
+  You'll lose any data associated with the current order
+</popup>

@@ -285,14 +285,23 @@ namespace RMS_Server_.Controllers
             _context.SaveChanges();
         }
 
-
+        [HttpPost]
+        [Route("api/DeleteOrder")]
+        public void DeleteTable(Order order)
+        {
+            var deleteOrderedItems = _context.OrderedItems.Where(p => p.OrderId == order.Id);
+            _context.OrderedItems.RemoveRange(deleteOrderedItems);
+            var deleteOrder = _context.Orders.FirstOrDefault(q => q.Id == order.Id);
+            _context.Orders.Remove(deleteOrder);
+            _context.SaveChanges();
+        }
        
 
         [HttpPost]
         [Route("api/AddNewInventory")]
         public void AddInventoryItem(Inventory inventory)
         {
-            try
+           try
             {
                 _context.Inventories.Add(inventory);
                 var sumOfInv = new SummaryOfInventory();

@@ -5,6 +5,9 @@ import {Http} from '@angular/http';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {Subscription} from 'rxjs/Subscription';
 import {OurOffersService} from '../../our-offers/our-offers.service';
+import {filter} from 'rxjs/operator/filter';
+import { LocationStrategy } from '@angular/common';
+
 
 @Component({
   selector: 'app-inventory',
@@ -19,9 +22,12 @@ export class InventoryComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private location: LocationStrategy,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) { }
+              private _http: Http) {
+
+  }
 
   ngOnInit() {
      this._dataStorageService.getInventories()
@@ -47,6 +53,7 @@ export class InventoryComponent implements OnInit {
     const id = inventory.Id;
     this.router.navigate(['admin/inventory/edit-inventory-item', id ]);
  }
+
 
  deleteItem(inventory: Inventory, index: number) {
    this._dataStorageService.deleteInventoryItem(inventory);

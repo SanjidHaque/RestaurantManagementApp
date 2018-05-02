@@ -54,16 +54,16 @@
 
 }
 
-  .header{
-    color: #770000;
-    font-size: 21px;
-    font-family: "Berlin Sans FB";
-    text-align: left;
-    margin-top: 10px;
-    border:1px;
-    border-radius: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+.header{
+  color: #770000;
+  font-size: 21px;
+  font-family: "Berlin Sans FB";
+  text-align: left;
+  margin-top: 10px;
+  border:1px;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .main-row{
   border-bottom: 2px double #dfdfdf;
@@ -130,4 +130,35 @@
   font-weight:bold;
   /* border: 1.2px solid #ffffdf;
    border-radius: 5px;*/
+}
+
+
+.icons{
+  /*text-align: center;*/
+  font-size: 23px;
+  color: #bcb4b6;
+  margin-top: 10px;
+}
+
+.icons:hover{
+  /*text-align: center;*/
+  font-size: 23px;
+  color: #690e0f;
+  margin-top: 10px;
+}
+
+.list, grid{
+  text-align: right;
+  padding-left: 0;
+  padding-right: 0;
+}
+.grid{
+  text-align: left;
+}
+
+.icon-active{
+  color: #690e0f;
+}
+a{
+  color: #ada5a7;
 }

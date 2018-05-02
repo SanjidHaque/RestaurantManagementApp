@@ -110,4 +110,30 @@
   /* border: 1.2px solid #ffffdf;
    border-radius: 5px;*/ }
 
-/*# sourceMappingURL=cash-flow.component.css.map */
+.icons {
+  /*text-align: center;*/
+  font-size: 23px;
+  color: #bcb4b6;
+  margin-top: 10px; }
+
+.icons:hover {
+  /*text-align: center;*/
+  font-size: 23px;
+  color: #690e0f;
+  margin-top: 10px; }
+
+.list, grid {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 0; }
+
+.grid {
+  text-align: left; }
+
+.icon-active {
+  color: #690e0f; }
+
+a {
+  color: #ada5a7; }
+
+/*# sourceMappingURL=orders.component.css.map */

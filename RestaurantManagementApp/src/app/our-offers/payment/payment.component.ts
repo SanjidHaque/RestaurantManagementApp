@@ -113,9 +113,17 @@ export class PaymentComponent implements OnInit, DoCheck {
 
 
   validate() {
-    const orderId = this._ourOfferService.uuidCodeOne;
+    const orderId = this.uuid.v1();
     this.onCheck  = 1;
+
     this.orderedItems = this._ourOfferService.orderedItems;
+    for ( let i = 0; i < this._ourOfferService.orderedItems.length; i++) {
+      this._ourOfferService.orderedItems[i].OrderId = orderId;
+
+    }
+   /* const index = this._ourOfferService.orderedItems.findIndex(d => d.FoodItemQuantity === 0 );
+   this._ourOfferService.orderedItems.splice(index, 1);*/
+
     const totalPrice = this._ourOfferService.TotalPrice;
     const orderStatus = 0;
     if ( this.selectedTable === '' || this.selectedTable === 'Select a Table' ) {
@@ -128,8 +136,8 @@ export class PaymentComponent implements OnInit, DoCheck {
       - Number.parseInt(totalPrice.toString());
     const dateTime = new Date().toLocaleString();
     console.log(dateTime);
-    this.orders = new Order(orderId, this.orderedItems, totalPrice,
-      this.tendered, this.change, orderStatus, dateTime , this.table );
+    this.orders = new Order(orderId, this._ourOfferService.orderedItems, totalPrice,
+      this.tendered, this.change, orderStatus, dateTime , this.table, null, null );
     this._ourOfferService.addToOrderedList(this.orders);
     this._dataStorageService.storeOrders()
       .subscribe(

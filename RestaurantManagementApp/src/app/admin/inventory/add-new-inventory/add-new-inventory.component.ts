@@ -11,6 +11,7 @@ import {DataStorageService} from '../../../shared/data-storage.service';
   templateUrl: './add-new-inventory.component.html',
   styleUrls: ['./add-new-inventory.component.scss']
 })
+
 export class AddNewInventoryComponent implements OnInit {
   uuidCodeOne = '';
   unit : number;

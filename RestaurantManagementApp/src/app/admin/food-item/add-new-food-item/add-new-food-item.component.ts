@@ -77,7 +77,7 @@ export class AddNewFoodItemComponent implements OnInit {
     (['admin/food-item/add-new-food-item/add-ingredients', this.foodItemId]);*/
     this.router.navigate
     (['add-ingredients', this.foodItemId],
-      {relativeTo: this.route})
+      {relativeTo: this.route});
   }
 
   onSaveFoodItem(Image) {

@@ -4,7 +4,6 @@ import { UuidModule } from 'ng2-uuid';
 import { CarouselModule } from 'angular4-carousel';
 import { CollapsibleModule } from 'angular4-collapsible';
 import { LoadingModule } from 'ngx-loading';
-import { DatePipe } from '@angular/common';
 
 
 import { AppComponent } from './app.component';
@@ -52,6 +51,13 @@ import { TablesComponent } from './admin/tables/tables.component';
 import { AddNewTableComponent } from './admin/tables/add-new-table/add-new-table.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import {PopupModule} from 'ng2-opd-popup';
+import { ViewIngredientsComponent } from './admin/food-item/view-ingredients/view-ingredients.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { OrderListViewComponent } from './admin/orders/order-list-view/order-list-view.component';
+import { OrderListViewDetailsComponent } from './admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
+import { OrderGridViewComponent } from './admin/orders/order-grid-view/order-grid-view.component';
+import { OrderGridViewDetailsComponent } from './admin/orders/order-grid-view/order-grid-view-details/order-grid-view-details.component';
+
 
 
 
@@ -90,8 +96,13 @@ import {PopupModule} from 'ng2-opd-popup';
     ReceiptComponent,
     TablesComponent,
     AddNewTableComponent,
-    ControlPanelComponent
-
+    ControlPanelComponent,
+    ViewIngredientsComponent,
+    OrdersComponent,
+    OrderListViewComponent,
+    OrderListViewDetailsComponent,
+    OrderGridViewComponent,
+    OrderGridViewDetailsComponent
   ],
   imports: [
     BrowserModule,

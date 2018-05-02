@@ -31,6 +31,7 @@ export class FoodItemsComponent implements OnInit {
   orderItemId = '';
   subscription: Subscription;
   searchedItems = '';
+  check : boolean;
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
@@ -60,20 +61,18 @@ export class FoodItemsComponent implements OnInit {
     // this.orderedItems = this._ourOfferService.orderedItems;
   }
 
- /* ngDoCheck() {
-    // this.orderedItems = this._ourOfferService.orderedItems;
-  }*/
+
   goToControlPanel() {
     this.router.navigate(['control-panel']);
   }
 
-  checkNegativeQuantity(foodItemId: number) {
+  checkNegativeQuantity(foodItemId: number, quantity: number) {
     for (let i = 0; i < this.orderedItems.length; i++) {
       if (this.orderedItems[i].FoodItemId === foodItemId) {
-        if ( this.orderedItems[i].FoodItemQuantity < this.quantity) {
-          return false;
+        if ( this.orderedItems[i].FoodItemQuantity > this.quantity) {
+         return  true;
         } else {
-          return true;
+          return false;
         }
       }
     }
@@ -84,7 +83,7 @@ export class FoodItemsComponent implements OnInit {
     let foodItemId = id;
     let foodItemName = name;
     let Price = price;
-    let orderId = this._ourOfferService.uuidCodeOne;
+    let orderId = null;
     if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
      let orderItemId = this.uuid.v1();
       if ( isAdd === true ) {
@@ -138,10 +137,11 @@ export class FoodItemsComponent implements OnInit {
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
                  foodItemId: number, foodItemName: string, price: number ) {
 
+   // this.check  = this.checkNegativeQuantity(foodItemId, quantity);
 
-    let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
+      let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
+      this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
 
-    this.quantity= this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
    /* this._ourOfferService.totalQuantity =
       Number.parseInt(this._ourOfferService.totalQuantity.toString()) -
       Number.parseInt(quantity.toString());*/

@@ -24,6 +24,13 @@ export class ReceiptComponent implements OnInit {
               private route: ActivatedRoute,
               private uuid: Uuid) {
   }
+  ngOnInit() {
+    this.change = this._ourOfferService.orders.Change;
+    this.order = this._ourOfferService.orders;
+
+
+  }
+
   discardOrder() {
     this.popup.options = {
       header: 'Destroy Current Order?',
@@ -46,15 +53,13 @@ export class ReceiptComponent implements OnInit {
     this._ourOfferService.totalQuantity = 0;
     this.router.navigate(['our-offers/regulars']);
     this.popup.hide();
+    this._ourOfferService.deleteOrder(order);
     this._dataStorageService.deleteOrder(order);
   }
   cancelEvent() {
     this.popup.hide();
   }
-  ngOnInit() {
-    this.change = this._ourOfferService.orders.Change;
-    this.order = this._ourOfferService.orders;
-  }
+
 
 
 

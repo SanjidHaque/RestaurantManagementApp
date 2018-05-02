@@ -28,6 +28,12 @@ import {ReceiptComponent} from './our-offers/receipt/receipt.component';
 import {TablesComponent} from './admin/tables/tables.component';
 import {AddNewTableComponent} from './admin/tables/add-new-table/add-new-table.component';
 import {ControlPanelComponent} from './control-panel/control-panel.component';
+import {OrdersComponent} from './admin/orders/orders.component';
+import {OrderListViewComponent} from './admin/orders/order-list-view/order-list-view.component';
+import {OrderListViewDetailsComponent} from './admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
+import {OrderGridViewComponent} from './admin/orders/order-grid-view/order-grid-view.component';
+import {OrderGridViewDetailsComponent} from './admin/orders/order-grid-view/order-grid-view-details/order-grid-view-details.component';
+
 
 const appRoutes: Routes = [
   { path: 'control-panel', component: ControlPanelComponent },
@@ -47,6 +53,14 @@ const appRoutes: Routes = [
   { path: 'contact-us', component: ContactUsComponent},
   { path: 'chef', component: ChefComponent},
   { path: 'admin', component: AdminComponent, children: [
+    { path: 'orders', component: OrdersComponent,
+    children: [
+      { path: 'list-view', component: OrderListViewComponent},
+      { path: 'list-details/:id', component: OrderListViewDetailsComponent},
+      { path: 'grid-view', component: OrderGridViewComponent},
+      { path: 'grid-details', component: OrderGridViewDetailsComponent }
+    ]
+    },
       { path: 'food-item', component: FoodItemComponent ,
        children: [
          { path: 'add-new-food-item/:id', component: AddNewFoodItemComponent,
@@ -56,7 +70,7 @@ const appRoutes: Routes = [
          { path: 'edit-food-item/:id', component: EditFoodItemComponent }
        ]},
       { path: 'set-menu', component: AddSetMenuComponent},
-    { path: 'orders', component: CashFlowComponent },
+   /* { path: 'orders', component: CashFlowComponent },*/
     { path: 'summary-of-inventories', component: SummaryComponent },
     { path: 'tables', component: TablesComponent, children:
     [

@@ -21,11 +21,13 @@ export class OurOffersService {
   public TotalPrice = 0;
   public menuChanged = new Subject<OurOffers>();
   public orderedItemsChanged = new Subject<OrderedItems[]>();
-  public ordersChanged = new Subject<Order>();
   public menu: OurOffers;
   public totalQuantity  = 0;
   public orderedItems: OrderedItems[] = [];
   public orders: Order;
+  public ordersChanged = new Subject<Order>();
+  public ordersList: Order[] = [];
+  public ordersListChanged = new Subject<Order[]>();
   public acceptedOrder: Order;
   public rejectedOrder: Order;
   public setMenuSubTotal = 0;
@@ -113,16 +115,21 @@ export class OurOffersService {
 
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
       if ( this.orderedItems[i].FoodItemId === foodItemId) {
-        this.orderedItems[i].FoodItemQuantity =
-          this.orderedItems[i].FoodItemQuantity
-          - quantity;
+        if (this.orderedItems[i].FoodItemQuantity >= quantity) {
+          this.orderedItems[i].FoodItemQuantity =
+            this.orderedItems[i].FoodItemQuantity
+            - quantity;
 
-        this.orderedItems[i].FoodItemSubTotal =
-          this.orderedItems[i].FoodItemSubTotal
-          - subTotal;
-        this.TotalPrice -= Number.parseInt(subTotal.toString());
-        this.totalQuantity -= Number.parseInt(quantity.toString());
-        return this.orderedItems[i].FoodItemQuantity;
+          this.orderedItems[i].FoodItemSubTotal =
+            this.orderedItems[i].FoodItemSubTotal
+            - subTotal;
+          this.TotalPrice -= Number.parseInt(subTotal.toString());
+          this.totalQuantity -= Number.parseInt(quantity.toString());
+          if (this.orderedItems[i].FoodItemQuantity === 0) {
+            this.orderedItems.splice(i, 1);
+          }
+        }
+
       }
     }
   }
@@ -155,7 +162,13 @@ export class OurOffersService {
   getRejectedOrder() {
     return this.rejectedOrder;
   }
-
+  deleteOrder(order: Order) {
+    for (let i = 0; i < this.ordersList.length; i++ ) {
+      if ( this.ordersList[i].Id === order.Id  ) {
+        this.ordersList.splice(i, 1);
+      }
+    }
+  }
   addToOrderedItemsList(orderedItems: OrderedItems) {
     this.orderedItems.push(orderedItems);
     this.orderedItemsChanged.next(this.orderedItems.slice());
@@ -164,6 +177,8 @@ export class OurOffersService {
   addToOrderedList(order: Order) {
     this.orders = order;
     this.ordersChanged.next(order);
+    this.ordersList.push(order);
+    this.ordersListChanged.next(this.ordersList.slice());
   }
 
   grandTotalPrice(price: number) {

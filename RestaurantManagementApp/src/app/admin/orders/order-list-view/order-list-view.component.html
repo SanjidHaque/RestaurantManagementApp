@@ -1,8 +1,13 @@
 <div class="sum-of-inv-body">
-
+<div class="row">
+  <div class="col-md-4 search-bar">
+    <span class="fa fa-search"></span>
+    <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Receipt Ref...">
+  </div>
+</div>
   <div class="row">
     <div class="col-md-12">
-      <div class="col-md-2 name">
+      <div class="col-md-2 receipt">
         Receipt Ref
       </div>
       <div class="col-md-2 name">
@@ -25,7 +30,7 @@
 
   <div class="row">
     <div class="col-md-12 body">
-      <div class="row" *ngFor="let orderList of orderLists">
+      <div class="row" *ngFor="let orderList of orderLists | order:term">
         <a title="View This Order's Details"
           style="cursor: pointer" (click)="viewDetails(orderList)">
         <div class="col-md-12 f-name table-bordered">
@@ -54,5 +59,31 @@
         </a>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 Summary">
+    Summary
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Order: {{ totalOrder }} (s)
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Sale: {{ grossSale }} BDT
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Inventory Cost: {{ grossCost }} BDT
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Profit: {{ grossProfit }} BDT
   </div>
 </div>

@@ -5,6 +5,7 @@ import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';
 import {IngredientServiceService} from '../../food-item/add-new-food-item/add-ingredients/ingredient-service.service';
 import {Order} from '../../../shared/order.model';
+import {Subject} from 'rxjs/Subject';
 
 
 @Component({
@@ -15,6 +16,10 @@ import {Order} from '../../../shared/order.model';
 export class OrderListViewComponent implements OnInit {
 
   orderLists: Order[] = [];
+  grossSale = 0;
+  grossCost = 0;
+  grossProfit = 0;
+  totalOrder = 0;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
@@ -35,10 +40,25 @@ export class OrderListViewComponent implements OnInit {
           this.orderLists = order;
         }
       );
+    for (let i = 0; i < this.orderLists.length; i++ ) {
+
+      this.grossSale = this.grossSale
+        + Number.parseInt(this.orderLists[i].TotalPrice.toString());
+
+      this.grossCost = this.grossCost
+        + Number.parseInt(this.orderLists[i].InventoryCost.toString());
+
+      this.grossProfit = this.grossProfit
+        + Number.parseInt(this.orderLists[i].Profit.toString());
+    }
+
+    this.totalOrder = this.orderLists.length;
   }
   viewDetails(orderList: Order) {
     const orderId =  orderList.Id;
     this.router.navigate(['admin/orders/list-details', orderId]);
   }
+
+
 
 }

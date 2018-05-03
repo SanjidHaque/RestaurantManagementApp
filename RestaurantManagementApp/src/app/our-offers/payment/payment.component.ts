@@ -25,7 +25,8 @@ export class PaymentComponent implements OnInit, DoCheck {
   change = 0;
   selectedTable = '';
   table: string;
-
+  inventoryCost = 0;
+  orderProfit = 0;
 
   public tables: Table[] = [];
   subscription: Subscription;
@@ -131,7 +132,10 @@ export class PaymentComponent implements OnInit, DoCheck {
     } else {
       this.table = this.selectedTable;
     }
-
+    /*for (let i = 0; i < this.orderedItems.length; i++) {
+        this.inventoryCost = Number.parseInt(this.inventoryCost.toString()) +
+          (Number.parseInt(this.orderedItems[i].FoodItemQuantity) *
+    }*/
     this.change = Number.parseInt(this.tendered.toString())
       - Number.parseInt(totalPrice.toString());
     const dateTime = new Date().toLocaleString();

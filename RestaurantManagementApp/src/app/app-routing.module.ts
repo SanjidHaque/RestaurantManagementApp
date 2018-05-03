@@ -58,7 +58,7 @@ const appRoutes: Routes = [
       { path: 'list-view', component: OrderListViewComponent},
       { path: 'list-details/:id', component: OrderListViewDetailsComponent},
       { path: 'grid-view', component: OrderGridViewComponent},
-      { path: 'grid-details', component: OrderGridViewDetailsComponent }
+      { path: 'grid-details/:id', component: OrderGridViewDetailsComponent }
     ]
     },
       { path: 'food-item', component: FoodItemComponent ,

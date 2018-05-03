@@ -85,7 +85,7 @@ export class AddNewFoodItemComponent implements OnInit {
     const foodItemId = this.foodItemId;
    /* const image = this.fileToUpload;*/
     const newFoodItem =
-      new FoodItems(foodItemId, this.name, this.price,
+      new FoodItems(foodItemId, this.name, this.price, null,
       null, foodItemIngredients );
     this._ourOfferService.addToFoodItemList(newFoodItem);
     this._dataStorageService.addFoodItem(newFoodItem);

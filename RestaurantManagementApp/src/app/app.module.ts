@@ -57,6 +57,7 @@ import { OrderListViewComponent } from './admin/orders/order-list-view/order-lis
 import { OrderListViewDetailsComponent } from './admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
 import { OrderGridViewComponent } from './admin/orders/order-grid-view/order-grid-view.component';
 import { OrderGridViewDetailsComponent } from './admin/orders/order-grid-view/order-grid-view-details/order-grid-view-details.component';
+import { OrderPipe } from './admin/orders/order.pipe';
 
 
 
@@ -102,7 +103,8 @@ import { OrderGridViewDetailsComponent } from './admin/orders/order-grid-view/or
     OrderListViewComponent,
     OrderListViewDetailsComponent,
     OrderGridViewComponent,
-    OrderGridViewDetailsComponent
+    OrderGridViewDetailsComponent,
+    OrderPipe
   ],
   imports: [
     BrowserModule,

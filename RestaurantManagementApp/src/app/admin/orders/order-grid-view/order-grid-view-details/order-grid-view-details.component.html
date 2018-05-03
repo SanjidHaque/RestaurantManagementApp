@@ -1,3 +1,135 @@
-<p>
-  order-grid-view-details works!
-</p>
+<div class="row">
+  <div class="col-md-offset-1 col-md-9 order-detail">
+    <div class="row buttons">
+      <div class="col-md-2 back">
+        <button class="back-button" (click)="goBack()"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+          Back</button>
+      </div>
+      <div class="col-md-offset-8 col-md-2 delete">
+        <button class="back-button" (click)="deleteOrder(order)"><i class="fa fa-trash" aria-hidden="true"></i>
+          Delete</button>
+      </div>
+    </div>
+
+
+    <div class="row upper-div">
+      <div class="col-md-6 order-header">
+        <div class="row">
+          <div class="col-md-4 order-ref">
+            Order Ref
+          </div>
+          <div class="col-md-6 id">
+            {{ order.Id }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4 order-date">
+            Order Date
+          </div>
+          <div class="col-md-6 date">
+            {{ order.DateTime }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row prod">
+      <div class="col-md-12">
+        Products
+      </div>
+    </div>
+    <div class="row units ">
+      <div class="col-md-3">
+        Product
+      </div>
+      <div class="col-md-3 ">
+        Quantity
+      </div>
+      <div class="col-md-3 ">
+        Unit Price
+      </div>
+      <div class="col-md-3 ">
+        Sub Total
+      </div>
+    </div>
+
+
+    <div *ngIf="order.OrderedItems !== null" class="scrollable-div" >
+      <div class="row table-bordered units-details" *ngFor="let products of order.OrderedItems">
+        <div class="col-md-3" >
+          {{ products.FoodItemName }}
+        </div>
+        <div class="col-md-3">
+          {{ products.FoodItemQuantity }}
+        </div>
+        <div class="col-md-3">
+          {{ products.Price}}
+        </div>
+        <div class="col-md-3">
+          {{ products.FoodItemSubTotal }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-md-offset-8 col-md-1 total">
+        Total:
+      </div>
+      <div class="col-md-2 bdt">
+        {{ order.TotalPrice }} BDT
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 prod">
+        Payments and Additional Informations
+      </div>
+    </div>
+    <div class="row units">
+      <div class="col-md-2">
+        Total
+      </div>
+      <div class="col-md-2">
+        Tendered
+      </div>
+      <div class="col-md-2">
+        Change
+      </div>
+      <div class="col-md-2">
+        Inventory Cost
+      </div>
+      <div class="col-md-2">
+        Profit
+      </div>
+      <div class="col-md-2">
+        Table
+      </div>
+    </div>
+
+    <div class="row units-details">
+      <div class="col-md-2">
+        {{ order.TotalPrice }}
+      </div>
+      <div class="col-md-2">
+        {{ order.Tendered }}
+      </div>
+      <div class="col-md-2">
+        {{ order.Change }}
+      </div>
+      <div class="col-md-2">
+        {{ order.InventoryCost }}
+      </div>
+      <div class="col-md-2">
+        {{ order.Profit }}
+      </div>
+      <div class="col-md-2">
+        {{ order.TableNo }}
+      </div>
+    </div>
+    <popup class="pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
+      You'll lose any data associated with the current order!
+    </popup>
+  </div>
+</div>
+
+

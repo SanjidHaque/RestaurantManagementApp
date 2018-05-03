@@ -10,8 +10,8 @@ export class FilterPipe implements PipeTransform {
       return foodItems;
     }
     return foodItems.filter(function (foodItem) {
-            return foodItem.Name.toLowerCase()
-              .includes(term.toLowerCase());
+      return foodItem.Name.toLowerCase()
+        .includes(term.toLowerCase());
     })
   }
 

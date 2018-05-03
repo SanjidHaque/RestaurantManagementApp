@@ -3,13 +3,22 @@
   margin-top: 20px;
   color: #6a0d0e;
   font-family: "Berlin Sans FB";
-  font-size: 20px;
+  font-size: 17px;
   text-align: center;
   padding-left: 0;
   padding-right: 0; }
 
 .whole {
   /*margin-top: 20px;*/ }
+
+.receipt {
+  text-align: left;
+  margin-top: 20px;
+  color: #6a0d0e;
+  font-family: "Berlin Sans FB";
+  font-size: 17px;
+  padding-left: 0;
+  padding-right: 0; }
 
 .column {
   border-left: 2px double #c5bdbf;
@@ -75,7 +84,7 @@
   border-bottom: 2px double #dfdfdf; }
 
 .body {
-  max-height: 55vh;
+  max-height: 49vh;
   overflow-y: scroll;
   border: 1px solid #cbc6cb;
   border-radius: 5px;
@@ -124,5 +133,44 @@
   font-weight: bold;
   /* border: 1.2px solid #ffffdf;
    border-radius: 5px;*/ }
+
+.box {
+  width: 230px;
+  height: 25px;
+  background: #fcfcfc;
+  border: 2px solid #9c0000;
+  border-radius: 10px;
+  text-indent: 32px;
+  color: #9c0000;
+  font-size: 11px;
+  font-family: "Lato","Lucida Grande", "Helvetica", "Verdana", "Arial"; }
+
+.box:focus {
+  outline: 0; }
+
+.fa-search {
+  position: absolute;
+  top: 7px;
+  left: 23px;
+  font-size: 11px; }
+
+.search-bar {
+  margin-top: 10px; }
+
+.Summary {
+  font-family: "Times New Roman";
+  color: #520606;
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 3px;
+  padding-bottom: 3px; }
+
+.detail {
+  font-family: "Times New Roman";
+  color: #630606;
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 2px;
+  padding-bottom: 2px; }
 
 /*# sourceMappingURL=order-list-view.component.css.map */

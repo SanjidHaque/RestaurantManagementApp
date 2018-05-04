@@ -33,6 +33,10 @@ import {OrderListViewComponent} from './admin/orders/order-list-view/order-list-
 import {OrderListViewDetailsComponent} from './admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
 import {OrderGridViewComponent} from './admin/orders/order-grid-view/order-grid-view.component';
 import {OrderGridViewDetailsComponent} from './admin/orders/order-grid-view/order-grid-view-details/order-grid-view-details.component';
+import {FooditemListViewComponent} from './admin/food-item/fooditem-list-view/fooditem-list-view.component';
+import {ListDetailsComponent} from './admin/food-item/fooditem-list-view/list-details/list-details.component';
+import {FooditemGridViewComponent} from './admin/food-item/fooditem-grid-view/fooditem-grid-view.component';
+import {GridDetailsComponent} from './admin/food-item/fooditem-grid-view/grid-details/grid-details.component';
 
 
 const appRoutes: Routes = [
@@ -63,10 +67,11 @@ const appRoutes: Routes = [
     },
       { path: 'food-item', component: FoodItemComponent ,
        children: [
-         { path: 'add-new-food-item/:id', component: AddNewFoodItemComponent,
-         children: [
-           { path: 'add-ingredients/:id', component: AddIngredientsComponent }
-         ]},
+         { path: 'list-view', component: FooditemListViewComponent},
+         { path: 'list-details/:id', component: ListDetailsComponent},
+         { path: 'grid-view', component: FooditemGridViewComponent},
+         { path: 'grid-details/:id', component: GridDetailsComponent },
+         { path: 'add-new-food-item', component: AddNewFoodItemComponent},
          { path: 'edit-food-item/:id', component: EditFoodItemComponent }
        ]},
       { path: 'set-menu', component: AddSetMenuComponent},

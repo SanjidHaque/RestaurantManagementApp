@@ -12,7 +12,7 @@ import {Order} from '../shared/order.model';
 import {Inventory} from '../shared/inventory.model';
 import {FoodItems} from '../shared/food-item.model';
 import {Ingredients} from '../shared/ingredients.model';
-import {Table} from "../shared/table.model";
+import {Table} from '../shared/table.model';
 
 
 @Injectable()

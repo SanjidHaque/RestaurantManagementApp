@@ -45,7 +45,7 @@ export class AddNewInventoryComponent implements OnInit {
       }
      // const w = this.amountInputRef.nativeElement.value;
       const price = form.value.price;
-      const newItem = new Inventory(id, name, quantity, this.unit, price);
+      const newItem = new Inventory(id, name, quantity, null , price);
       this._ourOfferService.addToInventoryList(newItem);
       this._dataStorageService.addNewInventoryItem(newItem);
 

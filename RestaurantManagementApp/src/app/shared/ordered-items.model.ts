@@ -10,12 +10,16 @@ export class OrderedItems {
   public Price: number;
   public SetMenuSubTotal?: number;
   public FoodItemSubTotal?: number;
+  public FoodItemMakingCost: number;
 
 
 
-  constructor(orderItemId: string, orderId: string, foodItemId: number, setMenuQuantity: number,
-            foodItemQuantity: number,  setMenuId: number, setMenuName: string, foodItemName: string,
-              price: number, setMenuSubTotal: number, foodItemSubTotal: number ) {
+  constructor(orderItemId: string, orderId: string,
+              foodItemId: number, setMenuQuantity: number,
+            foodItemQuantity: number,  setMenuId: number,
+              setMenuName: string, foodItemName: string,
+              price: number, setMenuSubTotal: number,
+              foodItemSubTotal: number, foodItemMakingCost: number ) {
     this.OrderItemId = orderItemId;
     this.OrderId = orderId;
     this.FoodItemId = foodItemId;
@@ -27,5 +31,6 @@ export class OrderedItems {
     this.Price = price;
     this.SetMenuSubTotal = setMenuSubTotal;
     this.FoodItemSubTotal = foodItemSubTotal;
+    this.FoodItemMakingCost = foodItemMakingCost;
   }
 }

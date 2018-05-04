@@ -132,16 +132,20 @@ export class PaymentComponent implements OnInit, DoCheck {
     } else {
       this.table = this.selectedTable;
     }
-    /*for (let i = 0; i < this.orderedItems.length; i++) {
+    for (let i = 0; i < this.orderedItems.length; i++) {
         this.inventoryCost = Number.parseInt(this.inventoryCost.toString()) +
-          (Number.parseInt(this.orderedItems[i].FoodItemQuantity) *
-    }*/
+          (Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString()) *
+            Number.parseInt(this.orderedItems[i].FoodItemMakingCost.toString()));
+    }
+    this.orderProfit = totalPrice - this.inventoryCost;
     this.change = Number.parseInt(this.tendered.toString())
       - Number.parseInt(totalPrice.toString());
     const dateTime = new Date().toLocaleString();
     console.log(dateTime);
+
     this.orders = new Order(orderId, this._ourOfferService.orderedItems, totalPrice,
-      this.tendered, this.change, orderStatus, dateTime , this.table, null, null );
+      this.tendered, this.change, orderStatus, dateTime , this.table,
+      this.inventoryCost, this.orderProfit );
     this._ourOfferService.addToOrderedList(this.orders);
     this._dataStorageService.storeOrders()
       .subscribe(

@@ -35,7 +35,7 @@ export class OurOffersListComponent implements OnInit {
   ngOnInit() {
   }
 
-  UpdateCart(id: number, price: number, name: string, isAdd: boolean) {
+ /* UpdateCart(id: number, price: number, name: string, isAdd: boolean) {
     let orderItemId = this.uuidCodeOne;
     let orderId = this._ourOfferService.uuidCodeOne;
     this.quantity = this.amountInputRef.nativeElement.value;
@@ -51,26 +51,26 @@ export class OurOffersListComponent implements OnInit {
     }
 
   }
-
-   AddToCart(orderItemId: string, orderId: string, quantity: number,
-                    setMenuId: number, setMenuName: string, price: number   )
-  {
+*/
+   /*AddToCart(orderItemId: string, orderId: string, quantity: number,
+                    setMenuId: number, setMenuName: string, price: number   )*/
+  /*{
 
     let subTotal = this._ourOfferService.SetMenuSubTotalPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
     this.condition = this._ourOfferService.checkExistingSetMenu(setMenuId);
-
-    if ( this.condition  ) {
+*/
+   /* if ( this.condition  ) {
       this._ourOfferService.increaseOnExistingSetMenu(setMenuId, quantity, subTotal );
-    } else {
-      const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, null , setMenuId, setMenuName, null, price, subTotal, null);
-      this._ourOfferService.addToOrderedItemsList(purchasedFood);
-    }
-    this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString()) + Number.parseInt(this.amountInputRef.nativeElement.value.toString());
+    } else {*/
+    //  const purchasedFood = new OrderedItems(orderItemId, orderId,  null, quantity, null , setMenuId, setMenuName, null, price, subTotal, null);
+     // this._ourOfferService.addToOrderedItemsList(purchasedFood);
+  //  }
+  //  this._ourOfferService.totalQuantity = Number.parseInt(this._ourOfferService.totalQuantity.toString()) + Number.parseInt(this.amountInputRef.nativeElement.value.toString());
 
-  }
-
-   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
+//  }
+//
+  /* RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
                          setMenuId: number, setMenuName: string, price: number ) {
 
     let subTotal = this._ourOfferService.SetMenuSubTotalPrice(price, quantity);
@@ -79,7 +79,7 @@ export class OurOffersListComponent implements OnInit {
     this._ourOfferService.totalQuantity =
       Number.parseInt(this._ourOfferService.totalQuantity.toString()) -
       Number.parseInt(this.amountInputRef.nativeElement.value.toString());
-  }
+  }*/
 
 }
 

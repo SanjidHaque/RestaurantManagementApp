@@ -1,9 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt");
 .name, .price {
-  margin-top: 24px;
   color: #ae0000;
-  font-family: "Berlin Sans FB";
-  font-size: 20px; }
+  font-family: "Times New Roman";
+  font-size: 13px;
+  padding-top: 5px;
+  padding-bottom: 2px; }
+
+.image {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #ffffff;
+  border-radius: 6px; }
 
 .whole {
   /*margin-top: 20px;*/ }
@@ -136,6 +143,7 @@
 .body {
   max-height: 52.5vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   border: 1px solid #cbc6cb;
   border-radius: 5px;
   margin-top: 20px;
@@ -173,7 +181,7 @@
 .table-and-money {
   padding-top: 6px;
   padding-right: 6px;
-}
+  padding-bottom: 10px; }
 
 a {
   color: #6a0d0e; }
@@ -194,4 +202,4 @@ a {
   padding-top: 2px;
   padding-bottom: 2px; }
 
-/*# sourceMappingURL=order-grid-view.component.css.map */
+/*# sourceMappingURL=fooditem-grid-view.component.css.map */

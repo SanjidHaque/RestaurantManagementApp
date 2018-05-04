@@ -44,7 +44,8 @@
         <div class="col-md-4 test">
           <button
             class="all-categories-button"
-            (click)="UpdateCart(foodItems.Id, foodItems.Price, foodItems.Name, true, i)">
+            (click)="UpdateCart(foodItems.Id, foodItems.Price,
+            foodItems.Name, foodItems.MakingCost, true, i)">
             Add
           </button>
         </div>
@@ -62,7 +63,8 @@
         <div class="col-md-4 test">
           <button
             class="all-categories-button"
-            (click)="UpdateCart(foodItems.Id, foodItems.Price,foodItems.Name, false, i)">
+            (click)="UpdateCart(foodItems.Id, foodItems.Price,foodItems.Name,
+             foodItems.MakingCost, false, i)">
             Remove
           </button>
         </div>

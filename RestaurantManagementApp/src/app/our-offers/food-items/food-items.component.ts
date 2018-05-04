@@ -78,7 +78,7 @@ export class FoodItemsComponent implements OnInit {
     }
   }
 
-  UpdateCart(id: number, price: number, name: string, isAdd: boolean, index: any) {
+  UpdateCart(id: number, price: number, name: string, makingCost: number, isAdd: boolean, index: any) {
     this.quantity = this.selectedQuantity[index];
     let foodItemId = id;
     let foodItemName = name;
@@ -88,20 +88,20 @@ export class FoodItemsComponent implements OnInit {
      let orderItemId = this.uuid.v1();
       if ( isAdd === true ) {
         this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-          foodItemName, Price );
+          foodItemName, Price, makingCost );
       } else {
         this.RemoveFromCart(orderItemId, orderId,  this.quantity,
-          foodItemId, foodItemName, Price );
+          foodItemId, foodItemName, Price, makingCost );
       }
     }
     else {
       let orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
       if ( isAdd === true ) {
         this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-          foodItemName, Price );
+          foodItemName, Price, makingCost );
       } else {
         this.RemoveFromCart(orderItemId, orderId,  this.quantity,
-          foodItemId, foodItemName, Price );
+          foodItemId, foodItemName, Price, makingCost );
       }
     }
 
@@ -112,7 +112,7 @@ export class FoodItemsComponent implements OnInit {
 
 
   AddToCart(orderItemId: string, orderId: string, quantity: number,
-            foodItemId: number, foodItemName: string, price: number ) {
+            foodItemId: number, foodItemName: string, price: number, makingCost: number ) {
 
     let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
@@ -123,7 +123,7 @@ export class FoodItemsComponent implements OnInit {
     } else {
 
       const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId, null,
-        quantity , null , null, foodItemName, price, null , subTotal);
+        quantity , null , null, foodItemName, price, null , subTotal, makingCost);
 
       this._ourOfferService.addToOrderedItemsList(purchasedFood);
     }
@@ -135,7 +135,7 @@ export class FoodItemsComponent implements OnInit {
   }
 
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
-                 foodItemId: number, foodItemName: string, price: number ) {
+                 foodItemId: number, foodItemName: string, price: number, makingCost: number) {
 
    // this.check  = this.checkNegativeQuantity(foodItemId, quantity);
 

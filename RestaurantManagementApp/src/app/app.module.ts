@@ -58,6 +58,10 @@ import { OrderListViewDetailsComponent } from './admin/orders/order-list-view/or
 import { OrderGridViewComponent } from './admin/orders/order-grid-view/order-grid-view.component';
 import { OrderGridViewDetailsComponent } from './admin/orders/order-grid-view/order-grid-view-details/order-grid-view-details.component';
 import { OrderPipe } from './admin/orders/order.pipe';
+import {FooditemListViewComponent} from './admin/food-item/fooditem-list-view/fooditem-list-view.component';
+import {FooditemGridViewComponent} from './admin/food-item/fooditem-grid-view/fooditem-grid-view.component';
+import {ListDetailsComponent} from './admin/food-item/fooditem-list-view/list-details/list-details.component';
+import {GridDetailsComponent} from './admin/food-item/fooditem-grid-view/grid-details/grid-details.component';
 
 
 
@@ -104,7 +108,11 @@ import { OrderPipe } from './admin/orders/order.pipe';
     OrderListViewDetailsComponent,
     OrderGridViewComponent,
     OrderGridViewDetailsComponent,
-    OrderPipe
+    OrderPipe,
+    FooditemListViewComponent,
+    FooditemGridViewComponent,
+    ListDetailsComponent,
+    GridDetailsComponent
   ],
   imports: [
     BrowserModule,

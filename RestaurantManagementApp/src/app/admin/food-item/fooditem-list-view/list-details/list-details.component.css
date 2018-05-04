@@ -1,26 +1,41 @@
 @import url("https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt");
-.name, .price {
-  margin-top: 24px;
-  color: #ae0000;
-  font-family: "Berlin Sans FB";
-  font-size: 20px; }
+.item-name {
+  font-family: "Times New Roman";
+  font-size: 18px;
+  color: #6a0d0e;
+  font-weight: bold;
+  text-align: left; }
 
-.whole {
-  /*margin-top: 20px;*/ }
-
-.sum-of-inv-body {
-  /*padding-right: 0;
-  padding-left: 155px;*/ }
-
-.f-name {
-  padding-top: 20px;
-  color: #ae0000;
+.selling-price {
   font-family: "Times New Roman";
   font-size: 15px;
+  color: #6a0d0e;
+  text-align: left;
+  font-weight: bold; }
+
+.making-price {
+  font-family: "Times New Roman";
+  font-size: 15px;
+  color: #6a0d0e;
   font-weight: bold;
-  /*-webkit-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  -moz-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);*/ }
+  text-align: center; }
+
+.image {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #ffffff;
+  border-radius: 10px; }
+
+.other {
+  text-align: center; }
+
+.additional {
+  font-family: "Times New Roman";
+  font-size: 12px;
+  color: #6a0d0e;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px; }
 
 .all-categories-button {
   width: 100%;
@@ -35,6 +50,16 @@
   padding-bottom: 5px;
   font-weight: bold; }
 
+.general {
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-bottom: 1px double #dfdfdf;
+  text-align: center;
+  color: #221d1f;
+  background-color: #f6f6f6; }
+
 .all-categories-button:hover {
   background-color: #d32039;
   color: #ffffdf;
@@ -47,15 +72,8 @@
   outline: 0; }
 
 .header {
-  color: #770000;
-  font-size: 21px;
-  font-family: "Berlin Sans FB";
-  text-align: left;
-  margin-top: 10px;
-  border: 1px;
-  border-radius: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px; }
+  padding-top: 15px;
+  padding-bottom: 10px; }
 
 .main-row {
   border-bottom: 2px double #dfdfdf; }
@@ -118,7 +136,7 @@
   border-radius: 5px;
   margin-top: 10px;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   background-color: white; }
 
 .order-ref, .order-date {
@@ -200,21 +218,16 @@
   padding-bottom: 5px;
   font-weight: bold; }
 
-.back-button-cancel {
-  width: 65%;
-  height: 80%;
-  font-family: "Arial Narrow";
-  color: #9b0f12;
-  background-color: #ffffdf;
-  border: 1.2px solid #ae0000;
-  border-radius: 5px;
-  font-size: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-weight: bold; }
+.back {
+  text-align: center; }
+
+.edit {
+  text-align: right;
+  padding-right: 0; }
 
 .delete {
-  text-align: right; }
+  text-align: left;
+  padding-right: 0; }
 
 .back-button:hover {
   width: 60%;
@@ -229,28 +242,13 @@
   padding-bottom: 5px;
   font-weight: bold; }
 
-.back-button-cancel:hover {
-  width: 65%;
-  height: 80%;
-  font-family: "Arial Narrow";
-  color: #ffffdf;
-  background-color: #9b0f12;
-  border: 1.2px solid #ae0000;
-  border-radius: 5px;
-  font-size: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-weight: bold; }
-
-.back-button-cancel:focus {
-  outline: 0; }
-
 .back-button:focus {
   outline: 0; }
 
 .buttons {
   padding-top: 5px;
-  padding-bottom: 15px; }
+  padding-bottom: 10px;
+  border-bottom: 2px double #dfdfdf; }
 
 .sub-links {
   color: #b3acaf;
@@ -277,116 +275,4 @@ a {
   text-align: center;
   font-weight: bold; }
 
-.item-name {
-  font-family: "Times New Roman";
-  font-size: 18px;
-  color: #6a0d0e;
-  font-weight: bold;
-  text-align: left; }
-
-.selling-price {
-  font-family: "Times New Roman";
-  font-size: 15px;
-  color: #6a0d0e;
-  text-align: left;
-  font-weight: bold; }
-
-.making-price {
-  font-family: "Times New Roman";
-  font-size: 15px;
-  color: #6a0d0e;
-  font-weight: bold;
-  text-align: center; }
-
-.image {
-  height: 100%;
-  width: 100%;
-  border: 1px solid #ffffff;
-  border-radius: 10px; }
-
-.header {
-  padding-top: 15px;
-  padding-bottom: 10px; }
-
-.general {
-  font-size: 15px;
-  font-weight: bold;
-  padding-top: 13px;
-  padding-bottom: 13px;
-  border-bottom: 1px double #dfdfdf;
-  text-align: center;
-  color: #221d1f;
-  background-color: #f6f6f6; }
-
-.other {
-  text-align: center; }
-
-.units {
-  font-size: 14px;
-  font-weight: bold;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  border-bottom: 1px double #dfdfdf; }
-
-.select {
-  font-family: "Times New Roman";
-  font-size: 14px;
-  font-weight: bold;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  text-align: center; }
-
-.del-ing {
-  color: #9c0000;
-  font-size: 10px; }
-
-.del-ing:hover {
-  color: #8f0000;
-  font-size: 10px; }
-
-.save-ingredient {
-  width: 100%;
-  height: 100%;
-  font-family: "Arial Narrow";
-  color: #ffffdf;
-  background-color: #a90f12;
-  border: 1.2px solid #ae0000;
-  border-radius: 5px;
-  font-size: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-weight: bold; }
-
-.save-ingredient:hover {
-  font-family: "Arial Narrow";
-  color: #ffffdf;
-  background-color: #880f12;
-  border: 1.2px solid #ae0000;
-  border-radius: 5px;
-  font-size: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-weight: bold; }
-
-.save-ingredient:focus {
-  outline: 0; }
-
-.warning {
-  color: #9c0000;
-  font-size: 14px;
-  font-family: "Times New Roman";
-  text-align: center;
-  font-weight: bold;
-  padding-top: 12px;
-  padding-bottom: 7px; }
-
-.scrollable-div {
-  max-height: 30vh;
-  overflow-y: scroll;
-  overflow-x: hidden; }
-
-input {
-  color: #9c0000;
-  font-family: "Times New Roman"; }
-
-/*# sourceMappingURL=add-new-food-item.component.css.map */
+/*# sourceMappingURL=list-details.component.css.map */

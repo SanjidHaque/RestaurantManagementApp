@@ -1,3 +1,4 @@
+<!--
 <div class="add-new-item">
 
 <div class="col-md-12 name">
@@ -29,8 +30,8 @@
       </div>
 
 
-     <!-- <form (ngSubmit) = "OnSubmit(Image)" #imageForm = ngForm>-->
-        <!--<div class="form-group">
+     &lt;!&ndash; <form (ngSubmit) = "OnSubmit(Image)" #imageForm = ngForm>&ndash;&gt;
+        &lt;!&ndash;<div class="form-group">
 
           <img [src]="imageUrl"
                style="width:230px;height:200px">
@@ -44,8 +45,8 @@
             class="btn-large btn-submit"
             [disabled]=" Image.value=='' ">Upload</button>&ndash;&gt;
 
-        </div>-->
-    <!--  </form>-->
+        </div>&ndash;&gt;
+    &lt;!&ndash;  </form>&ndash;&gt;
 
 
       <div>
@@ -81,4 +82,177 @@
   </div>
 </div>
 </div>
+
+-->
+
+<div class="row">
+  <form (ngSubmit) = "onSaveFoodItem(newFoodItem)" #newFoodItem = "ngForm">
+  <div class="col-md-offset-1 col-md-9 order-detail">
+    <div class="row buttons">
+      <div class="col-md-2 back">
+        <button class="back-button-cancel" (click)="cancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          Cancel</button>
+      </div>
+      <div class="col-md-offset-8 col-md-2 delete">
+        <button class="back-button"
+                [disabled]="!newFoodItem.valid"
+                type="submit"
+                (click)="onSaveFoodItem()"><i class="fa fa-bookmark" aria-hidden="true"></i>
+          Save</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 general">
+        General Informations
+      </div>
+    </div>
+
+    <div class="row header">
+      <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-12 image">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12 item-name">
+            <div class="form-group">
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                ngModel
+                name="name"
+                required
+                placeholder="Item's Name"
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 selling-price">
+            <div class="form-group">
+              <input
+                placeholder="Item's Selling Price"
+                type="number"
+                min="1"
+                class="form-control"
+                [(ngModel)] = "salePrice"
+                name="sale-price"
+                required
+              >
+            </div>
+          </div>
+          <div class="col-md-6 making-price">
+           Making Cost: {{ salePrice }} BDT
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 selling-price">
+          Profit: {{ salePrice-inventoryCost }} BDT
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row general">
+      <div class="col-md-12">
+         Add Ingredients
+      </div>
+    </div>
+    <div class="row">
+      <form (ngSubmit) = "onAddIngredients(newIngredients)" #newIngredients = "ngForm">
+      <div class="col-md-6">
+        <div class="form-group">
+          <select
+            id="ingName"
+            class="form-control"
+            ngModel
+            required
+            name="ingName">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option  *ngFor="let inventory of inventories" [value] ="inventory.Id"  > {{ inventory.Name }} </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="number"
+            min="1"
+            id="quantity"
+            class="form-control"
+            ngModel
+            name="quantity"
+            required
+            placeholder="Enter Quantity Here"
+          >
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-offset-5 col-md-2">
+            <button
+              [disabled]="!newIngredients.valid"
+              class="save-ingredient"
+              type="submit">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row units ">
+      <div class="col-md-3">
+        Product
+      </div>
+      <div class="col-md-2 other">
+        Quantity
+      </div>
+      <div class="col-md-2 other">
+        Unit
+      </div>
+      <div class="col-md-2 other">
+        Unit Price
+      </div>
+      <div class="col-md-3 other">
+        Sub Total
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 warning" *ngIf="ingredients.length === 0; else ingredientsSelected">
+        You have to select at least one ingredient to create a new item!
+      </div>
+    </div>
+    <ng-template #ingredientsSelected>
+    <div  class="scrollable-div" >
+      <div class="row table-bordered units-details" *ngFor="let products of ingredients, let i = index">
+        <div class="col-md-3" >
+          {{ i+1 }}. {{ products.Name }}
+        </div>
+        <div class="col-md-2 other">
+          {{ products.Quantity }}
+        </div>
+        <div class="col-md-2 other">
+          {{ products.Unit}}
+        </div>
+        <div class="col-md-2 other">
+          {{ products.InventoryPrice }}
+        </div>
+        <div class="col-md-2 other">
+          {{ products.Quantity * products.InventoryPrice }} BDT
+        </div>
+        <a style="cursor: pointer"
+           title="Delete This Ingredient"
+           (click)="deleteIngredient(i)">
+        <div class="col-md-1 del-ing">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </div>
+        </a>
+      </div>
+    </div>
+    </ng-template>
+  </div>
+  </form>
+</div>
+
+
 

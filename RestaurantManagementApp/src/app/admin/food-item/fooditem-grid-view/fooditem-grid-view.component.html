@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-4 search-bar">
+    <span class="fa fa-search"></span>
+    <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Name...">
+  </div>
+</div>
+
+
+
+<div class="row body">
+  <div class="col-md-4 items" *ngFor="let fooditems of FoodItem | filter:term">
+    <a title="View This Item's Details"
+       style="cursor: pointer" (click)="viewDetails(fooditems)">
+      <div class="row table-and-money">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12 image">
+              <img [src]="fooditems.FoodItemImage"
+                   class="img-responsive image"
+                   style= "height:66px"
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-12 name">
+                {{ fooditems.Name }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 price">
+                {{ fooditems.Price }} BDT
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </a>
+  </div>
+</div>
+
+
+
+

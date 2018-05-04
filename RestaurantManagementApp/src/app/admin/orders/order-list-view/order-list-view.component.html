@@ -30,12 +30,12 @@
 
   <div class="row">
     <div class="col-md-12 body">
-      <div class="row" *ngFor="let orderList of orderLists | order:term">
+      <div class="row" *ngFor="let orderList of orderLists | order:term; let i = index">
         <a title="View This Order's Details"
           style="cursor: pointer" (click)="viewDetails(orderList)">
         <div class="col-md-12 f-name table-bordered">
           <div class="col-md-2 column-receipt">
-            {{ orderList.Id }}
+           {{ i+1 }}.   {{ orderList.Id }}
           </div>
           <div class="col-md-2 column">
             {{ orderList.DateTime }}

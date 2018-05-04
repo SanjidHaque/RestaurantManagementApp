@@ -1,0 +1,50 @@
+<div class="sum-of-inv-body">
+  <div class="row">
+    <div class="col-md-4 search-bar">
+      <span class="fa fa-search"></span>
+      <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Name...">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3 receipt">
+        Product Name
+      </div>
+      <div class="col-md-3 name">
+        Selling Price
+      </div>
+      <div class="col-md-3 name">
+        Inventory Cost
+      </div>
+      <div class="col-md-3 price">
+        Total Sale
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 body">
+      <div class="row" *ngFor="let foodItem of FoodItem | filter:term; let i = index">
+        <a title="View This Item's Details"
+           style="cursor: pointer" (click)="viewDetails(foodItem)">
+          <div class="col-md-12 f-name table-bordered">
+            <div class="col-md-3 column-receipt">
+              {{ i+1 }}. {{ foodItem.Name }}
+            </div>
+            <div class="col-md-3 column">
+              {{ foodItem.Price }} BDT
+            </div>
+            <div class="col-md-3 column">
+              {{ foodItem.MakingCost }} BDT
+            </div>
+
+            <div class="col-md-3 column">
+              {{ foodItem.Profit }} BDT
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+

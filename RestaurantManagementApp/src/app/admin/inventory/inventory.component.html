@@ -86,7 +86,7 @@
     hodoo
   </div>
 </div>
-
+<!--
 <div class="row title">
   <div class="col-md-8">
     <div class="col-md-3 name">
@@ -163,6 +163,29 @@
     </div>
 
   </div>
+</div>-->
+
+
+<div class="row">
+  <a routerLink="/admin/inventory/add-new-inventory">
+    <div class="col-md-offset-9 col-md-2 add-new">
+      <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Item
+    </div>
+  </a>
+  <div class="col-md-1">
+    <div class="row icons">
+      <a title="List View" routerLink="/admin/inventory/list-view" routerLinkActive="icon-active">
+        <div class="col-md-6 list">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+      </a>
+      <a title="Grid View" routerLink="/admin/inventory/grid-view" routerLinkActive="icon-active">
+        <div class="col-md-6 grid">
+          <i class="fa fa-th-large" aria-hidden="true"></i>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
 
-
+<router-outlet></router-outlet>

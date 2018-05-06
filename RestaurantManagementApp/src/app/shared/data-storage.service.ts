@@ -12,6 +12,7 @@ import {FoodItems} from './food-item.model';
 import {SummaryOfInventory} from './summary-of-inventory';
 import {CashFlow} from './cash-flow';
 import {Table} from './table.model';
+import {InventoryHistoryModel} from './inventory-history.model';
 @Injectable()
 export class DataStorageService {
 
@@ -176,6 +177,16 @@ export class DataStorageService {
       );
   }
 
+  updateInventoryHistory(updateHistory: InventoryHistoryModel) {
+    return this._http.post('http://localhost:1548/api/UpdateInventoryHistory',
+      updateHistory)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
+
 
   deleteInventoryItem(inventory: Inventory) {
     return this._http.post('http://localhost:1548/api/DeleteInventoryItem',
@@ -206,7 +217,7 @@ export class DataStorageService {
   }
 
   editFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:1548/api/DeleteInventoryItem',
+    return this._http.post('http://localhost:1548/api/EditFoodItem',
       foodItem)
       .subscribe(
         (response: Response) => {

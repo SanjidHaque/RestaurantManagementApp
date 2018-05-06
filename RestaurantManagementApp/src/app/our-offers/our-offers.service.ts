@@ -32,7 +32,7 @@ export class OurOffersService {
   public rejectedOrder: Order;
   public setMenuSubTotal = 0;
   public foodItemSubTotal = 0;
-
+  public inventoryCost = 0;
   ingredients: Ingredients[] = [];
   ingredientsChanged = new Subject<Ingredients[]>();
   FoodItem: FoodItems[] = [];
@@ -51,18 +51,20 @@ export class OurOffersService {
    clearOrders() {
     this.orderedItems = [];
    }
-   updateInventoryList(inventoryId: string, editedInventoryItem: Inventory) {
 
+   updateInventoryList(inventoryId: string, editedInventoryItem: Inventory) {
     for ( let i = 0; i < this.inventory.length; i++) {
       if ( this.inventory[i].Id === inventoryId ) {
-        this.inventory[i] = editedInventoryItem;
+        this.inventory[i].Name = editedInventoryItem.Name;
+        this.inventory[i].Price = editedInventoryItem.Price;
+        this.inventory[i].Unit = editedInventoryItem.Unit;
         this.inventoryChanged.next(this.inventory.slice());
       }
     }
    }
 
   addToInventoryList(inventory: Inventory) {
-    this.inventory.unshift(inventory);
+    this.inventory.push(inventory);
     this.inventoryChanged.next(this.inventory.slice());
   }
 
@@ -80,9 +82,17 @@ export class OurOffersService {
   }
 
   addToFoodItemList(foodItem: FoodItems) {
-  //  this.FoodItem.push(foodItem); for any problem change unshift to push again
-    this.FoodItem.unshift(foodItem);
+    this.FoodItem.push(foodItem);
     this.foodItemChanged.next(this.FoodItem.slice());
+  }
+
+  updateFoodItemList(editedFoodItem: FoodItems) {
+    for ( let i = 0; i< this.FoodItem.length; i++ ) {
+      if ( this.FoodItem[i].Id === editedFoodItem.Id ) {
+        this.FoodItem[i] = editedFoodItem;
+        this.foodItemChanged.next(this.FoodItem.slice());
+      }
+    }
   }
 
   getIngredients() {

@@ -2,15 +2,81 @@
   {
     "Id": "1",
     "Name": "Rice",
-    "Quantity": "100",
+    "TotalQuantity": "100",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "55"
+    "Price": "55",
+    "InventoryHistory": [
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "15",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "15",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "15",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "15",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      }
+    ]
   },
 
   {
     "Id": "2",
     "Name": "Chicken",
-    "Quantity": "50",
+    "TotalQuantity": "50",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Kilogram",
     "Price": "110"
   },
@@ -18,15 +84,31 @@
   {
     "Id": "3",
     "Name": "Beef",
-    "Quantity": "10",
+    "TotalQuantity": "10",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "320"
+    "Price": "320",
+    "InventoryHistory": [
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      }
+    ]
   },
 
   {
     "Id": "4",
     "Name": "Garlic",
-    "Quantity": "40",
+    "TotalQuantity": "40",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Kilogram",
     "Price": "150"
   },
@@ -34,31 +116,90 @@
   {
     "Id": "5",
     "Name": "Onion",
-    "Quantity": "40",
+    "TotalQuantity": "40",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "120"
+    "Price": "120",
+    "InventoryHistory": [
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "15",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      }
+    ]
   },
 
   {
     "Id": "6",
     "Name": "Egg",
-    "Quantity": "200",
+    "TotalQuantity": "200",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Pieces",
-    "Price": "8"
+    "Price": "10",
+    "InventoryHistory": [
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "15",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      }
+    ]
   },
 
   {
     "Id": "7",
     "Name": "CocaCola 250 ml",
-    "Quantity": "100",
+    "TotalQuantity": "100",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Bottle",
-    "Price": "35"
+    "Price": "35",
+    "InventoryHistory": [
+      {
+        "UpdatedQuantity": "10",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "15",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      },
+      {
+        "UpdatedQuantity": "18",
+        "Unit": "Kilogram",
+        "UpdateTime": "12/23/2018 12:05:34"
+      }
+    ]
   },
 
   {
     "Id": "8",
     "Name": "Mineral water 250 ml",
-    "Quantity": "100",
+    "TotalQuantity": "100",
+    "UsedQuantity" : "33",
+    "RemainingQuantity":  "63",
     "Unit": "Bottle",
     "Price": "20"
   }

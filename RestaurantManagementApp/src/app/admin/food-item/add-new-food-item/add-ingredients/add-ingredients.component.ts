@@ -72,8 +72,8 @@ export class AddIngredientsComponent implements OnInit {
       if ( form.value.unit === 'Bottle') {
           this.unit = 4;
           }
-      const addIngredient = new Ingredients(id, name, quantity, this.unit, inventoryId, foodItemId);
-      this._ourOfferService.addToIngredientList(addIngredient);
+   //   const addIngredient = new Ingredients(id, name, quantity, this.unit, inventoryId, foodItemId);
+     // this._ourOfferService.addToIngredientList(addIngredient);
       this.router.navigate(['admin/food-item/add-new-food-item', foodItemId ]);
      // form.reset();
   }

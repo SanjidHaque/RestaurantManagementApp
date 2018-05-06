@@ -5,6 +5,7 @@ import { Uuid } from 'ng2-uuid';
 import {Inventory} from '../../../shared/inventory.model';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';
+import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
 
 @Component({
   selector: 'app-add-new-inventory',
@@ -13,9 +14,8 @@ import {DataStorageService} from '../../../shared/data-storage.service';
 })
 
 export class AddNewInventoryComponent implements OnInit {
-  uuidCodeOne = '';
   unit : number;
-  defaultUnit = 'Kilogram';
+  inventoryHistory: InventoryHistoryModel[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -26,39 +26,30 @@ export class AddNewInventoryComponent implements OnInit {
 
   ngOnInit() {
   }
- // @ViewChild('amountInput') amountInputRef: ElementRef;
+
   onAddNewItem(form: NgForm) {
-      const id = this.uuid.v1();
+      const inventoryId = this.uuid.v1();
+      const updateHistoryId = this.uuid.v1();
       const name = form.value.name;
       const quantity = form.value.quantity;
-      if ( form.value.unit === 'Kilogram' ) {
-        this.unit = 1;
-      }
-      if ( form.value.unit === 'Litre') {
-      this.unit = 2;
-      }
-      if ( form.value.unit === 'Piece') {
-      this.unit = 3;
-      }
-      if ( form.value.unit === 'Bottle') {
-      this.unit = 4;
-      }
-     // const w = this.amountInputRef.nativeElement.value;
       const price = form.value.price;
-      const newItem = new Inventory(id, name, quantity, null , price);
-      this._ourOfferService.addToInventoryList(newItem);
-      this._dataStorageService.addNewInventoryItem(newItem);
-
-      form.controls['quantity'].reset();
-      form.controls['name'].reset();
-      form.controls['price'].reset();
-
+      const unit = form.value.unit;
+      const updateTime = new Date().toLocaleString();
+      const updateHistory =
+        new InventoryHistoryModel(updateHistoryId, inventoryId, quantity, updateTime, unit );
+      this.inventoryHistory.push(updateHistory);
+      const newItem = new Inventory(inventoryId, name, 0 , quantity,
+        unit, price, this.inventoryHistory);
+       this._ourOfferService.addToInventoryList(newItem);
+       this._dataStorageService.addNewInventoryItem(newItem);
+      form.reset();
+      this.router.navigate(['admin/inventory/list-view']);
   }
 
 
 
   onCancel() {
-    this.router.navigate(['admin/inventory']);
+    this.router.navigate(['admin/inventory/list-view']);
 
   }
 }

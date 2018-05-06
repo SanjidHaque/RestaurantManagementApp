@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-4 search-bar">
+    <span class="fa fa-search"></span>
+    <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Name...">
+  </div>
+</div>
+
+
+
+<div class="row body">
+  <div class="col-md-4 items" *ngFor="let inventory of inventories | filter:term">
+    <a title="View This Item's Details"
+       style="cursor: pointer" (click)="viewDetails(inventory)">
+      <div class="table-and-money">
+        <div class="row">
+        <div class="col-md-12">
+
+            Name: {{ inventory.Name }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              Price: {{ inventory.Price }} BDT
+          </div>
+        </div>
+      </div>
+
+
+         <div class="row">
+               <div class="col-md-12 name">
+            <strong>{{ inventory.RemainingQuantity }} </strong>{{ inventory.Unit }} (s) on Hand
+               </div>
+             </div>
+
+    </a>
+  </div>
+</div>
+
+
+
+
+
+<div class="row">
+  <div class="col-md-12 Summary">
+    Summary
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Products: {{ totalProducts }} (s)
+  </div>
+</div>

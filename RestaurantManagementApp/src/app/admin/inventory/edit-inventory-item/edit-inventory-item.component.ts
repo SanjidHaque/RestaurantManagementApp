@@ -4,6 +4,7 @@ import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {Inventory} from '../../../shared/inventory.model';
 import {NgForm} from '@angular/forms';
 import {DataStorageService} from '../../../shared/data-storage.service';
+import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
 
 @Component({
   selector: 'app-edit-inventory-item',
@@ -13,27 +14,28 @@ import {DataStorageService} from '../../../shared/data-storage.service';
 export class EditInventoryItemComponent implements OnInit {
    id: string;
    name = '';
-   price: number
+   price: number;
    quantity: number;
-   unit: number;
+   unit: string;
+   inventoryHistory: InventoryHistoryModel[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService) { }
+              private _dataStorageService: DataStorageService ) { }
 
   ngOnInit() {
     this.route.params
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
-          for (let i = 0; i< this._ourOfferService.inventory.length; i++) {
+          for (let i = 0; i < this._ourOfferService.inventory.length; i++) {
             if ( this._ourOfferService.inventory[i].Id === this.id ) {
 
                this.name = this._ourOfferService.inventory[i].Name;
                this.price = this._ourOfferService.inventory[i].Price;
-               this.quantity = this._ourOfferService.inventory[i].Quantity;
-
+               this.unit = this._ourOfferService.inventory[i].Unit;
+               this.inventoryHistory = this._ourOfferService.inventory[i].InventoryHistory;
             }
           }
         }
@@ -43,26 +45,17 @@ export class EditInventoryItemComponent implements OnInit {
   onEditItem(form: NgForm) {
     const id = this.id;
     const name = form.value.name;
-    const quantity = form.value.quantity;
-    if ( form.value.unit === 'Kilogram' ) {
-      this.unit = 1;
-    }
-    if ( form.value.unit === 'Litre') {
-      this.unit = 2;
-    }
-    if ( form.value.unit === 'Piece') {
-      this.unit = 3;
-    }
-    if ( form.value.unit === 'Bottle') {
-      this.unit = 4;
-    }
     const price = form.value.price;
-    const editedInventoryItem = new Inventory(this.id, name, quantity, this.unit, price);
+    const unit = form.value.unit;
+    const editedInventoryItem = new Inventory(this.id, name, 0, this.quantity,
+      unit, price, this.inventoryHistory);
     this._ourOfferService.updateInventoryList(this.id, editedInventoryItem);
-   this._dataStorageService.editInventoryItem(editedInventoryItem);
+    this._dataStorageService.editInventoryItem(editedInventoryItem);
+    form.reset();
+    this.router.navigate(['admin/inventory/list-details', this.id]);
   }
 
   onCancel() {
-    this.router.navigate(['admin/inventory']);
+    this.router.navigate(['admin/inventory/list-details', this.id]);
   }
 }

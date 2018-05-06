@@ -53,7 +53,7 @@ export class ListDetailsComponent implements OnInit {
     }
   }
   goBack() {
-    this.router.navigate(['admin/food-item/list-view']);
+    this.router.navigate(['admin/food-item/inventory-list-view']);
   }
   edit() {
     this.router.navigate(['admin/food-item/edit-food-item', this.foodItemId]);
@@ -68,7 +68,7 @@ export class ListDetailsComponent implements OnInit {
       }
     }
 
-    this.router.navigate(['admin/food-item/list-view']);
+    this.router.navigate(['admin/food-item/inventory-list-view']);
     this.popup.hide();
   }
 

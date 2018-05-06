@@ -37,6 +37,11 @@ import {FooditemListViewComponent} from './admin/food-item/fooditem-list-view/fo
 import {ListDetailsComponent} from './admin/food-item/fooditem-list-view/list-details/list-details.component';
 import {FooditemGridViewComponent} from './admin/food-item/fooditem-grid-view/fooditem-grid-view.component';
 import {GridDetailsComponent} from './admin/food-item/fooditem-grid-view/grid-details/grid-details.component';
+import {InventoryListViewComponent} from './admin/inventory/inventory-list-view/inventory-list-view.component';
+import {InventoryGridDetailsComponent} from './admin/inventory/inventory-grid-view/inventory-grid-details/inventory-grid-details.component';
+import {InventoryListDetailsComponent} from './admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
+import {InventoryGridViewComponent} from './admin/inventory/inventory-grid-view/inventory-grid-view.component';
+import {UpdateInventoryItemComponent} from './admin/inventory/update-inventory-item/update-inventory-item.component';
 
 
 const appRoutes: Routes = [
@@ -75,7 +80,6 @@ const appRoutes: Routes = [
          { path: 'edit-food-item/:id', component: EditFoodItemComponent }
        ]},
       { path: 'set-menu', component: AddSetMenuComponent},
-   /* { path: 'orders', component: CashFlowComponent },*/
     { path: 'summary-of-inventories', component: SummaryComponent },
     { path: 'tables', component: TablesComponent, children:
     [
@@ -83,15 +87,15 @@ const appRoutes: Routes = [
       ]
 
     },
-      /*{ path: 'reports', component: BillOfMaterialsComponent,
-      children: [
-        { path: 'summary-of-inventories', component: SummaryComponent }
-        /!*{ path: 'orders', component: CashFlowComponent }*!/
-      ]},*/
-              { path: 'inventory', component: InventoryComponent ,
+    { path: 'inventory', component: InventoryComponent ,
         children: [
         {path: 'add-new-inventory', component: AddNewInventoryComponent },
-        {path: 'edit-inventory-item/:id', component: EditInventoryItemComponent }
+        {path: 'edit-inventory-item/:id', component: EditInventoryItemComponent },
+        {path: 'update-inventory-item/:id', component: UpdateInventoryItemComponent },
+          { path: 'list-view', component: InventoryListViewComponent},
+          { path: 'list-details/:id', component: InventoryListDetailsComponent},
+          { path: 'grid-view', component: InventoryGridViewComponent},
+          { path: 'grid-details/:id', component: InventoryGridDetailsComponent },
       ]}
     ] },
 ];

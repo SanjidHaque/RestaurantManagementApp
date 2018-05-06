@@ -62,6 +62,11 @@ import {FooditemListViewComponent} from './admin/food-item/fooditem-list-view/fo
 import {FooditemGridViewComponent} from './admin/food-item/fooditem-grid-view/fooditem-grid-view.component';
 import {ListDetailsComponent} from './admin/food-item/fooditem-list-view/list-details/list-details.component';
 import {GridDetailsComponent} from './admin/food-item/fooditem-grid-view/grid-details/grid-details.component';
+import { InventoryListViewComponent } from './admin/inventory/inventory-list-view/inventory-list-view.component';
+import { InventoryGridViewComponent } from './admin/inventory/inventory-grid-view/inventory-grid-view.component';
+import { InventoryListDetailsComponent } from './admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
+import { InventoryGridDetailsComponent } from './admin/inventory/inventory-grid-view/inventory-grid-details/inventory-grid-details.component';
+import { UpdateInventoryItemComponent } from './admin/inventory/update-inventory-item/update-inventory-item.component';
 
 
 
@@ -112,7 +117,12 @@ import {GridDetailsComponent} from './admin/food-item/fooditem-grid-view/grid-de
     FooditemListViewComponent,
     FooditemGridViewComponent,
     ListDetailsComponent,
-    GridDetailsComponent
+    GridDetailsComponent,
+    InventoryListViewComponent,
+    InventoryGridViewComponent,
+    InventoryListDetailsComponent,
+    InventoryGridDetailsComponent,
+    UpdateInventoryItemComponent
   ],
   imports: [
     BrowserModule,

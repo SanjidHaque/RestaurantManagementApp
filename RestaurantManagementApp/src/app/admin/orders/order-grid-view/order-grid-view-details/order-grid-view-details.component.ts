@@ -67,7 +67,7 @@ export class OrderGridViewDetailsComponent implements OnInit {
   confirmEvent() {
     this._ourOfferService.deleteOrder(this.order);
     this._dataStorageService.deleteOrder(this.order);
-    this.router.navigate(['admin/orders/list-view']);
+    this.router.navigate(['admin/orders/grid-view']);
     this.popup.hide();
   }
 

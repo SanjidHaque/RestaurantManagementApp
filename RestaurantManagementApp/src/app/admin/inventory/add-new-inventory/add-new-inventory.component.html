@@ -1,3 +1,4 @@
+<!--
 <div class="col-md-12 name">
   <form (ngSubmit) = "onAddNewItem(newItem)" #newItem = "ngForm">
     <div id="user-data">
@@ -65,3 +66,96 @@
     </div>
   </form>
 </div>
+-->
+
+
+
+
+<div class="row">
+  <form (ngSubmit) = "onAddNewItem(newItem)" #newItem = "ngForm">
+    <div class="col-md-offset-1 col-md-9 order-detail">
+      <div class="row buttons">
+        <div class="col-md-2 back">
+          <button class="back-button-cancel" (click)="onCancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
+            Cancel</button>
+        </div>
+        <div class="col-md-offset-8 col-md-2 delete">
+          <button class="back-button"
+                  [disabled]="!newItem.valid"
+                  type="submit"
+                  title="Save this item"
+          ><i class="fa fa-bookmark" aria-hidden="true"></i>
+            Save</button>
+        </div>
+      </div>
+      <div class="row prod-name">
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="name">Item's Name:</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              ngModel
+              name="name"
+              required
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input
+              type="number"
+              min="1"
+              id="price"
+              class="form-control"
+              ngModel
+              name="price"
+              required
+            >
+          </div>
+        </div>
+        <div class="col-md-1 bdt">
+          BDT
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+
+            <label for="quantity">Quantity:</label>
+            <input
+              type="number"
+              min="1"
+              id="quantity"
+              class="form-control"
+              ngModel
+              name="quantity"
+              required
+            >
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="unit">Unit:</label>
+            <input
+              type="text"
+              min="1"
+              id="unit"
+              class="form-control"
+              ngModel
+              name="unit"
+              required
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+

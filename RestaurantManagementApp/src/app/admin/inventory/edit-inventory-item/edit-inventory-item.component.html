@@ -1,67 +1,79 @@
-<div class="col-md-12 name" >
-  <form (ngSubmit) = "onEditItem(editItem)" #editItem = "ngForm">
-    <div id="user-data">
-      <div class="form-group">
-        <label for="name">Item Name:</label>
-        <input
-          type="text"
-          id="name"
-          class="form-control"
-          [ngModel] ="name"
-          name="name"
-          required
-        >
-      </div>
 
-      <div class="form-group">
-        <label for="price">Price:</label>
-        <input
-          type="number"
-          min="1"
-          id="price"
-          class="form-control"
-          [ngModel] = "price"
-          name="price"
-          required
-        >
-      </div>
 
-      <div class="form-group">
-        <label for="unit">Select an Unit</label>
-        <select
-          id="unit"
-          class="form-control"
-          ngModel
-          required
-          name="unit">
-          <option value="Kilogram">Kilogram</option>
-          <option value="Litre">Litre</option>
-          <option value="Piece">Piece</option>
-          <option value="Bottle">Bottle</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="quantity">Quantity:</label>
-        <input
-          type="number"
-          min="1"
-          id="quantity"
-          class="form-control"
-          ngModel
-          name="quantity"
-          required
-        >
-        <div>
-          <div class="action">
-          <button class="all-categories-button"
+
+<div class="row">
+  <form (ngSubmit) = "onEditItem(newItem)" #newItem = "ngForm">
+    <div class="col-md-offset-1 col-md-9 order-detail">
+      <div class="row buttons">
+        <div class="col-md-2 back">
+          <button class="back-button-cancel" (click)="onCancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
+            Cancel</button>
+        </div>
+        <div class="col-md-8 edit-mode">
+          Edit Mode
+        </div>
+        <div class="col-md-2 delete">
+          <button class="back-button"
+                  [disabled]="!newItem.valid"
                   type="submit"
-                  [disabled]="!editItem.valid">Save</button>
+                  title="Save this item"
+          ><i class="fa fa-bookmark" aria-hidden="true"></i>
+            Save</button>
+        </div>
+      </div>
+      <div class="row prod-name">
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="name">Item's Name:</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              [ngModel]="name"
+              name="name"
+              required
+            >
           </div>
-          <div class="action">
-          <button class="all-categories-button" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input
+              type="number"
+              min="1"
+              id="price"
+              class="form-control"
+              [ngModel] = "price"
+              name="price"
+              required
+            >
+          </div>
+        </div>
+        <div class="col-md-1 bdt">
+          BDT
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="unit">Unit:</label>
+            <input
+              type="text"
+              min="1"
+              id="unit"
+              class="form-control"
+              [ngModel] = "unit"
+              name="unit"
+              required
+            >
           </div>
         </div>
       </div>
     </div>
   </form>
 </div>
+
+
+

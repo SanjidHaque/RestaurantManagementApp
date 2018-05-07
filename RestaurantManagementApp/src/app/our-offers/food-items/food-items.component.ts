@@ -20,7 +20,6 @@ export class FoodItemsComponent implements OnInit {
   FoodItem: FoodItems[] = [];
   public orderedItems: OrderedItems[] = [];
   selectedQuantity = [];
-
   order: Order[];
   condition = false;
   @ViewChild('amountInput') amountInputRef: ElementRef;
@@ -28,10 +27,7 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeTwo = '';
   uuidCodeThree = '';
   quantity : number;
-  orderItemId = '';
   subscription: Subscription;
-  searchedItems = '';
-  check : boolean;
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
@@ -45,11 +41,18 @@ export class FoodItemsComponent implements OnInit {
 
   ngOnInit() {
 
-    this._dataStorageService.getMenu()
+   /* this._dataStorageService.getMenu()
       .subscribe(
         (Menu: OurOffers ) => {
           this._ourOfferService.FoodItem = Menu.FoodItems;
-        });
+        });*/
+    this.route.data.
+    subscribe(
+      ( data: FoodItems[]) => {
+        this._ourOfferService.FoodItem = data['foodItems'];
+      }
+    );
+
     this.FoodItem = this._ourOfferService.FoodItem;
 
     this._ourOfferService.foodItemChanged
@@ -58,27 +61,14 @@ export class FoodItemsComponent implements OnInit {
           this.FoodItem = FoodItem;
         }
       );
-    // this.orderedItems = this._ourOfferService.orderedItems;
+
   }
 
 
-  goToControlPanel() {
-    this.router.navigate(['control-panel']);
-  }
 
-  checkNegativeQuantity(foodItemId: number, quantity: number) {
-    for (let i = 0; i < this.orderedItems.length; i++) {
-      if (this.orderedItems[i].FoodItemId === foodItemId) {
-        if ( this.orderedItems[i].FoodItemQuantity > this.quantity) {
-         return  true;
-        } else {
-          return false;
-        }
-      }
-    }
-  }
 
-  UpdateCart(id: number, price: number, name: string, makingCost: number, isAdd: boolean, index: any) {
+
+  UpdateCart(id: string, price: number, name: string, makingCost: number, isAdd: boolean, index: any) {
     this.quantity = this.selectedQuantity[index];
     let foodItemId = id;
     let foodItemName = name;
@@ -112,7 +102,7 @@ export class FoodItemsComponent implements OnInit {
 
 
   AddToCart(orderItemId: string, orderId: string, quantity: number,
-            foodItemId: number, foodItemName: string, price: number, makingCost: number ) {
+            foodItemId: string, foodItemName: string, price: number, makingCost: number ) {
 
     let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
     this._ourOfferService.grandTotalPrice(subTotal);
@@ -135,15 +125,12 @@ export class FoodItemsComponent implements OnInit {
   }
 
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
-                 foodItemId: number, foodItemName: string, price: number, makingCost: number) {
+                 foodItemId: string, foodItemName: string, price: number, makingCost: number) {
 
-   // this.check  = this.checkNegativeQuantity(foodItemId, quantity);
+
 
       let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
       this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
 
-   /* this._ourOfferService.totalQuantity =
-      Number.parseInt(this._ourOfferService.totalQuantity.toString()) -
-      Number.parseInt(quantity.toString());*/
   }
 }

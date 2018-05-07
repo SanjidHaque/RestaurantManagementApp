@@ -23,6 +23,7 @@ export class EditFoodItemComponent implements OnInit {
   totalSale : number;
   inventoryCost = 0;
   itemName = '';
+  serialNumber = '';
   FoodItemList: FoodItems[] = [];
   inventories: Inventory[] = [];
   ingredients: Ingredients[] = [];
@@ -45,11 +46,18 @@ export class EditFoodItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dataStorageService.getMenu()
+   /* this._dataStorageService.getMenu()
       .subscribe(
         (Menu: OurOffers ) => {
           this._ourOfferService.FoodItem = Menu.FoodItems;
-        });
+        });*/
+    this.route.data.
+    subscribe(
+      ( data: FoodItems[]) => {
+        this._ourOfferService.FoodItem = data['foodItems'];
+      }
+    );
+
     this.FoodItemList = this._ourOfferService.FoodItem;
     this._ourOfferService.foodItemChanged
       .subscribe(
@@ -61,6 +69,7 @@ export class EditFoodItemComponent implements OnInit {
       if (this.FoodItemList[i].Id === this.foodItemId) {
         this.FoodItem = this.FoodItemList[i];
         this.itemName = this.FoodItemList[i].Name;
+        this.serialNumber = this.FoodItemList[i].SerialNo;
         this.ingredients = this.FoodItemList[i].Ingredients;
         this.salePrice = this.FoodItemList[i].Price;
         this.inventoryCost = this.FoodItemList[i].MakingCost;
@@ -119,6 +128,7 @@ export class EditFoodItemComponent implements OnInit {
     const ingredientId = this.uuid.v1();
     const inventoryId = form.value.ingName;
     const quantity = form.value.quantity;
+
     const inventoryPrice = this.getInventoryItemPrice(inventoryId);
     const subTotal = quantity * inventoryPrice;
     if (this.checkIfIngredientsExist(inventoryId) !== '') {
@@ -160,6 +170,7 @@ export class EditFoodItemComponent implements OnInit {
   onSaveEditedFoodItem(form: NgForm) {
     const name = form.value.itemName;
     const price = form.value.salePrice;
+    const serialNumber = form.value.serial;
     const foodItemIngredients = this.ingredients;
     const foodItemId = this.foodItemId;
     const profit = price - this.inventoryCost;
@@ -168,7 +179,8 @@ export class EditFoodItemComponent implements OnInit {
     }
     /* const image = this.fileToUpload;*/
     const editedFoodItem =
-      new FoodItems(foodItemId, name, price, this.inventoryCost, profit, 0 ,
+      new FoodItems(foodItemId, serialNumber,
+        name, price, this.inventoryCost, profit, 0 ,
         null, foodItemIngredients );
     this._ourOfferService.updateFoodItemList(editedFoodItem );
     this._dataStorageService.editFoodItem(editedFoodItem );

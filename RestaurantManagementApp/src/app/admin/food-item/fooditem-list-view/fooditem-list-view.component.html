@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-4 search-bar">
       <span class="fa fa-search"></span>
-      <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Name...">
+     <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Name...">
     </div>
   </div>
   <div class="row">
@@ -29,7 +29,7 @@
            style="cursor: pointer" (click)="viewDetails(foodItem)">
           <div class="col-md-12 f-name table-bordered">
             <div class="col-md-3 column-receipt">
-              {{ i+1 }}. {{ foodItem.Name }}
+          SN-{{ foodItem.SerialNo }}. {{ foodItem.Name }}
             </div>
             <div class="col-md-3 column">
               {{ foodItem.Price }} BDT

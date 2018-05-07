@@ -72,14 +72,21 @@ export class OurOffersService {
     this.table.push(table);
     this.tableChanged.next(this.table.slice());
   }
+  editTable(editedTable: Table) {
+    for ( let i = 0; i < this.table.length; i++) {
+      if ( this.table[i].Id === editedTable.Id ) {
+        this.table[i].Name = editedTable.Name;
+        this.tableChanged.next(this.table.slice());
+      }
+    }
+  }
+
 
   getInventories() {
     return this.inventory.slice();
   }
 
-  getTables() {
-    return this.table.slice();
-  }
+
 
   addToFoodItemList(foodItem: FoodItems) {
     this.FoodItem.push(foodItem);
@@ -121,7 +128,7 @@ export class OurOffersService {
      }
   }
 
-  removeFromFoodItemCart(foodItemId: number, quantity: number, subTotal: number) {
+  removeFromFoodItemCart(foodItemId: string, quantity: number, subTotal: number) {
 
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
       if ( this.orderedItems[i].FoodItemId === foodItemId) {
@@ -144,7 +151,7 @@ export class OurOffersService {
     }
   }
 
-  checkIfOrderedItemExist(foodItemId: number, orderId: string) {
+  checkIfOrderedItemExist(foodItemId: string, orderId: string) {
     for (let i = 0; i < this.orderedItems.length; i++) {
       if (this.orderedItems[i].FoodItemId === foodItemId
         && this.orderedItems[i].OrderId === orderId) {
@@ -214,7 +221,7 @@ export class OurOffersService {
      }
   }
 
-  checkExistingFoodItem(foodItemId: number) {
+  checkExistingFoodItem(foodItemId: string) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
       if (this.orderedItems[i].FoodItemId === foodItemId) {
         return true;
@@ -238,7 +245,7 @@ export class OurOffersService {
     }
   }
 
-  increaseOnExistingFoodItem(foodItemId: number, quantity: number, subTotal: number ) {
+  increaseOnExistingFoodItem(foodItemId: string, quantity: number, subTotal: number ) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
 
       if (this.orderedItems[i].FoodItemId === foodItemId) {

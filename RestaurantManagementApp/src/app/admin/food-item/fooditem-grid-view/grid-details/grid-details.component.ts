@@ -34,11 +34,19 @@ export class GridDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dataStorageService.getMenu()
+    /*this._dataStorageService.getMenu()
       .subscribe(
         (Menu: OurOffers ) => {
           this._ourOfferService.FoodItem = Menu.FoodItems;
-        });
+        });*/
+
+    this.route.data.
+    subscribe(
+      ( data: FoodItems[]) => {
+        this._ourOfferService.FoodItem = data['foodItems'];
+      }
+    );
+
     this.FoodItemList = this._ourOfferService.FoodItem;
     this._ourOfferService.foodItemChanged
       .subscribe(

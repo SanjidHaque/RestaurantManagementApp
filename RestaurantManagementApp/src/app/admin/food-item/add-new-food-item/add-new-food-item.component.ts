@@ -154,6 +154,7 @@ export class AddNewFoodItemComponent implements OnInit {
 
   onSaveFoodItem(form: NgForm) {
     const name = form.value.itemName;
+    const serialNumber= form.value.serial;
     const price = form.value.salePrice;
     const foodItemIngredients = this.ingredients;
     const foodItemId = this.uuid.v1();
@@ -163,7 +164,7 @@ export class AddNewFoodItemComponent implements OnInit {
     }
    /* const image = this.fileToUpload;*/
     const newFoodItem =
-      new FoodItems(foodItemId, name, price, this.inventoryCost, profit, 0 ,
+      new FoodItems(foodItemId, serialNumber, name, price, this.inventoryCost, profit, 0 ,
       null, foodItemIngredients );
     this._ourOfferService.addToFoodItemList(newFoodItem);
     this._dataStorageService.addFoodItem(newFoodItem);

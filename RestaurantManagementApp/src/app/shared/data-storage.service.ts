@@ -63,13 +63,12 @@ export class DataStorageService {
       );
   }
 
-  getMenu() {
+  getFoodItems() {
     return this._http.get(this._url)
       .map(
         (response: Response) => {
-           const menus: OurOffers = response.json();
-           console.log(menus);
-           return menus;
+           const foodItems: FoodItems = response.json();
+           return foodItems;
          }
       )
   }

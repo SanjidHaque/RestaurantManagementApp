@@ -1,6 +1,6 @@
 .name , .price{
   padding-top: 15px;
-  color: #ae0000;
+  color: #840d0f;
   font-family:"Berlin Sans FB";
   font-size: 21px;
 }
@@ -8,25 +8,25 @@
   margin-top:  26px;
 }
 .f-name {
-  padding-top: 10px;
-  color: #ae0000;
+  color: #840d0f;
   font-family: "Times New Roman";
   font-size: 17px;
   font-weight: bold;
-  /*-webkit-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  -moz-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);*/
+  background-color: white;
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .all-categories-button {
   width:100%;
   height:100%;
   font-family:"Arial Narrow";
-  color: #d32039;
-  background-color: #ffffdf;
-  border: 1.2px solid #ae0000;
+  color: #840d0f;
+  background-color: white;
+  border: 1.2px solid #840d0f;
   border-radius: 5px;
-  font-size:16px;
+  font-size:14px;
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: bold;
@@ -34,8 +34,8 @@
 
 
 .all-categories-button:hover{
-  background-color: #d32039;
-  color: #ffffdf;
+  background-color: #840d0f;
+  color: white;
   font-family:"Arial Narrow";
   font-weight:bold;
   border: 1.2px solid #ffffdf;
@@ -56,10 +56,8 @@
 
 
 .body{
-  height: 400px;
-  overflow-y: scroll;
-  border: 1px solid #cbc6cb;
-  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 
@@ -118,7 +116,7 @@
 }
 @import url('https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt');
 .hodoo {
-  font-family: 'Berkshire Swash', cursive;
+  font-family: 'Berkshire Swash',"Berlin Sans FB","Times New Roman";
   font-size:40px;
   // padding-left: 38px;
   text-align: right;
@@ -157,4 +155,12 @@
 }
 .main-row{
   border-bottom: 2px double #dfdfdf;
+}
+
+.total-table{
+  font-family: "Times New Roman";
+  font-size: 18px;
+  color: #6a0d0e;
+  font-weight: bold;
+  padding-top: 10px;
 }

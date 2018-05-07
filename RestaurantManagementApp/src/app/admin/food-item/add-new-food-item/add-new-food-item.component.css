@@ -278,7 +278,7 @@ a {
 
 .item-name {
   font-family: "Times New Roman";
-  font-size: 18px;
+  font-size: 15px;
   color: #840d0f;
   font-weight: bold;
   text-align: left; }
@@ -422,5 +422,8 @@ input {
 .extra {
   padding-left: 0;
   padding-right: 0; }
+
+.serial-number {
+  font-size: 10px; }
 
 /*# sourceMappingURL=add-new-food-item.component.css.map */

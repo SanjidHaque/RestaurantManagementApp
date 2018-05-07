@@ -6,6 +6,7 @@ import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
 import {NgForm} from '@angular/forms';
 import {Inventory} from '../../../shared/inventory.model';
 import { Uuid } from 'ng2-uuid';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-update-inventory-item',
@@ -19,27 +20,48 @@ export class UpdateInventoryItemComponent implements OnInit {
   price: number;
   quantity: number;
   unit: string;
-  inventoryHistory: InventoryHistoryModel[] = [];
-
+  inventoryList: Inventory[] = [];
+  subscription: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService ) { }
-
-  ngOnInit() {
+              private _dataStorageService: DataStorageService ) {
     this.route.params
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
-          for (let i = 0; i < this._ourOfferService.inventory.length; i++) {
-            if ( this._ourOfferService.inventory[i].Id === this.id ) {
-              this.unit = this._ourOfferService.inventory[i].Unit;
-              this.name = this._ourOfferService.inventory[i].Name;
-            }
-          }
         }
       );
+
+  }
+
+  ngOnInit() {
+   /* this._dataStorageService.getInventories()
+      .subscribe(
+        (inventories: Inventory[]) => {
+          this._ourOfferService.inventory = inventories;
+        }
+      );*/
+    this.route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
+    this.inventoryList = this._ourOfferService.inventory;
+    this.subscription = this._ourOfferService.inventoryChanged
+      .subscribe(
+        (inventories: Inventory[]) => {
+          this.inventoryList = inventories;
+        }
+      );
+    for (let i = 0; i < this.inventoryList.length; i++) {
+      if ( this.inventoryList[i].Id === this.id ) {
+        this.unit = this.inventoryList[i].Unit;
+        this.name = this.inventoryList[i].Name;
+      }
+    }
   }
 
   onUpdateItem(form: NgForm) {

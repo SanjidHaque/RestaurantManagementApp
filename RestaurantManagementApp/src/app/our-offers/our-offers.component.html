@@ -1,16 +1,4 @@
 
-<!--<mat-card class="card1">
-  <mat-card-header>
-    <mat-card-title><h1>Dialog Demo</h1></mat-card-title>
-  </mat-card-header>
-  <hr>
-  <mat-card-content>
-    <button mat-raised-button (click)="openDialog()">Open Dialog</button>
-    <hr>
-    <strong>Result: {{dialogResult}}</strong>
-  </mat-card-content>
-</mat-card>-->
-
 
 
 <div class="row">
@@ -22,6 +10,7 @@
 
     <div class="row">
       <a routerLink="/control-panel"
+         (click)="clear()"
       title="Go back to dashboard">
         <div class="col-md-10 dashboard">
           <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
@@ -31,8 +20,52 @@
         hodoo
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12 note">
+        Add or Remove Here Quickly
+      </div>
+    </div>
+    <div class="row other-adding-option">
+      <div class="col-md-6 serial">
+        <input
+          type="text"
+          id="serial"
+          onfocus=""
+          class="form-control"
+          name="serial"
+          required
+          placeholder="Enter serial no"
+          #serial
+        >
+      </div>
+      <div class="col-md-6 quantity">
+        <input
+          type="number"
+          min="1"
+          id="quantity"
+          name="quantity"
+          class="form-control"
+          required
+          placeholder="Enter quantity"
+          #quantity
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 add">
+        <button
 
-
+          class="add-remove-button"
+          (click)="add()"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+           Add</button>
+      </div>
+      <div class="col-md-6 remove">
+        <button
+          class="add-remove-button"
+          (click)="remove()"><i class="fa fa-minus-circle" aria-hidden="true"></i>
+        Remove </button>
+      </div>
+    </div>
     <div class="row">
         <div class="col-md-12 cart-empty" *ngIf="grandTotal==0; else itemIsSold">
           <div class="col-md-12">
@@ -79,16 +112,7 @@
           </div>
 
          <div *ngIf="checkFoodItemCount()!=0">
-<!--
-
-            <div class="row">
-               <div class="col-md-12 list-title">
-                  Regulars
-               </div>
-            </div>
--->
-
-            <div class="row list-detail" *ngFor="let order of orderedItems; let i = index">
+<        <div class="row list-detail" *ngFor="let order of orderedItems; let i = index">
               <div *ngIf="order.FoodItemQuantity !== 0">
                 <div class="row">
                   <div class="col-md-offset-1 col-md-7 name">
@@ -99,8 +123,16 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-offset-2 col-md-10 quantity">
+                  <div class="col-md-offset-1 col-md-8 quantity">
                     {{ order.FoodItemQuantity }} Unit(s) at {{ order.Price }} BDT/Unit(s)
+                  </div>
+                  <div class="col-md-1">
+                    <i
+                      title="Remove this ordered item"
+                      style="cursor: pointer"
+                      (click)="removeFromCart(i)"
+                      class="fa fa-times-circle-o remove-order"
+                      aria-hidden="true"></i>
                   </div>
                 </div>
               <hr class="content">

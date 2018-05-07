@@ -16,7 +16,7 @@ export class TablesComponent implements OnInit {
 
   public tables: Table[] ;
   subscription: Subscription;
-
+  totalTable = 0;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -25,12 +25,18 @@ export class TablesComponent implements OnInit {
               private _http: Http) { }
 
   ngOnInit() {
-    this._dataStorageService.getTables()
+    /*this._dataStorageService.getTables()
       .subscribe(
         (tables: Table[]) => {
           this._ourOfferService.table = tables;
         }
-      );
+      );*/
+   this.route.data.
+     subscribe(
+     ( data: Table[]) => {
+       this._ourOfferService.table = data['tables'];
+     }
+   );
     this.tables = this._ourOfferService.table;
     this.subscription = this._ourOfferService.tableChanged
       .subscribe(
@@ -38,12 +44,15 @@ export class TablesComponent implements OnInit {
           this.tables = tables;
         }
       );
+    this.totalTable = this.tables.length;
   }
   addNewTable() {
     this.router.navigate(['admin/tables/add-new-table']);
   }
 
-
+  editTable(table: Table) {
+    this.router.navigate(['admin/tables/edit-table', table.Id]);
+  }
   deleteTable(table: Table, index: number) {
     this._dataStorageService.deleteTable(table);
     this.tables.splice(index, 1);

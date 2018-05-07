@@ -42,6 +42,11 @@ import {InventoryGridDetailsComponent} from './admin/inventory/inventory-grid-vi
 import {InventoryListDetailsComponent} from './admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
 import {InventoryGridViewComponent} from './admin/inventory/inventory-grid-view/inventory-grid-view.component';
 import {UpdateInventoryItemComponent} from './admin/inventory/update-inventory-item/update-inventory-item.component';
+import {EditTableComponent} from './admin/tables/edit-table/edit-table.component';
+import {TableResolverService} from './admin/tables/table-resolver.service';
+import {FoodItemResolverService} from './admin/food-item/food-item-resolver.service';
+import {OrderResolverService} from './admin/orders/order-resolver.service';
+import {InventoryResolverService} from './admin/inventory/inventory-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -49,11 +54,11 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/control-panel', pathMatch: 'full' },
   { path: 'payment', component: PaymentComponent },
   { path: 'receipt', component: ReceiptComponent },
-  { path: 'our-offers', component: OurOffersComponent,
+  { path: 'our-offers', component: OurOffersComponent, resolve: { foodItems: FoodItemResolverService },
   children: [
     { path: 'all-categories', component: AllCategoriesComponent },
     { path: 'set-menu', component: OurOffersListComponent },
-    { path: 'regulars', component: FoodItemsComponent }
+    { path: 'regulars', component: FoodItemsComponent, resolve: { foodItems: FoodItemResolverService } }
   ]
   },
 
@@ -64,38 +69,39 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent, children: [
     { path: 'orders', component: OrdersComponent,
     children: [
-      { path: 'list-view', component: OrderListViewComponent},
-      { path: 'list-details/:id', component: OrderListViewDetailsComponent},
-      { path: 'grid-view', component: OrderGridViewComponent},
-      { path: 'grid-details/:id', component: OrderGridViewDetailsComponent }
+      { path: 'list-view', component: OrderListViewComponent, resolve: { orders: OrderResolverService }},
+      { path: 'list-details/:id', component: OrderListViewDetailsComponent, resolve: { orders: OrderResolverService }},
+      { path: 'grid-view', component: OrderGridViewComponent, resolve: { orders: OrderResolverService }},
+      { path: 'grid-details/:id', component: OrderGridViewDetailsComponent, resolve: { orders: OrderResolverService } }
     ]
     },
       { path: 'food-item', component: FoodItemComponent ,
        children: [
-         { path: 'list-view', component: FooditemListViewComponent},
-         { path: 'list-details/:id', component: ListDetailsComponent},
-         { path: 'grid-view', component: FooditemGridViewComponent},
-         { path: 'grid-details/:id', component: GridDetailsComponent },
+         { path: 'list-view', component: FooditemListViewComponent, resolve: { foodItems: FoodItemResolverService }},
+         { path: 'list-details/:id', component: ListDetailsComponent, resolve: { foodItems: FoodItemResolverService }},
+         { path: 'grid-view', component: FooditemGridViewComponent, resolve: { foodItems: FoodItemResolverService }},
+         { path: 'grid-details/:id', component: GridDetailsComponent, resolve: { foodItems: FoodItemResolverService } },
          { path: 'add-new-food-item', component: AddNewFoodItemComponent},
          { path: 'edit-food-item/:id', component: EditFoodItemComponent }
        ]},
       { path: 'set-menu', component: AddSetMenuComponent},
     { path: 'summary-of-inventories', component: SummaryComponent },
-    { path: 'tables', component: TablesComponent, children:
+    { path: 'tables', component: TablesComponent, resolve: { tables: TableResolverService }, children:
     [
-      { path: 'add-new-table', component: AddNewTableComponent }
+      { path: 'add-new-table', component: AddNewTableComponent },
+      { path: 'edit-table/:id', component: EditTableComponent }
       ]
 
     },
     { path: 'inventory', component: InventoryComponent ,
         children: [
         {path: 'add-new-inventory', component: AddNewInventoryComponent },
-        {path: 'edit-inventory-item/:id', component: EditInventoryItemComponent },
-        {path: 'update-inventory-item/:id', component: UpdateInventoryItemComponent },
-          { path: 'list-view', component: InventoryListViewComponent},
-          { path: 'list-details/:id', component: InventoryListDetailsComponent},
-          { path: 'grid-view', component: InventoryGridViewComponent},
-          { path: 'grid-details/:id', component: InventoryGridDetailsComponent },
+        {path: 'edit-inventory-item/:id', component: EditInventoryItemComponent, resolve: { inventories: InventoryResolverService }},
+        {path: 'update-inventory-item/:id', component: UpdateInventoryItemComponent, resolve: { inventories: InventoryResolverService }},
+          { path: 'list-view', component: InventoryListViewComponent, resolve: { inventories: InventoryResolverService }},
+          { path: 'list-details/:id', component: InventoryListDetailsComponent, resolve: { inventories: InventoryResolverService }},
+          { path: 'grid-view', component: InventoryGridViewComponent, resolve: { inventories: InventoryResolverService } },
+          { path: 'grid-details/:id', component: InventoryGridDetailsComponent, resolve: { inventories: InventoryResolverService }},
       ]}
     ] },
 ];

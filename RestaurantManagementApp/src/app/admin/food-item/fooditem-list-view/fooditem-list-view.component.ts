@@ -20,11 +20,18 @@ export class FooditemListViewComponent implements OnInit {
               private _http: Http) { }
 
   ngOnInit() {
-    this._dataStorageService.getMenu()
+    /*this._dataStorageService.getFoodItems()
       .subscribe(
-        (Menu: OurOffers ) => {
-          this._ourOfferService.FoodItem = Menu.FoodItems;
-        });
+        (foodItems: FoodItems[] ) => {
+          this._ourOfferService.FoodItem = foodItems;
+        });*/
+    this.route.data.
+    subscribe(
+      ( data: FoodItems[]) => {
+        this._ourOfferService.FoodItem = data['foodItems'];
+      }
+    );
+
     this.FoodItem = this._ourOfferService.FoodItem;
     this._ourOfferService.foodItemChanged
       .subscribe(

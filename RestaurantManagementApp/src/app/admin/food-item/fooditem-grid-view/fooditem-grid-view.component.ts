@@ -20,11 +20,17 @@ export class FooditemGridViewComponent implements OnInit {
               private _http: Http) { }
 
   ngOnInit() {
-    this._dataStorageService.getMenu()
+   /* this._dataStorageService.getMenu()
       .subscribe(
         (Menu: OurOffers ) => {
           this._ourOfferService.FoodItem = Menu.FoodItems;
-        });
+        });*/
+    this.route.data.
+    subscribe(
+      ( data: FoodItems[]) => {
+        this._ourOfferService.FoodItem = data['foodItems'];
+      }
+    );
     this.FoodItem = this._ourOfferService.FoodItem;
     this._ourOfferService.foodItemChanged
       .subscribe(

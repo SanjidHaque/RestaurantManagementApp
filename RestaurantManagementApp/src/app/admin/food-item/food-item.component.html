@@ -12,67 +12,6 @@
   </div>
 </div>
 
-<!--
-
-<div class="row title">
-  <div class="col-md-8">
-    <div class="col-md-4 name">
-      Name
-    </div>
-    <div class="col-md-4 price">
-      Price
-    </div>
-    <div class="col-md-4 price">
-      <span class="fa fa-search"></span>
-      <input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-8 body">
-
-    <div class="row" *ngFor="let foodItem of FoodItem | filter:term; let i = index">
-
-      <div class="col-md-12 f-name table-bordered">
-
-        <div class="col-md-4 ">
-          {{ foodItem.Name }}
-        </div>
-        <div class="col-md-4 ">
-          {{ foodItem.Price }} BDT
-        </div>
-        <div class="col-md-2 edit-delete">
-          <button class="all-categories-button" (click)="editItem(foodItem)">Edit</button>
-        </div>
-        <div class="col-md-2 edit-delete">
-          <button class="all-categories-button" (click)="deleteItem(foodItem,i)">Delete</button>
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-  <div class="col-md-4 ">
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        <button class="all-categories-button" (click)="addNewItem()">Add New Item</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-
-  </div>
-</div>
--->
-
-
 <div class="row">
   <a routerLink="/admin/food-item/add-new-food-item">
   <div class="col-md-offset-9 col-md-2 add-new">

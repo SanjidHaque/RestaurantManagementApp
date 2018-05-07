@@ -1,4 +1,4 @@
-import {Component, DoCheck, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import { Response } from '@angular/http';
 import {OurOffersService} from './our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,6 +11,8 @@ import { Uuid } from 'ng2-uuid';
 import {element} from 'protractor';
 import { Inject} from '@angular/core';
 import {Popup} from 'ng2-opd-popup';
+import {FoodItems} from '../shared/food-item.model';
+import {isUndefined} from 'util';
 
 
 @Component({
@@ -19,20 +21,25 @@ import {Popup} from 'ng2-opd-popup';
   styleUrls: ['./our-offers.component.scss']
 })
 export class OurOffersComponent implements OnInit, DoCheck {
-    Menu: OurOffers;
-    subscription: Subscription;
-    toCheckOut = false;
-    quantity: number = 0;
-    uuidCodeOne = '';
-    onCheck = 0;
-
+  Menu: OurOffers;
+  subscription: Subscription;
+  toCheckOut = false;
+  quantity = 0;
+  onCheck = 0;
+  FoodItem: FoodItems[] = [];
+  order: Order[];
+  condition = false;
+  uuidCodeOne = '';
+  uuidCodeTwo = '';
+  uuidCodeThree = '';
   public grandTotal: number;
   public orderedItems: OrderedItems[];
   public orders: Order;
   checkOrder = false;
   foodItemCount = 0;
   setMenuCount =  0;
-  public loading = false;
+  @ViewChild('serial') serialNo: ElementRef;
+  @ViewChild('quantity') quantityOfItem: ElementRef;
 
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
@@ -41,6 +48,9 @@ export class OurOffersComponent implements OnInit, DoCheck {
               private uuid: Uuid,
               private popup: Popup
   ) {
+    this.uuidCodeOne = this.uuid.v1();
+    this.uuidCodeTwo = this.uuid.v1();
+    this.uuidCodeThree = this.uuid.v1();
     this.Menu = new OurOffers();
     this.uuidCodeOne = this.uuid.v1();
   }
@@ -48,17 +58,38 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.orderedItems = this._ourOfferService.getOrderedItemsList();
-    this.grandTotal = this._ourOfferService.TotalPrice;
-    this.quantity += this._ourOfferService.totalQuantity;
+   /* this._dataStorageService.getMenu()
+      .subscribe(
+        (Menu: OurOffers ) => {
+          this._ourOfferService.FoodItem = Menu.FoodItems;
+        });*/
+    this.route.data.
+    subscribe(
+      ( data: FoodItems[]) => {
+        this._ourOfferService.FoodItem = data['foodItems'];
+      }
+    );
+    this.FoodItem = this._ourOfferService.FoodItem;
+
+    this._ourOfferService.foodItemChanged
+      .subscribe(
+        (FoodItem: FoodItems[]) => {
+          this.FoodItem = FoodItem;
+        }
+      );
+
   }
   ngDoCheck() {
     this.orderedItems = this._ourOfferService.getOrderedItemsList();
     this.grandTotal = this._ourOfferService.TotalPrice;
   }
 
-
-
-
+  removeFromCart(index: number) {
+    this._ourOfferService.TotalPrice = Number.parseInt(this._ourOfferService.TotalPrice.toString())
+      - Number.parseInt(this.orderedItems[index].FoodItemSubTotal.toString());
+    this.orderedItems.splice(index, 1);
+    this._ourOfferService.orderedItems.splice(index, 1);
+  }
   checkFoodItemCount() {
     for ( let i = 0; i< this.orderedItems.length; i++) {
       if(this.orderedItems[i].FoodItemName != null) {
@@ -77,36 +108,122 @@ export class OurOffersComponent implements OnInit, DoCheck {
     return this.setMenuCount;
   }
 
-  goToAllCategories() {
-    this.router.navigate(['our-offers/all-categories']);
-  }
-  goToSetMenus() {
-    this.router.navigate(['our-offers/set-menu']);
-  }
 
-  goToRegulars() {
-    this.router.navigate(['our-offers/regulars']);
-  }
   AddToOrderedList() {
-    /*let orderId = this._ourOfferService.uuidCodeOne;
-    this.onCheck  = 1;
-    this.orderedItems = this._ourOfferService.orderedItems;
-    let totalPrice = this._ourOfferService.TotalPrice;
-    let orderStatus = 0;
-    this.orders = new Order(orderId, this.orderedItems, totalPrice, orderStatus);
-    this._ourOfferService.addToOrderedList(this.orders);
-    this._dataStorageService.storeOrders()
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );*/
     this.router.navigate(['payment']);
 
   }
+  add() {
+    const serialNumber = this.serialNo.nativeElement.value;
+    const quantity = this.quantityOfItem.nativeElement.value;
+    if ( serialNumber !== '' && quantity !== '') {
+      for (let i = 0; i < this.FoodItem.length; i++) {
+        if (this.FoodItem[i].SerialNo === serialNumber) {
+          this.UpdateCart(
+            this.FoodItem[i].Id,
+            this.FoodItem[i].Price,
+            this.FoodItem[i].Name,
+            this.FoodItem[i].MakingCost,
+            true,
+            quantity
+          )
+        }
+      }
+    }
+     (<HTMLInputElement>document.getElementById('quantity')).value = '';
+     (<HTMLInputElement>document.getElementById('serial')).value = '';
+   // const clear1 =  document.getElementById('quantity').value = '';
+  //  const clear2 =  document.getElementById('serial').value = '';
+  }
+  remove() {
+    const serialNumber = this.serialNo.nativeElement.value;
+    const quantity = this.quantityOfItem.nativeElement.value;
+    if ( serialNumber !== '' && quantity !== '') {
+      for ( let i = 0; i < this.FoodItem.length; i++ ) {
+        if (this.FoodItem[i].SerialNo === serialNumber) {
+          this.UpdateCart(
+            this.FoodItem[i].Id,
+            this.FoodItem[i].Price,
+            this.FoodItem[i].Name,
+            this.FoodItem[i].MakingCost,
+            false,
+            quantity
+          )
+
+        }
+      }
+    }
+  //  HTMLInputElement.document.getElementById('serial').value = '';
+  //  HTMLInputElement.document.getElementById('quantity').value = '';
+  }
+
+
+  UpdateCart(id: string, price: number, name: string, makingCost: number,
+             isAdd: boolean, quantity: number) {
+
+    let foodItemId = id;
+    let foodItemName = name;
+    let Price = price;
+    let orderId = null;
+    if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
+      let orderItemId = this.uuid.v1();
+      if ( isAdd === true ) {
+        this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
+          foodItemName, Price, makingCost );
+      } else {
+        this.RemoveFromCart(orderItemId, orderId,  quantity,
+          foodItemId, foodItemName, Price, makingCost );
+      }
+    }
+    else {
+      let orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
+      if ( isAdd === true ) {
+        this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
+          foodItemName, Price, makingCost );
+      } else {
+        this.RemoveFromCart(orderItemId, orderId,  quantity,
+          foodItemId, foodItemName, Price, makingCost );
+      }
+    }
 
 
 
+  }
+
+
+
+  AddToCart(orderItemId: string, orderId: string, quantity: number,
+            foodItemId: string, foodItemName: string, price: number, makingCost: number ) {
+
+    let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
+    this._ourOfferService.grandTotalPrice(subTotal);
+    this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
+
+    if ( this.condition  ) {
+      this._ourOfferService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
+    } else {
+
+      const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId, null,
+        quantity , null , null, foodItemName, price, null , subTotal, makingCost);
+
+      this._ourOfferService.addToOrderedItemsList(purchasedFood);
+    }
+    this._ourOfferService.totalQuantity
+      = Number.parseInt(this._ourOfferService.totalQuantity.toString())
+      + Number.parseInt(quantity.toString());
+
+
+  }
+
+  RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
+                 foodItemId: string, foodItemName: string, price: number, makingCost: number) {
+
+
+
+    let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
+    this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
+
+  }
 
   DiscardOrder() {
     this.popup.options = {
@@ -123,7 +240,9 @@ export class OurOffersComponent implements OnInit, DoCheck {
     };
     this.popup.show();
   }
-
+  clear() {
+    this.ConfirmEvent();
+  }
   ConfirmEvent() {
     this._ourOfferService.clearOrders();
     this._ourOfferService.TotalPrice = 0;

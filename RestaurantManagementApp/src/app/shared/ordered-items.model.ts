@@ -1,7 +1,7 @@
 export class OrderedItems {
   public OrderItemId: string;
   public OrderId: string;
-  public FoodItemId?: number;
+  public FoodItemId?: string;
   public SetMenuQuantity?: number;
   public FoodItemQuantity?: number;
   public SetMenuId?: number;
@@ -15,7 +15,7 @@ export class OrderedItems {
 
 
   constructor(orderItemId: string, orderId: string,
-              foodItemId: number, setMenuQuantity: number,
+              foodItemId: string, setMenuQuantity: number,
             foodItemQuantity: number,  setMenuId: number,
               setMenuName: string, foodItemName: string,
               price: number, setMenuSubTotal: number,

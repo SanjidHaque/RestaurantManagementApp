@@ -37,12 +37,18 @@ export class InventoryListDetailsComponent implements OnInit {
   }
   ngOnInit() {
 
-    this._dataStorageService.getInventories()
+    /*this._dataStorageService.getInventories()
       .subscribe(
         (inventories: Inventory[]) => {
           this._ourOfferService.inventory = inventories;
         }
-      );
+      );*/
+    this.route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
     this.inventoryList = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(

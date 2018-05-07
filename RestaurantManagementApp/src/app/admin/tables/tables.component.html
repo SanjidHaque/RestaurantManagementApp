@@ -12,9 +12,13 @@
     hodoo
   </div>
 </div>
+
 <div class="row title">
   <div class="col-md-8">
-    <div class="col-md-offset-8 col-md-2 quantity">
+    <div class="col-md-3 name">
+      Table's Name
+    </div>
+    <div class="col-md-offset-5 col-md-2 quantity">
       <span class="fa fa-search"></span>
       <input class="box" type="text" [(ngModel)]="term" placeholder="Search Tables...">
     </div>
@@ -22,37 +26,46 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8 body">
+  <div class="col-md-8">
 
-    <div class="row" >
+    <div class="row f-name">
 
-      <div class="col-md-6 f-name table-bordered" *ngFor="let table of tables | filter:term; let i = index">
+      <div class="col-md-12 body table-bordered" *ngFor="let table of tables | filter:term; let i = index">
 
-        <div class="col-md-8 ">
-          {{ table.Name }}
+        <div class="col-md-8 body">
+        {{ table.Name }}
         </div>
 
-        <div class="col-md-4 edit-delete">
-
-
-            <button class="all-categories-button" (click)="deleteTable(table,i)">Delete</button>
-
-
+        <div class="col-md-2 body">
+            <button
+              class="all-categories-button"
+              (click)="editTable(table,i)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
         </div>
 
-
+        <div class="col-md-2 body">
+          <button class="all-categories-button"
+                  (click)="deleteTable(table,i)">
+            <i class=" fa fa-trash" aria-hidden="true"></i> Delete</button>
+        </div>
 
       </div>
 
 
     </div>
 
-
+    <div class="row">
+      <div class="col-md-12 total-table">
+        Total Table: {{ totalTable }} (s)
+      </div>
+    </div>
   </div>
+
   <div class="col-md-4">
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
-        <button class="all-categories-button" (click)="addNewTable()">Add New Table</button>
+        <button class="all-categories-button" (click)="addNewTable()">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Table</button>
       </div>
     </div>
     <div class="row">

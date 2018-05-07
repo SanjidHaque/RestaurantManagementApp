@@ -5,6 +5,7 @@ import {Inventory} from '../../../shared/inventory.model';
 import {NgForm} from '@angular/forms';
 import {DataStorageService} from '../../../shared/data-storage.service';
 import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-edit-inventory-item',
@@ -18,28 +19,50 @@ export class EditInventoryItemComponent implements OnInit {
    quantity: number;
    unit: string;
    inventoryHistory: InventoryHistoryModel[] = [];
+  inventoryList: Inventory[] = [];
+  subscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService ) { }
-
-  ngOnInit() {
+              private _dataStorageService: DataStorageService ) {
     this.route.params
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
-          for (let i = 0; i < this._ourOfferService.inventory.length; i++) {
-            if ( this._ourOfferService.inventory[i].Id === this.id ) {
-
-               this.name = this._ourOfferService.inventory[i].Name;
-               this.price = this._ourOfferService.inventory[i].Price;
-               this.unit = this._ourOfferService.inventory[i].Unit;
-               this.inventoryHistory = this._ourOfferService.inventory[i].InventoryHistory;
-            }
-          }
         }
       );
+  }
+
+  ngOnInit() {
+    /*this._dataStorageService.getInventories()
+      .subscribe(
+        (inventories: Inventory[]) => {
+          this._ourOfferService.inventory = inventories;
+        }
+      );*/
+    this.route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
+    this.inventoryList = this._ourOfferService.inventory;
+    this.subscription = this._ourOfferService.inventoryChanged
+      .subscribe(
+        (inventories: Inventory[]) => {
+          this.inventoryList = inventories;
+        }
+      );
+    for (let i = 0; i < this.inventoryList.length; i++) {
+      if ( this.inventoryList[i].Id === this.id ) {
+
+        this.name = this.inventoryList[i].Name;
+        this.price = this.inventoryList[i].Price;
+        this.unit = this.inventoryList[i].Unit;
+        this.inventoryHistory = this.inventoryList[i].InventoryHistory;
+      }
+    }
   }
 
   onEditItem(form: NgForm) {

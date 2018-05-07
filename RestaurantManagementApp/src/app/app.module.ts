@@ -67,6 +67,11 @@ import { InventoryGridViewComponent } from './admin/inventory/inventory-grid-vie
 import { InventoryListDetailsComponent } from './admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
 import { InventoryGridDetailsComponent } from './admin/inventory/inventory-grid-view/inventory-grid-details/inventory-grid-details.component';
 import { UpdateInventoryItemComponent } from './admin/inventory/update-inventory-item/update-inventory-item.component';
+import { EditTableComponent } from './admin/tables/edit-table/edit-table.component';
+import {TableResolverService} from './admin/tables/table-resolver.service';
+import {OrderResolverService} from './admin/orders/order-resolver.service';
+import {InventoryResolverService} from './admin/inventory/inventory-resolver.service';
+import {FoodItemResolverService} from './admin/food-item/food-item-resolver.service';
 
 
 
@@ -122,7 +127,8 @@ import { UpdateInventoryItemComponent } from './admin/inventory/update-inventory
     InventoryGridViewComponent,
     InventoryListDetailsComponent,
     InventoryGridDetailsComponent,
-    UpdateInventoryItemComponent
+    UpdateInventoryItemComponent,
+    EditTableComponent
   ],
   imports: [
     BrowserModule,
@@ -146,7 +152,11 @@ import { UpdateInventoryItemComponent } from './admin/inventory/update-inventory
     DataStorageService,
     ChefServiceService,
     AdminDataService,
-    IngredientServiceService
+    IngredientServiceService,
+    TableResolverService,
+    OrderResolverService,
+    InventoryResolverService,
+    FoodItemResolverService
   ],
   bootstrap: [AppComponent]
 })

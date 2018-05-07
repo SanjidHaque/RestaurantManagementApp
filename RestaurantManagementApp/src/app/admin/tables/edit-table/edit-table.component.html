@@ -1,14 +1,14 @@
 <div class="col-md-12 name">
-  <form (ngSubmit) = "onAddNewTable(newTable)" #newTable = "ngForm">
+  <form (ngSubmit) = "onEditTable(newTable)" #newTable = "ngForm">
     <div id="user-data">
       <div class="form-group">
-        <label for="name">Table's Name:</label>
+        <label for="tableName">Edit Table's Name:</label>
         <input
           type="text"
-          id="name"
+          id="tableName"
           class="form-control"
-          ngModel
-          name="name"
+          [ngModel] = "tableName"
+          name="tableName"
           required
         >
       </div>
@@ -19,7 +19,7 @@
           <button class="all-categories-button"
                   type="submit"
                   [disabled]="!newTable.valid">
-            <i class="fa fa-bookmark" aria-hidden="true"></i> Save</button>
+            <i class="fa fa-wrench" aria-hidden="true"></i> Update</button>
         </div>
         <div class="action">
           <button class="all-categories-button" type="button" (click)="onCancel()">

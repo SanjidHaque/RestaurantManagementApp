@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
 import {OurOffersService} from '../../../../our-offers/our-offers.service';
 import {Popup} from 'ng2-opd-popup';
 import {DataStorageService} from '../../../../shared/data-storage.service';
-import {LocationStrategy} from '@angular/common';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OrderedItems} from '../../../../shared/ordered-items.model';
 import {Order} from '../../../../shared/order.model';
@@ -22,11 +20,10 @@ export class OrderGridViewDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private location: LocationStrategy,
               private _dataStorageService: DataStorageService,
               private popup: Popup,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+              ) {
     this.route.params
       .subscribe(
         (params: Params) => {

@@ -3,7 +3,6 @@ import {DataStorageService} from '../../../shared/data-storage.service';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Order} from '../../../shared/order.model';
-import {IngredientServiceService} from '../../food-item/add-new-food-item/add-ingredients/ingredient-service.service';
 
 @Component({
   selector: 'app-order-grid-view',
@@ -21,8 +20,7 @@ export class OrderGridViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService,
-              private _ingredientService: IngredientServiceService) { }
+             ) { }
 
   ngOnInit() {
    /* this._dataStorageService.getOrders()

@@ -1,41 +1,35 @@
 import {Injectable, OnInit} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import {OurOffersService} from '../our-offers/our-offers.service';
-import {OurOffers} from '../our-offers/our-offers.model';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Order} from './order.model';
 import {Inventory} from './inventory.model';
-import {Subject} from 'rxjs/Subject';
 import {FoodItems} from './food-item.model';
-import {SummaryOfInventory} from './summary-of-inventory';
-import {CashFlow} from './cash-flow';
 import {Table} from './table.model';
 import {InventoryHistoryModel} from './inventory-history.model';
 @Injectable()
 export class DataStorageService {
 
   public order: Order;
-   private _url = 'assets/menu-from-api.json';
-  // private _url = 'http://localhost:1548/api/menu';
+   private foodItemJson = 'assets/food-item.json';
+  // private foodItemApi = 'http://localhost:1548/api/GetFoodItems';
 
   private _inventoryJson = 'assets/inventories.json';
   private _inventoryApi = 'http://localhost:1548/api/GetInventories';
   private _tableJson = 'assets/tables.json';
   private _tableApi = 'http://localhost:1548/api/GetTables';
-  private _cashFlowJson = 'assets/cash-flow.json';
-  private _sumOfInventoryJson = 'assets/sum-of-inventory.json';
 
   private _orderJson  = 'assets/order.json';
+  private _orderApi  = 'http://localhost:1548/api/GetOrders';
 
   constructor(private _http: Http,
               private _ourOffersService: OurOffersService) {
   }
 
 
-  postFile(foodItemId: string, fileToUpload: File ) {
-    const endpoint = 'http://localhost:1548/api/UploadImage';
+  saveFoodItemImage(foodItemId: string, fileToUpload: File ) {
+    const endpoint = 'http://localhost:1548/api/SaveFoodItemImage';
     const formData: FormData = new FormData();
     formData.append('Image', fileToUpload, fileToUpload.name);
     formData.append('FoodItemId', foodItemId);
@@ -43,58 +37,29 @@ export class DataStorageService {
       .post(endpoint, formData );
   }
 
-  getSummaryOfInventories() {
-    return this._http.get(this._sumOfInventoryJson)
-      .map(
-        (response: Response) => {
-          const sumOfInv: SummaryOfInventory[] = response.json();
-          return sumOfInv;
-        }
-      );
-  }
 
-  getCashFlow() {
-    return this._http.get(this._cashFlowJson)
-      .map(
-        (response: Response) => {
-          const cashFlow: CashFlow[] = response.json();
-          return cashFlow;
-        }
-      );
-  }
 
   getFoodItems() {
-    return this._http.get(this._url)
+    return this._http.get(this.foodItemJson)
       .map(
         (response: Response) => {
            const foodItems: FoodItems = response.json();
+           console.log(foodItems);
            return foodItems;
          }
       )
   }
 
-  storeOrders() {
-    return this._http.post('http://localhost:1548/api/PostMenu',
-     this._ourOffersService.orders);
+  saveOrder(order: Order) {
+    return this._http.post('http://localhost:1548/api/StoreOrder',
+     order).subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
   }
 
-  acceptOrders() {
-    return this._http.post('http://localhost:1548/api/AcceptOrders',
-      this._ourOffersService.getAcceptedOrder() ).map(
-        res => res.json())
-      .catch((error: any) => Observable.throw(error.json().error ||
-      'Server error'))
-      .subscribe();
-  }
 
-  rejectOrders() {
-    return this._http.post('http://localhost:1548/api/RejectOrders',
-      this._ourOffersService.getRejectedOrder () ).map(
-      res => res.json())
-      .catch((error: any) => Observable.throw(error.json().error ||
-        'Server error'))
-      .subscribe();
-  }
   deleteOrder(order: Order) {
     return this._http.post('http://localhost:1548/api/DeleteOrder',
       order)

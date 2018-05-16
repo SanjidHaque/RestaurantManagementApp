@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAU;EACR,WAAW,EAAC,iBAAiB;EAC7B,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,OAAO;EACd,UAAU,EAAE,MAAM;EAClB,WAAW,EAAE,KAAK",
+"sources": ["forbidden.component.scss"],
+"names": [],
+"file": "forbidden.component.css"
+}

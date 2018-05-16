@@ -20,6 +20,11 @@
   font-weight: bold;
   text-align: center; }
 
+.fixed-div {
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
 .image {
   height: 100%;
   width: 100%;
@@ -90,7 +95,7 @@
   border-radius: 5px; }
 
 ::-webkit-scrollbar {
-  width: 4px; }
+  width: 2px; }
 
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -98,8 +103,8 @@
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.61);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+  background-color: rgba(201, 191, 197, 0.61);
+  -webkit-box-shadow: inset 0 0 6px rgba(211, 201, 207, 0.5); }
 
 .hodoo {
   font-family: 'Berkshire Swash', cursive;

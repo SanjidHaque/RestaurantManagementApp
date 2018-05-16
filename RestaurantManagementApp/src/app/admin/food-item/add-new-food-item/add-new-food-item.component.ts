@@ -1,16 +1,15 @@
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Uuid } from 'ng2-uuid';
 import {FoodItems} from '../../../shared/food-item.model';
-import {Ingredients} from '../../../shared/ingredients.model';
-import {IngredientServiceService} from './add-ingredients/ingredient-service.service';
-import {Observable} from 'rxjs/Observable';
-import {Http, RequestOptions} from '@angular/http';
+import {Http} from '@angular/http';
 import {Inventory} from '../../../shared/inventory.model';
 import {Subject} from 'rxjs/Subject';
+import {Subscription} from 'rxjs/Subscription';
+import {Ingredients} from '../../../shared/ingredients.model';
 
 @Component({
   selector: 'app-add-new-food-item',
@@ -24,35 +23,42 @@ export class AddNewFoodItemComponent implements OnInit {
   price: number;
   foodItemId : string;
   @ViewChild('newFoodItem') form: NgForm;
-  imageUrl = '/assets/no-image.jpg';
   salePrice = 0;
   profit = 0;
   inventories: Inventory[] = [];
   ingredients: Ingredients[] = [];
   ingredientsChanged = new Subject<Ingredients[]>();
   unit: number;
-  inventoryCost: number;
-  fileToUpload: File = null;
+  inventoryCost = 0;
+  subscription: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
-              private _http: Http,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
-              private _ingredientService: IngredientServiceService) {
+           ) {
     this.uuidCodeOne = this.uuid.v1();
   }
 
   ngOnInit() {
-    this._dataStorageService.getInventories()
+    this.route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
+    this.inventories = this._ourOfferService.inventory;
+    this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
-          this._ourOfferService.inventory = inventories;
+          this.inventories = inventories;
         }
       );
-    this.inventories = this._ourOfferService.getInventories();
     this.inventoryCost = 0;
   }
+
+
+
   getInventoryItemName(inventoryId: string) {
     for (let i = 0; i < this.inventories.length; i++) {
       if ( this.inventories[i].Id === inventoryId) {
@@ -97,23 +103,19 @@ export class AddNewFoodItemComponent implements OnInit {
 
       const name = this.getInventoryItemName(inventoryId);
       const inventoryUnit = this.getInventoryItemUnit(inventoryId);
-  //    let inventoryPrice = this.getInventoryItemPrice(inventoryId);
       const foodItemId = '';
       const addIngredient = new Ingredients(ingredientId, name, quantity,
         inventoryUnit, inventoryId, inventoryPrice, subTotal, foodItemId);
-   //   this._ourOfferService.addToIngredientList(addIngredient);
       this.ingredients.push(addIngredient);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
 
 
-  //  for (let i = 0; i < this.ingredients.length; i++) {
       this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
         + Number.parseInt(subTotal.toString());
-  //  }
-  //  this.router.navigate(['admin/food-item/add-new-food-item', foodItemId ]);
     form.controls['quantity'].reset();
 }
+
   deleteIngredient(ingredient: Ingredients, index: number) {
     for (let i = 0; i < this.ingredients.length; i++) {
       if (this.ingredients[i].Id === ingredient.Id ) {
@@ -126,31 +128,9 @@ export class AddNewFoodItemComponent implements OnInit {
   }
 
 
-  handleFileInput(file: FileList) {
-    this.fileToUpload = file.item(0);
-
-    // Show image preview
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imageUrl = event.target.result;
-    }
-    reader.readAsDataURL(this.fileToUpload);
-  }
-
-  OnSubmit(Image) {
-    this._dataStorageService.postFile( this.foodItemId, this.fileToUpload).subscribe(
-      data => {
-        console.log('done');
-        Image.value = null;
-        this.imageUrl = '/assets/no-image.jpg';
-      }
-    );
-  }
-
-  onAddNewFoodItem() {
 
 
-  }
+
 
   onSaveFoodItem(form: NgForm) {
     const name = form.value.itemName;
@@ -162,13 +142,14 @@ export class AddNewFoodItemComponent implements OnInit {
     for (let i = 0; i < this.ingredients.length; i++) {
       this.ingredients[i].FoodItemId = foodItemId;
     }
-   /* const image = this.fileToUpload;*/
     const newFoodItem =
       new FoodItems(foodItemId, serialNumber, name, price, this.inventoryCost, profit, 0 ,
       null, foodItemIngredients );
+
     this._ourOfferService.addToFoodItemList(newFoodItem);
     this._dataStorageService.addFoodItem(newFoodItem);
-    this.router.navigate(['admin/food-item/inventory-list-view']);
+
+    this.router.navigate(['admin/food-item/add-food-item-image', foodItemId]);
      this.form.reset();
   }
 

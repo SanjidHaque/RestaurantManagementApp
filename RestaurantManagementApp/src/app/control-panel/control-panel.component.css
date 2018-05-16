@@ -19,4 +19,22 @@
 .pos:hover, .admin:hover {
   color: #6a0d0e; }
 
+.log-out {
+  text-align: right;
+  padding-top: 20px; }
+
+.btn-primary {
+  background-color: #9c0000;
+  color: white; }
+
+.btn-primary:hover {
+  background-color: #7f0000;
+  color: white; }
+
+.btn-primary:focus {
+  outline: 0; }
+
+.dashboard {
+  padding-top: 120px; }
+
 /*# sourceMappingURL=control-panel.component.css.map */

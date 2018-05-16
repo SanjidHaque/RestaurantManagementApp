@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
 import {DataStorageService} from '../../../../shared/data-storage.service';
-import {LocationStrategy} from '@angular/common';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Popup} from 'ng2-opd-popup';
 import {OurOffersService} from '../../../../our-offers/our-offers.service';
@@ -27,7 +26,7 @@ export class InventoryListDetailsComponent implements OnInit {
               private _dataStorageService: DataStorageService,
               private popup: Popup,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+              ) {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -37,12 +36,6 @@ export class InventoryListDetailsComponent implements OnInit {
   }
   ngOnInit() {
 
-    /*this._dataStorageService.getInventories()
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this._ourOfferService.inventory = inventories;
-        }
-      );*/
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {

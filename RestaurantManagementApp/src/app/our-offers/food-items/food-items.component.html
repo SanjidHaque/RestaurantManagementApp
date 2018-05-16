@@ -1,4 +1,10 @@
+<div class="row empty" *ngIf="total === 0; else notEmpty">
+  <div class="col-md-12">
+  No item available.
+  </div>
+</div>
 
+<ng-template #notEmpty>
 
 <div class="row">
   <div class="col-md-3 food-body">
@@ -36,7 +42,7 @@
           <button
             class="all-categories-button"
             (click)="UpdateCart(foodItems.Id, foodItems.Price,
-            foodItems.Name, foodItems.MakingCost, true, i)">
+            foodItems.Name, foodItems.SerialNo, foodItems.MakingCost, true, i)">
             Add
           </button>
         </div>
@@ -66,3 +72,4 @@
 </div>
 
 
+</ng-template>

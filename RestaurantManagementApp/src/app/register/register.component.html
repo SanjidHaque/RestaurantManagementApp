@@ -1,7 +1,156 @@
-<div class="row">
-  <div class="col-md-12 register">
-    This feature is not ready yet.
-  </div>
+
+
+<div class="row main-row">
+    <div class="col-md-8 header">
+      User Registration
+    </div>
+    <a routerLink="/control-panel">
+      <div class="col-md-offset-1 col-md-2 dashboard">
+        Back to Dashboard
+      </div>
+    </a>
 </div>
 
 
+<div class="row">
+  <div class="col-md-offset-1 col-md-5">
+    <form #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+
+      <div class="row">
+        <div class="col-md-12 new-user">
+          Create a new user
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+            >User Name</label>
+          </div>
+          <div class="col-md-12">
+          <input class="validate form-control"
+                 type="text"
+                 name="UserName"
+                 #UserName="ngModel"
+                 [(ngModel)]="user.UserName"
+                 placeholder="Should be unique"
+                 required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+              [attr.data-error]="Password.errors!=null?(Password.errors.required?
+            'Required field!':'Minimum 3 characters needed'):''">Password</label>
+          </div>
+          <div class="col-md-12">
+          <input
+            class="validate form-control"
+            type="password"
+            name="Password"
+            #Password="ngModel"
+            [(ngModel)]="user.Password"
+            placeholder="At least 3 characters long"
+            required
+            minlength="3">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+            >Email
+            </label>
+          </div>
+          <div class="col-md-12">
+          <input class="validate form-control"
+                 type="text"
+                 name="Email"
+                 #Email="ngModel"
+                 [(ngModel)]="user.Email"
+                 [pattern]="emailPattern"
+                 required>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 form-group">
+        <label>Choose a role from here</label>
+        <select
+          id="roleName"
+          name="roleName"
+          class="form-control"
+          ngModel
+          required
+          >
+          <option  *ngFor="let item of roles" [value] ="item.Name" selected > {{ item.Name }} </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-md-12 button">
+          <button [disabled]="!userRegistrationForm.valid"
+                  class="btn btn-primary"
+                  type="submit">
+            Submit</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-5">
+    <div class="row users">
+      <div class="col-md-4">
+        Users
+      </div>
+      <div class="col-md-6">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input class="box"
+               type="text"
+               [(ngModel)]="term"
+               placeholder="Search by User Name...">
+      </div>
+    </div>
+
+    <div class="row body">
+      <div class="col-md-12 table-bordered" *ngFor="let user of modifiedUser | userFilter:term; let i= index">
+        <div class="row">
+          <div class="col-md-12 content">
+            {{ i+1 }}. {{ user.UserName }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 content">
+           Role assigned: {{ user.Role }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 content">
+            Email: {{ user.Email }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10 content">
+            Added on: {{ user.DateTime }}
+          </div>
+          <div class="col-md-2" *ngIf="user.UserName !== 'Default User'">
+            <i
+              title="Remove this user"
+              style="cursor: pointer"
+              (click)="deleteUser(user, i)"
+              class="fa fa-times-circle-o remove-order"
+              aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 total">
+        Total {{ totalUsers }} (s)
+      </div>
+    </div>
+  </div>
+</div>

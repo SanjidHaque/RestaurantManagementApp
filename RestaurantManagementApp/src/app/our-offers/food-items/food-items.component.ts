@@ -1,5 +1,4 @@
 import {Component, DoCheck, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {OurOffers} from '../our-offers.model';
 import {Order} from '../../shared/order.model';
 import {OurOffersService} from '../our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,6 +7,7 @@ import { Uuid } from 'ng2-uuid';
 import {Subscription} from 'rxjs/Subscription';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {FoodItems} from '../../shared/food-item.model';
+import {Inventory} from '../../shared/inventory.model';
 
 @Component({
   selector: 'app-food-items',
@@ -15,10 +15,10 @@ import {FoodItems} from '../../shared/food-item.model';
   styleUrls: ['./food-items.component.scss']
 })
 export class FoodItemsComponent implements OnInit {
-  Menu: OurOffers;
   index: number;
+  total: number;
   FoodItem: FoodItems[] = [];
-  public orderedItems: OrderedItems[] = [];
+  inventories: Inventory[] = [];
   selectedQuantity = [];
   order: Order[];
   condition = false;
@@ -27,6 +27,8 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeTwo = '';
   uuidCodeThree = '';
   quantity : number;
+  imageUrl = '/assets/noImage.png';
+
   subscription: Subscription;
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
@@ -40,21 +42,7 @@ export class FoodItemsComponent implements OnInit {
   }
 
   ngOnInit() {
-
-   /* this._dataStorageService.getMenu()
-      .subscribe(
-        (Menu: OurOffers ) => {
-          this._ourOfferService.FoodItem = Menu.FoodItems;
-        });*/
-    this.route.data.
-    subscribe(
-      ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
-      }
-    );
-
     this.FoodItem = this._ourOfferService.FoodItem;
-
     this._ourOfferService.foodItemChanged
       .subscribe(
         (FoodItem: FoodItems[]) => {
@@ -62,13 +50,26 @@ export class FoodItemsComponent implements OnInit {
         }
       );
 
+    this.inventories = this._ourOfferService.inventory;
+    this.subscription = this._ourOfferService.inventoryChanged
+      .subscribe(
+        (inventories: Inventory[]) => {
+          this.inventories = inventories;
+        }
+      );
+    this.total = this.FoodItem.length;
+    for (let i = 0; i < this.FoodItem.length; i++) {
+      if (this.FoodItem[i].FoodItemImage === null || this.FoodItem[i].FoodItemImage === '' ) {
+        this.FoodItem[i].FoodItemImage = this.imageUrl;
+      }
+    }
   }
 
 
 
 
 
-  UpdateCart(id: string, price: number, name: string, makingCost: number, isAdd: boolean, index: any) {
+  UpdateCart(id: string, price: number, name: string, serialNo: string, makingCost: number, isAdd: boolean, index: any) {
     this.quantity = this.selectedQuantity[index];
     let foodItemId = id;
     let foodItemName = name;
@@ -78,7 +79,7 @@ export class FoodItemsComponent implements OnInit {
      let orderItemId = this.uuid.v1();
       if ( isAdd === true ) {
         this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-          foodItemName, Price, makingCost );
+          foodItemName, serialNo, Price, makingCost );
       } else {
         this.RemoveFromCart(orderItemId, orderId,  this.quantity,
           foodItemId, foodItemName, Price, makingCost );
@@ -88,7 +89,7 @@ export class FoodItemsComponent implements OnInit {
       let orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
       if ( isAdd === true ) {
         this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-          foodItemName, Price, makingCost );
+          foodItemName, serialNo, Price, makingCost );
       } else {
         this.RemoveFromCart(orderItemId, orderId,  this.quantity,
           foodItemId, foodItemName, Price, makingCost );
@@ -102,31 +103,62 @@ export class FoodItemsComponent implements OnInit {
 
 
   AddToCart(orderItemId: string, orderId: string, quantity: number,
-            foodItemId: string, foodItemName: string, price: number, makingCost: number ) {
+            foodItemId: string, foodItemName: string, serialNo: string, price: number, makingCost: number ) {
 
-    let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
-    this._ourOfferService.grandTotalPrice(subTotal);
-    this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
 
-    if ( this.condition  ) {
-      this._ourOfferService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
-    } else {
+      for (let j = 0; j < this.FoodItem.length; j++) {
+        if (this.FoodItem[j].Id === foodItemId) {
+          let check = 0;
+          for (let k = 0; k < this.FoodItem[j].Ingredients.length; k++ ) {
+            const inventoryQuantity =  this.FoodItem[j].Ingredients[k].Quantity;
+            const totalQuantity = inventoryQuantity * quantity;
+            const inventoryId = this.FoodItem[j].Ingredients[k].InventoryId;
+            for (let l = 0; l < this.inventories.length; l++) {
+              if (this._ourOfferService.inventory[l].Id === inventoryId) {
+                if (this._ourOfferService.inventory[l].RemainingQuantity > totalQuantity ) {
+                  check++;
 
-      const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId, null,
-        quantity , null , null, foodItemName, price, null , subTotal, makingCost);
+                  if ( check === this.FoodItem[j].Ingredients.length) {
+                    const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
+                    this._ourOfferService.grandTotalPrice(subTotal);
+                    this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
 
-      this._ourOfferService.addToOrderedItemsList(purchasedFood);
+                    if ( this.condition  ) {
+                      this._ourOfferService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
+                    } else {
+
+                      const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId,
+                        quantity , foodItemName, serialNo, price , subTotal, makingCost);
+
+                      this._ourOfferService.addToOrderedItemsList(purchasedFood);
+                    }
+                    this._ourOfferService.totalQuantity
+                      = Number.parseInt(this._ourOfferService.totalQuantity.toString())
+                      + Number.parseInt(quantity.toString());
+                  }
+
+                }
+
+              }
+
+          }
+
+
+        }
+          if (check < this.FoodItem[j].Ingredients.length) {
+            alert('Insufficient inventory, please update your inventory first');
+          }
+break;
+      }
     }
-    this._ourOfferService.totalQuantity
-      = Number.parseInt(this._ourOfferService.totalQuantity.toString())
-      + Number.parseInt(quantity.toString());
+
 
 
   }
 
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
-                 foodItemId: string, foodItemName: string, price: number, makingCost: number) {
-
+                 foodItemId: string, foodItemName: string, price: number,
+                 makingCost: number) {
 
 
       let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);

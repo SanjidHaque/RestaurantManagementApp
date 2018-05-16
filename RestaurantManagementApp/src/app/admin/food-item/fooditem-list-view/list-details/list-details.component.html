@@ -5,7 +5,11 @@
         <button class="back-button" (click)="goBack()"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
           Back</button>
       </div>
-      <div class="col-md-offset-6 col-md-2 edit">
+      <div class="col-md-offset-4 col-md-2 change-image">
+        <button class="change-image-button" (click)="changeImage(FoodItem)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          Change Image</button>
+      </div>
+      <div class="col-md-2 edit">
         <button class="back-button" (click)="edit(FoodItem)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           Edit</button>
       </div>
@@ -14,6 +18,7 @@
           Delete</button>
       </div>
     </div>
+    <div class="fixed-div">
     <div class="row">
       <div class="col-md-12 general">
         General Informations
@@ -107,6 +112,7 @@
     <popup class="pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
       You'll lose any data associated with the current item!
     </popup>
+    </div>
   </div>
 </div>
 

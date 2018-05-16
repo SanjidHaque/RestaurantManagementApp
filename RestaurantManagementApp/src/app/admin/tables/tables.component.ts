@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {Table} from '../../shared/table.model';
 import {OurOffersService} from '../../our-offers/our-offers.service';
 import {DataStorageService} from '../../shared/data-storage.service';
@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss']
 })
-export class TablesComponent implements OnInit {
+export class TablesComponent implements OnInit, DoCheck {
 
   public tables: Table[] ;
   subscription: Subscription;
@@ -25,12 +25,6 @@ export class TablesComponent implements OnInit {
               private _http: Http) { }
 
   ngOnInit() {
-    /*this._dataStorageService.getTables()
-      .subscribe(
-        (tables: Table[]) => {
-          this._ourOfferService.table = tables;
-        }
-      );*/
    this.route.data.
      subscribe(
      ( data: Table[]) => {
@@ -44,6 +38,9 @@ export class TablesComponent implements OnInit {
           this.tables = tables;
         }
       );
+    this.totalTable = this.tables.length;
+  }
+  ngDoCheck() {
     this.totalTable = this.tables.length;
   }
   addNewTable() {

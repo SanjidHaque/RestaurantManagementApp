@@ -1,0 +1,47 @@
+<div class="row">
+  <form (ngSubmit) = "saveFoodItemImage(Image)" #imageForm=ngForm>
+  <div class="col-md-offset-1 col-md-9 order-detail">
+    <div class="row buttons">
+      <div class="col-md-2 back">
+        <button class="back-button-cancel" (click)="skipFoodItemImage()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          Skip</button>
+      </div>
+      <div class="col-md-offset-8 col-md-2 delete">
+        <button
+          type="submit"
+          class="back-button"
+          [disabled]="Image.value == '' || !imageForm.valid">
+          <i class="fa fa-bookmark" aria-hidden="true"></i> Save</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 general">
+        Optional Information
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 units">
+        Add an image for this item
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <img [src]="imageUrl"
+             class="img-responsive image"
+             style= "height: 34vh"
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <input type="file"
+               #Image
+               accept="image/*"
+               (change)="handleFileInput($event.target.files)">
+      </div>
+    </div>
+
+
+  </div>
+  </form>
+</div>

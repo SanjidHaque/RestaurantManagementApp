@@ -1,93 +1,3 @@
-/*
-.SetMenuName {
-  text-align: center;
-  font-family: "Berlin Sans FB";
-  font-size: 19px;
-}
-
-.our-offers-title{
-  text-align: center;
-  font-family:"Berlin Sans FB";
-  font-size:25px;
-  }
-*/
-/*
-.start{
-  display: flex;
-  overflow: hidden;
-  height: 100vh;
- !* margin-top: -100px;
-  padding-top: 100px;*!
-  position: relative;
-  width: 100%;
-  backface-visibility: hidden;
-  will-change: overflow;
-}
-.set-menu::-webkit-scrollbar{
-  display: none;
-}
-.set-menu{
-  overflow: auto;
-  height: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-}
-.food-item::-webkit-scrollbar{
-  display: none;
-}
-.food-item{
-  overflow: auto;
-  height: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-}
-
-
-.set-menu-title {
-  font-family: "Times New Roman";
-  font-size: 22px;
-  color: #feff26;
-  border: 2px solid #feff26;
-  border-radius: 6px;
-  margin-top:10px;
-  text-align: center;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-.popup{
-  color: black;
-  font-family: "Berlin Sans FB";
-  font-size:20px;
-}
-.smpbutton {
-  width:100%;
-  height:100%;
-  font-family:"SansSerif";
-  color: #feff26;
-  background-color: black;
-  border: 1.2px solid  #feff26;
-  border-radius: 3px;
-  font-size:20px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-left: 5px;
-  margin-top: 22px;
-}
-
-.smpbutton:hover{
-  background-color: #feff26;
-  color: black;
-  font-family:"SansSerif";
-  font-weight:bold;
-  border: 1.2px solid black;
-  border-radius: 3px;
-}
-
-.smpbutton:focus{
-  outline:0;
-}
-*/
 @import url("https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt");
 .buttons {
   padding-right: 0px;
@@ -244,25 +154,19 @@ discard-order-div {
   text-align: center; }
 
 .cart-empty {
-  padding-top: 150px;
-  border: 2px solid #7e0000;
-  -webkit-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  -moz-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
+  padding-top: 100px;
+  border: 2px solid rgba(201, 191, 197, 0.87);
   border-radius: 6px;
   margin-top: 40px;
-  margin-left: 18px;
-  padding-bottom: 150px; }
+  margin-left: 2px;
+  padding-bottom: 100px; }
 
 .whole {
-  border: 2px solid #7e0000;
-  -webkit-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  -moz-box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
-  box-shadow: 0px 10px 25px 0px rgba(161, 18, 18, 0.2);
+  border: 2px solid rgba(201, 191, 197, 0.87);
   border-radius: 6px;
   padding-top: 20px;
   margin-top: 8px;
-  margin-left: 18px; }
+  margin-left: 2px; }
 
 .please-wait {
   color: #7e0000;
@@ -300,7 +204,7 @@ discard-order-div {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
 
 .cash-memo {
-  height: 300px;
+  height: 35vh;
   overflow-y: scroll;
   overflow-x: hidden; }
 
@@ -315,19 +219,19 @@ discard-order-div {
   outline: 0; }
 
 .dashboard {
-  width: 20%;
-  height: 100%;
-  font-family: "Arial Narrow";
-  color: #aa0909;
-  background-color: ghostwhite;
-  /*border: 1.2px solid #ae0000;
-  border-radius: 5px;*/
-  font-size: 16px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-weight: bold;
   text-align: center;
-  margin-top: 15px; }
+  font-family: "Arial Narrow";
+  font-weight: bold;
+  font-size: 16px;
+  padding-top: 10px; }
+
+a {
+  color: #970000;
+  text-decoration: none; }
+
+a:hover {
+  color: #650d0e;
+  text-decoration: none; }
 
 .dashboard:hover {
   color: #6a0d0e;

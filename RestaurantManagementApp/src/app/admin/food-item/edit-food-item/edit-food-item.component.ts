@@ -6,11 +6,11 @@ import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {FoodItems} from '../../../shared/food-item.model';
 import {Ingredients} from '../../../shared/ingredients.model';
 import {Http} from '@angular/http';
-import {OurOffers} from '../../../our-offers/our-offers.model';
 import {Inventory} from '../../../shared/inventory.model';
 import {NgForm} from '@angular/forms';
 import { Uuid } from 'ng2-uuid';
 import {Subject} from 'rxjs/Subject';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-edit-food-item',
@@ -30,13 +30,13 @@ export class EditFoodItemComponent implements OnInit {
   ingredientsChanged = new Subject<Ingredients[]>();
   FoodItem: FoodItems;
   foodItemId: string;
+  subscription: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private popup: Popup,
               private uuid: Uuid,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+             ) {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -46,11 +46,6 @@ export class EditFoodItemComponent implements OnInit {
   }
 
   ngOnInit() {
-   /* this._dataStorageService.getMenu()
-      .subscribe(
-        (Menu: OurOffers ) => {
-          this._ourOfferService.FoodItem = Menu.FoodItems;
-        });*/
     this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
@@ -77,13 +72,19 @@ export class EditFoodItemComponent implements OnInit {
         this.totalSale = this.FoodItemList[i].TotalSale;
       }
     }
-    this._dataStorageService.getInventories()
+    this.route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
+    this.inventories = this._ourOfferService.inventory;
+    this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
-          this._ourOfferService.inventory = inventories;
+          this.inventories = inventories;
         }
       );
-    this.inventories = this._ourOfferService.getInventories();
   }
 
 
@@ -157,12 +158,15 @@ export class EditFoodItemComponent implements OnInit {
     //  this.router.navigate(['admin/food-item/add-new-food-item', foodItemId ]);
     form.controls['quantity'].reset();
   }
+
+
   deleteIngredient(ingredient: Ingredients, index: number) {
-    for (let i = 0; i < this.ingredients.length; i++) {
-      if (this.ingredients[i].Id === ingredient.Id ) {
-        this.inventoryCost -= this.ingredients[i].SubTotal;
-      }
-    }
+    // for (let i = 0; i < this.ingredients.length; i++) {
+    //  if (this.ingredients[i].FoodItemId === ingredient.FoodItemId ) {
+        this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
+          - Number.parseInt(this.ingredients[index].SubTotal.toString());
+  //    }
+  //  }
     this.ingredients.splice(index, 1);
 
 

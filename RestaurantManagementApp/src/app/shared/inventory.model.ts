@@ -1,4 +1,4 @@
-import {InventoryHistoryModel} from './inventory-history.model';
+    import {InventoryHistoryModel} from './inventory-history.model';
 
 export class Inventory {
    public Id: string;

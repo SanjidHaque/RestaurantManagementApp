@@ -6,21 +6,19 @@ export class Order {
   public TotalPrice: number;
   public Tendered: number;
   public Change: number;
-  public OrderStatus: number;
   public DateTime: string;
   public TableNo: string;
   public InventoryCost: number;
   public Profit: number;
 
   constructor(id: string, orderedItems: OrderedItems[], totalPrice: number,
-              tendered: number, change: number, orderStatus: number,
+              tendered: number, change: number ,
               dateTime: string, tableNo: string, inventoryCost: number, profit: number) {
     this.Id = id;
     this.OrderedItems = orderedItems;
     this.TotalPrice = totalPrice;
     this.Tendered = tendered;
     this.Change = change;
-    this.OrderStatus = orderStatus;
     this.DateTime = dateTime;
     this.TableNo = tableNo;
     this.InventoryCost = inventoryCost;

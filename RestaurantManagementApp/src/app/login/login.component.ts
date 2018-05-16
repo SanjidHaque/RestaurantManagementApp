@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {DataStorageService} from '../shared/data-storage.service';
+import {UserService} from '../user.service';
+import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,31 +11,37 @@ import {DataStorageService} from '../shared/data-storage.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  imageUrl = '/assets/img/default-image.png';
-  fileToUpload: File = null;
-  constructor(private _dataStorageService: DataStorageService) { }
+  isLoginError = false;
+  constructor(private userService : UserService,
+              private router : Router) { }
 
   ngOnInit() {
-  }
-  handleFileInput(file: FileList) {
-    this.fileToUpload = file.item(0);
 
-    // Show image preview
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imageUrl = event.target.result;
-    }
-    reader.readAsDataURL(this.fileToUpload);
   }
 
-  OnSubmit(Caption, Image) {
-    this._dataStorageService.postFile(Caption.value, this.fileToUpload).subscribe(
-      data =>{
-        console.log('done');
-        Caption.value = null;
-        Image.value = null;
-        this.imageUrl = '/assets/img/default-image.png';
-      }
-    );
+  OnSubmit(userName, password) {
+
+    this.userService.userAuthentication(userName, password).subscribe((data : any) => {
+      console.log(data.json().access_token);
+      console.log(data.json().role);
+        localStorage.setItem('userToken', data.json().access_token);
+        localStorage.setItem('userRoles', data.json().role);
+        localStorage.setItem('userName', userName);
+        if (this.userService.roleMatch(['Cashier'])) {
+          this.router.navigate(['our-offers/regulars']);
+        } else {
+          this.router.navigate(['/control-panel']);
+        }
+
+      },
+      (err : HttpErrorResponse) => {
+        this.isLoginError = true;
+        if (this.isLoginError === true ) {
+          alert('Incorrect username or password');
+        }
+
+
+      });
+
   }
 }

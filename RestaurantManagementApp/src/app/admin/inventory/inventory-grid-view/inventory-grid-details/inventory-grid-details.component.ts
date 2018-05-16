@@ -26,7 +26,7 @@ export class InventoryGridDetailsComponent implements OnInit {
               private _dataStorageService: DataStorageService,
               private popup: Popup,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+             ) {
     this.route.params
       .subscribe(
         (params: Params) => {

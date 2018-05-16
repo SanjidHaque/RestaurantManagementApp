@@ -17,7 +17,7 @@ export class AddNewInventoryComponent implements OnInit {
   unit : number;
   inventoryHistory: InventoryHistoryModel[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(
               private router: Router,
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,

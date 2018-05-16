@@ -1,23 +1,19 @@
 
-
+<app-logout></app-logout>
 
 <div class="row">
   <div class="col-md-9">
     <app-food-items></app-food-items>
   </div>
-
   <div class="col-md-3">
 
-    <div class="row">
-      <a routerLink="/control-panel"
-         (click)="clear()"
-      title="Go back to dashboard">
-        <div class="col-md-10 dashboard">
-          <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
-        </div>
-      </a>
-      <div class="col-md-2 hodoo">
-        hodoo
+    <div class="row dashboard">
+      <div class="col-md-12" *ngIf="checkOut === true">
+        <a routerLink="/control-panel"
+           (click)="clear()"
+          >
+        Go Back to Dashboard
+        </a>
       </div>
     </div>
     <div class="row">
@@ -87,36 +83,12 @@
         </div>
           <div class="cash-memo" >
        <div class="row">
-          <div class="col-md-12" *ngIf="checkSetMenuCount()!= 0">
-            <div class="col-md-12 list-title">
-              Set Menus:
-            </div>
-            <div class="col-md-12 list-detail" *ngFor="let order of orderedItems">
-
-              <div class="col-md-3">
-                {{ order.SetMenuName }}
-              </div>
-              <div class="col-md-1">
-                x
-              </div>
-              <div class="col-md-2">
-                {{ order.Price }}
-              </div>
-              <div class="col-md-2">
-                {{ order.SetMenuQuantity }}
-              </div>
-              <div class="col-md-3">
-               = {{ order.SetMenuSubTotal }}BDT
-              </div>
-            </div>
-          </div>
-
          <div *ngIf="checkFoodItemCount()!=0">
-<        <div class="row list-detail" *ngFor="let order of orderedItems; let i = index">
+        <div class="row list-detail" *ngFor="let order of orderedItems; let i = index">
               <div *ngIf="order.FoodItemQuantity !== 0">
                 <div class="row">
                   <div class="col-md-offset-1 col-md-7 name">
-                    {{ order.FoodItemName }}
+                   {{ i+1 }}. {{ order.FoodItemName }}  (SN-{{ order.FoodItemSerialNo }})
                   </div>
                   <div class="col-md-3 sub-total">
                     {{ order.FoodItemSubTotal }} BDT

@@ -4,7 +4,6 @@ import {DataStorageService} from '../../shared/data-storage.service';
 import {OurOffersService} from '../our-offers.service';
 import { Uuid } from 'ng2-uuid';
 import {Order} from '../../shared/order.model';
-import * as jsPDF from 'jspdf'
 import {Popup} from 'ng2-opd-popup';
 
 
@@ -34,15 +33,15 @@ export class ReceiptComponent implements OnInit {
   discardOrder() {
     this.popup.options = {
       header: 'Destroy Current Order?',
-      color: '#760000', // red, blue....
-      widthProsentage: 40, // The with of the popou measured by browser width
-      animationDuration: 1, // in seconds, 0 = no animation
-      showButtons: true, // You can hide this in case you want to use custom buttons
-      confirmBtnContent: 'Confirm', // The text on your confirm button
-      cancleBtnContent: 'Cancel', // the text on your cancel button
-      confirmBtnClass: 'btn btn-default', // your class for styling the confirm button
-      cancleBtnClass: 'btn btn-default', // you class for styling the cancel button
-      animation: 'bounceIn' // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+      color: '#760000',
+      widthProsentage: 40,
+      animationDuration: 1,
+      showButtons: true,
+      confirmBtnContent: 'Confirm',
+      cancleBtnContent: 'Cancel',
+      confirmBtnClass: 'btn btn-default',
+      cancleBtnClass: 'btn btn-default',
+      animation: 'bounceIn'
     };
     this.popup.show();
   }
@@ -88,7 +87,6 @@ export class ReceiptComponent implements OnInit {
     font-family:"Inconsolata";
     font-size: 21px;
     text-align: center;
-    /*padding-left: 90px;*/
     padding-top: 10px;
   }
   .date-time{
@@ -116,7 +114,6 @@ export class ReceiptComponent implements OnInit {
   .main{
   padding-top: 10px;
   padding-bottom: 10px;
-  /*padding-left: 5px;*/
   text-align: center;
   }
   .name{

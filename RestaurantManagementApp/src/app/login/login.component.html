@@ -1,89 +1,70 @@
-<!--
+
 <div class="row">
-  <div class="col-md-12 login">
-    This feature is not ready yet.
+  <div class="col-md-12 hodoo">
+    hodoo
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12 header">
+    User Login
+  </div>
+</div>
 
-<div class="add-new-item">
-
-  <div class="col-md-12 name">
-
-    <form (ngSubmit) = "OnSubmit(Image)" #newFoodItem = ngForm>
-      <div id="user-data">
-
-     &lt;!&ndash;   <div class="form-group">
-          <label for="name">Item Name:</label>
-          <input
-            type="text"
-            id="name"
-            class="form-control"
-            ngModel
-            name="name"
-            required
-          >
-        </div>&ndash;&gt;
-        <img [src]="imageUrl"
-             style="width:250px;height:200px">
-        <input type="file"
-               #Image
-               accept="image/*"
-               (change)="handleFileInput($event.target.files)">
-
-        <button
-          type="submit"
-          class="btn-large btn-submit"
-          [disabled]=" Image.value=='' ">Submit</button>
-
-     &lt;!&ndash;   <button class="all-categories-button"
-                type="submit"
-                [disabled]="!newFoodItem.valid">Save</button>&ndash;&gt;
-
-      &lt;!&ndash;  <div class="form-group">
-          <label for="price">Price:</label>
-          <input
-            type="number"
-            min="1"
-            id="price"
-            class="form-control"
-            ngModel
-            name="price"
-            required
-          >
-        </div>&ndash;&gt;
-    &lt;!&ndash;    <div>
-          <div class="action" *ngIf = "checkIfIngredientsExist() === 0; else addMoreIngredients">
-            <button class="all-categories-button"
-                    type="submit"
-                    [disabled]="!newFoodItem.valid">Add Ingredients</button>
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <form #userLoginForm="ngForm" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+            >User Name</label>
           </div>
-
-          <ng-template #addMoreIngredients>
-            <div class="action">
-              <button class="all-categories-button"
-                      type="submit"
-                      [disabled]="!newFoodItem.valid">Add Another Ingredient</button>
-            </div>
-            <div class="action">
-              <button [disabled]="!newFoodItem.valid"
-                      class="all-categories-button"
-                      type="submit"
-                      (click)="onSaveFoodItem()">Save</button>
-            </div>
-          </ng-template>
-          <div class="action">
-            <button class="all-categories-button" type="button" (click)="onCancel()">Cancel</button>
+          <div class="col-md-12">
+            <input class="validate form-control"
+                   type="text"
+                   name="UserName"
+                   #UserName
+                   ngModel
+                   required>
           </div>
-        </div>&ndash;&gt;
+        </div>
+      </div>
+
+        <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+              [attr.data-error]="Password.errors!=null?(Password.errors.required?
+            'Required field!':'Minimum 3 characters needed'):''">Password</label>
+          </div>
+          <div class="col-md-12">
+            <input
+              class="validate form-control"
+              type="password"
+              name="Password"
+              #Password
+              ngModel
+              required
+              minlength="3">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 forgot-password">
+          <a routerLink="/reset-password">Forgot your password?</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 button">
+          <button [disabled]="!userLoginForm.valid"
+                  class="btn btn-primary"
+                  type="submit">
+            Login</button>
+
+        </div>
       </div>
     </form>
   </div>
- &lt;!&ndash; <div class="row">
-    <div class="col-md-offset-2 col-md-10">
-      <router-outlet></router-outlet>
-    </div>
-  </div>&ndash;&gt;
 </div>
-
--->

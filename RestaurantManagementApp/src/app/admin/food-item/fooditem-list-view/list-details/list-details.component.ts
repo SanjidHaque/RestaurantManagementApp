@@ -4,7 +4,6 @@ import {OurOffersService} from '../../../../our-offers/our-offers.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FoodItems} from '../../../../shared/food-item.model';
 import {DataStorageService} from '../../../../shared/data-storage.service';
-import {OurOffers} from '../../../../our-offers/our-offers.model';
 import {Ingredients} from '../../../../shared/ingredients.model';
 import {Popup} from 'ng2-opd-popup';
 @Component({
@@ -23,7 +22,7 @@ export class ListDetailsComponent implements OnInit {
               private popup: Popup,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+             ) {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -98,4 +97,7 @@ export class ListDetailsComponent implements OnInit {
     this.popup.show();
   }
 
+  changeImage() {
+    this.router.navigate(['admin/food-item/edit-food-item-image', this.foodItemId]);
+  }
 }

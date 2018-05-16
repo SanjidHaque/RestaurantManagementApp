@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {Table} from '../../../shared/table.model';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -11,7 +11,7 @@ import {NgForm} from '@angular/forms';
   templateUrl: './edit-table.component.html',
   styleUrls: ['./edit-table.component.scss']
 })
-export class EditTableComponent implements OnInit {
+export class EditTableComponent implements OnInit, DoCheck {
   public tables: Table[] ;
   tableId: string;
   tableName = '';
@@ -30,12 +30,12 @@ export class EditTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dataStorageService.getTables()
-      .subscribe(
-        (tables: Table[]) => {
-          this._ourOfferService.table = tables;
-        }
-      );
+    this.route.data.
+    subscribe(
+      ( data: Table[]) => {
+        this._ourOfferService.table = data['tables'];
+      }
+    );
     this.tables = this._ourOfferService.table;
     this.subscription = this._ourOfferService.tableChanged
       .subscribe(
@@ -49,11 +49,28 @@ export class EditTableComponent implements OnInit {
       }
     }
   }
+
+  ngDoCheck() {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.tableId = params['id'];
+        }
+      );
+    for ( let i = 0; i < this.tables.length; i++) {
+      if ( this.tables[i].Id === this.tableId ) {
+        this.tableName = this.tables[i].Name;
+      }
+    }
+  }
+
   onEditTable(form: NgForm) {
     const name = form.value.tableName;
     const editedTable = new Table(this.tableId, name);
-    this._ourOfferService.editTable(editedTable);
-    this._dataStorageService.deleteTable(editedTable);
+    const ifExist = this._ourOfferService.editTable(editedTable);
+    if (ifExist) {
+      this._dataStorageService.deleteTable(editedTable);
+    }
     form.reset();
   }
 

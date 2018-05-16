@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CashFlow} from '../../../shared/cash-flow';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';
-import {IngredientServiceService} from '../../food-item/add-new-food-item/add-ingredients/ingredient-service.service';
 import {Order} from '../../../shared/order.model';
-import {Subject} from 'rxjs/Subject';
 
 
 @Component({
@@ -23,8 +20,7 @@ export class OrderListViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService,
-              private _ingredientService: IngredientServiceService) { }
+              ) { }
 
   ngOnInit() {
     /*this._dataStorageService.getOrders()

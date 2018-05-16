@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataStorageService} from '../../../shared/data-storage.service';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {Http} from '@angular/http';
-import {OurOffers} from '../../../our-offers/our-offers.model';
 
 @Component({
   selector: 'app-fooditem-grid-view',
@@ -12,19 +11,15 @@ import {OurOffers} from '../../../our-offers/our-offers.model';
   styleUrls: ['./fooditem-grid-view.component.scss']
 })
 export class FooditemGridViewComponent implements OnInit {
+
   FoodItem: FoodItems[] = [];
+  total: number;
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) { }
+            ) { }
 
   ngOnInit() {
-   /* this._dataStorageService.getMenu()
-      .subscribe(
-        (Menu: OurOffers ) => {
-          this._ourOfferService.FoodItem = Menu.FoodItems;
-        });*/
     this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
@@ -38,6 +33,7 @@ export class FooditemGridViewComponent implements OnInit {
           this.FoodItem = FoodItem;
         }
       );
+    this.total =  this.FoodItem.length;
   }
   viewDetails(foodItem: FoodItems) {
     const foodItemId =  foodItem.Id;

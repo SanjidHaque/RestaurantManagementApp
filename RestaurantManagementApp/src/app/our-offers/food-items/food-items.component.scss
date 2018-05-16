@@ -1,196 +1,3 @@
-/*
-
-.set-menu-details {
-  border: 2px solid #feff26;
-  border-radius: 6px;
-  margin-top:8px;
-}
-
-.set-menu-name {
-  font-family: "Times New Roman";
-  font-size:20px;
-  color: #feff26;
-  text-align: center;
-}
-.set-menu-items {
-  font-family: "SansSerif";
-  color: #feff26;
-  text-align: left;
-  font-size:17px;
-  padding-top: 1px;
-}
-.set-menu-price {
-  font-family: "Times New Roman";
-  font-size:20px;
-  color: #feff26;
-  text-align: left;
-  padding-top: 24px;
-}
-
-collapsible-header {
-  font-family: "Times New Roman";
-  font-size:20px;
-  color: #feff26;
-  text-align: center;
-  background-color: black;
-  border-bottom: 1px groove #feff26;
-}
-
-collapsible-list{
-  border: none;
-}
-
-collapsible-list-item{
-  border: none;
-}
-
-collapsible-body{
-  border: none;
-}
-
-
-.set-menu-image {
-  height: 120px;
-  width: 130px;
-  border: 2px groove white;
-  border-radius: 6px;
-  -webkit-transition: all .5s ease;
-  -moz-transition: all .5s ease;
-  -ms-transition: all .5s ease;
-  transition: all .5s ease;
-}
-
-.set-menu-image:hover{
-  width: 176px;
-  height: 176px;
-}
-
-
-.set-menu-price-button {
-
-}
-
-.smpbutton {
-  width:100%;
-  height:100%;
-  font-family:"SansSerif";
-  color: #feff26;
-  background-color: black;
-  border: 1.2px solid  #feff26;
-  border-radius: 3px;
-  font-size:16px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-left: 5px;
-  margin-top: 22px;
-}
-
-.smpbutton:hover{
-  background-color: #feff26;
-  color: black;
-  font-family:"SansSerif";
-  font-weight:bold;
-  border: 1.2px solid black;
-  border-radius: 3px;
-}
-
-.smpbutton:focus{
-  outline:0;
-}
-
-
-*/
-/*
-.SetMenuName {
-  text-align: center;
-  font-family: "Berlin Sans FB";
-  font-size: 19px;
-}
-
-.our-offers-title{
-  text-align: center;
-  font-family:"Berlin Sans FB";
-  font-size:25px;
-  }
-*/
-/*
-.start{
-  display: flex;
-  overflow: hidden;
-  height: 100vh;
- !* margin-top: -100px;
-  padding-top: 100px;*!
-  position: relative;
-  width: 100%;
-  backface-visibility: hidden;
-  will-change: overflow;
-}
-.set-menu::-webkit-scrollbar{
-  display: none;
-}
-.set-menu{
-  overflow: auto;
-  height: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-}
-.food-item::-webkit-scrollbar{
-  display: none;
-}
-.food-item{
-  overflow: auto;
-  height: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-}
-
-
-.set-menu-title {
-  font-family: "Times New Roman";
-  font-size: 22px;
-  color: #feff26;
-  border: 2px solid #feff26;
-  border-radius: 6px;
-  margin-top:10px;
-  text-align: center;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-.popup{
-  color: black;
-  font-family: "Berlin Sans FB";
-  font-size:20px;
-}
-.smpbutton {
-  width:100%;
-  height:100%;
-  font-family:"SansSerif";
-  color: #feff26;
-  background-color: black;
-  border: 1.2px solid  #feff26;
-  border-radius: 3px;
-  font-size:20px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-left: 5px;
-  margin-top: 22px;
-}
-
-.smpbutton:hover{
-  background-color: #feff26;
-  color: black;
-  font-family:"SansSerif";
-  font-weight:bold;
-  border: 1.2px solid black;
-  border-radius: 3px;
-}
-
-.smpbutton:focus{
-  outline:0;
-}
-*/
-
 
 .buttons{
   padding-right: 0px;
@@ -301,15 +108,10 @@ collapsible-body{
 
 }
 
-.food-content{
-  /*position: relative;
-  z-index: 99;
-  padding-top: 30px;*/
-}
+
 
 .left{
-  height: 90vh; // vh means current window's height
-  /*height: calc(510px - 2px);*/
+  height: 80vh;
   box-sizing: border-box;
   overflow: auto;
   margin-top: 50px;
@@ -350,4 +152,12 @@ collapsible-body{
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.61);
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.empty{
+  font-family:"Times New Roman";
+  color: #630606;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+  text-align: center;
 }

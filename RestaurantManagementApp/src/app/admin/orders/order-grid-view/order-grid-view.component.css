@@ -60,12 +60,6 @@
 .main-row {
   border-bottom: 2px double #dfdfdf; }
 
-.body {
-  height: 350px;
-  overflow-y: scroll;
-  border: 1px solid #cbc6cb;
-  border-radius: 5px; }
-
 ::-webkit-scrollbar {
   width: 4px; }
 
@@ -93,9 +87,6 @@
   font-family: "Arial Narrow";
   color: #aa0909;
   background-color: ghostwhite;
-  /*border: 1.2px solid #ae0000;
-  border-radius: 5px;*/
-  font-size: 16px;
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: bold;
@@ -106,9 +97,7 @@
   color: #6a0d0e;
   background-color: ghostwhite;
   font-family: "Arial Narrow";
-  font-weight: bold;
-  /* border: 1.2px solid #ffffdf;
-   border-radius: 5px;*/ }
+  font-weight: bold; }
 
 .box {
   width: 230px;
@@ -134,7 +123,7 @@
   margin-top: 10px; }
 
 .body {
-  max-height: 52.5vh;
+  max-height: 45vh;
   overflow-y: scroll;
   border: 1px solid #cbc6cb;
   border-radius: 5px;
@@ -172,8 +161,7 @@
 
 .table-and-money {
   padding-top: 6px;
-  padding-right: 6px;
-}
+  padding-right: 6px; }
 
 a {
   color: #6a0d0e; }
@@ -193,5 +181,13 @@ a {
   font-weight: bold;
   padding-top: 2px;
   padding-bottom: 2px; }
+
+.empty {
+  font-family: "Times New Roman";
+  color: #630606;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+  text-align: center; }
 
 /*# sourceMappingURL=order-grid-view.component.css.map */

@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,eAAgB;EACd,WAAW,EAAC,qBAAqB;EACjC,SAAS,EAAC,IAAI;EACd,KAAK,EAAE,OAAO",
-"sources": ["checking-order.component.scss"],
-"names": [],
-"file": "checking-order.component.css"
-}

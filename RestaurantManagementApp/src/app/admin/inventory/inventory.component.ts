@@ -5,7 +5,6 @@ import {Http} from '@angular/http';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {Subscription} from 'rxjs/Subscription';
 import {OurOffersService} from '../../our-offers/our-offers.service';
-import {filter} from 'rxjs/operator/filter';
 import { LocationStrategy } from '@angular/common';
 
 
@@ -20,12 +19,11 @@ export class InventoryComponent implements OnInit {
   subscription: Subscription;
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(
               private router: Router,
-              private location: LocationStrategy,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+             ) {
 
   }
 
@@ -44,21 +42,4 @@ export class InventoryComponent implements OnInit {
         }
       );
   }
-
-  AddNewItem() {
-    this.router.navigate(['admin/inventory/add-new-inventory']);
- }
-
-  editItem(inventory: Inventory) {
-    const id = inventory.Id;
-    this.router.navigate(['admin/inventory/edit-inventory-item', id ]);
- }
-
-
- deleteItem(inventory: Inventory, index: number) {
-   this._dataStorageService.deleteInventoryItem(inventory);
-   this.inventories.splice(index, 1);
-   this._ourOfferService.inventory.splice(index, 1);
- }
-
 }

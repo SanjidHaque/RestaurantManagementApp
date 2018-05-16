@@ -3,12 +3,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {OurOffersService} from '../our-offers.service';
 import {Order} from '../../shared/order.model';
-import { Response } from '@angular/http';
 import {OrderedItems} from '../../shared/ordered-items.model';
 import { Uuid } from 'ng2-uuid';
 import {Table} from '../../shared/table.model';
 import {Subscription} from 'rxjs/Subscription';
 import {Popup} from 'ng2-opd-popup';
+import {Inventory} from '../../shared/inventory.model';
+import {FoodItems} from '../../shared/food-item.model';
 
 @Component({
   selector: 'app-payment',
@@ -27,9 +28,10 @@ export class PaymentComponent implements OnInit, DoCheck {
   table: string;
   inventoryCost = 0;
   orderProfit = 0;
-
+  public inventories: Inventory[] = [] ;
   public tables: Table[] = [];
   subscription: Subscription;
+  FoodItemList: FoodItems[] = [];
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
@@ -41,12 +43,13 @@ export class PaymentComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.grandTotal = this._ourOfferService.TotalPrice;
-    this._dataStorageService.getTables()
-      .subscribe(
-        (tables: Table[]) => {
-          this._ourOfferService.table = tables;
-        }
-      );
+
+    this.route.data.
+    subscribe(
+      ( data: Table[]) => {
+        this._ourOfferService.table = data['tables'];
+      }
+    );
     this.tables = this._ourOfferService.table;
     this.subscription = this._ourOfferService.tableChanged
       .subscribe(
@@ -54,6 +57,34 @@ export class PaymentComponent implements OnInit, DoCheck {
           this.tables = tables;
         }
       );
+    this.route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
+    this.inventories = this._ourOfferService.inventory;
+    this.subscription = this._ourOfferService.inventoryChanged
+      .subscribe(
+        (inventories: Inventory[]) => {
+          this.inventories = inventories;
+        }
+      );
+    this.route.data.
+    subscribe(
+      ( data: FoodItems[]) => {
+        this._ourOfferService.FoodItem = data['foodItems'];
+      }
+    );
+
+    this.FoodItemList = this._ourOfferService.FoodItem;
+    this._ourOfferService.foodItemChanged
+      .subscribe(
+        (FoodItem: FoodItems[]) => {
+          this.FoodItemList = FoodItem;
+        }
+      );
+    debugger
   }
 
   ngDoCheck() {
@@ -108,9 +139,6 @@ export class PaymentComponent implements OnInit, DoCheck {
     }
   }
 
-  destroyOrder() {
-
-  }
 
 
   validate() {
@@ -122,11 +150,8 @@ export class PaymentComponent implements OnInit, DoCheck {
       this._ourOfferService.orderedItems[i].OrderId = orderId;
 
     }
-   /* const index = this._ourOfferService.orderedItems.findIndex(d => d.FoodItemQuantity === 0 );
-   this._ourOfferService.orderedItems.splice(index, 1);*/
 
     const totalPrice = this._ourOfferService.TotalPrice;
-    const orderStatus = 0;
     if ( this.selectedTable === '' || this.selectedTable === 'Select a Table' ) {
       this.table  =  'No Table';
     } else {
@@ -137,22 +162,42 @@ export class PaymentComponent implements OnInit, DoCheck {
           (Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString()) *
             Number.parseInt(this.orderedItems[i].FoodItemMakingCost.toString()));
     }
+
     this.orderProfit = totalPrice - this.inventoryCost;
     this.change = Number.parseInt(this.tendered.toString())
       - Number.parseInt(totalPrice.toString());
     const dateTime = new Date().toLocaleString();
-    console.log(dateTime);
 
     this.orders = new Order(orderId, this._ourOfferService.orderedItems, totalPrice,
-      this.tendered, this.change, orderStatus, dateTime , this.table,
+      this.tendered, this.change, dateTime , this.table,
       this.inventoryCost, this.orderProfit );
     this._ourOfferService.addToOrderedList(this.orders);
-    this._dataStorageService.storeOrders()
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+
+    /*for (let i = 0; i < this.orders.OrderedItems.length; i++) {
+     const foodItemId =  this.orders.OrderedItems[i].FoodItemId;
+     for (let j = 0; j < this.FoodItemList.length; j++) {
+       if (this.FoodItemList[j].Id === foodItemId) {
+         for (let k = 0; k < this.FoodItemList[j].Ingredients.length; k++ ) {
+           const quantity =  this.FoodItemList[j].Ingredients[k].Quantity;
+           const totalQuantity = quantity * this.orders.OrderedItems[i].FoodItemQuantity;
+           const inventoryId = this.FoodItemList[j].Ingredients[k].InventoryId;
+           for (let l = 0; l < this.inventories.length; l++) {
+             if (this.inventories[l].Id === inventoryId) {
+               this.inventories[l].UsedQuantity =
+                 Number.parseInt(this.inventories[l].UsedQuantity.toString())
+               + Number.parseInt(totalQuantity.toString());
+
+               this.inventories[l].RemainingQuantity =
+                 Number.parseInt(this.inventories[l].RemainingQuantity.toString())
+                 - Number.parseInt(totalQuantity.toString());
+             }
+           }
+         }
+
+       }
+     }
+    }*/
+    this._dataStorageService.saveOrder(this.orders);
     this.router.navigate(['receipt']);
   }
 

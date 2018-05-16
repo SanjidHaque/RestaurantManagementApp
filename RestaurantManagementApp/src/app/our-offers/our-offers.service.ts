@@ -1,13 +1,8 @@
-import { Response} from '@angular/http';
-import {Http} from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Uuid } from 'ng2-uuid';
 import 'rxjs/add/operator/map';
 import {Subject} from 'rxjs/Subject';
-import {OurOffers} from './our-offers.model';
-import {DataStorageService} from '../shared/data-storage.service';
 import {OrderedItems} from '../shared/ordered-items.model';
-import {forEach} from '@angular/router/src/utils/collection';
 import {Order} from '../shared/order.model';
 import {Inventory} from '../shared/inventory.model';
 import {FoodItems} from '../shared/food-item.model';
@@ -19,9 +14,7 @@ import {Table} from '../shared/table.model';
 export class OurOffersService {
   public uuidCodeOne = '';
   public TotalPrice = 0;
-  public menuChanged = new Subject<OurOffers>();
   public orderedItemsChanged = new Subject<OrderedItems[]>();
-  public menu: OurOffers;
   public totalQuantity  = 0;
   public orderedItems: OrderedItems[] = [];
   public orders: Order;
@@ -45,6 +38,8 @@ export class OurOffersService {
 
   constructor(private uuid: Uuid,
             ) { this.uuidCodeOne = this.uuid.v1(); }
+
+
 
 
 
@@ -77,8 +72,10 @@ export class OurOffersService {
       if ( this.table[i].Id === editedTable.Id ) {
         this.table[i].Name = editedTable.Name;
         this.tableChanged.next(this.table.slice());
+        return true;
       }
     }
+    return false;
   }
 
 
@@ -102,31 +99,9 @@ export class OurOffersService {
     }
   }
 
-  getIngredients() {
-    return this.ingredients.slice();
-  }
 
-  addToIngredientList(ingredient: Ingredients) {
-    this.ingredients.push(ingredient);
-    this.ingredientsChanged.next(this.ingredients.slice());
-  }
 
-  removeFromSetMenuCart(setMenuId: number, quantity: number, subTotal: number) {
 
-    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
-        if ( this.orderedItems[i].SetMenuId === setMenuId) {
-          this.orderedItems[i].SetMenuQuantity =
-            this.orderedItems[i].SetMenuQuantity
-            - quantity;
-
-          this.orderedItems[i].SetMenuSubTotal =
-            this.orderedItems[i].SetMenuSubTotal
-            - subTotal;
-          this.TotalPrice -= Number.parseInt(subTotal.toString());
-          return this.orderedItems[i].SetMenuQuantity;
-        }
-     }
-  }
 
   removeFromFoodItemCart(foodItemId: string, quantity: number, subTotal: number) {
 
@@ -166,19 +141,6 @@ export class OurOffersService {
     return this.orderedItems.slice();
   }
 
-  getAccepted(order: Order) {
-    this.acceptedOrder = order;
-  }
-  getRejected(order: Order) {
-    this.rejectedOrder = order;
-  }
-  getAcceptedOrder() {
-    return this.acceptedOrder;
-  }
-
-  getRejectedOrder() {
-    return this.rejectedOrder;
-  }
   deleteOrder(order: Order) {
     for (let i = 0; i < this.ordersList.length; i++ ) {
       if ( this.ordersList[i].Id === order.Id  ) {
@@ -203,44 +165,19 @@ export class OurOffersService {
      return this.TotalPrice;
   }
 
-  SetMenuSubTotalPrice(price: number, quantity: number) {
-    this.setMenuSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
-    return this.setMenuSubTotal;
-  }
+
 
   FoodItemSubTotalPrice(price: number, quantity: number) {
-    this.foodItemSubTotal = Number.parseInt(price.toString()) * Number.parseInt(quantity.toString());
+    this.foodItemSubTotal = price * quantity;
     return this.foodItemSubTotal;
   }
 
-   checkExistingSetMenu(setMenuId: number) {
-     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
-       if (this.orderedItems[i].SetMenuId === setMenuId) {
-         return true;
-       }
-     }
-  }
+
 
   checkExistingFoodItem(foodItemId: string) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
       if (this.orderedItems[i].FoodItemId === foodItemId) {
         return true;
-      }
-    }
-  }
-
-  increaseOnExistingSetMenu(setMenuId: number, quantity: number, subTotal: number) {
-    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
-
-      if (this.orderedItems[i].SetMenuId === setMenuId) {
-
-        this.orderedItems[i].SetMenuQuantity =
-          Number.parseInt(this.orderedItems[i].SetMenuQuantity.toString())
-          + Number.parseInt(quantity.toString());
-
-        this.orderedItems[i].SetMenuSubTotal =
-          Number.parseInt(this.orderedItems[i].SetMenuSubTotal.toString())
-          + Number.parseInt(subTotal.toString());
       }
     }
   }

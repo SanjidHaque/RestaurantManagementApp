@@ -20,19 +20,12 @@ export class InventoryListViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+              ) {
 
   }
 
   ngOnInit() {
-   /* this._dataStorageService.getInventories()
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this._ourOfferService.inventory = inventories;
-        }
-      );*/
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
@@ -46,6 +39,7 @@ export class InventoryListViewComponent implements OnInit {
           this.inventories = inventories;
         }
       );
+    console.log(this._ourOfferService.inventory);
     this.totalProducts = this.inventories.length;
   }
   viewDetails(inventory: Inventory) {

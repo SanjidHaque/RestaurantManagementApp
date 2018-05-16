@@ -37,12 +37,6 @@ export class UpdateInventoryItemComponent implements OnInit {
   }
 
   ngOnInit() {
-   /* this._dataStorageService.getInventories()
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this._ourOfferService.inventory = inventories;
-        }
-      );*/
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {

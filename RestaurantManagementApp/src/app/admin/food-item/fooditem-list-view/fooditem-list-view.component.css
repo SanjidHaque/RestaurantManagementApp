@@ -84,7 +84,7 @@
   border-bottom: 2px double #dfdfdf; }
 
 .body {
-  max-height: 49vh;
+  max-height: 42vh;
   overflow-y: scroll;
   border: 1px solid #cbc6cb;
   border-radius: 5px;
@@ -168,9 +168,17 @@
 .detail {
   font-family: "Times New Roman";
   color: #630606;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
-  padding-top: 2px;
+  padding-top: 8px;
   padding-bottom: 2px; }
 
-/*# sourceMappingURL=fooditem-inventory-inventory-list-view.component.css.mapnt.css.map */
+.empty {
+  font-family: "Times New Roman";
+  color: #630606;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+  text-align: center; }
+
+/*# sourceMappingURL=fooditem-list-view.component.css.map */

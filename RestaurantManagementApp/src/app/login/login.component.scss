@@ -1,7 +1,70 @@
-.login{
-  font-family:"Times New Roman";
-  font-size: 23px;
+@import url('https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt');
+
+
+
+.hodoo {
+  font-family: 'Berkshire Swash', "Times New Roman", "Arial Narrow";
+  font-size: 100px;
+  padding-left: 38px;
   text-align: center;
-  margin-top: 30px;
-  color: #b40000;
+  color: #7e0000;
+  padding-top: 40px;
+}
+
+.hodoo:focus {
+  outline: 0;
+}
+
+
+.header{
+  text-align: center;
+  font-size: 30px;
+  font-family: "Times New Roman";
+  padding-top: 20px;
+  padding-bottom: 10px;
+  color: #680000;
+}
+
+label{
+  font-size: 13px;
+  font-family: "Arial Narrow";
+  color: #6b0000;
+}
+
+.btn-primary{
+  background-color: #9c0000;
+  color: white;
+}
+.btn-primary:hover{
+  background-color: #7f0000;
+  color: white;
+}
+
+.btn-primary:focus{
+  outline:0;
+}
+
+.button{
+  text-align: center;
+}
+
+input{
+  font-size:12px;
+}
+
+a{
+  color: #950000;
+  font-size: 14px;
+  font-family: "Arial Narrow";
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover{
+  color: #6b0000;
+}
+
+.forgot-password{
+  text-align: center;
+  padding-bottom: 20px;
 }

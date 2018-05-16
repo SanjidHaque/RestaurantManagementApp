@@ -1,3 +1,12 @@
+
+<div class="row empty" *ngIf="total === 0; else notEmpty">
+  <div class="col-md-12">
+    No item available. Click "Add New Item" to populate.
+  </div>
+</div>
+
+
+<ng-template #notEmpty>
 <div class="sum-of-inv-body">
   <div class="row">
     <div class="col-md-4 search-bar">
@@ -47,4 +56,13 @@
     </div>
   </div>
 </div>
+
+
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Products: {{ total }} (s)
+  </div>
+</div>
+
+</ng-template>
 

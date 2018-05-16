@@ -13,6 +13,9 @@
     background-color: white;
     border: 1px solid #cbc6cb;
     margin-top: 10px;
+    height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 .table-no{
   text-align: center;
@@ -21,7 +24,8 @@
 
 }
   .print-row{
-    padding-left: 72px;
+    padding-left: 90px;
+    padding-right: 90px;
   }
 
   hr{
@@ -207,9 +211,8 @@
 
   @import url('https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt');
   .hodoo-logo {
-    font-family: 'Berkshire Swash', cursive;
+    font-family: 'Berkshire Swash', "Times New Roman", "Berlin Sans FB";
     font-size:40px;
-    // padding-left: 38px;
     text-align: right;
     color: #7e0000;
     padding-top: 5px;
@@ -225,8 +228,6 @@
     font-family:"Arial Narrow";
     color: #aa0909;
     background-color: ghostwhite;
-    /*border: 1.2px solid #ae0000;
-    border-radius: 5px;*/
     font-size:33px;
     font-weight: bold;
     text-align: center;
@@ -240,8 +241,6 @@
     background-color: ghostwhite;
     font-family:"Arial Narrow";
     font-weight:bold;
-    /* border: 1.2px solid #ffffdf;
-     border-radius: 5px;*/
   }
 
 
@@ -256,6 +255,21 @@
     border-bottom: 2px double #dfdfdf;
   }
 
+
+  ::-webkit-scrollbar {
+    width: 1px;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.61);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  }
 
 
 

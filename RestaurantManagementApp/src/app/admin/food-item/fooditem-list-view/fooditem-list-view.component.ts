@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataStorageService} from '../../../shared/data-storage.service';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {Http} from '@angular/http';
-import {OurOffers} from '../../../our-offers/our-offers.model';
 
 @Component({
   selector: 'app-fooditem-list-view',
@@ -13,18 +12,13 @@ import {OurOffers} from '../../../our-offers/our-offers.model';
 })
 export class FooditemListViewComponent implements OnInit {
   FoodItem: FoodItems[] = [];
+  total: number;
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) { }
+            ) { }
 
   ngOnInit() {
-    /*this._dataStorageService.getFoodItems()
-      .subscribe(
-        (foodItems: FoodItems[] ) => {
-          this._ourOfferService.FoodItem = foodItems;
-        });*/
     this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
@@ -39,6 +33,7 @@ export class FooditemListViewComponent implements OnInit {
           this.FoodItem = FoodItem;
         }
       );
+    this.total =  this.FoodItem.length;
   }
   viewDetails(foodItem: FoodItems) {
     const foodItemId =  foodItem.Id;

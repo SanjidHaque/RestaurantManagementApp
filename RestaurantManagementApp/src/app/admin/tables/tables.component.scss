@@ -4,16 +4,14 @@
   font-family:"Berlin Sans FB";
   font-size: 21px;
 }
-.title, .whole {
-  margin-top:  26px;
-}
+
 .f-name {
   color: #840d0f;
   font-family: "Times New Roman";
   font-size: 17px;
   font-weight: bold;
   background-color: white;
-  max-height: 60vh;
+  max-height: 55vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -118,7 +116,6 @@
 .hodoo {
   font-family: 'Berkshire Swash',"Berlin Sans FB","Times New Roman";
   font-size:40px;
-  // padding-left: 38px;
   text-align: right;
   color: #7e0000;
 }
@@ -133,8 +130,6 @@
   font-family:"Arial Narrow";
   color: #aa0909;
   background-color: ghostwhite;
-  /*border: 1.2px solid #ae0000;
-  border-radius: 5px;*/
   font-size:16px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -150,11 +145,11 @@
   background-color: ghostwhite;
   font-family:"Arial Narrow";
   font-weight:bold;
-  /* border: 1.2px solid #ffffdf;
-   border-radius: 5px;*/
+
 }
 .main-row{
   border-bottom: 2px double #dfdfdf;
+  padding-right: 0;
 }
 
 .total-table{
@@ -163,4 +158,17 @@
   color: #6a0d0e;
   font-weight: bold;
   padding-top: 10px;
+}
+.empty{
+  font-family:"Times New Roman";
+  color: #630606;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.add-new{
+  padding-top: 15px;
+  text-align: right;
 }

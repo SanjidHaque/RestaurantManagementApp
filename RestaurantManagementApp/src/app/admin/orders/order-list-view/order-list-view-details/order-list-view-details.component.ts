@@ -20,11 +20,10 @@ export class OrderListViewDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private location: LocationStrategy,
               private _dataStorageService: DataStorageService,
               private popup: Popup,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+              ) {
     this.route.params
       .subscribe(
         (params: Params) => {

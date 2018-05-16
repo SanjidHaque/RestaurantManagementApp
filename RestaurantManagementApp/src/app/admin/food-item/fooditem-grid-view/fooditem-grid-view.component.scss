@@ -76,12 +76,7 @@
   border-bottom: 2px double #dfdfdf;
 }
 
-.body{
-  height: 350px;
-  overflow-y: scroll;
-  border: 1px solid #cbc6cb;
-  border-radius: 5px;
-}
+
 
 
 ::-webkit-scrollbar {
@@ -166,7 +161,7 @@
   margin-top: 10px;
 }
 .body{
-  max-height: 52.5vh;
+  max-height: 45vh;
   overflow-y: scroll;
   overflow-x: hidden;
   border: 1px solid #cbc6cb;
@@ -228,8 +223,17 @@ a{
 .detail{
   font-family:"Times New Roman";
   color: #630606;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
-  padding-top: 2px;
+  padding-top: 8px;
   padding-bottom: 2px;
+}
+
+.empty{
+  font-family:"Times New Roman";
+  color: #630606;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+  text-align: center;
 }

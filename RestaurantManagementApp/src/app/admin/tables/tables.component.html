@@ -4,16 +4,18 @@
     Manage Your Tables
   </div>
   <a routerLink="/control-panel">
-    <div class="col-md-2 dashboard">
-      <i class="fa fa-power-off" aria-hidden="true"></i> Back to Dashboard
+    <div class="col-md-offset-1 col-md-2 dashboard">
+    Back to Dashboard
     </div>
   </a>
-  <div class="col-md-1 hodoo">
-    hodoo
+</div>
+<div class="row">
+  <div class="col-md-offset-9 col-md-2 add-new">
+    <button class="all-categories-button" (click)="addNewTable()">
+      <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Table</button>
   </div>
 </div>
-
-<div class="row title">
+<div class="row title" *ngIf="totalTable !== 0">
   <div class="col-md-8">
     <div class="col-md-3 name">
       Table's Name
@@ -26,7 +28,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8" *ngIf="totalTable !== 0; else empty">
 
     <div class="row f-name">
 
@@ -60,19 +62,16 @@
       </div>
     </div>
   </div>
-
+  <ng-template #empty>
+    <div class="col-md-8 empty">
+      No table available. Click "Add New Table" to populate
+    </div>
+  </ng-template>
   <div class="col-md-4">
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        <button class="all-categories-button" (click)="addNewTable()">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Table</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
+
         <router-outlet></router-outlet>
-      </div>
-    </div>
+
+
 
   </div>
 </div>

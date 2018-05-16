@@ -19,9 +19,8 @@ export class InventoryGridViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) {
+             ) {
 
   }
 
@@ -32,19 +31,19 @@ export class InventoryGridViewComponent implements OnInit {
           this._ourOfferService.inventory = inventories;
         }
       );*/
-    this.route.data.
-    subscribe(
-      ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
-      }
-    );
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this.inventories = inventories;
+      this.route.data.
+      subscribe(
+        ( data: Inventory[]) => {
+          this._ourOfferService.inventory = data['inventories'];
         }
       );
+      this.inventories = this._ourOfferService.inventory;
+      this.subscription = this._ourOfferService.inventoryChanged
+        .subscribe(
+          (inventories: Inventory[]) => {
+            this.inventories = inventories;
+          }
+        );
     this.totalProducts = this.inventories.length;
   }
   viewDetails(inventory: Inventory) {

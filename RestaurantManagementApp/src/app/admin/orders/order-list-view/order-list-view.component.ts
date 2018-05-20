@@ -23,18 +23,6 @@ export class OrderListViewComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    /*this._dataStorageService.getOrders()
-      .subscribe(
-        (order: Order[]) => {
-          this._ourOfferService.ordersList = order;
-        }
-      );*/
-    this.route.data.
-    subscribe(
-      ( data: Order[]) => {
-        this._ourOfferService.ordersList = data['orders'];
-      }
-    );
     this.orderLists = this._ourOfferService.ordersList;
     this._ourOfferService.ordersListChanged
       .subscribe(
@@ -54,7 +42,7 @@ export class OrderListViewComponent implements OnInit {
         + Number.parseInt(this.orderLists[i].Profit.toString());
     }
 
-    this.totalOrder = this.orderLists.length;
+    this.totalOrder = this._ourOfferService.ordersList.length;
   }
   viewDetails(orderList: Order) {
     const orderId =  orderList.Id;

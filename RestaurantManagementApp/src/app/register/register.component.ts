@@ -60,13 +60,12 @@ export class RegisterComponent implements OnInit, DoCheck {
 
 
   OnSubmit(form: NgForm) {
-
+    const dateTime = new Date().toLocaleString();
     this.userService.registerUser(form.value.UserName,
-      form.value.Password, form.value.Email, form.value.roleName )
+      form.value.Password, form.value.Email, form.value.roleName, dateTime )
       .subscribe((data: any) => {
 
         if (data.json().Succeeded === true) {
-          const dateTime = new Date().toLocaleString();
           const newUser =
             new ModifiedUserModel(form.value.UserName,  form.value.Email,
               form.value.roleName, dateTime);

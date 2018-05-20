@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {OurOffersService} from '../our-offers/our-offers.service';
+import {Inventory} from '../shared/inventory.model';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -8,8 +11,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor( ) {
-  }
+  constructor() { }
 
   ngOnInit() {
   }

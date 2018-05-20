@@ -13,17 +13,18 @@ import {Popup} from 'ng2-opd-popup';
 })
 export class ListDetailsComponent implements OnInit {
 
+  imageUrl = 'assets/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];
   FoodItem: FoodItems;
   foodItemId: string;
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private popup: Popup,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
              ) {
-    this.route.params
+    this._route.params
       .subscribe(
         (params: Params) => {
           this.foodItemId = params['id'];
@@ -32,18 +33,12 @@ export class ListDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-  /*  this._dataStorageService.getMenu()
-      .subscribe(
-        (Menu: OurOffers ) => {
-          this._ourOfferService.FoodItem = Menu.FoodItems;
-        });*/
-    this.route.data.
+    this._route.data.
     subscribe(
       ( data: FoodItems[]) => {
         this._ourOfferService.FoodItem = data['foodItems'];
       }
     );
-
     this.FoodItemList = this._ourOfferService.FoodItem;
     this._ourOfferService.foodItemChanged
       .subscribe(
@@ -54,27 +49,31 @@ export class ListDetailsComponent implements OnInit {
     for (let i = 0; i < this.FoodItemList.length; i++) {
       if (this.FoodItemList[i].Id === this.foodItemId) {
         this.FoodItem = this.FoodItemList[i];
-      //  this.Ingredients = this.FoodItemList[i].Ingredients;
+        if ( this.FoodItem.FoodItemImage === null || this.FoodItem.FoodItemImage === '' ) {
+          this.FoodItem.FoodItemImage = this.imageUrl;
+        }
       }
     }
   }
   goBack() {
-    this.router.navigate(['admin/food-item/inventory-list-view']);
+    this.router.navigate(['admin/food-item/list-view']);
   }
   edit() {
     this.router.navigate(['admin/food-item/edit-food-item', this.foodItemId]);
   }
 
   confirmEvent() {
-    this._dataStorageService.deleteFoodItem(this.FoodItem);
-    for (let i = 0; i < this.FoodItemList.length; i++) {
-      if (this.FoodItemList[i].Id === this.foodItemId) {
-        this.FoodItemList.splice(i, 1);
-        this._ourOfferService.FoodItem.splice(i, 1);
-      }
-    }
+    this._dataStorageService.deleteFoodItem(this.FoodItem).subscribe(
+      (data: any) => {
+        for (let i = 0; i < this.FoodItemList.length; i++) {
+          if (this.FoodItemList[i].Id === this.foodItemId) {
+            this._ourOfferService.FoodItem.splice(i, 1);
+          }
+        }
 
-    this.router.navigate(['admin/food-item/inventory-list-view']);
+        this.router.navigate(['admin/food-item/list-view']);
+      }
+    );
     this.popup.hide();
   }
 

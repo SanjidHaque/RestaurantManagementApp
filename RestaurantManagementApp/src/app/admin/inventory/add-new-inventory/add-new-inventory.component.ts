@@ -15,7 +15,7 @@ import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
 
 export class AddNewInventoryComponent implements OnInit {
   unit : number;
-  inventoryHistory: InventoryHistoryModel[] = [];
+  inventoryHistoryModel: InventoryHistoryModel[] = [];
 
   constructor(
               private router: Router,
@@ -37,9 +37,9 @@ export class AddNewInventoryComponent implements OnInit {
       const updateTime = new Date().toLocaleString();
       const updateHistory =
         new InventoryHistoryModel(updateHistoryId, inventoryId, quantity, updateTime, unit );
-      this.inventoryHistory.push(updateHistory);
+      this.inventoryHistoryModel.push(updateHistory);
       const newItem = new Inventory(inventoryId, name, 0 , quantity,
-        unit, price, this.inventoryHistory);
+        unit, price, this.inventoryHistoryModel);
        this._ourOfferService.addToInventoryList(newItem);
        this._dataStorageService.addNewInventoryItem(newItem);
       form.reset();

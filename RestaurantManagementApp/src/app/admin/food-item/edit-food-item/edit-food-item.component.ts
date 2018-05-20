@@ -31,13 +31,13 @@ export class EditFoodItemComponent implements OnInit {
   FoodItem: FoodItems;
   foodItemId: string;
   subscription: Subscription;
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
              ) {
-    this.route.params
+    this._route.params
       .subscribe(
         (params: Params) => {
           this.foodItemId = params['id'];
@@ -46,7 +46,7 @@ export class EditFoodItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.
+    this._route.data.
     subscribe(
       ( data: FoodItems[]) => {
         this._ourOfferService.FoodItem = data['foodItems'];
@@ -72,7 +72,7 @@ export class EditFoodItemComponent implements OnInit {
         this.totalSale = this.FoodItemList[i].TotalSale;
       }
     }
-    this.route.data.
+    this._route.data.
     subscribe(
       ( data: Inventory[]) => {
         this._ourOfferService.inventory = data['inventories'];

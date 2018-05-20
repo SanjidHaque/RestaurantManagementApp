@@ -18,19 +18,19 @@ export class TablesComponent implements OnInit, DoCheck {
   subscription: Subscription;
   totalTable = 0;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
               private _http: Http) { }
 
   ngOnInit() {
-   this.route.data.
-     subscribe(
-     ( data: Table[]) => {
-       this._ourOfferService.table = data['tables'];
-     }
-   );
+    this._route.data.
+    subscribe(
+      ( data: Table[]) => {
+        this._ourOfferService.table = data['tables'];
+      }
+    );
     this.tables = this._ourOfferService.table;
     this.subscription = this._ourOfferService.tableChanged
       .subscribe(

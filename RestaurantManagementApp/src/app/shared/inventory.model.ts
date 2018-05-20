@@ -7,17 +7,17 @@ export class Inventory {
    public RemainingQuantity: number;
    public Unit: string;
    public Price: number;
-   public InventoryHistory: InventoryHistoryModel[];
+   public InventoryHistoryModel: InventoryHistoryModel[];
 
    constructor(id: string, name: string, usedQuantity: number,
                remainingQuantity: number, unit: string,
-               price: number, inventoryHistory: InventoryHistoryModel[] ) {
+               price: number, inventoryHistoryModel: InventoryHistoryModel[] = [] ) {
      this.Id = id;
      this.Name = name;
      this.UsedQuantity = usedQuantity;
      this.RemainingQuantity = remainingQuantity;
      this.Unit = unit;
      this.Price = price;
-     this.InventoryHistory = inventoryHistory;
+     this.InventoryHistoryModel = inventoryHistoryModel;
    }
 }

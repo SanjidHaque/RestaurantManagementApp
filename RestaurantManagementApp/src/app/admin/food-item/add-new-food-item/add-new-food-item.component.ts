@@ -30,8 +30,9 @@ export class AddNewFoodItemComponent implements OnInit {
   ingredientsChanged = new Subject<Ingredients[]>();
   unit: number;
   inventoryCost = 0;
+  checkIfEmpty = 0;
   subscription: Subscription;
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
@@ -41,7 +42,7 @@ export class AddNewFoodItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.
+    this._route.data.
     subscribe(
       ( data: Inventory[]) => {
         this._ourOfferService.inventory = data['inventories'];
@@ -55,6 +56,7 @@ export class AddNewFoodItemComponent implements OnInit {
         }
       );
     this.inventoryCost = 0;
+    this.checkIfEmpty = this._ourOfferService.inventory.length;
   }
 
 

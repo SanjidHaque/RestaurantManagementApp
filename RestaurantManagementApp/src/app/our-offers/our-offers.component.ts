@@ -146,6 +146,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
             this.FoodItem[i].Id,
             this.FoodItem[i].Price,
             this.FoodItem[i].Name,
+            this.FoodItem[i].SerialNo,
             this.FoodItem[i].MakingCost,
             false,
             quantity

@@ -28,13 +28,6 @@ export class AddFoodItemImageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.
-    subscribe(
-      ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
-      }
-    );
-
   }
   saveFoodItemImage(Image) {
     this._dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
@@ -44,6 +37,7 @@ export class AddFoodItemImageComponent implements OnInit {
         this.imageUrl = '/assets/noImage.png';
       }
     );
+    this.router.navigate(['admin/food-item/grid-view']);
   }
 
   skipFoodItemImage() {

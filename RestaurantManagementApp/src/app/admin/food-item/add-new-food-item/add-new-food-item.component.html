@@ -5,7 +5,9 @@
   <div class="col-md-offset-1 col-md-9 order-detail">
     <div class="row buttons">
       <div class="col-md-2 back">
-        <button class="back-button-cancel" (click)="cancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        <button class="back-button-cancel"
+                type="reset"
+                (click)="cancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
           Cancel</button>
       </div>
       <div class="col-md-offset-8 col-md-2 delete">
@@ -29,11 +31,6 @@
       </div>
       <div class="col-md-10">
         <div class="row">
-          <!--<img [src]="imageUrl"
-               style="width:250px;height:200px">
-          <input type="file"
-                 #Image accept="image/*"
-                 (change)="handleFileInput($event.target.files)">-->
         </div>
         <div class="row">
           <div class="col-md-8 item-name">
@@ -104,6 +101,13 @@
          Add Ingredients
       </div>
     </div>
+
+    <div class="row" *ngIf="checkIfEmpty === 0; else notEmpty">
+      <div class="col-md-12 warning2">
+        Your inventory is empty. Add items in your inventory first
+      </div>
+    </div>
+    <ng-template #notEmpty>
     <div class="row">
       <form (ngSubmit) = "onAddIngredients(newIngredients)" #newIngredients = "ngForm">
       <div class="col-md-6">
@@ -143,7 +147,8 @@
         </div>
       </form>
     </div>
-    <div class="row units ">
+    </ng-template>
+    <div class="row units" *ngIf="checkIfEmpty !== 0">
       <div class="col-md-3">
         Product's Name
       </div>

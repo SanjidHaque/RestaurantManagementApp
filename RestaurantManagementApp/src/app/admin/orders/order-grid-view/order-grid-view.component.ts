@@ -29,12 +29,12 @@ export class OrderGridViewComponent implements OnInit {
           this._ourOfferService.ordersList = order;
         }
       );*/
-    this.route.data.
+   /* this.route.data.
     subscribe(
       ( data: Order[]) => {
         this._ourOfferService.ordersList = data['orders'];
       }
-    );
+    );*/
     this.orderLists = this._ourOfferService.ordersList;
     this._ourOfferService.ordersListChanged
       .subscribe(
@@ -55,7 +55,7 @@ export class OrderGridViewComponent implements OnInit {
         + Number.parseInt(this.orderLists[i].Profit.toString());
     }
 
-    this.totalOrder = this.orderLists.length;
+    this.totalOrder = this._ourOfferService.ordersList.length;
 
   }
   viewDetails(orderList: Order) {

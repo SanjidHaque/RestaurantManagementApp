@@ -12,8 +12,8 @@ import {InventoryHistoryModel} from './inventory-history.model';
 export class DataStorageService {
 
   public order: Order;
-   private foodItemJson = 'assets/food-item.json';
-  // private foodItemApi = 'http://localhost:1548/api/GetFoodItems';
+  private _foodItemJson = 'assets/food-item.json';
+  private _foodItemApi = 'http://localhost:1548/api/GetFoodItems';
 
   private _inventoryJson = 'assets/inventories.json';
   private _inventoryApi = 'http://localhost:1548/api/GetInventories';
@@ -29,21 +29,23 @@ export class DataStorageService {
 
 
   saveFoodItemImage(foodItemId: string, fileToUpload: File ) {
-    const endpoint = 'http://localhost:1548/api/SaveFoodItemImage';
-    const formData: FormData = new FormData();
-    formData.append('Image', fileToUpload, fileToUpload.name);
-    formData.append('FoodItemId', foodItemId);
-    return this._http
-      .post(endpoint, formData );
+    if (fileToUpload.name !==  null || fileToUpload.name !== '') {
+      const endpoint = 'http://localhost:1548/api/SaveFoodItemImage';
+      const formData: FormData = new FormData();
+      formData.append('Image', fileToUpload, fileToUpload.name);
+      formData.append('FoodItemId', foodItemId);
+      return this._http
+        .post(endpoint, formData );
+    }
   }
 
 
 
   getFoodItems() {
-    return this._http.get(this.foodItemJson)
+    return this._http.get(this._foodItemApi)
       .map(
         (response: Response) => {
-           const foodItems: FoodItems = response.json();
+           const foodItems: FoodItems[] = response.json();
            console.log(foodItems);
            return foodItems;
          }
@@ -71,7 +73,7 @@ export class DataStorageService {
   }
 
   getOrders() {
-    return this._http.get(this._orderJson)
+    return this._http.get(this._orderApi)
       .map(
         (response: Response) => {
           const orders: Order[] = response.json();
@@ -81,7 +83,7 @@ export class DataStorageService {
   }
 
   getInventories() {
-    return this._http.get(this._inventoryJson)
+    return this._http.get(this._inventoryApi)
       .map(
         (response: Response) => {
           const inventories: Inventory[] = response.json();
@@ -92,7 +94,7 @@ export class DataStorageService {
   }
 
   getTables() {
-    return this._http.get(this._tableJson)
+    return this._http.get(this._tableApi)
       .map(
         (response: Response) => {
           const tables: Table[] = response.json();
@@ -111,7 +113,15 @@ export class DataStorageService {
         }
       );
   }
-
+  editTable(table: Table) {
+    return this._http.post('http://localhost:1548/api/EditTable',
+      table)
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
   deleteTable(table: Table) {
     return this._http.post('http://localhost:1548/api/DeleteTable',
       table)
@@ -172,12 +182,7 @@ export class DataStorageService {
   }
   deleteFoodItem(foodItem: FoodItems) {
     return this._http.post('http://localhost:1548/api/DeleteFoodItem',
-      foodItem)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+      foodItem);
   }
 
   editFoodItem(foodItem: FoodItems) {

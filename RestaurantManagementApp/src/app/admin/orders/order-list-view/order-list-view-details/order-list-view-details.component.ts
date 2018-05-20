@@ -32,19 +32,6 @@ export class OrderListViewDetailsComponent implements OnInit {
       );
     }
   ngOnInit() {
-
-  /*  this._dataStorageService.getOrders()
-      .subscribe(
-        (order: Order[]) => {
-          this._ourOfferService.ordersList = order;
-        }
-      );*/
-    this.route.data.
-    subscribe(
-      ( data: Order[]) => {
-        this._ourOfferService.ordersList = data['orders'];
-      }
-    );
     this.orderLists = this._ourOfferService.ordersList;
     this._ourOfferService.ordersListChanged
       .subscribe(

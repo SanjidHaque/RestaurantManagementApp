@@ -33,7 +33,7 @@
                  name="UserName"
                  #UserName="ngModel"
                  [(ngModel)]="user.UserName"
-                 placeholder="Should be unique"
+                 placeholder="Should be unique and cannot contain any space"
                  required>
           </div>
         </div>
@@ -136,7 +136,7 @@
           <div class="col-md-10 content">
             Added on: {{ user.DateTime }}
           </div>
-          <div class="col-md-2" *ngIf="user.UserName !== 'Default User'">
+          <div class="col-md-2" *ngIf="user.UserName !== 'DefaultUser'">
             <i
               title="Remove this user"
               style="cursor: pointer"

@@ -35,18 +35,6 @@ export class EditInventoryItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*this._dataStorageService.getInventories()
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this._ourOfferService.inventory = inventories;
-        }
-      );*/
-    this.route.data.
-    subscribe(
-      ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
-      }
-    );
     this.inventoryList = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
@@ -60,7 +48,7 @@ export class EditInventoryItemComponent implements OnInit {
         this.name = this.inventoryList[i].Name;
         this.price = this.inventoryList[i].Price;
         this.unit = this.inventoryList[i].Unit;
-        this.inventoryHistory = this.inventoryList[i].InventoryHistory;
+        this.inventoryHistory = this.inventoryList[i].InventoryHistoryModel;
       }
     }
   }

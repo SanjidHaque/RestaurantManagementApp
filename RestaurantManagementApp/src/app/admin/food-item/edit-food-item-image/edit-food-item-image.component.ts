@@ -15,13 +15,13 @@ export class EditFoodItemImageComponent implements OnInit {
   fileToUpload: File = null;
   imageUrl = '';
   foodItems: FoodItems[] = [];
+  rootUrl = 'http://localhost:1548/Content/';
 
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
-              private _http: Http,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
-  ) {this.route.params
+  ) {this._route.params
     .subscribe(
       (params: Params) => {
         this.foodItemId = params['id'];
@@ -30,7 +30,7 @@ export class EditFoodItemImageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.
+    this._route.data.
     subscribe(
       ( data: FoodItems[]) => {
         this._ourOfferService.FoodItem = data['foodItems'];
@@ -39,11 +39,12 @@ export class EditFoodItemImageComponent implements OnInit {
     this.foodItems = this._ourOfferService.FoodItem;
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].Id === this.foodItemId) {
-        this.imageUrl = this.foodItems[i].FoodItemImage;
+        if ( this.foodItems[i].FoodItemImage === null || this.foodItems[i].FoodItemImage === '' ) {
+          this.imageUrl = '/assets/noImage.png';
+        } else {
+          this.imageUrl = this.rootUrl + this.foodItems[i].FoodItemImage;
+        }
       }
-    }
-    if (this.imageUrl === null || this.imageUrl === '' ) {
-      this.imageUrl = '/assets/noImage.png';
     }
   }
   saveFoodItemImage(Image) {
@@ -52,6 +53,7 @@ export class EditFoodItemImageComponent implements OnInit {
         console.log('done');
         Image.value = null;
         this.imageUrl = '/assets/noImage.png';
+        this.router.navigate(['admin/food-item/grid-view']);
       }
     );
   }

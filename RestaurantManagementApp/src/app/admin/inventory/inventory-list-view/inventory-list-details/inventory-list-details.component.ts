@@ -20,7 +20,7 @@ export class InventoryListDetailsComponent implements OnInit {
  inventoryList: Inventory[] = [];
  inventoryHistory: InventoryHistoryModel[] = [];
  subscription: Subscription;
-
+ index: number;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService,
@@ -35,13 +35,6 @@ export class InventoryListDetailsComponent implements OnInit {
       );
   }
   ngOnInit() {
-
-    this.route.data.
-    subscribe(
-      ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
-      }
-    );
     this.inventoryList = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
@@ -53,8 +46,8 @@ export class InventoryListDetailsComponent implements OnInit {
     for (let i = 0; i < this.inventoryList.length; i++) {
       if (this.inventoryList[i].Id === this.inventoryId) {
         this.inventory = this.inventoryList[i];
-        this.inventoryHistory = this.inventoryList[i].InventoryHistory;
-
+        this.inventoryHistory = this.inventoryList[i].InventoryHistoryModel;
+        this.index = i;
       }
     }
   }
@@ -65,10 +58,9 @@ export class InventoryListDetailsComponent implements OnInit {
   }
 
 
-  confirmEvent(index: number) {
+  confirmEvent() {
     this._dataStorageService.deleteInventoryItem(this.inventory);
-    this.inventoryList.splice(index, 1);
-    this._ourOfferService.inventory.splice(index, 1);
+    this._ourOfferService.inventory.splice(this.index, 1);
     this.router.navigate(['admin/inventory/list-view']);
     this.popup.hide();
   }

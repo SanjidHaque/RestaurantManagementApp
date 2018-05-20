@@ -8,6 +8,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {FoodItems} from '../../shared/food-item.model';
 import {Inventory} from '../../shared/inventory.model';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-food-items',
@@ -28,19 +29,17 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeThree = '';
   quantity : number;
   imageUrl = '/assets/noImage.png';
+  rootUrl = 'http://localhost:1548/Content/';
 
   subscription: Subscription;
   constructor(private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService,
-              private router: Router,
-              private route: ActivatedRoute,
+              private _sanitizer: DomSanitizer,
               private uuid: Uuid
   ) {
     this.uuidCodeOne = this.uuid.v1();
     this.uuidCodeTwo = this.uuid.v1();
     this.uuidCodeThree = this.uuid.v1();
   }
-
   ngOnInit() {
     this.FoodItem = this._ourOfferService.FoodItem;
     this._ourOfferService.foodItemChanged
@@ -61,6 +60,8 @@ export class FoodItemsComponent implements OnInit {
     for (let i = 0; i < this.FoodItem.length; i++) {
       if (this.FoodItem[i].FoodItemImage === null || this.FoodItem[i].FoodItemImage === '' ) {
         this.FoodItem[i].FoodItemImage = this.imageUrl;
+      } else {
+        this.FoodItem[i].FoodItemImage =  this.rootUrl + this.FoodItem[i].FoodItemImage;
       }
     }
   }

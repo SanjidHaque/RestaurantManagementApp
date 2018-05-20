@@ -30,12 +30,12 @@ export class EditTableComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    this.route.data.
+    /*this.route.data.
     subscribe(
       ( data: Table[]) => {
         this._ourOfferService.table = data['tables'];
       }
-    );
+    );*/
     this.tables = this._ourOfferService.table;
     this.subscription = this._ourOfferService.tableChanged
       .subscribe(
@@ -69,9 +69,10 @@ export class EditTableComponent implements OnInit, DoCheck {
     const editedTable = new Table(this.tableId, name);
     const ifExist = this._ourOfferService.editTable(editedTable);
     if (ifExist) {
-      this._dataStorageService.deleteTable(editedTable);
+      this._dataStorageService.editTable(editedTable);
     }
     form.reset();
+    this.router.navigate(['admin/tables']);
   }
 
   onCancel() {

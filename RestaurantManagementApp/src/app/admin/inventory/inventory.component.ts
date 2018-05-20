@@ -19,27 +19,19 @@ export class InventoryComponent implements OnInit {
   subscription: Subscription;
 
 
-  constructor(
-              private router: Router,
-              private _dataStorageService: DataStorageService,
+  constructor(private _route: ActivatedRoute,
               private _ourOfferService: OurOffersService,
              ) {
 
   }
 
   ngOnInit() {
-     this._dataStorageService.getInventories()
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this._ourOfferService.inventory = inventories;
-        }
-      );
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this.inventories = inventories;
-        }
-      );
+    this._route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
+
   }
 }

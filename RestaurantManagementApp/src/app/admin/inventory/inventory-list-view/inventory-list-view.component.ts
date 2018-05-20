@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import {Inventory} from '../../../shared/inventory.model';
 import {Http} from '@angular/http';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
@@ -11,9 +11,9 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './inventory-list-view.component.html',
   styleUrls: ['./inventory-list-view.component.scss']
 })
-export class InventoryListViewComponent implements OnInit {
+export class InventoryListViewComponent implements OnInit, DoCheck {
 
-  public inventories: Inventory[] ;
+  public inventories: Inventory[] = [] ;
   subscription: Subscription;
   totalProducts = 0;
 
@@ -26,12 +26,6 @@ export class InventoryListViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.
-    subscribe(
-      ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
-      }
-    );
     this.inventories = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
@@ -39,8 +33,11 @@ export class InventoryListViewComponent implements OnInit {
           this.inventories = inventories;
         }
       );
-    console.log(this._ourOfferService.inventory);
-    this.totalProducts = this.inventories.length;
+    this.totalProducts = this._ourOfferService.inventory.length;
+  }
+
+  ngDoCheck() {
+   // this.totalProducts = this._ourOfferService.inventory.length;
   }
   viewDetails(inventory: Inventory) {
     const inventoryId =  inventory.Id;

@@ -1,9 +1,9 @@
 export class OrderedItems {
   public OrderItemId: string;
   public OrderId: string;
-  public FoodItemId?: string;
-  public FoodItemQuantity?: number;
-  public FoodItemName?: string;
+  public FoodItemId: string;
+  public FoodItemQuantity: number;
+  public FoodItemName: string;
   public FoodItemSerialNo: string;
   public Price: number;
   public FoodItemSubTotal?: number;

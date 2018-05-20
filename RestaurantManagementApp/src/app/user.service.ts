@@ -13,12 +13,13 @@ export class UserService {
   private _modifiedUserApi = 'http://localhost:1548/api/GetUsersList';
   constructor(private _http: Http) { }
 
-  registerUser(name: string, password: string, email: string, role: string) {
+  registerUser(name: string, password: string, email: string, role: string, dateTime: string) {
     const body = {
       UserName: name,
       Password: password,
       Email: email,
-      Role : role
+      Role : role,
+      DateTime : dateTime
     };
     const reqHeader = new HttpHeaders({'No-Auth': 'True'});
     return this._http.post(this.rootUrl + '/api/User/Register', body
@@ -83,7 +84,7 @@ export class UserService {
   }
 
   getUsers() {
-    return this._http.get(this._modifiedUserJson).map(
+    return this._http.get(this._modifiedUserApi).map(
       (response: any) => {
         const users: ModifiedUserModel[] = response.json();
         console.log(users);

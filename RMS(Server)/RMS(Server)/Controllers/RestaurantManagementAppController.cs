@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
+using System.Security.AccessControl;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using System.Data.Entity;
+using System.Web.Mail;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using RMS_Server_.Models;
 using System.Web.Http.Cors;
 
@@ -27,242 +37,249 @@ namespace RMS_Server_.Controllers
         {
             _context = new ApplicationDbContext();
         }
-        [Route("api/menu")]
+       
         [HttpGet]
-        public MenuViewModel Menu()
+        [Route("api/GetAllRoles")]
+        [AllowAnonymous]
+        public HttpResponseMessage GetRoles()
         {
-
-            var foodItem = _context.FoodItems.Include(c => c.Ingredients).ToList();
-            var setMenu = _context.SetMenus.Include(a => a.SetMenuItems).ToList();
-            var menu = new MenuViewModel { FoodItems = foodItem, SetMenus = setMenu, };
-            return menu;
+            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            var roleMngr = new RoleManager<IdentityRole>(roleStore);
+          
+            var roles = roleMngr.Roles
+                .Select(x => new { x.Id, x.Name })
+                .ToList();
+            return this.Request.CreateResponse(HttpStatusCode.OK, roles);
         }
 
-        [Route("api/PostMenu")]
+
+
+
+
         [HttpPost]
-        public void PostMenu(Order orders)
+        [Route("api/ResetPassword")]
+        [AllowAnonymous]
+        public string ResetPassword(ForgotPassword forgotPassword)
         {
-            _context.OrderedItems.AddRange(orders.OrderedItems);
-            _context.Orders.Add(orders);
+            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(userStore);
+            var provider = new DpapiDataProtectionProvider("Sample");
+
+            manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
+            var user = manager.FindByName(forgotPassword.UserName);
+       
+
+           
+            if (user != null)
+            {
+                string code = manager.GeneratePasswordResetToken(user.Id);
+                var email = manager.GetEmail(user.Id);
+                string fromaddr = "apphodoo@gmail.com";
+                string toaddr = email;
+                string password = "hodoo123";
+
+
+                System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+                msg.Subject = "Hodoo Reset Password";
+                msg.From = new MailAddress(fromaddr);
+                msg.Body = "\n\nReset Code:  " + user.Id + "\n\n\n";
+                msg.To.Add(new MailAddress(toaddr));
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.EnableSsl = true;
+                NetworkCredential nc = new NetworkCredential(fromaddr, password);
+                smtp.Credentials = nc;
+                smtp.Send(msg);
+
+
+
+                var callbackUrl = string.Format("http://www.google.com?userId={0}&code={1}", user.Id, code);
+                manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                return "User Name Found";
+            }
+            return "User Name Not Found";
+        }
+
+        [HttpPost]
+        [Route("api/NewPassword")]
+        [AllowAnonymous]
+        public string NewPassword(ForgotPassword forgotPassword)
+        {
+            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(userStore);
+            var provider = new DpapiDataProtectionProvider("Sample");
+
+            manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
+            var user = manager.FindById(forgotPassword.Id);
+            if (user != null)
+            {
+                String hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
+                userStore.SetPasswordHashAsync(user, hashedNewPassword);
+                userStore.UpdateAsync(user);
+                //manager.ResetPasswordAsync(forgotPassword.Id, forgotPassword.Code, forgotPassword.NewPassword);
+                return "Successful";
+            }
+            return "Not Successful";
+        }
+
+
+
+        [Route("api/GetUsersList")]
+        [HttpGet]
+        [AllowAnonymous]
+        public List<ModifiedUser>  GetUsersList()
+        {
+           var modifiedUser = _context.ModifiedUsers.ToList();
+           return modifiedUser;
+        }
+
+
+        [Route("api/DeleteUser")]
+        [HttpPost]
+        [AllowAnonymous]
+        public void DeleteUser(AccountModel accountModel)
+        {
+            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(userStore);
+            var user = _context.Users.FirstOrDefault(p => p.UserName == accountModel.UserName);
+            var modifiedUser = _context.ModifiedUsers.FirstOrDefault(q => q.UserName == accountModel.UserName);
+            manager.RemoveFromRole(user.Id, accountModel.Role);
+            _context.ModifiedUsers.Remove(modifiedUser);
+            _context.Users.Remove(user);
             _context.SaveChanges();
         }
-                
-             
-            
- 
-            
-         //   var apiOrder = new Order();
-         //   apiOrder.Id = orders.Id;
-         //   apiOrder.OrderStatus = orders.OrderStatus;
-         //   apiOrder.TotalPrice = orders.TotalPrice;
-         //   for(int i = 0; i < orders.OrderedItems.Count; i++)
-         //   {
-         //       var apiOrderedItems = new OrderedItems();
-         //       apiOrderedItems.OrderItemId = orders.OrderedItems[i].OrderItemId;
-         //       apiOrderedItems.OrderId = orders.OrderedItems[i].OrderId;
-         //       apiOrderedItems.Price = orders.OrderedItems[i].Price;
-         //       apiOrderedItems.SetMenuQuantity = orders.OrderedItems[i].SetMenuQuantity;
-         //       apiOrderedItems.SetMenuId = orders.OrderedItems[i].SetMenuId;
-         //       apiOrderedItems.SetMenuName = orders.OrderedItems[i].SetMenuName;
-         //       apiOrderedItems.SetMenuSubTotal = orders.OrderedItems[i].SetMenuSubTotal;
-         //       apiOrderedItems.FoodItemId = orders.OrderedItems[i].FoodItemId;
-         //       apiOrderedItems.FoodItemQuantity = orders.OrderedItems[i].FoodItemQuantity;
-         //       apiOrderedItems.FoodItemSubTotal = orders.OrderedItems[i].FoodItemSubTotal;
-         //       apiOrderedItems.FoodItemName = orders.OrderedItems[i].FoodItemName;
-         //      // apiOrderedItems.FoodItemId = orders.OrderedItems[i].FoodItemId;
-         //       _context.OrderedItems.Add(apiOrderedItems);
-         //       _context.SaveChanges();
-         //   }
-         ////   _context.OrderedItems.AddRange(orders.OrderedItems);
-         //  // _context.Orders.Add(orders);
-         //   _context.Orders.Add(apiOrder);
-            
-
-         //   _context.SaveChanges();
-
         
-        [HttpGet]
-        [Route("api/GetOrders")]
-        public List<Order> Order()
+        [Route("api/User/Register")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IdentityResult Register(AccountModel model)
         {
-            return _context.Orders.Where(p => p.OrderStatus == 0).Include(b => b.OrderedItems).ToList();
+            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(userStore);
+           
+            var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 3
+            };
+            IdentityResult result = manager.Create(user, model.Password);
+            if (result.Succeeded != false)
+            {
+                manager.AddToRoles(user.Id, model.Role);
+                var modifiedUser = new ModifiedUser()
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Role = model.Role,
+                    DateTime = model.DateTime
+                };
+                _context.ModifiedUsers.Add(modifiedUser);
+                _context.SaveChanges();
+            }
+            return result;
         }
 
-        [HttpPost]
-        [Route("api/AcceptOrders")]
-        public void OrderAccepted(Order order)
+        [HttpGet]
+        [Route("api/GetUserClaims")]
+        public AccountModel GetUserClaims()
         {
-            var acceptedOrder = _context.Orders.FirstOrDefault(p => p.Id == order.Id);
-            acceptedOrder.OrderStatus = 1;
-            _context.SaveChanges();
-
-            var orderedItems = _context.OrderedItems.Where(p => p.OrderId == order.Id).ToList();
-
-            for (int i = 0; i < orderedItems.Count; i++)
+            var identityClaims = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identityClaims.Claims;
+            AccountModel model = new AccountModel()
             {
+                UserName = identityClaims.FindFirst("Username").Value,
+                Email = identityClaims.FindFirst("Email").Value,
+                LoggedOn = identityClaims.FindFirst("LoggedOn").Value
+            };
+            return model;
+        }
 
-                var getFoodItemId = acceptedOrder.OrderedItems[i].FoodItemId;
-                var getIngredient = _context.Ingredients.Where(p => p.FooditemId == getFoodItemId).ToList();
-                for (int j = 0; j < getIngredient.Count; j++)
-                {
-                    var getInventoryId = getIngredient[j].InventoryId;
-                    var getInventory = _context.Inventories.FirstOrDefault(p => p.Id == getInventoryId);
-                    getInventory.Quantity -= getIngredient[j].Quantity;
-                    _context.SaveChanges();
-
-
-                    var sumOfInv = _context.SummaryOfInventories.FirstOrDefault(p => p.InventoryId == getInventoryId);
-                    sumOfInv.ItemUsedName = getInventory.Name;
-
-                    sumOfInv.ItemUsedToday += getIngredient[j].Quantity;
-                    sumOfInv.ItemRemaining = sumOfInv.ItemTotal - sumOfInv.ItemUsedToday;
-                    _context.SaveChanges();
-                }
+        [Route("api/GetFoodItems")]
+        [HttpGet]
+        [AllowAnonymous]
+        public List<FoodItem> GetFoodItems()
+        {
+            var foodItems = _context.FoodItems.Include(c => c.Ingredients).ToList();
+            return foodItems;
+        }
 
 
-            }
-
-            var cashFlow = new CashFlow();
-            cashFlow.OrderId = order.Id;
-            cashFlow.OrderPrice = order.TotalPrice;
 
 
-            var getFoodItemList = _context.OrderedItems.Where(p => p.OrderId == order.Id).ToList();
-            for (int i = 0; i < getFoodItemList.Count; i++)
+        [Route("api/StoreOrder")]
+        [HttpPost]
+        [AllowAnonymous]
+        public void StoreOrder(Order orders)
+        {
+            for (int i = 0; i < orders.OrderedItems.Count; i++)
             {
-                var getCertainFoodItemId = getFoodItemList[i].FoodItemId;
-                if (getCertainFoodItemId != null)
+                var foodItemId = orders.OrderedItems[i].FoodItemId;
+                var soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
+                soldFoodItem.TotalSale++;
+                var foodItems = _context.FoodItems.Include(b => b.Ingredients).ToList();
+                for (int j = 0; j < foodItems.Count; j++)
                 {
-                    var getIngList = _context.Ingredients.Where(p => p.FooditemId == getCertainFoodItemId).ToList();
-                    for (int j = 0; j < getIngList.Count; j++)
+                    if (foodItems[j].Id == foodItemId)
                     {
-                        var getInvId = getIngList[j].InventoryId;
-                        var getInvRow = _context.Inventories.FirstOrDefault(p => p.Id == getInvId);
-                        var invPrice = getInvRow.Price;
-                        var ingSubTotal = getIngList[j].Quantity*invPrice;
-
-                        cashFlow.InventoryCost += System.Math.Round(ingSubTotal, 2);
-                    }
-                }
-            }
-            for (int i = 0; i < getFoodItemList.Count; i++)
-            {
-                var getCertainSetMenuId = getFoodItemList[i].SetMenuId;
-                if (getCertainSetMenuId != null)
-                {
-                    var setMenuList = _context.SetMenuItems.Where(p => p.SetMenuId == getCertainSetMenuId).ToList();
-                    for (int j = 0; j < setMenuList.Count; j++)
-                    {
-                        var getFoodItemId = setMenuList[j].FoodItemId;
-                        var getIngList = _context.Ingredients.Where(p => p.FooditemId
-                                                                         == getFoodItemId).ToList();
-
-                        for (int k = 0; k < getIngList.Count; k++)
+                        for (int k = 0; k < foodItems[j].Ingredients.Count; k++)
                         {
-                            var getInvId = getIngList[k].InventoryId;
-                            var getInvRow = _context.Inventories.FirstOrDefault(p => p.Id == getInvId);
-                            var invPrice = getInvRow.Price;
-                            var ingSubTotal = getIngList[k].Quantity*invPrice;
-                            cashFlow.InventoryCost += System.Math.Round(ingSubTotal, 2);
+                            var quantity = foodItems[j].Ingredients[k].Quantity;
+                            var totalQuantity = quantity*orders.OrderedItems[i].FoodItemQuantity;
+                            var inventoryId = foodItems[j].Ingredients[k].InventoryId;
+                            var inventory = _context.Inventories.ToList();
+                            for (int l = 0; l < inventory.Count; l++)
+                            {
+                                if (inventory[l].Id == inventoryId)
+                                {
+                                    inventory[l].UsedQuantity += totalQuantity;
+                                    inventory[l].RemainingQuantity -= totalQuantity;
+                                }
+                            }
                         }
                     }
                 }
             }
-
-            var profit = cashFlow.OrderPrice - cashFlow.InventoryCost;
-            cashFlow.Profit = System.Math.Round(profit, 2);
-            _context.CashFlows.Add(cashFlow);
+            _context.OrderedItems.AddRange(orders.OrderedItems);
+            _context.Orders.Add(orders);
             _context.SaveChanges();
         }
 
 
-        [HttpGet]
-        [Route("api/GetCashFlow")]
-        public List<CashFlow> CashFlow()
-        {
-            return _context.CashFlows.ToList();
-        }
-
-
-
-        [HttpGet]
-        [Route("api/GetSummaryOfInventories")]
-        public List<SummaryOfInventory> SummaryOfInventories()
-        {
-            return _context.SummaryOfInventories.Include(c => c.Inventory).ToList();
-        }
-
-
+        [Route("api/DeleteOrder")]
         [HttpPost]
-        [Route("api/RejectOrders")]
-        public void OrderRejected(Order order)
+        [AllowAnonymous]
+        public void DeleteOrder(Order orders)
         {
-            var rejectedOrder = _context.Orders.FirstOrDefault(p => p.Id == order.Id);
-            rejectedOrder.OrderStatus = 2;
+            var deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
+            var deleteOrderedItems = _context.OrderedItems.Where(b => b.OrderId == deleteOrder.Id).ToList();
+            _context.OrderedItems.RemoveRange(deleteOrderedItems);
+            _context.Orders.Remove(deleteOrder);
             _context.SaveChanges();
         }
-
-        [HttpPost]
-        [Route("api/AddNewFoodItem")]
-        public void FoodItemAdd(FoodItem foodItem)
-        {
-            _context.FoodItems.Add(foodItem);
-            _context.SaveChanges();
-        }
-
-        [HttpPost]
-        [Route("api/EditFoodItem")]
-        public void FoodItemEdit(FoodItem foodItem)
-        {
-            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
-            editedFoodItem.Name = foodItem.Name;
-            editedFoodItem.Price = foodItem.Price;
-            _context.SaveChanges();
-        }
-
-        [HttpPost]
-        [Route("api/DeleteFoodItem")]
-        public void FoodItemDelete(FoodItem foodItem)
-        {
-            var getOrderId =
-                _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
-            
-                for (int k = 0; k < getOrderId.Count; k++)
-                {
-                    if (getOrderId[k] != null)
-                    {
-                        var orderId = getOrderId[k].OrderId;
-
-                        var deleteOrderedItemsRelatedToThisFoodItem =
-                            _context.OrderedItems.Where(p => p.OrderId == orderId).ToList();
-
-
-                        _context.OrderedItems.RemoveRange(deleteOrderedItemsRelatedToThisFoodItem);
-
-                        var deleteOrderRelatedToThisFoodItem =
-                            _context.Orders.FirstOrDefault(p => p.Id == orderId);
-                        _context.Orders.Remove(deleteOrderRelatedToThisFoodItem);
-                        _context.SaveChanges();
-                    }
-                    var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
-                    _context.Ingredients.RemoveRange(deleteIngredients);
-                    var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
-                    _context.FoodItems.Remove(deleteFoodItem);
-                    _context.SaveChanges();
  
-                }
-            
-              }
+           
+        [HttpGet]
+        [Route("api/GetOrders")]
+        [AllowAnonymous]
+        public List<Order> Order()
+        {
+            return _context.Orders.Include(b => b.OrderedItems).ToList();
+        }
 
         [HttpGet]
         [Route("api/GetInventories")]
+        [AllowAnonymous]
         public List<Inventory> GetInventories()
         {
-            return _context.Inventories.ToList();
+            return _context.Inventories.Include(b => b.InventoryHistoryModel).ToList();
         }
 
         [HttpGet]
         [Route("api/GetTables")]
+        [AllowAnonymous]
         public List<Table> GetTables()
         {
             return _context.Tables.ToList();
@@ -270,269 +287,170 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/AddNewTable")]
+        [AllowAnonymous]
         public void AddNewTable(Table table)
         {
             _context.Tables.Add(table);
             _context.SaveChanges();
         }
-
+        [HttpPost]
+        [Route("api/EditTable")]
+        [AllowAnonymous]
+        public void EditTable(Table table)
+        {
+            var getEdited = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+            if (getEdited != null)
+            {
+                getEdited.Name = table.Name;
+            }          
+            _context.SaveChanges();
+        }
         [HttpPost]
         [Route("api/DeleteTable")]
+        [AllowAnonymous]
         public void DeleteTable(Table table)
         {
             var deleteTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
-            _context.Tables.Remove(deleteTable);
-            _context.SaveChanges();
+            if (deleteTable!=null)
+            {
+                _context.Tables.Remove(deleteTable);
+                _context.SaveChanges();
+            }
+          
         }
 
-        [HttpPost]
-        [Route("api/DeleteOrder")]
-        public void DeleteTable(Order order)
-        {
-            var deleteOrderedItems = _context.OrderedItems.Where(p => p.OrderId == order.Id);
-            _context.OrderedItems.RemoveRange(deleteOrderedItems);
-            var deleteOrder = _context.Orders.FirstOrDefault(q => q.Id == order.Id);
-            _context.Orders.Remove(deleteOrder);
-            _context.SaveChanges();
-        }
-       
 
         [HttpPost]
         [Route("api/AddNewInventory")]
+        [AllowAnonymous]
         public void AddInventoryItem(Inventory inventory)
         {
-           try
-            {
-                _context.Inventories.Add(inventory);
-                var sumOfInv = new SummaryOfInventory();
-                sumOfInv.InventoryId = inventory.Id;
-                sumOfInv.ItemTotal = inventory.Quantity;
-                sumOfInv.Unit = inventory.Unit;
-                _context.SummaryOfInventories.Add(sumOfInv);
-                _context.SaveChanges();
-            }
-            
-             catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+            _context.InventoryHistoryModels.AddRange(inventory.InventoryHistoryModel);
+            _context.Inventories.Add(inventory);
+            _context.SaveChanges();
         }
+
+
 
         [HttpPost]
         [Route("api/EditInventoryItem")]
+        [AllowAnonymous]
         public void EditInventoryItem(Inventory inventory)
-        {
-            try
-            {
-                var getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-                getEdited.Name = inventory.Name;
-                getEdited.Price = inventory.Price;
-                getEdited.Quantity = inventory.Quantity;
-                getEdited.Unit = inventory.Unit;
-                _context.SaveChanges();
-            }
+        {          
+             var getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+             getEdited.Name = inventory.Name;
+             getEdited.Price = inventory.Price;
+             getEdited.Unit = inventory.Unit;
+            _context.SaveChanges();
+         }
 
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+
+        [HttpPost]
+        [Route("api/UpdateInventoryHistory")]
+        [AllowAnonymous]
+        public void UpdateInventoryHistory(InventoryHistoryModel inventoryHistoryModel)
+        {
+            var inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistoryModel.InventoryId);
+            inventory.RemainingQuantity += inventoryHistoryModel.UpdatedQuantity;
+            _context.InventoryHistoryModels.Add(inventoryHistoryModel);
+            _context.SaveChanges();
         }
 
 
 
         [HttpPost]
         [Route("api/DeleteInventoryItem")]
+        [AllowAnonymous]
         public void DeleteInventoryItem(Inventory inventory)
         {
-            try
-            {
-                var getIngredientsDeleted = _context.Ingredients.Where(p => p.InventoryId == inventory.Id).ToList();
-                _context.Ingredients.RemoveRange(getIngredientsDeleted);
-                var getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-                _context.Inventories.Remove(getDeleted);
-                _context.SaveChanges();
-            }
-             catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
-        }
-
-        [HttpPost]
-        [Route("api/UploadImage")]
-        public HttpResponseMessage UploadImage()
-        {
-            string imageName = null;
-            var httpRequest = HttpContext.Current.Request;
-            //Upload Image
-            var postedFile = httpRequest.Files["Image"];
-            //Create custom filename
-            imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
-            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
-            var filePath = HttpContext.Current.Server.MapPath("~/Image/" + imageName);
-            postedFile.SaveAs(filePath);
-
-            //Save to DB
-            //using (DBModel db = new DBModel())
-            //{
-            //    Image image = new Image()
-            //    {
-            //        ImageCaption = httpRequest["ImageCaption"],
-            //        ImageName = imageName
-            //    };
-            //    db.Images.Add(image);
-            //    db.SaveChanges();
-            //}
-            //var image = new FileUpload();
-            //image.CourseFile = imageName;
-            //_context.FileUploads.Add(image);
-
-           // var uploadImage = new FoodItemImage();
-
-
-          var  uploadedImageId = httpRequest["FoodItemId"];
-            //var foodItemImage = new FoodItemImage();
-            //foodItemImage.FoodItemId = uploadedImageId;
-            //foodItemImage.ImagePath = imageName;
-            //_context.FoodItemImages.Add(foodItemImage);
-            //_context.SaveChanges();
-
-
-
-            FoodItem foodItem = new FoodItem();
-            foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
-            foodItem.FoodItemImage = imageName;
+            var getIngredientsDeleted = _context.Ingredients.Where(p => p.InventoryId == inventory.Id).ToList();
+            _context.Ingredients.RemoveRange(getIngredientsDeleted);
+            var deleteInvHistory = _context.InventoryHistoryModels.Where(q => q.InventoryId == inventory.Id).ToList();
+            _context.InventoryHistoryModels.RemoveRange(deleteInvHistory);
+            var getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+            _context.Inventories.Remove(getDeleted);
             _context.SaveChanges();
-
-        /*  var getEdited = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
-          getEdited.FoodItemImage = imageName; */
-         //   var foodItem = new FoodItemImage();
-         //   foodItem.FoodItemId = uploadedImageId;
-        //    foodItem.ImagePath = imageName;
-       //     _context.FoodItemImages.Add(foodItem);  
-         //   _context.SaveChanges();
-
-         //   var uploadImage = new FoodItemImage();
-        //    uploadImage.FoodItemId = httpRequest["FoodItemId"];
-          //  uploadImage.ImagePath = imageName;
-     //       _context.FoodItemImages.Add(uploadImage);        
-           
-
-
-            return Request.CreateResponse(HttpStatusCode.Created);
         }
+
 
         [HttpPost]
         [Route("api/AddFoodItem")]
-        public void AddFoodItem(FoodItem foodItem)
+        [AllowAnonymous]
+        public void FoodItemAdd(FoodItem foodItem)
         {
-            //var foodItemToSave = _context.FoodItems.First(p => p.Id == foodItem.Id);
-            //foodItemToSave.Name = foodItem.Name;
-            //foodItemToSave.Price = foodItem.Price;
-
-
             _context.Ingredients.AddRange(foodItem.Ingredients);
             _context.FoodItems.Add(foodItem);
             _context.SaveChanges();
-
-
-           /* _context.Ingredients.AddRange(foodItem.Ingredients);
-            var imagePath = _context.FoodItemImages.FirstOrDefault(q => q.FoodItemId == foodItem.Id);
-            var foodItemToSave = new FoodItem();
-            foodItemToSave.Name = foodItem.Name;
-            foodItemToSave.Price = foodItem.Price;
-            foodItemToSave.FoodItemImage = imagePath.ImagePath;
-            _context.FoodItems.Add(foodItemToSave);
-            _context.SaveChanges();*/
-            //try
-            //{  
-            //    _context.Ingredients.AddRange(foodItem.Ingredients);
-            //    _context.FoodItems.Add(foodItem);
-            //    _context.SaveChanges();
-            //}
-            //catch (DbEntityValidationException e)
-            //{
-            //    foreach (var eve in e.EntityValidationErrors)
-            //    {
-            //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-            //        foreach (var ve in eve.ValidationErrors)
-            //        {
-            //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-            //                ve.PropertyName, ve.ErrorMessage);
-            //        }
-            //    }
-            //    throw;
-            //}
         }
 
-
-
-        
-
         [HttpPost]
-        [Route("api/AddSetMenu")]
-        public void AddSetMenu(SetMenu setMenu)
+        [Route("api/EditFoodItem")]
+        [AllowAnonymous]
+        public void FoodItemEdit(FoodItem foodItem)
         {
-            _context.SetMenus.Add(setMenu);
+            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+            editedFoodItem.Name = foodItem.Name;
+            editedFoodItem.Price = foodItem.Price;
+            editedFoodItem.SerialNo = foodItem.SerialNo;
+            editedFoodItem.MakingCost = foodItem.MakingCost;
+            editedFoodItem.Profit = foodItem.Profit;
+            _context.Ingredients.RemoveRange(editedFoodItem.Ingredients);
+            _context.Ingredients.AddRange(foodItem.Ingredients);
             _context.SaveChanges();
         }
 
 
-      /*  public void CalculateInventories()
-        {
-            List<SummaryOfInventory> dataList = new List<SummaryOfInventory>();
-            
-            var totalOrderedItems = _context.OrderedItems.ToList();
 
-            var i = 0;
-            foreach (var totalOrderedItem in totalOrderedItems)
-            {
-                var id = totalOrderedItems[i].FoodItem.Ingredients
-                var inventoryId = totalOrderedItems.
-                dataList.Add(new SummaryOfInventory { ItemUsedId = ""});
-            }
+
+        [HttpPost]
+        [Route("api/DeleteFoodItem")]
+        [AllowAnonymous]
+        public void FoodItemDelete(FoodItem foodItem)
+        {
+           var getOrderedItems = _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
+           _context.OrderedItems.RemoveRange(getOrderedItems);             
+           var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
+           _context.Ingredients.RemoveRange(deleteIngredients);
+           var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+           _context.FoodItems.Remove(deleteFoodItem);
+           _context.SaveChanges();           
+         }
+
+        [HttpPost]
+        [Route("api/SaveFoodItemImage")]
+        [AllowAnonymous]
+        public HttpResponseMessage SaveFoodItemImage()
+        {
+            string imageName = null;
+            var httpRequest = HttpContext.Current.Request;         
+            var postedFile = httpRequest.Files["Image"];         
+            imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
+            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
+            var filePath = HttpContext.Current.Server.MapPath("~/Content/" + imageName);
+            postedFile.SaveAs(filePath);
+            var uploadedImageId = httpRequest["FoodItemId"];           
+            var foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
+            foodItem.FoodItemImage = imageName;
+            _context.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
-*/
-       /* public List<SummaryOfInventory> SummaryOfInventories()
+
+
+        [HttpGet]
+        [Route("api/GetFoodItemImage")]
+        [AllowAnonymous]
+        public HttpResponseMessage GetFoodItemImage()
         {
-            var totalOrderedItems = _context.OrderedItems.ToList();
-
-            foreach (var totalOrderedItem in totalOrderedItems)
-            {
-                
-            }
-
-        }*/
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            var path = "~/Image/" + "10154902_1180012622.jpg";
+            path = System.Web.Hosting.HostingEnvironment.MapPath(path);
+            var ext = System.IO.Path.GetExtension(path);
+            var contents = System.IO.File.ReadAllBytes(path);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream(contents);
+            response.Content = new StreamContent(ms);
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/" + ext);
+            return response;
+        }
+        
     }
 }

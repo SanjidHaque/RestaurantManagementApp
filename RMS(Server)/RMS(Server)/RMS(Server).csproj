@@ -48,6 +48,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.0\lib\net451\Microsoft.Owin.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -148,12 +160,6 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
@@ -180,6 +186,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApllicationOAuthProvider.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -214,6 +221,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestaurantManagementAppController.cs" />
@@ -221,35 +229,51 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804282020375_madeManRepack.cs" />
-    <Compile Include="Migrations\201804282020375_madeManRepack.Designer.cs">
-      <DependentUpon>201804282020375_madeManRepack.cs</DependentUpon>
+    <Compile Include="Migrations\201805091904541_Initial.cs" />
+    <Compile Include="Migrations\201805091904541_Initial.Designer.cs">
+      <DependentUpon>201805091904541_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804291913327_ordeModelChanged.cs" />
-    <Compile Include="Migrations\201804291913327_ordeModelChanged.Designer.cs">
-      <DependentUpon>201804291913327_ordeModelChanged.cs</DependentUpon>
+    <Compile Include="Migrations\201805101145219_modelchanged.cs" />
+    <Compile Include="Migrations\201805101145219_modelchanged.Designer.cs">
+      <DependentUpon>201805101145219_modelchanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805121623085_ManyModelsHasChanged.cs" />
+    <Compile Include="Migrations\201805121623085_ManyModelsHasChanged.Designer.cs">
+      <DependentUpon>201805121623085_ManyModelsHasChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805141736456_newTableAdded.cs" />
+    <Compile Include="Migrations\201805141736456_newTableAdded.Designer.cs">
+      <DependentUpon>201805141736456_newTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805151331581_modelChanged2.cs" />
+    <Compile Include="Migrations\201805151331581_modelChanged2.Designer.cs">
+      <DependentUpon>201805151331581_modelChanged2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805161601149_orderedItemModelChangedAgain.cs" />
+    <Compile Include="Migrations\201805161601149_orderedItemModelChangedAgain.Designer.cs">
+      <DependentUpon>201805161601149_orderedItemModelChangedAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805161657289_orderModelChangedAgain.cs" />
+    <Compile Include="Migrations\201805161657289_orderModelChangedAgain.Designer.cs">
+      <DependentUpon>201805161657289_orderModelChangedAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CashFlow.cs" />
-    <Compile Include="Models\FileUpload.cs" />
     <Compile Include="Models\FoodItem.cs" />
-    <Compile Include="Models\FoodItemImage.cs" />
+    <Compile Include="Models\ForgotPassword.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Inventory.cs" />
-    <Compile Include="Models\MenuViewModel.cs" />
+    <Compile Include="Models\InventoryHistoryModel.cs" />
+    <Compile Include="Models\ModifiedUser.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderedItems.cs" />
-    <Compile Include="Models\SetMenu.cs" />
-    <Compile Include="Models\SetMenuItem.cs" />
-    <Compile Include="Models\SummaryOfInventory.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="StartupRMS.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -290,7 +314,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -300,11 +326,6 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
@@ -316,14 +337,31 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Image\" />
     <Folder Include="Image\" />
+    <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804282020375_madeManRepack.resx">
-      <DependentUpon>201804282020375_madeManRepack.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805091904541_Initial.resx">
+      <DependentUpon>201805091904541_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804291913327_ordeModelChanged.resx">
-      <DependentUpon>201804291913327_ordeModelChanged.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805101145219_modelchanged.resx">
+      <DependentUpon>201805101145219_modelchanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805121623085_ManyModelsHasChanged.resx">
+      <DependentUpon>201805121623085_ManyModelsHasChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805141736456_newTableAdded.resx">
+      <DependentUpon>201805141736456_newTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805151331581_modelChanged2.resx">
+      <DependentUpon>201805151331581_modelChanged2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805161601149_orderedItemModelChangedAgain.resx">
+      <DependentUpon>201805161601149_orderedItemModelChangedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805161657289_orderModelChangedAgain.resx">
+      <DependentUpon>201805161657289_orderModelChangedAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

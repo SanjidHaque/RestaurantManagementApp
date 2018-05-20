@@ -12,8 +12,9 @@ namespace RMS_Server_.Models
         public int TotalPrice { get; set; }
         public int Tendered { get; set; }
         public int Change { get; set; }
-        public int OrderStatus { get; set; }
         public string DateTime { get; set; }
         public string TableNo { get; set; }
+        public int InventoryCost { get; set; }
+        public int Profit { get; set; }
     }
 }

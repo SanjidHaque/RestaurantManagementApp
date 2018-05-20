@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class madeManRepack : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -42,7 +42,11 @@ namespace RMS_Server_.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         TotalPrice = c.Int(nullable: false),
+                        Tendered = c.Int(nullable: false),
+                        Change = c.Int(nullable: false),
                         OrderStatus = c.Int(nullable: false),
+                        DateTime = c.String(),
+                        TableNo = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -143,7 +147,7 @@ namespace RMS_Server_.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetRoles",
+                "dbo.Role",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -153,15 +157,15 @@ namespace RMS_Server_.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.UserRole",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Role", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
@@ -191,10 +195,12 @@ namespace RMS_Server_.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetUsers",
+                "dbo.User",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FirstName = c.String(),
+                        LastName = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -211,7 +217,7 @@ namespace RMS_Server_.Migrations
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
-                "dbo.AspNetUserClaims",
+                "dbo.UserClaim",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -220,11 +226,11 @@ namespace RMS_Server_.Migrations
                         ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.AspNetUserLogins",
+                "dbo.UserLogin",
                 c => new
                     {
                         LoginProvider = c.String(nullable: false, maxLength: 128),
@@ -232,18 +238,18 @@ namespace RMS_Server_.Migrations
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserRole", "UserId", "dbo.User");
+            DropForeignKey("dbo.UserLogin", "UserId", "dbo.User");
+            DropForeignKey("dbo.UserClaim", "UserId", "dbo.User");
             DropForeignKey("dbo.SummaryOfInventories", "InventoryId", "dbo.Inventories");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
             DropForeignKey("dbo.CashFlows", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderedItems", "SetMenuId", "dbo.SetMenus");
             DropForeignKey("dbo.SetMenuItems", "SetMenuId", "dbo.SetMenus");
@@ -253,13 +259,13 @@ namespace RMS_Server_.Migrations
             DropForeignKey("dbo.Ingredients", "InventoryId", "dbo.Inventories");
             DropForeignKey("dbo.Ingredients", "FooditemId", "dbo.FoodItems");
             DropForeignKey("dbo.CashFlows", "InventoryId", "dbo.Inventories");
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.UserLogin", new[] { "UserId" });
+            DropIndex("dbo.UserClaim", new[] { "UserId" });
+            DropIndex("dbo.User", "UserNameIndex");
             DropIndex("dbo.SummaryOfInventories", new[] { "InventoryId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.UserRole", new[] { "RoleId" });
+            DropIndex("dbo.UserRole", new[] { "UserId" });
+            DropIndex("dbo.Role", "RoleNameIndex");
             DropIndex("dbo.SetMenuItems", new[] { "FoodItemId" });
             DropIndex("dbo.SetMenuItems", new[] { "SetMenuId" });
             DropIndex("dbo.Ingredients", new[] { "FooditemId" });
@@ -269,13 +275,13 @@ namespace RMS_Server_.Migrations
             DropIndex("dbo.OrderedItems", new[] { "OrderId" });
             DropIndex("dbo.CashFlows", new[] { "InventoryId" });
             DropIndex("dbo.CashFlows", new[] { "OrderId" });
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.UserLogin");
+            DropTable("dbo.UserClaim");
+            DropTable("dbo.User");
             DropTable("dbo.Tables");
             DropTable("dbo.SummaryOfInventories");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.UserRole");
+            DropTable("dbo.Role");
             DropTable("dbo.FoodItemImages");
             DropTable("dbo.FileUploads");
             DropTable("dbo.SetMenuItems");

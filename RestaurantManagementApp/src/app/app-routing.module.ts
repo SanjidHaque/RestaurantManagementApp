@@ -80,13 +80,6 @@ const appRoutes: Routes = [
     /*canActivate: [AuthGuard], */ data: { roles: ['Admin'] }},
   { path: 'admin',
     component: AdminComponent,
-    /*resolve: {
-      foodItems: FoodItemResolverService,
-    inventories: InventoryResolverService,
-    tables: TableResolverService,
-      roles: RoleResolverService,
-      users: ModifiedUserResolverService,
-      orders: OrderResolverService },*/
    /* canActivate: [AuthGuard],
      data: { roles: ['Admin'] },*/
     children: [
@@ -96,16 +89,16 @@ const appRoutes: Routes = [
         resolve: { roles: RoleResolverService, users: ModifiedUserResolverService } },
     { path: 'orders', component: OrdersComponent,
       /*canActivate: [AuthGuard],*/
-      resolve: { orders: OrderResolverService },
+
     children: [
       { path: 'list-view', component: OrderListViewComponent, /*canActivate: [AuthGuard],*/
-       /* resolve: { orders: OrderResolverService }*/},
+        resolve: { orders: OrderResolverService }},
       { path: 'list-details/:id', component: OrderListViewDetailsComponent, /*canActivate: [AuthGuard],*/
-        /*resolve: { orders: OrderResolverService }*/},
+        resolve: { orders: OrderResolverService }},
       { path: 'grid-view', component: OrderGridViewComponent, /*canActivate: [AuthGuard],*/
-        /*resolve: { orders: OrderResolverService }*/},
+        resolve: { orders: OrderResolverService }},
       { path: 'grid-details/:id', component: OrderGridViewDetailsComponent, /*canActivate: [AuthGuard],*/
-       /* resolve: { orders: OrderResolverService }*/ }
+        resolve: { orders: OrderResolverService } }
     ]
     },
       { path: 'food-item', component: FoodItemComponent,

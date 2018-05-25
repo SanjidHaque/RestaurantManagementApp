@@ -257,6 +257,10 @@
     <Compile Include="Migrations\201805161657289_orderModelChangedAgain.Designer.cs">
       <DependentUpon>201805161657289_orderModelChangedAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805231704296_inventoryModelChanged.cs" />
+    <Compile Include="Migrations\201805231704296_inventoryModelChanged.Designer.cs">
+      <DependentUpon>201805231704296_inventoryModelChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountModel.cs" />
@@ -362,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805161657289_orderModelChangedAgain.resx">
       <DependentUpon>201805161657289_orderModelChangedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805231704296_inventoryModelChanged.resx">
+      <DependentUpon>201805231704296_inventoryModelChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

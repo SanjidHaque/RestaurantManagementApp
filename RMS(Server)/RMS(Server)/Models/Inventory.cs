@@ -13,7 +13,7 @@ namespace RMS_Server_.Models
         public int UsedQuantity { get; set; }
         public int RemainingQuantity { get; set; }  
         public  string Unit { get; set; }
-        public int Price { get; set; }
+        public int AveragePrice { get; set; }
       
     }
 }

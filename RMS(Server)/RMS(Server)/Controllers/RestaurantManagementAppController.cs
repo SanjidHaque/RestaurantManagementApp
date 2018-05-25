@@ -254,10 +254,13 @@ namespace RMS_Server_.Controllers
         public void DeleteOrder(Order orders)
         {
             var deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
-            var deleteOrderedItems = _context.OrderedItems.Where(b => b.OrderId == deleteOrder.Id).ToList();
-            _context.OrderedItems.RemoveRange(deleteOrderedItems);
-            _context.Orders.Remove(deleteOrder);
-            _context.SaveChanges();
+            if (deleteOrder != null)
+            {
+                var deleteOrderedItems = _context.OrderedItems.Where(b => b.OrderId == deleteOrder.Id).ToList();
+                _context.OrderedItems.RemoveRange(deleteOrderedItems);
+                _context.Orders.Remove(deleteOrder);
+                _context.SaveChanges();
+            }            
         }
  
            
@@ -339,7 +342,6 @@ namespace RMS_Server_.Controllers
         {          
              var getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
              getEdited.Name = inventory.Name;
-             getEdited.Price = inventory.Price;
              getEdited.Unit = inventory.Unit;
             _context.SaveChanges();
          }
@@ -353,6 +355,21 @@ namespace RMS_Server_.Controllers
             var inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistoryModel.InventoryId);
             inventory.RemainingQuantity += inventoryHistoryModel.UpdatedQuantity;
             _context.InventoryHistoryModels.Add(inventoryHistoryModel);
+            _context.SaveChanges();
+            var inventoryHistory =
+                _context.InventoryHistoryModels.Where(q => q.InventoryId == inventoryHistoryModel.InventoryId).ToList();
+            int totalPrice = 0;
+            for (int i = 0; i < inventoryHistory.Count; i++)
+            {
+                totalPrice += (inventoryHistory[i].CurrentPrice * inventoryHistory[i].UpdatedQuantity);
+            }
+            int totalWeight = 0;
+            for (int i = 0; i < inventoryHistory.Count; i++)
+            {
+                totalWeight += inventoryHistory[i].UpdatedQuantity;
+            }
+            int averagePrice = totalPrice/totalWeight;
+            inventory.AveragePrice = averagePrice;
             _context.SaveChanges();
         }
 
@@ -388,7 +405,7 @@ namespace RMS_Server_.Controllers
         [AllowAnonymous]
         public void FoodItemEdit(FoodItem foodItem)
         {
-            var editedFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+            var editedFoodItem = _context.FoodItems.Include(c => c.Ingredients).FirstOrDefault(p => p.Id == foodItem.Id);
             editedFoodItem.Name = foodItem.Name;
             editedFoodItem.Price = foodItem.Price;
             editedFoodItem.SerialNo = foodItem.SerialNo;

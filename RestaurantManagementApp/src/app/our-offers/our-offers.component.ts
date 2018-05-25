@@ -162,35 +162,38 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
   UpdateCart(id: string, price: number, name: string, serialNo: string, makingCost: number,
              isAdd: boolean, quantity: number) {
+    if (quantity > 0) {
 
-    let foodItemId = id;
-    let foodItemName = name;
-    let Price = price;
-    let orderId = null;
-    if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
-      let orderItemId = this.uuid.v1();
-      if ( isAdd === true ) {
-        this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
-          foodItemName, serialNo, Price, makingCost );
-      } else {
-        this.RemoveFromCart(orderItemId, orderId,  quantity,
-          foodItemId, foodItemName, Price, makingCost );
+      const foodItemId = id;
+      const foodItemName = name;
+      const Price = price;
+      const orderId = null;
+      if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
+        const orderItemId = this.uuid.v1();
+        if ( isAdd === true ) {
+          this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
+            foodItemName, serialNo, Price, makingCost );
+        } else {
+          this.RemoveFromCart(orderItemId, orderId,  quantity,
+            foodItemId, foodItemName, Price, makingCost );
+        }
       }
-    }
-    else {
-      let orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
-      if ( isAdd === true ) {
-        this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
-          foodItemName, serialNo, Price, makingCost );
-      } else {
-        this.RemoveFromCart(orderItemId, orderId,  quantity,
-          foodItemId, foodItemName, Price, makingCost );
+      else {
+        const orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
+        if ( isAdd === true ) {
+          this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
+            foodItemName, serialNo, Price, makingCost );
+        } else {
+          this.RemoveFromCart(orderItemId, orderId,  quantity,
+            foodItemId, foodItemName, Price, makingCost );
+        }
       }
+
+
+
+
     }
-
-
-
-  }
+     }
 
 
 
@@ -211,6 +214,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
                 check++;
 
                 if ( check === this.FoodItem[j].Ingredients.length) {
+                  this._ourOfferService.inventory[l].RemainingQuantity -= totalQuantity;
                   const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
                   this._ourOfferService.grandTotalPrice(subTotal);
                   this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);

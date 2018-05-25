@@ -13,6 +13,7 @@ import {Popup} from 'ng2-opd-popup';
 })
 export class ListDetailsComponent implements OnInit {
 
+  rootUrl = 'http://localhost:1548/Content/';
   imageUrl = 'assets/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];
@@ -51,6 +52,8 @@ export class ListDetailsComponent implements OnInit {
         this.FoodItem = this.FoodItemList[i];
         if ( this.FoodItem.FoodItemImage === null || this.FoodItem.FoodItemImage === '' ) {
           this.FoodItem.FoodItemImage = this.imageUrl;
+        } else {
+          this.FoodItem.FoodItemImage =  this.rootUrl + this.FoodItem.FoodItemImage;
         }
       }
     }

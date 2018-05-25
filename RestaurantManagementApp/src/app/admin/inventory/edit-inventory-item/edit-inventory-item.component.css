@@ -414,7 +414,8 @@ label {
 
 input {
   color: #9c0000;
-  font-family: "Times New Roman"; }
+  font-family: "Times New Roman";
+  font-weight: bold; }
 
 .prod-name {
   margin-top: 30px; }

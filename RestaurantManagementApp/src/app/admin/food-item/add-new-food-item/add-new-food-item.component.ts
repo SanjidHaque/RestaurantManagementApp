@@ -78,10 +78,11 @@ export class AddNewFoodItemComponent implements OnInit {
   getInventoryItemPrice(inventoryId: string) {
     for (let i = 0; i < this.inventories.length; i++) {
       if ( this.inventories[i].Id === inventoryId) {
-        return this.inventories[i].Price;
+        return this.inventories[i].AveragePrice;
       }
     }
   }
+
   checkIfIngredientsExist(inventoryId: string) {
     for (let i = 0; i < this.ingredients.length; i++) {
       if (this.ingredients[i].InventoryId === inventoryId) {
@@ -90,6 +91,7 @@ export class AddNewFoodItemComponent implements OnInit {
     }
     return '';
   }
+
   onAddIngredients(form: NgForm) {
     const ingredientId = this.uuid.v1();
     const inventoryId = form.value.ingName;
@@ -102,7 +104,6 @@ export class AddNewFoodItemComponent implements OnInit {
       this.ingredients[this.checkIfIngredientsExist(inventoryId)].SubTotal
         += Number.parseInt(subTotal.toString());
     } else {
-
       const name = this.getInventoryItemName(inventoryId);
       const inventoryUnit = this.getInventoryItemUnit(inventoryId);
       const foodItemId = '';
@@ -111,8 +112,6 @@ export class AddNewFoodItemComponent implements OnInit {
       this.ingredients.push(addIngredient);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
-
-
       this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
         + Number.parseInt(subTotal.toString());
     form.controls['quantity'].reset();

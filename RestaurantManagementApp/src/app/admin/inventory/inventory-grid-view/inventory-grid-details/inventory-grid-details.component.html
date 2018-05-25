@@ -25,7 +25,7 @@
         Name: {{ inventory.Name }}
       </div>
       <div class="col-md-6 price">
-        Price: {{ inventory.Price }} BDT
+        Average Price: {{ inventory.AveragePrice }} BDT
       </div>
     </div>
     <div class="row">
@@ -64,13 +64,16 @@
       </div>
     </div>
     <div class="row units ">
-      <div class="col-md-4">
+      <div class="col-md-3">
         Product's Quantity
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         Product's Unit
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
+        Current Price
+      </div>
+      <div class="col-md-3">
         Update Date and Time
       </div>
 
@@ -79,13 +82,16 @@
 
     <div class="scrollable-div" >
       <div class="row table-bordered units-details" *ngFor="let history of inventoryHistory">
-        <div class="col-md-4">
+        <div class="col-md-3">
           {{ history.UpdatedQuantity }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           {{ inventory.Unit }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+          {{ history.CurrentPrice }}
+        </div>
+        <div class="col-md-3">
           {{ history.UpdateTime }}
         </div>
       </div>

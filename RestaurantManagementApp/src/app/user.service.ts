@@ -84,7 +84,7 @@ export class UserService {
   }
 
   getUsers() {
-    return this._http.get(this._modifiedUserApi).map(
+    return this._http.get(this._modifiedUserJson).map(
       (response: any) => {
         const users: ModifiedUserModel[] = response.json();
         console.log(users);

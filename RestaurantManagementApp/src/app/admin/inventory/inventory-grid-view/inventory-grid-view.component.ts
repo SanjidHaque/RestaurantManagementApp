@@ -16,10 +16,17 @@ export class InventoryGridViewComponent implements OnInit, DoCheck {
   totalProducts = 0;
 
   constructor(private router: Router,
+              private _route: ActivatedRoute,
               private _ourOfferService: OurOffersService,
              ) {}
 
   ngOnInit() {
+    this._route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
       this.inventories = this._ourOfferService.inventory;
       this.subscription = this._ourOfferService.inventoryChanged
         .subscribe(

@@ -15,18 +15,18 @@ import {Subscription} from 'rxjs/Subscription';
 export class EditInventoryItemComponent implements OnInit {
    id: string;
    name = '';
-   price: number;
+   currentPrice: number;
    quantity: number;
    unit: string;
    inventoryHistory: InventoryHistoryModel[] = [];
   inventoryList: Inventory[] = [];
   subscription: Subscription;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService ) {
-    this.route.params
+    this._route.params
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
@@ -35,6 +35,12 @@ export class EditInventoryItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
     this.inventoryList = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
@@ -46,7 +52,7 @@ export class EditInventoryItemComponent implements OnInit {
       if ( this.inventoryList[i].Id === this.id ) {
 
         this.name = this.inventoryList[i].Name;
-        this.price = this.inventoryList[i].Price;
+        this.currentPrice = this.inventoryList[i].AveragePrice;
         this.unit = this.inventoryList[i].Unit;
         this.inventoryHistory = this.inventoryList[i].InventoryHistoryModel;
       }
@@ -56,7 +62,7 @@ export class EditInventoryItemComponent implements OnInit {
   onEditItem(form: NgForm) {
     const id = this.id;
     const name = form.value.name;
-    const price = form.value.price;
+    const price = form.value.currentPrice;
     const unit = form.value.unit;
     const editedInventoryItem = new Inventory(this.id, name, 0, this.quantity,
       unit, price, this.inventoryHistory);

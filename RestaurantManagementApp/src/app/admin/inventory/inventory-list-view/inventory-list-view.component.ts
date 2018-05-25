@@ -18,7 +18,7 @@ export class InventoryListViewComponent implements OnInit, DoCheck {
   totalProducts = 0;
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
               ) {
@@ -26,6 +26,12 @@ export class InventoryListViewComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+    this._route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
     this.inventories = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(

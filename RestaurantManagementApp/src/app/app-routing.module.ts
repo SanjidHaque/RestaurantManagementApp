@@ -124,7 +124,7 @@ const appRoutes: Routes = [
          { path: 'add-food-item-image/:id', component: AddFoodItemImageComponent, /*canActivate: [AuthGuard],*/
            },
          { path: 'edit-food-item/:id', component: EditFoodItemComponent, /*canActivate: [AuthGuard],*/
-           resolve: {  foodItems: FoodItemResolverService }
+           resolve: {  foodItems: FoodItemResolverService, inventories: InventoryResolverService }
            },
          { path: 'edit-food-item-image/:id', component: EditFoodItemImageComponent, /*canActivate: [AuthGuard],*/
            resolve: {  foodItems: FoodItemResolverService }
@@ -142,26 +142,25 @@ const appRoutes: Routes = [
     { path: 'inventory',
       component: InventoryComponent ,
       /*canActivate: [AuthGuard],*/
-      resolve: { inventories: InventoryResolverService },
         children: [
         {path: 'add-new-inventory', component: AddNewInventoryComponent, /*canActivate: [AuthGuard]*/ },
         {path: 'edit-inventory-item/:id', component: EditInventoryItemComponent, /* canActivate: [AuthGuard],*/
-          /*resolve: { inventories: InventoryResolverService }*/},
+          resolve: { inventories: InventoryResolverService }},
         {path: 'update-inventory-item/:id', component: UpdateInventoryItemComponent,
          /* canActivate: [AuthGuard],*/
-          /*resolve: { inventories: InventoryResolverService }*/},
+          resolve: { inventories: InventoryResolverService }},
           { path: 'list-view', component: InventoryListViewComponent,
            /* canActivate: [AuthGuard],*/
-            /*resolve: { inventories: InventoryResolverService }*/},
+            resolve: { inventories: InventoryResolverService }},
           { path: 'list-details/:id', component: InventoryListDetailsComponent,
            /* canActivate: [AuthGuard],*/
-            /*resolve: { inventories: InventoryResolverService }*/},
+            resolve: { inventories: InventoryResolverService }},
           { path: 'grid-view', component: InventoryGridViewComponent,
            /* canActivate: [AuthGuard],*/
-            /*resolve: { inventories: InventoryResolverService }*/ },
+            resolve: { inventories: InventoryResolverService } },
           { path: 'grid-details/:id', component: InventoryGridDetailsComponent,
           /*  canActivate: [AuthGuard],*/
-            /*resolve: { inventories: InventoryResolverService }*/}
+            resolve: { inventories: InventoryResolverService }}
       ]}
     ] },
   { path : '', redirectTo: '/login', pathMatch : 'full'},

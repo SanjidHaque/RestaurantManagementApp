@@ -42,7 +42,7 @@ export class DataStorageService {
 
 
   getFoodItems() {
-    return this._http.get(this._foodItemApi)
+    return this._http.get(this._foodItemJson)
       .map(
         (response: Response) => {
            const foodItems: FoodItems[] = response.json();
@@ -63,13 +63,7 @@ export class DataStorageService {
 
 
   deleteOrder(order: Order) {
-    return this._http.post('http://localhost:1548/api/DeleteOrder',
-      order)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:1548/api/DeleteOrder', order);
   }
 
   getOrders() {
@@ -83,7 +77,7 @@ export class DataStorageService {
   }
 
   getInventories() {
-    return this._http.get(this._inventoryApi)
+    return this._http.get(this._inventoryJson)
       .map(
         (response: Response) => {
           const inventories: Inventory[] = response.json();
@@ -153,23 +147,12 @@ export class DataStorageService {
 
   updateInventoryHistory(updateHistory: InventoryHistoryModel) {
     return this._http.post('http://localhost:1548/api/UpdateInventoryHistory',
-      updateHistory)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+      updateHistory);
   }
 
 
   deleteInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:1548/api/DeleteInventoryItem',
-      inventory)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:1548/api/DeleteInventoryItem', inventory);
   }
   addFoodItem(foodItem: FoodItems) {
     return this._http.post('http://localhost:1548/api/AddFoodItem',
@@ -186,13 +169,7 @@ export class DataStorageService {
   }
 
   editFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:1548/api/EditFoodItem',
-      foodItem)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:1548/api/EditFoodItem', foodItem);
   }
 
 

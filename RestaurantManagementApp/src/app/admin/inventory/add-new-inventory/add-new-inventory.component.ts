@@ -32,11 +32,11 @@ export class AddNewInventoryComponent implements OnInit {
       const updateHistoryId = this.uuid.v1();
       const name = form.value.name;
       const quantity = form.value.quantity;
-      const price = form.value.price;
+      const price = form.value.currentPrice;
       const unit = form.value.unit;
       const updateTime = new Date().toLocaleString();
       const updateHistory =
-        new InventoryHistoryModel(updateHistoryId, inventoryId, quantity, updateTime, unit );
+        new InventoryHistoryModel(updateHistoryId, inventoryId, quantity, updateTime, unit, price );
       this.inventoryHistoryModel.push(updateHistory);
       const newItem = new Inventory(inventoryId, name, 0 , quantity,
         unit, price, this.inventoryHistoryModel);

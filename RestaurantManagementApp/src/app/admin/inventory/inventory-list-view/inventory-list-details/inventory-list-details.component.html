@@ -25,7 +25,7 @@
         Name: {{ inventory.Name }}
       </div>
       <div class="col-md-6 price">
-        Price: {{ inventory.Price }} BDT
+        Average Price: {{ inventory.AveragePrice }} BDT
       </div>
     </div>
     <div class="row">
@@ -61,33 +61,39 @@
         Update History
       </div>
     </div>
-    <div class="row units ">
-      <div class="col-md-4">
-        Product's Quantity
-      </div>
-      <div class="col-md-4">
-        Product's Unit
-      </div>
-      <div class="col-md-4">
-        Update Date and Time
+      <div class="row units ">
+        <div class="col-md-3">
+          Product's Quantity
+        </div>
+        <div class="col-md-3">
+          Product's Unit
+        </div>
+        <div class="col-md-3">
+          Current Price
+        </div>
+        <div class="col-md-3">
+          Update Date and Time
+        </div>
+
       </div>
 
-    </div>
 
-
-    <div class="scrollable-div" >
-      <div class="row table-bordered units-details" *ngFor="let history of inventoryHistory">
-        <div class="col-md-4">
-          {{ history.UpdatedQuantity }}
-        </div>
-        <div class="col-md-4">
-          {{ inventory.Unit }}
-        </div>
-        <div class="col-md-4">
-          {{ history.UpdateTime }}
+      <div class="scrollable-div" >
+        <div class="row table-bordered units-details" *ngFor="let history of inventoryHistory">
+          <div class="col-md-3">
+            {{ history.UpdatedQuantity }}
+          </div>
+          <div class="col-md-3">
+            {{ inventory.Unit }}
+          </div>
+          <div class="col-md-3">
+            {{ history.CurrentPrice }}
+          </div>
+          <div class="col-md-3">
+            {{ history.UpdateTime }}
+          </div>
         </div>
       </div>
-    </div>
 
     <popup class="pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
       You'll lose any data associated with the current item!

@@ -6,67 +6,55 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "55",
-    "InventoryHistory": [
+    "AveragePrice": "55",
+    "InventoryHistoryModel": [
       {
         "UpdatedQuantity": "10",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "54"
       },
       {
         "UpdatedQuantity": "15",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "54"
       },
       {
         "UpdatedQuantity": "18",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "54"
       },
       {
         "UpdatedQuantity": "10",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "54"
       },
       {
         "UpdatedQuantity": "15",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "43"
       },
       {
         "UpdatedQuantity": "18",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "51"
       },
       {
         "UpdatedQuantity": "10",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
-      },
-      {
-        "UpdatedQuantity": "15",
-        "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "51"
       },
       {
         "UpdatedQuantity": "18",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
-      },
-      {
-        "UpdatedQuantity": "10",
-        "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
-      },
-      {
-        "UpdatedQuantity": "15",
-        "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
-      },
-      {
-        "UpdatedQuantity": "18",
-        "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       }
     ]
   },
@@ -78,7 +66,7 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "110"
+    "AveragePrice": "110"
   },
 
   {
@@ -88,17 +76,20 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "320",
-    "InventoryHistory": [
+    "AveragePrice": "320",
+    "InventoryHistoryModel": [
       {
         "UpdatedQuantity": "10",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
+
       },
       {
         "UpdatedQuantity": "18",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       }
     ]
   },
@@ -110,7 +101,7 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "150"
+    "AveragePrice": "150"
   },
 
   {
@@ -120,22 +111,25 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Kilogram",
-    "Price": "120",
-    "InventoryHistory": [
+    "AveragePrice": "120",
+    "InventoryHistoryModel": [
       {
         "UpdatedQuantity": "10",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       },
       {
         "UpdatedQuantity": "15",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       },
       {
         "UpdatedQuantity": "18",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       }
     ]
   },
@@ -147,22 +141,25 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Pieces",
-    "Price": "10",
-    "InventoryHistory": [
+    "AveragePrice": "10",
+    "InventoryHistoryModel": [
       {
         "UpdatedQuantity": "10",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       },
       {
         "UpdatedQuantity": "15",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       },
       {
         "UpdatedQuantity": "18",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       }
     ]
   },
@@ -174,22 +171,25 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Bottle",
-    "Price": "35",
-    "InventoryHistory": [
+    "AveragePrice": "35",
+    "InventoryHistoryModel": [
       {
         "UpdatedQuantity": "10",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       },
       {
         "UpdatedQuantity": "15",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       },
       {
         "UpdatedQuantity": "18",
         "Unit": "Kilogram",
-        "UpdateTime": "12/23/2018 12:05:34"
+        "UpdateTime": "12/23/2018 12:05:34",
+        "CurrentPrice" : "52"
       }
     ]
   },
@@ -201,6 +201,6 @@
     "UsedQuantity" : "33",
     "RemainingQuantity":  "63",
     "Unit": "Bottle",
-    "Price": "20"
+    "AveragePrice": "20"
   }
 ]

@@ -47,7 +47,6 @@ export class OurOffersService {
     for ( let i = 0; i < this.inventory.length; i++) {
       if ( this.inventory[i].Id === inventoryId ) {
         this.inventory[i].Name = editedInventoryItem.Name;
-        this.inventory[i].Price = editedInventoryItem.Price;
         this.inventory[i].Unit = editedInventoryItem.Unit;
         this.inventoryChanged.next(this.inventory.slice());
       }

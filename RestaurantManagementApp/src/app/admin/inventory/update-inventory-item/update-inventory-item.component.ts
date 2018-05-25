@@ -22,12 +22,12 @@ export class UpdateInventoryItemComponent implements OnInit {
   unit: string;
   inventoryList: Inventory[] = [];
   subscription: Subscription;
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService ) {
-    this.route.params
+    this._route.params
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
@@ -37,6 +37,12 @@ export class UpdateInventoryItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
     this.inventoryList = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
@@ -56,9 +62,16 @@ export class UpdateInventoryItemComponent implements OnInit {
     const inventoryId = this.id;
     const updateHistoryId = this.uuid.v1();
     const quantity = form.value.quantity;
+    const currentPrice = form.value.currentPrice;
     const time = new Date().toLocaleString();
     const updateHistory =
-      new InventoryHistoryModel(updateHistoryId, inventoryId, quantity, time, this.unit);
+      new InventoryHistoryModel(
+        updateHistoryId,
+        inventoryId,
+        quantity,
+        time,
+        this.unit,
+        currentPrice);
     for (let i = 0; i < this._ourOfferService.inventory.length; i++) {
       if ( this._ourOfferService.inventory[i].Id === this.id ) {
         this._ourOfferService.inventory[i].InventoryHistoryModel.push(updateHistory);
@@ -67,9 +80,13 @@ export class UpdateInventoryItemComponent implements OnInit {
           + Number.parseInt(quantity.toString());
       }
     }
-    this._dataStorageService.updateInventoryHistory(updateHistory);
-    form.reset();
-    this.router.navigate(['admin/inventory/list-details', inventoryId]);
+    this._dataStorageService.updateInventoryHistory(updateHistory).
+    subscribe(
+      (data: any) => {
+        form.reset();
+        this.router.navigate(['admin/inventory/list-details', inventoryId]);
+      }
+    );
   }
 
   onCancel() {

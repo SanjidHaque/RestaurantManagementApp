@@ -14,12 +14,7 @@ export class OrdersComponent implements OnInit {
               private _ourOfferService: OurOffersService ) { }
 
   ngOnInit() {
-    this._route.data.
-    subscribe(
-      ( data: Order[]) => {
-        this._ourOfferService.ordersList = data['orders'];
-      }
-    );
+
   }
 
 

@@ -33,7 +33,6 @@ export class FoodItemsComponent implements OnInit {
 
   subscription: Subscription;
   constructor(private _ourOfferService: OurOffersService,
-              private _sanitizer: DomSanitizer,
               private uuid: Uuid
   ) {
     this.uuidCodeOne = this.uuid.v1();
@@ -71,41 +70,39 @@ export class FoodItemsComponent implements OnInit {
 
 
   UpdateCart(id: string, price: number, name: string, serialNo: string, makingCost: number, isAdd: boolean, index: any) {
+
     this.quantity = this.selectedQuantity[index];
-    let foodItemId = id;
-    let foodItemName = name;
-    let Price = price;
-    let orderId = null;
-    if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
-     let orderItemId = this.uuid.v1();
-      if ( isAdd === true ) {
-        this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-          foodItemName, serialNo, Price, makingCost );
+    if (this.quantity > 0) {
+      const foodItemId = id;
+      const foodItemName = name;
+      const Price = price;
+      const orderId = null;
+      if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
+        const orderItemId = this.uuid.v1();
+        if ( isAdd === true ) {
+          this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
+            foodItemName, serialNo, Price, makingCost );
+        } else {
+          this.RemoveFromCart(orderItemId, orderId,  this.quantity,
+            foodItemId, foodItemName, Price, makingCost );
+        }
       } else {
-        this.RemoveFromCart(orderItemId, orderId,  this.quantity,
-          foodItemId, foodItemName, Price, makingCost );
+        const orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
+        if ( isAdd === true ) {
+          this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
+            foodItemName, serialNo, Price, makingCost );
+        } else {
+          this.RemoveFromCart(orderItemId, orderId,  this.quantity,
+            foodItemId, foodItemName, Price, makingCost );
+        }
       }
     }
-    else {
-      let orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
-      if ( isAdd === true ) {
-        this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-          foodItemName, serialNo, Price, makingCost );
-      } else {
-        this.RemoveFromCart(orderItemId, orderId,  this.quantity,
-          foodItemId, foodItemName, Price, makingCost );
-      }
-    }
-
-
-
   }
 
 
 
   AddToCart(orderItemId: string, orderId: string, quantity: number,
             foodItemId: string, foodItemName: string, serialNo: string, price: number, makingCost: number ) {
-
 
       for (let j = 0; j < this.FoodItem.length; j++) {
         if (this.FoodItem[j].Id === foodItemId) {
@@ -117,9 +114,11 @@ export class FoodItemsComponent implements OnInit {
             for (let l = 0; l < this.inventories.length; l++) {
               if (this._ourOfferService.inventory[l].Id === inventoryId) {
                 if (this._ourOfferService.inventory[l].RemainingQuantity > totalQuantity ) {
-                  check++;
+
+                    check++;
 
                   if ( check === this.FoodItem[j].Ingredients.length) {
+                    this._ourOfferService.inventory[l].RemainingQuantity -= totalQuantity;
                     const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
                     this._ourOfferService.grandTotalPrice(subTotal);
                     this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
@@ -143,7 +142,6 @@ export class FoodItemsComponent implements OnInit {
               }
 
           }
-
 
         }
           if (check < this.FoodItem[j].Ingredients.length) {

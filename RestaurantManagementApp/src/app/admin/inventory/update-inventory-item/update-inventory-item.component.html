@@ -6,7 +6,10 @@
     <div class="col-md-offset-1 col-md-9 order-detail">
       <div class="row buttons">
         <div class="col-md-2 back">
-          <button class="back-button-cancel" (click)="onCancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          <button
+            type="button"
+            class="back-button-cancel"
+            (click)="onCancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
             Cancel</button>
         </div>
         <div class="col-md-8 edit-mode">
@@ -33,6 +36,23 @@
               class="form-control"
               ngModel
               name="quantity"
+              required
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row prod-name">
+        <div class="col-md-offset-4 col-md-4">
+          <div class="form-group">
+            <label  for="currentPrice">Current Price</label>
+            <input
+              min="1"
+              type="number"
+              id="currentPrice"
+              class="form-control"
+              ngModel
+              name="currentPrice"
               required
             >
           </div>

@@ -18,13 +18,13 @@ export class OrderGridViewDetailsComponent implements OnInit {
   orderLists: Order[] = [];
   orderedItems: OrderedItems[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService,
               private popup: Popup,
               private _ourOfferService: OurOffersService,
               ) {
-    this.route.params
+    this._route.params
       .subscribe(
         (params: Params) => {
           this.orderId = params['id'];
@@ -33,6 +33,12 @@ export class OrderGridViewDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._route.data.
+    subscribe(
+      ( data: Order[]) => {
+        this._ourOfferService.ordersList = data['orders'];
+      }
+    );
     this.orderLists = this._ourOfferService.ordersList;
     this._ourOfferService.ordersListChanged
       .subscribe(
@@ -57,9 +63,13 @@ export class OrderGridViewDetailsComponent implements OnInit {
 
   confirmEvent() {
     this._ourOfferService.deleteOrder(this.order);
-    this._dataStorageService.deleteOrder(this.order);
-    this.router.navigate(['admin/orders/grid-view']);
-    this.popup.hide();
+    this._dataStorageService.deleteOrder(this.order).
+    subscribe(
+      (data: any) => {
+        this.router.navigate(['admin/orders/grid-view']);
+        this.popup.hide();
+      }
+    );
   }
 
   cancelEvent() {

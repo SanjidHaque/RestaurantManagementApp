@@ -109,7 +109,7 @@ export class EditFoodItemComponent implements OnInit {
   getInventoryItemPrice(inventoryId: string) {
     for (let i = 0; i < this.inventories.length; i++) {
       if ( this.inventories[i].Id === inventoryId) {
-        return this.inventories[i].Price;
+        return this.inventories[i].AveragePrice;
       }
     }
   }
@@ -141,27 +141,23 @@ export class EditFoodItemComponent implements OnInit {
 
       const name = this.getInventoryItemName(inventoryId);
       const inventoryUnit = this.getInventoryItemUnit(inventoryId);
-      //    let inventoryPrice = this.getInventoryItemPrice(inventoryId);
       const foodItemId = '';
       const addIngredient = new Ingredients(ingredientId, name, quantity,
         inventoryUnit, inventoryId, inventoryPrice, subTotal, foodItemId);
-      //   this._ourOfferService.addToIngredientList(addIngredient);
       this.ingredients.push(addIngredient);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
 
 
-    //  for (let i = 0; i < this.ingredients.length; i++) {
+
     this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
       + Number.parseInt(subTotal.toString());
-    //  }
-    //  this.router.navigate(['admin/food-item/add-new-food-item', foodItemId ]);
     form.controls['quantity'].reset();
   }
 
 
   deleteIngredient(ingredient: Ingredients, index: number) {
-    // for (let i = 0; i < this.ingredients.length; i++) {
+    // for (let i = 0; i < this.ingredients.length; i ++) {
     //  if (this.ingredients[i].FoodItemId === ingredient.FoodItemId ) {
         this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
           - Number.parseInt(this.ingredients[index].SubTotal.toString());
@@ -187,9 +183,13 @@ export class EditFoodItemComponent implements OnInit {
         name, price, this.inventoryCost, profit, 0 ,
         null, foodItemIngredients );
     this._ourOfferService.updateFoodItemList(editedFoodItem );
-    this._dataStorageService.editFoodItem(editedFoodItem );
-    this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);
-    form.reset();
+    this._dataStorageService.editFoodItem(editedFoodItem).
+    subscribe(
+      (data: any) => {
+        this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);
+        form.reset();
+      }
+    );
   }
   cancel() {
     this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);

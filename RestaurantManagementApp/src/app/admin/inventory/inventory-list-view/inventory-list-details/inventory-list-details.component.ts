@@ -21,13 +21,13 @@ export class InventoryListDetailsComponent implements OnInit {
  inventoryHistory: InventoryHistoryModel[] = [];
  subscription: Subscription;
  index: number;
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService,
               private popup: Popup,
               private _ourOfferService: OurOffersService,
               ) {
-    this.route.params
+    this._route.params
       .subscribe(
         (params: Params) => {
           this.inventoryId = params['id'];
@@ -35,6 +35,12 @@ export class InventoryListDetailsComponent implements OnInit {
       );
   }
   ngOnInit() {
+    this._route.data.
+    subscribe(
+      ( data: Inventory[]) => {
+        this._ourOfferService.inventory = data['inventories'];
+      }
+    );
     this.inventoryList = this._ourOfferService.inventory;
     this.subscription = this._ourOfferService.inventoryChanged
       .subscribe(
@@ -59,10 +65,14 @@ export class InventoryListDetailsComponent implements OnInit {
 
 
   confirmEvent() {
-    this._dataStorageService.deleteInventoryItem(this.inventory);
-    this._ourOfferService.inventory.splice(this.index, 1);
-    this.router.navigate(['admin/inventory/list-view']);
-    this.popup.hide();
+   // this._ourOfferService.inventory.splice(this.index, 1);
+    this._dataStorageService.deleteInventoryItem(this.inventory).
+    subscribe(
+      (data: any) => {
+        this.router.navigate(['admin/inventory/list-view']);
+        this.popup.hide();
+      }
+    );
   }
   edit(inventory: Inventory) {
     this.router.navigate(['admin/inventory/edit-inventory-item', inventory.Id]);

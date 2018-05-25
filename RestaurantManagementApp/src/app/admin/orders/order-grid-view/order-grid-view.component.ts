@@ -17,24 +17,18 @@ export class OrderGridViewComponent implements OnInit {
   grossProfit = 0;
   totalOrder = 0;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
              ) { }
 
   ngOnInit() {
-   /* this._dataStorageService.getOrders()
-      .subscribe(
-        (order: Order[]) => {
-          this._ourOfferService.ordersList = order;
-        }
-      );*/
-   /* this.route.data.
+    this._route.data.
     subscribe(
       ( data: Order[]) => {
         this._ourOfferService.ordersList = data['orders'];
       }
-    );*/
+    );
     this.orderLists = this._ourOfferService.ordersList;
     this._ourOfferService.ordersListChanged
       .subscribe(

@@ -17,12 +17,18 @@ export class OrderListViewComponent implements OnInit {
   grossCost = 0;
   grossProfit = 0;
   totalOrder = 0;
-  constructor(private route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
               ) { }
 
   ngOnInit() {
+    this._route.data.
+    subscribe(
+      ( data: Order[]) => {
+        this._ourOfferService.ordersList = data['orders'];
+      }
+    );
     this.orderLists = this._ourOfferService.ordersList;
     this._ourOfferService.ordersListChanged
       .subscribe(

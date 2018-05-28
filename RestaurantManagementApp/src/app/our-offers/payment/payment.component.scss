@@ -1,4 +1,5 @@
-@media screen and (min-width: 1200px) and (max-width: 5000px) {
+
+
   .back{
     width:100%;
     height:100%;
@@ -6,12 +7,11 @@
     color: #d32039;
     background-color: #ffffdf;
     border: 1.2px solid #ae0000;
-    border-radius: 5px;
-    font-size: 18px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 5px;
-    margin-top: 22px;
+    border-radius: .4vw;
+    font-size: 2vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin-top: 3vh;
     font-weight: bold;
   }
 
@@ -21,7 +21,7 @@
     font-family:"Arial Narrow";
     font-weight:bold;
     border: 1.2px solid #7e0000;
-    border-radius: 5px;
+    border-radius: .4vw;
   }
 
   .back:focus{
@@ -36,12 +36,11 @@
     color: #ffffdf;
     background-color: #d32039;
     border: 1.2px solid #ae0000;
-    border-radius: 5px;
-    font-size: 18px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 5px;
-    margin-top: 22px;
+    border-radius: .4vw;
+    font-size: 2vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin-top: 3vh;
     font-weight: bold;
   }
 
@@ -52,7 +51,7 @@
     font-family:"Arial Narrow";
     font-weight:bold;
     border: 1.2px solid #ae0000;
-    border-radius: 5px;
+    border-radius: .4vw;
   }
 
   .un-back:focus{
@@ -63,9 +62,9 @@
     font-family:"Arial Narrow";
     color: #7e0000;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 2.5vw;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 5vh;
   }
   .bar{
     margin-top: 40px;
@@ -75,131 +74,93 @@
   .grand-total{
     font-family:"Arial Narrow";
     color: #7e0000;
-    font-size: 100px;
+    font-size: 7vw;
     text-align: center;
-    padding-top: 20px;
-    padding-right:0px;
-  }
+    padding-top: 2vh;
 
-
-
-  .title-row{
-    padding-left: 20px;
-  }
-  .content-row{
-    padding-left: 20px;
   }
 
   .content{
-    border: 2px solid #7e0000;
-    border-radius: 7px;
+    border: .17vw solid #7e0000;
+    border-radius: .8vw;
     background-color: #ffffdf;
   }
 
   .due, .tendered, .change{
     font-family:"Arial Narrow";
     color: #7e0000;
-    font-size: 35px;
+    font-size: 3vw;
   }
 
-  .due{
-    padding-left: 50px;
-  }
 
   .due-box{
     font-family:"Arial Narrow";
     color: #7e0000;
-    font-size: 34px;
-    padding-left: 50px;
+    font-size: 3vw;
   }
 
   .change-box{
     font-family:"Arial Narrow";
     color: #7e0000;
-    font-size: 34px;
-    padding-left: 20px;
+    font-size: 3vw;
   }
 
 
 
   input{
-    font-size: 32px;
+    font-size: 3vw;
     color: #7e0000;
     font-family: "Arial Narrow";
-    border: 2px solid #d32039;
-    width: 80%;
-    height:1%;
+    border: .2vw solid #d32039;
+    width: 11.6vw;
+    height: auto;
+    padding-top: 0;
+    padding-left: .9vw;
   }
 
   input:focus{
-    border: 2px solid #7e0000;
+    border: .2vw solid #7e0000;
   }
-
-  .fa{
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   .table{
     text-align: center;
-    margin-top: 5px;
-
+    margin-top: 1vh;
   }
 
-  .from-table{
-    text-align: right;
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 20px;
-    font-weight: bold;
-    padding-top: 3px;
-  }
 
-  .dropdown{
+  .drop-down{
     text-align: center;
   }
   select{
     background-color: #ffffdf;
     color: #7e0000;
-    font-family:"Berlin Sans FB";
-    font-size: 20px;
+    font-family:"align-self: ;";
+    font-size: 2vw;
     text-align: center;
     border: 1px solid #7e0000;
-    border-radius: 3px;
+    border-radius: .5vw;
     outline:none;
-    text-align: center;
+    text-align: left;
     cursor:pointer;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-right: 4vw;
+    padding-left: 4vw;
+    padding-top: .5vw;
+    padding-bottom: .5vw;
+    font-weight: bold;
   }
 
   option{
     color: #7e0000;
-    text-align: center;
+    text-align: left;
     cursor:pointer;
-  }
-  .up {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-  }
-  @import url('https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt');
-  .hodoo {
-    font-family: 'Berkshire Swash', cursive;
-    font-size:40px;
-    text-align: right;
-    color: #7e0000;
-    padding-top: 5px;
+    font-weight: bold;
   }
 
-  .hodoo:focus {
-    outline: 0;
-  }
 
   .dashboard{
     width:20%;
@@ -207,10 +168,10 @@
     font-family:"Arial Narrow";
     color: #aa0909;
     background-color: ghostwhite;
-    font-size:33px;
+    font-size:2.8vw;
     font-weight: bold;
     text-align: center;
-    margin-top: 12px;
+    margin-top: 1vh;
   }
 
 
@@ -225,7 +186,7 @@
 
   .pop-up{
     color: #7e0000;
-    font-size: 19px;
+    font-size: 16px;
     font-family: "Berlin Sans FB";
     text-align: center;
   }
@@ -234,303 +195,6 @@
     border-bottom: 2px double #dfdfdf;
   }
 
-}
 
 
-@media screen
-and (min-width : 992px)
-and (max-width : 1199px)  {
-  .due, .tendered, .change{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 20px;
-  }
-  .pop-up{
-    color: #7e0000;
-    font-size: 15px;
-    font-family: "Berlin Sans FB";
-    text-align: center;
-  }
-  .due-box{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 23px;
-    padding-left: 50px;
-  }
 
-  .change-box{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 23px;
-    padding-left: 20px;
-  }
-  input{
-    font-size: 23px;
-    color: #7e0000;
-    font-family: "Arial Narrow";
-    border: 2px solid #d32039;
-    width: 80%;
-    padding-top: 1px;
-  }
-
-}
-
-@media screen
-and (min-width : 768px)
-and (max-width : 991px) {
-  .back{
-    max-width:100%;
-    height:100%;
-    font-family:"Arial Narrow";
-    color: #d32039;
-    background-color: #ffffdf;
-    border: 1.2px solid #ae0000;
-    border-radius: 5px;
-    font-size: 2vw;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 5px;
-    margin-top: 22px;
-    font-weight: bold;
-  }
-
-  .back:hover{
-    background-color: white;
-    color: #7e0000;
-    font-family:"Arial Narrow";
-    font-weight:bold;
-    border: 1.2px solid #7e0000;
-    border-radius: 5px;
-  }
-
-  .back:focus{
-    outline: 0;
-  }
-
-
-  .un-back{
-    max-width:100%;
-    height:100%;
-    font-family:"Arial Narrow";
-    color: #ffffdf;
-    background-color: #d32039;
-    border: 1.2px solid #ae0000;
-    border-radius: 5px;
-    font-size: 1vw;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 5px;
-    margin-top: 22px;
-    font-weight: bold;
-  }
-
-
-  .un-back:hover{
-    background-color: #d32039;
-    color: #ffffdf;
-    font-family:"Arial Narrow";
-    font-weight:bold;
-    border: 1.2px solid #ae0000;
-    border-radius: 5px;
-  }
-
-  .un-back:focus{
-    outline: 0;
-  }
-
-  .pop-up{
-    color: #7e0000;
-    font-size: 15px;
-    font-family: "Berlin Sans FB";
-    text-align: center;
-  }
-  .grand-total{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 70px;
-    text-align: center;
-    padding-top: 20px;
-    padding-right:0px;
-  }
-  .payment{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-weight: bold;
-    font-size: 22px;
-    text-align: center;
-    padding-top: 20px;
-  }
-  .due, .tendered, .change{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 20px;
-  }
-  .pop-up{
-    color: #7e0000;
-    font-size: 15px;
-    font-family: "Berlin Sans FB";
-    text-align: center;
-  }
-  .due-box{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 18px;
-    padding-left: 50px;
-  }
-
-  .change-box{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 18px;
-    padding-left: 20px;
-  }
-  input{
-    font-size: 18px;
-    color: #7e0000;
-    font-family: "Arial Narrow";
-    border: 2px solid #d32039;
-    width: 80%;
-    padding-top: 1px;
-  }
-
-}
-
-@media screen
-and (min-width: 300px)
-and (max-width: 767px) {
-  .back {
-    width: 100%;
-    height: 100%;
-    font-family: "Arial Narrow";
-    color: #d32039;
-    background-color: #ffffdf;
-    border: 1px solid #ae0000;
-    border-radius: 2px;
-    font-size: 2vw;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 5px;
-    margin-top: 22px;
-    font-weight: bold;
-    white-space: normal;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .back:hover {
-    background-color: white;
-    color: #7e0000;
-    font-family: "Arial Narrow";
-    font-weight: bold;
-    border: 1px solid #7e0000;
-    border-radius: 2px;
-  }
-
-  .back:focus {
-    outline: 0;
-  }
-  .un-back {
-    width: 100%;
-    height: 100%;
-    font-family: "Arial Narrow";
-    color: #ffffdf;
-    background-color: #d32039;
-    border: 1px solid #ae0000;
-    border-radius: 2px;
-    font-size: 2vw;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 5px;
-    margin-top: 22px;
-    font-weight: bold;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .un-back:hover {
-    background-color: #d32039;
-    color: #ffffdf;
-    font-family: "Arial Narrow";
-    font-weight: bold;
-    border: 1px solid #ae0000;
-    border-radius: 2px;
-  }
-
-  .un-back:focus {
-    outline: 0;
-  }
-
-  .pop-up {
-    color: #7e0000;
-    font-size: 15px;
-    font-family: "Berlin Sans FB";
-    text-align: center;
-  }
-  .grand-total {
-    font-family: "Arial Narrow";
-    color: #7e0000;
-    font-size: 10vw;
-    text-align: center;
-    padding-top: 20px;
-    padding-right: 0px;
-  }
-  .payment {
-    font-family: "Arial Narrow";
-    color: #7e0000;
-    font-weight: bold;
-    font-size: 4vw;
-    text-align: center;
-    padding-top: 20px;
-  }
-  .due, .tendered, .change {
-    font-family: "Arial Narrow";
-    color: #7e0000;
-    font-size: 20px;
-  }
-  .pop-up {
-    color: #7e0000;
-    font-size: 15px;
-    font-family: "Berlin Sans FB";
-    text-align: center;
-  }
-  .due-box {
-    font-family: "Arial Narrow";
-    color: #7e0000;
-    font-size: 18px;
-    padding-left: 50px;
-  }
-
-  .change-box {
-    font-family: "Arial Narrow";
-    color: #7e0000;
-    font-size: 18px;
-    padding-left: 20px;
-  }
-  input {
-    font-size: 18px;
-    color: #7e0000;
-    font-family: "Arial Narrow";
-    border: 2px solid #d32039;
-    width: 80%;
-    padding-top: 1px;
-  }
-
-  .dashboard {
-    width: 20%;
-    height: 100%;
-    font-family: "Arial Narrow";
-    color: #aa0909;
-    background-color: ghostwhite;
-    font-size: 5vw;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 2px;
-  }
-
-  .dashboard:hover {
-    color: #6a0d0e;
-    background-color: ghostwhite;
-    font-family: "Arial Narrow";
-    font-weight: bold;
-  }
-}

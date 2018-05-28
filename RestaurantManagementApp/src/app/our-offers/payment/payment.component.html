@@ -12,7 +12,9 @@
 </div>
 </div>
 
-
+<popup class="col-md-12 col-lg-12 col-xs-10 col-sm-10 pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
+  You'll lose any data associated with the current order!
+</popup>
 
 
 <div class="row">
@@ -41,14 +43,18 @@
   </div>
 </div>
 
+
+
 <div class="row">
   <div class="
   col-lg-offset-3
   col-md-offset-3
   col-sm-offset-3
+  col-xs-offset-3
   col-lg-6
   col-md-6
   col-sm-6
+  col-xs-6
   grand-total">
     {{ grandTotal }} BDT
   </div>
@@ -57,36 +63,36 @@
 <div class="bar">
 
 <div class="row title-row">
-  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12">
-    <div class="col-lg-3 col-md-3 col-sm-3 due">
+  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due">
       Due
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 change">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change">
       Remaining
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 tendered">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 tendered">
       Tendered
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 change">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change">
       Change
     </div>
   </div>
 </div>
 
 <div class="row content-row">
-  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 content">
-    <div class="col-lg-3 col-md-3 col-sm-3 due-box">
+  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12 content">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box">
       {{ grandTotal }}
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 due-box" *ngIf="!checkCertainChange(); else showZero">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box" *ngIf="!checkCertainChange(); else showZero">
       {{ grandTotal - tendered }}
     </div>
       <ng-template #showZero>
-        <div class="col-lg-3 col-md-3 col-sm-3 due-box">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box">
           0
         </div>
       </ng-template>
-    <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
       <input type="number"
              min="0"
              id="amount"
@@ -94,14 +100,15 @@
              [(ngModel)]="tendered"
       >
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 change-box" *ngIf="checkCertainAmount()">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change-box" *ngIf="checkCertainAmount()">
       {{ tendered - grandTotal }}
     </div>
   </div>
 </div>
+</div>
 
-  <div class="row table">
-    <div class="col-lg-12 col-md-12 col-sm-12 drop-down form-group">
+<div class="row table">
+    <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12">
       <select
         (change)="selectChangeHandler($event)">
         <option value="">Select a Table</option>
@@ -109,10 +116,5 @@
                 > {{ table.Name }} </option>
       </select>
     </div>
-  </div>
-
-
 </div>
-<popup class="pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
-  You'll lose any data associated with the current order!
-</popup>
+

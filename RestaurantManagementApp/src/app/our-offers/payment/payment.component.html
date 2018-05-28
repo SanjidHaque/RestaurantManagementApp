@@ -1,18 +1,14 @@
 <app-logout></app-logout>
 
 <div class="row main-row">
-<div class="col-md-offset-9 col-md-3">
-
+<div class="col-lg-offset-9 col-md-offset-9 col-lg-3 col-md-3 col-sm-12 col-xs-12">
   <a style="cursor: pointer"
      (click)="discardOrder()"
      title="Destroy Current Order">
-    <div class="col-md-1 dashboard">
+    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 dashboard">
       <i class="fa fa-times-circle-o" aria-hidden="true"></i>
     </div>
   </a>
-  <div class="col-md-2 hodoo">
-    hodoo
-  </div>
 </div>
 </div>
 
@@ -20,20 +16,23 @@
 
 
 <div class="row">
-  <div class="col-md-offset-2 col-md-2">
+  <div class="
+  col-lg-offset-2
+   col-md-offset-2
+   col-sm-offset-2
+   col-lg-2 col-md-2 col-sm-2 col-xs-4">
     <button
       class="back"
       (click)="back()">
       <i class="fa fa-angle-double-left"></i>
        Back</button>
   </div>
-  <div class="col-md-4 payment">
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 payment">
     Payment
   </div>
-  <!--[ngStyle]="{'background-color': checkCertainAmount() === false ? 'green' : 'red' }"-->
-  <div class="col-md-2">
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
     <button
-      class="back"
+      class="back "
       [ngClass]="[!checkCertainAmount() ? 'back' : 'un-back']"
       [disabled] = "!checkCertainAmount()"
       (click)="validate()">
@@ -42,11 +41,15 @@
   </div>
 </div>
 
-<!--<div [ngStyle]="{'background-color':person.country === 'UK' ? 'green' : 'red' }"></<div>-->
-
-
 <div class="row">
-  <div class="col-md-offset-3 col-md-6 grand-total">
+  <div class="
+  col-lg-offset-3
+  col-md-offset-3
+  col-sm-offset-3
+  col-lg-6
+  col-md-6
+  col-sm-6
+  grand-total">
     {{ grandTotal }} BDT
   </div>
 </div>
@@ -54,36 +57,36 @@
 <div class="bar">
 
 <div class="row title-row">
-  <div class="col-md-offset-2 col-md-8 title">
-    <div class="col-md-3 due">
+  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12">
+    <div class="col-lg-3 col-md-3 col-sm-3 due">
       Due
     </div>
-    <div class="col-md-3 change">
+    <div class="col-lg-3 col-md-3 col-sm-3 change">
       Remaining
     </div>
-    <div class="col-md-3 tendered">
+    <div class="col-lg-3 col-md-3 col-sm-3 tendered">
       Tendered
     </div>
-    <div class="col-md-3 change">
+    <div class="col-lg-3 col-md-3 col-sm-3 change">
       Change
     </div>
   </div>
 </div>
 
 <div class="row content-row">
-  <div class="col-md-offset-2 col-md-8 content">
-    <div class="col-md-3 due-box">
+  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 content">
+    <div class="col-lg-3 col-md-3 col-sm-3 due-box">
       {{ grandTotal }}
     </div>
-    <div class="col-md-3 due-box" *ngIf="!checkCertainChange(); else showZero">
+    <div class="col-lg-3 col-md-3 col-sm-3 due-box" *ngIf="!checkCertainChange(); else showZero">
       {{ grandTotal - tendered }}
     </div>
       <ng-template #showZero>
-        <div class="col-md-3 due-box">
+        <div class="col-lg-3 col-md-3 col-sm-3 due-box">
           0
         </div>
       </ng-template>
-    <div class="col-md-3 tendered-box">
+    <div class="col-lg-3 col-md-3 col-sm-3">
       <input type="number"
              min="0"
              id="amount"
@@ -91,19 +94,14 @@
              [(ngModel)]="tendered"
       >
     </div>
-    <div class="col-md-3 change-box" *ngIf="checkCertainAmount()">
+    <div class="col-lg-3 col-md-3 col-sm-3 change-box" *ngIf="checkCertainAmount()">
       {{ tendered - grandTotal }}
     </div>
   </div>
 </div>
 
   <div class="row table">
-   <!-- <div class="col-md-6 from-table">
-      From Table:
-    </div>-->
-    <div class="col-md-12 drop-down">
-
-      <div class="form-group">
+    <div class="col-lg-12 col-md-12 col-sm-12 drop-down form-group">
       <select
         (change)="selectChangeHandler($event)">
         <option value="">Select a Table</option>
@@ -111,21 +109,10 @@
                 > {{ table.Name }} </option>
       </select>
     </div>
-
-    </div>
   </div>
 
 
 </div>
-<!--<div class="row content-row" *ngIf="!checkCertainChange()">
-  <div class="col-md-offset-2 col-md-2 content">
-    <div class="col-md-4 due-box">
-      {{ grandTotal - tendered }}
-    </div>
-  </div>
-</div>-->
-
-
 <popup class="pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
-  You'll lose any data associated with the current order
+  You'll lose any data associated with the current order!
 </popup>

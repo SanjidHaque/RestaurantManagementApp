@@ -1,9 +1,6 @@
 .body-content {
-  padding-left: 70px;
-  padding-right: 70px;
-  /* padding-top: 60px;*/
-  /* position: relative;
-   z-index: 99;*/
+  padding-left: 5vw;
+  padding-right: 5vw;
   overflow-x: hidden; }
 
 /*# sourceMappingURL=app.component.css.map */

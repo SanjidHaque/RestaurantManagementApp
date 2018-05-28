@@ -35,7 +35,7 @@ export class PaymentComponent implements OnInit, DoCheck {
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
-              private route: ActivatedRoute,
+              private _route: ActivatedRoute,
               private uuid: Uuid,
               private popup: Popup) {
     this.tendered = 0;
@@ -44,7 +44,7 @@ export class PaymentComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.grandTotal = this._ourOfferService.TotalPrice;
 
-    this.route.data.
+    this._route.data.
     subscribe(
       ( data: Table[]) => {
         this._ourOfferService.table = data['tables'];
@@ -57,34 +57,6 @@ export class PaymentComponent implements OnInit, DoCheck {
           this.tables = tables;
         }
       );
-    this.route.data.
-    subscribe(
-      ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
-      }
-    );
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this.inventories = inventories;
-        }
-      );
-    this.route.data.
-    subscribe(
-      ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
-      }
-    );
-
-    this.FoodItemList = this._ourOfferService.FoodItem;
-    this._ourOfferService.foodItemChanged
-      .subscribe(
-        (FoodItem: FoodItems[]) => {
-          this.FoodItemList = FoodItem;
-        }
-      );
-    debugger
   }
 
   ngDoCheck() {

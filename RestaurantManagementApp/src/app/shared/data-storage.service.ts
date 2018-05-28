@@ -88,7 +88,7 @@ export class DataStorageService {
   }
 
   getTables() {
-    return this._http.get(this._tableApi)
+    return this._http.get(this._tableJson)
       .map(
         (response: Response) => {
           const tables: Table[] = response.json();

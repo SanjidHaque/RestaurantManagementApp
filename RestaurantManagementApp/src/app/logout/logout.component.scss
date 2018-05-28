@@ -54,7 +54,7 @@
   border-bottom: 2px double #dfdfdf;
 }
 @media screen
-and (min-width : 401px)
+and (min-width : 320px)
 and (max-width : 991px) {
   .hodoo {
     font-family: 'Berkshire Swash', "Times New Roman", "Berlin Sans FB";
@@ -106,6 +106,7 @@ and (max-width : 991px) {
     padding-top: 2px;
     padding-bottom: 2px;
     font-weight: bold;
+    text-align: center;
   }
   .logout-button:hover{
     background-color: #ae0000;
@@ -119,5 +120,44 @@ and (max-width : 991px) {
   .logout-button:focus{
     outline:0;
   }
+}
 
+
+@media screen
+and (min-width : 992px)
+and (max-width : 1199px)  {
+
+  .user{
+    text-align: right;
+    font-family:"Times New Roman";
+    color: rgba(127, 0, 0, 0.93);
+    font-size: 19px;
+    font-weight: bold;
+  }
+  .logout-button{
+    max-width:100%;
+    height:100%;
+    font-family:"Arial Narrow";
+    color: #ae0000;
+    background-color: white;
+    border: 1px solid #ae0000;
+    border-radius: 2px;
+    font-size: 1vw;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .logout-button:hover{
+    background-color: #ae0000;
+    color: white;
+    font-family:"Arial Narrow";
+    font-weight:bold;
+    border: 1px solid #ffffdf;
+    border-radius: 2px;
+  }
+
+  .logout-button:focus{
+    outline:0;
+  }
 }

@@ -10,7 +10,8 @@
   padding-top: 1vh;
   padding-bottom: 1vh;
   margin-top: 3vh;
-  font-weight: bold; }
+  font-weight: bold;
+  display: inline-block; }
 
 .back:hover {
   background-color: white;

@@ -73,30 +73,17 @@ export class GridDetailsComponent implements OnInit {
             this._ourOfferService.FoodItem.splice(i, 1);
           }
         }
-
         this.router.navigate(['admin/food-item/grid-view']);
       }
     );
-    this.popup.hide();
   }
 
-  cancelEvent() {
-    this.popup.hide();
-  }
   deleteFoodItem() {
-    this.popup.options = {
-      header: 'Delete This Item?',
-      color: '#760000',
-      widthProsentage: 50,
-      animationDuration: 1,
-      showButtons: true,
-      confirmBtnContent: 'Confirm',
-      cancleBtnContent: 'Cancel',
-      confirmBtnClass: 'btn btn-default',
-      cancleBtnClass: 'btn btn-default',
-      animation: 'bounceIn'
-    };
-    this.popup.show();
+    const dialog = confirm('Delete this item?\n' +
+      'You will lose any kind of data associated with the current item!');
+    if (dialog === true) {
+      this.confirmEvent();
+    }
   }
   changeImage() {
     this.router.navigate(['admin/food-item/edit-food-item-image', this.foodItemId]);

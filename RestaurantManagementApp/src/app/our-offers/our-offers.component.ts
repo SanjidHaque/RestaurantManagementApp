@@ -262,32 +262,28 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
   }
 
-  DiscardOrder() {
-    this.popup.options = {
-      header: 'Destroy Current Order?',
-      color: '#760000', // red, blue....
-      widthProsentage: 40, // The with of the popou measured by browser width
-      animationDuration: 1, // in seconds, 0 = no animation
-      showButtons: true, // You can hide this in case you want to use custom buttons
-      confirmBtnContent: 'Confirm', // The text on your confirm button
-      cancleBtnContent: 'Cancel', // the text on your cancel button
-      confirmBtnClass: 'btn btn-default', // your class for styling the confirm button
-      cancleBtnClass: 'btn btn-default', // you class for styling the cancel button
-      animation: 'bounceIn' // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
-    };
-    this.popup.show();
+  discardOrder() {
+    const dialog = confirm('Delete this order?\n' +
+      'You will lose any kind of data associated with the current order!');
+    if (dialog === true) {
+      this.confirmEvent();
+    }
   }
-  clear() {
-    this.ConfirmEvent();
+  goToDashboard() {
+    if (this.orderedItems.length !== 0) {
+      const dialog = confirm('Go Back to Dashboard?\n' +
+        'You will lose any kind of data associated with the current order!');
+      if (dialog) {
+        this.confirmEvent();
+        this.router.navigate(['/control-panel']);
+      }
+    } else {
+      this.router.navigate(['/control-panel']);
+    }
   }
-  ConfirmEvent() {
+  confirmEvent() {
     this._ourOfferService.clearOrders();
     this._ourOfferService.TotalPrice = 0;
     this._ourOfferService.totalQuantity = 0;
-    this.popup.hide();
-  }
-
-  CancelEvent() {
-    this.popup.hide();
   }
 }

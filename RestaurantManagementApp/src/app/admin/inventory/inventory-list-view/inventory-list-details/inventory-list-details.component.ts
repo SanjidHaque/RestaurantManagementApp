@@ -65,12 +65,10 @@ export class InventoryListDetailsComponent implements OnInit {
 
 
   confirmEvent() {
-   // this._ourOfferService.inventory.splice(this.index, 1);
     this._dataStorageService.deleteInventoryItem(this.inventory).
     subscribe(
       (data: any) => {
         this.router.navigate(['admin/inventory/list-view']);
-        this.popup.hide();
       }
     );
   }
@@ -81,22 +79,11 @@ export class InventoryListDetailsComponent implements OnInit {
     this.router.navigate(['admin/inventory/update-inventory-item', inventory.Id]);
   }
 
-  cancelEvent() {
-    this.popup.hide();
-  }
   deleteInventoryItem() {
-    this.popup.options = {
-      header: 'Delete This Item?',
-      color: '#760000', // red, blue....
-      widthProsentage: 50, // The with of the popou measured by browser width
-      animationDuration: 1, // in seconds, 0 = no animation
-      showButtons: true, // You can hide this in case you want to use custom buttons
-      confirmBtnContent: 'Confirm', // The text on your confirm button
-      cancleBtnContent: 'Cancel', // the text on your cancel button
-      confirmBtnClass: 'btn btn-default', // your class for styling the confirm button
-      cancleBtnClass: 'btn btn-default', // you class for styling the cancel button
-      animation: 'bounceIn' // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
-    };
-    this.popup.show();
+    const dialog = confirm('Delete this item?\n' +
+      'You will lose any kind of data associated with the current item!');
+    if (dialog) {
+      this.confirmEvent();
+    }
   }
 }

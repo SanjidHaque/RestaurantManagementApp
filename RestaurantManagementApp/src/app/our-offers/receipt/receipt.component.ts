@@ -13,50 +13,34 @@ import {Popup} from 'ng2-opd-popup';
   styleUrls: ['./receipt.component.scss']
 })
 export class ReceiptComponent implements OnInit {
-  change = 0;
   order: Order;
 
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
-              private popup: Popup,
-              private route: ActivatedRoute,
-              private uuid: Uuid) {
+              private popup: Popup) {
   }
+
   ngOnInit() {
-    this.change = this._ourOfferService.orders.Change;
     this.order = this._ourOfferService.orders;
-
-
   }
 
   discardOrder() {
-    this.popup.options = {
-      header: 'Destroy Current Order?',
-      color: '#760000',
-      widthProsentage: 40,
-      animationDuration: 1,
-      showButtons: true,
-      confirmBtnContent: 'Confirm',
-      cancleBtnContent: 'Cancel',
-      confirmBtnClass: 'btn btn-default',
-      cancleBtnClass: 'btn btn-default',
-      animation: 'bounceIn'
-    };
-    this.popup.show();
+    const dialog = confirm('Delete this order?\n' +
+      'You will lose any kind of data associated with the current order!');
+    if (dialog === true) {
+      this.confirmEvent();
+    }
   }
 
-  confirmEvent(order: Order) {
+  confirmEvent() {
     this._ourOfferService.clearOrders();
     this._ourOfferService.TotalPrice = 0;
     this._ourOfferService.totalQuantity = 0;
     this.router.navigate(['our-offers/regulars']);
     this.popup.hide();
-    this._ourOfferService.deleteOrder(order);
-    this._dataStorageService.deleteOrder(order);
-  }
-  cancelEvent() {
-    this.popup.hide();
+    this._ourOfferService.deleteOrder(this.order);
+    this._dataStorageService.deleteOrder(this.order);
   }
 
 
@@ -173,7 +157,6 @@ text-align: right;
   .change-cash{
     font-family:"Inconsolata";
     font-size: 21px;
-  /*  padding-left: 23px;*/
     display: inline-block;
   }
 .tendered-div{

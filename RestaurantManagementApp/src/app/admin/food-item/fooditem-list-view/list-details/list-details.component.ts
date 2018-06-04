@@ -73,30 +73,17 @@ export class ListDetailsComponent implements OnInit {
             this._ourOfferService.FoodItem.splice(i, 1);
           }
         }
-
         this.router.navigate(['admin/food-item/list-view']);
       }
     );
-    this.popup.hide();
   }
 
-  cancelEvent() {
-    this.popup.hide();
-  }
   deleteFoodItem() {
-    this.popup.options = {
-      header: 'Delete This Item?',
-      color: '#760000', // red, blue....
-      widthProsentage: 50, // The with of the popou measured by browser width
-      animationDuration: 1, // in seconds, 0 = no animation
-      showButtons: true, // You can hide this in case you want to use custom buttons
-      confirmBtnContent: 'Confirm', // The text on your confirm button
-      cancleBtnContent: 'Cancel', // the text on your cancel button
-      confirmBtnClass: 'btn btn-default', // your class for styling the confirm button
-      cancleBtnClass: 'btn btn-default', // you class for styling the cancel button
-      animation: 'bounceIn' // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
-    };
-    this.popup.show();
+    const dialog = confirm('Delete this item?\n' +
+      'You will lose any kind of data associated with the current item!');
+    if (dialog === true) {
+      this.confirmEvent();
+    }
   }
 
   changeImage() {

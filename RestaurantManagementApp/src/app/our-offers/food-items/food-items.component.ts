@@ -1,14 +1,11 @@
-import {Component, DoCheck, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Order} from '../../shared/order.model';
 import {OurOffersService} from '../our-offers.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {OrderedItems} from '../../shared/ordered-items.model';
 import { Uuid } from 'ng2-uuid';
 import {Subscription} from 'rxjs/Subscription';
-import {DataStorageService} from '../../shared/data-storage.service';
 import {FoodItems} from '../../shared/food-item.model';
 import {Inventory} from '../../shared/inventory.model';
-import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-food-items',

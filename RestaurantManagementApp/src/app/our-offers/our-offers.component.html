@@ -2,31 +2,29 @@
 <app-logout></app-logout>
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-lg-9 col-md-9">
     <app-food-items></app-food-items>
   </div>
-  <div class="col-md-3">
 
-    <div class="row dashboard">
-      <div class="col-md-12" *ngIf="checkOut === true">
-        <a routerLink="/control-panel"
-           (click)="clear()"
-          >
-        Go Back to Dashboard
-        </a>
+
+
+  <div class="col-lg-3 col-md-3">
+    <div class="row dashboard" *ngIf="checkOut === true">
+      <div class="col-lg-12 col-md-12"
+           (click)="goToDashboard()" >
+        Back to Dashboard
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 note">
+      <div class="col-lg-12 col-md-12 note">
         Add or Remove Here Quickly
       </div>
     </div>
     <div class="row other-adding-option">
-      <div class="col-md-6 serial">
+      <div class="col-lg-6 col-md-6 serial">
         <input
           type="text"
           id="serial"
-          onfocus=""
           class="form-control"
           name="serial"
           required
@@ -34,7 +32,7 @@
           #serial
         >
       </div>
-      <div class="col-md-6 quantity">
+      <div class="col-lg-6 col-md-6 quantity">
         <input
           type="number"
           min="1"
@@ -48,14 +46,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 add">
+      <div class="col-lg-6 col-md-6 add">
         <button
 
           class="add-remove-button"
           (click)="add()"><i class="fa fa-plus-circle" aria-hidden="true"></i>
            Add</button>
       </div>
-      <div class="col-md-6 remove">
+      <div class="col-lg-6 col-md-6 remove">
         <button
           class="add-remove-button"
           (click)="remove()"><i class="fa fa-minus-circle" aria-hidden="true"></i>
@@ -63,21 +61,21 @@
       </div>
     </div>
     <div class="row">
-        <div class="col-md-12 cart-empty" *ngIf="grandTotal==0; else itemIsSold">
-          <div class="col-md-12">
+        <div class="col-lg-12 col-md-12 cart-empty" *ngIf="grandTotal==0; else itemIsSold">
+          <div class="col-lg-12 col-md-12 icon">
             <i class="fa fa-shopping-cart"></i>
           </div>
-          <div class="col-md-12 text">
+          <div class="col-lg-12 col-md-12 text">
             Your food cart is empty!
           </div>
         </div>
-
     </div>
+
 
       <ng-template #itemIsSold>
         <div class="whole" >
         <div class="row">
-          <div class="col-md-12 your-purchased-Foods">
+          <div class="col-lg-12 col-md-12 your-purchased-Foods">
             Your purchased foods:
           </div>
         </div>
@@ -87,18 +85,18 @@
         <div class="row list-detail" *ngFor="let order of orderedItems; let i = index">
               <div *ngIf="order.FoodItemQuantity !== 0">
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-7 name">
+                  <div class="col-lg-offset-1 col-md-offset-1 col-lg-7 col-md-7 name">
                    {{ i+1 }}. {{ order.FoodItemName }}  (SN-{{ order.FoodItemSerialNo }})
                   </div>
-                  <div class="col-md-3 sub-total">
+                  <div class="col-lg-3 col-md-3 sub-total">
                     {{ order.FoodItemSubTotal }} BDT
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-offset-1 col-md-8 quantity">
+                  <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 quantity">
                     {{ order.FoodItemQuantity }} Unit(s) at {{ order.Price }} BDT/Unit(s)
                   </div>
-                  <div class="col-md-1">
+                  <div class="col-lg-1 col-md-1">
                     <i
                       title="Remove this ordered item"
                       style="cursor: pointer"
@@ -115,28 +113,25 @@
           </div>
           </div>
          <div class="row">
-           <div class="col-md-12 grand-total">
+           <div class="col-lg-12 col-md-12 grand-total">
              Total Price: {{ grandTotal }} BDT
            </div>
          </div>
 
 
          <div class="row cash-memo-buttons">
-           <div class="col-md-6 confirm-div">
+           <div class="col-lg-6 col-md-6 confirm-div">
              <button class="confirm-purchase" (click)="AddToOrderedList()">Payment</button>
            </div>
-           <div class="col-md-6 discard-div">
-             <button class="confirm-purchase" (click)="DiscardOrder()">Discard</button>
+           <div class="col-lg-6 col-md-6 discard-div">
+             <button class="confirm-purchase" (click)="discardOrder()">Discard</button>
            </div>
          </div>
 
         </div>
       </ng-template>
-
     </div>
   </div>
 
-<popup class="pop-up" (confirmClick)="ConfirmEvent()" (cancelClick)="CancelEvent()">
-  You'll lose any data associated with the current order
-</popup>
+
 

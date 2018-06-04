@@ -67,7 +67,7 @@ export class DataStorageService {
   }
 
   getOrders() {
-    return this._http.get(this._orderApi)
+    return this._http.get(this._orderJson)
       .map(
         (response: Response) => {
           const orders: Order[] = response.json();
@@ -163,6 +163,7 @@ export class DataStorageService {
         }
       );
   }
+
   deleteFoodItem(foodItem: FoodItems) {
     return this._http.post('http://localhost:1548/api/DeleteFoodItem',
       foodItem);
@@ -171,7 +172,4 @@ export class DataStorageService {
   editFoodItem(foodItem: FoodItems) {
     return this._http.post('http://localhost:1548/api/EditFoodItem', foodItem);
   }
-
-
-
 }

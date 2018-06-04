@@ -9,6 +9,7 @@
   }
 
 
+
   #print-section{
     background-color: white;
     border: 1px solid #cbc6cb;
@@ -67,10 +68,6 @@
 
   .next-order-div{
     margin-top: 10px;
-  }
-
-  .upper-div{
-
   }
 
   .intro{
@@ -271,13 +268,31 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
   }
 
+  .go-back-to-pos{
+    text-align: center;
+    font-size: 1vw;
+    padding-top: 13px;
+  }
+  a{
+    color: #a30000;
+    text-decoration: none;
+  }
+
+  a:hover{
+    color: #550d0e;
+    text-decoration: none;
+  }
 
 
-
-
-
-
-
+  .no-receipt{
+    padding-top:15vh;
+    font-size: 2vw;
+    color: #7e0000;
+    font-weight: bold;
+    font-family:"Times New Roman";
+    text-align: center;
+    opacity: .9;
+  }
 
 
 

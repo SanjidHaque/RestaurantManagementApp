@@ -1,53 +1,10 @@
-
-
 .buttons{
   padding-right: 0px;
   padding-left:0px;
   padding-top: 10px;
 }
 
-.all-categories{
-  padding-top: 10px;
-}
 
-.regulars{
-  padding-top: 10px;
-}
-
-.set-menus{
-  padding-top: 10px;
-}
-
-.all-categories-button {
-  width:100%;
-  height:100%;
-  font-family:"Arial Narrow";
-  color: #a50f10;
-  background-color: #ffffdf;
-  border: 1.2px solid #a50f10;
-  border-radius: 5px;
-  font-size:16px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-left: 5px;
-  margin-top: 22px;
-  font-weight: bold;
-  text-align: center;
-}
-
-
-.all-categories-button:hover{
-  background-color: #a50f10;
-  color: #ffffdf;
-  font-family:"Arial Narrow";
-  font-weight:bold;
-  border: 1.2px solid #ffffdf;
-  border-radius: 5px;
-}
-
-.all-categories-button:focus{
-  outline:0;
-}
 
 .add-remove-button{
   width:100%;
@@ -57,9 +14,9 @@
   background-color: #ffffdf;
   border: 1.2px solid #a50f10;
   border-radius: 5px;
-  font-size:16px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  font-size: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   margin-top: 5px;
   font-weight: bold;
   text-align: center;
@@ -78,17 +35,20 @@
 }
 
 .text{
-  padding-left: 38px;
   color: #7e0000;
-  font-size:18px;
+  font-size: 1.4vw;
+  text-align: center;
   font-family:"Times New Roman";
   font-weight: bold;
   opacity: 0.3;
 }
 
+.icon{
+  font-size: 5vw;
+  text-align: center;
+}
+
 .fa-shopping-cart{
-  font-size: 70px;
-  padding-left: 80px;
   color: #7e0000;
   opacity: 0.3;
 }
@@ -97,24 +57,17 @@
 .your-purchased-Foods{
   padding-top: 1px;
   color: #7e0000;
-  font-size:17px;
+  font-size:1.1vw;
   font-family:"Times New Roman";
   font-weight: bold;
-  padding-left: 70px;
   padding-bottom: 10px;
-}
-.list-title{
-  padding-top: 10px;
-  color: #7e0000;
-  font-size:15px;
-  font-family:"Times New Roman";
-  font-weight: bold;
   text-align: center;
 }
+
 .list-detail{
   padding-top: 1px;
   color: #7e0000;
-  font-size:12px;
+  font-size: .9vw;
   font-family:"Times New Roman";
   font-weight: bold;
 }
@@ -127,7 +80,7 @@ hr{
 .grand-total{
   padding-top: 20px;
   color: #7e0000;
-  font-size:18px;
+  font-size:1.2vw;
   font-family:"Times New Roman";
   font-weight: bold;
   text-align: center;
@@ -141,9 +94,9 @@ hr{
   background-color: #ffffdf;
   border: 1px solid #ae0000;
   border-radius: 3px;
-  font-size:16px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  font-size: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   margin-left: 0px;
   margin-top: 0px;
   font-weight: bold;
@@ -173,18 +126,15 @@ hr{
   outline:0;
 }
 
-discard-order-div{
-  text-align: center;
-}
+
 
 .cart-empty{
-  padding-top: 100px;
   border: 2px solid rgba(201, 191, 197, 0.87);
   border-radius: 6px;
   margin-top:  40px;
   margin-left: 2px;
-  padding-bottom: 100px;
-
+  padding-top:15vh;
+  padding-bottom:15vh;
 }
 
 .whole{
@@ -195,34 +145,20 @@ discard-order-div{
   margin-left: 2px;
 }
 
-.please-wait{
-  color: #7e0000;
-  font-family:"Times New Roman";
-  font-size: 14px;
-}
-
-
-
 
 .name{
   padding-left: 26px;
-  font-size: 14px;
+  font-size: 1.1vw;
 }
 
 .sub-total{
-  font-size: 14px;
+  font-size: 1.1vw;
   padding-left: 0px;
 }
 
-.price{
-
-}
-.mul{
-  text-align: center;
-}
-
 .quantity{
-  padding-left: 10px;
+  padding-left: 0px;
+
 }
 
 
@@ -257,26 +193,13 @@ discard-order-div{
 
 
 
-@import url('https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt');
-.hodoo {
-  font-family: 'Berkshire Swash', "Times New Roman", "Berlin Sans FB", cursive;
-  font-size:40px;
-  // padding-left: 38px;
-  text-align: right;
-  color: #7e0000;
-  padding-top: 5px;
-}
-
-.hodoo:focus {
-  outline: 0;
-}
 
 .dashboard{
   text-align: center;
   font-family:"Arial Narrow";
   font-weight:bold;
-  font-size: 16px;
-  padding-top: 10px;
+  font-size: 1.2vw;
+  padding-top: 2vh;
 }
 
 a{
@@ -295,8 +218,7 @@ a:hover{
   background-color: ghostwhite;
   font-family:"Arial Narrow";
   font-weight:bold;
-  /* border: 1.2px solid #ffffdf;
-   border-radius: 5px;*/
+  cursor: pointer;
 }
 
 
@@ -324,14 +246,33 @@ a:hover{
   padding-top: 5px;
 }
 
+
 .note{
-  font-size: 15px;
+  font-size: 1.1vw;
   font-family:"Times New Roman";
   color: #6a0d0e;
   font-weight: bold;
   text-align: center;
   padding-top: 20px;
 }
+
+
 .remove-order{
-  font-size: 15px;
+  font-size: 1.2vw;
+}
+
+
+
+input{
+  font-size: 1vw;
+  padding-right: 0;
+  height: 4.8vh;
+}
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

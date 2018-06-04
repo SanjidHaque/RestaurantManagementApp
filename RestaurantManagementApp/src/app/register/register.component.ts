@@ -81,11 +81,16 @@ export class RegisterComponent implements OnInit, DoCheck {
   }
 
   deleteUser(user: ModifiedUserModel, index: number) {
-
-      this.modifiedUser.splice(index, 1);
-      this.userService.deleteUser(user);
+    const dialog = confirm('Delete this user?\n' +
+      'You will lose any kind of data associated with the current user!');
+    if (dialog === true) {
+      this.confirmEvent(user, index);
+    }
 
   }
-
+  confirmEvent(user: ModifiedUserModel, index: number) {
+    this.modifiedUser.splice(index, 1);
+    this.userService.deleteUser(user);
+  }
 
 }

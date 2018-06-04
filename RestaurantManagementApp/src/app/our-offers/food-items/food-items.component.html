@@ -1,14 +1,14 @@
 <div class="row empty" *ngIf="total === 0; else notEmpty">
-  <div class="col-md-12">
-  No item available.
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+  No item is available
   </div>
 </div>
 
 <ng-template #notEmpty>
 
 <div class="row">
-  <div class="col-md-3 food-body">
-      <span class="fa fa-search"></span>
+  <div class="col-lg-3 col-md-3 food-body">
+      <i class="fa fa-search"></i>
       <input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">
   </div>
 </div>
@@ -17,28 +17,26 @@
 
 
 <div class="row left">
-    <div class="col-md-4"
+    <div class="col-lg-4 col-md-4"
          *ngFor="let foodItems of FoodItem | filter:term
         ; let i = index">
-      <div class="row ">
-        <div class="col-md-8 name">
+      <div class="row">
+        <div class="col-lg-8 col-md-8 name">
        SN-{{ foodItems.SerialNo }}.   {{ foodItems.Name }}
         </div>
-        <div class="col-md-4 price">
+        <div class="col-lg-4 col-md-4 price">
           {{ foodItems.Price }} BDT
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12 col-md-12 ">
           <img [src]="foodItems.FoodItemImage"
-               class="img-responsive image"
-               style= "height: 260px"
+               class="image"
           >
-
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 test">
+        <div class="col-lg-4 col-md-4">
           <button
             class="all-categories-button"
             (click)="UpdateCart(foodItems.Id, foodItems.Price,
@@ -46,8 +44,7 @@
             Add
           </button>
         </div>
-
-        <div class="col-md-4 test">
+        <div class="col-lg-4 col-md-4 input-box">
           <input type="number"
                  min="1"
                  id="amount"
@@ -56,8 +53,7 @@
                  #amountInput
           >
         </div>
-
-        <div class="col-md-4 test">
+        <div class="col-lg-4 col-md-4">
           <button
             class="all-categories-button"
             (click)="UpdateCart(foodItems.Id, foodItems.Price,foodItems.Name,
@@ -66,10 +62,6 @@
           </button>
         </div>
       </div>
-
     </div>
-
 </div>
-
-
 </ng-template>

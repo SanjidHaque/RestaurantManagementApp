@@ -51,6 +51,14 @@ export class TablesComponent implements OnInit, DoCheck {
     this.router.navigate(['admin/tables/edit-table', table.Id]);
   }
   deleteTable(table: Table, index: number) {
+    const dialog = confirm('Delete this table?\n' +
+      'You will lose any kind of data associated with the current table!');
+    if (dialog === true) {
+      this.confirmEvent(table, index);
+    }
+  }
+
+  confirmEvent(table: Table, index: number) {
     this._dataStorageService.deleteTable(table);
     this.tables.splice(index, 1);
     this._ourOfferService.table.splice(index, 1);

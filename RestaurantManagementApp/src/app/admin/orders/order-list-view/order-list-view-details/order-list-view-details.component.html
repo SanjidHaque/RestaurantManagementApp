@@ -6,7 +6,7 @@
           Back</button>
       </div>
       <div class="col-md-offset-8 col-md-2 delete">
-        <button class="back-button" (click)="deleteOrder(order)"><i class="fa fa-trash" aria-hidden="true"></i>
+        <button class="back-button" (click)="deleteOrder()"><i class="fa fa-trash" aria-hidden="true"></i>
           Delete</button>
       </div>
     </div>
@@ -126,9 +126,6 @@
         {{ order.TableNo }}
       </div>
     </div>
-    <popup class="pop-up" (confirmClick)="confirmEvent()" (cancelClick)="cancelEvent()">
-      You'll lose any data associated with the current order!
-    </popup>
     </div>
 </div>
 

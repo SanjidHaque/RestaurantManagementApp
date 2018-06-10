@@ -16,6 +16,7 @@ import {Subject} from 'rxjs/Subject';
 export class RegisterComponent implements OnInit, DoCheck {
 
   user: UserModel;
+  term = '';
   modifiedUser: ModifiedUserModel[] = [];
   modifiedUserChanged =  new Subject<ModifiedUserModel[]>();
   emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';

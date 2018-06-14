@@ -62,7 +62,6 @@ export class OrderListViewDetailsComponent implements OnInit {
     subscribe(
       (data: any) => {
         this.router.navigate(['admin/orders/grid-view']);
-        this.popup.hide();
       }
     );
   }

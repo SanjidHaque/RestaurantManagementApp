@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Http} from '@angular/http';
-import {LocationStrategy} from '@angular/common';
 import {OurOffersService} from '../../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../../shared/data-storage.service';
 import {Order} from '../../../../shared/order.model';
 import {OrderedItems} from '../../../../shared/ordered-items.model';
-import {Popup} from 'ng2-opd-popup';
 @Component({
   selector: 'app-order-list-view-details',
   templateUrl: './order-list-view-details.component.html',
@@ -21,7 +18,6 @@ export class OrderListViewDetailsComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService,
-              private popup: Popup,
               private _ourOfferService: OurOffersService,
               ) {
     this._route.params

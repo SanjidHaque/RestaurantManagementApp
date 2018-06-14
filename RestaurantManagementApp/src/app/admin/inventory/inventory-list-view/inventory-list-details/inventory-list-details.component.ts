@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
 import {DataStorageService} from '../../../../shared/data-storage.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Popup} from 'ng2-opd-popup';
 import {OurOffersService} from '../../../../our-offers/our-offers.service';
 import {Inventory} from '../../../../shared/inventory.model';
 import {Subscription} from 'rxjs/Subscription';
@@ -24,7 +22,6 @@ export class InventoryListDetailsComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService,
-              private popup: Popup,
               private _ourOfferService: OurOffersService,
               ) {
     this._route.params

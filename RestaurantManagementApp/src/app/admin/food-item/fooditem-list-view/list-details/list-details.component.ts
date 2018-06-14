@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
 import {OurOffersService} from '../../../../our-offers/our-offers.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FoodItems} from '../../../../shared/food-item.model';
 import {DataStorageService} from '../../../../shared/data-storage.service';
 import {Ingredients} from '../../../../shared/ingredients.model';
-import {Popup} from 'ng2-opd-popup';
+
 @Component({
   selector: 'app-list-details',
   templateUrl: './list-details.component.html',
@@ -21,7 +20,6 @@ export class ListDetailsComponent implements OnInit {
   foodItemId: string;
   constructor(private _route: ActivatedRoute,
               private router: Router,
-              private popup: Popup,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
              ) {

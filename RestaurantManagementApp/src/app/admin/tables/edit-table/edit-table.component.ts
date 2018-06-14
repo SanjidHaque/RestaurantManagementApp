@@ -30,12 +30,6 @@ export class EditTableComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    /*this.route.data.
-    subscribe(
-      ( data: Table[]) => {
-        this._ourOfferService.table = data['tables'];
-      }
-    );*/
     this.tables = this._ourOfferService.table;
     this.subscription = this._ourOfferService.tableChanged
       .subscribe(

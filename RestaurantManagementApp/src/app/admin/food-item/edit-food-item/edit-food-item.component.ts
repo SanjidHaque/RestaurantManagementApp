@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {DataStorageService} from '../../../shared/data-storage.service';
-import {Popup} from 'ng2-opd-popup';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {FoodItems} from '../../../shared/food-item.model';
 import {Ingredients} from '../../../shared/ingredients.model';
-import {Http} from '@angular/http';
 import {Inventory} from '../../../shared/inventory.model';
 import {NgForm} from '@angular/forms';
 import { Uuid } from 'ng2-uuid';

@@ -2,7 +2,6 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {Table} from '../../shared/table.model';
 import {OurOffersService} from '../../our-offers/our-offers.service';
 import {DataStorageService} from '../../shared/data-storage.service';
-import {Inventory} from '../../shared/inventory.model';
 import {Http} from '@angular/http';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -22,7 +21,7 @@ export class TablesComponent implements OnInit, DoCheck {
               private router: Router,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
-              private _http: Http) { }
+              ) { }
 
   ngOnInit() {
     this._route.data.

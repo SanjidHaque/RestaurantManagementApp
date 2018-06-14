@@ -7,7 +7,6 @@ import {OrderedItems} from '../../shared/ordered-items.model';
 import { Uuid } from 'ng2-uuid';
 import {Table} from '../../shared/table.model';
 import {Subscription} from 'rxjs/Subscription';
-import {Popup} from 'ng2-opd-popup';
 import {Inventory} from '../../shared/inventory.model';
 import {FoodItems} from '../../shared/food-item.model';
 
@@ -36,8 +35,7 @@ export class PaymentComponent implements OnInit, DoCheck {
               private _dataStorageService: DataStorageService,
               private router: Router,
               private _route: ActivatedRoute,
-              private uuid: Uuid,
-              private popup: Popup) {
+              private uuid: Uuid) {
     this.tendered = 0;
   }
 

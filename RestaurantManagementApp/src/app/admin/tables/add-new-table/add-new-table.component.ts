@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ElementRef, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import { Uuid } from 'ng2-uuid';
-import {Inventory} from '../../../shared/inventory.model';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';
 import {Table} from '../../../shared/table.model';
@@ -15,8 +13,7 @@ import {Table} from '../../../shared/table.model';
 })
 export class AddNewTableComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private router: Router,
               private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService) { }

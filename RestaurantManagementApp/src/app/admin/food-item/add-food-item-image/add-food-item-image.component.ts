@@ -3,7 +3,6 @@ import {DataStorageService} from '../../../shared/data-storage.service';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {Http} from '@angular/http';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {FoodItems} from '../../../shared/food-item.model';
 
 @Component({
   selector: 'app-add-food-item-image',
@@ -16,8 +15,6 @@ export class AddFoodItemImageComponent implements OnInit {
   imageUrl = '/assets/noImage.png';
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _http: Http,
-              private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
   ) {this.route.params
     .subscribe(

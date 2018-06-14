@@ -33,7 +33,6 @@ import { ReceiptComponent } from './our-offers/receipt/receipt.component';
 import { TablesComponent } from './admin/tables/tables.component';
 import { AddNewTableComponent } from './admin/tables/add-new-table/add-new-table.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-import {PopupModule} from 'ng2-opd-popup';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { OrderListViewComponent } from './admin/orders/order-list-view/order-list-view.component';
 import { OrderListViewDetailsComponent } from './admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
@@ -129,7 +128,6 @@ import { UserFilterPipe } from './shared/user-filter.pipe';
     CommonModule,
     FormsModule,
     LoadingModule,
-    PopupModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: ''
 

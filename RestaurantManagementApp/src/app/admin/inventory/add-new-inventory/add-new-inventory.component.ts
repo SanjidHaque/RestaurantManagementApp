@@ -1,5 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import { Uuid } from 'ng2-uuid';
 import {Inventory} from '../../../shared/inventory.model';

@@ -1,9 +1,7 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {FoodItems} from '../../../shared/food-item.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DataStorageService} from '../../../shared/data-storage.service';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
-
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {DataStorageService} from '../../../shared/data-storage.service';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Order} from '../../../shared/order.model';

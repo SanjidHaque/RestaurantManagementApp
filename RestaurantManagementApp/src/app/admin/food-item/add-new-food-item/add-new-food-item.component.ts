@@ -5,7 +5,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Uuid } from 'ng2-uuid';
 import {FoodItems} from '../../../shared/food-item.model';
-import {Http} from '@angular/http';
 import {Inventory} from '../../../shared/inventory.model';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';

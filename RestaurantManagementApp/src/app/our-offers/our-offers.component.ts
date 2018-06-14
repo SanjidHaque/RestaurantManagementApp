@@ -1,12 +1,10 @@
-import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, DoCheck, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OurOffersService} from './our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {DataStorageService} from '../shared/data-storage.service';
 import {OrderedItems} from '../shared/ordered-items.model';
 import {Order} from '../shared/order.model';
 import { Uuid } from 'ng2-uuid';
-import {Popup} from 'ng2-opd-popup';
 import {FoodItems} from '../shared/food-item.model';
 import {Inventory} from '../shared/inventory.model';
 import {UserService} from '../user.service';
@@ -21,7 +19,6 @@ export class OurOffersComponent implements OnInit, DoCheck {
   subscription: Subscription;
   checkOut = false;
   quantity = 0;
-  onCheck = 0;
   FoodItem: FoodItems[] = [];
   order: Order[];
   condition = false;
@@ -31,7 +28,6 @@ export class OurOffersComponent implements OnInit, DoCheck {
   public grandTotal: number;
   public orderedItems: OrderedItems[];
   public orders: Order;
-  checkOrder = false;
   foodItemCount = 0;
   setMenuCount =  0;
   @ViewChild('serial') serialNo: ElementRef;
@@ -39,11 +35,9 @@ export class OurOffersComponent implements OnInit, DoCheck {
   inventories: Inventory[] = [];
 
   constructor(private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService,
               private router: Router,
               private route: ActivatedRoute,
               private uuid: Uuid,
-              private popup: Popup,
               private userService : UserService,
   ) {
     this.uuidCodeOne = this.uuid.v1();

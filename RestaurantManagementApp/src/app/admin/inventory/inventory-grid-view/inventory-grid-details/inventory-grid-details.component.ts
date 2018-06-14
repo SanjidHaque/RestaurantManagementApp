@@ -3,9 +3,7 @@ import {InventoryHistoryModel} from '../../../../shared/inventory-history.model'
 import {Inventory} from '../../../../shared/inventory.model';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Http} from '@angular/http';
 import {OurOffersService} from '../../../../our-offers/our-offers.service';
-import {Popup} from 'ng2-opd-popup';
 import {DataStorageService} from '../../../../shared/data-storage.service';
 
 @Component({
@@ -24,7 +22,6 @@ export class InventoryGridDetailsComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService,
-              private popup: Popup,
               private _ourOfferService: OurOffersService,
              ) {
     this._route.params

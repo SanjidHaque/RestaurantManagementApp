@@ -42,6 +42,7 @@ export class TablesComponent implements OnInit, DoCheck {
   ngDoCheck() {
     this.totalTable = this.tables.length;
   }
+
   addNewTable() {
     this.router.navigate(['admin/tables/add-new-table']);
   }
@@ -49,6 +50,8 @@ export class TablesComponent implements OnInit, DoCheck {
   editTable(table: Table) {
     this.router.navigate(['admin/tables/edit-table', table.Id]);
   }
+
+
   deleteTable(table: Table, index: number) {
     const dialog = confirm('Delete this table?\n' +
       'You will lose any kind of data associated with the current table!');

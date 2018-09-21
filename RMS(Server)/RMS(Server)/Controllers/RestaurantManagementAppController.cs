@@ -9,13 +9,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
-using System.Security.AccessControl;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using System.Data.Entity;
-using System.Web.Mail;
-using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -128,8 +125,8 @@ namespace RMS_Server_.Controllers
 
 
         [Route("api/GetUsersList")]
-        [HttpGet]
         [AllowAnonymous]
+        [HttpGet]
         public List<ModifiedUser>  GetUsersList()
         {
            var modifiedUser = _context.ModifiedUsers.ToList();
@@ -184,6 +181,7 @@ namespace RMS_Server_.Controllers
 
         [HttpGet]
         [Route("api/GetUserClaims")]
+        [AllowAnonymous]
         public AccountModel GetUserClaims()
         {
             var identityClaims = (ClaimsIdentity)User.Identity;
@@ -425,8 +423,16 @@ namespace RMS_Server_.Controllers
         public void FoodItemDelete(FoodItem foodItem)
         {
            var getOrderedItems = _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
-           _context.OrderedItems.RemoveRange(getOrderedItems);             
-           var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
+           for (int i = 0; i < getOrderedItems.Count; i++)
+            {
+                var getOrderId =  _context.Orders.FirstOrDefault(n => n.Id == getOrderedItems[i].OrderId);
+                if (getOrderId!=null)
+                {
+                    _context.Orders.Remove(getOrderId);
+                }
+            }
+            _context.OrderedItems.RemoveRange(getOrderedItems);
+            var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
            _context.Ingredients.RemoveRange(deleteIngredients);
            var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
            _context.FoodItems.Remove(deleteFoodItem);

@@ -11,8 +11,8 @@ namespace RMS_Server_.Models
         public string SerialNo { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
-        public int MakingCost { get; set; }
-        public int Profit { get; set; }
+        public float MakingCost { get; set; }
+        public float Profit { get; set; }
         public int TotalSale { get; set; }
         public string FoodItemImage { get; set; }
         public List<Ingredient> Ingredients { get; set; }

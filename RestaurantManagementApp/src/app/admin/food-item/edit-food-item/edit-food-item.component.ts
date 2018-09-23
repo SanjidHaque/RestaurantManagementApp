@@ -155,16 +155,11 @@ export class EditFoodItemComponent implements OnInit {
 
 
   deleteIngredient(ingredient: Ingredients, index: number) {
-    // for (let i = 0; i < this.ingredients.length; i ++) {
-    //  if (this.ingredients[i].FoodItemId === ingredient.FoodItemId ) {
-        this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
+    this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
           - Number.parseInt(this.ingredients[index].SubTotal.toString());
-  //    }
-  //  }
     this.ingredients.splice(index, 1);
-
-
   }
+
   onSaveEditedFoodItem(form: NgForm) {
     const name = form.value.itemName;
     const price = form.value.salePrice;
@@ -175,7 +170,6 @@ export class EditFoodItemComponent implements OnInit {
     for (let i = 0; i < this.ingredients.length; i++) {
       this.ingredients[i].FoodItemId = this.foodItemId;
     }
-    /* const image = this.fileToUpload;*/
     const editedFoodItem =
       new FoodItems(foodItemId, serialNumber,
         name, price, this.inventoryCost, profit, 0 ,

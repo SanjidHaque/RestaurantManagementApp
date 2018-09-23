@@ -13,15 +13,15 @@ export class DataStorageService {
 
   public order: Order;
   private _foodItemJson = 'assets/food-item.json';
-  private _foodItemApi = 'http://localhost:1548/api/GetFoodItems';
+  private _foodItemApi = 'http://localhost:4202/api/GetFoodItems';
 
   private _inventoryJson = 'assets/inventories.json';
-  private _inventoryApi = 'http://localhost:1548/api/GetInventories';
+  private _inventoryApi = 'http://localhost:4202/api/GetInventories';
   private _tableJson = 'assets/tables.json';
-  private _tableApi = 'http://localhost:1548/api/GetTables';
+  private _tableApi = 'http://localhost:4202/api/GetTables';
 
   private _orderJson  = 'assets/order.json';
-  private _orderApi  = 'http://localhost:1548/api/GetOrders';
+  private _orderApi  = 'http://localhost:4202/api/GetOrders';
 
   constructor(private _http: Http,
               private _ourOffersService: OurOffersService) {
@@ -53,12 +53,12 @@ export class DataStorageService {
   }
 
   saveOrder(order: Order) {
-    return this._http.post('http://localhost:1548/api/StoreOrder', order);
+    return this._http.post('http://localhost:4202/api/StoreOrder', order);
   }
 
 
   deleteOrder(order: Order) {
-    return this._http.post('http://localhost:1548/api/DeleteOrder', order);
+    return this._http.post('http://localhost:4202/api/DeleteOrder', order);
   }
 
   getOrders() {
@@ -106,31 +106,31 @@ export class DataStorageService {
   }
 
   addNewInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:1548/api/AddNewInventory', inventory);
+    return this._http.post('http://localhost:4202/api/AddNewInventory', inventory);
   }
 
   editInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:1548/api/EditInventoryItem', inventory);
+    return this._http.post('http://localhost:4202/api/EditInventoryItem', inventory);
   }
 
   updateInventoryHistory(updateHistory: InventoryHistoryModel) {
-    return this._http.post('http://localhost:1548/api/UpdateInventoryHistory', updateHistory);
+    return this._http.post('http://localhost:4202/api/UpdateInventoryHistory', updateHistory);
   }
 
 
   deleteInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:1548/api/DeleteInventoryItem', inventory);
+    return this._http.post('http://localhost:4202/api/DeleteInventoryItem', inventory);
   }
 
   addFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:1548/api/AddFoodItem', foodItem);
+    return this._http.post('http://localhost:4202/api/AddFoodItem', foodItem);
   }
 
   deleteFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:1548/api/DeleteFoodItem', foodItem);
+    return this._http.post('http://localhost:4202/api/DeleteFoodItem', foodItem);
   }
 
   editFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:1548/api/EditFoodItem', foodItem);
+    return this._http.post('http://localhost:4202/api/EditFoodItem', foodItem);
   }
 }

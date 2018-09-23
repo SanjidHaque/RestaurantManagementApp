@@ -5,7 +5,10 @@ import {UserService} from '../user.service';
 import {RoleModel} from '../shared/role.model';
 import {ActivatedRoute} from '@angular/router';
 import {ModifiedUserModel} from '../shared/modified-user.model';
+import {Subscription} from 'rxjs/Subscription';
+
 import {Subject} from 'rxjs/Subject';
+import {Table} from '../shared/table.model';
 
 
 @Component({
@@ -18,10 +21,12 @@ export class RegisterComponent implements OnInit, DoCheck {
   user: UserModel;
   term = '';
   modifiedUser: ModifiedUserModel[] = [];
-  modifiedUserChanged =  new Subject<ModifiedUserModel[]>();
   emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   roles : RoleModel[] = [];
   totalUsers: number;
+  subscription: Subscription;
+
+
   constructor(private userService: UserService,
               private route: ActivatedRoute) { }
 
@@ -36,9 +41,16 @@ export class RegisterComponent implements OnInit, DoCheck {
     this.route.data.
     subscribe(
       ( data: ModifiedUserModel[]) => {
-        this.modifiedUser = data['users'];
+        this.userService.modifiedUser = data['users'];
       }
     );
+    this.modifiedUser = this.userService.modifiedUser;
+    this.subscription = this.userService.modifiedUserChanged
+      .subscribe(
+        (modifiedUsers: ModifiedUserModel[]) => {
+          this.modifiedUser = modifiedUsers;
+        }
+      );
     this.totalUsers = this.modifiedUser.length;
   }
 
@@ -70,8 +82,7 @@ export class RegisterComponent implements OnInit, DoCheck {
           const newUser =
             new ModifiedUserModel(form.value.UserName,  form.value.Email,
               form.value.roleName, dateTime);
-          this.modifiedUser.push(newUser);
-          this.modifiedUserChanged.next(this.modifiedUser.slice());
+          this.userService.addToUserList(newUser);
           alert('Registration Successful!');
           this.resetForm(form);
         } else {
@@ -85,13 +96,9 @@ export class RegisterComponent implements OnInit, DoCheck {
     const dialog = confirm('Delete this user?\n' +
       'You will lose any kind of data associated with the current user!');
     if (dialog === true) {
-      this.confirmEvent(user, index);
+      this.modifiedUser.splice(index, 1);
+      this.userService.deleteUser(user, index);
     }
-
-  }
-  confirmEvent(user: ModifiedUserModel, index: number) {
-    this.modifiedUser.splice(index, 1);
-    this.userService.deleteUser(user);
   }
 
 }

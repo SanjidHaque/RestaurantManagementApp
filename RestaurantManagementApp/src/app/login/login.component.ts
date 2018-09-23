@@ -20,28 +20,24 @@ export class LoginComponent implements OnInit {
   }
 
   OnSubmit(userName, password) {
+     this.userService.userAuthentication(userName, password).subscribe((data : any) => {
+       console.log(data.json().access_token);
+       console.log(data.json().role);
+         localStorage.setItem('userToken', data.json().access_token);
+         localStorage.setItem('userRoles', data.json().role);
+         localStorage.setItem('userName', userName);
+         if (this.userService.roleMatch(['Cashier'])) {
+           this.router.navigate(['our-offers/regulars']);
+         } else {
+           this.router.navigate(['/control-panel']);
+         }
 
-    this.userService.userAuthentication(userName, password).subscribe((data : any) => {
-      console.log(data.json().access_token);
-      console.log(data.json().role);
-        localStorage.setItem('userToken', data.json().access_token);
-        localStorage.setItem('userRoles', data.json().role);
-        localStorage.setItem('userName', userName);
-        if (this.userService.roleMatch(['Cashier'])) {
-          this.router.navigate(['our-offers/regulars']);
-        } else {
-          this.router.navigate(['/control-panel']);
-        }
-
-      },
-      (err : HttpErrorResponse) => {
-        this.isLoginError = true;
-        if (this.isLoginError === true ) {
-          alert('Incorrect username or password');
-        }
-
-
-      });
-
+       },
+       (err : HttpErrorResponse) => {
+         this.isLoginError = true;
+         if (this.isLoginError === true ) {
+           alert('Incorrect username or password');
+         }
+       });
   }
 }

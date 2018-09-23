@@ -132,9 +132,9 @@ export class EditFoodItemComponent implements OnInit {
     const subTotal = quantity * inventoryPrice;
     if (this.checkIfIngredientsExist(inventoryId) !== '') {
       this.ingredients[this.checkIfIngredientsExist(inventoryId)].Quantity
-        += Number.parseInt(quantity.toString());
+        += Number.parseFloat(quantity.toString());
       this.ingredients[this.checkIfIngredientsExist(inventoryId)].SubTotal
-        += Number.parseInt(subTotal.toString());
+        += Number.parseFloat(subTotal.toString());
     } else {
 
       const name = this.getInventoryItemName(inventoryId);

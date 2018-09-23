@@ -41,9 +41,13 @@ export class AddNewInventoryComponent implements OnInit {
       const newItem = new Inventory(inventoryId, name, 0 , quantity,
         unit, price, this.inventoryHistoryModel);
        this._ourOfferService.addToInventoryList(newItem);
-       this._dataStorageService.addNewInventoryItem(newItem);
-      form.reset();
-      this.router.navigate(['admin/inventory/list-view']);
+       this._dataStorageService.addNewInventoryItem(newItem).
+       subscribe(
+         (data: any) => {
+           this.router.navigate(['admin/inventory/list-view']);
+           form.reset();
+         }
+       );
   }
 
 

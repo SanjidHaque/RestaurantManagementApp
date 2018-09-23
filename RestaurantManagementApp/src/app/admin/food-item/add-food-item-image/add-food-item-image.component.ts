@@ -32,9 +32,10 @@ export class AddFoodItemImageComponent implements OnInit {
         console.log('done');
         Image.value = null;
         this.imageUrl = '/assets/noImage.png';
+        this.router.navigate(['admin/food-item/grid-view']);
       }
     );
-    this.router.navigate(['admin/food-item/grid-view']);
+
   }
 
   skipFoodItemImage() {

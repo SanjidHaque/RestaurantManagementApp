@@ -30,19 +30,19 @@ export class DataStorageService {
 
   saveFoodItemImage(foodItemId: string, fileToUpload: File ) {
     if (fileToUpload.name !==  null || fileToUpload.name !== '') {
-      const endpoint = 'http://localhost:1548/api/SaveFoodItemImage';
+      const endpoint = 'http://localhost:4202/api/SaveFoodItemImage';
       const formData: FormData = new FormData();
       formData.append('Image', fileToUpload, fileToUpload.name);
       formData.append('FoodItemId', foodItemId);
       return this._http
-        .post(endpoint, formData );
+        .post(endpoint, formData);
     }
   }
 
 
 
   getFoodItems() {
-    return this._http.get(this._foodItemJson)
+    return this._http.get(this._foodItemApi)
       .map(
         (response: Response) => {
            const foodItems: FoodItems[] = response.json();
@@ -53,12 +53,7 @@ export class DataStorageService {
   }
 
   saveOrder(order: Order) {
-    return this._http.post('http://localhost:1548/api/StoreOrder',
-     order).subscribe(
-      (response: Response) => {
-        console.log(response);
-      }
-    );
+    return this._http.post('http://localhost:1548/api/StoreOrder', order);
   }
 
 
@@ -67,7 +62,7 @@ export class DataStorageService {
   }
 
   getOrders() {
-    return this._http.get(this._orderJson)
+    return this._http.get(this._orderApi)
       .map(
         (response: Response) => {
           const orders: Order[] = response.json();
@@ -77,7 +72,7 @@ export class DataStorageService {
   }
 
   getInventories() {
-    return this._http.get(this._inventoryJson)
+    return this._http.get(this._inventoryApi)
       .map(
         (response: Response) => {
           const inventories: Inventory[] = response.json();
@@ -88,7 +83,7 @@ export class DataStorageService {
   }
 
   getTables() {
-    return this._http.get(this._tableJson)
+    return this._http.get(this._tableApi)
       .map(
         (response: Response) => {
           const tables: Table[] = response.json();
@@ -99,74 +94,40 @@ export class DataStorageService {
   }
 
   addNewTable(table: Table) {
-    return this._http.post('http://localhost:1548/api/AddNewTable',
-      table)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:4202/api/AddNewTable', table);
   }
+
   editTable(table: Table) {
-    return this._http.post('http://localhost:1548/api/EditTable',
-      table)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:4202/api/EditTable', table);
   }
+
   deleteTable(table: Table) {
-    return this._http.post('http://localhost:1548/api/DeleteTable',
-      table)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:4202/api/DeleteTable', table);
   }
+
   addNewInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:1548/api/AddNewInventory',
-      inventory)
-      .subscribe(
-      (response: Response) => {
-        console.log(response);
-      }
-    );
+    return this._http.post('http://localhost:1548/api/AddNewInventory', inventory);
   }
 
   editInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:1548/api/EditInventoryItem',
-      inventory)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:1548/api/EditInventoryItem', inventory);
   }
 
   updateInventoryHistory(updateHistory: InventoryHistoryModel) {
-    return this._http.post('http://localhost:1548/api/UpdateInventoryHistory',
-      updateHistory);
+    return this._http.post('http://localhost:1548/api/UpdateInventoryHistory', updateHistory);
   }
 
 
   deleteInventoryItem(inventory: Inventory) {
     return this._http.post('http://localhost:1548/api/DeleteInventoryItem', inventory);
   }
+
   addFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:1548/api/AddFoodItem',
-      foodItem)
-      .subscribe(
-        (response: Response) => {
-          console.log(response);
-        }
-      );
+    return this._http.post('http://localhost:1548/api/AddFoodItem', foodItem);
   }
 
   deleteFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:1548/api/DeleteFoodItem',
-      foodItem);
+    return this._http.post('http://localhost:1548/api/DeleteFoodItem', foodItem);
   }
 
   editFoodItem(foodItem: FoodItems) {

@@ -12,7 +12,7 @@ import {Http} from '@angular/http';
   styleUrls: ['./grid-details.component.scss']
 })
 export class GridDetailsComponent implements OnInit {
-  rootUrl = 'http://localhost:1548/Content/';
+  rootUrl = 'http://localhost:4202/Content/';
   imageUrl = 'assets/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];

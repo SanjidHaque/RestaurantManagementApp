@@ -14,7 +14,7 @@ export class EditFoodItemImageComponent implements OnInit {
   fileToUpload: File = null;
   imageUrl = '';
   foodItems: FoodItems[] = [];
-  rootUrl = 'http://localhost:1548/Content/';
+  rootUrl = 'http://localhost:4202/Content/';
 
   constructor(private _route: ActivatedRoute,
               private router: Router,

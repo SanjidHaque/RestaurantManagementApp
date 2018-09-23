@@ -94,25 +94,29 @@ export class AddNewFoodItemComponent implements OnInit {
   onAddIngredients(form: NgForm) {
     const ingredientId = this.uuid.v1();
     const inventoryId = form.value.ingName;
-    const quantity = form.value.quantity;
+    let quantity = form.value.quantity;
     const inventoryPrice = this.getInventoryItemPrice(inventoryId);
-    const subTotal = quantity * inventoryPrice;
+    let subTotal = quantity * inventoryPrice;
+
     if (this.checkIfIngredientsExist(inventoryId) !== '') {
       this.ingredients[this.checkIfIngredientsExist(inventoryId)].Quantity
-        += Number.parseInt(quantity.toString());
+        += Number.parseFloat(quantity.toString());
       this.ingredients[this.checkIfIngredientsExist(inventoryId)].SubTotal
-        += Number.parseInt(subTotal.toString());
+        += Number.parseFloat(subTotal.toString());
+
     } else {
       const name = this.getInventoryItemName(inventoryId);
       const inventoryUnit = this.getInventoryItemUnit(inventoryId);
       const foodItemId = '';
+      subTotal = Number.parseFloat(subTotal.toFixed(2));
+      quantity = Number.parseFloat(quantity.toFixed(2));
       const addIngredient = new Ingredients(ingredientId, name, quantity,
         inventoryUnit, inventoryId, inventoryPrice, subTotal, foodItemId);
       this.ingredients.push(addIngredient);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
-      this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
-        + Number.parseInt(subTotal.toString());
+      this.inventoryCost = this.inventoryCost
+        + subTotal;
     form.controls['quantity'].reset();
 }
 
@@ -123,8 +127,6 @@ export class AddNewFoodItemComponent implements OnInit {
       }
     }
     this.ingredients.splice(index, 1);
-
-
   }
 
 
@@ -147,10 +149,13 @@ export class AddNewFoodItemComponent implements OnInit {
       null, foodItemIngredients );
 
     this._ourOfferService.addToFoodItemList(newFoodItem);
-    this._dataStorageService.addFoodItem(newFoodItem);
-
-    this.router.navigate(['admin/food-item/add-food-item-image', foodItemId]);
-     this.form.reset();
+    this._dataStorageService.addFoodItem(newFoodItem).
+    subscribe(
+      (data: any) => {
+        this.form.reset();
+        this.router.navigate(['admin/food-item/add-food-item-image', foodItemId]);
+      }
+    );
   }
 
 

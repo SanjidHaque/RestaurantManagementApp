@@ -63,7 +63,7 @@ export class EditTableComponent implements OnInit, DoCheck {
     const editedTable = new Table(this.tableId, name);
     const ifExist = this._ourOfferService.editTable(editedTable);
     if (ifExist) {
-      this._dataStorageService.editTable(editedTable);
+      this._dataStorageService.editTable(editedTable).subscribe();
     }
     form.reset();
     this.router.navigate(['admin/tables']);

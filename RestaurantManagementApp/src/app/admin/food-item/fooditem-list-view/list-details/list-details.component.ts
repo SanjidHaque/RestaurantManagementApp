@@ -12,7 +12,7 @@ import {Ingredients} from '../../../../shared/ingredients.model';
 })
 export class ListDetailsComponent implements OnInit {
 
-  rootUrl = 'http://localhost:1548/Content/';
+  rootUrl = 'http://localhost:4202/Content/';
   imageUrl = 'assets/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];

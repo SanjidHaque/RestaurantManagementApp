@@ -36,7 +36,7 @@ export class ReceiptComponent implements OnInit {
     this._ourOfferService.totalQuantity = 0;
     this.router.navigate(['our-offers/regulars']);
     this._ourOfferService.deleteOrder(this.order);
-    this._dataStorageService.deleteOrder(this.order);
+    this._dataStorageService.deleteOrder(this.order).subscribe();
   }
 
 

@@ -2,7 +2,6 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {Table} from '../../shared/table.model';
 import {OurOffersService} from '../../our-offers/our-offers.service';
 import {DataStorageService} from '../../shared/data-storage.service';
-import {Http} from '@angular/http';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -42,7 +41,6 @@ export class TablesComponent implements OnInit, DoCheck {
   ngDoCheck() {
     this.totalTable = this.tables.length;
   }
-
   addNewTable() {
     this.router.navigate(['admin/tables/add-new-table']);
   }
@@ -50,8 +48,6 @@ export class TablesComponent implements OnInit, DoCheck {
   editTable(table: Table) {
     this.router.navigate(['admin/tables/edit-table', table.Id]);
   }
-
-
   deleteTable(table: Table, index: number) {
     const dialog = confirm('Delete this table?\n' +
       'You will lose any kind of data associated with the current table!');
@@ -61,7 +57,7 @@ export class TablesComponent implements OnInit, DoCheck {
   }
 
   confirmEvent(table: Table, index: number) {
-    this._dataStorageService.deleteTable(table);
+    this._dataStorageService.deleteTable(table).subscribe();
     this.tables.splice(index, 1);
     this._ourOfferService.table.splice(index, 1);
   }

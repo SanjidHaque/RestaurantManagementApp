@@ -67,9 +67,13 @@ export class EditInventoryItemComponent implements OnInit {
     const editedInventoryItem = new Inventory(this.id, name, 0, this.quantity,
       unit, price, this.inventoryHistory);
     this._ourOfferService.updateInventoryList(this.id, editedInventoryItem);
-    this._dataStorageService.editInventoryItem(editedInventoryItem);
-    form.reset();
-    this.router.navigate(['admin/inventory/list-details', this.id]);
+    this._dataStorageService.editInventoryItem(editedInventoryItem).
+    subscribe(
+      (data: any) => {
+        form.reset();
+        this.router.navigate(['admin/inventory/list-details', this.id]);
+      }
+    );
   }
 
   onCancel() {

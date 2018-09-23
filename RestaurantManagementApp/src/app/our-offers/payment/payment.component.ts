@@ -132,7 +132,7 @@ export class PaymentComponent implements OnInit, DoCheck {
       this.inventoryCost, this.orderProfit );
     this._ourOfferService.addToOrderedList(this.orders);
 
-    this._dataStorageService.saveOrder(this.orders);
+    this._dataStorageService.saveOrder(this.orders).subscribe();
     this.router.navigate(['receipt']);
   }
 

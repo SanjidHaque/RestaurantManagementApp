@@ -49,11 +49,9 @@ export class OrderListViewComponent implements OnInit {
 
     this.totalOrder = this._ourOfferService.ordersList.length;
   }
+
   viewDetails(orderList: Order) {
     const orderId =  orderList.Id;
     this.router.navigate(['admin/orders/list-details', orderId]);
   }
-
-
-
 }

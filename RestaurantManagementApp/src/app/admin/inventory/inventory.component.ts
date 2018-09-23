@@ -10,13 +10,7 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class InventoryComponent implements OnInit {
 
-  public inventories: Inventory[] ;
-  subscription: Subscription;
-
-
-  constructor() {
-  }
-
   ngOnInit() {
   }
+
 }

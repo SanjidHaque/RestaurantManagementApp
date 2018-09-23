@@ -17,13 +17,13 @@ export class ControlPanelComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
-   this.userName
-      = JSON.parse(JSON.stringify(localStorage.getItem('userName')));
+   /*this.userName
+      = JSON.parse(JSON.stringify(localStorage.getItem('userName')));*/
 }
-  logOut() {
+  /*logOut() {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
     this.router.navigate(['/login']);
-  }
+  }*/
 
 }

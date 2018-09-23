@@ -1,16 +1,21 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {UserModel} from './shared/user.model';
-import {Http} from '@angular/http';
-import {RoleModel} from './shared/role.model';
+import { HttpHeaders } from '@angular/common/http';
+import { Http } from '@angular/http';
+import { RoleModel } from './shared/role.model';
+
 import {ModifiedUserModel} from './shared/modified-user.model';
 
 @Injectable()
 export class UserService {
 
-  readonly rootUrl = 'http://localhost:1548';
+  readonly rootUrl = 'http://localhost:4202';
   private _modifiedUserJson = 'assets/modified-user.json';
-  private _modifiedUserApi = 'http://localhost:1548/api/GetUsersList';
+  private _modifiedUserApi = 'http://localhost:4202/api/GetUsersList';
+
+  public modifiedUser: ModifiedUserModel[] = [];
+  public modifiedUserChanged =  new Subject<ModifiedUserModel[]>();
+
   constructor(private _http: Http) { }
 
   registerUser(name: string, password: string, email: string, role: string, dateTime: string) {
@@ -22,7 +27,7 @@ export class UserService {
       DateTime : dateTime
     };
     const reqHeader = new HttpHeaders({'No-Auth': 'True'});
-    return this._http.post(this.rootUrl + '/api/User/Register', body
+    return this._http.post('http://localhost:4202' + '/api/User/Register', body
       );
   }
 
@@ -74,23 +79,25 @@ export class UserService {
     return isMatch;
   }
 
-  deleteUser(user: ModifiedUserModel) {
-      return this._http.post(this.rootUrl + '/api/DeleteUser',
-      user).subscribe(
-      (response: any) => {
-        console.log(response);
-      }
-    );
+  deleteUser(user: ModifiedUserModel, index: number) {
+    this.modifiedUser.splice(index, 1);
+    this.modifiedUserChanged.next(this.modifiedUser.slice());
+    return this._http.post(this.rootUrl + '/api/DeleteUser', user).subscribe();
   }
 
   getUsers() {
-    return this._http.get(this._modifiedUserJson).map(
+    return this._http.get(this._modifiedUserApi).map(
       (response: any) => {
         const users: ModifiedUserModel[] = response.json();
         console.log(users);
         return users;
       }
     );
+  }
+
+  addToUserList(user: ModifiedUserModel) {
+    this.modifiedUser.push(user);
+    this.modifiedUserChanged.next(this.modifiedUser.slice());
   }
 
 }

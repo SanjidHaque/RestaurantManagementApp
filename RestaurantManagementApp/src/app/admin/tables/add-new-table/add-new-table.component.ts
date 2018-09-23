@@ -26,7 +26,7 @@ export class AddNewTableComponent implements OnInit {
     const name = form.value.name;
     const newTable = new Table(id, name);
     this._ourOfferService.addToTableList(newTable);
-    this._dataStorageService.addNewTable(newTable);
+    this._dataStorageService.addNewTable(newTable).subscribe();
     form.controls['name'].reset();
   }
 

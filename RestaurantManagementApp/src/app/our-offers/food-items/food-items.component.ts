@@ -26,7 +26,7 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeThree = '';
   quantity : number;
   imageUrl = '/assets/noImage.png';
-  rootUrl = 'http://localhost:1548/Content/';
+  rootUrl = 'http://localhost:4202/Content/';
 
   subscription: Subscription;
   constructor(private _ourOfferService: OurOffersService,
@@ -53,13 +53,13 @@ export class FoodItemsComponent implements OnInit {
         }
       );
     this.total = this.FoodItem.length;
-    for (let i = 0; i < this.FoodItem.length; i++) {
-      if (this.FoodItem[i].FoodItemImage === null || this.FoodItem[i].FoodItemImage === '' ) {
-        this.FoodItem[i].FoodItemImage = this.imageUrl;
-      } else {
-        this.FoodItem[i].FoodItemImage =  this.rootUrl + this.FoodItem[i].FoodItemImage;
-      }
-    }
+     for (let i = 0; i < this.FoodItem.length; i++) {
+       if (this.FoodItem[i].FoodItemImage === null || this.FoodItem[i].FoodItemImage === '' ) {
+         this.FoodItem[i].FoodItemImage = this.imageUrl;
+       } else {
+         this.FoodItem[i].FoodItemImage =  this.rootUrl + this.FoodItem[i].FoodItemImage;
+       }
+     }
   }
 
 

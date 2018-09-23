@@ -255,10 +255,13 @@ namespace RMS_Server_.Controllers
             if (deleteOrder != null)
             {
                 var deleteOrderedItems = _context.OrderedItems.Where(b => b.OrderId == deleteOrder.Id).ToList();
-                _context.OrderedItems.RemoveRange(deleteOrderedItems);
+                if (deleteOrderedItems != null)
+                {
+                    _context.OrderedItems.RemoveRange(deleteOrderedItems);
+                }
                 _context.Orders.Remove(deleteOrder);
                 _context.SaveChanges();
-            }            
+            }
         }
  
            

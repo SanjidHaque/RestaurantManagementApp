@@ -12,7 +12,7 @@ namespace RMS_Server_.Models
         public string Name { get; set; }
         public float UsedQuantity { get; set; }
         public float RemainingQuantity { get; set; }  
-        public  string Unit { get; set; }
+        public string Unit { get; set; }
         public int AveragePrice { get; set; }
       
     }

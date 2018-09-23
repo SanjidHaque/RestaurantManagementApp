@@ -267,6 +267,10 @@
     <Compile Include="Migrations\201809230548242_typeChanged.Designer.cs">
       <DependentUpon>201809230548242_typeChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809231241044_someModelIsChanged.cs" />
+    <Compile Include="Migrations\201809231241044_someModelIsChanged.Designer.cs">
+      <DependentUpon>201809231241044_someModelIsChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountModel.cs" />
@@ -286,6 +290,10 @@
     <Compile Include="StartupRMS.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-RMS%28Server%29-20171229071618.mdf" />
+    <Content Include="App_Data\aspnet-RMS%28Server%29-20171229071618_log.ldf">
+      <DependentUpon>aspnet-RMS%28Server%29-20171229071618.mdf</DependentUpon>
+    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -347,7 +355,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\Image\" />
     <Folder Include="Image\" />
     <Folder Include="Providers\" />
@@ -379,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809230548242_typeChanged.resx">
       <DependentUpon>201809230548242_typeChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809231241044_someModelIsChanged.resx">
+      <DependentUpon>201809231241044_someModelIsChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

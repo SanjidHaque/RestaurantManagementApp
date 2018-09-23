@@ -14,7 +14,7 @@ namespace RMS_Server_.Models
         public int Change { get; set; }
         public string DateTime { get; set; }
         public string TableNo { get; set; }
-        public int InventoryCost { get; set; }
-        public int Profit { get; set; }
+        public float InventoryCost { get; set; }
+        public float Profit { get; set; }
     }
 }

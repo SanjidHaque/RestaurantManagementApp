@@ -53,21 +53,21 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] }
    },
-  { path: 'payment', component: PaymentComponent,  /*canActivate: [AuthGuard],*/
+  { path: 'payment', component: PaymentComponent,  canActivate: [AuthGuard],
     resolve: { inventories: InventoryResolverService,
       tables: TableResolverService,
       foodItems: FoodItemResolverService
     }
   },
-  { path: 'receipt', component: ReceiptComponent,  /*canActivate: [AuthGuard] */},
+  { path: 'receipt', component: ReceiptComponent,  canActivate: [AuthGuard] },
   { path: 'forbidden', component: ForbiddenComponent, canActivate: [AuthGuard] },
-  { path: 'our-offers', component: OurOffersComponent, /*canActivate: [AuthGuard],*/
+  { path: 'our-offers', component: OurOffersComponent, canActivate: [AuthGuard],
     resolve: {
       inventories: InventoryResolverService,
       foodItems: FoodItemResolverService
     },
   children: [
-    { path: 'regulars', component: FoodItemsComponent, /*canActivate: [AuthGuard]*/
+    { path: 'regulars', component: FoodItemsComponent, canActivate: [AuthGuard]
     }
   ]
   },
@@ -81,24 +81,24 @@ const appRoutes: Routes = [
     data: { roles: ['Admin'] }},
   { path: 'admin',
     component: AdminComponent,
-    /*canActivate: [AuthGuard],
-     data: { roles: ['Admin'] },*/
+    canActivate: [AuthGuard],
+     data: { roles: ['Admin'] },
     children: [
       { path: 'register',
         component: RegisterComponent,
         canActivate: [AuthGuard],
         resolve: { roles: RoleResolverService, users: ModifiedUserResolverService } },
     { path: 'orders', component: OrdersComponent,
-     /* canActivate: [AuthGuard],*/
+      canActivate: [AuthGuard],
 
     children: [
-      { path: 'list-view', component: OrderListViewComponent, /*canActivate: [AuthGuard],*/
+      { path: 'list-view', component: OrderListViewComponent, canActivate: [AuthGuard],
         resolve: { orders: OrderResolverService }},
-      { path: 'list-details/:id', component: OrderListViewDetailsComponent, /*canActivate: [AuthGuard],*/
+      { path: 'list-details/:id', component: OrderListViewDetailsComponent, canActivate: [AuthGuard],
         resolve: { orders: OrderResolverService }},
-      { path: 'grid-view', component: OrderGridViewComponent, /*canActivate: [AuthGuard],*/
+      { path: 'grid-view', component: OrderGridViewComponent, canActivate: [AuthGuard],
         resolve: { orders: OrderResolverService }},
-      { path: 'grid-details/:id', component: OrderGridViewDetailsComponent, /*canActivate: [AuthGuard],*/
+      { path: 'grid-details/:id', component: OrderGridViewDetailsComponent, canActivate: [AuthGuard],
         resolve: { orders: OrderResolverService } }
     ]
     },

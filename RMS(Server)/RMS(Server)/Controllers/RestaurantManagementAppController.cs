@@ -426,14 +426,6 @@ namespace RMS_Server_.Controllers
         public void FoodItemDelete(FoodItem foodItem)
         {
            var getOrderedItems = _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
-           for (int i = 0; i < getOrderedItems.Count; i++)
-            {
-                var getOrderId =  _context.Orders.FirstOrDefault(n => n.Id == getOrderedItems[i].OrderId);
-                if (getOrderId!=null)
-                {
-                    _context.Orders.Remove(getOrderId);
-                }
-            }
             _context.OrderedItems.RemoveRange(getOrderedItems);
             var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
            _context.Ingredients.RemoveRange(deleteIngredients);

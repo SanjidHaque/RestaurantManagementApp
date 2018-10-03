@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {DataStorageService} from '../../../shared/data-storage.service';
-import {OurOffersService} from '../../../our-offers/our-offers.service';
-import {Http} from '@angular/http';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+
+import {DataStorageService} from '../../../shared/data-storage.service';
 
 @Component({
   selector: 'app-add-food-item-image',
   templateUrl: './add-food-item-image.component.html',
   styleUrls: ['./add-food-item-image.component.scss']
 })
+
 export class AddFoodItemImageComponent implements OnInit {
   foodItemId : string;
   fileToUpload: File = null;
   imageUrl = '/assets/noImage.png';
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
+              private _dataStorageService: DataStorageService
   ) {this.route.params
     .subscribe(
       (params: Params) => {
@@ -26,6 +26,7 @@ export class AddFoodItemImageComponent implements OnInit {
 
   ngOnInit() {
   }
+
   saveFoodItemImage(Image) {
     this._dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
@@ -35,7 +36,6 @@ export class AddFoodItemImageComponent implements OnInit {
         this.router.navigate(['admin/food-item/grid-view']);
       }
     );
-
   }
 
   skipFoodItemImage() {

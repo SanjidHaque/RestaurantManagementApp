@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import {OurOffersService} from '../our-offers/our-offers.service';
 import 'rxjs/add/operator/map';
@@ -8,6 +8,7 @@ import {Inventory} from './inventory.model';
 import {FoodItems} from './food-item.model';
 import {Table} from './table.model';
 import {InventoryHistoryModel} from './inventory-history.model';
+
 @Injectable()
 export class DataStorageService {
 

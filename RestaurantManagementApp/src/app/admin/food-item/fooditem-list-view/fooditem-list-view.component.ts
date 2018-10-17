@@ -32,6 +32,7 @@ export class FooditemListViewComponent implements OnInit {
       );
     this.total = this._ourOfferService.FoodItem.length;
   }
+
   viewDetails(foodItem: FoodItems) {
     const foodItemId =  foodItem.Id;
     this.router.navigate(['admin/food-item/list-details', foodItemId]);

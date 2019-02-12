@@ -1,22 +1,24 @@
-import { Subject } from 'rxjs/Subject';
+
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
-import { Http } from '@angular/http';
-import { RoleModel } from './shared/role.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
 
 import {ModifiedUserModel} from './shared/modified-user.model';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class UserService {
 
-  readonly rootUrl = 'http://localhost:4202';
+  private backEndPort = '1548';
+
+  readonly rootUrl = 'http://localhost:' + this.backEndPort;
   private _modifiedUserJson = 'assets/modified-user.json';
-  private _modifiedUserApi = 'http://localhost:4202/api/GetUsersList';
+  private _modifiedUserApi =  this.rootUrl + '/api/GetUsersList';
 
   public modifiedUser: ModifiedUserModel[] = [];
   public modifiedUserChanged =  new Subject<ModifiedUserModel[]>();
 
-  constructor(private _http: Http) { }
+  constructor(private _http: HttpClient) { }
 
   registerUser(name: string, password: string, email: string, role: string, dateTime: string) {
     const body = {
@@ -27,25 +29,20 @@ export class UserService {
       DateTime : dateTime
     };
     const reqHeader = new HttpHeaders({'No-Auth': 'True'});
-    return this._http.post('http://localhost:4202' + '/api/User/Register', body
+    return this._http.post(this.rootUrl + '/api/User/Register', body
       );
   }
 
   userAuthentication(userName, password) {
-    const data = 'username=' + userName + '&password=' + password + '&grant_type=password';
+    const data =
+      'username=' + userName + '&password='  + password + '&grant_type=password';
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True' });
     return this._http.post(this.rootUrl + '/token', data);
   }
 
 
   getAllRoles() {
-    return this._http.get('/assets/role.json').map(
-      (response: any) => {
-        const role: RoleModel[] = response.json();
-        console.log(role);
-        return role;
-      }
-    );
+    return this._http.get('/assets/role.json');
   }
 
   resetPassword(userName: string) {
@@ -86,13 +83,7 @@ export class UserService {
   }
 
   getUsers() {
-    return this._http.get(this._modifiedUserApi).map(
-      (response: any) => {
-        const users: ModifiedUserModel[] = response.json();
-        console.log(users);
-        return users;
-      }
-    );
+    return this._http.get(this._modifiedUserApi);
   }
 
   addToUserList(user: ModifiedUserModel) {

@@ -2,7 +2,7 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {FoodItems} from '../../../shared/food-item.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-fooditem-grid-view',

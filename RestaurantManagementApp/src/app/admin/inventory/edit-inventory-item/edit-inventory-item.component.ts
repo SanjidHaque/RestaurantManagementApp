@@ -5,7 +5,7 @@ import {Inventory} from '../../../shared/inventory.model';
 import {NgForm} from '@angular/forms';
 import {DataStorageService} from '../../../shared/data-storage.service';
 import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-edit-inventory-item',

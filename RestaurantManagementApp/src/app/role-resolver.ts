@@ -2,7 +2,7 @@ import {UserService} from './user.service';
 import {RoleModel} from './shared/role.model';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class RoleResolverService implements Resolve<RoleModel> {

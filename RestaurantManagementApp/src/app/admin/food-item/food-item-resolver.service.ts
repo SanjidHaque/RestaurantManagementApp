@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {FoodItems} from '../../shared/food-item.model';

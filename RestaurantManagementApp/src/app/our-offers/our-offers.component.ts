@@ -1,13 +1,13 @@
 import {Component, DoCheck, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OurOffersService} from './our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {OrderedItems} from '../shared/ordered-items.model';
 import {Order} from '../shared/order.model';
-import { Uuid } from 'ng2-uuid';
 import {FoodItems} from '../shared/food-item.model';
 import {Inventory} from '../shared/inventory.model';
 import {UserService} from '../user.service';
+import {UUID} from 'angular2-uuid';
 
 
 @Component({
@@ -29,7 +29,6 @@ export class OurOffersComponent implements OnInit, DoCheck {
   public orderedItems: OrderedItems[];
   public orders: Order;
   foodItemCount = 0;
-  setMenuCount =  0;
   @ViewChild('serial') serialNo: ElementRef;
   @ViewChild('quantity') quantityOfItem: ElementRef;
   inventories: Inventory[] = [];
@@ -37,13 +36,12 @@ export class OurOffersComponent implements OnInit, DoCheck {
   constructor(private _ourOfferService: OurOffersService,
               private router: Router,
               private route: ActivatedRoute,
-              private uuid: Uuid,
               private userService : UserService,
   ) {
-    this.uuidCodeOne = this.uuid.v1();
-    this.uuidCodeTwo = this.uuid.v1();
-    this.uuidCodeThree = this.uuid.v1();
-    this.uuidCodeOne = this.uuid.v1();
+    this.uuidCodeOne = UUID.UUID();
+    this.uuidCodeTwo = UUID.UUID();
+    this.uuidCodeThree = UUID.UUID();
+    this.uuidCodeOne = UUID.UUID();
   }
 
 
@@ -163,7 +161,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
       const Price = price;
       const orderId = null;
       if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
-        const orderItemId = this.uuid.v1();
+        const orderItemId = UUID.UUID();
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
             foodItemName, serialNo, Price, makingCost );
@@ -171,8 +169,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
           this.RemoveFromCart(orderItemId, orderId,  quantity,
             foodItemId, foodItemName, Price, makingCost );
         }
-      }
-      else {
+      } else {
         const orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
@@ -251,7 +248,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
 
 
-    let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
+    const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
     this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
 
   }

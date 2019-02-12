@@ -2,7 +2,7 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {Table} from '../../shared/table.model';
 import {OurOffersService} from '../../our-offers/our-offers.service';
 import {DataStorageService} from '../../shared/data-storage.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Uuid } from 'ng2-uuid';
-import 'rxjs/add/operator/map';
-import {Subject} from 'rxjs/Subject';
+
+import {Subject} from 'rxjs';
 import {OrderedItems} from '../shared/ordered-items.model';
 import {Order} from '../shared/order.model';
 import {Inventory} from '../shared/inventory.model';
 import {FoodItems} from '../shared/food-item.model';
 import {Ingredients} from '../shared/ingredients.model';
 import {Table} from '../shared/table.model';
+import {UUID} from 'angular2-uuid';
 
 
 @Injectable()
@@ -23,7 +23,6 @@ export class OurOffersService {
   public ordersListChanged = new Subject<Order[]>();
   public foodItemSubTotal = 0;
   public ingredients: Ingredients[] = [];
-  public ingredientsChanged = new Subject<Ingredients[]>();
   public FoodItem: FoodItems[] = [];
   public foodItemChanged = new Subject<FoodItems[]>();
   public inventory: Inventory[] = [];
@@ -32,8 +31,9 @@ export class OurOffersService {
   public tableChanged = new Subject<Table[]>();
 
 
-  constructor(private uuid: Uuid,
-            ) { this.uuidCodeOne = this.uuid.v1(); }
+  constructor() {
+    this.uuidCodeOne = UUID.UUID();
+  }
 
 
 
@@ -74,9 +74,6 @@ export class OurOffersService {
   }
 
 
-  getInventories() {
-    return this.inventory.slice();
-  }
 
 
 

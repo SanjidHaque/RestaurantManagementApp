@@ -19,13 +19,14 @@ export class LoginComponent implements OnInit {
 
   }
 
-  OnSubmit(userName, password) {
-     this.userService.userAuthentication(userName, password).subscribe((data : any) => {
+  OnSubmit(form: NgForm) {
+     this.userService.userAuthentication(form.value.userName, form.value.password)
+       .subscribe((data : any) => {
        console.log(data.json().access_token);
        console.log(data.json().role);
          localStorage.setItem('userToken', data.json().access_token);
          localStorage.setItem('userRoles', data.json().role);
-         localStorage.setItem('userName', userName);
+         localStorage.setItem('userName', form.value.userName);
          if (this.userService.roleMatch(['Cashier'])) {
            this.router.navigate(['our-offers/regulars']);
          } else {

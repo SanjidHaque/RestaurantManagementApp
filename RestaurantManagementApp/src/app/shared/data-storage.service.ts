@@ -1,37 +1,39 @@
+
 import {Injectable} from '@angular/core';
-import { Http, Response } from '@angular/http';
-import {OurOffersService} from '../our-offers/our-offers.service';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+
+
 import {Order} from './order.model';
 import {Inventory} from './inventory.model';
 import {FoodItems} from './food-item.model';
 import {Table} from './table.model';
 import {InventoryHistoryModel} from './inventory-history.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
 
+  private backEndPort = '1548';
+
   public order: Order;
   private _foodItemJson = 'assets/food-item.json';
-  private _foodItemApi = 'http://localhost:4202/api/GetFoodItems';
+  private _foodItemApi = 'http://localhost:' + this.backEndPort + '/api/GetFoodItems';
 
   private _inventoryJson = 'assets/inventories.json';
-  private _inventoryApi = 'http://localhost:4202/api/GetInventories';
+  private _inventoryApi = 'http://localhost:' + this.backEndPort + '/api/GetInventories';
+
   private _tableJson = 'assets/tables.json';
-  private _tableApi = 'http://localhost:4202/api/GetTables';
+  private _tableApi = 'http://localhost:' + this.backEndPort + '/api/GetTables';
 
   private _orderJson  = 'assets/order.json';
-  private _orderApi  = 'http://localhost:4202/api/GetOrders';
+  private _orderApi  = 'http://localhost:' + this.backEndPort + '/api/GetOrders';
 
-  constructor(private _http: Http,
-              private _ourOffersService: OurOffersService) {
+  constructor(private _http: HttpClient) {
   }
 
 
   saveFoodItemImage(foodItemId: string, fileToUpload: File ) {
     if (fileToUpload.name !==  null || fileToUpload.name !== '') {
-      const endpoint = 'http://localhost:4202/api/SaveFoodItemImage';
+      const endpoint = 'http://localhost:' + this.backEndPort + '/api/SaveFoodItemImage';
       const formData: FormData = new FormData();
       formData.append('Image', fileToUpload, fileToUpload.name);
       formData.append('FoodItemId', foodItemId);
@@ -43,95 +45,70 @@ export class DataStorageService {
 
 
   getFoodItems() {
-    return this._http.get(this._foodItemApi)
-      .map(
-        (response: Response) => {
-           const foodItems: FoodItems[] = response.json();
-           console.log(foodItems);
-           return foodItems;
-         }
-      )
+    return this._http.get(this._foodItemApi);
   }
 
   saveOrder(order: Order) {
-    return this._http.post('http://localhost:4202/api/StoreOrder', order);
+    return this._http.post(
+      'http://localhost:' + this.backEndPort + '/api/StoreOrder', order);
   }
 
 
   deleteOrder(order: Order) {
-    return this._http.post('http://localhost:4202/api/DeleteOrder', order);
+    return this._http.post(
+      'http://localhost:' + this.backEndPort + '/api/DeleteOrder', order);
   }
 
   getOrders() {
-    return this._http.get(this._orderApi)
-      .map(
-        (response: Response) => {
-          const orders: Order[] = response.json();
-          return orders;
-        }
-      );
+    return this._http.get(this._orderApi);
   }
 
   getInventories() {
-    return this._http.get(this._inventoryApi)
-      .map(
-        (response: Response) => {
-          const inventories: Inventory[] = response.json();
-          console.log(inventories);
-          return inventories;
-        }
-      );
+    return this._http.get(this._inventoryApi);
   }
 
   getTables() {
-    return this._http.get(this._tableApi)
-      .map(
-        (response: Response) => {
-          const tables: Table[] = response.json();
-          console.log(tables);
-          return tables;
-        }
-      );
+    return this._http.get(this._tableApi);
   }
 
   addNewTable(table: Table) {
-    return this._http.post('http://localhost:4202/api/AddNewTable', table);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/AddNewTable', table);
   }
 
   editTable(table: Table) {
-    return this._http.post('http://localhost:4202/api/EditTable', table);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/EditTable', table);
   }
 
   deleteTable(table: Table) {
-    return this._http.post('http://localhost:4202/api/DeleteTable', table);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/DeleteTable', table);
   }
 
   addNewInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:4202/api/AddNewInventory', inventory);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/AddNewInventory', inventory);
   }
 
   editInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:4202/api/EditInventoryItem', inventory);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/EditInventoryItem', inventory);
   }
 
   updateInventoryHistory(updateHistory: InventoryHistoryModel) {
-    return this._http.post('http://localhost:4202/api/UpdateInventoryHistory', updateHistory);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/UpdateInventoryHistory', updateHistory);
   }
 
 
   deleteInventoryItem(inventory: Inventory) {
-    return this._http.post('http://localhost:4202/api/DeleteInventoryItem', inventory);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/DeleteInventoryItem', inventory);
   }
 
   addFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:4202/api/AddFoodItem', foodItem);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/AddFoodItem', foodItem);
   }
 
   deleteFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:4202/api/DeleteFoodItem', foodItem);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/DeleteFoodItem', foodItem);
   }
 
   editFoodItem(foodItem: FoodItems) {
-    return this._http.post('http://localhost:4202/api/EditFoodItem', foodItem);
+    return this._http.post('http://localhost:' + this.backEndPort + '/api/EditFoodItem', foodItem);
   }
 }

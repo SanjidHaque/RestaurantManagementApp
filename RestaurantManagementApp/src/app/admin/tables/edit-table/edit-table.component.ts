@@ -1,6 +1,6 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {Table} from '../../../shared/table.model';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';

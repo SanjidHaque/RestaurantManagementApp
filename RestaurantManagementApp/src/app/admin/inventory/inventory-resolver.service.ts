@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Inventory} from '../../shared/inventory.model';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {DataStorageService} from '../../shared/data-storage.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class InventoryResolverService  implements Resolve<Inventory> {

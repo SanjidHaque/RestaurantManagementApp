@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {UserService} from './user.service';
 
 
@@ -10,8 +10,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):  boolean {
-    if (localStorage.getItem('userToken') != null)
-    {
+    if (localStorage.getItem('userToken') != null) {
       const roles = next.data['roles'] as string;
       if (roles) {
         const match = this.userService.roleMatch(roles);

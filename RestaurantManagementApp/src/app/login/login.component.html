@@ -14,7 +14,7 @@
 <div class="row small">
   <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3
     col-lg-4 col-md-4 col-sm-6 col-xs-12">
-    <form #userLoginForm="ngForm" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
+    <form #userLoginForm="ngForm" (ngSubmit)="OnSubmit(userLoginForm)">
       <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 form-group">
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -24,8 +24,7 @@
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <input class="validate form-control"
                    type="text"
-                   name="UserName"
-                   #UserName
+                   name="userName"
                    ngModel
                    required>
           </div>
@@ -35,16 +34,13 @@
         <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 form-group">
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <label
-              [attr.data-error]="Password.errors!=null?(Password.errors.required?
-            'Required field!':'Minimum 3 characters needed'):''">Password</label>
+            <label>Password</label>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <input
               class="validate form-control"
               type="password"
-              name="Password"
-              #Password
+              name="password"
               ngModel
               required
               minlength="3">
@@ -59,7 +55,10 @@
 
       <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 button">
-          <button [disabled]="!userLoginForm.valid"
+          <button
+            style="outline: 0;"
+            [disabled]="userLoginForm.value.userName === ''
+            && userLoginForm.value.password === ''"
                   class="btn btn-primary"
                   type="submit">
             Login</button>

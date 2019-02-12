@@ -2,10 +2,10 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Order} from '../../shared/order.model';
 import {OurOffersService} from '../our-offers.service';
 import {OrderedItems} from '../../shared/ordered-items.model';
-import { Uuid } from 'ng2-uuid';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {FoodItems} from '../../shared/food-item.model';
 import {Inventory} from '../../shared/inventory.model';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'app-food-items',
@@ -29,13 +29,12 @@ export class FoodItemsComponent implements OnInit {
   rootUrl = 'http://localhost:4202/Content/';
 
   subscription: Subscription;
-  constructor(private _ourOfferService: OurOffersService,
-              private uuid: Uuid
-  ) {
-    this.uuidCodeOne = this.uuid.v1();
-    this.uuidCodeTwo = this.uuid.v1();
-    this.uuidCodeThree = this.uuid.v1();
+  constructor(private _ourOfferService: OurOffersService) {
+    this.uuidCodeOne = UUID.UUID();
+    this.uuidCodeTwo = UUID.UUID();
+    this.uuidCodeThree = UUID.UUID();
   }
+
   ngOnInit() {
     this.FoodItem = this._ourOfferService.FoodItem;
     this._ourOfferService.foodItemChanged
@@ -75,7 +74,7 @@ export class FoodItemsComponent implements OnInit {
       const Price = price;
       const orderId = null;
       if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
-        const orderItemId = this.uuid.v1();
+        const orderItemId = UUID.UUID();
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
             foodItemName, serialNo, Price, makingCost );
@@ -147,17 +146,12 @@ export class FoodItemsComponent implements OnInit {
 break;
       }
     }
-
-
-
   }
 
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
                  foodItemId: string, foodItemName: string, price: number,
                  makingCost: number) {
-
-
-      let subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
+      const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
       this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
 
   }

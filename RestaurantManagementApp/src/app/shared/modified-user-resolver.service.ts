@@ -2,7 +2,7 @@ import {UserService} from '../user.service';
 import {ModifiedUserModel} from './modified-user.model';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class ModifiedUserResolverService  implements Resolve<ModifiedUserModel> {

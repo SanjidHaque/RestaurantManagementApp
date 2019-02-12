@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {InventoryHistoryModel} from '../../../../shared/inventory-history.model';
 import {Inventory} from '../../../../shared/inventory.model';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../../shared/data-storage.service';

@@ -1,13 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { UuidModule } from 'ng2-uuid';
-import { CarouselModule } from 'angular4-carousel';
-import { CollapsibleModule } from 'angular4-collapsible';
-import { LoadingModule } from 'ngx-loading';
-
 
 import { AppComponent } from './app.component';
-import {HttpModule} from '@angular/http';
 import { OurOffersComponent } from './our-offers/our-offers.component';
 import {AppRoutingModule} from './app-routing.module';
 import {OurOffersService} from './our-offers/our-offers.service';
@@ -15,8 +9,6 @@ import {DataStorageService} from './shared/data-storage.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {CommonModule} from '@angular/common';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { AgmCoreModule } from '@agm/core';
 import {FormsModule} from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { FoodItemsComponent } from './our-offers/food-items/food-items.component';
@@ -57,7 +49,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {UserService} from './user.service';
 import { LogoutComponent } from './logout/logout.component';
 import {AuthGuard} from './auth.guard';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth.interceptor';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import {RoleResolverService} from './role-resolver';
@@ -77,7 +69,6 @@ import { UserFilterPipe } from './shared/user-filter.pipe';
     OurOffersComponent,
     LoginComponent,
     RegisterComponent,
-    ContactUsComponent,
     AdminComponent,
     InventoryComponent,
     FoodItemsComponent,
@@ -121,17 +112,9 @@ import { UserFilterPipe } from './shared/user-filter.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule,
-    UuidModule,
-    CarouselModule,
-    CollapsibleModule,
+    HttpClientModule,
     CommonModule,
-    FormsModule,
-    LoadingModule,
-    AgmCoreModule.forRoot({
-      apiKey: ''
-
-    })
+    FormsModule
   ],
 
   providers: [

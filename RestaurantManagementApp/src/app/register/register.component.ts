@@ -5,9 +5,7 @@ import {UserService} from '../user.service';
 import {RoleModel} from '../shared/role.model';
 import {ActivatedRoute} from '@angular/router';
 import {ModifiedUserModel} from '../shared/modified-user.model';
-import {Subscription} from 'rxjs/Subscription';
-
-import {Subject} from 'rxjs/Subject';
+import {Subscription, Subject} from 'rxjs';
 import {Table} from '../shared/table.model';
 
 

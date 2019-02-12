@@ -6,9 +6,8 @@ import {FoodItems} from '../../../shared/food-item.model';
 import {Ingredients} from '../../../shared/ingredients.model';
 import {Inventory} from '../../../shared/inventory.model';
 import {NgForm} from '@angular/forms';
-import { Uuid } from 'ng2-uuid';
-import {Subject} from 'rxjs/Subject';
-import {Subscription} from 'rxjs/Subscription';
+import {Subject, Subscription} from 'rxjs';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'app-edit-food-item',
@@ -31,7 +30,6 @@ export class EditFoodItemComponent implements OnInit {
   subscription: Subscription;
   constructor(private _route: ActivatedRoute,
               private router: Router,
-              private uuid: Uuid,
               private _dataStorageService: DataStorageService,
               private _ourOfferService: OurOffersService,
              ) {
@@ -124,7 +122,7 @@ export class EditFoodItemComponent implements OnInit {
 
 
   onAddIngredients(form: NgForm) {
-    const ingredientId = this.uuid.v1();
+    const ingredientId = UUID.UUID();
     const inventoryId = form.value.ingName;
     const quantity = form.value.quantity;
 

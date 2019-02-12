@@ -3,12 +3,11 @@ import {DataStorageService} from '../../../shared/data-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import { Uuid } from 'ng2-uuid';
 import {FoodItems} from '../../../shared/food-item.model';
 import {Inventory} from '../../../shared/inventory.model';
-import {Subject} from 'rxjs/Subject';
-import {Subscription} from 'rxjs/Subscription';
+import {Subject, Subscription} from 'rxjs';
 import {Ingredients} from '../../../shared/ingredients.model';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'app-add-new-food-item',
@@ -33,11 +32,10 @@ export class AddNewFoodItemComponent implements OnInit {
   subscription: Subscription;
   constructor(private _route: ActivatedRoute,
               private router: Router,
-              private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
            ) {
-    this.uuidCodeOne = this.uuid.v1();
+    this.uuidCodeOne = UUID.UUID();
   }
 
   ngOnInit() {
@@ -92,7 +90,7 @@ export class AddNewFoodItemComponent implements OnInit {
   }
 
   onAddIngredients(form: NgForm) {
-    const ingredientId = this.uuid.v1();
+    const ingredientId = UUID.UUID();
     const inventoryId = form.value.ingName;
     let quantity = form.value.quantity;
     const inventoryPrice = this.getInventoryItemPrice(inventoryId);
@@ -139,7 +137,7 @@ export class AddNewFoodItemComponent implements OnInit {
     const serialNumber= form.value.serial;
     const price = form.value.salePrice;
     const foodItemIngredients = this.ingredients;
-    const foodItemId = this.uuid.v1();
+    const foodItemId = UUID.UUID();
     const profit = price - this.inventoryCost;
     for (let i = 0; i < this.ingredients.length; i++) {
       this.ingredients[i].FoodItemId = foodItemId;

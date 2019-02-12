@@ -5,8 +5,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
 import {NgForm} from '@angular/forms';
 import {Inventory} from '../../../shared/inventory.model';
-import { Uuid } from 'ng2-uuid';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'app-update-inventory-item',
@@ -24,7 +24,6 @@ export class UpdateInventoryItemComponent implements OnInit {
   subscription: Subscription;
   constructor(private _route: ActivatedRoute,
               private router: Router,
-              private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService ) {
     this._route.params
@@ -60,7 +59,7 @@ export class UpdateInventoryItemComponent implements OnInit {
 
   onUpdateItem(form: NgForm) {
     const inventoryId = this.id;
-    const updateHistoryId = this.uuid.v1();
+    const updateHistoryId = UUID.UUID();
     const quantity = form.value.quantity;
     const currentPrice = form.value.currentPrice;
     const time = new Date().toLocaleString();

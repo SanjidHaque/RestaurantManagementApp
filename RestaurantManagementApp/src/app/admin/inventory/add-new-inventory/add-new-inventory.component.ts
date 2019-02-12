@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import { Uuid } from 'ng2-uuid';
 import {Inventory} from '../../../shared/inventory.model';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';
 import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'app-add-new-inventory',
@@ -19,7 +19,6 @@ export class AddNewInventoryComponent implements OnInit {
 
   constructor(
               private router: Router,
-              private uuid: Uuid,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService) {
   }
@@ -28,8 +27,8 @@ export class AddNewInventoryComponent implements OnInit {
   }
 
   onAddNewItem(form: NgForm) {
-      const inventoryId = this.uuid.v1();
-      const updateHistoryId = this.uuid.v1();
+      const inventoryId = UUID.UUID();
+      const updateHistoryId = UUID.UUID();
       const name = form.value.name;
       const quantity = form.value.quantity;
       const price = form.value.currentPrice;

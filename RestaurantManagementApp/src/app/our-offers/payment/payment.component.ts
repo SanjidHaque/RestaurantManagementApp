@@ -4,11 +4,11 @@ import {DataStorageService} from '../../shared/data-storage.service';
 import {OurOffersService} from '../our-offers.service';
 import {Order} from '../../shared/order.model';
 import {OrderedItems} from '../../shared/ordered-items.model';
-import { Uuid } from 'ng2-uuid';
 import {Table} from '../../shared/table.model';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {Inventory} from '../../shared/inventory.model';
 import {FoodItems} from '../../shared/food-item.model';
+import {UUID} from 'angular2-uuid';
 
 @Component({
   selector: 'app-payment',
@@ -34,8 +34,7 @@ export class PaymentComponent implements OnInit, DoCheck {
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
-              private _route: ActivatedRoute,
-              private uuid: Uuid) {
+              private _route: ActivatedRoute) {
     this.tendered = 0;
   }
 
@@ -101,7 +100,7 @@ export class PaymentComponent implements OnInit, DoCheck {
 
 
   validate() {
-    const orderId = this.uuid.v1();
+    const orderId = UUID.UUID();
     this.onCheck  = 1;
 
     this.orderedItems = this._ourOfferService.orderedItems;

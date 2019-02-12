@@ -60,8 +60,15 @@ label{
   color: white;
 }
 .btn-primary:hover{
-  background-color: #7f0000;
+  background-color: #9c0000;
   color: white;
+}
+
+.btn-primary:disabled{
+  background-color: #9c0000;
+  cursor: pointer;
+  color: white;
+  opacity: 1;
 }
 
 .btn-primary:focus{

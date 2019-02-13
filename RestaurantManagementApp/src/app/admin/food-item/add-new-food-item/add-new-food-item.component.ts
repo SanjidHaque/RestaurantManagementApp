@@ -29,6 +29,7 @@ export class AddNewFoodItemComponent implements OnInit {
   unit: number;
   inventoryCost = 0;
   checkIfEmpty = 0;
+  isDisabled = false;
   subscription: Subscription;
   constructor(private _route: ActivatedRoute,
               private router: Router,
@@ -133,6 +134,7 @@ export class AddNewFoodItemComponent implements OnInit {
 
 
   onSaveFoodItem(form: NgForm) {
+    this.isDisabled = true;
     const name = form.value.itemName;
     const serialNumber= form.value.serial;
     const price = form.value.salePrice;
@@ -146,10 +148,12 @@ export class AddNewFoodItemComponent implements OnInit {
       new FoodItems(foodItemId, serialNumber, name, price, this.inventoryCost, profit, 0 ,
       null, foodItemIngredients );
 
-    this._ourOfferService.addToFoodItemList(newFoodItem);
+
     this._dataStorageService.addFoodItem(newFoodItem).
     subscribe(
       (data: any) => {
+
+        this._ourOfferService.addToFoodItemList(newFoodItem);
         this.form.reset();
         this.router.navigate(['admin/food-item/add-food-item-image', foodItemId]);
       }

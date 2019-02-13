@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-offset-8 col-md-2 delete">
           <button class="back-button"
-                  [disabled]="!newFoodItem.valid || ingredients.length === 0"
+                  [disabled]="!newFoodItem.valid || ingredients.length === 0 || isDisabled"
                   type="submit"
                   title="Save this item"
                   ><i class="fa fa-bookmark" aria-hidden="true"></i>

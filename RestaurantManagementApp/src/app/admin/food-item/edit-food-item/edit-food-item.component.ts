@@ -27,6 +27,7 @@ export class EditFoodItemComponent implements OnInit {
   ingredientsChanged = new Subject<Ingredients[]>();
   FoodItem: FoodItems;
   foodItemId: string;
+  isDisabled = false;
   subscription: Subscription;
   constructor(private _route: ActivatedRoute,
               private router: Router,
@@ -168,14 +169,16 @@ export class EditFoodItemComponent implements OnInit {
     for (let i = 0; i < this.ingredients.length; i++) {
       this.ingredients[i].FoodItemId = this.foodItemId;
     }
+    this.isDisabled = true;
     const editedFoodItem =
       new FoodItems(foodItemId, serialNumber,
         name, price, this.inventoryCost, profit, 0 ,
         null, foodItemIngredients );
-    this._ourOfferService.updateFoodItemList(editedFoodItem );
     this._dataStorageService.editFoodItem(editedFoodItem).
     subscribe(
       (data: any) => {
+
+        this._ourOfferService.updateFoodItemList(editedFoodItem );
         this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);
         form.reset();
       }

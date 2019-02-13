@@ -35,19 +35,6 @@ namespace RMS_Server_.Controllers
             _context = new ApplicationDbContext();
         }
        
-        [HttpGet]
-        [Route("api/GetAllRoles")]
-        [AllowAnonymous]
-        public HttpResponseMessage GetRoles()
-        {
-            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-            var roleMngr = new RoleManager<IdentityRole>(roleStore);
-          
-            var roles = roleMngr.Roles
-                .Select(x => new { x.Id, x.Name })
-                .ToList();
-            return this.Request.CreateResponse(HttpStatusCode.OK, roles);
-        }
 
 
 
@@ -125,7 +112,6 @@ namespace RMS_Server_.Controllers
 
 
         [Route("api/GetUsersList")]
-        [AllowAnonymous]
         [HttpGet]
         public List<ModifiedUser>  GetUsersList()
         {
@@ -136,7 +122,6 @@ namespace RMS_Server_.Controllers
 
         [Route("api/DeleteUser")]
         [HttpPost]
-        [AllowAnonymous]
         public void DeleteUser(AccountModel accountModel)
         {
             var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
@@ -151,7 +136,6 @@ namespace RMS_Server_.Controllers
         
         [Route("api/User/Register")]
         [HttpPost]
-        [AllowAnonymous]
         public IdentityResult Register(AccountModel model)
         {
             var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
@@ -179,25 +163,10 @@ namespace RMS_Server_.Controllers
             return result;
         }
 
-        [HttpGet]
-        [Route("api/GetUserClaims")]
-        [AllowAnonymous]
-        public AccountModel GetUserClaims()
-        {
-            var identityClaims = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identityClaims.Claims;
-            AccountModel model = new AccountModel()
-            {
-                UserName = identityClaims.FindFirst("Username").Value,
-                Email = identityClaims.FindFirst("Email").Value,
-                LoggedOn = identityClaims.FindFirst("LoggedOn").Value
-            };
-            return model;
-        }
+        
 
         [Route("api/GetFoodItems")]
         [HttpGet]
-        [AllowAnonymous]
         public List<FoodItem> GetFoodItems()
         {
             var foodItems = _context.FoodItems.Include(c => c.Ingredients).ToList();
@@ -209,7 +178,6 @@ namespace RMS_Server_.Controllers
 
         [Route("api/StoreOrder")]
         [HttpPost]
-        [AllowAnonymous]
         public void StoreOrder(Order orders)
         {
             for (int i = 0; i < orders.OrderedItems.Count; i++)
@@ -248,7 +216,6 @@ namespace RMS_Server_.Controllers
 
         [Route("api/DeleteOrder")]
         [HttpPost]
-        [AllowAnonymous]
         public void DeleteOrder(Order orders)
         {
             var deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
@@ -267,7 +234,6 @@ namespace RMS_Server_.Controllers
            
         [HttpGet]
         [Route("api/GetOrders")]
-        [AllowAnonymous]
         public List<Order> Order()
         {
             return _context.Orders.Include(b => b.OrderedItems).ToList();
@@ -275,7 +241,6 @@ namespace RMS_Server_.Controllers
 
         [HttpGet]
         [Route("api/GetInventories")]
-        [AllowAnonymous]
         public List<Inventory> GetInventories()
         {
             return _context.Inventories.Include(b => b.InventoryHistoryModel).ToList();
@@ -283,7 +248,6 @@ namespace RMS_Server_.Controllers
 
         [HttpGet]
         [Route("api/GetTables")]
-        [AllowAnonymous]
         public List<Table> GetTables()
         {
             return _context.Tables.ToList();
@@ -291,15 +255,15 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/AddNewTable")]
-        [AllowAnonymous]
         public void AddNewTable(Table table)
         {
             _context.Tables.Add(table);
             _context.SaveChanges();
         }
+
+
         [HttpPost]
         [Route("api/EditTable")]
-        [AllowAnonymous]
         public void EditTable(Table table)
         {
             var getEdited = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
@@ -311,7 +275,7 @@ namespace RMS_Server_.Controllers
         }
         [HttpPost]
         [Route("api/DeleteTable")]
-        [AllowAnonymous]
+      
         public void DeleteTable(Table table)
         {
             var deleteTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
@@ -326,7 +290,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/AddNewInventory")]
-        [AllowAnonymous]
         public void AddInventoryItem(Inventory inventory)
         {
             _context.InventoryHistoryModels.AddRange(inventory.InventoryHistoryModel);
@@ -338,7 +301,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/EditInventoryItem")]
-        [AllowAnonymous]
         public void EditInventoryItem(Inventory inventory)
         {          
              var getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
@@ -350,7 +312,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/UpdateInventoryHistory")]
-        [AllowAnonymous]
         public void UpdateInventoryHistory(InventoryHistoryModel inventoryHistoryModel)
         {
             var inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistoryModel.InventoryId);
@@ -378,7 +339,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/DeleteInventoryItem")]
-        [AllowAnonymous]
         public void DeleteInventoryItem(Inventory inventory)
         {
             var getIngredientsDeleted = _context.Ingredients.Where(p => p.InventoryId == inventory.Id).ToList();
@@ -393,7 +353,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/AddFoodItem")]
-        [AllowAnonymous]
         public void FoodItemAdd(FoodItem foodItem)
         {
             _context.Ingredients.AddRange(foodItem.Ingredients);
@@ -403,7 +362,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/EditFoodItem")]
-        [AllowAnonymous]
         public void FoodItemEdit(FoodItem foodItem)
         {
             var editedFoodItem = _context.FoodItems.Include(c => c.Ingredients).FirstOrDefault(p => p.Id == foodItem.Id);
@@ -422,7 +380,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/DeleteFoodItem")]
-        [AllowAnonymous]
         public void FoodItemDelete(FoodItem foodItem)
         {
            var getOrderedItems = _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
@@ -436,7 +393,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/SaveFoodItemImage")]
-        [AllowAnonymous]
         public HttpResponseMessage SaveFoodItemImage()
         {
             string imageName = null;
@@ -453,22 +409,5 @@ namespace RMS_Server_.Controllers
             return Request.CreateResponse(HttpStatusCode.Created);
         }
 
-
-        [HttpGet]
-        [Route("api/GetFoodItemImage")]
-        [AllowAnonymous]
-        public HttpResponseMessage GetFoodItemImage()
-        {
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            var path = "~/Image/" + "10154902_1180012622.jpg";
-            path = System.Web.Hosting.HostingEnvironment.MapPath(path);
-            var ext = System.IO.Path.GetExtension(path);
-            var contents = System.IO.File.ReadAllBytes(path);
-            System.IO.MemoryStream ms = new System.IO.MemoryStream(contents);
-            response.Content = new StreamContent(ms);
-            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/" + ext);
-            return response;
-        }
-        
     }
 }

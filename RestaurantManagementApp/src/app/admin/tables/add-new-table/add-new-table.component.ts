@@ -13,6 +13,8 @@ import {UUID} from 'angular2-uuid';
 })
 export class AddNewTableComponent implements OnInit {
 
+  isDisabled = false;
+
   constructor(private router: Router,
               private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService) { }
@@ -21,12 +23,19 @@ export class AddNewTableComponent implements OnInit {
   }
 
   onAddNewTable(form: NgForm) {
+    this.isDisabled = true;
     const id = UUID.UUID();
     const name = form.value.name;
     const newTable = new Table(id, name);
     this._ourOfferService.addToTableList(newTable);
-    this._dataStorageService.addNewTable(newTable).subscribe();
-    form.controls['name'].reset();
+    this._dataStorageService.addNewTable(newTable)
+      .subscribe(
+        (data: any) => {
+          form.controls['name'].reset();
+          this.router.navigate(['admin/tables']);
+        }
+    );
+
   }
 
   onCancel() {

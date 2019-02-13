@@ -15,6 +15,7 @@ export class EditFoodItemImageComponent implements OnInit {
   imageUrl = '';
   foodItems: FoodItems[] = [];
   rootUrl = 'http://localhost:4202/Content/';
+  isDisabled = false;
 
   constructor(private _route: ActivatedRoute,
               private router: Router,
@@ -47,8 +48,10 @@ export class EditFoodItemImageComponent implements OnInit {
     }
   }
   saveFoodItemImage(Image) {
+    this.isDisabled = true;
     this._dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
+
         console.log('done');
         Image.value = null;
         this.imageUrl = '/assets/noImage.png';

@@ -16,6 +16,7 @@ import {Table} from '../shared/table.model';
 })
 export class RegisterComponent implements OnInit, DoCheck {
 
+  isDisabled = false;
   user: UserModel;
   term = '';
   modifiedUser: ModifiedUserModel[] = [];
@@ -71,12 +72,13 @@ export class RegisterComponent implements OnInit, DoCheck {
 
 
   OnSubmit(form: NgForm) {
+    this.isDisabled = true;
     const dateTime = new Date().toLocaleString();
     this.userService.registerUser(form.value.UserName,
-      form.value.Password, form.value.Email, form.value.roleName, dateTime )
+      form.value.Password, form.value.Email, form.value.roleName, dateTime)
       .subscribe((data: any) => {
 
-        if (data.json().Succeeded === true) {
+        if (data.Succeeded === true) {
           const newUser =
             new ModifiedUserModel(form.value.UserName,  form.value.Email,
               form.value.roleName, dateTime);
@@ -84,7 +86,7 @@ export class RegisterComponent implements OnInit, DoCheck {
           alert('Registration Successful!');
           this.resetForm(form);
         } else {
-          alert(data.json().Errors[0]);
+          alert(data.Errors[0]);
         }
 
       });

@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-offset-8 col-md-2 delete">
           <button class="back-button"
-                  [disabled]="!newItem.valid"
+                  [disabled]="!newItem.valid || isDisabled"
                   type="submit"
                   title="Save this item"
           ><i class="fa fa-bookmark" aria-hidden="true"></i>

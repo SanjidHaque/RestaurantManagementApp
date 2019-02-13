@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-2 delete">
           <button class="back-button"
-                  [disabled]="!updateItem.valid"
+                  [disabled]="!updateItem.valid || isDisabled"
                   type="submit"
                   title="Update this item"
           ><i class="fa fa-wrench" aria-hidden="true"></i>

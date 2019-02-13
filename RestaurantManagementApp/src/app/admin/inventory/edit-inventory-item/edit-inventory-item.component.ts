@@ -21,6 +21,7 @@ export class EditInventoryItemComponent implements OnInit {
    inventoryHistory: InventoryHistoryModel[] = [];
   inventoryList: Inventory[] = [];
   subscription: Subscription;
+  isDisabled = false;
 
   constructor(private _route: ActivatedRoute,
               private router: Router,
@@ -60,16 +61,19 @@ export class EditInventoryItemComponent implements OnInit {
   }
 
   onEditItem(form: NgForm) {
+    this.isDisabled = true;
     const id = this.id;
     const name = form.value.name;
     const price = form.value.currentPrice;
     const unit = form.value.unit;
     const editedInventoryItem = new Inventory(this.id, name, 0, this.quantity,
       unit, price, this.inventoryHistory);
-    this._ourOfferService.updateInventoryList(this.id, editedInventoryItem);
+
     this._dataStorageService.editInventoryItem(editedInventoryItem).
     subscribe(
       (data: any) => {
+
+        this._ourOfferService.updateInventoryList(this.id, editedInventoryItem);
         form.reset();
         this.router.navigate(['admin/inventory/list-details', this.id]);
       }

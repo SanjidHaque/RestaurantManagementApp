@@ -13,29 +13,23 @@ export class LoginComponent implements OnInit {
   @ViewChild('userLoginForm') form: NgForm;
 
   isLoginError = false;
-  isDisabled: boolean;
+  isDisabled = false;
   constructor(private userService : UserService,
               private router : Router) { }
 
   ngOnInit() {
-    this.form.value.userName = '';
-    this.form.value.password = '';
 
-    if (this.form.value.userName === '' && this.form.value.password === '') {
-      this.isDisabled = true;
-    } else {
-      this.isDisabled = false;
-    }
   }
 
   OnSubmit() {
-    this.isDisabled = false;
-     this.userService.userAuthentication(this.form.value.userName, this.form.value.password)
+    this.isDisabled = true;
+     this.userService.
+     userAuthentication(this.form.value.userName, this.form.value.password)
        .subscribe((data : any) => {
-       console.log(data.json().access_token);
-       console.log(data.json().role);
-         localStorage.setItem('userToken', data.json().access_token);
-         localStorage.setItem('userRoles', data.json().role);
+
+
+         localStorage.setItem('userToken', data.access_token);
+         localStorage.setItem('userRoles', data.role);
          localStorage.setItem('userName', this.form.value.userName);
          if (this.userService.roleMatch(['Cashier'])) {
            this.router.navigate(['our-offers/regulars']);

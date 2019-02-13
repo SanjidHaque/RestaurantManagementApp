@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-2 delete">
           <button class="back-button"
-                  [disabled]="!newItem.valid"
+                  [disabled]="!newItem.valid || isDisabled"
                   type="submit"
                   title="Save this item"
           ><i class="fa fa-bookmark" aria-hidden="true"></i>
@@ -36,25 +36,7 @@
           </div>
         </div>
       </div>
-      <!--<div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="currentPrice">Current Price:</label>
-            <input
-              type="number"
-              min="1"
-              id="currentPrice"
-              class="form-control"
-              [ngModel] = "currentPrice"
-              name="currentPrice"
-              required
-            >
-          </div>
-        </div>
-        <div class="col-md-1 bdt">
-          BDT
-        </div>
-      </div>-->
+
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">

@@ -18,7 +18,7 @@
         <div class="action">
           <button class="all-categories-button"
                   type="submit"
-                  [disabled]="!newTable.valid">
+                  [disabled]="!newTable.valid || isDisabled">
             <i class="fa fa-bookmark" aria-hidden="true"></i> Save</button>
         </div>
         <div class="action">

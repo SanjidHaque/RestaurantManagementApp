@@ -9,7 +9,7 @@ import {UserService} from '../user.service';
   styleUrls: ['./new-password.component.scss']
 })
 export class NewPasswordComponent implements OnInit {
-
+  isDisabled = false;
   constructor(private userService: UserService,
               private router : Router) { }
 
@@ -17,15 +17,16 @@ export class NewPasswordComponent implements OnInit {
   }
 
   resetPassword(form: NgForm) {
+    this.isDisabled  = true;
     if ( form.value.password !==  form.value.confirmPassword ) {
+      this.isDisabled = false;
       alert('Your password did not match!');
       form.controls['password'].reset();
       form.controls['confirmPassword'].reset();
     } else {
       this.userService.newPassword(form.value.password, form.value.code)
         .subscribe((data: any) => {
-        console.log(data.json());
-        if (data.json() === 'Successful') {
+        if (data === 'Successful') {
           alert('password changed successfully! You can login now.');
           this.router.navigate(['/login']);
         } else {

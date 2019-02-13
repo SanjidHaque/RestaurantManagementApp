@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
+  isDisabled = false;
 
   constructor(private userService: UserService,
               private router : Router) { }
@@ -17,9 +18,9 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   getResetCode(form: NgForm) {
+    this.isDisabled = true;
     this.userService.resetPassword(form.value.UserName).subscribe((data: any) => {
-      console.log(data.json());
-      if (data.json() === 'User Name Found') {
+       if (data === 'User Name Found') {
         form.reset();
         alert('A password recovery code has sent to your email');
         this.router.navigate(['/new-password']);

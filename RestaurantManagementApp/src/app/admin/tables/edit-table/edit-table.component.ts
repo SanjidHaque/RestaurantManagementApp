@@ -16,6 +16,7 @@ export class EditTableComponent implements OnInit, DoCheck {
   tableId: string;
   tableName = '';
   subscription: Subscription;
+  isDisabled = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -59,14 +60,20 @@ export class EditTableComponent implements OnInit, DoCheck {
   }
 
   onEditTable(form: NgForm) {
+    this.isDisabled = true;
     const name = form.value.tableName;
     const editedTable = new Table(this.tableId, name);
     const ifExist = this._ourOfferService.editTable(editedTable);
     if (ifExist) {
-      this._dataStorageService.editTable(editedTable).subscribe();
+      this._dataStorageService.editTable(editedTable)
+        .subscribe(
+          (data: any) => {
+            form.reset();
+            this.router.navigate(['admin/tables']);
+          }
+        );
     }
-    form.reset();
-    this.router.navigate(['admin/tables']);
+
   }
 
   onCancel() {

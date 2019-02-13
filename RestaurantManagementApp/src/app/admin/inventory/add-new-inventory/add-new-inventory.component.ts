@@ -16,6 +16,7 @@ import {UUID} from 'angular2-uuid';
 export class AddNewInventoryComponent implements OnInit {
   unit : number;
   inventoryHistoryModel: InventoryHistoryModel[] = [];
+  isDisabled = false;
 
   constructor(
               private router: Router,
@@ -27,6 +28,7 @@ export class AddNewInventoryComponent implements OnInit {
   }
 
   onAddNewItem(form: NgForm) {
+    this.isDisabled = true;
       const inventoryId = UUID.UUID();
       const updateHistoryId = UUID.UUID();
       const name = form.value.name;
@@ -39,10 +41,12 @@ export class AddNewInventoryComponent implements OnInit {
       this.inventoryHistoryModel.push(updateHistory);
       const newItem = new Inventory(inventoryId, name, 0 , quantity,
         unit, price, this.inventoryHistoryModel);
-       this._ourOfferService.addToInventoryList(newItem);
+
        this._dataStorageService.addNewInventoryItem(newItem).
        subscribe(
          (data: any) => {
+
+           this._ourOfferService.addToInventoryList(newItem);
            this.router.navigate(['admin/inventory/list-view']);
            form.reset();
          }

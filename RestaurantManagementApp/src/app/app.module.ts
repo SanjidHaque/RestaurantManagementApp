@@ -59,6 +59,8 @@ import {ModifiedUserResolverService} from './shared/modified-user-resolver.servi
 import { AddFoodItemImageComponent } from './admin/food-item/add-food-item-image/add-food-item-image.component';
 import { EditFoodItemImageComponent } from './admin/food-item/edit-food-item-image/edit-food-item-image.component';
 import { UserFilterPipe } from './shared/user-filter.pipe';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -114,7 +116,9 @@ import { UserFilterPipe } from './shared/user-filter.pipe';
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule
   ],
 
   providers: [

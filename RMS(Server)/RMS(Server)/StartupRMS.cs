@@ -14,17 +14,14 @@ namespace RMS_Server_
         
         public void Configuration(IAppBuilder app)
         {
-     
- 
-   
-
+       
             app.UseCors(CorsOptions.AllowAll);
 
             OAuthAuthorizationServerOptions option = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/token"),
                 Provider = new ApllicationOAuthProvider(),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(60),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 AllowInsecureHttp = true
             };
             app.UseOAuthAuthorizationServer(option);

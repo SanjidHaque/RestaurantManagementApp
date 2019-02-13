@@ -22,6 +22,9 @@ export class UpdateInventoryItemComponent implements OnInit {
   unit: string;
   inventoryList: Inventory[] = [];
   subscription: Subscription;
+  isDisabled = false;
+
+
   constructor(private _route: ActivatedRoute,
               private router: Router,
               private _ourOfferService: OurOffersService,
@@ -58,6 +61,7 @@ export class UpdateInventoryItemComponent implements OnInit {
   }
 
   onUpdateItem(form: NgForm) {
+    this.isDisabled = true;
     const inventoryId = this.id;
     const updateHistoryId = UUID.UUID();
     const quantity = form.value.quantity;

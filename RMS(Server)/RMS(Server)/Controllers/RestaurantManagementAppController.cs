@@ -103,7 +103,6 @@ namespace RMS_Server_.Controllers
                 String hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
                 userStore.SetPasswordHashAsync(user, hashedNewPassword);
                 userStore.UpdateAsync(user);
-                //manager.ResetPasswordAsync(forgotPassword.Id, forgotPassword.Code, forgotPassword.NewPassword);
                 return "Successful";
             }
             return "Not Successful";
@@ -115,7 +114,7 @@ namespace RMS_Server_.Controllers
         [HttpGet]
         public List<ModifiedUser>  GetUsersList()
         {
-           var modifiedUser = _context.ModifiedUsers.ToList();
+           var modifiedUser = _context.ModifiedUsers.OrderBy(x => x.UserName).ToList();
            return modifiedUser;
         }
 
@@ -169,7 +168,7 @@ namespace RMS_Server_.Controllers
         [HttpGet]
         public List<FoodItem> GetFoodItems()
         {
-            var foodItems = _context.FoodItems.Include(c => c.Ingredients).ToList();
+            var foodItems = _context.FoodItems.Include(c => c.Ingredients).OrderBy(x => x.Name).ToList();
             return foodItems;
         }
 
@@ -236,21 +235,21 @@ namespace RMS_Server_.Controllers
         [Route("api/GetOrders")]
         public List<Order> Order()
         {
-            return _context.Orders.Include(b => b.OrderedItems).ToList();
+            return _context.Orders.Include(b => b.OrderedItems).OrderBy(x => x.DateTime).ToList();
         }
 
         [HttpGet]
         [Route("api/GetInventories")]
         public List<Inventory> GetInventories()
         {
-            return _context.Inventories.Include(b => b.InventoryHistoryModel).ToList();
+            return _context.Inventories.Include(b => b.InventoryHistoryModel).OrderBy(x => x.Name).ToList();
         }
 
         [HttpGet]
         [Route("api/GetTables")]
         public List<Table> GetTables()
         {
-            return _context.Tables.ToList();
+            return _context.Tables.OrderBy(x => x.Name).ToList();
         }
 
         [HttpPost]

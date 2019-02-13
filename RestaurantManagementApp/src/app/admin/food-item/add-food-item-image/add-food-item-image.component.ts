@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {DataStorageService} from '../../../shared/data-storage.service';
@@ -14,6 +14,9 @@ export class AddFoodItemImageComponent implements OnInit {
   fileToUpload: File = null;
   isDisabled = false;
   imageUrl = '/assets/noImage.png';
+
+  @ViewChild('Image') Image: any;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private _dataStorageService: DataStorageService
@@ -29,9 +32,9 @@ export class AddFoodItemImageComponent implements OnInit {
   }
 
   saveFoodItemImage(Image) {
+    this.isDisabled = true;
     this._dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
-        this.isDisabled = true;
         Image.value = null;
         this.imageUrl = '/assets/noImage.png';
         this.router.navigate(['admin/food-item/grid-view']);
@@ -44,11 +47,21 @@ export class AddFoodItemImageComponent implements OnInit {
   }
 
   handleFileInput(file: FileList) {
-    this.fileToUpload = file.item(0);
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imageUrl = event.target.result;
-    };
-    reader.readAsDataURL(this.fileToUpload);
+    const fileExtension = file.item(0).name.split('.').pop();
+
+    if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png') {
+      this.isDisabled = false;
+      this.fileToUpload = file.item(0);
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imageUrl = event.target.result;
+      };
+      reader.readAsDataURL(this.fileToUpload);
+    } else {
+      this.Image.value = '';
+      this.isDisabled = true;
+      alert('Unsupported image format');
+    }
+
   }
 }

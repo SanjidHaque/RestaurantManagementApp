@@ -25,8 +25,11 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeTwo = '';
   uuidCodeThree = '';
   quantity : number;
+
+
   imageUrl = '/assets/noImage.png';
-  rootUrl = 'http://localhost:4202/Content/';
+  backEndPort = '1548';
+  rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
 
   subscription: Subscription;
   constructor(private _ourOfferService: OurOffersService) {

@@ -12,7 +12,9 @@ import {Subscription} from 'rxjs';
 export class FooditemGridViewComponent implements OnInit {
 
   imageUrl = 'assets/noImage.png';
-  rootUrl = 'http://localhost:4202/Content/';
+  backEndPort = '1548';
+  rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
+
   public FoodItem: FoodItems[] = [];
   subscription: Subscription;
   total: number;

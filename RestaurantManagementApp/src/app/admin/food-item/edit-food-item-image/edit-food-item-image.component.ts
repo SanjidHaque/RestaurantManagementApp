@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../our-offers/our-offers.service';
 import {DataStorageService} from '../../../shared/data-storage.service';
@@ -14,8 +14,10 @@ export class EditFoodItemImageComponent implements OnInit {
   fileToUpload: File = null;
   imageUrl = '';
   foodItems: FoodItems[] = [];
-  rootUrl = 'http://localhost:4202/Content/';
+  backEndPort = '1548';
+  rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
   isDisabled = false;
+  @ViewChild('Image') Image: any;
 
   constructor(private _route: ActivatedRoute,
               private router: Router,
@@ -65,11 +67,21 @@ export class EditFoodItemImageComponent implements OnInit {
   }
 
   handleFileInput(file: FileList) {
-    this.fileToUpload = file.item(0);
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imageUrl = event.target.result;
-    };
-    reader.readAsDataURL(this.fileToUpload);
+    const fileExtension = file.item(0).name.split('.').pop();
+
+    if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png') {
+      this.isDisabled = false;
+      this.fileToUpload = file.item(0);
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imageUrl = event.target.result;
+      };
+      reader.readAsDataURL(this.fileToUpload);
+    } else {
+      this.Image.value = '';
+      this.isDisabled = true;
+      alert('Unsupported image format');
+    }
+
   }
 }

@@ -13,27 +13,29 @@
 
 
     <div class="row upper-div">
-      <div class="col-md-6 order-header">
+      <div class="col-md-7 order-header">
         <div class="row">
-          <div class="col-md-4 order-ref">
+          <div class="col-md-3 order-ref">
             Order Ref
           </div>
-          <div class="col-md-6 id">
+          <div class="col-md-9 id">
             {{ order.Id }}
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="row">
-          <div class="col-md-4 order-date">
+          <div class="col-md-5 order-date">
             Order Date
           </div>
-          <div class="col-md-6 date">
+          <div class="col-md-7 date">
             {{ order.DateTime }}
           </div>
         </div>
       </div>
     </div>
+
+
     <div class="row prod">
       <div class="col-md-12">
         Products
@@ -55,7 +57,7 @@
     </div>
 
 
-<div *ngIf="order.OrderedItems !== null" class="scrollable-div" >
+<div *ngIf="order.OrderedItems.length !== 0; else orderedItemsDeleted" class="scrollable-div" >
     <div class="row table-bordered units-details" *ngFor="let products of order.OrderedItems">
       <div class="col-md-3" >
         {{ products.FoodItemName }}
@@ -71,6 +73,24 @@
       </div>
     </div>
 </div>
+
+    <ng-template #orderedItemsDeleted>
+
+      <div class="row">
+        <div class="col-md-12"
+             style="font-family: sans-serif;
+             padding-top: 15px;
+             opacity: .8;
+             font-size: 13px;
+             font-weight: bold;
+             color: #aa0909;">
+
+          Related records are deleted.
+
+        </div>
+      </div>
+
+    </ng-template>
 
     <div class="row ">
       <div class="col-md-offset-8 col-md-1 total">

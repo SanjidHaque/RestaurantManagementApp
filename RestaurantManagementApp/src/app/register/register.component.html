@@ -80,13 +80,14 @@
       <div class="col-md-12 form-group">
         <label>Choose a role from here</label>
         <select
+          style="cursor: pointer;"
           id="roleName"
           name="roleName"
           class="form-control"
           ngModel
           required
           >
-          <option  *ngFor="let item of roles" [value] ="item.Name" selected > {{ item.Name }} </option>
+          <option  *ngFor="let item of roles" [value] ="item.Name"  > {{ item.Name }} </option>
         </select>
       </div>
       <div class="row">
@@ -136,7 +137,8 @@
           <div class="col-md-10 content">
             Added on: {{ user.DateTime }}
           </div>
-          <div class="col-md-2" *ngIf="user.UserName !== 'DefaultUser' && user.UserName !== 'DefaultAdmin'">
+          <div class="col-md-2" *ngIf="user.UserName !== 'Admin'
+          && user.UserName !== 'Cashier'">
             <i
               title="Remove this user"
               style="cursor: pointer"

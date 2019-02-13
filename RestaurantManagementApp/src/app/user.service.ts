@@ -52,7 +52,9 @@ export class UserService {
       Id: '',
       NewPassword: ''
     };
-    return this.http.post(this.rootUrl + '/api/ResetPassword', body);
+    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.post(this.rootUrl + '/api/ResetPassword', body,
+      { headers: reqHeader });
   }
 
   newPassword(password: string, code: string) {
@@ -61,7 +63,9 @@ export class UserService {
       Id: code,
       NewPassword: password
     };
-    return this.http.post(this.rootUrl + '/api/NewPassword', body);
+
+    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.post(this.rootUrl + '/api/NewPassword', body, { headers: reqHeader});
   }
 
   roleMatch(allowedRoles) {

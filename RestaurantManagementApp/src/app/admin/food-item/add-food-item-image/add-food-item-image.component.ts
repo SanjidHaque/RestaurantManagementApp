@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import {DataStorageService} from '../../../shared/data-storage.service';
+import {DataStorageService} from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-add-food-item-image',
@@ -13,8 +13,7 @@ export class AddFoodItemImageComponent implements OnInit {
   foodItemId : string;
   fileToUpload: File = null;
   isDisabled = false;
-  imageUrl = '/assets/noImage.png';
-
+  imageUrl = 'assets/images/noImage.png';
   @ViewChild('Image') Image: any;
 
   constructor(private route: ActivatedRoute,

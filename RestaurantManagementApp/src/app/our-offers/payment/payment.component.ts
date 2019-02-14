@@ -1,13 +1,13 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DataStorageService} from '../../shared/data-storage.service';
-import {OurOffersService} from '../our-offers.service';
-import {Order} from '../../shared/order.model';
-import {OrderedItems} from '../../shared/ordered-items.model';
-import {Table} from '../../shared/table.model';
+import {DataStorageService} from '../../services/data-storage.service';
+import {OurOffersService} from '../../services/our-offers.service';
+import {Order} from '../../models/order.model';
+import {OrderedItems} from '../../models/ordered-items.model';
+import {Table} from '../../models/table.model';
 import {Subscription} from 'rxjs';
-import {Inventory} from '../../shared/inventory.model';
-import {FoodItems} from '../../shared/food-item.model';
+import {Inventory} from '../../models/inventory.model';
+import {FoodItems} from '../../models/food-item.model';
 import {UUID} from 'angular2-uuid';
 
 @Component({

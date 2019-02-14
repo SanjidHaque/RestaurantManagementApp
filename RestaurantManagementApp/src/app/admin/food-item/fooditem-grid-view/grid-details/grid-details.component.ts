@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FoodItems} from '../../../../shared/food-item.model';
-import {Ingredients} from '../../../../shared/ingredients.model';
+import {FoodItems} from '../../../../models/food-item.model';
+import {Ingredients} from '../../../../models/ingredients.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DataStorageService} from '../../../../shared/data-storage.service';
-import {OurOffersService} from '../../../../our-offers/our-offers.service';
+import {DataStorageService} from '../../../../services/data-storage.service';
+import {OurOffersService} from '../../../../services/our-offers.service';
 import {Http} from '@angular/http';
 
 @Component({
@@ -14,7 +14,7 @@ import {Http} from '@angular/http';
 export class GridDetailsComponent implements OnInit {
   backEndPort = '1548';
   rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
-  imageUrl = 'assets/noImage.png';
+  imageUrl = 'assets/images/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];
   FoodItem: FoodItems;

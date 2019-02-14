@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import {Subject} from 'rxjs';
-import {OrderedItems} from '../shared/ordered-items.model';
-import {Order} from '../shared/order.model';
-import {Inventory} from '../shared/inventory.model';
-import {FoodItems} from '../shared/food-item.model';
-import {Ingredients} from '../shared/ingredients.model';
-import {Table} from '../shared/table.model';
+import {OrderedItems} from '../models/ordered-items.model';
+import {Order} from '../models/order.model';
+import {Inventory} from '../models/inventory.model';
+import {FoodItems} from '../models/food-item.model';
+import {Ingredients} from '../models/ingredients.model';
+import {Table} from '../models/table.model';
 import {UUID} from 'angular2-uuid';
 
 

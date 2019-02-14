@@ -1,10 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Order} from '../../shared/order.model';
-import {OurOffersService} from '../our-offers.service';
-import {OrderedItems} from '../../shared/ordered-items.model';
+import {Order} from '../../models/order.model';
+import {OurOffersService} from '../../services/our-offers.service';
+import {OrderedItems} from '../../models/ordered-items.model';
 import {Subscription} from 'rxjs';
-import {FoodItems} from '../../shared/food-item.model';
-import {Inventory} from '../../shared/inventory.model';
+import {FoodItems} from '../../models/food-item.model';
+import {Inventory} from '../../models/inventory.model';
 import {UUID} from 'angular2-uuid';
 
 @Component({
@@ -26,9 +26,7 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeThree = '';
   quantity : number;
 
-
-  imageUrl = '/assets/noImage.png';
-  backEndPort = '1548';
+  imageUrl = 'assets/images/noImage.png';  backEndPort = '1548';
   rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
 
   subscription: Subscription;

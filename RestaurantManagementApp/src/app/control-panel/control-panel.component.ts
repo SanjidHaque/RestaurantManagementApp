@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Inventory} from '../shared/inventory.model';
+import {Inventory} from '../models/inventory.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OurOffersService} from '../our-offers/our-offers.service';
-import {UserService} from '../user.service';
+import {OurOffersService} from '../services/our-offers.service';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-control-panel',

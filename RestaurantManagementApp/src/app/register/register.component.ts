@@ -1,12 +1,12 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import {UserModel} from '../shared/user.model';
+import {UserModel} from '../models/user.model';
 import {NgForm} from '@angular/forms';
-import {UserService} from '../user.service';
-import {RoleModel} from '../shared/role.model';
+import {UserService} from '../services/user.service';
+import {RoleModel} from '../models/role.model';
 import {ActivatedRoute} from '@angular/router';
-import {ModifiedUserModel} from '../shared/modified-user.model';
+import {ModifiedUserModel} from '../models/modified-user.model';
 import {Subscription, Subject} from 'rxjs';
-import {Table} from '../shared/table.model';
+import {Table} from '../models/table.model';
 
 
 @Component({

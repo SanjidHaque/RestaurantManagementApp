@@ -1,12 +1,12 @@
-import {OurOffersService} from '../../../our-offers/our-offers.service';
-import {DataStorageService} from '../../../shared/data-storage.service';
+import {OurOffersService} from '../../../services/our-offers.service';
+import {DataStorageService} from '../../../services/data-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {FoodItems} from '../../../shared/food-item.model';
-import {Inventory} from '../../../shared/inventory.model';
+import {FoodItems} from '../../../models/food-item.model';
+import {Inventory} from '../../../models/inventory.model';
 import {Subject, Subscription} from 'rxjs';
-import {Ingredients} from '../../../shared/ingredients.model';
+import {Ingredients} from '../../../models/ingredients.model';
 import {UUID} from 'angular2-uuid';
 
 @Component({

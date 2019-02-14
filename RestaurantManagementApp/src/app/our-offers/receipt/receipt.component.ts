@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {DataStorageService} from '../../shared/data-storage.service';
-import {OurOffersService} from '../our-offers.service';
-import {Order} from '../../shared/order.model';
+import {DataStorageService} from '../../services/data-storage.service';
+import {OurOffersService} from '../../services/our-offers.service';
+import {Order} from '../../models/order.model';
 
 
 @Component({

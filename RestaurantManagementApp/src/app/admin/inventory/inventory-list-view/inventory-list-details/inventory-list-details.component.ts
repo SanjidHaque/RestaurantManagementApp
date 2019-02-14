@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {DataStorageService} from '../../../../shared/data-storage.service';
+import {DataStorageService} from '../../../../services/data-storage.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OurOffersService} from '../../../../our-offers/our-offers.service';
-import {Inventory} from '../../../../shared/inventory.model';
+import {OurOffersService} from '../../../../services/our-offers.service';
+import {Inventory} from '../../../../models/inventory.model';
 import {Subscription} from 'rxjs';
-import {InventoryHistoryModel} from '../../../../shared/inventory-history.model';
+import {InventoryHistoryModel} from '../../../../models/inventory-history.model';
 
 @Component({
   selector: 'app-inventory-list-details',

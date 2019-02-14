@@ -2,11 +2,11 @@
 import {Injectable} from '@angular/core';
 
 
-import {Order} from './order.model';
-import {Inventory} from './inventory.model';
-import {FoodItems} from './food-item.model';
-import {Table} from './table.model';
-import {InventoryHistoryModel} from './inventory-history.model';
+import {Order} from '../models/order.model';
+import {Inventory} from '../models/inventory.model';
+import {FoodItems} from '../models/food-item.model';
+import {Table} from '../models/table.model';
+import {InventoryHistoryModel} from '../models/inventory-history.model';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()
@@ -15,16 +15,9 @@ export class DataStorageService {
   private backEndPort = '1548';
 
   public order: Order;
-  private _foodItemJson = 'assets/food-item.json';
   private _foodItemApi = 'http://localhost:' + this.backEndPort + '/api/GetFoodItems';
-
-  private _inventoryJson = 'assets/inventories.json';
   private _inventoryApi = 'http://localhost:' + this.backEndPort + '/api/GetInventories';
-
-  private _tableJson = 'assets/tables.json';
   private _tableApi = 'http://localhost:' + this.backEndPort + '/api/GetTables';
-
-  private _orderJson  = 'assets/order.json';
   private _orderApi  = 'http://localhost:' + this.backEndPort + '/api/GetOrders';
 
   constructor(private _http: HttpClient) {

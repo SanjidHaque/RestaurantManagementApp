@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {OurOffersService} from '../../../our-offers/our-offers.service';
+import {OurOffersService} from '../../../services/our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Order} from '../../../shared/order.model';
+import {Order} from '../../../models/order.model';
 
 @Component({
   selector: 'app-order-grid-view',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {OurOffersService} from '../../../our-offers/our-offers.service';
-import {DataStorageService} from '../../../shared/data-storage.service';
-import {Table} from '../../../shared/table.model';
+import {OurOffersService} from '../../../services/our-offers.service';
+import {DataStorageService} from '../../../services/data-storage.service';
+import {Table} from '../../../models/table.model';
 import {UUID} from 'angular2-uuid';
 
 @Component({

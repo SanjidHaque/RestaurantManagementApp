@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import {Table} from '../../shared/table.model';
+import {Order} from '../models/order.model';
 import {Observable} from 'rxjs';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {DataStorageService} from '../../shared/data-storage.service';
+import {DataStorageService} from '../services/data-storage.service';
 
 @Injectable()
-export class TableResolverService implements Resolve<Table> {
+export class OrderResolverService implements Resolve<Order> {
 
   constructor(private _dataStorageService: DataStorageService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> |
-      Promise<any> | any {
-    return this._dataStorageService.getTables();
+    Promise<any> | any {
+    return this._dataStorageService.getOrders();
   }
 
 }
-
-

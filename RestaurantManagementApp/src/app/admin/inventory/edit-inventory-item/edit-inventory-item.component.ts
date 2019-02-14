@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OurOffersService} from '../../../our-offers/our-offers.service';
-import {Inventory} from '../../../shared/inventory.model';
+import {OurOffersService} from '../../../services/our-offers.service';
+import {Inventory} from '../../../models/inventory.model';
 import {NgForm} from '@angular/forms';
-import {DataStorageService} from '../../../shared/data-storage.service';
-import {InventoryHistoryModel} from '../../../shared/inventory-history.model';
+import {DataStorageService} from '../../../services/data-storage.service';
+import {InventoryHistoryModel} from '../../../models/inventory-history.model';
 import {Subscription} from 'rxjs';
 
 @Component({

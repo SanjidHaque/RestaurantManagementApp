@@ -1,5 +1,5 @@
-import {UserService} from '../user.service';
-import {ModifiedUserModel} from './modified-user.model';
+import {UserService} from '../services/user.service';
+import {ModifiedUserModel} from '../models/modified-user.model';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';

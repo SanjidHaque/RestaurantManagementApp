@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {OurOffersService} from '../../../../our-offers/our-offers.service';
-import {DataStorageService} from '../../../../shared/data-storage.service';
+import {OurOffersService} from '../../../../services/our-offers.service';
+import {DataStorageService} from '../../../../services/data-storage.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OrderedItems} from '../../../../shared/ordered-items.model';
-import {Order} from '../../../../shared/order.model';
+import {OrderedItems} from '../../../../models/ordered-items.model';
+import {Order} from '../../../../models/order.model';
 
 @Component({
   selector: 'app-order-grid-view-details',

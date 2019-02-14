@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
-import {ModifiedUserModel} from './shared/modified-user.model';
+import {ModifiedUserModel} from '../models/modified-user.model';
 import {Subject} from 'rxjs';
 
 @Injectable()

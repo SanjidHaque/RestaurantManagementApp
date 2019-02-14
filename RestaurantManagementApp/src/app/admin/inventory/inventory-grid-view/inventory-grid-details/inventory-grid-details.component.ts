@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {InventoryHistoryModel} from '../../../../shared/inventory-history.model';
-import {Inventory} from '../../../../shared/inventory.model';
+import {InventoryHistoryModel} from '../../../../models/inventory-history.model';
+import {Inventory} from '../../../../models/inventory.model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OurOffersService} from '../../../../our-offers/our-offers.service';
-import {DataStorageService} from '../../../../shared/data-storage.service';
+import {OurOffersService} from '../../../../services/our-offers.service';
+import {DataStorageService} from '../../../../services/data-storage.service';
 
 @Component({
   selector: 'app-inventory-grid-details',

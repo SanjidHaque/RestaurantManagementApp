@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OurOffersService} from '../../../../our-offers/our-offers.service';
-import {DataStorageService} from '../../../../shared/data-storage.service';
-import {Order} from '../../../../shared/order.model';
-import {OrderedItems} from '../../../../shared/ordered-items.model';
+import {OurOffersService} from '../../../../services/our-offers.service';
+import {DataStorageService} from '../../../../services/data-storage.service';
+import {Order} from '../../../../models/order.model';
+import {OrderedItems} from '../../../../models/ordered-items.model';
 @Component({
   selector: 'app-order-list-view-details',
   templateUrl: './order-list-view-details.component.html',

@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OurOffersService} from '../../../our-offers/our-offers.service';
-import {DataStorageService} from '../../../shared/data-storage.service';
-import {FoodItems} from '../../../shared/food-item.model';
+import {OurOffersService} from '../../../services/our-offers.service';
+import {DataStorageService} from '../../../services/data-storage.service';
+import {FoodItems} from '../../../models/food-item.model';
 
 @Component({
   selector: 'app-edit-food-item-image',
@@ -42,7 +42,7 @@ export class EditFoodItemImageComponent implements OnInit {
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].Id === this.foodItemId) {
         if ( this.foodItems[i].FoodItemImage === null || this.foodItems[i].FoodItemImage === '' ) {
-          this.imageUrl = '/assets/noImage.png';
+          this.imageUrl = '/assets/images/noImage.png';
         } else {
           this.imageUrl = this.rootUrl + this.foodItems[i].FoodItemImage;
         }

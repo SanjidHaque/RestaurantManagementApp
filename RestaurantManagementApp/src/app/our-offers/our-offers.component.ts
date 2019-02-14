@@ -1,12 +1,12 @@
 import {Component, DoCheck, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {OurOffersService} from './our-offers.service';
+import {OurOffersService} from '../services/our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {OrderedItems} from '../shared/ordered-items.model';
-import {Order} from '../shared/order.model';
-import {FoodItems} from '../shared/food-item.model';
-import {Inventory} from '../shared/inventory.model';
-import {UserService} from '../user.service';
+import {OrderedItems} from '../models/ordered-items.model';
+import {Order} from '../models/order.model';
+import {FoodItems} from '../models/food-item.model';
+import {Inventory} from '../models/inventory.model';
+import {UserService} from '../services/user.service';
 import {UUID} from 'angular2-uuid';
 
 

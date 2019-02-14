@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {OurOffersService} from '../../../../our-offers/our-offers.service';
+import {OurOffersService} from '../../../../services/our-offers.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {FoodItems} from '../../../../shared/food-item.model';
-import {DataStorageService} from '../../../../shared/data-storage.service';
-import {Ingredients} from '../../../../shared/ingredients.model';
+import {FoodItems} from '../../../../models/food-item.model';
+import {DataStorageService} from '../../../../services/data-storage.service';
+import {Ingredients} from '../../../../models/ingredients.model';
 
 @Component({
   selector: 'app-list-details',
@@ -14,8 +14,7 @@ export class ListDetailsComponent implements OnInit {
 
   backEndPort = '1548';
   rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
-  imageUrl = 'assets/noImage.png';
-  FoodItemList: FoodItems[] = [];
+  imageUrl = 'assets/images/noImage.png';  FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];
   FoodItem: FoodItems;
   foodItemId: string;

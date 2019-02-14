@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Inventory} from '../../shared/inventory.model';
+import {Inventory} from '../../models/inventory.model';
 import {Subscription} from 'rxjs';
 
 

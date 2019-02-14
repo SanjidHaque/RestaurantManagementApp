@@ -1,9 +1,9 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import {Table} from '../../../shared/table.model';
+import {Table} from '../../../models/table.model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OurOffersService} from '../../../our-offers/our-offers.service';
-import {DataStorageService} from '../../../shared/data-storage.service';
+import {OurOffersService} from '../../../services/our-offers.service';
+import {DataStorageService} from '../../../services/data-storage.service';
 import {NgForm} from '@angular/forms';
 
 @Component({

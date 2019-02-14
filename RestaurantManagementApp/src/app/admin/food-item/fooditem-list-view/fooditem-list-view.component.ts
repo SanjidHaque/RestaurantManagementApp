@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FoodItems} from '../../../shared/food-item.model';
+import {FoodItems} from '../../../models/food-item.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OurOffersService} from '../../../our-offers/our-offers.service';
+import {OurOffersService} from '../../../services/our-offers.service';
 
 @Component({
   selector: 'app-fooditem-list-view',

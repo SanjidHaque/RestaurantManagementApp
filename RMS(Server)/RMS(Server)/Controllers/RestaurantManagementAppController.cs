@@ -381,13 +381,15 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteFoodItem")]
         public void FoodItemDelete(FoodItem foodItem)
         {
-           var getOrderedItems = _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
+            var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+            
+            DeleteFoodItemImage(deleteFoodItem);
+            var getOrderedItems = _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
             _context.OrderedItems.RemoveRange(getOrderedItems);
             var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
            _context.Ingredients.RemoveRange(deleteIngredients);
-           var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
-           _context.FoodItems.Remove(deleteFoodItem);
-           _context.SaveChanges();           
+            _context.FoodItems.Remove(deleteFoodItem);
+            _context.SaveChanges();           
          }
 
         [HttpPost]
@@ -407,6 +409,19 @@ namespace RMS_Server_.Controllers
             _context.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.Created);
         }
+
+
+      
+        public void DeleteFoodItemImage(FoodItem foodItem)
+        {
+            var filePath = HttpContext.Current.Server.MapPath("~/Content/" + foodItem.FoodItemImage);
+            if ((System.IO.File.Exists(filePath)))
+            {
+                System.IO.File.Delete(filePath);
+            }
+          
+        }
+ 
 
     }
 }

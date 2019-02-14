@@ -43,7 +43,7 @@ export class UserService {
 
 
   getAllRoles() {
-    return this.http.get('/assets/role.json');
+    return this.http.get('/assets/mock-data/role.json');
   }
 
   resetPassword(userName: string) {

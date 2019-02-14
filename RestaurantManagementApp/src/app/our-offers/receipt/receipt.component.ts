@@ -65,27 +65,25 @@ export class ReceiptComponent implements OnInit {
   }
   .hodoo{
     font-family:"Inconsolata";
-    font-size: 21px;
+    font-size: 4vw;
     text-align: center;
     padding-top: 10px;
   }
   .date-time{
    font-family:"Inconsolata";
-   font-size: 21px;
+   font-size: 4vw;
    display: inline-block;
-   padding-right: 66px;
-   text-align:right;
+   text-align:center;
   }
 .id{
    font-family:"Inconsolata";
-   font-size: 21px;
+   font-size: 4vw;
    display: inline;
-   padding-left: -25px;
-  text-align: right;
+   text-align: center;
 }
 .name, .price, .quantity, .equal, .sub-total, .mul{
     font-family:"Inconsolata";
-    font-size: 20px;
+    font-size: 3vw;
     padding-top: 2px;
     padding-bottom: 2px;
     display: inline;
@@ -102,25 +100,15 @@ export class ReceiptComponent implements OnInit {
 .intro{
     margin-top: 15px;
   }
-.price{
- /* padding-left: 60px;*/
-  }
+
+
 .sub-total{
-/*padding-left: 70px;*/
 text-align: right;
 }
-.quantity{
-   /* padding-left: 70px;*/
-  }
-  .mul{
-   /* padding-left: 90px;*/
-  }
-  .equal{
-  /*padding-left: 50px;*/
-  }
+
   .choosing-hodoo{
     font-family:"Inconsolata";
-    font-size: 21px;
+    font-size: 3vw;
     padding-top: 15px;
     padding-bottom: 20px;
     text-align: center;
@@ -132,12 +120,12 @@ text-align: right;
   }
   .total{
     font-family:"Inconsolata";
-    font-size: 24px;
+    font-size: 4vw;
      display: inline-block;
   }
   .total-bdt{
     font-family:"Inconsolata";
-    font-size: 24px;
+    font-size: 4vw;
      display: inline-block;
   }
    .change-div{
@@ -147,12 +135,12 @@ text-align: right;
   }
   .change-bdt{
     font-family:"Inconsolata";
-    font-size: 21px;
+    font-size: 4vw;
      display: inline-block;
   }
   .change-cash{
     font-family:"Inconsolata";
-    font-size: 21px;
+    font-size: 4vw;
     display: inline-block;
   }
 .tendered-div{
@@ -162,19 +150,18 @@ text-align: right;
   }
   .tendered{
     font-family:"Inconsolata";
-    font-size: 21px;
+    font-size: 4vw;
     display: inline-block;
   }
   .tendered-bdt{
     font-family:"Inconsolata";
-    font-size: 21px;
+    font-size: 4vw;
     display: inline-block;
   }
   .table-no{
     text-align: center;
     font-family:"Inconsolata";
-    font-size: 21px;
-
+    font-size: 4vw;
   }
  }
 </style>

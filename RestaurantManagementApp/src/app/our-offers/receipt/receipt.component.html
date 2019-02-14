@@ -38,10 +38,23 @@
 
   <div class="row print-row">
     <div class="col-md-offset-4 col-md-4" id="print-section">
-      <div class="col-md-12 intro">
-        <div class="col-md-6 date-time">{{ order.DateTime }}</div>
-        <div class="col-md-6 id">{{ order.Id }}</div>
+
+      <div class="intro">
+
+        <div class="row date-time" >
+          <div class="col-md-12">
+            {{ order.DateTime }}
+          </div>
+        </div>
+        <div class="row id ">
+          <div class="cl-md-12">
+            {{ order.Id }}
+          </div>
+        </div>
+
       </div>
+
+
       <div class="row">
         <div class="col-md-12 table-no">
           Table: {{ order.TableNo }}

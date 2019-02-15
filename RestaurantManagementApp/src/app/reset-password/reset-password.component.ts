@@ -21,10 +21,12 @@ export class ResetPasswordComponent implements OnInit {
     this.isDisabled = true;
     this.userService.resetPassword(form.value.UserName).subscribe((data: any) => {
        if (data === 'User Name Found') {
+         this.isDisabled = false;
         form.reset();
         alert('A password recovery code has sent to your email');
         this.router.navigate(['/new-password']);
       } else {
+         this.isDisabled = false;
         alert('Incorrect user name!');
       }
     });

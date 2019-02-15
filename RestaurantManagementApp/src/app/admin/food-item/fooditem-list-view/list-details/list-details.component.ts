@@ -13,7 +13,7 @@ import {Ingredients} from '../../../../models/ingredients.model';
 export class ListDetailsComponent implements OnInit {
 
   rootUrl = '';
-  imageUrl = 'assets/images/noImage.png';
+  imageUrl = 'assets/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];
   FoodItem: FoodItems;

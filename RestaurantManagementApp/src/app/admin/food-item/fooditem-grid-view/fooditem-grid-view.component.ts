@@ -12,7 +12,7 @@ import {DataStorageService} from '../../../services/data-storage.service';
 })
 export class FooditemGridViewComponent implements OnInit {
 
-  imageUrl = 'assets/images/noImage.png';
+  imageUrl = 'assets/noImage.png';
   rootUrl = '';
   public FoodItem: FoodItems[] = [];
   subscription: Subscription;

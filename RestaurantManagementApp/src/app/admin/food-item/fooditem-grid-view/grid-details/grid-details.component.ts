@@ -13,7 +13,7 @@ import {Http} from '@angular/http';
 })
 export class GridDetailsComponent implements OnInit {
   rootUrl = '';
-  imageUrl = 'assets/images/noImage.png';
+  imageUrl = 'assets/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];
   FoodItem: FoodItems;

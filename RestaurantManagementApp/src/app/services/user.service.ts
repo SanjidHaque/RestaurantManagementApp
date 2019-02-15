@@ -2,9 +2,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-
 import {ModifiedUserModel} from '../models/modified-user.model';
-import {Subject} from 'rxjs';
 import {Role} from '../models/role.model';
 import {DataStorageService} from './data-storage.service';
 
@@ -12,9 +10,6 @@ import {DataStorageService} from './data-storage.service';
 export class UserService {
 
   rootUrl = '';
-
-  public modifiedUser: ModifiedUserModel[] = [];
-  public modifiedUserChanged =  new Subject<ModifiedUserModel[]>();
 
   constructor(private http: HttpClient,
               private dataStorageService: DataStorageService) {
@@ -45,7 +40,7 @@ export class UserService {
 
 
   getAllRoles() {
-    return this.http.get<Role[]>('/assets/mock-data/role.json');
+    return this.http.get<Role[]>('/assets/role.json');
   }
 
   resetPassword(userName: string) {
@@ -82,19 +77,12 @@ export class UserService {
     return isMatch;
   }
 
-  deleteUser(user: ModifiedUserModel, index: number) {
-    this.modifiedUser.splice(index, 1);
-    this.modifiedUserChanged.next(this.modifiedUser.slice());
-    return this.http.post(this.rootUrl + '/api/DeleteUser', user).subscribe();
+  deleteUser(user: ModifiedUserModel) {
+    return this.http.post(this.rootUrl + '/api/DeleteUser', user);
   }
 
   getUsers() {
     return this.http.get<ModifiedUserModel[]>(this.rootUrl + '/api/GetUsersList');
-  }
-
-  addToUserList(user: ModifiedUserModel) {
-    this.modifiedUser.push(user);
-    this.modifiedUserChanged.next(this.modifiedUser.slice());
   }
 
 }

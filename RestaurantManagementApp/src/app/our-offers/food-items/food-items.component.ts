@@ -27,7 +27,7 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeThree = '';
   quantity : number;
 
-  imageUrl = 'assets/images/noImage.png';
+  imageUrl = 'assets/noImage.png';
   rootUrl = '';
 
   subscription: Subscription;

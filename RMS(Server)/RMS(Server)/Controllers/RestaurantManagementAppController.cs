@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Migrations;
-using System.Data.Entity.Validation;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
-using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using System.Data.Entity;
@@ -23,41 +18,34 @@ using System.Web.Http.Cors;
 
 namespace RMS_Server_.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]  
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]  
     public class RestaurantManagementAppController : ApiController
     {
-        
-   
-        private ApplicationDbContext _context;
-
+        private readonly ApplicationDbContext _context;
         private RestaurantManagementAppController()
         {
             _context = new ApplicationDbContext();
         }
        
 
-
-
-
-
         [HttpPost]
         [Route("api/ResetPassword")]
         [AllowAnonymous]
         public string ResetPassword(ForgotPassword forgotPassword)
         {
-            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            var manager = new UserManager<ApplicationUser>(userStore);
-            var provider = new DpapiDataProtectionProvider("Sample");
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
 
             manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
-            var user = manager.FindByName(forgotPassword.UserName);
+            ApplicationUser user = manager.FindByName(forgotPassword.UserName);
        
-
+    
            
             if (user != null)
             {
                 string code = manager.GeneratePasswordResetToken(user.Id);
-                var email = manager.GetEmail(user.Id);
+                string email = manager.GetEmail(user.Id);
                 string fromaddr = "apphodoo@gmail.com";
                 string toaddr = email;
                 string password = "hodoo123";
@@ -77,9 +65,9 @@ namespace RMS_Server_.Controllers
                 smtp.Credentials = nc;
                 smtp.Send(msg);
 
+          
 
-
-                var callbackUrl = string.Format("http://www.google.com?userId={0}&code={1}", user.Id, code);
+                string callbackUrl = string.Format("http://www.google.com?userId={0}&code={1}", user.Id, code);
                 manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                 return "User Name Found";
@@ -92,12 +80,12 @@ namespace RMS_Server_.Controllers
         [AllowAnonymous]
         public string NewPassword(ForgotPassword forgotPassword)
         {
-            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            var manager = new UserManager<ApplicationUser>(userStore);
-            var provider = new DpapiDataProtectionProvider("Sample");
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
 
             manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
-            var user = manager.FindById(forgotPassword.Id);
+            ApplicationUser user = manager.FindById(forgotPassword.Id);
             if (user != null)
             {
                 String hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
@@ -112,9 +100,9 @@ namespace RMS_Server_.Controllers
 
         [Route("api/GetUsersList")]
         [HttpGet]
-        public List<ModifiedUser>  GetUsersList()
+        public List<ModifiedUser> GetUsersList()
         {
-           var modifiedUser = _context.ModifiedUsers.OrderBy(x => x.UserName).ToList();
+           List<ModifiedUser> modifiedUser = _context.ModifiedUsers.OrderBy(x => x.UserName).ToList();
            return modifiedUser;
         }
 
@@ -123,13 +111,23 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public void DeleteUser(AccountModel accountModel)
         {
-            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            var manager = new UserManager<ApplicationUser>(userStore);
-            var user = _context.Users.FirstOrDefault(p => p.UserName == accountModel.UserName);
-            var modifiedUser = _context.ModifiedUsers.FirstOrDefault(q => q.UserName == accountModel.UserName);
-            manager.RemoveFromRole(user.Id, accountModel.Role);
-            _context.ModifiedUsers.Remove(modifiedUser);
-            _context.Users.Remove(user);
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            ApplicationUser user = _context.Users.FirstOrDefault(p => p.UserName == accountModel.UserName);
+          
+            if (user != null)
+            {
+                manager.RemoveFromRole(user.Id, accountModel.Role);
+                
+                _context.Users.Remove(user);
+            }
+
+            ModifiedUser modifiedUser = _context.ModifiedUsers
+                .FirstOrDefault(q => q.UserName == accountModel.UserName);
+            if (modifiedUser != null)
+            {
+                _context.ModifiedUsers.Remove(modifiedUser);
+            }
             _context.SaveChanges();
         }
         
@@ -137,10 +135,10 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public IdentityResult Register(AccountModel model)
         {
-            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            var manager = new UserManager<ApplicationUser>(userStore);
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
            
-            var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
+            ApplicationUser user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 3
@@ -168,7 +166,7 @@ namespace RMS_Server_.Controllers
         [HttpGet]
         public List<FoodItem> GetFoodItems()
         {
-            var foodItems = _context.FoodItems.Include(c => c.Ingredients).OrderBy(x => x.Name).ToList();
+            List<FoodItem> foodItems = _context.FoodItems.Include(c => c.Ingredients).OrderBy(x => x.Name).ToList();
             return foodItems;
         }
 
@@ -181,10 +179,14 @@ namespace RMS_Server_.Controllers
         {
             for (int i = 0; i < orders.OrderedItems.Count; i++)
             {
-                var foodItemId = orders.OrderedItems[i].FoodItemId;
-                var soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
-                soldFoodItem.TotalSale++;
-                var foodItems = _context.FoodItems.Include(b => b.Ingredients).ToList();
+                string foodItemId = orders.OrderedItems[i].FoodItemId;
+                FoodItem soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
+                if (soldFoodItem != null)
+                {
+                    soldFoodItem.TotalSale++;
+                }
+             
+                List<FoodItem> foodItems = _context.FoodItems.Include(b => b.Ingredients).ToList();
                 for (int j = 0; j < foodItems.Count; j++)
                 {
                     if (foodItems[j].Id == foodItemId)
@@ -193,8 +195,8 @@ namespace RMS_Server_.Controllers
                         {
                             var quantity = foodItems[j].Ingredients[k].Quantity;
                             var totalQuantity = quantity*orders.OrderedItems[i].FoodItemQuantity;
-                            var inventoryId = foodItems[j].Ingredients[k].InventoryId;
-                            var inventory = _context.Inventories.ToList();
+                            string inventoryId = foodItems[j].Ingredients[k].InventoryId;
+                            List<Inventory> inventory = _context.Inventories.ToList();
                             for (int l = 0; l < inventory.Count; l++)
                             {
                                 if (inventory[l].Id == inventoryId)
@@ -217,14 +219,12 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public void DeleteOrder(Order orders)
         {
-            var deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
+            Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
             if (deleteOrder != null)
             {
-                var deleteOrderedItems = _context.OrderedItems.Where(b => b.OrderId == deleteOrder.Id).ToList();
-                if (deleteOrderedItems != null)
-                {
-                    _context.OrderedItems.RemoveRange(deleteOrderedItems);
-                }
+                List<OrderedItems> deleteOrderedItems = _context.OrderedItems
+                    .Where(b => b.OrderId == deleteOrder.Id).ToList();
+                _context.OrderedItems.RemoveRange(deleteOrderedItems);
                 _context.Orders.Remove(deleteOrder);
                 _context.SaveChanges();
             }
@@ -235,7 +235,7 @@ namespace RMS_Server_.Controllers
         [Route("api/GetOrders")]
         public List<Order> Order()
         {
-            return _context.Orders.Include(b => b.OrderedItems).OrderBy(x => x.DateTime).ToList();
+            return _context.Orders.Include(b => b.OrderedItems).OrderBy(x => x.Profit).ToList();
         }
 
         [HttpGet]
@@ -265,7 +265,7 @@ namespace RMS_Server_.Controllers
         [Route("api/EditTable")]
         public void EditTable(Table table)
         {
-            var getEdited = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+            Table getEdited = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
             if (getEdited != null)
             {
                 getEdited.Name = table.Name;
@@ -277,13 +277,11 @@ namespace RMS_Server_.Controllers
       
         public void DeleteTable(Table table)
         {
-            var deleteTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
-            if (deleteTable!=null)
-            {
-                _context.Tables.Remove(deleteTable);
-                _context.SaveChanges();
-            }
-          
+            Table deleteTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+            if (deleteTable == null) return;
+            _context.Tables.Remove(deleteTable);
+            _context.SaveChanges();
+
         }
 
 
@@ -302,9 +300,13 @@ namespace RMS_Server_.Controllers
         [Route("api/EditInventoryItem")]
         public void EditInventoryItem(Inventory inventory)
         {          
-             var getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-             getEdited.Name = inventory.Name;
-             getEdited.Unit = inventory.Unit;
+            Inventory getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+            if (getEdited != null)
+            {
+                getEdited.Name = inventory.Name;
+                getEdited.Unit = inventory.Unit;
+            }
+
             _context.SaveChanges();
          }
 
@@ -313,24 +315,32 @@ namespace RMS_Server_.Controllers
         [Route("api/UpdateInventoryHistory")]
         public void UpdateInventoryHistory(InventoryHistoryModel inventoryHistoryModel)
         {
-            var inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistoryModel.InventoryId);
-            inventory.RemainingQuantity += inventoryHistoryModel.UpdatedQuantity;
-            _context.InventoryHistoryModels.Add(inventoryHistoryModel);
-            _context.SaveChanges();
-            var inventoryHistory =
-                _context.InventoryHistoryModels.Where(q => q.InventoryId == inventoryHistoryModel.InventoryId).ToList();
-            int totalPrice = 0;
-            for (int i = 0; i < inventoryHistory.Count; i++)
+            Inventory inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistoryModel.InventoryId);
+            if (inventory != null)
             {
-                totalPrice += (inventoryHistory[i].CurrentPrice * inventoryHistory[i].UpdatedQuantity);
+                inventory.RemainingQuantity += inventoryHistoryModel.UpdatedQuantity;
+                _context.InventoryHistoryModels.Add(inventoryHistoryModel);
+                _context.SaveChanges();
+                List<InventoryHistoryModel> inventoryHistory =
+                    _context.InventoryHistoryModels
+                        .Where(q => q.InventoryId == inventoryHistoryModel.InventoryId)
+                        .ToList();
+                int totalPrice = 0;
+                for (int i = 0; i < inventoryHistory.Count; i++)
+                {
+                    totalPrice += (inventoryHistory[i].CurrentPrice * inventoryHistory[i].UpdatedQuantity);
+                }
+
+                int totalWeight = 0;
+                for (int i = 0; i < inventoryHistory.Count; i++)
+                {
+                    totalWeight += inventoryHistory[i].UpdatedQuantity;
+                }
+
+                int averagePrice = totalPrice / totalWeight;
+                inventory.AveragePrice = averagePrice;
             }
-            int totalWeight = 0;
-            for (int i = 0; i < inventoryHistory.Count; i++)
-            {
-                totalWeight += inventoryHistory[i].UpdatedQuantity;
-            }
-            int averagePrice = totalPrice/totalWeight;
-            inventory.AveragePrice = averagePrice;
+
             _context.SaveChanges();
         }
 
@@ -340,12 +350,16 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteInventoryItem")]
         public void DeleteInventoryItem(Inventory inventory)
         {
-            var getIngredientsDeleted = _context.Ingredients.Where(p => p.InventoryId == inventory.Id).ToList();
+            List<Ingredient> getIngredientsDeleted = _context.Ingredients
+                .Where(p => p.InventoryId == inventory.Id)
+                .ToList();
             _context.Ingredients.RemoveRange(getIngredientsDeleted);
-            var deleteInvHistory = _context.InventoryHistoryModels.Where(q => q.InventoryId == inventory.Id).ToList();
+            List<InventoryHistoryModel> deleteInvHistory = _context.InventoryHistoryModels
+                .Where(q => q.InventoryId == inventory.Id)
+                .ToList();
             _context.InventoryHistoryModels.RemoveRange(deleteInvHistory);
-            var getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-            _context.Inventories.Remove(getDeleted);
+            Inventory getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+            if (getDeleted != null) _context.Inventories.Remove(getDeleted);
             _context.SaveChanges();
         }
 
@@ -363,13 +377,17 @@ namespace RMS_Server_.Controllers
         [Route("api/EditFoodItem")]
         public void FoodItemEdit(FoodItem foodItem)
         {
-            var editedFoodItem = _context.FoodItems.Include(c => c.Ingredients).FirstOrDefault(p => p.Id == foodItem.Id);
-            editedFoodItem.Name = foodItem.Name;
-            editedFoodItem.Price = foodItem.Price;
-            editedFoodItem.SerialNo = foodItem.SerialNo;
-            editedFoodItem.MakingCost = foodItem.MakingCost;
-            editedFoodItem.Profit = foodItem.Profit;
-            _context.Ingredients.RemoveRange(editedFoodItem.Ingredients);
+            FoodItem editedFoodItem = _context.FoodItems.Include(c => c.Ingredients).FirstOrDefault(p => p.Id == foodItem.Id);
+            if (editedFoodItem != null)
+            {
+                editedFoodItem.Name = foodItem.Name;
+                editedFoodItem.Price = foodItem.Price;
+                editedFoodItem.SerialNo = foodItem.SerialNo;
+                editedFoodItem.MakingCost = foodItem.MakingCost;
+                editedFoodItem.Profit = foodItem.Profit;
+                _context.Ingredients.RemoveRange(editedFoodItem.Ingredients);
+            }
+
             _context.Ingredients.AddRange(foodItem.Ingredients);
             _context.SaveChanges();
         }
@@ -381,15 +399,22 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteFoodItem")]
         public void FoodItemDelete(FoodItem foodItem)
         {
-            var deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
-            
-            DeleteFoodItemImage(deleteFoodItem);
-            var getOrderedItems = _context.OrderedItems.Where(p => p.FoodItemId == foodItem.Id).ToList();
-            _context.OrderedItems.RemoveRange(getOrderedItems);
-            var deleteIngredients = _context.Ingredients.Where(p => p.FooditemId == foodItem.Id).ToList();
-           _context.Ingredients.RemoveRange(deleteIngredients);
-            _context.FoodItems.Remove(deleteFoodItem);
-            _context.SaveChanges();           
+            FoodItem deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
+            if (deleteFoodItem != null)
+            {
+                DeleteFoodItemImage(deleteFoodItem);
+                List<OrderedItems> getOrderedItems = _context.OrderedItems
+                    .Where(p => p.FoodItemId == foodItem.Id)
+                    .ToList();
+
+                _context.OrderedItems.RemoveRange(getOrderedItems);
+                List<Ingredient> deleteIngredients = _context.Ingredients
+                    .Where(p => p.FooditemId == foodItem.Id)
+                    .ToList();
+                _context.Ingredients.RemoveRange(deleteIngredients);
+                _context.FoodItems.Remove(deleteFoodItem);
+                _context.SaveChanges();
+            }
          }
 
         [HttpPost]
@@ -397,15 +422,15 @@ namespace RMS_Server_.Controllers
         public HttpResponseMessage SaveFoodItemImage()
         {
             string imageName = null;
-            var httpRequest = HttpContext.Current.Request;         
-            var postedFile = httpRequest.Files["Image"];         
+            HttpRequest httpRequest = HttpContext.Current.Request;         
+            HttpPostedFile postedFile = httpRequest.Files["Image"];         
             imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
             imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
-            var filePath = HttpContext.Current.Server.MapPath("~/Content/" + imageName);
+            string filePath = HttpContext.Current.Server.MapPath("~/Content/" + imageName);
             postedFile.SaveAs(filePath);
-            var uploadedImageId = httpRequest["FoodItemId"];           
-            var foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
-            foodItem.FoodItemImage = imageName;
+            string uploadedImageId = httpRequest["FoodItemId"];           
+            FoodItem foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
+            if (foodItem != null) foodItem.FoodItemImage = imageName;
             _context.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.Created);
         }
@@ -414,7 +439,7 @@ namespace RMS_Server_.Controllers
       
         public void DeleteFoodItemImage(FoodItem foodItem)
         {
-            var filePath = HttpContext.Current.Server.MapPath("~/Content/" + foodItem.FoodItemImage);
+            string filePath = HttpContext.Current.Server.MapPath("~/Content/" + foodItem.FoodItemImage);
             if ((System.IO.File.Exists(filePath)))
             {
                 System.IO.File.Delete(filePath);

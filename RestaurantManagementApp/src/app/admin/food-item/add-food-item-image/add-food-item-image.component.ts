@@ -13,7 +13,7 @@ export class AddFoodItemImageComponent implements OnInit {
   foodItemId : string;
   fileToUpload: File = null;
   isDisabled = false;
-  imageUrl = 'assets/images/noImage.png';
+  imageUrl = 'assets/noImage.png';
   @ViewChild('Image') Image: any;
 
   constructor(private route: ActivatedRoute,

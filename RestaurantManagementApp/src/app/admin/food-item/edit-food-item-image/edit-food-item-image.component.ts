@@ -42,7 +42,7 @@ export class EditFoodItemImageComponent implements OnInit {
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].Id === this.foodItemId) {
         if ( this.foodItems[i].FoodItemImage === null || this.foodItems[i].FoodItemImage === '' ) {
-          this.imageUrl = '/assets/images/noImage.png';
+          this.imageUrl = '/assets/noImage.png';
         } else {
           this.imageUrl = this.rootUrl + this.foodItems[i].FoodItemImage;
         }

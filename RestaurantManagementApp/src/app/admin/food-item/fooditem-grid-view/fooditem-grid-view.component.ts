@@ -3,6 +3,7 @@ import {FoodItems} from '../../../models/food-item.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OurOffersService} from '../../../services/our-offers.service';
 import {Subscription} from 'rxjs';
+import {DataStorageService} from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-fooditem-grid-view',
@@ -12,26 +13,26 @@ import {Subscription} from 'rxjs';
 export class FooditemGridViewComponent implements OnInit {
 
   imageUrl = 'assets/images/noImage.png';
-  backEndPort = '1548';
-  rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
-
+  rootUrl = '';
   public FoodItem: FoodItems[] = [];
   subscription: Subscription;
   total: number;
   constructor(private router: Router,
-              private _route: ActivatedRoute,
-              private _ourOfferService: OurOffersService,
+              private route: ActivatedRoute,
+              private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService
             ) { }
 
   ngOnInit() {
-    this._route.data.
+    this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
+    this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
+        this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
-    this.FoodItem = this._ourOfferService.FoodItem;
-    this.subscription = this._ourOfferService.foodItemChanged
+    this.FoodItem = this.ourOffersService.FoodItem;
+    this.subscription = this.ourOffersService.foodItemChanged
       .subscribe(
         (FoodItem: FoodItems[]) => {
           this.FoodItem = FoodItem;
@@ -44,7 +45,7 @@ export class FooditemGridViewComponent implements OnInit {
         this.FoodItem[i].FoodItemImage =  this.rootUrl + this.FoodItem[i].FoodItemImage;
       }
     }
-    this.total = this._ourOfferService.FoodItem.length;
+    this.total = this.ourOffersService.FoodItem.length;
   }
 
 

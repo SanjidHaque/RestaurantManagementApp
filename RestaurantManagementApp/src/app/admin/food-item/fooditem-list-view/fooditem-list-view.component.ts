@@ -11,26 +11,26 @@ import {OurOffersService} from '../../../services/our-offers.service';
 export class FooditemListViewComponent implements OnInit {
   FoodItem: FoodItems[] = [];
   total: number;
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _ourOfferService: OurOffersService
+              private ourOffersService: OurOffersService
             ) { }
 
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
+        this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
-    this.FoodItem = this._ourOfferService.FoodItem;
-    this._ourOfferService.foodItemChanged
+    this.FoodItem = this.ourOffersService.FoodItem;
+    this.ourOffersService.foodItemChanged
       .subscribe(
         (FoodItem: FoodItems[]) => {
           this.FoodItem = FoodItem;
         }
       );
-    this.total = this._ourOfferService.FoodItem.length;
+    this.total = this.ourOffersService.FoodItem.length;
   }
 
   viewDetails(foodItem: FoodItems) {

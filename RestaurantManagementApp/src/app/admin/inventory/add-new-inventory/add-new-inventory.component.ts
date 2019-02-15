@@ -18,10 +18,9 @@ export class AddNewInventoryComponent implements OnInit {
   inventoryHistoryModel: InventoryHistoryModel[] = [];
   isDisabled = false;
 
-  constructor(
-              private router: Router,
-              private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService) {
+  constructor(private router: Router,
+              private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService) {
   }
 
   ngOnInit() {
@@ -42,11 +41,11 @@ export class AddNewInventoryComponent implements OnInit {
       const newItem = new Inventory(inventoryId, name, 0 , quantity,
         unit, price, this.inventoryHistoryModel);
 
-       this._dataStorageService.addNewInventoryItem(newItem).
+       this.dataStorageService.addNewInventoryItem(newItem).
        subscribe(
          (data: any) => {
 
-           this._ourOfferService.addToInventoryList(newItem);
+           this.ourOffersService.addToInventoryList(newItem);
            this.router.navigate(['admin/inventory/list-view']);
            form.reset();
          }

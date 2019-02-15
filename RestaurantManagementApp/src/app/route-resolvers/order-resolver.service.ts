@@ -5,13 +5,13 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {DataStorageService} from '../services/data-storage.service';
 
 @Injectable()
-export class OrderResolverService implements Resolve<Order> {
+export class OrderResolverService implements Resolve<Order[]> {
 
-  constructor(private _dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> |
-    Promise<any> | any {
-    return this._dataStorageService.getOrders();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Order[]> |
+    Promise<Order[]> | Order[] {
+    return this.dataStorageService.getOrders();
   }
 
 }

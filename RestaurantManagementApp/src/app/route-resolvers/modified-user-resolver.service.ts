@@ -5,13 +5,13 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 @Injectable()
-export class ModifiedUserResolverService  implements Resolve<ModifiedUserModel> {
+export class ModifiedUserResolverService  implements Resolve<ModifiedUserModel[]> {
 
-  constructor(private _userService: UserService) { }
+  constructor(private userService: UserService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> |
-    Promise<any> | any {
-    return this._userService.getUsers();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ModifiedUserModel[]> |
+    Promise<ModifiedUserModel[]> | ModifiedUserModel[] {
+    return this.userService.getUsers();
   }
 
 }

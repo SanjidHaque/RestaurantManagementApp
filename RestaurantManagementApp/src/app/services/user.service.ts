@@ -5,19 +5,21 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {ModifiedUserModel} from '../models/modified-user.model';
 import {Subject} from 'rxjs';
+import {Role} from '../models/role.model';
+import {DataStorageService} from './data-storage.service';
 
 @Injectable()
 export class UserService {
 
-  private backEndPort = '1548';
-
-  readonly rootUrl = 'http://localhost:' + this.backEndPort;
-  private _modifiedUserApi =  this.rootUrl + '/api/GetUsersList';
+  rootUrl = '';
 
   public modifiedUser: ModifiedUserModel[] = [];
   public modifiedUserChanged =  new Subject<ModifiedUserModel[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private dataStorageService: DataStorageService) {
+     this.rootUrl = this.dataStorageService.rootUrl;
+  }
 
   registerUser(name: string, password: string,
                email: string, role: string, dateTime: string) {
@@ -43,7 +45,7 @@ export class UserService {
 
 
   getAllRoles() {
-    return this.http.get('/assets/mock-data/role.json');
+    return this.http.get<Role[]>('/assets/mock-data/role.json');
   }
 
   resetPassword(userName: string) {
@@ -70,8 +72,7 @@ export class UserService {
 
   roleMatch(allowedRoles) {
     let isMatch = false;
-    const userRole: string
-      = JSON.parse(localStorage.getItem('userRoles'));
+    const userRole: string = JSON.parse(JSON.stringify(localStorage.getItem('userRoles')));
     allowedRoles.forEach(element => {
       if (userRole.indexOf(element) > -1) {
         isMatch = true;
@@ -88,7 +89,7 @@ export class UserService {
   }
 
   getUsers() {
-    return this.http.get(this._modifiedUserApi);
+    return this.http.get<ModifiedUserModel[]>(this.rootUrl + '/api/GetUsersList');
   }
 
   addToUserList(user: ModifiedUserModel) {

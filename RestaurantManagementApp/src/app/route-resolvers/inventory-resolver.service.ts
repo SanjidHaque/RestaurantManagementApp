@@ -5,13 +5,13 @@ import {DataStorageService} from '../services/data-storage.service';
 import {Observable} from 'rxjs';
 
 @Injectable()
-export class InventoryResolverService  implements Resolve<Inventory> {
+export class InventoryResolverService  implements Resolve<Inventory[]> {
 
-  constructor(private _dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> |
-    Promise<any> | any {
-    return this._dataStorageService.getInventories();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Inventory[]> |
+    Promise<Inventory[]> | Inventory[] {
+    return this.dataStorageService.getInventories();
   }
 
 }

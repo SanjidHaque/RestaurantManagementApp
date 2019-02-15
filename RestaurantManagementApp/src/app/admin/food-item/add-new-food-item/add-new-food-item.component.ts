@@ -31,30 +31,30 @@ export class AddNewFoodItemComponent implements OnInit {
   checkIfEmpty = 0;
   isDisabled = false;
   subscription: Subscription;
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService,
+              private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService,
            ) {
     this.uuidCodeOne = UUID.UUID();
   }
 
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
+        this.ourOffersService.inventory = data['inventories'];
       }
     );
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
+    this.inventories = this.ourOffersService.inventory;
+    this.subscription = this.ourOffersService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
         }
       );
     this.inventoryCost = 0;
-    this.checkIfEmpty = this._ourOfferService.inventory.length;
+    this.checkIfEmpty = this.ourOffersService.inventory.length;
   }
 
 
@@ -149,11 +149,11 @@ export class AddNewFoodItemComponent implements OnInit {
       null, foodItemIngredients );
 
 
-    this._dataStorageService.addFoodItem(newFoodItem).
+    this.dataStorageService.addFoodItem(newFoodItem).
     subscribe(
       (data: any) => {
 
-        this._ourOfferService.addToFoodItemList(newFoodItem);
+        this.ourOffersService.addToFoodItemList(newFoodItem);
         this.form.reset();
         this.router.navigate(['admin/food-item/add-food-item-image', foodItemId]);
       }

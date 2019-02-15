@@ -16,21 +16,21 @@ export class TablesComponent implements OnInit, DoCheck {
   subscription: Subscription;
   totalTable = 0;
 
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
-              private _ourOfferService: OurOffersService,
+              private dataStorageService: DataStorageService,
+              private ourOffersService: OurOffersService,
               ) { }
 
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: Table[]) => {
-        this._ourOfferService.table = data['tables'];
+        this.ourOffersService.table = data['tables'];
       }
     );
-    this.tables = this._ourOfferService.table;
-    this.subscription = this._ourOfferService.tableChanged
+    this.tables = this.ourOffersService.table;
+    this.subscription = this.ourOffersService.tableChanged
       .subscribe(
         (tables: Table[]) => {
           this.tables = tables;
@@ -57,8 +57,8 @@ export class TablesComponent implements OnInit, DoCheck {
   }
 
   confirmEvent(table: Table, index: number) {
-    this._dataStorageService.deleteTable(table).subscribe();
+    this.dataStorageService.deleteTable(table).subscribe();
     this.tables.splice(index, 1);
-    this._ourOfferService.table.splice(index, 1);
+    this.ourOffersService.table.splice(index, 1);
   }
 }

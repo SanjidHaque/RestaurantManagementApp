@@ -18,7 +18,6 @@ import { EditInventoryItemComponent } from './admin/inventory/edit-inventory-ite
 import { FoodItemComponent } from './admin/food-item/food-item.component';
 import { AddNewFoodItemComponent } from './admin/food-item/add-new-food-item/add-new-food-item.component';
 import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-food-item.component';
-import { SearchPipe } from './pipes/search.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { PaymentComponent } from './our-offers/payment/payment.component';
 import { ReceiptComponent } from './our-offers/receipt/receipt.component';
@@ -78,7 +77,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AddNewFoodItemComponent,
     EditFoodItemComponent,
     EditInventoryItemComponent,
-    SearchPipe,
     FilterPipe,
     PaymentComponent,
     ReceiptComponent,

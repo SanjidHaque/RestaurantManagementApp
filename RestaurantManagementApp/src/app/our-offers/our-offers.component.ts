@@ -33,7 +33,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
   @ViewChild('quantity') quantityOfItem: ElementRef;
   inventories: Inventory[] = [];
 
-  constructor(private _ourOfferService: OurOffersService,
+  constructor(private ourOffersService: OurOffersService,
               private router: Router,
               private route: ActivatedRoute,
               private userService : UserService,
@@ -46,7 +46,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
 
   ngOnInit() {
-    this.orderedItems = this._ourOfferService.getOrderedItemsList();
+    this.orderedItems = this.ourOffersService.getOrderedItemsList();
     if (this.userService.roleMatch(['Admin'])) {
       this.checkOut = true;
     }
@@ -54,12 +54,12 @@ export class OurOffersComponent implements OnInit, DoCheck {
     this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
+        this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
-    this.FoodItem = this._ourOfferService.FoodItem;
+    this.FoodItem = this.ourOffersService.FoodItem;
 
-    this._ourOfferService.foodItemChanged
+    this.ourOffersService.foodItemChanged
       .subscribe(
         (FoodItem: FoodItems[]) => {
           this.FoodItem = FoodItem;
@@ -68,11 +68,11 @@ export class OurOffersComponent implements OnInit, DoCheck {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
+        this.ourOffersService.inventory = data['inventories'];
       }
     );
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
+    this.inventories = this.ourOffersService.inventory;
+    this.subscription = this.ourOffersService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
@@ -81,15 +81,15 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
   }
   ngDoCheck() {
-    this.orderedItems = this._ourOfferService.getOrderedItemsList();
-    this.grandTotal = this._ourOfferService.TotalPrice;
+    this.orderedItems = this.ourOffersService.getOrderedItemsList();
+    this.grandTotal = this.ourOffersService.TotalPrice;
   }
 
   removeFromCart(index: number) {
-    this._ourOfferService.TotalPrice = Number.parseInt(this._ourOfferService.TotalPrice.toString())
+    this.ourOffersService.TotalPrice = Number.parseInt(this.ourOffersService.TotalPrice.toString())
       - Number.parseInt(this.orderedItems[index].FoodItemSubTotal.toString());
     this.orderedItems.splice(index, 1);
-    this._ourOfferService.orderedItems.splice(index, 1);
+    this.ourOffersService.orderedItems.splice(index, 1);
   }
   checkFoodItemCount() {
     for ( let i = 0; i< this.orderedItems.length; i++) {
@@ -160,7 +160,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
       const foodItemName = name;
       const Price = price;
       const orderId = null;
-      if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
+      if ( this.ourOffersService.checkIfOrderedItemExist(id, orderId) === null) {
         const orderItemId = UUID.UUID();
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
@@ -170,7 +170,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
             foodItemId, foodItemName, Price, makingCost );
         }
       } else {
-        const orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
+        const orderItemId = this.ourOffersService.checkIfOrderedItemExist(id, orderId);
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
             foodItemName, serialNo, Price, makingCost );
@@ -200,27 +200,27 @@ export class OurOffersComponent implements OnInit, DoCheck {
           const totalQuantity = inventoryQuantity * quantity;
           const inventoryId = this.FoodItem[j].Ingredients[k].InventoryId;
           for (let l = 0; l < this.inventories.length; l++) {
-            if (this._ourOfferService.inventory[l].Id === inventoryId) {
-              if (this._ourOfferService.inventory[l].RemainingQuantity > totalQuantity ) {
+            if (this.ourOffersService.inventory[l].Id === inventoryId) {
+              if (this.ourOffersService.inventory[l].RemainingQuantity > totalQuantity ) {
                 check++;
 
                 if ( check === this.FoodItem[j].Ingredients.length) {
-                  this._ourOfferService.inventory[l].RemainingQuantity -= totalQuantity;
-                  const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
-                  this._ourOfferService.grandTotalPrice(subTotal);
-                  this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
+                  this.ourOffersService.inventory[l].RemainingQuantity -= totalQuantity;
+                  const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
+                  this.ourOffersService.grandTotalPrice(subTotal);
+                  this.condition = this.ourOffersService.checkExistingFoodItem(foodItemId);
 
                   if ( this.condition  ) {
-                    this._ourOfferService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
+                    this.ourOffersService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
                   } else {
 
                     const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId,
                       quantity, foodItemName, serialNo, price , subTotal, makingCost);
 
-                    this._ourOfferService.addToOrderedItemsList(purchasedFood);
+                    this.ourOffersService.addToOrderedItemsList(purchasedFood);
                   }
-                  this._ourOfferService.totalQuantity
-                    = Number.parseInt(this._ourOfferService.totalQuantity.toString())
+                  this.ourOffersService.totalQuantity
+                    = Number.parseInt(this.ourOffersService.totalQuantity.toString())
                     + Number.parseInt(quantity.toString());
                 }
 
@@ -248,8 +248,8 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
 
 
-    const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
-    this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
+    const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
+    this.ourOffersService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
 
   }
 
@@ -273,8 +273,8 @@ export class OurOffersComponent implements OnInit, DoCheck {
     }
   }
   confirmEvent() {
-    this._ourOfferService.clearOrders();
-    this._ourOfferService.TotalPrice = 0;
-    this._ourOfferService.totalQuantity = 0;
+    this.ourOffersService.clearOrders();
+    this.ourOffersService.TotalPrice = 0;
+    this.ourOffersService.totalQuantity = 0;
   }
 }

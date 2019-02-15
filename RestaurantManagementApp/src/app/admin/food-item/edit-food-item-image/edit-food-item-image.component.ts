@@ -14,16 +14,15 @@ export class EditFoodItemImageComponent implements OnInit {
   fileToUpload: File = null;
   imageUrl = '';
   foodItems: FoodItems[] = [];
-  backEndPort = '1548';
-  rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
+  rootUrl = '';
   isDisabled = false;
   @ViewChild('Image') Image: any;
 
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService,
-  ) {this._route.params
+              private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService,
+  ) {this.route.params
     .subscribe(
       (params: Params) => {
         this.foodItemId = params['id'];
@@ -32,13 +31,14 @@ export class EditFoodItemImageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.data.
+    this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
+    this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
+        this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
-    this.foodItems = this._ourOfferService.FoodItem;
+    this.foodItems = this.ourOffersService.FoodItem;
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].Id === this.foodItemId) {
         if ( this.foodItems[i].FoodItemImage === null || this.foodItems[i].FoodItemImage === '' ) {
@@ -51,7 +51,7 @@ export class EditFoodItemImageComponent implements OnInit {
   }
   saveFoodItemImage(Image) {
     this.isDisabled = true;
-    this._dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
+    this.dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
 
         console.log('done');

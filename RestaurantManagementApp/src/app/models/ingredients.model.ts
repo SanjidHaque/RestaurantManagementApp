@@ -9,8 +9,14 @@ export class Ingredients {
   public SubTotal: number;
   public FoodItemId: string;
 
-  constructor(id: string, name: string, quantity: number, unit: string,
-              inventoryId: string, inventoryPrice: number, subTotal: number, foodItemId: string) {
+  constructor(id: string,
+              name: string,
+              quantity: number,
+              unit: string,
+              inventoryId: string,
+              inventoryPrice: number,
+              subTotal: number,
+              foodItemId: string) {
     this.Id = id;
     this.Name = name;
     this.Quantity = quantity;

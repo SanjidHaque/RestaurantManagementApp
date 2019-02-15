@@ -16,20 +16,20 @@ export class OrderListViewComponent implements OnInit {
   grossCost = 0;
   grossProfit = 0;
   totalOrder = 0;
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _ourOfferService: OurOffersService,
+              private ourOffersService: OurOffersService,
               ) { }
 
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: Order[]) => {
-        this._ourOfferService.ordersList = data['orders'];
+        this.ourOffersService.ordersList = data['orders'];
       }
     );
-    this.orderLists = this._ourOfferService.ordersList;
-    this._ourOfferService.ordersListChanged
+    this.orderLists = this.ourOffersService.ordersList;
+    this.ourOffersService.ordersListChanged
       .subscribe(
         (order: Order[]) => {
           this.orderLists = order;
@@ -47,7 +47,7 @@ export class OrderListViewComponent implements OnInit {
         + Number.parseInt(this.orderLists[i].Profit.toString());
     }
 
-    this.totalOrder = this._ourOfferService.ordersList.length;
+    this.totalOrder = this.ourOffersService.ordersList.length;
   }
 
   viewDetails(orderList: Order) {

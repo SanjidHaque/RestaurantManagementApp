@@ -9,9 +9,14 @@ export class Inventory {
    public AveragePrice: number;
    public InventoryHistoryModel: InventoryHistoryModel[];
 
-   constructor(id: string, name: string, usedQuantity: number,
-               remainingQuantity: number, unit: string,
-               averagePrice: number, inventoryHistoryModel: InventoryHistoryModel[] = [] ) {
+   constructor(id: string,
+               name: string,
+               usedQuantity: number,
+               remainingQuantity: number,
+               unit: string,
+               averagePrice: number,
+               inventoryHistoryModel: InventoryHistoryModel[] = []
+   ) {
      this.Id = id;
      this.Name = name;
      this.UsedQuantity = usedQuantity;

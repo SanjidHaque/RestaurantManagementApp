@@ -36,9 +36,6 @@ export class OurOffersService {
   }
 
 
-
-
-
    clearOrders() {
     this.orderedItems = [];
    }

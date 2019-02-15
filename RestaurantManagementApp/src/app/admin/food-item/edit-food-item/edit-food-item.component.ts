@@ -29,12 +29,12 @@ export class EditFoodItemComponent implements OnInit {
   foodItemId: string;
   isDisabled = false;
   subscription: Subscription;
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
-              private _ourOfferService: OurOffersService,
+              private dataStorageService: DataStorageService,
+              private ourOffersService: OurOffersService,
              ) {
-    this._route.params
+    this.route.params
       .subscribe(
         (params: Params) => {
           this.foodItemId = params['id'];
@@ -43,15 +43,15 @@ export class EditFoodItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
+        this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
 
-    this.FoodItemList = this._ourOfferService.FoodItem;
-    this._ourOfferService.foodItemChanged
+    this.FoodItemList = this.ourOffersService.FoodItem;
+    this.ourOffersService.foodItemChanged
       .subscribe(
         (FoodItem: FoodItems[]) => {
           this.FoodItemList = FoodItem;
@@ -69,14 +69,14 @@ export class EditFoodItemComponent implements OnInit {
         this.totalSale = this.FoodItemList[i].TotalSale;
       }
     }
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
+        this.ourOffersService.inventory = data['inventories'];
       }
     );
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
+    this.inventories = this.ourOffersService.inventory;
+    this.subscription = this.ourOffersService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
@@ -174,11 +174,11 @@ export class EditFoodItemComponent implements OnInit {
       new FoodItems(foodItemId, serialNumber,
         name, price, this.inventoryCost, profit, 0 ,
         null, foodItemIngredients );
-    this._dataStorageService.editFoodItem(editedFoodItem).
+    this.dataStorageService.editFoodItem(editedFoodItem).
     subscribe(
       (data: any) => {
 
-        this._ourOfferService.updateFoodItemList(editedFoodItem );
+        this.ourOffersService.updateFoodItemList(editedFoodItem );
         this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);
         form.reset();
       }

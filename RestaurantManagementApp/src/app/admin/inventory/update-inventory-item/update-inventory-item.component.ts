@@ -25,11 +25,11 @@ export class UpdateInventoryItemComponent implements OnInit {
   isDisabled = false;
 
 
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService ) {
-    this._route.params
+              private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService ) {
+    this.route.params
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
@@ -39,14 +39,14 @@ export class UpdateInventoryItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
+        this.ourOffersService.inventory = data['inventories'];
       }
     );
-    this.inventoryList = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
+    this.inventoryList = this.ourOffersService.inventory;
+    this.subscription = this.ourOffersService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventoryList = inventories;
@@ -75,15 +75,15 @@ export class UpdateInventoryItemComponent implements OnInit {
         time,
         this.unit,
         currentPrice);
-    for (let i = 0; i < this._ourOfferService.inventory.length; i++) {
-      if ( this._ourOfferService.inventory[i].Id === this.id ) {
-        this._ourOfferService.inventory[i].InventoryHistoryModel.push(updateHistory);
-        this._ourOfferService.inventory[i].RemainingQuantity  =
-          Number.parseInt( this._ourOfferService.inventory[i].RemainingQuantity.toString())
+    for (let i = 0; i < this.ourOffersService.inventory.length; i++) {
+      if ( this.ourOffersService.inventory[i].Id === this.id ) {
+        this.ourOffersService.inventory[i].InventoryHistoryModel.push(updateHistory);
+        this.ourOffersService.inventory[i].RemainingQuantity  =
+          Number.parseInt( this.ourOffersService.inventory[i].RemainingQuantity.toString())
           + Number.parseInt(quantity.toString());
       }
     }
-    this._dataStorageService.updateInventoryHistory(updateHistory).
+    this.dataStorageService.updateInventoryHistory(updateHistory).
     subscribe(
       (data: any) => {
         form.reset();

@@ -16,8 +16,8 @@ export class AddNewTableComponent implements OnInit {
   isDisabled = false;
 
   constructor(private router: Router,
-              private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService) { }
+              private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
   }
@@ -27,8 +27,8 @@ export class AddNewTableComponent implements OnInit {
     const id = UUID.UUID();
     const name = form.value.name;
     const newTable = new Table(id, name);
-    this._ourOfferService.addToTableList(newTable);
-    this._dataStorageService.addNewTable(newTable)
+    this.ourOffersService.addToTableList(newTable);
+    this.dataStorageService.addNewTable(newTable)
       .subscribe(
         (data: any) => {
           form.controls['name'].reset();

@@ -11,9 +11,14 @@ export class OrderedItems {
 
 
 
-  constructor(orderItemId: string, orderId: string, foodItemId: string,
-              foodItemQuantity: number, foodItemName: string, foodItemSerialNo: string,
-              price: number, foodItemSubTotal: number,
+  constructor(orderItemId: string,
+              orderId: string,
+              foodItemId: string,
+              foodItemQuantity: number,
+              foodItemName: string,
+              foodItemSerialNo: string,
+              price: number,
+              foodItemSubTotal: number,
               foodItemMakingCost: number ) {
     this.OrderItemId = orderItemId;
     this.OrderId = orderId;

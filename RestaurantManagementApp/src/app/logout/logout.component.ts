@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,11 +10,10 @@ export class LogoutComponent implements OnInit {
 
   public userName: string;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    this.userName
-      = JSON.parse(JSON.stringify(localStorage.getItem('userName')));
+    this.userName = JSON.parse(JSON.stringify(localStorage.getItem('userName')));
   }
 
   logOut() {

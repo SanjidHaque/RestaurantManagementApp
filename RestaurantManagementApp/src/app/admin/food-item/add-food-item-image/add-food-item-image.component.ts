@@ -18,7 +18,7 @@ export class AddFoodItemImageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService
+              private dataStorageService: DataStorageService
   ) {this.route.params
     .subscribe(
       (params: Params) => {
@@ -32,7 +32,7 @@ export class AddFoodItemImageComponent implements OnInit {
 
   saveFoodItemImage(Image) {
     this.isDisabled = true;
-    this._dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
+    this.dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
         Image.value = null;
         this.imageUrl = '/assets/noImage.png';

@@ -6,8 +6,12 @@ export class InventoryHistoryModel {
   public Unit: string;
   public CurrentPrice: number;
 
-  constructor(id: string, inventoryId: string, updatedQuantity: number,
-              updateTime: string, unit: string, currentPrice: number) {
+  constructor(id: string,
+              inventoryId: string,
+              updatedQuantity: number,
+              updateTime: string,
+              unit: string,
+              currentPrice: number) {
     this.Id = id;
     this.InventoryId = inventoryId;
     this.UpdatedQuantity = updatedQuantity;

@@ -7,7 +7,6 @@ import {OrderedItems} from '../../models/ordered-items.model';
 import {Table} from '../../models/table.model';
 import {Subscription} from 'rxjs';
 import {Inventory} from '../../models/inventory.model';
-import {FoodItems} from '../../models/food-item.model';
 import {UUID} from 'angular2-uuid';
 
 @Component({
@@ -15,7 +14,7 @@ import {UUID} from 'angular2-uuid';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit, DoCheck {
+export class PaymentComponent implements OnInit {
 
   grandTotal : number;
   public orderedItems: OrderedItems[];
@@ -30,7 +29,7 @@ export class PaymentComponent implements OnInit, DoCheck {
   public inventories: Inventory[] = [] ;
   public tables: Table[] = [];
   subscription: Subscription;
-  FoodItemList: FoodItems[] = [];
+
   constructor(private _ourOfferService: OurOffersService,
               private _dataStorageService: DataStorageService,
               private router: Router,
@@ -40,7 +39,6 @@ export class PaymentComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.grandTotal = this._ourOfferService.TotalPrice;
-
     this._route.data.
     subscribe(
       ( data: Table[]) => {
@@ -56,9 +54,6 @@ export class PaymentComponent implements OnInit, DoCheck {
       );
   }
 
-  ngDoCheck() {
-
-  }
 
   discardOrder() {
   const dialog = confirm('Delete this order?\n' +

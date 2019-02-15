@@ -2,7 +2,7 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {UserModel} from '../models/user.model';
 import {NgForm} from '@angular/forms';
 import {UserService} from '../services/user.service';
-import {RoleModel} from '../models/role.model';
+import {Role} from '../models/role.model';
 import {ActivatedRoute} from '@angular/router';
 import {ModifiedUserModel} from '../models/modified-user.model';
 import {Subscription, Subject} from 'rxjs';
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit, DoCheck {
   term = '';
   modifiedUser: ModifiedUserModel[] = [];
   emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
-  roles : RoleModel[] = [];
+  roles : Role[] = [];
   totalUsers: number;
   subscription: Subscription;
 
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit, DoCheck {
     this.resetForm();
     this.route.data.
     subscribe(
-      ( data: RoleModel[]) => {
+      ( data: Role[]) => {
         this.roles = data['roles'];
       }
     );
@@ -56,8 +56,6 @@ export class RegisterComponent implements OnInit, DoCheck {
   ngDoCheck() {
     this.totalUsers = this.modifiedUser.length;
   }
-
-
 
   resetForm(form?: NgForm) {
     if (form != null) {

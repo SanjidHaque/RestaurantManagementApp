@@ -5,12 +5,12 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {DataStorageService} from '../services/data-storage.service';
 
 @Injectable()
-export class TableResolverService implements Resolve<Table> {
+export class TableResolverService implements Resolve<Table[]> {
 
   constructor(private _dataStorageService: DataStorageService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> |
-      Promise<any> | any {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Table[]> |
+      Promise<Table[]> | Table[] {
     return this._dataStorageService.getTables();
   }
 

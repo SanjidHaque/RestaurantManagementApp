@@ -20,8 +20,8 @@ export class EditTableComponent implements OnInit, DoCheck {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService) {
+              private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService) {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -31,8 +31,8 @@ export class EditTableComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    this.tables = this._ourOfferService.table;
-    this.subscription = this._ourOfferService.tableChanged
+    this.tables = this.ourOffersService.table;
+    this.subscription = this.ourOffersService.tableChanged
       .subscribe(
         (tables: Table[]) => {
           this.tables = tables;
@@ -63,9 +63,9 @@ export class EditTableComponent implements OnInit, DoCheck {
     this.isDisabled = true;
     const name = form.value.tableName;
     const editedTable = new Table(this.tableId, name);
-    const ifExist = this._ourOfferService.editTable(editedTable);
+    const ifExist = this.ourOffersService.editTable(editedTable);
     if (ifExist) {
-      this._dataStorageService.editTable(editedTable)
+      this.dataStorageService.editTable(editedTable)
         .subscribe(
           (data: any) => {
             form.reset();

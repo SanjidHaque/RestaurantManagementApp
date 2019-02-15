@@ -4,7 +4,10 @@ export class ModifiedUserModel {
   public Role: string;
   public DateTime: string;
 
-  constructor (userName: string, email: string, role: string, dateTime: string) {
+  constructor (userName: string,
+               email: string,
+               role: string,
+               dateTime: string) {
     this.UserName = userName;
     this.Email = email;
     this.Role = role;

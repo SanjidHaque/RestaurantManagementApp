@@ -11,9 +11,15 @@ export class Order {
   public InventoryCost: number;
   public Profit: number;
 
-  constructor(id: string, orderedItems: OrderedItems[], totalPrice: number,
-              tendered: number, change: number ,
-              dateTime: string, tableNo: string, inventoryCost: number, profit: number) {
+  constructor(id: string,
+              orderedItems: OrderedItems[],
+              totalPrice: number,
+              tendered: number,
+              change: number,
+              dateTime: string,
+              tableNo: string,
+              inventoryCost: number,
+              profit: number) {
     this.Id = id;
     this.OrderedItems = orderedItems;
     this.TotalPrice = totalPrice;

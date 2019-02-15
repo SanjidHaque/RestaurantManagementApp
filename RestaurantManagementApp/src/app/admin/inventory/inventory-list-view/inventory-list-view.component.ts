@@ -16,32 +16,32 @@ export class InventoryListViewComponent implements OnInit, DoCheck {
   totalProducts = 0;
 
 
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _ourOfferService: OurOffersService,
+              private ourOffersService: OurOffersService,
               ) {
 
   }
 
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
+        this.ourOffersService.inventory = data['inventories'];
       }
     );
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
+    this.inventories = this.ourOffersService.inventory;
+    this.subscription = this.ourOffersService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
         }
       );
-    this.totalProducts = this._ourOfferService.inventory.length;
+    this.totalProducts = this.ourOffersService.inventory.length;
   }
 
   ngDoCheck() {
-   // this.totalProducts = this._ourOfferService.inventory.length;
+   // this.totalProducts = this.ourOffersService.inventory.length;
   }
   viewDetails(inventory: Inventory) {
     const inventoryId =  inventory.Id;

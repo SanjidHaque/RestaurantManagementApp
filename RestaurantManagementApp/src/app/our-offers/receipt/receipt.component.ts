@@ -13,13 +13,13 @@ import {Order} from '../../models/order.model';
 export class ReceiptComponent implements OnInit {
   order: Order;
 
-  constructor(private _ourOfferService: OurOffersService,
-              private _dataStorageService: DataStorageService,
+  constructor(private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.order = this._ourOfferService.orders;
+    this.order = this.ourOffersService.orders;
   }
 
   discardOrder() {
@@ -31,12 +31,12 @@ export class ReceiptComponent implements OnInit {
   }
 
   confirmEvent() {
-    this._ourOfferService.clearOrders();
-    this._ourOfferService.TotalPrice = 0;
-    this._ourOfferService.totalQuantity = 0;
+    this.ourOffersService.clearOrders();
+    this.ourOffersService.TotalPrice = 0;
+    this.ourOffersService.totalQuantity = 0;
     this.router.navigate(['our-offers/regulars']);
-    this._ourOfferService.deleteOrder(this.order);
-    this._dataStorageService.deleteOrder(this.order).subscribe();
+    this.ourOffersService.deleteOrder(this.order);
+    this.dataStorageService.deleteOrder(this.order).subscribe();
   }
 
 
@@ -107,7 +107,7 @@ text-align: right;
 }
 
   .choosing-hodoo{
-    font-family:"Inconsolata";
+    font-family:"Inconsolata",cursive;
     font-size: 3vw;
     padding-top: 15px;
     padding-bottom: 20px;
@@ -174,9 +174,9 @@ text-align: right;
 
 
   nextOrder() {
-    this._ourOfferService.clearOrders();
-    this._ourOfferService.TotalPrice = 0;
-    this._ourOfferService.totalQuantity = 0;
+    this.ourOffersService.clearOrders();
+    this.ourOffersService.TotalPrice = 0;
+    this.ourOffersService.totalQuantity = 0;
     this.router.navigate(['our-offers']);
   }
 

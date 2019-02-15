@@ -1,3 +1,3 @@
-export class RoleModel {
+export class Role {
   Name: string;
 }

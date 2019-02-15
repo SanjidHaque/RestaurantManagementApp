@@ -5,13 +5,13 @@ import {DataStorageService} from '../services/data-storage.service';
 import {FoodItems} from '../models/food-item.model';
 
 @Injectable()
-export class FoodItemResolverService  implements Resolve<FoodItems> {
+export class FoodItemResolverService  implements Resolve<FoodItems[]> {
 
-  constructor(private _dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> |
-    Promise<any> | any {
-    return this._dataStorageService.getFoodItems();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FoodItems[]> |
+    Promise<FoodItems[]> | FoodItems[] {
+    return this.dataStorageService.getFoodItems();
   }
 
 }

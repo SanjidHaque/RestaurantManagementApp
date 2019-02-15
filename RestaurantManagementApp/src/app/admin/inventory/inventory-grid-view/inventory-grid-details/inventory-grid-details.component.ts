@@ -19,12 +19,12 @@ export class InventoryGridDetailsComponent implements OnInit {
   inventoryHistory: InventoryHistoryModel[] = [];
   subscription: Subscription;
   index: number;
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
-              private _ourOfferService: OurOffersService,
+              private dataStorageService: DataStorageService,
+              private ourOffersService: OurOffersService,
              ) {
-    this._route.params
+    this.route.params
       .subscribe(
         (params: Params) => {
           this.inventoryId = params['id'];
@@ -32,14 +32,14 @@ export class InventoryGridDetailsComponent implements OnInit {
       );
   }
   ngOnInit() {
-    this._route.data.
+    this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this._ourOfferService.inventory = data['inventories'];
+        this.ourOffersService.inventory = data['inventories'];
       }
     );
-    this.inventoryList = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
+    this.inventoryList = this.ourOffersService.inventory;
+    this.subscription = this.ourOffersService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventoryList = inventories;
@@ -63,7 +63,7 @@ export class InventoryGridDetailsComponent implements OnInit {
 
 
   confirmEvent() {
-    this._dataStorageService.deleteInventoryItem(this.inventory).
+    this.dataStorageService.deleteInventoryItem(this.inventory).
     subscribe(
       (data: any) => {
         this.router.navigate(['admin/inventory/grid-view']);

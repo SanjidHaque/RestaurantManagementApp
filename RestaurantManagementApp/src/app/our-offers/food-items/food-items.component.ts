@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {FoodItems} from '../../models/food-item.model';
 import {Inventory} from '../../models/inventory.model';
 import {UUID} from 'angular2-uuid';
+import {DataStorageService} from '../../services/data-storage.service';
 
 @Component({
   selector: 'app-food-items',
@@ -26,27 +27,29 @@ export class FoodItemsComponent implements OnInit {
   uuidCodeThree = '';
   quantity : number;
 
-  imageUrl = 'assets/images/noImage.png';  backEndPort = '1548';
-  rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
+  imageUrl = 'assets/images/noImage.png';
+  rootUrl = '';
 
   subscription: Subscription;
-  constructor(private _ourOfferService: OurOffersService) {
+  constructor(private ourOffersService: OurOffersService,
+              private dataStorageService: DataStorageService) {
     this.uuidCodeOne = UUID.UUID();
     this.uuidCodeTwo = UUID.UUID();
     this.uuidCodeThree = UUID.UUID();
   }
 
   ngOnInit() {
-    this.FoodItem = this._ourOfferService.FoodItem;
-    this._ourOfferService.foodItemChanged
+    this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
+    this.FoodItem = this.ourOffersService.FoodItem;
+    this.ourOffersService.foodItemChanged
       .subscribe(
         (FoodItem: FoodItems[]) => {
           this.FoodItem = FoodItem;
         }
       );
 
-    this.inventories = this._ourOfferService.inventory;
-    this.subscription = this._ourOfferService.inventoryChanged
+    this.inventories = this.ourOffersService.inventory;
+    this.subscription = this.ourOffersService.inventoryChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
@@ -74,7 +77,7 @@ export class FoodItemsComponent implements OnInit {
       const foodItemName = name;
       const Price = price;
       const orderId = null;
-      if ( this._ourOfferService.checkIfOrderedItemExist(id, orderId) === null) {
+      if ( this.ourOffersService.checkIfOrderedItemExist(id, orderId) === null) {
         const orderItemId = UUID.UUID();
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
@@ -84,7 +87,7 @@ export class FoodItemsComponent implements OnInit {
             foodItemId, foodItemName, Price, makingCost );
         }
       } else {
-        const orderItemId = this._ourOfferService.checkIfOrderedItemExist(id, orderId);
+        const orderItemId = this.ourOffersService.checkIfOrderedItemExist(id, orderId);
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
             foodItemName, serialNo, Price, makingCost );
@@ -109,28 +112,28 @@ export class FoodItemsComponent implements OnInit {
             const totalQuantity = inventoryQuantity * quantity;
             const inventoryId = this.FoodItem[j].Ingredients[k].InventoryId;
             for (let l = 0; l < this.inventories.length; l++) {
-              if (this._ourOfferService.inventory[l].Id === inventoryId) {
-                if (this._ourOfferService.inventory[l].RemainingQuantity > totalQuantity ) {
+              if (this.ourOffersService.inventory[l].Id === inventoryId) {
+                if (this.ourOffersService.inventory[l].RemainingQuantity > totalQuantity ) {
 
                     check++;
 
                   if ( check === this.FoodItem[j].Ingredients.length) {
-                    this._ourOfferService.inventory[l].RemainingQuantity -= totalQuantity;
-                    const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
-                    this._ourOfferService.grandTotalPrice(subTotal);
-                    this.condition = this._ourOfferService.checkExistingFoodItem(foodItemId);
+                    this.ourOffersService.inventory[l].RemainingQuantity -= totalQuantity;
+                    const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
+                    this.ourOffersService.grandTotalPrice(subTotal);
+                    this.condition = this.ourOffersService.checkExistingFoodItem(foodItemId);
 
                     if ( this.condition  ) {
-                      this._ourOfferService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
+                      this.ourOffersService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
                     } else {
 
                       const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId,
                         quantity , foodItemName, serialNo, price , subTotal, makingCost);
 
-                      this._ourOfferService.addToOrderedItemsList(purchasedFood);
+                      this.ourOffersService.addToOrderedItemsList(purchasedFood);
                     }
-                    this._ourOfferService.totalQuantity
-                      = Number.parseInt(this._ourOfferService.totalQuantity.toString())
+                    this.ourOffersService.totalQuantity
+                      = Number.parseInt(this.ourOffersService.totalQuantity.toString())
                       + Number.parseInt(quantity.toString());
                   }
 
@@ -152,8 +155,8 @@ break;
   RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
                  foodItemId: string, foodItemName: string, price: number,
                  makingCost: number) {
-      const subTotal = this._ourOfferService.FoodItemSubTotalPrice(price, quantity);
-      this._ourOfferService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
+      const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
+      this.ourOffersService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
 
   }
 }

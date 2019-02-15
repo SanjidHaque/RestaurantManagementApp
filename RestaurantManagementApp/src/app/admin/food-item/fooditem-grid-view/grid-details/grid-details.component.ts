@@ -12,19 +12,18 @@ import {Http} from '@angular/http';
   styleUrls: ['./grid-details.component.scss']
 })
 export class GridDetailsComponent implements OnInit {
-  backEndPort = '1548';
-  rootUrl = 'http://localhost:' + this.backEndPort + '/Content/';
+  rootUrl = '';
   imageUrl = 'assets/images/noImage.png';
   FoodItemList: FoodItems[] = [];
   Ingredients: Ingredients[] = [];
   FoodItem: FoodItems;
   foodItemId: string;
-  constructor(private _route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private _dataStorageService: DataStorageService,
-              private _ourOfferService: OurOffersService,
+              private dataStorageService: DataStorageService,
+              private ourOffersService: OurOffersService,
               ) {
-    this._route.params
+    this.route.params
       .subscribe(
         (params: Params) => {
           this.foodItemId = params['id'];
@@ -33,14 +32,15 @@ export class GridDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.data.
+    this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
+    this.route.data.
     subscribe(
       ( data: FoodItems[]) => {
-        this._ourOfferService.FoodItem = data['foodItems'];
+        this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
-    this.FoodItemList = this._ourOfferService.FoodItem;
-    this._ourOfferService.foodItemChanged
+    this.FoodItemList = this.ourOffersService.FoodItem;
+    this.ourOffersService.foodItemChanged
       .subscribe(
         (FoodItem: FoodItems[]) => {
           this.FoodItemList = FoodItem;
@@ -65,11 +65,11 @@ export class GridDetailsComponent implements OnInit {
   }
 
   confirmEvent() {
-    this._dataStorageService.deleteFoodItem(this.FoodItem).subscribe(
+    this.dataStorageService.deleteFoodItem(this.FoodItem).subscribe(
       (data: any) => {
         for (let i = 0; i < this.FoodItemList.length; i++) {
           if (this.FoodItemList[i].Id === this.foodItemId) {
-            this._ourOfferService.FoodItem.splice(i, 1);
+            this.ourOffersService.FoodItem.splice(i, 1);
           }
         }
         this.router.navigate(['admin/food-item/grid-view']);

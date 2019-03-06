@@ -60,6 +60,9 @@ import { EditFoodItemImageComponent } from './admin/food-item/edit-food-item-ima
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {NgProgressHttpModule} from '@ngx-progressbar/http';
+import {NgProgressModule} from '@ngx-progressbar/core';
+import {NgProgressRouterModule} from '@ngx-progressbar/router';
 
 
 
@@ -116,7 +119,16 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     CommonModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    HttpClientModule,
+    NgProgressHttpModule,
+    NgProgressRouterModule,
+    NgProgressModule.withConfig({
+      color: '#7e0000',
+      min: 20,
+      spinner: false,
+      meteor: false
+    })
   ],
 
   providers: [

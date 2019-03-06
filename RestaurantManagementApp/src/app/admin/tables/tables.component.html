@@ -15,7 +15,7 @@
       <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Table</button>
   </div>
 </div>
-<div class="row title" *ngIf="totalTable !== 0">
+<div class="row title" *ngIf="tables.length !== 0">
   <div class="col-md-8">
     <div class="col-md-3 name">
       Table's Name
@@ -28,7 +28,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8" *ngIf="totalTable !== 0; else empty">
+  <div class="col-md-8" *ngIf="tables.length !== 0; else empty">
 
     <div class="row f-name">
 
@@ -58,7 +58,7 @@
 
     <div class="row">
       <div class="col-md-12 total-table">
-        Total Table: {{ totalTable }} (s)
+        Total Table: {{ tables.length }} (s)
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ import {OurOffersService} from '../../services/our-offers.service';
 import {DataStorageService} from '../../services/data-storage.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-tables',
@@ -57,8 +58,11 @@ export class TablesComponent implements OnInit, DoCheck {
   }
 
   confirmEvent(table: Table, index: number) {
-    this.dataStorageService.deleteTable(table).subscribe();
-    this.tables.splice(index, 1);
-    this.ourOffersService.table.splice(index, 1);
+    this.dataStorageService.deleteTable(table).
+    subscribe(
+      (data: any) => {
+        this.tables.splice(index, 1);
+      });
+
   }
 }

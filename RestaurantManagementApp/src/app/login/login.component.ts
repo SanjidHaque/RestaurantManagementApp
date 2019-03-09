@@ -23,9 +23,8 @@ export class LoginComponent implements OnInit {
     this.isDisabled = true;
      this.userService.
      userAuthentication(this.form.value.userName, this.form.value.password)
-       .subscribe((data : any) => {
-
-
+       .subscribe(
+         (data : any) => {
          localStorage.setItem('userToken', data.access_token);
          localStorage.setItem('userRoles', data.role);
          localStorage.setItem('userName', this.form.value.userName);

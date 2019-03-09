@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   OnSubmit() {
+    if (this.form.value.userName === '' ||  this.form.value.password === '') {
+      return;
+    }
     this.isDisabled = true;
      this.userService.
      userAuthentication(this.form.value.userName, this.form.value.password)

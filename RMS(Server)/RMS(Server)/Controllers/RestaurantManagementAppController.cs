@@ -100,35 +100,32 @@ namespace RMS_Server_.Controllers
 
         [Route("api/GetUsersList")]
         [HttpGet]
-        public List<ModifiedUser> GetUsersList()
+        public IHttpActionResult GetUsersList()
         {
            List<ModifiedUser> modifiedUser = _context.ModifiedUsers.OrderBy(x => x.UserName).ToList();
-           return modifiedUser;
+           return Ok(modifiedUser);
         }
 
 
         [Route("api/DeleteUser")]
         [HttpPost]
-        public void DeleteUser(AccountModel accountModel)
+        public IHttpActionResult DeleteUser(AccountModel accountModel)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
             ApplicationUser user = _context.Users.FirstOrDefault(p => p.UserName == accountModel.UserName);
-          
-            if (user != null)
-            {
-                manager.RemoveFromRole(user.Id, accountModel.Role);
-                
-                _context.Users.Remove(user);
-            }
-
             ModifiedUser modifiedUser = _context.ModifiedUsers
                 .FirstOrDefault(q => q.UserName == accountModel.UserName);
-            if (modifiedUser != null)
+
+            if (user != null && modifiedUser != null)
             {
+                manager.RemoveFromRole(user.Id, accountModel.Role);
+                _context.Users.Remove(user);              
                 _context.ModifiedUsers.Remove(modifiedUser);
+                _context.SaveChanges();
+                return Ok();
             }
-            _context.SaveChanges();
+            return NotFound();
         }
         
         [Route("api/User/Register")]
@@ -144,7 +141,7 @@ namespace RMS_Server_.Controllers
                 RequiredLength = 3
             };
             IdentityResult result = manager.Create(user, model.Password);
-            if (result.Succeeded != false)
+            if (result.Succeeded)
             {
                 manager.AddToRoles(user.Id, model.Role);
                 var modifiedUser = new ModifiedUser()
@@ -164,10 +161,10 @@ namespace RMS_Server_.Controllers
 
         [Route("api/GetFoodItems")]
         [HttpGet]
-        public List<FoodItem> GetFoodItems()
+        public IHttpActionResult GetFoodItems()
         {
             List<FoodItem> foodItems = _context.FoodItems.Include(c => c.Ingredients).OrderBy(x => x.Name).ToList();
-            return foodItems;
+            return Ok(foodItems);
         }
 
 
@@ -175,7 +172,7 @@ namespace RMS_Server_.Controllers
 
         [Route("api/StoreOrder")]
         [HttpPost]
-        public void StoreOrder(Order orders)
+        public IHttpActionResult StoreOrder(Order orders)
         {
             for (int i = 0; i < orders.OrderedItems.Count; i++)
             {
@@ -212,12 +209,13 @@ namespace RMS_Server_.Controllers
             _context.OrderedItems.AddRange(orders.OrderedItems);
             _context.Orders.Add(orders);
             _context.SaveChanges();
+            return Ok();
         }
 
 
         [Route("api/DeleteOrder")]
         [HttpPost]
-        public void DeleteOrder(Order orders)
+        public IHttpActionResult DeleteOrder(Order orders)
         {
             Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
             if (deleteOrder != null)
@@ -227,94 +225,128 @@ namespace RMS_Server_.Controllers
                 _context.OrderedItems.RemoveRange(deleteOrderedItems);
                 _context.Orders.Remove(deleteOrder);
                 _context.SaveChanges();
+                return Ok();
             }
+
+            return NotFound();
         }
  
            
         [HttpGet]
         [Route("api/GetOrders")]
-        public List<Order> Order()
+        public IHttpActionResult GetOrders()
         {
-            return _context.Orders.Include(b => b.OrderedItems).OrderBy(x => x.Profit).ToList();
+            List<Order> orders = _context.Orders.Include(b => b.OrderedItems).OrderBy(x => x.Profit).ToList();
+            return Ok(orders);
         }
 
         [HttpGet]
         [Route("api/GetInventories")]
-        public List<Inventory> GetInventories()
+        public IHttpActionResult GetInventories()
         {
-            return _context.Inventories.Include(b => b.InventoryHistoryModel).OrderBy(x => x.Name).ToList();
+            List<Inventory> inventories = _context.Inventories
+                .Include(b => b.InventoryHistoryModel)
+                .OrderBy(x => x.Name)
+                .ToList();
+            return Ok(inventories);
         }
 
         [HttpGet]
         [Route("api/GetTables")]
-        public List<Table> GetTables()
+        public IHttpActionResult GetTables()
         {
-            return _context.Tables.OrderBy(x => x.Name).ToList();
+            List<Table> tables = _context.Tables.OrderBy(x => x.Name).ToList();
+            return Ok(tables);
         }
 
         [HttpPost]
         [Route("api/AddNewTable")]
-        public void AddNewTable(Table table)
+        public IHttpActionResult AddNewTable(Table table)
         {
-            _context.Tables.Add(table);
-            _context.SaveChanges();
+            if (table != null)
+            {
+                _context.Tables.Add(table);
+                _context.SaveChanges();
+                return Ok();
+            }
+
+            return NotFound();
         }
 
 
         [HttpPost]
         [Route("api/EditTable")]
-        public void EditTable(Table table)
+        public IHttpActionResult EditTable(Table table)
         {
             Table getEdited = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
             if (getEdited != null)
             {
                 getEdited.Name = table.Name;
-            }          
-            _context.SaveChanges();
+                _context.SaveChanges();
+                return Ok();
+            }
+
+            return NotFound();
         }
+
+
         [HttpPost]
         [Route("api/DeleteTable")]
-      
-        public void DeleteTable(Table table)
+        public IHttpActionResult DeleteTable(Table table)
         {
             Table deleteTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
-            if (deleteTable == null) return;
+            if (deleteTable == null)
+            {
+                return NotFound();
+            }
             _context.Tables.Remove(deleteTable);
             _context.SaveChanges();
+            return Ok();
 
         }
 
 
         [HttpPost]
         [Route("api/AddNewInventory")]
-        public void AddInventoryItem(Inventory inventory)
+        public IHttpActionResult AddInventoryItem(Inventory inventory)
         {
+            if (inventory == null)
+            {
+                return NotFound();
+            }
             _context.InventoryHistoryModels.AddRange(inventory.InventoryHistoryModel);
             _context.Inventories.Add(inventory);
             _context.SaveChanges();
+            return Ok();
         }
 
 
 
         [HttpPost]
         [Route("api/EditInventoryItem")]
-        public void EditInventoryItem(Inventory inventory)
+        public IHttpActionResult EditInventoryItem(Inventory inventory)
         {          
             Inventory getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
             if (getEdited != null)
             {
                 getEdited.Name = inventory.Name;
                 getEdited.Unit = inventory.Unit;
+                _context.SaveChanges();
+                return Ok();
             }
 
-            _context.SaveChanges();
-         }
+            return NotFound();
+        }
 
 
         [HttpPost]
         [Route("api/UpdateInventoryHistory")]
-        public void UpdateInventoryHistory(InventoryHistoryModel inventoryHistoryModel)
+        public IHttpActionResult UpdateInventoryHistory(InventoryHistoryModel inventoryHistoryModel)
         {
+            if (inventoryHistoryModel == null)
+            {
+                return NotFound();
+            }
             Inventory inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistoryModel.InventoryId);
             if (inventory != null)
             {
@@ -339,17 +371,23 @@ namespace RMS_Server_.Controllers
 
                 int averagePrice = totalPrice / totalWeight;
                 inventory.AveragePrice = averagePrice;
+                _context.SaveChanges();
+                return Ok();
             }
 
-            _context.SaveChanges();
+            return NotFound();
         }
 
 
 
         [HttpPost]
         [Route("api/DeleteInventoryItem")]
-        public void DeleteInventoryItem(Inventory inventory)
+        public IHttpActionResult DeleteInventoryItem(Inventory inventory)
         {
+            if (inventory == null)
+            {
+                return NotFound();
+            }
             List<Ingredient> getIngredientsDeleted = _context.Ingredients
                 .Where(p => p.InventoryId == inventory.Id)
                 .ToList();
@@ -361,22 +399,32 @@ namespace RMS_Server_.Controllers
             Inventory getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
             if (getDeleted != null) _context.Inventories.Remove(getDeleted);
             _context.SaveChanges();
+            return Ok();
         }
 
 
         [HttpPost]
         [Route("api/AddFoodItem")]
-        public void FoodItemAdd(FoodItem foodItem)
+        public IHttpActionResult AddFoodItem(FoodItem foodItem)
         {
+            if (foodItem == null)
+            {
+                return NotFound();
+            }
             _context.Ingredients.AddRange(foodItem.Ingredients);
             _context.FoodItems.Add(foodItem);
             _context.SaveChanges();
+            return Ok();
         }
 
         [HttpPost]
         [Route("api/EditFoodItem")]
-        public void FoodItemEdit(FoodItem foodItem)
+        public IHttpActionResult EditFoodItem(FoodItem foodItem)
         {
+            if (foodItem == null)
+            {
+                return NotFound();
+            }
             FoodItem editedFoodItem = _context.FoodItems.Include(c => c.Ingredients).FirstOrDefault(p => p.Id == foodItem.Id);
             if (editedFoodItem != null)
             {
@@ -386,10 +434,12 @@ namespace RMS_Server_.Controllers
                 editedFoodItem.MakingCost = foodItem.MakingCost;
                 editedFoodItem.Profit = foodItem.Profit;
                 _context.Ingredients.RemoveRange(editedFoodItem.Ingredients);
+                _context.Ingredients.AddRange(foodItem.Ingredients);
+                _context.SaveChanges();
+                return Ok();
             }
 
-            _context.Ingredients.AddRange(foodItem.Ingredients);
-            _context.SaveChanges();
+            return NotFound();
         }
 
 
@@ -397,8 +447,12 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/DeleteFoodItem")]
-        public void FoodItemDelete(FoodItem foodItem)
+        public IHttpActionResult DeleteFoodItem(FoodItem foodItem)
         {
+            if (foodItem == null)
+            {
+                return NotFound();
+            }
             FoodItem deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
             if (deleteFoodItem != null)
             {
@@ -414,8 +468,11 @@ namespace RMS_Server_.Controllers
                 _context.Ingredients.RemoveRange(deleteIngredients);
                 _context.FoodItems.Remove(deleteFoodItem);
                 _context.SaveChanges();
+                return Ok();
             }
-         }
+
+            return NotFound();
+        }
 
         [HttpPost]
         [Route("api/SaveFoodItemImage")]
@@ -444,7 +501,6 @@ namespace RMS_Server_.Controllers
             {
                 System.IO.File.Delete(filePath);
             }
-          
         }
  
 

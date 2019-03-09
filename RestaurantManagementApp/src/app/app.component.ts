@@ -1,5 +1,4 @@
-import {Component, ElementRef, NgZone, Renderer2, ViewChild} from '@angular/core';
-import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',

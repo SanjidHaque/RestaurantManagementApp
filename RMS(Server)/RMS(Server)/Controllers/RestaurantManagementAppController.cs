@@ -17,8 +17,7 @@ using System.Web.Http.Cors;
 
 
 namespace RMS_Server_.Controllers
-{
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]  
+{ 
     public class RestaurantManagementAppController : ApiController
     {
         private readonly ApplicationDbContext _context;
@@ -40,8 +39,6 @@ namespace RMS_Server_.Controllers
             manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
             ApplicationUser user = manager.FindByName(forgotPassword.UserName);
        
-    
-           
             if (user != null)
             {
                 string code = manager.GeneratePasswordResetToken(user.Id);

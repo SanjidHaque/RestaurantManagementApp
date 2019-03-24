@@ -231,45 +231,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805091904541_Initial.cs" />
-    <Compile Include="Migrations\201805091904541_Initial.Designer.cs">
-      <DependentUpon>201805091904541_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805101145219_modelchanged.cs" />
-    <Compile Include="Migrations\201805101145219_modelchanged.Designer.cs">
-      <DependentUpon>201805101145219_modelchanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805121623085_ManyModelsHasChanged.cs" />
-    <Compile Include="Migrations\201805121623085_ManyModelsHasChanged.Designer.cs">
-      <DependentUpon>201805121623085_ManyModelsHasChanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805141736456_newTableAdded.cs" />
-    <Compile Include="Migrations\201805141736456_newTableAdded.Designer.cs">
-      <DependentUpon>201805141736456_newTableAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805151331581_modelChanged2.cs" />
-    <Compile Include="Migrations\201805151331581_modelChanged2.Designer.cs">
-      <DependentUpon>201805151331581_modelChanged2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805161601149_orderedItemModelChangedAgain.cs" />
-    <Compile Include="Migrations\201805161601149_orderedItemModelChangedAgain.Designer.cs">
-      <DependentUpon>201805161601149_orderedItemModelChangedAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805161657289_orderModelChangedAgain.cs" />
-    <Compile Include="Migrations\201805161657289_orderModelChangedAgain.Designer.cs">
-      <DependentUpon>201805161657289_orderModelChangedAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805231704296_inventoryModelChanged.cs" />
-    <Compile Include="Migrations\201805231704296_inventoryModelChanged.Designer.cs">
-      <DependentUpon>201805231704296_inventoryModelChanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809230548242_typeChanged.cs" />
-    <Compile Include="Migrations\201809230548242_typeChanged.Designer.cs">
-      <DependentUpon>201809230548242_typeChanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809231241044_someModelIsChanged.cs" />
-    <Compile Include="Migrations\201809231241044_someModelIsChanged.Designer.cs">
-      <DependentUpon>201809231241044_someModelIsChanged.cs</DependentUpon>
+    <Compile Include="Migrations\201903241731513_Init.cs" />
+    <Compile Include="Migrations\201903241731513_Init.Designer.cs">
+      <DependentUpon>201903241731513_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -290,17 +254,9 @@
     <Compile Include="StartupRMS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-RMS%28Server%29-20171229071618.mdf" />
-    <Content Include="App_Data\aspnet-RMS%28Server%29-20171229071618_log.ldf">
-      <DependentUpon>aspnet-RMS%28Server%29-20171229071618.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\photo-1511192130174.jpg" />
-    <Content Include="Content\photo-1532192250992.jpg" />
-    <Content Include="Content\photo-1532192459252.jpg" />
-    <Content Include="Content\www.YTS.AM190652145.jpg" />
     <Content Include="Content\www.YTS.AM194452261.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -327,6 +283,8 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\hodoo-backend - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\hodoo-backend - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -360,40 +318,13 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Image\" />
+    <Folder Include="App_Data\" />
     <Folder Include="Image\" />
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805091904541_Initial.resx">
-      <DependentUpon>201805091904541_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805101145219_modelchanged.resx">
-      <DependentUpon>201805101145219_modelchanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805121623085_ManyModelsHasChanged.resx">
-      <DependentUpon>201805121623085_ManyModelsHasChanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805141736456_newTableAdded.resx">
-      <DependentUpon>201805141736456_newTableAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805151331581_modelChanged2.resx">
-      <DependentUpon>201805151331581_modelChanged2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805161601149_orderedItemModelChangedAgain.resx">
-      <DependentUpon>201805161601149_orderedItemModelChangedAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805161657289_orderModelChangedAgain.resx">
-      <DependentUpon>201805161657289_orderModelChangedAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805231704296_inventoryModelChanged.resx">
-      <DependentUpon>201805231704296_inventoryModelChanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809230548242_typeChanged.resx">
-      <DependentUpon>201809230548242_typeChanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809231241044_someModelIsChanged.resx">
-      <DependentUpon>201809231241044_someModelIsChanged.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903241731513_Init.resx">
+      <DependentUpon>201903241731513_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

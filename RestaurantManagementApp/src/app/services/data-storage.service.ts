@@ -10,10 +10,10 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class DataStorageService {
 
-   backEndPort = '1548';
-   rootUrl = 'http://localhost:' + this.backEndPort;
+  backEndPort = '1548';
+  rootUrl = 'http://localhost:' + this.backEndPort;
 
- // rootUrl = 'https://hodoo-backend.azurewebsites.net';
+  // rootUrl = 'https://hodoo-backend.azurewebsites.net';
   
   constructor(private http: HttpClient) {
   }

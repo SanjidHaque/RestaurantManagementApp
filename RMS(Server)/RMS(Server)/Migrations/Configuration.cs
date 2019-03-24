@@ -1,3 +1,7 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using RMS_Server_.Models;
+
 namespace RMS_Server_.Migrations
 {
     using System;
@@ -14,10 +18,47 @@ namespace RMS_Server_.Migrations
 
         protected override void Seed(RMS_Server_.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            //context.Roles.AddOrUpdate(
+            //    new IdentityRole { Id = "1", Name = "Admin" },
+            //    new IdentityRole { Id = "2", Name = "Cashier" }
+            //);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            //var userStore = new UserStore<ApplicationUser>(context);
+            //var userManager = new UserManager<ApplicationUser>(userStore);
+            //var admin = new ApplicationUser
+            //{
+            //    UserName = "Admin",
+            //    Email = "hodoo@gmail.com"
+            //};
+            //userManager.Create(admin, "123456");
+            //userManager.AddToRole(admin.Id, "Admin");
+
+            //var cashier = new ApplicationUser
+            //{
+            //    UserName = "Cashier",
+            //    Email = "hodooalpha@gmail.com"
+            //};
+            //userManager.Create(cashier, "123456");
+            //userManager.AddToRole(cashier.Id, "Cashier");
+
+
+            //context.ModifiedUsers.AddOrUpdate(
+            //    new ModifiedUser()
+            //    {
+            //        DateTime = "12-Mar-2019",
+            //        Email = "hodooalpha@gmail.com",
+            //        UserName = "Admin",
+            //        Role = "Admin"
+            //    },
+            //    new ModifiedUser()
+            //    {
+            //        DateTime = "12-Mar-2019",
+            //        Email = "hodooalpha@gmail.com",
+            //        UserName = "Cashier",
+            //        Role = "Cashier"
+            //    }
+
+            //);
         }
     }
 }

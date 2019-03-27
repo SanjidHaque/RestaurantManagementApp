@@ -4,7 +4,7 @@ import {NgForm} from '@angular/forms';
 import {Inventory} from '../../../models/inventory.model';
 import {OurOffersService} from '../../../services/our-offers.service';
 import {DataStorageService} from '../../../services/data-storage.service';
-import {InventoryHistoryModel} from '../../../models/inventory-history.model';
+import {InventoryHistory} from '../../../models/inventory-history.model';
 import {UUID} from 'angular2-uuid';
 
 @Component({
@@ -14,8 +14,7 @@ import {UUID} from 'angular2-uuid';
 })
 
 export class AddNewInventoryComponent implements OnInit {
-  unit : number;
-  inventoryHistoryModel: InventoryHistoryModel[] = [];
+  inventoryHistoryModel: InventoryHistory[] = [];
   isDisabled = false;
 
   constructor(private router: Router,
@@ -26,28 +25,41 @@ export class AddNewInventoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddNewItem(form: NgForm) {
+  addNewInventoryItem(form: NgForm) {
     this.isDisabled = true;
-      const inventoryId = UUID.UUID();
-      const updateHistoryId = UUID.UUID();
-      const name = form.value.name;
+      const inventoryId = null;
+      const updateHistoryId = null;
+      const inventoryItemName = form.value.name;
       const quantity = form.value.quantity;
-      const price = form.value.currentPrice;
+      const currentPrice = form.value.currentPrice;
       const unit = form.value.unit;
       const updateTime = new Date().toLocaleString();
-      const updateHistory =
-        new InventoryHistoryModel(updateHistoryId, inventoryId, quantity, updateTime, unit, price );
-      this.inventoryHistoryModel.push(updateHistory);
-      const newItem = new Inventory(inventoryId, name, 0 , quantity,
-        unit, price, this.inventoryHistoryModel);
 
-       this.dataStorageService.addNewInventoryItem(newItem).
+      const updateHistory =
+        new InventoryHistory(
+          updateHistoryId,
+          inventoryId,
+          quantity,
+          updateTime,
+          currentPrice
+        );
+
+      this.inventoryHistoryModel.push(updateHistory);
+      const newInventory = new Inventory(
+        inventoryId,
+        inventoryItemName,
+        0,
+        quantity,
+        unit,
+        currentPrice,
+        this.inventoryHistoryModel
+      );
+
+       this.dataStorageService.addNewInventoryItem(newInventory).
        subscribe(
          (data: any) => {
-
-           this.ourOffersService.addToInventoryList(newItem);
-           this.router.navigate(['admin/inventory/list-view']);
            form.reset();
+           this.router.navigate(['admin/inventory/list-view']);
          }
        );
   }

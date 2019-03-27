@@ -27,10 +27,10 @@ namespace RMS_Server_.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
-        public DbSet<OrderedItems> OrderedItems { get; set; }
+        public DbSet<OrderedItem> OrderedItems { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<ModifiedUser> ModifiedUsers { get; set; }
-        public DbSet<InventoryHistoryModel> InventoryHistoryModels { get; set; }
+        public DbSet<InventoryHistory> InventoryHistories { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

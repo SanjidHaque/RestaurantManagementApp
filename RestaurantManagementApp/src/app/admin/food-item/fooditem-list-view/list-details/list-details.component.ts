@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OurOffersService} from '../../../../services/our-offers.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {FoodItems} from '../../../../models/food-item.model';
+import {FoodItem} from '../../../../models/food-item.model';
 import {DataStorageService} from '../../../../services/data-storage.service';
 import {Ingredients} from '../../../../models/ingredients.model';
 
@@ -14,9 +14,9 @@ export class ListDetailsComponent implements OnInit {
 
   rootUrl = '';
   imageUrl = 'assets/noImage.png';
-  FoodItemList: FoodItems[] = [];
+  FoodItemList: FoodItem[] = [];
   Ingredients: Ingredients[] = [];
-  FoodItem: FoodItems;
+  FoodItem: FoodItem;
   foodItemId: string;
 
   constructor(private route: ActivatedRoute,
@@ -36,24 +36,24 @@ export class ListDetailsComponent implements OnInit {
     this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
     this.route.data.
     subscribe(
-      ( data: FoodItems[]) => {
+      ( data: FoodItem[]) => {
         this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
     this.FoodItemList = this.ourOffersService.FoodItem;
     this.ourOffersService.foodItemChanged
       .subscribe(
-        (FoodItem: FoodItems[]) => {
+        (FoodItem: FoodItem[]) => {
           this.FoodItemList = FoodItem;
         }
       );
     for (let i = 0; i < this.FoodItemList.length; i++) {
       if (this.FoodItemList[i].Id === this.foodItemId) {
         this.FoodItem = this.FoodItemList[i];
-        if ( this.FoodItem.FoodItemImage === null || this.FoodItem.FoodItemImage === '' ) {
-          this.FoodItem.FoodItemImage = this.imageUrl;
+        if ( this.FoodItem.FoodItemImageName === null || this.FoodItem.FoodItemImageName === '' ) {
+          this.FoodItem.FoodItemImageName = this.imageUrl;
         } else {
-          this.FoodItem.FoodItemImage =  this.rootUrl + this.FoodItem.FoodItemImage;
+          this.FoodItem.FoodItemImageName =  this.rootUrl + this.FoodItem.FoodItemImageName;
         }
       }
     }

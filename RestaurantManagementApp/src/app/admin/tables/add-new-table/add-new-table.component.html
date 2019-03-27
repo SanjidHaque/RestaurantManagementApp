@@ -1,4 +1,5 @@
 <div class="col-md-12 name">
+
   <form (ngSubmit) = "onAddNewTable(newTable)" #newTable = "ngForm">
     <div id="user-data">
       <div class="form-group">
@@ -22,10 +23,15 @@
             <i class="fa fa-bookmark" aria-hidden="true"></i> Save</button>
         </div>
         <div class="action">
-          <button class="all-categories-button" type="button" (click)="onCancel()">
+          <button
+            class="all-categories-button"
+            routerLink="admin/tables"
+            type="button">
             <i class="fa fa-times-circle-o" aria-hidden="true"></i> Cancel</button>
         </div>
+
       </div>
     </div>
   </form>
+
 </div>

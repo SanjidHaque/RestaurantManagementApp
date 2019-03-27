@@ -125,7 +125,7 @@ namespace RMS_Server_.Controllers
             return NotFound();
         }
         
-        [Route("api/User/Register")]
+        [Route("api/Register")]
         [HttpPost]
         public IdentityResult Register(AccountModel model)
         {
@@ -171,9 +171,9 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public IHttpActionResult StoreOrder(Order orders)
         {
-            for (int i = 0; i < orders.OrderedItems.Count; i++)
+            for (int i = 0; i < orders.OrderedItem.Count; i++)
             {
-                string foodItemId = orders.OrderedItems[i].FoodItemId;
+                int foodItemId = orders.OrderedItem[i].FoodItemId;
                 FoodItem soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
                 if (soldFoodItem != null)
                 {
@@ -188,8 +188,8 @@ namespace RMS_Server_.Controllers
                         for (int k = 0; k < foodItems[j].Ingredients.Count; k++)
                         {
                             var quantity = foodItems[j].Ingredients[k].Quantity;
-                            var totalQuantity = quantity*orders.OrderedItems[i].FoodItemQuantity;
-                            string inventoryId = foodItems[j].Ingredients[k].InventoryId;
+                            var totalQuantity = quantity*orders.OrderedItem[i].FoodItemQuantity;
+                            int inventoryId = foodItems[j].Ingredients[k].InventoryId;
                             List<Inventory> inventory = _context.Inventories.ToList();
                             for (int l = 0; l < inventory.Count; l++)
                             {
@@ -203,7 +203,7 @@ namespace RMS_Server_.Controllers
                     }
                 }
             }
-            _context.OrderedItems.AddRange(orders.OrderedItems);
+            _context.OrderedItems.AddRange(orders.OrderedItem);
             _context.Orders.Add(orders);
             _context.SaveChanges();
             return Ok();
@@ -217,7 +217,7 @@ namespace RMS_Server_.Controllers
             Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
             if (deleteOrder != null)
             {
-                List<OrderedItems> deleteOrderedItems = _context.OrderedItems
+                List<OrderedItem> deleteOrderedItems = _context.OrderedItems
                     .Where(b => b.OrderId == deleteOrder.Id).ToList();
                 _context.OrderedItems.RemoveRange(deleteOrderedItems);
                 _context.Orders.Remove(deleteOrder);
@@ -233,7 +233,7 @@ namespace RMS_Server_.Controllers
         [Route("api/GetOrders")]
         public IHttpActionResult GetOrders()
         {
-            List<Order> orders = _context.Orders.Include(b => b.OrderedItems).OrderBy(x => x.Profit).ToList();
+            List<Order> orders = _context.Orders.Include(b => b.OrderedItem).OrderBy(x => x.Profit).ToList();
             return Ok(orders);
         }
 
@@ -242,7 +242,7 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult GetInventories()
         {
             List<Inventory> inventories = _context.Inventories
-                .Include(b => b.InventoryHistoryModel)
+                .Include(b => b.InventoryHistory)
                 .OrderBy(x => x.Name)
                 .ToList();
             return Ok(inventories);
@@ -264,7 +264,7 @@ namespace RMS_Server_.Controllers
             {
                 _context.Tables.Add(table);
                 _context.SaveChanges();
-                return Ok();
+                return Ok(table.Id);
             }
 
             return NotFound();
@@ -311,8 +311,9 @@ namespace RMS_Server_.Controllers
             {
                 return NotFound();
             }
-            _context.InventoryHistoryModels.AddRange(inventory.InventoryHistoryModel);
-            _context.Inventories.Add(inventory);
+            _context.Inventories.Add(inventory);       
+            inventory.InventoryHistory.ForEach(x => { x.InventoryId = inventory.Id;});
+            _context.InventoryHistories.AddRange(inventory.InventoryHistory);
             _context.SaveChanges();
             return Ok();
         }
@@ -338,32 +339,32 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/UpdateInventoryHistory")]
-        public IHttpActionResult UpdateInventoryHistory(InventoryHistoryModel inventoryHistoryModel)
+        public IHttpActionResult UpdateInventoryHistory(InventoryHistory inventoryHistory)
         {
-            if (inventoryHistoryModel == null)
+            if (inventoryHistory == null)
             {
                 return NotFound();
             }
-            Inventory inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistoryModel.InventoryId);
+            Inventory inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistory.InventoryId);
             if (inventory != null)
             {
-                inventory.RemainingQuantity += inventoryHistoryModel.UpdatedQuantity;
-                _context.InventoryHistoryModels.Add(inventoryHistoryModel);
+                inventory.RemainingQuantity += inventoryHistory.UpdatedQuantity;
+                _context.InventoryHistories.Add(inventoryHistory);
                 _context.SaveChanges();
-                List<InventoryHistoryModel> inventoryHistory =
-                    _context.InventoryHistoryModels
-                        .Where(q => q.InventoryId == inventoryHistoryModel.InventoryId)
+                List<InventoryHistory> getInventoryHistories =
+                    _context.InventoryHistories
+                        .Where(q => q.InventoryId == inventoryHistory.InventoryId)
                         .ToList();
                 int totalPrice = 0;
-                for (int i = 0; i < inventoryHistory.Count; i++)
+                for (int i = 0; i < getInventoryHistories.Count; i++)
                 {
-                    totalPrice += (inventoryHistory[i].CurrentPrice * inventoryHistory[i].UpdatedQuantity);
+                    totalPrice += (getInventoryHistories[i].CurrentPrice * getInventoryHistories[i].UpdatedQuantity);
                 }
 
                 int totalWeight = 0;
-                for (int i = 0; i < inventoryHistory.Count; i++)
+                for (int i = 0; i < getInventoryHistories.Count; i++)
                 {
-                    totalWeight += inventoryHistory[i].UpdatedQuantity;
+                    totalWeight += getInventoryHistories[i].UpdatedQuantity;
                 }
 
                 int averagePrice = totalPrice / totalWeight;
@@ -389,10 +390,10 @@ namespace RMS_Server_.Controllers
                 .Where(p => p.InventoryId == inventory.Id)
                 .ToList();
             _context.Ingredients.RemoveRange(getIngredientsDeleted);
-            List<InventoryHistoryModel> deleteInvHistory = _context.InventoryHistoryModels
+            List<InventoryHistory> deleteInvHistory = _context.InventoryHistories
                 .Where(q => q.InventoryId == inventory.Id)
                 .ToList();
-            _context.InventoryHistoryModels.RemoveRange(deleteInvHistory);
+            _context.InventoryHistories.RemoveRange(deleteInvHistory);
             Inventory getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
             if (getDeleted != null) _context.Inventories.Remove(getDeleted);
             _context.SaveChanges();
@@ -427,8 +428,8 @@ namespace RMS_Server_.Controllers
             {
                 editedFoodItem.Name = foodItem.Name;
                 editedFoodItem.Price = foodItem.Price;
-                editedFoodItem.SerialNo = foodItem.SerialNo;
-                editedFoodItem.MakingCost = foodItem.MakingCost;
+             //   editedFoodItem.SerialNo = foodItem.SerialNo;
+                editedFoodItem.InventoryCost = foodItem.InventoryCost;
                 editedFoodItem.Profit = foodItem.Profit;
                 _context.Ingredients.RemoveRange(editedFoodItem.Ingredients);
                 _context.Ingredients.AddRange(foodItem.Ingredients);
@@ -454,7 +455,7 @@ namespace RMS_Server_.Controllers
             if (deleteFoodItem != null)
             {
                 DeleteFoodItemImage(deleteFoodItem);
-                List<OrderedItems> getOrderedItems = _context.OrderedItems
+                List<OrderedItem> getOrderedItems = _context.OrderedItems
                     .Where(p => p.FoodItemId == foodItem.Id)
                     .ToList();
 
@@ -473,9 +474,10 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/SaveFoodItemImage")]
-        public HttpResponseMessage SaveFoodItemImage()
+        public IHttpActionResult SaveFoodItemImage()
         {
-            string imageName = null;
+            HttpRequest httpRequest = HttpContext.Current.Request;
+            /*string imageName = null;
             HttpRequest httpRequest = HttpContext.Current.Request;         
             HttpPostedFile postedFile = httpRequest.Files["Image"];         
             imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
@@ -484,16 +486,17 @@ namespace RMS_Server_.Controllers
             postedFile.SaveAs(filePath);
             string uploadedImageId = httpRequest["FoodItemId"];           
             FoodItem foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
-            if (foodItem != null) foodItem.FoodItemImage = imageName;
+            if (foodItem != null) foodItem.FoodItemImageName = imageName;
             _context.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.Created);*/
+            return Ok(httpRequest);
         }
 
 
       
         public void DeleteFoodItemImage(FoodItem foodItem)
         {
-            string filePath = HttpContext.Current.Server.MapPath("~/Content/" + foodItem.FoodItemImage);
+            string filePath = HttpContext.Current.Server.MapPath("~/Content/" + foodItem.FoodItemImageName);
             if ((System.IO.File.Exists(filePath)))
             {
                 System.IO.File.Delete(filePath);

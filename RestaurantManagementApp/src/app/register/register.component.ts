@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserModel} from '../models/user.model';
+import {User} from '../models/user';
 import {NgForm} from '@angular/forms';
 import {UserService} from '../services/user.service';
 import {Role} from '../models/role.model';
@@ -16,7 +16,7 @@ import {Subscription} from 'rxjs';
 export class RegisterComponent implements OnInit {
 
   isDisabled = false;
-  user: UserModel;
+  user: User;
   term = '';
   modifiedUser: ModifiedUserModel[] = [];
   emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';

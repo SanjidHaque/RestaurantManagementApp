@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DataStorageService} from '../../../services/data-storage.service';
 import {OurOffersService} from '../../../services/our-offers.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {InventoryHistoryModel} from '../../../models/inventory-history.model';
+import {InventoryHistory} from '../../../models/inventory-history.model';
 import {NgForm} from '@angular/forms';
 import {Inventory} from '../../../models/inventory.model';
 import {Subscription} from 'rxjs';
@@ -68,7 +68,7 @@ export class UpdateInventoryItemComponent implements OnInit {
     const currentPrice = form.value.currentPrice;
     const time = new Date().toLocaleString();
     const updateHistory =
-      new InventoryHistoryModel(
+      new InventoryHistory(
         updateHistoryId,
         inventoryId,
         quantity,

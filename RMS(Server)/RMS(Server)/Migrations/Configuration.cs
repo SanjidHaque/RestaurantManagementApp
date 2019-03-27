@@ -40,25 +40,6 @@ namespace RMS_Server_.Migrations
             //};
             //userManager.Create(cashier, "123456");
             //userManager.AddToRole(cashier.Id, "Cashier");
-
-
-            //context.ModifiedUsers.AddOrUpdate(
-            //    new ModifiedUser()
-            //    {
-            //        DateTime = "12-Mar-2019",
-            //        Email = "hodooalpha@gmail.com",
-            //        UserName = "Admin",
-            //        Role = "Admin"
-            //    },
-            //    new ModifiedUser()
-            //    {
-            //        DateTime = "12-Mar-2019",
-            //        Email = "hodooalpha@gmail.com",
-            //        UserName = "Cashier",
-            //        Role = "Cashier"
-            //    }
-
-            //);
         }
     }
 }

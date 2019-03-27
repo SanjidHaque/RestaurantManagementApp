@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../../services/our-offers.service';
 import {DataStorageService} from '../../../../services/data-storage.service';
 import {Order} from '../../../../models/order.model';
-import {OrderedItems} from '../../../../models/ordered-items.model';
+import {OrderedItem} from '../../../../models/ordered-item.model';
 @Component({
   selector: 'app-order-list-view-details',
   templateUrl: './order-list-view-details.component.html',
@@ -13,7 +13,7 @@ export class OrderListViewDetailsComponent implements OnInit {
   orderId: string;
   order: Order;
   orderLists: Order[] = [];
-  orderedItems: OrderedItems[] = [];
+  orderedItems: OrderedItem[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -45,7 +45,7 @@ export class OrderListViewDetailsComponent implements OnInit {
     for (let i = 0; i < this.orderLists.length; i++) {
       if (this.orderLists[i].Id === this.orderId) {
         this.order = this.orderLists[i];
-        this.orderedItems = this.orderLists[i].OrderedItems;
+        this.orderedItems = this.orderLists[i].OrderedItem;
       }
     }
   }

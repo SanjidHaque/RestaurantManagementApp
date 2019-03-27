@@ -2,9 +2,9 @@ import {Component, DoCheck, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OurOffersService} from '../services/our-offers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {OrderedItems} from '../models/ordered-items.model';
+import {OrderedItem} from '../models/ordered-item.model';
 import {Order} from '../models/order.model';
-import {FoodItems} from '../models/food-item.model';
+import {FoodItem} from '../models/food-item.model';
 import {Inventory} from '../models/inventory.model';
 import {UserService} from '../services/user.service';
 import {UUID} from 'angular2-uuid';
@@ -19,14 +19,14 @@ export class OurOffersComponent implements OnInit, DoCheck {
   subscription: Subscription;
   checkOut = false;
   quantity = 0;
-  FoodItem: FoodItems[] = [];
+  FoodItem: FoodItem[] = [];
   order: Order[];
   condition = false;
   uuidCodeOne = '';
   uuidCodeTwo = '';
   uuidCodeThree = '';
   public grandTotal: number;
-  public orderedItems: OrderedItems[];
+  public orderedItems: OrderedItem[];
   public orders: Order;
   foodItemCount = 0;
   @ViewChild('serial') serialNo: ElementRef;
@@ -53,7 +53,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
     this.route.data.
     subscribe(
-      ( data: FoodItems[]) => {
+      ( data: FoodItem[]) => {
         this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
@@ -61,7 +61,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
     this.ourOffersService.foodItemChanged
       .subscribe(
-        (FoodItem: FoodItems[]) => {
+        (FoodItem: FoodItem[]) => {
           this.FoodItem = FoodItem;
         }
       );
@@ -117,7 +117,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
             this.FoodItem[i].Price,
             this.FoodItem[i].Name,
             this.FoodItem[i].SerialNo,
-            this.FoodItem[i].MakingCost,
+            this.FoodItem[i].InventoryCost,
             true,
             quantity
           )
@@ -139,7 +139,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
             this.FoodItem[i].Price,
             this.FoodItem[i].Name,
             this.FoodItem[i].SerialNo,
-            this.FoodItem[i].MakingCost,
+            this.FoodItem[i].InventoryCost,
             false,
             quantity
           )
@@ -214,7 +214,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
                     this.ourOffersService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
                   } else {
 
-                    const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId,
+                    const purchasedFood = new OrderedItem(orderItemId, orderId,  foodItemId,
                       quantity, foodItemName, serialNo, price , subTotal, makingCost);
 
                     this.ourOffersService.addToOrderedItemsList(purchasedFood);

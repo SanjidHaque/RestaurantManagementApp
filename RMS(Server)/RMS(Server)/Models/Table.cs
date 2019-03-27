@@ -8,8 +8,7 @@ namespace RMS_Server_.Models
 {
     public class Table
     {
-        [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DataStorageService} from '../../../services/data-storage.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../services/our-offers.service';
-import {FoodItems} from '../../../models/food-item.model';
+import {FoodItem} from '../../../models/food-item.model';
 import {Ingredients} from '../../../models/ingredients.model';
 import {Inventory} from '../../../models/inventory.model';
 import {NgForm} from '@angular/forms';
@@ -21,11 +21,11 @@ export class EditFoodItemComponent implements OnInit {
   inventoryCost = 0;
   itemName = '';
   serialNumber = '';
-  FoodItemList: FoodItems[] = [];
+  FoodItemList: FoodItem[] = [];
   inventories: Inventory[] = [];
   ingredients: Ingredients[] = [];
   ingredientsChanged = new Subject<Ingredients[]>();
-  FoodItem: FoodItems;
+  FoodItem: FoodItem;
   foodItemId: string;
   isDisabled = false;
   subscription: Subscription;
@@ -37,7 +37,7 @@ export class EditFoodItemComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.foodItemId = params['id'];
+          this.foodItemId = params[+'id'];
         }
       );
   }
@@ -45,7 +45,7 @@ export class EditFoodItemComponent implements OnInit {
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: FoodItems[]) => {
+      ( data: FoodItem[]) => {
         this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
@@ -53,18 +53,18 @@ export class EditFoodItemComponent implements OnInit {
     this.FoodItemList = this.ourOffersService.FoodItem;
     this.ourOffersService.foodItemChanged
       .subscribe(
-        (FoodItem: FoodItems[]) => {
+        (foodItem: FoodItem[]) => {
           this.FoodItemList = FoodItem;
         }
       );
     for (let i = 0; i < this.FoodItemList.length; i++) {
-      if (this.FoodItemList[i].Id === this.foodItemId) {
+      if (this.FoodItemList[i].Id === +this.foodItemId) {
         this.FoodItem = this.FoodItemList[i];
         this.itemName = this.FoodItemList[i].Name;
         this.serialNumber = this.FoodItemList[i].SerialNo;
         this.ingredients = this.FoodItemList[i].Ingredients;
         this.salePrice = this.FoodItemList[i].Price;
-        this.inventoryCost = this.FoodItemList[i].MakingCost;
+        this.inventoryCost = this.FoodItemList[i].InventoryCost;
         this.profit = this.FoodItemList[i].Profit;
         this.totalSale = this.FoodItemList[i].TotalSale;
       }
@@ -85,7 +85,7 @@ export class EditFoodItemComponent implements OnInit {
   }
 
 
-  getInventoryItemName(inventoryId: string) {
+  getInventoryItemName(inventoryId: number) {
     for (let i = 0; i < this.inventories.length; i++) {
       if ( this.inventories[i].Id === inventoryId) {
         return this.inventories[i].Name;
@@ -94,7 +94,7 @@ export class EditFoodItemComponent implements OnInit {
   }
 
 
-  getInventoryItemUnit(inventoryId: string) {
+  getInventoryItemUnit(inventoryId: number) {
     for (let i = 0; i < this.inventories.length; i++) {
       if ( this.inventories[i].Id === inventoryId) {
         return this.inventories[i].Unit;
@@ -103,7 +103,7 @@ export class EditFoodItemComponent implements OnInit {
   }
 
 
-  getInventoryItemPrice(inventoryId: string) {
+  getInventoryItemPrice(inventoryId: number) {
     for (let i = 0; i < this.inventories.length; i++) {
       if ( this.inventories[i].Id === inventoryId) {
         return this.inventories[i].AveragePrice;
@@ -112,7 +112,7 @@ export class EditFoodItemComponent implements OnInit {
   }
 
 
-  checkIfIngredientsExist(inventoryId: string) {
+  checkIfIngredientsExist(inventoryId: number) {
     for (let i = 0; i < this.ingredients.length; i++) {
       if (this.ingredients[i].InventoryId === inventoryId) {
         return i;
@@ -123,7 +123,7 @@ export class EditFoodItemComponent implements OnInit {
 
 
   onAddIngredients(form: NgForm) {
-    const ingredientId = UUID.UUID();
+    const ingredientId = null;
     const inventoryId = form.value.ingName;
     const quantity = form.value.quantity;
 
@@ -132,16 +132,22 @@ export class EditFoodItemComponent implements OnInit {
     if (this.checkIfIngredientsExist(inventoryId) !== '') {
       this.ingredients[this.checkIfIngredientsExist(inventoryId)].Quantity
         += Number.parseFloat(quantity.toString());
-      this.ingredients[this.checkIfIngredientsExist(inventoryId)].SubTotal
+      this.ingredients[this.checkIfIngredientsExist(inventoryId)].TotalPrice
         += Number.parseFloat(subTotal.toString());
     } else {
 
       const name = this.getInventoryItemName(inventoryId);
       const inventoryUnit = this.getInventoryItemUnit(inventoryId);
       const foodItemId = '';
-      const addIngredient = new Ingredients(ingredientId, name, quantity,
-        inventoryUnit, inventoryId, inventoryPrice, subTotal, foodItemId);
-      this.ingredients.push(addIngredient);
+      const addNewIngredient = new Ingredients(
+        ingredientId,
+        name,
+        quantity,
+        inventoryId,
+        subTotal,
+        foodItemId
+      );
+      this.ingredients.push(addNewIngredient);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
 
@@ -170,10 +176,17 @@ export class EditFoodItemComponent implements OnInit {
       this.ingredients[i].FoodItemId = this.foodItemId;
     }
     this.isDisabled = true;
-    const editedFoodItem =
-      new FoodItems(foodItemId, serialNumber,
-        name, price, this.inventoryCost, profit, 0 ,
-        null, foodItemIngredients );
+    const editedFoodItem = new FoodItem(
+      foodItemId,
+      serialNumber,
+      name,
+      price,
+      this.inventoryCost,
+      profit,
+      0,
+      null,
+      foodItemIngredients
+    );
     this.dataStorageService.editFoodItem(editedFoodItem).
     subscribe(
       (data: any) => {

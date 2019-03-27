@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../services/our-offers.service';
 import {DataStorageService} from '../../../services/data-storage.service';
-import {FoodItems} from '../../../models/food-item.model';
+import {FoodItem} from '../../../models/food-item.model';
 
 @Component({
   selector: 'app-edit-food-item-image',
@@ -13,7 +13,7 @@ export class EditFoodItemImageComponent implements OnInit {
   foodItemId : string;
   fileToUpload: File = null;
   imageUrl = '';
-  foodItems: FoodItems[] = [];
+  foodItems: FoodItem[] = [];
   rootUrl = '';
   isDisabled = false;
   @ViewChild('Image') Image: any;
@@ -34,17 +34,17 @@ export class EditFoodItemImageComponent implements OnInit {
     this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
     this.route.data.
     subscribe(
-      ( data: FoodItems[]) => {
+      ( data: FoodItem[]) => {
         this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
     this.foodItems = this.ourOffersService.FoodItem;
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].Id === this.foodItemId) {
-        if ( this.foodItems[i].FoodItemImage === null || this.foodItems[i].FoodItemImage === '' ) {
+        if ( this.foodItems[i].FoodItemImageName === null || this.foodItems[i].FoodItemImageName === '' ) {
           this.imageUrl = '/assets/noImage.png';
         } else {
-          this.imageUrl = this.rootUrl + this.foodItems[i].FoodItemImage;
+          this.imageUrl = this.rootUrl + this.foodItems[i].FoodItemImageName;
         }
       }
     }

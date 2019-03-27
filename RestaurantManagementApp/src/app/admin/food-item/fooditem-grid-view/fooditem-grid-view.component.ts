@@ -1,5 +1,5 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import {FoodItems} from '../../../models/food-item.model';
+import {FoodItem} from '../../../models/food-item.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OurOffersService} from '../../../services/our-offers.service';
 import {Subscription} from 'rxjs';
@@ -14,7 +14,7 @@ export class FooditemGridViewComponent implements OnInit {
 
   imageUrl = 'assets/noImage.png';
   rootUrl = '';
-  public FoodItem: FoodItems[] = [];
+  public FoodItem: FoodItem[] = [];
   subscription: Subscription;
   total: number;
   constructor(private router: Router,
@@ -27,22 +27,22 @@ export class FooditemGridViewComponent implements OnInit {
     this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
     this.route.data.
     subscribe(
-      ( data: FoodItems[]) => {
+      ( data: FoodItem[]) => {
         this.ourOffersService.FoodItem = data['foodItems'];
       }
     );
     this.FoodItem = this.ourOffersService.FoodItem;
     this.subscription = this.ourOffersService.foodItemChanged
       .subscribe(
-        (FoodItem: FoodItems[]) => {
+        (FoodItem: FoodItem[]) => {
           this.FoodItem = FoodItem;
         }
       );
     for (let i = 0; i < this.FoodItem.length; i++) {
-      if (this.FoodItem[i].FoodItemImage === null || this.FoodItem[i].FoodItemImage === '' ) {
-        this.FoodItem[i].FoodItemImage = this.imageUrl;
+      if (this.FoodItem[i].FoodItemImageName === null || this.FoodItem[i].FoodItemImageName === '' ) {
+        this.FoodItem[i].FoodItemImageName = this.imageUrl;
       } else {
-        this.FoodItem[i].FoodItemImage =  this.rootUrl + this.FoodItem[i].FoodItemImage;
+        this.FoodItem[i].FoodItemImageName =  this.rootUrl + this.FoodItem[i].FoodItemImageName;
       }
     }
     this.total = this.ourOffersService.FoodItem.length;
@@ -50,7 +50,7 @@ export class FooditemGridViewComponent implements OnInit {
 
 
 
-  viewDetails(foodItem: FoodItems) {
+  viewDetails(foodItem: FoodItem) {
     const foodItemId =  foodItem.Id;
     this.router.navigate(['admin/food-item/grid-details', foodItemId]);
   }

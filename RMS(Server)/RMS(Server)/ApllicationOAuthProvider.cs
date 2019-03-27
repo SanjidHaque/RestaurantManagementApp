@@ -16,8 +16,6 @@ namespace RMS_Server_
     public class ApllicationOAuthProvider  : OAuthAuthorizationServerProvider
     {
 
-      
-
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();

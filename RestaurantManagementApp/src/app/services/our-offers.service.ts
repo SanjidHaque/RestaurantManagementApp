@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import {Subject} from 'rxjs';
-import {OrderedItems} from '../models/ordered-items.model';
+import {OrderedItem} from '../models/ordered-item.model';
 import {Order} from '../models/order.model';
 import {Inventory} from '../models/inventory.model';
-import {FoodItems} from '../models/food-item.model';
+import {FoodItem} from '../models/food-item.model';
 import {Ingredients} from '../models/ingredients.model';
 import {Table} from '../models/table.model';
 import {UUID} from 'angular2-uuid';
@@ -14,17 +14,17 @@ import {UUID} from 'angular2-uuid';
 export class OurOffersService {
   public uuidCodeOne = '';
   public TotalPrice = 0;
-  public orderedItemsChanged = new Subject<OrderedItems[]>();
+  public orderedItemsChanged = new Subject<OrderedItem[]>();
   public totalQuantity  = 0;
-  public orderedItems: OrderedItems[] = [];
+  public orderedItems: OrderedItem[] = [];
   public orders: Order;
   public ordersChanged = new Subject<Order>();
   public ordersList: Order[] = [];
   public ordersListChanged = new Subject<Order[]>();
   public foodItemSubTotal = 0;
   public ingredients: Ingredients[] = [];
-  public FoodItem: FoodItems[] = [];
-  public foodItemChanged = new Subject<FoodItems[]>();
+  public FoodItem: FoodItem[] = [];
+  public foodItemChanged = new Subject<FoodItem[]>();
   public inventory: Inventory[] = [];
   public inventoryChanged = new Subject<Inventory[]>();
   public table: Table[] = [];
@@ -74,12 +74,12 @@ export class OurOffersService {
 
 
 
-  addToFoodItemList(foodItem: FoodItems) {
+  addToFoodItemList(foodItem: FoodItem) {
     this.FoodItem.push(foodItem);
     this.foodItemChanged.next(this.FoodItem.slice());
   }
 
-  updateFoodItemList(editedFoodItem: FoodItems) {
+  updateFoodItemList(editedFoodItem: FoodItem) {
     for ( let i = 0; i< this.FoodItem.length; i++ ) {
       if ( this.FoodItem[i].Id === editedFoodItem.Id ) {
         this.FoodItem[i] = editedFoodItem;
@@ -137,7 +137,7 @@ export class OurOffersService {
       }
     }
   }
-  addToOrderedItemsList(orderedItems: OrderedItems) {
+  addToOrderedItemsList(orderedItems: OrderedItem) {
     this.orderedItems.push(orderedItems);
     this.orderedItemsChanged.next(this.orderedItems.slice());
   }

@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DataStorageService} from '../../services/data-storage.service';
 import {OurOffersService} from '../../services/our-offers.service';
 import {Order} from '../../models/order.model';
-import {OrderedItems} from '../../models/ordered-items.model';
+import {OrderedItem} from '../../models/ordered-item.model';
 import {Table} from '../../models/table.model';
 import {Subscription} from 'rxjs';
 import {Inventory} from '../../models/inventory.model';
@@ -17,7 +17,7 @@ import {UUID} from 'angular2-uuid';
 export class PaymentComponent implements OnInit {
 
   grandTotal : number;
-  public orderedItems: OrderedItems[];
+  public orderedItems: OrderedItem[];
   public orders: Order;
   onCheck = 0;
   tendered: number;

@@ -57,8 +57,8 @@
     </div>
 
 
-<div *ngIf="order.OrderedItems.length !== 0; else orderedItemsDeleted" class="scrollable-div" >
-    <div class="row table-bordered units-details" *ngFor="let products of order.OrderedItems">
+<div *ngIf="order.OrderedItem.length !== 0; else orderedItemsDeleted" class="scrollable-div" >
+    <div class="row table-bordered units-details" *ngFor="let products of order.OrderedItem">
       <div class="col-md-3" >
         {{ products.FoodItemName }}
       </div>
@@ -143,7 +143,7 @@
         {{ order.Profit }}
       </div>
       <div class="col-md-2">
-        {{ order.TableNo }}
+        {{ order.TableNumber }}
       </div>
     </div>
     </div>

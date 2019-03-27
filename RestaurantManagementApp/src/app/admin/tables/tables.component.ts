@@ -15,7 +15,6 @@ export class TablesComponent implements OnInit, DoCheck {
 
   public tables: Table[] ;
   subscription: Subscription;
-  totalTable = 0;
 
   constructor(private route: ActivatedRoute,
               private router: Router,

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 
 import {Order} from '../models/order.model';
 import {Inventory} from '../models/inventory.model';
-import {FoodItems} from '../models/food-item.model';
+import {FoodItem} from '../models/food-item.model';
 import {Table} from '../models/table.model';
-import {InventoryHistoryModel} from '../models/inventory-history.model';
+import {InventoryHistory} from '../models/inventory-history.model';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()
@@ -13,17 +13,17 @@ export class DataStorageService {
   backEndPort = '1548';
   rootUrl = 'http://localhost:' + this.backEndPort;
 
-  // rootUrl = 'https://hodoo-backend.azurewebsites.net';
+ // rootUrl = 'https://hodoo-backend.azurewebsites.net';
   
   constructor(private http: HttpClient) {
   }
 
 
 
-  saveFoodItemImage(foodItemId: string, fileToUpload: File ) {
+  saveFoodItemImage(foodItemId: string, fileToUpload: File) {
     if (fileToUpload.name !==  null || fileToUpload.name !== '') {
-      const formData: FormData = new FormData();
-      formData.append('Image', fileToUpload, fileToUpload.name);
+      const formData = new FormData();
+      formData.append('Image', fileToUpload);
       formData.append('FoodItemId', foodItemId);
       return this.http.post(this.rootUrl + '/api/SaveFoodItemImage', formData);
     }
@@ -31,7 +31,7 @@ export class DataStorageService {
 
 
   getFoodItems() {
-    return this.http.get<FoodItems[]>(this.rootUrl + '/api/GetFoodItems');
+    return this.http.get<FoodItem[]>(this.rootUrl + '/api/GetFoodItems');
   }
 
   saveOrder(order: Order) {
@@ -75,7 +75,7 @@ export class DataStorageService {
     return this.http.post(this.rootUrl + '/api/EditInventoryItem', inventory);
   }
 
-  updateInventoryHistory(updateHistory: InventoryHistoryModel) {
+  updateInventoryHistory(updateHistory: InventoryHistory) {
     return this.http.post(this.rootUrl + '/api/UpdateInventoryHistory', updateHistory);
   }
 
@@ -84,15 +84,15 @@ export class DataStorageService {
     return this.http.post(this.rootUrl + '/api/DeleteInventoryItem', inventory);
   }
 
-  addFoodItem(foodItem: FoodItems) {
+  addFoodItem(foodItem: FoodItem) {
     return this.http.post(this.rootUrl + '/api/AddFoodItem', foodItem);
   }
 
-  deleteFoodItem(foodItem: FoodItems) {
+  deleteFoodItem(foodItem: FoodItem) {
     return this.http.post(this.rootUrl + '/api/DeleteFoodItem', foodItem);
   }
 
-  editFoodItem(foodItem: FoodItems) {
+  editFoodItem(foodItem: FoodItem) {
     return this.http.post(this.rootUrl + '/api/EditFoodItem', foodItem);
   }
 }

@@ -231,9 +231,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903241731513_Init.cs" />
-    <Compile Include="Migrations\201903241731513_Init.Designer.cs">
-      <DependentUpon>201903241731513_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201903261155016_orderModelChanged.cs" />
+    <Compile Include="Migrations\201903261155016_orderModelChanged.Designer.cs">
+      <DependentUpon>201903261155016_orderModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903261415007_foodItemAndOrderModelChanged.cs" />
+    <Compile Include="Migrations\201903261415007_foodItemAndOrderModelChanged.Designer.cs">
+      <DependentUpon>201903261415007_foodItemAndOrderModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903271035427_someModelChangedThatIDontRemember.cs" />
+    <Compile Include="Migrations\201903271035427_someModelChangedThatIDontRemember.Designer.cs">
+      <DependentUpon>201903271035427_someModelChangedThatIDontRemember.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -244,10 +252,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Inventory.cs" />
-    <Compile Include="Models\InventoryHistoryModel.cs" />
+    <Compile Include="Models\InventoryHistory.cs" />
     <Compile Include="Models\ModifiedUser.cs" />
     <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderedItems.cs" />
+    <Compile Include="Models\OrderedItem.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -323,8 +331,14 @@
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903241731513_Init.resx">
-      <DependentUpon>201903241731513_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903261155016_orderModelChanged.resx">
+      <DependentUpon>201903261155016_orderModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903261415007_foodItemAndOrderModelChanged.resx">
+      <DependentUpon>201903261415007_foodItemAndOrderModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271035427_someModelChangedThatIDontRemember.resx">
+      <DependentUpon>201903271035427_someModelChangedThatIDontRemember.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

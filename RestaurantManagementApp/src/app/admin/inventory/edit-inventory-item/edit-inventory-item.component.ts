@@ -4,7 +4,7 @@ import {OurOffersService} from '../../../services/our-offers.service';
 import {Inventory} from '../../../models/inventory.model';
 import {NgForm} from '@angular/forms';
 import {DataStorageService} from '../../../services/data-storage.service';
-import {InventoryHistoryModel} from '../../../models/inventory-history.model';
+import {InventoryHistory} from '../../../models/inventory-history.model';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class EditInventoryItemComponent implements OnInit {
    currentPrice: number;
    quantity: number;
    unit: string;
-   inventoryHistory: InventoryHistoryModel[] = [];
+   inventoryHistory: InventoryHistory[] = [];
   inventoryList: Inventory[] = [];
   subscription: Subscription;
   isDisabled = false;

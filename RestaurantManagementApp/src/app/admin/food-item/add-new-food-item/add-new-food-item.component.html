@@ -1,7 +1,7 @@
 
 
 <div class="row">
-  <form (ngSubmit) = "onSaveFoodItem(newFoodItem)" #newFoodItem = "ngForm">
+  <form (ngSubmit) = "addNewFoodItem(newFoodItem)" #newFoodItem = "ngForm">
   <div class="col-md-offset-1 col-md-9 order-detail">
     <div class="row buttons">
       <div class="col-md-2 back">
@@ -51,10 +51,10 @@
               <label>Item's Serial Number</label>
               <input
                 type="text"
-                id="serial"
+                id="serialNumber"
                 class="form-control"
                 ngModel
-                name="serial"
+                name="serialNumber"
                 required
               >
             </div>
@@ -109,17 +109,18 @@
     </div>
     <ng-template #notEmpty>
     <div class="row">
-      <form (ngSubmit) = "onAddIngredients(newIngredients)" #newIngredients = "ngForm">
+      <form (ngSubmit) = "addIngredients(newIngredients)" #newIngredients = "ngForm">
       <div class="col-md-6">
         <div class="form-group">
           <select
-            id="ingName"
+            id="inventoryId"
             class="form-control"
             ngModel
             required
-            name="ingName">
+            name="inventoryId">
             <option value="" selected disabled hidden>Choose ingredients from here</option>
-            <option  *ngFor="let inventory of inventories" [value] ="inventory.Id"  > {{ inventory.Name }} </option>
+            <option  *ngFor="let inventory of inventories" [value] ="inventory.Id"  >
+              {{ inventory.Name }} </option>
           </select>
         </div>
       </div>

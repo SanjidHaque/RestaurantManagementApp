@@ -63,6 +63,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {NgProgressHttpModule} from '@ngx-progressbar/http';
 import {NgProgressModule} from '@ngx-progressbar/core';
 import {NgProgressRouterModule} from '@ngx-progressbar/router';
+import {AppMaterialModule} from './modules/app-material.module';
 
 
 
@@ -115,6 +116,7 @@ import {NgProgressRouterModule} from '@ngx-progressbar/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AppMaterialModule,
     HttpClientModule,
     CommonModule,
     FormsModule,

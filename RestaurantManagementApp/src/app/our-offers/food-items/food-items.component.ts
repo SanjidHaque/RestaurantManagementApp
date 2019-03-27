@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Order} from '../../models/order.model';
 import {OurOffersService} from '../../services/our-offers.service';
-import {OrderedItems} from '../../models/ordered-items.model';
+import {OrderedItem} from '../../models/ordered-item.model';
 import {Subscription} from 'rxjs';
-import {FoodItems} from '../../models/food-item.model';
+import {FoodItem} from '../../models/food-item.model';
 import {Inventory} from '../../models/inventory.model';
 import {UUID} from 'angular2-uuid';
 import {DataStorageService} from '../../services/data-storage.service';
@@ -16,7 +16,7 @@ import {DataStorageService} from '../../services/data-storage.service';
 export class FoodItemsComponent implements OnInit {
   index: number;
   total: number;
-  FoodItem: FoodItems[] = [];
+  FoodItem: FoodItem[] = [];
   inventories: Inventory[] = [];
   selectedQuantity = [];
   order: Order[];
@@ -43,7 +43,7 @@ export class FoodItemsComponent implements OnInit {
     this.FoodItem = this.ourOffersService.FoodItem;
     this.ourOffersService.foodItemChanged
       .subscribe(
-        (FoodItem: FoodItems[]) => {
+        (FoodItem: FoodItem[]) => {
           this.FoodItem = FoodItem;
         }
       );
@@ -57,10 +57,10 @@ export class FoodItemsComponent implements OnInit {
       );
     this.total = this.FoodItem.length;
      for (let i = 0; i < this.FoodItem.length; i++) {
-       if (this.FoodItem[i].FoodItemImage === null || this.FoodItem[i].FoodItemImage === '' ) {
-         this.FoodItem[i].FoodItemImage = this.imageUrl;
+       if (this.FoodItem[i].FoodItemImageName === null || this.FoodItem[i].FoodItemImageName === '' ) {
+         this.FoodItem[i].FoodItemImageName = this.imageUrl;
        } else {
-         this.FoodItem[i].FoodItemImage =  this.rootUrl + this.FoodItem[i].FoodItemImage;
+         this.FoodItem[i].FoodItemImageName =  this.rootUrl + this.FoodItem[i].FoodItemImageName;
        }
      }
   }
@@ -127,7 +127,7 @@ export class FoodItemsComponent implements OnInit {
                       this.ourOffersService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
                     } else {
 
-                      const purchasedFood = new OrderedItems(orderItemId, orderId,  foodItemId,
+                      const purchasedFood = new OrderedItem(orderItemId, orderId,  foodItemId,
                         quantity , foodItemName, serialNo, price , subTotal, makingCost);
 
                       this.ourOffersService.addToOrderedItemsList(purchasedFood);

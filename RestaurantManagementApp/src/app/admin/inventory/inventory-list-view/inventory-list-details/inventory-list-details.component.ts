@@ -4,7 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OurOffersService} from '../../../../services/our-offers.service';
 import {Inventory} from '../../../../models/inventory.model';
 import {Subscription} from 'rxjs';
-import {InventoryHistoryModel} from '../../../../models/inventory-history.model';
+import {InventoryHistory} from '../../../../models/inventory-history.model';
 
 @Component({
   selector: 'app-inventory-list-details',
@@ -16,7 +16,7 @@ export class InventoryListDetailsComponent implements OnInit {
  inventoryId: string;
  inventory: Inventory;
  inventoryList: Inventory[] = [];
- inventoryHistory: InventoryHistoryModel[] = [];
+ inventoryHistory: InventoryHistory[] = [];
  subscription: Subscription;
  index: number;
   constructor(private route: ActivatedRoute,

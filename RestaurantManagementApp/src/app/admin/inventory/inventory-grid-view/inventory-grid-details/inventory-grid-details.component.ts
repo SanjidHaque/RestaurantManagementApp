@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {InventoryHistoryModel} from '../../../../models/inventory-history.model';
+import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -16,7 +16,7 @@ export class InventoryGridDetailsComponent implements OnInit {
   inventoryId: string;
   inventory: Inventory;
   inventoryList: Inventory[] = [];
-  inventoryHistory: InventoryHistoryModel[] = [];
+  inventoryHistory: InventoryHistory[] = [];
   subscription: Subscription;
   index: number;
   constructor(private route: ActivatedRoute,

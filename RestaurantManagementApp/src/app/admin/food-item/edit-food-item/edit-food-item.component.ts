@@ -26,7 +26,7 @@ export class EditFoodItemComponent implements OnInit {
   ingredients: Ingredients[] = [];
   ingredientsChanged = new Subject<Ingredients[]>();
   FoodItem: FoodItem;
-  foodItemId: string;
+  foodItemId: number;
   isDisabled = false;
   subscription: Subscription;
   constructor(private route: ActivatedRoute,
@@ -37,7 +37,7 @@ export class EditFoodItemComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.foodItemId = params[+'id'];
+          this.foodItemId = +params['id'];
         }
       );
   }
@@ -46,15 +46,15 @@ export class EditFoodItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
-        this.ourOffersService.FoodItem = data['foodItems'];
+        this.ourOffersService.foodItems = data['foodItems'];
       }
     );
 
-    this.FoodItemList = this.ourOffersService.FoodItem;
-    this.ourOffersService.foodItemChanged
+    this.FoodItemList = this.ourOffersService.foodItems;
+    this.ourOffersService.foodItemsChanged
       .subscribe(
         (foodItem: FoodItem[]) => {
-          this.FoodItemList = FoodItem;
+          this.FoodItemList = foodItem;
         }
       );
     for (let i = 0; i < this.FoodItemList.length; i++) {
@@ -72,11 +72,11 @@ export class EditFoodItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.ourOffersService.inventory = data['inventories'];
+        this.ourOffersService.inventories = data['inventories'];
       }
     );
-    this.inventories = this.ourOffersService.inventory;
-    this.subscription = this.ourOffersService.inventoryChanged
+    this.inventories = this.ourOffersService.inventories;
+    this.subscription = this.ourOffersService.inventoriesChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
@@ -132,13 +132,13 @@ export class EditFoodItemComponent implements OnInit {
     if (this.checkIfIngredientsExist(inventoryId) !== '') {
       this.ingredients[this.checkIfIngredientsExist(inventoryId)].Quantity
         += Number.parseFloat(quantity.toString());
-      this.ingredients[this.checkIfIngredientsExist(inventoryId)].TotalPrice
+      this.ingredients[this.checkIfIngredientsExist(inventoryId)].totalPrice
         += Number.parseFloat(subTotal.toString());
     } else {
 
       const name = this.getInventoryItemName(inventoryId);
       const inventoryUnit = this.getInventoryItemUnit(inventoryId);
-      const foodItemId = '';
+      const foodItemId = null;
       const addNewIngredient = new Ingredients(
         ingredientId,
         name,

@@ -15,7 +15,7 @@ import {UUID} from 'angular2-uuid';
 })
 export class UpdateInventoryItemComponent implements OnInit {
 
-  id: string;
+  id: number;
   name = '';
   price: number;
   quantity: number;
@@ -42,11 +42,11 @@ export class UpdateInventoryItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.ourOffersService.inventory = data['inventories'];
+        this.ourOffersService.inventories = data['inventories'];
       }
     );
-    this.inventoryList = this.ourOffersService.inventory;
-    this.subscription = this.ourOffersService.inventoryChanged
+    this.inventoryList = this.ourOffersService.inventories;
+    this.subscription = this.ourOffersService.inventoriesChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventoryList = inventories;
@@ -63,7 +63,7 @@ export class UpdateInventoryItemComponent implements OnInit {
   onUpdateItem(form: NgForm) {
     this.isDisabled = true;
     const inventoryId = this.id;
-    const updateHistoryId = UUID.UUID();
+    const updateHistoryId = null;
     const quantity = form.value.quantity;
     const currentPrice = form.value.currentPrice;
     const time = new Date().toLocaleString();
@@ -73,13 +73,12 @@ export class UpdateInventoryItemComponent implements OnInit {
         inventoryId,
         quantity,
         time,
-        this.unit,
         currentPrice);
-    for (let i = 0; i < this.ourOffersService.inventory.length; i++) {
-      if ( this.ourOffersService.inventory[i].Id === this.id ) {
-        this.ourOffersService.inventory[i].InventoryHistoryModel.push(updateHistory);
-        this.ourOffersService.inventory[i].RemainingQuantity  =
-          Number.parseInt( this.ourOffersService.inventory[i].RemainingQuantity.toString())
+    for (let i = 0; i < this.ourOffersService.inventories.length; i++) {
+      if ( this.ourOffersService.inventories[i].Id === this.id ) {
+        this.ourOffersService.inventories[i].InventoryHistoryModel.push(updateHistory);
+        this.ourOffersService.inventories[i].RemainingQuantity  =
+          Number.parseInt( this.ourOffersService.inventories[i].RemainingQuantity.toString())
           + Number.parseInt(quantity.toString());
       }
     }
@@ -87,12 +86,12 @@ export class UpdateInventoryItemComponent implements OnInit {
     subscribe(
       (data: any) => {
         form.reset();
-        this.router.navigate(['admin/inventory/list-details', inventoryId]);
+        this.router.navigate(['admin/inventories/list-details', inventoryId]);
       }
     );
   }
 
   onCancel() {
-    this.router.navigate(['admin/inventory/list-view']);
+    this.router.navigate(['admin/inventories/list-view']);
   }
 }

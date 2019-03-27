@@ -25,11 +25,11 @@ export class OrderListViewComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Order[]) => {
-        this.ourOffersService.ordersList = data['orders'];
+        this.ourOffersService.orders = data['order'];
       }
     );
-    this.orderLists = this.ourOffersService.ordersList;
-    this.ourOffersService.ordersListChanged
+    this.orderLists = this.ourOffersService.orders;
+    this.ourOffersService.ordersChanged
       .subscribe(
         (order: Order[]) => {
           this.orderLists = order;
@@ -47,11 +47,11 @@ export class OrderListViewComponent implements OnInit {
         + Number.parseInt(this.orderLists[i].Profit.toString());
     }
 
-    this.totalOrder = this.ourOffersService.ordersList.length;
+    this.totalOrder = this.ourOffersService.orders.length;
   }
 
   viewDetails(orderList: Order) {
     const orderId =  orderList.Id;
-    this.router.navigate(['admin/orders/list-details', orderId]);
+    this.router.navigate(['admin/order/list-details', orderId]);
   }
 }

@@ -4,14 +4,14 @@ export class Ingredients {
   public Quantity: number;
   public InventoryId: number;
   public SubTotal: number;
-  public FoodItemId: string;
+  public FoodItemId: number;
 
   constructor(id: number,
               name: string,
               quantity: number,
               inventoryId: number,
               subTotal: number,
-              foodItemId: string) {
+              foodItemId: number) {
 
     this.Id = id;
     this.Name = name;

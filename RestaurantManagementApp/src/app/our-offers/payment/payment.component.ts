@@ -38,15 +38,15 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.grandTotal = this._ourOfferService.TotalPrice;
+    this.grandTotal = this._ourOfferService.totalPrice;
     this._route.data.
     subscribe(
       ( data: Table[]) => {
-        this._ourOfferService.table = data['tables'];
+        this._ourOfferService.tables = data['tables'];
       }
     );
-    this.tables = this._ourOfferService.table;
-    this.subscription = this._ourOfferService.tableChanged
+    this.tables = this._ourOfferService.tables;
+    this.subscription = this._ourOfferService.tablesChanged
       .subscribe(
         (tables: Table[]) => {
           this.tables = tables;
@@ -65,7 +65,7 @@ export class PaymentComponent implements OnInit {
 
   confirmEvent() {
     this._ourOfferService.clearOrders();
-    this._ourOfferService.TotalPrice = 0;
+    this._ourOfferService.totalPrice = 0;
     this._ourOfferService.totalQuantity = 0;
     this.router.navigate(['our-offers/regulars']);
   }
@@ -95,7 +95,7 @@ export class PaymentComponent implements OnInit {
 
 
   validate() {
-    const orderId = UUID.UUID();
+    const orderId = null;
     this.onCheck  = 1;
 
     this.orderedItems = this._ourOfferService.orderedItems;
@@ -104,7 +104,7 @@ export class PaymentComponent implements OnInit {
 
     }
 
-    const totalPrice = this._ourOfferService.TotalPrice;
+    const totalPrice = this._ourOfferService.totalPrice;
     if ( this.selectedTable === '' || this.selectedTable === 'Select a Table' ) {
       this.table  =  'No Table';
     } else {
@@ -113,7 +113,7 @@ export class PaymentComponent implements OnInit {
     for (let i = 0; i < this.orderedItems.length; i++) {
         this.inventoryCost = Number.parseInt(this.inventoryCost.toString()) +
           (Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString()) *
-            Number.parseInt(this.orderedItems[i].FoodItemMakingCost.toString()));
+            Number.parseInt(this.orderedItems[i].TotalPrice.toString()));
     }
 
     this.orderProfit = totalPrice - this.inventoryCost;

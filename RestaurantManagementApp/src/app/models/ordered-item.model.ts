@@ -1,15 +1,15 @@
 export class OrderedItem {
   public Id: number;
   public ReceiptNumber: string;
-  public OrderId: string;
-  public FoodItemId: string;
+  public OrderId: number;
+  public FoodItemId: number;
   public FoodItemQuantity: number;
   public TotalPrice: number;
 
   constructor(id: number,
               receiptNumber: string,
-              orderId: string,
-              foodItemId: string,
+              orderId: number,
+              foodItemId: number,
               foodItemQuantity: number,
               totalPrice: number,
              ) {

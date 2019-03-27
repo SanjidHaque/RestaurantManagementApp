@@ -20,17 +20,17 @@ export class FooditemListViewComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
-        this.ourOffersService.FoodItem = data['foodItems'];
+        this.ourOffersService.foodItems = data['foodItems'];
       }
     );
-    this.FoodItem = this.ourOffersService.FoodItem;
-    this.ourOffersService.foodItemChanged
+    this.FoodItem = this.ourOffersService.foodItems;
+    this.ourOffersService.foodItemsChanged
       .subscribe(
         (FoodItem: FoodItem[]) => {
           this.FoodItem = FoodItem;
         }
       );
-    this.total = this.ourOffersService.FoodItem.length;
+    this.total = this.ourOffersService.foodItems.length;
   }
 
   viewDetails(foodItem: FoodItem) {

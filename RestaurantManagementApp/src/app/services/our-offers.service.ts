@@ -13,22 +13,22 @@ import {UUID} from 'angular2-uuid';
 @Injectable()
 export class OurOffersService {
   public uuidCodeOne = '';
-  public TotalPrice = 0;
-  public orderedItemsChanged = new Subject<OrderedItem[]>();
+  public totalPrice = 0;
   public totalQuantity  = 0;
   public orderedItems: OrderedItem[] = [];
-  public orders: Order;
-  public ordersChanged = new Subject<Order>();
-  public ordersList: Order[] = [];
-  public ordersListChanged = new Subject<Order[]>();
+  public orderedItemsChanged = new Subject<OrderedItem[]>();
+  public order: Order;
+  public orderChanged = new Subject<Order>();
+  public orders: Order[] = [];
+  public ordersChanged = new Subject<Order[]>();
   public foodItemSubTotal = 0;
   public ingredients: Ingredients[] = [];
-  public FoodItem: FoodItem[] = [];
-  public foodItemChanged = new Subject<FoodItem[]>();
-  public inventory: Inventory[] = [];
-  public inventoryChanged = new Subject<Inventory[]>();
-  public table: Table[] = [];
-  public tableChanged = new Subject<Table[]>();
+  public foodItems: FoodItem[] = [];
+  public foodItemsChanged = new Subject<FoodItem[]>();
+  public inventories: Inventory[] = [];
+  public inventoriesChanged = new Subject<Inventory[]>();
+  public tables: Table[] = [];
+  public tablesChanged = new Subject<Table[]>();
 
 
   constructor() {
@@ -40,30 +40,31 @@ export class OurOffersService {
     this.orderedItems = [];
    }
 
-   updateInventoryList(inventoryId: string, editedInventoryItem: Inventory) {
-    for ( let i = 0; i < this.inventory.length; i++) {
-      if ( this.inventory[i].Id === inventoryId ) {
-        this.inventory[i].Name = editedInventoryItem.Name;
-        this.inventory[i].Unit = editedInventoryItem.Unit;
-        this.inventoryChanged.next(this.inventory.slice());
+   updateInventoryList(inventoryId: number, editedInventoryItem: Inventory) {
+    for (let i = 0; i < this.inventories.length; i++) {
+      if ( this.inventories[i].Id === inventoryId ) {
+        this.inventories[i].Name = editedInventoryItem.Name;
+        this.inventories[i].Unit = editedInventoryItem.Unit;
+        this.inventoriesChanged.next(this.inventories.slice());
       }
     }
    }
 
   addToInventoryList(inventory: Inventory) {
-    this.inventory.push(inventory);
-    this.inventoryChanged.next(this.inventory.slice());
+    this.inventories.push(inventory);
+    this.inventoriesChanged.next(this.inventories.slice());
   }
 
-  addToTableList(table: Table) {
-    this.table.push(table);
-    this.tableChanged.next(this.table.slice());
+  addNewTable(table: Table) {
+    this.tables.push(table);
+    this.tablesChanged.next(this.tables.slice());
   }
+
   editTable(editedTable: Table) {
-    for ( let i = 0; i < this.table.length; i++) {
-      if ( this.table[i].Id === editedTable.Id ) {
-        this.table[i].Name = editedTable.Name;
-        this.tableChanged.next(this.table.slice());
+    for (let i = 0; i < this.tables.length; i++) {
+      if ( this.tables[i].Id === editedTable.Id ) {
+        this.tables[i].Name = editedTable.Name;
+        this.tablesChanged.next(this.tables.slice());
         return true;
       }
     }
@@ -75,15 +76,15 @@ export class OurOffersService {
 
 
   addToFoodItemList(foodItem: FoodItem) {
-    this.FoodItem.push(foodItem);
-    this.foodItemChanged.next(this.FoodItem.slice());
+    this.foodItems.push(foodItem);
+    this.foodItemsChanged.next(this.foodItems.slice());
   }
 
   updateFoodItemList(editedFoodItem: FoodItem) {
-    for ( let i = 0; i< this.FoodItem.length; i++ ) {
-      if ( this.FoodItem[i].Id === editedFoodItem.Id ) {
-        this.FoodItem[i] = editedFoodItem;
-        this.foodItemChanged.next(this.FoodItem.slice());
+    for (let i = 0; i< this.foodItems.length; i++ ) {
+      if ( this.foodItems[i].Id === editedFoodItem.Id ) {
+        this.foodItems[i] = editedFoodItem;
+        this.foodItemsChanged.next(this.foodItems.slice());
       }
     }
   }
@@ -92,7 +93,7 @@ export class OurOffersService {
 
 
 
-  removeFromFoodItemCart(foodItemId: string, quantity: number, subTotal: number) {
+  removeFromFoodItemCart(foodItemId: number, quantity: number, subTotal: number) {
 
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
       if ( this.orderedItems[i].FoodItemId === foodItemId) {
@@ -101,11 +102,11 @@ export class OurOffersService {
             this.orderedItems[i].FoodItemQuantity
             - quantity;
 
-          this.orderedItems[i].FoodItemSubTotal =
-            this.orderedItems[i].FoodItemSubTotal
+          this.orderedItems[i].TotalPrice =
+            this.orderedItems[i].TotalPrice
             - subTotal;
-          this.TotalPrice -= Number.parseInt(subTotal.toString());
-          this.totalQuantity -= Number.parseInt(quantity.toString());
+          this.totalPrice -= Number.parseInt(subTotal.toString(), 2);
+          this.totalQuantity -= Number.parseInt(quantity.toString(), 2);
           if (this.orderedItems[i].FoodItemQuantity === 0) {
             this.orderedItems.splice(i, 1);
           }
@@ -115,11 +116,11 @@ export class OurOffersService {
     }
   }
 
-  checkIfOrderedItemExist(foodItemId: string, orderId: string) {
+  checkIfOrderedItemExist(foodItemId: number, orderId: number) {
     for (let i = 0; i < this.orderedItems.length; i++) {
       if (this.orderedItems[i].FoodItemId === foodItemId
         && this.orderedItems[i].OrderId === orderId) {
-        return this.orderedItems[i].OrderItemId;
+        return this.orderedItems[i].Id;
       }
     }
     return null;
@@ -131,9 +132,9 @@ export class OurOffersService {
   }
 
   deleteOrder(order: Order) {
-    for (let i = 0; i < this.ordersList.length; i++ ) {
-      if ( this.ordersList[i].Id === order.Id  ) {
-        this.ordersList.splice(i, 1);
+    for (let i = 0; i < this.orders.length; i++ ) {
+      if ( this.orders[i].Id === order.Id  ) {
+        this.orders.splice(i, 1);
       }
     }
   }
@@ -143,15 +144,16 @@ export class OurOffersService {
   }
 
   addToOrderedList(order: Order) {
-    this.orders = order;
-    this.ordersChanged.next(order);
-    this.ordersList.push(order);
-    this.ordersListChanged.next(this.ordersList.slice());
+    this.order = order;
+    this.orderChanged.next(order);
+    this.orders.push(order);
+    this.ordersChanged.next(this.orders.slice());
   }
 
   grandTotalPrice(price: number) {
-     this.TotalPrice = Number.parseInt(price.toString()) + Number.parseInt(this.TotalPrice.toString());
-     return this.TotalPrice;
+     this.totalPrice = Number.parseInt(price.toString(), 2)
+       + Number.parseInt(this.totalPrice.toString(), 2);
+     return this.totalPrice;
   }
 
 
@@ -163,7 +165,7 @@ export class OurOffersService {
 
 
 
-  checkExistingFoodItem(foodItemId: string) {
+  checkExistingFoodItem(foodItemId: number) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
       if (this.orderedItems[i].FoodItemId === foodItemId) {
         return true;
@@ -171,18 +173,18 @@ export class OurOffersService {
     }
   }
 
-  increaseOnExistingFoodItem(foodItemId: string, quantity: number, subTotal: number ) {
+  increaseOnExistingFoodItem(foodItemId: number, quantity: number, subTotal: number) {
     for (let i = 0 ; i < this.orderedItems.length; i++ ) {
 
       if (this.orderedItems[i].FoodItemId === foodItemId) {
 
         this.orderedItems[i].FoodItemQuantity =
-          Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString())
-          + Number.parseInt(quantity.toString());
+          Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString(), 2)
+          + Number.parseInt(quantity.toString(), 2);
 
-        this.orderedItems[i].FoodItemSubTotal =
-          Number.parseInt(this.orderedItems[i].FoodItemSubTotal.toString())
-          + Number.parseInt(subTotal.toString());
+        this.orderedItems[i].TotalPrice =
+          Number.parseInt(this.orderedItems[i].TotalPrice.toString(), 2)
+          + Number.parseInt(subTotal.toString(), 2);
       }
     }
   }

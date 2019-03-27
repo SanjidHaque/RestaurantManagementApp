@@ -59,7 +59,7 @@ export class AddNewInventoryComponent implements OnInit {
        subscribe(
          (data: any) => {
            form.reset();
-           this.router.navigate(['admin/inventory/list-view']);
+           this.router.navigate(['admin/inventories/list-view']);
          }
        );
   }
@@ -67,7 +67,7 @@ export class AddNewInventoryComponent implements OnInit {
 
 
   onCancel() {
-    this.router.navigate(['admin/inventory/list-view']);
+    this.router.navigate(['admin/inventories/list-view']);
 
   }
 }

@@ -13,6 +13,7 @@ import {DataStorageService} from '../../services/data-storage.service';
   templateUrl: './food-items.component.html',
   styleUrls: ['./food-items.component.scss']
 })
+
 export class FoodItemsComponent implements OnInit {
   index: number;
   total: number;
@@ -40,16 +41,16 @@ export class FoodItemsComponent implements OnInit {
 
   ngOnInit() {
     this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
-    this.FoodItem = this.ourOffersService.FoodItem;
-    this.ourOffersService.foodItemChanged
+    this.FoodItem = this.ourOffersService.foodItems;
+    this.ourOffersService.foodItemsChanged
       .subscribe(
-        (FoodItem: FoodItem[]) => {
-          this.FoodItem = FoodItem;
+        (foodItem: FoodItem[]) => {
+          this.FoodItem = foodItem;
         }
       );
 
-    this.inventories = this.ourOffersService.inventory;
-    this.subscription = this.ourOffersService.inventoryChanged
+    this.inventories = this.ourOffersService.inventories;
+    this.subscription = this.ourOffersService.inventoriesChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
@@ -69,7 +70,8 @@ export class FoodItemsComponent implements OnInit {
 
 
 
-  UpdateCart(id: string, price: number, name: string, serialNo: string, makingCost: number, isAdd: boolean, index: any) {
+  UpdateCart(id: number, price: number,
+             name: string, serialNo: string, makingCost: number, isAdd: boolean, index: any) {
 
     this.quantity = this.selectedQuantity[index];
     if (this.quantity > 0) {
@@ -78,7 +80,7 @@ export class FoodItemsComponent implements OnInit {
       const Price = price;
       const orderId = null;
       if ( this.ourOffersService.checkIfOrderedItemExist(id, orderId) === null) {
-        const orderItemId = UUID.UUID();
+        const orderItemId = null;
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
             foodItemName, serialNo, Price, makingCost );
@@ -101,59 +103,61 @@ export class FoodItemsComponent implements OnInit {
 
 
 
-  AddToCart(orderItemId: string, orderId: string, quantity: number,
-            foodItemId: string, foodItemName: string, serialNo: string, price: number, makingCost: number ) {
+  AddToCart(orderItemId: number, orderId: number, quantity: number,
+             foodItemId: number, foodItemName: string, serialNo: string, price: number,
+             makingCost: number ) {
 
-      for (let j = 0; j < this.FoodItem.length; j++) {
-        if (this.FoodItem[j].Id === foodItemId) {
-          let check = 0;
-          for (let k = 0; k < this.FoodItem[j].Ingredients.length; k++ ) {
-            const inventoryQuantity =  this.FoodItem[j].Ingredients[k].Quantity;
-            const totalQuantity = inventoryQuantity * quantity;
-            const inventoryId = this.FoodItem[j].Ingredients[k].InventoryId;
-            for (let l = 0; l < this.inventories.length; l++) {
-              if (this.ourOffersService.inventory[l].Id === inventoryId) {
-                if (this.ourOffersService.inventory[l].RemainingQuantity > totalQuantity ) {
+    for (let j = 0; j < this.FoodItem.length; j++) {
+      if (this.FoodItem[j].Id === foodItemId) {
+        let check = 0;
+        for (let k = 0; k < this.FoodItem[j].Ingredients.length; k++ ) {
+          const inventoryQuantity =  this.FoodItem[j].Ingredients[k].Quantity;
+          const totalQuantity = inventoryQuantity * quantity;
+          const inventoryId = this.FoodItem[j].Ingredients[k].InventoryId;
+          for (let l = 0; l < this.inventories.length; l++) {
+            if (this.ourOffersService.inventories[l].Id === inventoryId) {
+              if (this.ourOffersService.inventories[l].RemainingQuantity > totalQuantity ) {
 
-                    check++;
+                check++;
 
-                  if ( check === this.FoodItem[j].Ingredients.length) {
-                    this.ourOffersService.inventory[l].RemainingQuantity -= totalQuantity;
-                    const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
-                    this.ourOffersService.grandTotalPrice(subTotal);
-                    this.condition = this.ourOffersService.checkExistingFoodItem(foodItemId);
+                if ( check === this.FoodItem[j].Ingredients.length) {
+                  this.ourOffersService.inventories[l].RemainingQuantity -= totalQuantity;
+                  const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
+                  this.ourOffersService.grandTotalPrice(subTotal);
+                  this.condition = this.ourOffersService.checkExistingFoodItem(foodItemId);
 
-                    if ( this.condition  ) {
-                      this.ourOffersService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
-                    } else {
+                  if ( this.condition  ) {
+                    this.ourOffersService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
+                  } else {
 
-                      const purchasedFood = new OrderedItem(orderItemId, orderId,  foodItemId,
-                        quantity , foodItemName, serialNo, price , subTotal, makingCost);
+                    const purchasedFood =
+                      new OrderedItem(orderItemId, null,  foodItemId,
+                        quantity  , price , subTotal);
 
-                      this.ourOffersService.addToOrderedItemsList(purchasedFood);
-                    }
-                    this.ourOffersService.totalQuantity
-                      = Number.parseInt(this.ourOffersService.totalQuantity.toString())
-                      + Number.parseInt(quantity.toString());
+                    this.ourOffersService.addToOrderedItemsList(purchasedFood);
                   }
-
+                  this.ourOffersService.totalQuantity
+                    = Number.parseInt(this.ourOffersService.totalQuantity.toString())
+                    + Number.parseInt(quantity.toString());
                 }
 
               }
 
+            }
+
           }
 
         }
-          if (check < this.FoodItem[j].Ingredients.length) {
-            alert('Insufficient inventory, please update your inventory first');
-          }
-break;
+        if (check < this.FoodItem[j].Ingredients.length) {
+          alert('Insufficient inventories, please update your inventories first');
+        }
+        break;
       }
     }
   }
 
-  RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
-                 foodItemId: string, foodItemName: string, price: number,
+  RemoveFromCart(orderItemId: number, orderId: number, quantity: number,
+                 foodItemId: number, foodItemName: string, price: number,
                  makingCost: number) {
       const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
       this.ourOffersService.removeFromFoodItemCart(foodItemId, quantity, subTotal);

@@ -19,7 +19,7 @@ export class ReceiptComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.order = this.ourOffersService.orders;
+    this.order = this.ourOffersService.order;
   }
 
   discardOrder() {
@@ -32,7 +32,7 @@ export class ReceiptComponent implements OnInit {
 
   confirmEvent() {
     this.ourOffersService.clearOrders();
-    this.ourOffersService.TotalPrice = 0;
+    this.ourOffersService.totalPrice = 0;
     this.ourOffersService.totalQuantity = 0;
     this.router.navigate(['our-offers/regulars']);
     this.ourOffersService.deleteOrder(this.order);
@@ -175,7 +175,7 @@ text-align: right;
 
   nextOrder() {
     this.ourOffersService.clearOrders();
-    this.ourOffersService.TotalPrice = 0;
+    this.ourOffersService.totalPrice = 0;
     this.ourOffersService.totalQuantity = 0;
     this.router.navigate(['our-offers']);
   }

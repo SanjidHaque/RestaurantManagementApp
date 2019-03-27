@@ -138,7 +138,7 @@ const appRoutes: Routes = [
               users: ModifiedUserResolverService
             }
         },
-        { path: 'orders',
+        { path: 'order',
           component: OrdersComponent,
           canActivate: [AuthGuard],
           children:
@@ -270,12 +270,12 @@ const appRoutes: Routes = [
           children:
             [
               {
-                path: 'add-new-table',
+                path: 'add-new-tables',
                 component: AddNewTableComponent,
                 canActivate: [AuthGuard]
               },
               {
-                path: 'edit-table/:id',
+                path: 'edit-tables/:id',
                 component: EditTableComponent,
                 canActivate: [AuthGuard],
                 resolve:
@@ -287,18 +287,18 @@ const appRoutes: Routes = [
 
         },
         {
-          path: 'inventory',
+          path: 'inventories',
           component: InventoryComponent,
           canActivate: [AuthGuard],
           children:
             [
               {
-                path: 'add-new-inventory',
+                path: 'add-new-inventories',
                 component: AddNewInventoryComponent,
                 canActivate: [AuthGuard]
               },
               {
-                path: 'edit-inventory-item/:id',
+                path: 'edit-inventories-item/:id',
                 component: EditInventoryItemComponent,
                 canActivate: [AuthGuard],
                 resolve:
@@ -307,7 +307,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: 'update-inventory-item/:id',
+                path: 'update-inventories-item/:id',
                 component: UpdateInventoryItemComponent,
                 canActivate: [AuthGuard],
                 resolve:

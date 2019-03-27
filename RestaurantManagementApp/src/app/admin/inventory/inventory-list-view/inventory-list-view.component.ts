@@ -24,6 +24,6 @@ export class InventoryListViewComponent implements OnInit {
 
   viewDetails(inventory: Inventory) {
     const inventoryId =  inventory.Id;
-    this.router.navigate(['admin/inventory/list-details', inventoryId]);
+    this.router.navigate(['admin/inventories/list-details', inventoryId]);
   }
 }

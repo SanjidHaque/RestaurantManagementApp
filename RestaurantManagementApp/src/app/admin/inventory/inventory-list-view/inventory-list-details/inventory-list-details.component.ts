@@ -13,7 +13,7 @@ import {InventoryHistory} from '../../../../models/inventory-history.model';
 })
 export class InventoryListDetailsComponent implements OnInit {
 
- inventoryId: string;
+ inventoryId: number;
  inventory: Inventory;
  inventoryList: Inventory[] = [];
  inventoryHistory: InventoryHistory[] = [];
@@ -35,11 +35,11 @@ export class InventoryListDetailsComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.ourOffersService.inventory = data['inventories'];
+        this.ourOffersService.inventories = data['inventories'];
       }
     );
-    this.inventoryList = this.ourOffersService.inventory;
-    this.subscription = this.ourOffersService.inventoryChanged
+    this.inventoryList = this.ourOffersService.inventories;
+    this.subscription = this.ourOffersService.inventoriesChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventoryList = inventories;
@@ -57,7 +57,7 @@ export class InventoryListDetailsComponent implements OnInit {
 
 
   goBack() {
-    this.router.navigate(['admin/inventory/list-view']);
+    this.router.navigate(['admin/inventories/list-view']);
   }
 
 
@@ -65,15 +65,15 @@ export class InventoryListDetailsComponent implements OnInit {
     this.dataStorageService.deleteInventoryItem(this.inventory).
     subscribe(
       (data: any) => {
-        this.router.navigate(['admin/inventory/list-view']);
+        this.router.navigate(['admin/inventories/list-view']);
       }
     );
   }
   edit(inventory: Inventory) {
-    this.router.navigate(['admin/inventory/edit-inventory-item', inventory.Id]);
+    this.router.navigate(['admin/inventories/edit-inventories-item', inventory.Id]);
   }
   update(inventory: Inventory) {
-    this.router.navigate(['admin/inventory/update-inventory-item', inventory.Id]);
+    this.router.navigate(['admin/inventories/update-inventories-item', inventory.Id]);
   }
 
   deleteInventoryItem() {

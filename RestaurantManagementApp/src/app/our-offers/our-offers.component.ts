@@ -54,25 +54,25 @@ export class OurOffersComponent implements OnInit, DoCheck {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
-        this.ourOffersService.FoodItem = data['foodItems'];
+        this.ourOffersService.foodItems = data['foodItems'];
       }
     );
-    this.FoodItem = this.ourOffersService.FoodItem;
+    this.FoodItem = this.ourOffersService.foodItems;
 
-    this.ourOffersService.foodItemChanged
-      .subscribe(
-        (FoodItem: FoodItem[]) => {
-          this.FoodItem = FoodItem;
-        }
-      );
+    // this.ourOffersService.foodItemsChanged
+    //   .subscribe(
+    //     (FoodItem: FoodItem[]) => {
+    //       this.FoodItem = FoodItem;
+    //     }
+    //   );
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.ourOffersService.inventory = data['inventories'];
+        this.ourOffersService.inventories = data['inventories'];
       }
     );
-    this.inventories = this.ourOffersService.inventory;
-    this.subscription = this.ourOffersService.inventoryChanged
+    this.inventories = this.ourOffersService.inventories;
+    this.subscription = this.ourOffersService.inventoriesChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventories = inventories;
@@ -82,18 +82,20 @@ export class OurOffersComponent implements OnInit, DoCheck {
   }
   ngDoCheck() {
     this.orderedItems = this.ourOffersService.getOrderedItemsList();
-    this.grandTotal = this.ourOffersService.TotalPrice;
+    this.grandTotal = this.ourOffersService.totalPrice;
   }
 
   removeFromCart(index: number) {
-    this.ourOffersService.TotalPrice = Number.parseInt(this.ourOffersService.TotalPrice.toString())
-      - Number.parseInt(this.orderedItems[index].FoodItemSubTotal.toString());
+    this.ourOffersService.totalPrice =
+      Number.parseInt(this.ourOffersService.totalPrice.toString(), 2)
+      - Number.parseInt(this.orderedItems[index].TotalPrice.toString(), 2);
     this.orderedItems.splice(index, 1);
     this.ourOffersService.orderedItems.splice(index, 1);
   }
+
   checkFoodItemCount() {
-    for ( let i = 0; i< this.orderedItems.length; i++) {
-      if(this.orderedItems[i].FoodItemName != null) {
+    for ( let i = 0; i < this.orderedItems.length; i++) {
+      if (this.orderedItems[i].FoodItemId != null) {
         this.foodItemCount += 1;
       }
     }
@@ -101,10 +103,8 @@ export class OurOffersComponent implements OnInit, DoCheck {
   }
 
 
-
   AddToOrderedList() {
     this.router.navigate(['payment']);
-
   }
   add() {
     const serialNumber = this.serialNo.nativeElement.value;
@@ -152,7 +152,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
   }
 
 
-  UpdateCart(id: string, price: number, name: string, serialNo: string, makingCost: number,
+  UpdateCart(id: number, price: number, name: string, serialNo: string, makingCost: number,
              isAdd: boolean, quantity: number) {
     if (quantity > 0) {
 
@@ -161,7 +161,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
       const Price = price;
       const orderId = null;
       if ( this.ourOffersService.checkIfOrderedItemExist(id, orderId) === null) {
-        const orderItemId = UUID.UUID();
+        const orderItemId = null;
         if ( isAdd === true ) {
           this.AddToCart( orderItemId, orderId,  quantity, foodItemId,
             foodItemName, serialNo, Price, makingCost );
@@ -188,8 +188,9 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
 
 
-  AddToCart(orderItemId: string, orderId: string, quantity: number,
-            foodItemId: string, foodItemName: string, serialNo: string, price: number, makingCost: number ) {
+  AddToCart(orderItemId: number, orderId: number, quantity: number,
+            foodItemId: number, foodItemName: string, serialNo: string,
+            price: number, makingCost: number ) {
 
 
     for (let j = 0; j < this.FoodItem.length; j++) {
@@ -200,12 +201,12 @@ export class OurOffersComponent implements OnInit, DoCheck {
           const totalQuantity = inventoryQuantity * quantity;
           const inventoryId = this.FoodItem[j].Ingredients[k].InventoryId;
           for (let l = 0; l < this.inventories.length; l++) {
-            if (this.ourOffersService.inventory[l].Id === inventoryId) {
-              if (this.ourOffersService.inventory[l].RemainingQuantity > totalQuantity ) {
+            if (this.ourOffersService.inventories[l].Id === inventoryId) {
+              if (this.ourOffersService.inventories[l].RemainingQuantity > totalQuantity ) {
                 check++;
 
                 if ( check === this.FoodItem[j].Ingredients.length) {
-                  this.ourOffersService.inventory[l].RemainingQuantity -= totalQuantity;
+                  this.ourOffersService.inventories[l].RemainingQuantity -= totalQuantity;
                   const subTotal = this.ourOffersService.FoodItemSubTotalPrice(price, quantity);
                   this.ourOffersService.grandTotalPrice(subTotal);
                   this.condition = this.ourOffersService.checkExistingFoodItem(foodItemId);
@@ -214,8 +215,8 @@ export class OurOffersComponent implements OnInit, DoCheck {
                     this.ourOffersService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
                   } else {
 
-                    const purchasedFood = new OrderedItem(orderItemId, orderId,  foodItemId,
-                      quantity, foodItemName, serialNo, price , subTotal, makingCost);
+                    const purchasedFood = new OrderedItem(orderItemId,  '0',  foodItemId,
+                      quantity, price , subTotal);
 
                     this.ourOffersService.addToOrderedItemsList(purchasedFood);
                   }
@@ -233,7 +234,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
         }
         if (check < this.FoodItem[j].Ingredients.length) {
-          alert('Insufficient inventory, please update your inventory first');
+          alert('Insufficient inventories, please update your inventories first');
         }
         break;
       }
@@ -243,8 +244,8 @@ export class OurOffersComponent implements OnInit, DoCheck {
 
   }
 
-  RemoveFromCart(orderItemId: string, orderId: string, quantity: number,
-                 foodItemId: string, foodItemName: string, price: number, makingCost: number) {
+  RemoveFromCart(orderItemId: number, orderId: number, quantity: number,
+                 foodItemId: number, foodItemName: string, price: number, makingCost: number) {
 
 
 
@@ -274,7 +275,7 @@ export class OurOffersComponent implements OnInit, DoCheck {
   }
   confirmEvent() {
     this.ourOffersService.clearOrders();
-    this.ourOffersService.TotalPrice = 0;
+    this.ourOffersService.totalPrice = 0;
     this.ourOffersService.totalQuantity = 0;
   }
 }

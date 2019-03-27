@@ -24,23 +24,23 @@ export class InventoryGridViewComponent implements OnInit, DoCheck {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.ourOffersService.inventory = data['inventories'];
+        this.ourOffersService.inventories = data['inventories'];
       }
     );
-      this.inventories = this.ourOffersService.inventory;
-      this.subscription = this.ourOffersService.inventoryChanged
+      this.inventories = this.ourOffersService.inventories;
+      this.subscription = this.ourOffersService.inventoriesChanged
         .subscribe(
           (inventories: Inventory[]) => {
             this.inventories = inventories;
           }
         );
-    this.totalProducts = this.ourOffersService.inventory.length;
+    this.totalProducts = this.ourOffersService.inventories.length;
   }
   ngDoCheck() {
-    this.totalProducts = this.ourOffersService.inventory.length;
+    this.totalProducts = this.ourOffersService.inventories.length;
   }
   viewDetails(inventory: Inventory) {
     const inventoryId =  inventory.Id;
-    this.router.navigate(['admin/inventory/grid-details', inventoryId]);
+    this.router.navigate(['admin/inventories/grid-details', inventoryId]);
   }
 }

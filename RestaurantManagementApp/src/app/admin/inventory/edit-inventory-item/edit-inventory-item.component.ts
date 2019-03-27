@@ -13,15 +13,15 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./edit-inventory-item.component.scss']
 })
 export class EditInventoryItemComponent implements OnInit {
-   id: string;
+   id: number;
    name = '';
    currentPrice: number;
    quantity: number;
    unit: string;
    inventoryHistory: InventoryHistory[] = [];
-  inventoryList: Inventory[] = [];
-  subscription: Subscription;
-  isDisabled = false;
+   inventoryList: Inventory[] = [];
+   subscription: Subscription;
+   isDisabled = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -39,11 +39,11 @@ export class EditInventoryItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.ourOffersService.inventory = data['inventories'];
+        this.ourOffersService.inventories = data['inventories'];
       }
     );
-    this.inventoryList = this.ourOffersService.inventory;
-    this.subscription = this.ourOffersService.inventoryChanged
+    this.inventoryList = this.ourOffersService.inventories;
+    this.subscription = this.ourOffersService.inventoriesChanged
       .subscribe(
         (inventories: Inventory[]) => {
           this.inventoryList = inventories;
@@ -75,12 +75,12 @@ export class EditInventoryItemComponent implements OnInit {
 
         this.ourOffersService.updateInventoryList(this.id, editedInventoryItem);
         form.reset();
-        this.router.navigate(['admin/inventory/list-details', this.id]);
+        this.router.navigate(['admin/inventories/list-details', this.id]);
       }
     );
   }
 
   onCancel() {
-    this.router.navigate(['admin/inventory/list-details', this.id]);
+    this.router.navigate(['admin/inventories/list-details', this.id]);
   }
 }

@@ -28,11 +28,11 @@ export class FooditemGridViewComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
-        this.ourOffersService.FoodItem = data['foodItems'];
+        this.ourOffersService.foodItems = data['foodItems'];
       }
     );
-    this.FoodItem = this.ourOffersService.FoodItem;
-    this.subscription = this.ourOffersService.foodItemChanged
+    this.FoodItem = this.ourOffersService.foodItems;
+    this.subscription = this.ourOffersService.foodItemsChanged
       .subscribe(
         (FoodItem: FoodItem[]) => {
           this.FoodItem = FoodItem;
@@ -45,7 +45,7 @@ export class FooditemGridViewComponent implements OnInit {
         this.FoodItem[i].FoodItemImageName =  this.rootUrl + this.FoodItem[i].FoodItemImageName;
       }
     }
-    this.total = this.ourOffersService.FoodItem.length;
+    this.total = this.ourOffersService.foodItems.length;
   }
 
 

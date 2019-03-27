@@ -126,7 +126,7 @@ import {AppMaterialModule} from './modules/app-material.module';
     NgProgressHttpModule,
     NgProgressRouterModule,
     NgProgressModule.withConfig({
-      color: '#7e0000',
+      color: '#6a7ce6',
       min: 20,
       spinner: false,
       meteor: false

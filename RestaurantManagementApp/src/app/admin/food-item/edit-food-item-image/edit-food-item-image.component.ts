@@ -31,23 +31,23 @@ export class EditFoodItemImageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
-    this.route.data.
-    subscribe(
-      ( data: FoodItem[]) => {
-        this.ourOffersService.FoodItem = data['foodItems'];
-      }
-    );
-    this.foodItems = this.ourOffersService.FoodItem;
-    for (let i = 0; i < this.foodItems.length; i++) {
-      if (this.foodItems[i].Id === this.foodItemId) {
-        if ( this.foodItems[i].FoodItemImageName === null || this.foodItems[i].FoodItemImageName === '' ) {
-          this.imageUrl = '/assets/noImage.png';
-        } else {
-          this.imageUrl = this.rootUrl + this.foodItems[i].FoodItemImageName;
-        }
-      }
-    }
+    // this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
+    // this.route.data.
+    // subscribe(
+    //   ( data: FoodItem[]) => {
+    //     this.ourOffersService.foodItems = data['foodItems'];
+    //   }
+    // );
+    // this.foodItems = this.ourOffersService.foodItems;
+    // for (let i = 0; i < this.foodItems.length; i++) {
+    //   if (this.foodItems[i].Id === this.foodItemId) {
+    //     if ( this.foodItems[i].FoodItemImageName === null || this.foodItems[i].FoodItemImageName === '' ) {
+    //       this.imageUrl = '/assets/noImage.png';
+    //     } else {
+    //       this.imageUrl = this.rootUrl + this.foodItems[i].FoodItemImageName;
+    //     }
+    //   }
+    // }
   }
   saveFoodItemImage(Image) {
     this.isDisabled = true;

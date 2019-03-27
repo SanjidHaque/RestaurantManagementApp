@@ -10,7 +10,7 @@ import {OrderedItem} from '../../../../models/ordered-item.model';
   styleUrls: ['./order-list-view-details.component.scss']
 })
 export class OrderListViewDetailsComponent implements OnInit {
-  orderId: string;
+  orderId: number;
   order: Order;
   orderLists: Order[] = [];
   orderedItems: OrderedItem[] = [];
@@ -31,11 +31,11 @@ export class OrderListViewDetailsComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Order[]) => {
-        this.ourOffersService.ordersList = data['orders'];
+        this.ourOffersService.orders = data['order'];
       }
     );
-    this.orderLists = this.ourOffersService.ordersList;
-    this.ourOffersService.ordersListChanged
+    this.orderLists = this.ourOffersService.orders;
+    this.ourOffersService.ordersChanged
       .subscribe(
         (order: Order[]) => {
           this.orderLists = order;
@@ -52,7 +52,7 @@ export class OrderListViewDetailsComponent implements OnInit {
 
 
   goBack() {
-    this.router.navigate(['admin/orders/list-view']);
+    this.router.navigate(['admin/order/list-view']);
   }
 
 
@@ -61,7 +61,7 @@ export class OrderListViewDetailsComponent implements OnInit {
     this.dataStorageService.deleteOrder(this.order).
     subscribe(
       (data: any) => {
-        this.router.navigate(['admin/orders/grid-view']);
+        this.router.navigate(['admin/order/grid-view']);
       }
     );
   }

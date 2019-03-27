@@ -28,14 +28,10 @@ export class AddNewTableComponent {
       .subscribe(
         (tableId: number) => {
           newTable.Id = tableId;
-          this.ourOffersService.addToTableList(newTable);
+          this.ourOffersService.addNewTable(newTable);
           form.controls['name'].reset();
           this.router.navigate(['admin/tables']);
         }
     );
-  }
-
-  onCancel() {
-    this.router.navigate(['admin/tables']);
   }
 }

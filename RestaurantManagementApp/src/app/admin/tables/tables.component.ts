@@ -13,8 +13,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class TablesComponent implements OnInit, DoCheck {
 
-  public tables: Table[] ;
+  tables: Table[] ;
   subscription: Subscription;
+  totalTable = 0;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -26,11 +27,11 @@ export class TablesComponent implements OnInit, DoCheck {
     this.route.data.
     subscribe(
       ( data: Table[]) => {
-        this.ourOffersService.table = data['tables'];
+        this.ourOffersService.tables = data['tables'];
       }
     );
-    this.tables = this.ourOffersService.table;
-    this.subscription = this.ourOffersService.tableChanged
+    this.tables = this.ourOffersService.tables;
+    this.subscription = this.ourOffersService.tablesChanged
       .subscribe(
         (tables: Table[]) => {
           this.tables = tables;
@@ -41,16 +42,18 @@ export class TablesComponent implements OnInit, DoCheck {
   ngDoCheck() {
     this.totalTable = this.tables.length;
   }
+
   addNewTable() {
-    this.router.navigate(['admin/tables/add-new-table']);
+    this.router.navigate(['admin/tables/add-new-tables']);
   }
 
   editTable(table: Table) {
-    this.router.navigate(['admin/tables/edit-table', table.Id]);
+    this.router.navigate(['admin/tables/edit-tables', table.Id]);
   }
+
   deleteTable(table: Table, index: number) {
-    const dialog = confirm('Delete this table?\n' +
-      'You will lose any kind of data associated with the current table!');
+    const dialog = confirm('Delete this tables?\n' +
+      'You will lose any kind of data associated with the current tables!');
     if (dialog === true) {
       this.confirmEvent(table, index);
     }

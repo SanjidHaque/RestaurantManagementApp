@@ -17,7 +17,7 @@ export class GridDetailsComponent implements OnInit {
   FoodItemList: FoodItem[] = [];
   Ingredients: Ingredients[] = [];
   FoodItem: FoodItem;
-  foodItemId: string;
+  foodItemId: number;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private dataStorageService: DataStorageService,
@@ -36,11 +36,11 @@ export class GridDetailsComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
-        this.ourOffersService.FoodItem = data['foodItems'];
+        this.ourOffersService.foodItems = data['foodItems'];
       }
     );
-    this.FoodItemList = this.ourOffersService.FoodItem;
-    this.ourOffersService.foodItemChanged
+    this.FoodItemList = this.ourOffersService.foodItems;
+    this.ourOffersService.foodItemsChanged
       .subscribe(
         (FoodItem: FoodItem[]) => {
           this.FoodItemList = FoodItem;
@@ -69,7 +69,7 @@ export class GridDetailsComponent implements OnInit {
       (data: any) => {
         for (let i = 0; i < this.FoodItemList.length; i++) {
           if (this.FoodItemList[i].Id === this.foodItemId) {
-            this.ourOffersService.FoodItem.splice(i, 1);
+            this.ourOffersService.foodItems.splice(i, 1);
           }
         }
         this.router.navigate(['admin/food-item/grid-view']);

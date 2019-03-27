@@ -12,8 +12,8 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./edit-table.component.scss']
 })
 export class EditTableComponent implements OnInit, DoCheck {
-  public tables: Table[] ;
-  tableId: string;
+  tables: Table[] ;
+  tableId: number;
   tableName = '';
   subscription: Subscription;
   isDisabled = false;
@@ -25,14 +25,14 @@ export class EditTableComponent implements OnInit, DoCheck {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.tableId = params['id'];
+          this.tableId = +params['id'];
         }
       );
   }
 
   ngOnInit() {
-    this.tables = this.ourOffersService.table;
-    this.subscription = this.ourOffersService.tableChanged
+    this.tables = this.ourOffersService.tables;
+    this.subscription = this.ourOffersService.tablesChanged
       .subscribe(
         (tables: Table[]) => {
           this.tables = tables;
@@ -73,10 +73,6 @@ export class EditTableComponent implements OnInit, DoCheck {
           }
         );
     }
-
   }
 
-  onCancel() {
-    this.router.navigate(['admin/tables']);
-  }
 }

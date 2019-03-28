@@ -1,49 +1,43 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PointOfSaleComponent} from '../our-offers/point-of-sale.component';
-import {LoginComponent} from '../login/login.component';
-import {RegisterComponent} from '../register/register.component';
-import {AdminComponent} from '../admin/admin.component';
-import {InventoryComponent} from '../admin/inventory/inventory.component';
-import {AddNewInventoryComponent} from '../admin/inventory/add-new-inventory/add-new-inventory.component';
-import {EditInventoryItemComponent} from '../admin/inventory/edit-inventory-item/edit-inventory-item.component';
-import {FoodItemsComponent} from '../our-offers/food-items/food-items.component';
-import {FoodItemComponent} from '../admin/food-item/food-item.component';
-import {AddNewFoodItemComponent} from '../admin/food-item/add-new-food-item/add-new-food-item.component';
-import {EditFoodItemComponent} from '../admin/food-item/edit-food-item/edit-food-item.component';
-import {PaymentComponent} from '../our-offers/payment/payment.component';
-import {ReceiptComponent} from '../our-offers/receipt/receipt.component';
-import {TablesComponent} from '../admin/tables/tables.component';
-import {AddNewTableComponent} from '../admin/tables/add-new-table/add-new-table.component';
-import {ControlPanelComponent} from '../control-panel/control-panel.component';
-import {OrdersComponent} from '../admin/orders/orders.component';
-import {OrderListViewComponent} from '../admin/orders/order-list-view/order-list-view.component';
-import {OrderListViewDetailsComponent} from '../admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
-import {OrderGridViewComponent} from '../admin/orders/order-grid-view/order-grid-view.component';
-import {OrderGridViewDetailsComponent} from '../admin/orders/order-grid-view/order-grid-view-details/order-grid-view-details.component';
-import {FooditemListViewComponent} from '../admin/food-item/fooditem-list-view/fooditem-list-view.component';
-import {ListDetailsComponent} from '../admin/food-item/fooditem-list-view/list-details/list-details.component';
-import {FooditemGridViewComponent} from '../admin/food-item/fooditem-grid-view/fooditem-grid-view.component';
-import {GridDetailsComponent} from '../admin/food-item/fooditem-grid-view/grid-details/grid-details.component';
-import {InventoryListViewComponent} from '../admin/inventory/inventory-list-view/inventory-list-view.component';
-import {InventoryGridDetailsComponent} from '../admin/inventory/inventory-grid-view/inventory-grid-details/inventory-grid-details.component';
-import {InventoryListDetailsComponent} from '../admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
-import {InventoryGridViewComponent} from '../admin/inventory/inventory-grid-view/inventory-grid-view.component';
-import {UpdateInventoryItemComponent} from '../admin/inventory/update-inventory-item/update-inventory-item.component';
-import {EditTableComponent} from '../admin/tables/edit-table/edit-table.component';
+import {ControlPanelComponent} from '../components/control-panel/control-panel.component';
+import {AuthGuard} from '../auth/auth.guard';
+import {PaymentComponent} from '../components/point-of-sale/payment/payment.component';
+import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
 import {TableResolverService} from '../route-resolvers/table-resolver.service';
 import {FoodItemResolverService} from '../route-resolvers/food-item-resolver.service';
-import {OrderResolverService} from '../route-resolvers/order-resolver.service';
-import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
-import {PageNotFoundComponent} from '../page-not-found/page-not-found.component';
-import {AuthGuard} from '../auth/auth.guard';
-import {ForbiddenComponent} from '../forbidden/forbidden.component';
-import {RoleResolverService} from '../route-resolvers/role-resolver';
-import {ResetPasswordComponent} from '../reset-password/reset-password.component';
-import {NewPasswordComponent} from '../new-password/new-password.component';
+import {ReceiptComponent} from '../components/point-of-sale/receipt/receipt.component';
+import {ForbiddenComponent} from '../components/forbidden/forbidden.component';
+import {PointOfSaleComponent} from '../components/point-of-sale/point-of-sale.component';
+import {FoodItemsComponent} from '../components/point-of-sale/food-items/food-items.component';
+import {LoginComponent} from '../components/login/login.component';
+import {ResetPasswordComponent} from '../components/reset-password/reset-password.component';
+import {AdminComponent} from '../components/admin/admin.component';
+import {NewPasswordComponent} from '../components/new-password/new-password.component';
 import {ModifiedUserResolverService} from '../route-resolvers/modified-user-resolver.service';
-import {AddFoodItemImageComponent} from '../admin/food-item/add-food-item-image/add-food-item-image.component';
-import {EditFoodItemImageComponent} from '../admin/food-item/edit-food-item-image/edit-food-item-image.component';
+import {OrdersComponent} from '../components/admin/orders/orders.component';
+import {RoleResolverService} from '../route-resolvers/role-resolver';
+import {RegisterComponent} from '../components/register/register.component';
+import {OrderListViewComponent} from '../components/admin/orders/order-list-view/order-list-view.component';
+import {OrderResolverService} from '../route-resolvers/order-resolver.service';
+import {OrderListViewDetailsComponent} from '../components/admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
+import {FoodItemComponent} from '../components/admin/food-item/food-item.component';
+import {FooditemListViewComponent} from '../components/admin/food-item/fooditem-list-view/fooditem-list-view.component';
+import {ListDetailsComponent} from '../components/admin/food-item/fooditem-list-view/list-details/list-details.component';
+import {AddNewFoodItemComponent} from '../components/admin/food-item/add-new-food-item/add-new-food-item.component';
+import {AddFoodItemImageComponent} from '../components/admin/food-item/add-food-item-image/add-food-item-image.component';
+import {EditFoodItemComponent} from '../components/admin/food-item/edit-food-item/edit-food-item.component';
+import {EditFoodItemImageComponent} from '../components/admin/food-item/edit-food-item-image/edit-food-item-image.component';
+import {TablesComponent} from '../components/admin/tables/tables.component';
+import {AddNewTableComponent} from '../components/admin/tables/add-new-table/add-new-table.component';
+import {EditTableComponent} from '../components/admin/tables/edit-table/edit-table.component';
+import {InventoryComponent} from '../components/admin/inventory/inventory.component';
+import {EditInventoryItemComponent} from '../components/admin/inventory/edit-inventory-item/edit-inventory-item.component';
+import {AddNewInventoryComponent} from '../components/admin/inventory/add-new-inventory/add-new-inventory.component';
+import {UpdateInventoryItemComponent} from '../components/admin/inventory/update-inventory-item/update-inventory-item.component';
+import {InventoryListViewComponent} from '../components/admin/inventory/inventory-list-view/inventory-list-view.component';
+import {InventoryListDetailsComponent} from '../components/admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
+import {PageNotFoundComponent} from '../components/page-not-found/page-not-found.component';
 
 
 const appRoutes: Routes = [
@@ -81,7 +75,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
 
-  { path: 'our-offers',
+  { path: 'point-of-sale',
     component: PointOfSaleComponent,
     canActivate: [AuthGuard],
     resolve:
@@ -91,7 +85,7 @@ const appRoutes: Routes = [
       },
     children:
       [
-        { path: 'regulars',
+        { path: 'food-items',
           component: FoodItemsComponent,
           canActivate: [AuthGuard]
         }
@@ -160,24 +154,6 @@ const appRoutes: Routes = [
                   {
                     orders: OrderResolverService
                   }
-              },
-              {
-                path: 'grid-view',
-                component: OrderGridViewComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    orders: OrderResolverService
-                  }
-              },
-              {
-                path: 'grid-details/:id',
-                component: OrderGridViewDetailsComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    orders: OrderResolverService
-                  }
               }
             ]
         },
@@ -200,24 +176,6 @@ const appRoutes: Routes = [
             {
               path: 'list-details/:id',
               component: ListDetailsComponent,
-              canActivate: [AuthGuard],
-              resolve:
-                {
-                  foodItems: FoodItemResolverService
-                }
-            },
-            {
-              path: 'grid-view',
-              component: FooditemGridViewComponent,
-              canActivate: [AuthGuard],
-              resolve:
-                {
-                  foodItems: FoodItemResolverService
-                }
-            },
-            {
-              path: 'grid-details/:id',
-              component: GridDetailsComponent,
               canActivate: [AuthGuard],
               resolve:
                 {
@@ -327,24 +285,6 @@ const appRoutes: Routes = [
               {
                 path: 'list-details/:id',
                 component: InventoryListDetailsComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    inventories: InventoryResolverService
-                  }
-              },
-              {
-                path: 'grid-view',
-                component: InventoryGridViewComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    inventories: InventoryResolverService
-                  }
-              },
-              {
-                path: 'grid-details/:id',
-                component: InventoryGridDetailsComponent,
                 canActivate: [AuthGuard],
                 resolve:
                   {

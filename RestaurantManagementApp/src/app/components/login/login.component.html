@@ -1,0 +1,118 @@
+
+
+
+
+<div class="row"
+     style="
+     font-family: 'Times New Roman', sans-serif;
+     font-size: 100px;
+     text-align: center;
+     padding-top: 35px;"
+>
+  <div class="
+  col-xl-12">
+    hodoo
+  </div>
+</div>
+
+
+<div class="row"
+     style="
+     text-align: center;
+     font-size: 25px;">
+  <div class="
+  col-xl-12
+  ">
+    User Login
+  </div>
+</div>
+
+
+<br>
+
+<form
+  autocomplete="off"
+  #userLoginForm="ngForm"
+  (ngSubmit)="OnSubmit()">
+
+
+  <div class="row form-group">
+    <div class="offset-xl-4 col-xl-4">
+      <label style="font-weight: 300;">User Name</label>
+      <input class="form-control"
+             type="text"
+             name="userName"
+             ngModel
+             #userName="ngModel"
+             required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+        User name is required!
+      </p>
+    </div>
+  </div>
+
+
+
+  <div class="row form-group">
+    <div class="offset-xl-4 col-xl-4">
+      <label style="font-weight: 300;">Password</label>
+      <input
+        class="form-control"
+        type="password"
+        name="password"
+        ngModel
+        #password="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="password.invalid && (password.dirty || password.touched)">
+        Password is required!
+      </p>
+    </div>
+  </div>
+
+  <div class="row"
+       style="text-align: center;">
+    <div class="
+        col-xl-12
+        ">
+      <button
+        [disabled]="isDisabled || userLoginForm.invalid"
+        class="btn btn-primary"
+        type="submit">
+        Login</button>
+
+    </div>
+  </div>
+
+  <br>
+  <div class="row"
+       style="text-align: center;">
+    <div class="
+        col-xl-12
+       ">
+      <a
+        style="text-decoration: none;"
+        routerLink="/reset-password">Forgot your password?</a>
+    </div>
+  </div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

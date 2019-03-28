@@ -11,11 +11,12 @@ import {UUID} from 'angular2-uuid';
 
 
 @Component({
-  selector: 'app-our-offers',
-  templateUrl: './our-offers.component.html',
-  styleUrls: ['./our-offers.component.scss']
+  selector: 'app-point-of-sale',
+  templateUrl: './point-of-sale.component.html',
+  styleUrls: ['./point-of-sale.component.scss']
 })
-export class OurOffersComponent implements OnInit, DoCheck {
+
+export class PointOfSaleComponent implements OnInit, DoCheck {
   subscription: Subscription;
   checkOut = false;
   quantity = 0;

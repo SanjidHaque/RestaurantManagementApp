@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { OurOffersComponent } from './our-offers/our-offers.component';
 import {AppRoutingModule} from './modules/app-routing.module';
 import {OurOffersService} from './services/our-offers.service';
 import {DataStorageService} from './services/data-storage.service';
@@ -46,7 +45,6 @@ import {InventoryResolverService} from './route-resolvers/inventory-resolver.ser
 import {FoodItemResolverService} from './route-resolvers/food-item-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {UserService} from './services/user.service';
-import { LogoutComponent } from './logout/logout.component';
 import {AuthGuard} from './auth/auth.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
@@ -64,6 +62,8 @@ import {NgProgressHttpModule} from '@ngx-progressbar/http';
 import {NgProgressModule} from '@ngx-progressbar/core';
 import {NgProgressRouterModule} from '@ngx-progressbar/router';
 import {AppMaterialModule} from './modules/app-material.module';
+import { HeaderComponent } from './header/header.component';
+import {PointOfSaleComponent} from './our-offers/point-of-sale.component';
 
 
 
@@ -71,7 +71,7 @@ import {AppMaterialModule} from './modules/app-material.module';
 @NgModule({
   declarations: [
     AppComponent,
-    OurOffersComponent,
+    PointOfSaleComponent,
     LoginComponent,
     RegisterComponent,
     AdminComponent,
@@ -105,13 +105,13 @@ import {AppMaterialModule} from './modules/app-material.module';
     UpdateInventoryItemComponent,
     EditTableComponent,
     PageNotFoundComponent,
-    LogoutComponent,
     ForbiddenComponent,
     ResetPasswordComponent,
     NewPasswordComponent,
     AddFoodItemImageComponent,
     EditFoodItemImageComponent,
-    UserFilterPipe
+    UserFilterPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

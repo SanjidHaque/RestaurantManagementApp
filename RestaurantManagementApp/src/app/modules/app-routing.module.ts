@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {OurOffersComponent} from '../our-offers/our-offers.component';
+import {PointOfSaleComponent} from '../our-offers/point-of-sale.component';
 import {LoginComponent} from '../login/login.component';
 import {RegisterComponent} from '../register/register.component';
 import {AdminComponent} from '../admin/admin.component';
@@ -82,7 +82,7 @@ const appRoutes: Routes = [
   },
 
   { path: 'our-offers',
-    component: OurOffersComponent,
+    component: PointOfSaleComponent,
     canActivate: [AuthGuard],
     resolve:
       {

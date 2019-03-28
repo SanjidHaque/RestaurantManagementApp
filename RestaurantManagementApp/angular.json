@@ -22,7 +22,6 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/jspdf/dist/jspdf.min.js",
               "src/styles.scss"
             ],
             "scripts": []

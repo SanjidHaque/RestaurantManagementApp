@@ -27,37 +27,40 @@ import {NgProgressModule} from '@ngx-progressbar/core';
 import {NgProgressRouterModule} from '@ngx-progressbar/router';
 import {AppMaterialModule} from './modules/app-material.module';
 import {PointOfSaleComponent} from './components/point-of-sale/point-of-sale.component';
-import {InventoryComponent} from './components/admin/inventory/inventory.component';
 import {AdminComponent} from './components/admin/admin.component';
-import {RegisterComponent} from './components/register/register.component';
+import {RegisterComponent} from './components/admin/register/register.component';
 import {LoginComponent} from './components/login/login.component';
-import {FoodItemsComponent} from './components/point-of-sale/food-items/food-items.component';
-import {FoodItemComponent} from './components/admin/food-item/food-item.component';
-import {AddNewFoodItemComponent} from './components/admin/food-item/add-new-food-item/add-new-food-item.component';
-import {EditFoodItemComponent} from './components/admin/food-item/edit-food-item/edit-food-item.component';
-import {EditInventoryItemComponent} from './components/admin/inventory/edit-inventory-item/edit-inventory-item.component';
 import {PaymentComponent} from './components/point-of-sale/payment/payment.component';
 import {ReceiptComponent} from './components/point-of-sale/receipt/receipt.component';
 import {TablesComponent} from './components/admin/tables/tables.component';
 import {AddNewTableComponent} from './components/admin/tables/add-new-table/add-new-table.component';
-import {ControlPanelComponent} from './components/control-panel/control-panel.component';
-import {AddNewInventoryComponent} from './components/admin/inventory/add-new-inventory/add-new-inventory.component';
-import {OrderListViewComponent} from './components/admin/orders/order-list-view/order-list-view.component';
 import {OrdersComponent} from './components/admin/orders/orders.component';
-import {FooditemListViewComponent} from './components/admin/food-item/fooditem-list-view/fooditem-list-view.component';
-import {OrderListViewDetailsComponent} from './components/admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
-import {ListDetailsComponent} from './components/admin/food-item/fooditem-list-view/list-details/list-details.component';
-import {InventoryListViewComponent} from './components/admin/inventory/inventory-list-view/inventory-list-view.component';
-import {InventoryListDetailsComponent} from './components/admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
-import {UpdateInventoryItemComponent} from './components/admin/inventory/update-inventory-item/update-inventory-item.component';
 import {EditTableComponent} from './components/admin/tables/edit-table/edit-table.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
-import {AddFoodItemImageComponent} from './components/admin/food-item/add-food-item-image/add-food-item-image.component';
-import {EditFoodItemImageComponent} from './components/admin/food-item/edit-food-item-image/edit-food-item-image.component';
 import {NewPasswordComponent} from './components/new-password/new-password.component';
 import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import {ForbiddenComponent} from './components/forbidden/forbidden.component';
 import {HeaderComponent} from './components/header/header.component';
+import {InventoriesComponent} from './components/admin/inventories/inventories.component';
+import {EditFoodItemComponent} from './components/admin/food-items/edit-food-item/edit-food-item.component';
+import {EditInventoryItemComponent} from './components/admin/inventories/edit-inventory-item/edit-inventory-item.component';
+import {AddNewFoodItemComponent} from './components/admin/food-items/add-new-food-item/add-new-food-item.component';
+import {MenuComponent} from './components/point-of-sale/menu/menu.component';
+import { SelectTableComponent } from './components/point-of-sale/select-table/select-table.component';
+import { TableListComponent } from './components/admin/tables/table-list/table-list.component';
+import { TableDetailsComponent } from './components/admin/tables/table-list/table-details/table-details.component';
+import {OrderListComponent} from './components/admin/orders/order-list/order-list.component';
+import {InventoryListComponent} from './components/admin/inventories/inventory-list/inventory-list.component';
+import {InventoryDetailsComponent} from './components/admin/inventories/inventory-list/inventory-details/inventory-details.component';
+import {UpdateInventoryItemComponent} from './components/admin/inventories/update-inventory-item/update-inventory-item.component';
+import {AddFoodItemImageComponent} from './components/admin/food-items/add-food-item-image/add-food-item-image.component';
+import {EditFoodItemImageComponent} from './components/admin/food-items/edit-food-item-image/edit-food-item-image.component';
+import {OrderDetailsComponent} from './components/admin/orders/order-list/order-details/order-details.component';
+import {FoodItemDetailsComponent} from './components/admin/food-items/food-item-list/food-item-details/food-item-details.component';
+import {FoodItemListComponent} from './components/admin/food-items/food-item-list/food-item-list.component';
+import {AddNewInventoryItemComponent} from './components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
+import {SessionComponent} from './components/point-of-sale/session/session.component';
+import {FoodItemsComponent} from './components/admin/food-items/food-items.component';
 
 
 
@@ -69,9 +72,9 @@ import {HeaderComponent} from './components/header/header.component';
     LoginComponent,
     RegisterComponent,
     AdminComponent,
-    InventoryComponent,
-    FoodItemsComponent,
-    FoodItemComponent,
+    InventoriesComponent,
+    MenuComponent,
+    MenuComponent,
     AddNewFoodItemComponent,
     EditFoodItemComponent,
     EditInventoryItemComponent,
@@ -80,16 +83,16 @@ import {HeaderComponent} from './components/header/header.component';
     ReceiptComponent,
     TablesComponent,
     AddNewTableComponent,
-    ControlPanelComponent,
-    AddNewInventoryComponent,
+    AddNewInventoryItemComponent,
     OrdersComponent,
-    OrderListViewComponent,
-    OrderListViewDetailsComponent,
+    OrderListComponent,
+    OrderDetailsComponent,
     OrderPipe,
-    FooditemListViewComponent,
-    ListDetailsComponent,
-    InventoryListViewComponent,
-    InventoryListDetailsComponent,
+    FoodItemsComponent,
+    FoodItemListComponent,
+    FoodItemDetailsComponent,
+    InventoryListComponent,
+    InventoryDetailsComponent,
     UpdateInventoryItemComponent,
     EditTableComponent,
     PageNotFoundComponent,
@@ -99,7 +102,11 @@ import {HeaderComponent} from './components/header/header.component';
     AddFoodItemImageComponent,
     EditFoodItemImageComponent,
     UserFilterPipe,
-    HeaderComponent
+    HeaderComponent,
+    SelectTableComponent,
+    TableListComponent,
+    TableDetailsComponent,
+    SessionComponent
   ],
   imports: [
     BrowserModule,

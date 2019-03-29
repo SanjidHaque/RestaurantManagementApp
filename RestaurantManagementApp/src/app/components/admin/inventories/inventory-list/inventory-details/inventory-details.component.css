@@ -1,0 +1,334 @@
+@import url("https://fonts.googleapis.com/css?family=Acme|Aladin|Berkshire+Swash|Cabin+Sketch|Chewy|Fredoka+One|Kanit|Lobster|Londrina+Solid|Righteous|Rock+Salt");
+.item-name {
+  font-family: "Times New Roman";
+  font-size: 18px;
+  color: #6a0d0e;
+  font-weight: bold;
+  text-align: left; }
+
+.selling-price {
+  font-family: "Times New Roman";
+  font-size: 15px;
+  color: #6a0d0e;
+  text-align: left;
+  font-weight: bold; }
+
+.making-price {
+  font-family: "Times New Roman";
+  font-size: 15px;
+  color: #6a0d0e;
+  font-weight: bold;
+  text-align: center; }
+
+.fixed-div {
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
+.image {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #ffffff;
+  border-radius: 10px; }
+
+.other {
+  text-align: center; }
+
+.additional {
+  font-family: "Times New Roman";
+  font-size: 12px;
+  color: #6a0d0e;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px; }
+
+.all-categories-button {
+  width: 100%;
+  height: 100%;
+  font-family: "Arial Narrow";
+  color: #d32039;
+  background-color: #ffffdf;
+  border: 1.2px solid #ae0000;
+  border-radius: 5px;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold; }
+
+.general {
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-bottom: 1px double #dfdfdf;
+  text-align: center;
+  color: #221d1f;
+  background-color: #f6f6f6; }
+
+.all-categories-button:hover {
+  background-color: #d32039;
+  color: #ffffdf;
+  font-family: "Arial Narrow";
+  font-weight: bold;
+  border: 1.2px solid #ffffdf;
+  border-radius: 5px; }
+
+.all-categories-button:focus {
+  outline: 0; }
+
+.header {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-right: 0;
+  text-align: center;
+  font-family: "Times New Roman";
+  color: #6a0d0e;
+  font-weight: bold; }
+
+.main-row {
+  border-bottom: 2px double #dfdfdf; }
+
+.body {
+  height: 350px;
+  overflow-y: scroll;
+  border: 1px solid #cbc6cb;
+  border-radius: 5px; }
+
+::-webkit-scrollbar {
+  width: 4px; }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.61);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+
+.hodoo {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 40px;
+  text-align: right;
+  color: #7e0000; }
+
+.hodoo:focus {
+  outline: 0; }
+
+.dashboard {
+  width: 20%;
+  height: 100%;
+  font-family: "Arial Narrow";
+  color: #aa0909;
+  background-color: ghostwhite;
+  /*border: 1.2px solid #ae0000;
+  border-radius: 5px;*/
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px; }
+
+.dashboard:hover {
+  color: #6a0d0e;
+  background-color: ghostwhite;
+  font-family: "Arial Narrow";
+  font-weight: bold;
+  /* border: 1.2px solid #ffffdf;
+   border-radius: 5px;*/ }
+
+.order-detail {
+  background-color: #fcfcfc;
+  color: #910000;
+  font-family: "Times New Roman";
+  border: 2px double #e2e2e2;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  background-color: white; }
+
+.order-ref, .order-date {
+  border-right: 2px double #c5bdbf;
+  font-weight: bold;
+  font-size: 16px; }
+
+.upper-div {
+  border-bottom: 2px double #dfdfdf; }
+
+.id, .date {
+  font-size: 15px;
+  font-weight: bold; }
+
+.prod {
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-bottom: 1px double #dfdfdf;
+  text-align: center;
+  color: #221d1f;
+  background-color: #f6f6f6; }
+
+.units {
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px double #dfdfdf;
+  text-align: center; }
+
+.units-details {
+  font-size: 13px;
+  font-weight: bold;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+  border-bottom: 1px double #dfdfdf; }
+
+.total {
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  text-align: right;
+  font-size: 20px; }
+
+.bdt {
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  text-align: left;
+  font-size: 20px; }
+
+.scrollable-div {
+  max-height: 17vh;
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
+::-webkit-scrollbar {
+  width: 3px; }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.61);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+
+.back-button {
+  width: 60%;
+  height: 80%;
+  font-family: "Arial Narrow";
+  color: #9b0f12;
+  background-color: #ffffdf;
+  border: 1.2px solid #ae0000;
+  border-radius: 5px;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold; }
+
+.back {
+  text-align: center; }
+
+.edit {
+  text-align: right;
+  padding-right: 0; }
+
+.delete {
+  text-align: left;
+  padding-right: 0; }
+
+.back-button:hover {
+  width: 60%;
+  height: 80%;
+  font-family: "Arial Narrow";
+  color: #ffffdf;
+  background-color: #9b0f12;
+  border: 1.2px solid #ae0000;
+  border-radius: 5px;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold; }
+
+.back-button:focus {
+  outline: 0; }
+
+.update-button {
+  width: 70%;
+  height: 80%;
+  font-family: "Arial Narrow";
+  color: #9b0f12;
+  background-color: #ffffdf;
+  border: 1.2px solid #ae0000;
+  border-radius: 5px;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold;
+  text-align: center; }
+
+.update-button:hover {
+  width: 70%;
+  height: 80%;
+  font-family: "Arial Narrow";
+  color: #ffffdf;
+  background-color: #9b0f12;
+  border: 1.2px solid #ae0000;
+  border-radius: 5px;
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold; }
+
+.update-button:focus {
+  outline: 0; }
+
+.update {
+  text-align: center;
+  padding-top: 6px;
+  padding-bottom: 6px; }
+
+.buttons {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 2px double #dfdfdf; }
+
+.sub-links {
+  color: #b3acaf;
+  font-family: "Arial Narrow";
+  font-size: 15px;
+  font-weight: bold; }
+
+.sub-links:hover {
+  color: #6a0d0e;
+  font-family: "Arial Narrow";
+  font-size: 15px;
+  font-weight: bold; }
+
+a {
+  color: #b3acaf; }
+
+.link {
+  color: #6a0d0e; }
+
+.pop-up {
+  color: #7e0000;
+  font-size: 14px;
+  font-family: "Times New Roman";
+  text-align: center;
+  font-weight: bold; }
+
+.name, .price {
+  font-size: 18px;
+  font-family: "Times New Roman";
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center; }
+
+/*# sourceMappingURL=inventories-food-item-details.component.css.map */

@@ -32,16 +32,16 @@ export class LoginComponent implements OnInit {
          localStorage.setItem('userRoles', data.role);
          localStorage.setItem('userName', this.form.value.userName);
          if (this.authService.roleMatch(['Cashier'])) {
-           this.router.navigate(['our-offers/regulars']);
+           this.router.navigate(['/pos']);
          } else {
-           this.router.navigate(['/control-panel']);
+           this.router.navigate(['/pos']);
          }
 
        },
        (err : HttpErrorResponse) => {
          this.isLoginError = true;
          if (this.isLoginError === true ) {
-           alert(err);
+           alert('User name or password is incorrect!');
            this.isDisabled = false;
          }
        });

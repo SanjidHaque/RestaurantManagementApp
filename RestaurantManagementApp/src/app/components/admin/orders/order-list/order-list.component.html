@@ -1,0 +1,99 @@
+<div class="row empty" *ngIf="totalOrder === 0; else notEmpty">
+  <div class="col-md-12">
+    No order has arrived yet.
+  </div>
+</div>
+
+
+<ng-template #notEmpty>
+
+<div class="sum-of-inv-body">
+<div class="row">
+  <div class="col-md-4 search-bar">
+    <span class="fa fa-search"></span>
+    <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Receipt Ref...">
+  </div>
+</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-2 receipt">
+        Receipt Ref
+      </div>
+      <div class="col-md-2 name">
+        Order Date
+      </div>
+      <div class="col-md-2 name">
+        Table No
+      </div>
+      <div class="col-md-2 price">
+        Selling Price
+      </div>
+      <div class="col-md-2 price">
+        Inventory Cost
+      </div>
+      <div class="col-md-2 price">
+        Profit in Order
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 body">
+      <div class="row" *ngFor="let orderList of orders | order:term; let i = index">
+        <a title="View This Order's Details"
+          style="cursor: pointer" (click)="viewDetails(orderList)">
+        <div class="col-md-12 f-name table-bordered">
+          <div class="col-md-2 column-receipt">
+          {{ orderList.Id }}
+          </div>
+          <div class="col-md-2 column">
+            {{ orderList.DateTime }}
+          </div>
+          <div class="col-md-2 column">
+            {{orderList.TableNumber }}
+          </div>
+
+          <div class="col-md-2 column">
+            {{ orderList.totalPrice }} BDT
+          </div>
+
+          <div class="col-md-2 column">
+            {{ orderList.InventoryCost }} BDT
+          </div>
+
+          <div class="col-md-2 column">
+            {{ orderList.Profit }} BDT
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 Summary">
+    Summary
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Order: {{ totalOrder }} (s)
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Sale: {{ grossSale }} BDT
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Inventory Cost: {{ grossCost }} BDT
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 detail">
+    Total Profit: {{ grossProfit }} BDT
+  </div>
+</div>
+</ng-template>

@@ -1,26 +1,28 @@
 <div class="row">
 
-  <div class="col-xl-2"
+  <div class="col-xl-1"
        style="font-size: 45px;
        font-family: 'Times New Roman', sans-serif;">
-    <span routerLink="/point-of-sale">hodoo</span>
+    <span
+      style="outline: 0; cursor: pointer;"
+      routerLink="/pos">hodoo</span>
   </div>
 
-  <div class="col-xl-2" style="padding-top: 15px;">
+  <div class="col-xl-2 text-xl-right" style="padding-top: 15px;">
     <a
-      style="text-decoration: none; font-size: 19px;"
-      routerLink="/point-of-sale"
+      style="text-decoration: none; font-size: 19px; color: black;"
+      routerLink="/pos"
       routerLinkActive="active">Point of Sale</a>
   </div>
 
   <div class="col-xl-2" style="padding-top: 15px;">
     <a
-      style="text-decoration: none; font-size: 19px;"
+      style="text-decoration: none; font-size: 19px; color: black;"
       routerLink="/admin"
       routerLinkActive="active">Administration</a>
   </div>
 
-  <div class="col-xl-5 text-xl-right" style="padding-top: 20px; font-weight: bold;">
+  <div class="col-xl-6 text-xl-right" style="padding-top: 20px; font-weight: bold;">
     <i style="font-weight: bold;" class="fa fa-user-o"></i> {{ userName }}
   </div>
 

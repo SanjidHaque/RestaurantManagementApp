@@ -1,111 +1,80 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ControlPanelComponent} from '../components/control-panel/control-panel.component';
 import {AuthGuard} from '../auth/auth.guard';
 import {PaymentComponent} from '../components/point-of-sale/payment/payment.component';
 import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
 import {TableResolverService} from '../route-resolvers/table-resolver.service';
 import {FoodItemResolverService} from '../route-resolvers/food-item-resolver.service';
-import {ReceiptComponent} from '../components/point-of-sale/receipt/receipt.component';
 import {ForbiddenComponent} from '../components/forbidden/forbidden.component';
 import {PointOfSaleComponent} from '../components/point-of-sale/point-of-sale.component';
-import {FoodItemsComponent} from '../components/point-of-sale/food-items/food-items.component';
+import {MenuComponent} from '../components/point-of-sale/menu/menu.component';
 import {LoginComponent} from '../components/login/login.component';
 import {ResetPasswordComponent} from '../components/reset-password/reset-password.component';
 import {AdminComponent} from '../components/admin/admin.component';
 import {NewPasswordComponent} from '../components/new-password/new-password.component';
-import {ModifiedUserResolverService} from '../route-resolvers/modified-user-resolver.service';
 import {OrdersComponent} from '../components/admin/orders/orders.component';
-import {RoleResolverService} from '../route-resolvers/role-resolver';
-import {RegisterComponent} from '../components/register/register.component';
-import {OrderListViewComponent} from '../components/admin/orders/order-list-view/order-list-view.component';
+import {RegisterComponent} from '../components/admin/register/register.component';
 import {OrderResolverService} from '../route-resolvers/order-resolver.service';
-import {OrderListViewDetailsComponent} from '../components/admin/orders/order-list-view/order-list-view-details/order-list-view-details.component';
-import {FoodItemComponent} from '../components/admin/food-item/food-item.component';
-import {FooditemListViewComponent} from '../components/admin/food-item/fooditem-list-view/fooditem-list-view.component';
-import {ListDetailsComponent} from '../components/admin/food-item/fooditem-list-view/list-details/list-details.component';
-import {AddNewFoodItemComponent} from '../components/admin/food-item/add-new-food-item/add-new-food-item.component';
-import {AddFoodItemImageComponent} from '../components/admin/food-item/add-food-item-image/add-food-item-image.component';
-import {EditFoodItemComponent} from '../components/admin/food-item/edit-food-item/edit-food-item.component';
-import {EditFoodItemImageComponent} from '../components/admin/food-item/edit-food-item-image/edit-food-item-image.component';
 import {TablesComponent} from '../components/admin/tables/tables.component';
 import {AddNewTableComponent} from '../components/admin/tables/add-new-table/add-new-table.component';
 import {EditTableComponent} from '../components/admin/tables/edit-table/edit-table.component';
-import {InventoryComponent} from '../components/admin/inventory/inventory.component';
-import {EditInventoryItemComponent} from '../components/admin/inventory/edit-inventory-item/edit-inventory-item.component';
-import {AddNewInventoryComponent} from '../components/admin/inventory/add-new-inventory/add-new-inventory.component';
-import {UpdateInventoryItemComponent} from '../components/admin/inventory/update-inventory-item/update-inventory-item.component';
-import {InventoryListViewComponent} from '../components/admin/inventory/inventory-list-view/inventory-list-view.component';
-import {InventoryListDetailsComponent} from '../components/admin/inventory/inventory-list-view/inventory-list-details/inventory-list-details.component';
 import {PageNotFoundComponent} from '../components/page-not-found/page-not-found.component';
+import {SessionComponent} from '../components/point-of-sale/session/session.component';
+import {SelectTableComponent} from '../components/point-of-sale/select-table/select-table.component';
+import {FoodItemsComponent} from '../components/admin/food-items/food-items.component';
+import {OrderListComponent} from '../components/admin/orders/order-list/order-list.component';
+import {InventoriesComponent} from '../components/admin/inventories/inventories.component';
+import {InventoryListComponent} from '../components/admin/inventories/inventory-list/inventory-list.component';
+import {InventoryDetailsComponent} from '../components/admin/inventories/inventory-list/inventory-details/inventory-details.component';
+import {OrderDetailsComponent} from '../components/admin/orders/order-list/order-details/order-details.component';
+import {TableListComponent} from '../components/admin/tables/table-list/table-list.component';
+import {FoodItemDetailsComponent} from '../components/admin/food-items/food-item-list/food-item-details/food-item-details.component';
+import {FoodItemListComponent} from '../components/admin/food-items/food-item-list/food-item-list.component';
+import {EditFoodItemComponent} from '../components/admin/food-items/edit-food-item/edit-food-item.component';
+import {AddNewFoodItemComponent} from '../components/admin/food-items/add-new-food-item/add-new-food-item.component';
+import {EditInventoryItemComponent} from '../components/admin/inventories/edit-inventory-item/edit-inventory-item.component';
+import {AddNewInventoryItemComponent} from '../components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
+import {TableDetailsComponent} from '../components/admin/tables/table-list/table-details/table-details.component';
 
 
 const appRoutes: Routes = [
-  {
-    path: 'control-panel',
-    component: ControlPanelComponent,
-    canActivate: [AuthGuard],
-    data:
-      {
-        roles: ['Admin']
-      }
-  },
 
   {
-    path: 'payment',
-    component: PaymentComponent,
+    path: 'pos',
+    component: PointOfSaleComponent,
     canActivate: [AuthGuard],
     resolve:
       {
         inventories: InventoryResolverService,
         tables: TableResolverService,
         foodItems: FoodItemResolverService
-      }
-  },
-
-
-  { path: 'receipt',
-    component: ReceiptComponent,
-    canActivate: [AuthGuard]
-  },
-
-
-  { path: 'forbidden',
-    component: ForbiddenComponent,
-    canActivate: [AuthGuard]
-  },
-
-  { path: 'point-of-sale',
-    component: PointOfSaleComponent,
-    canActivate: [AuthGuard],
-    resolve:
-      {
-        inventories: InventoryResolverService,
-        foodItems: FoodItemResolverService
       },
     children:
-      [
-        { path: 'food-items',
-          component: FoodItemsComponent,
-          canActivate: [AuthGuard]
-        }
-      ]
+    [
+      {
+        path: '',
+        redirectTo: 'session',
+        pathMatch: 'full'
+      },
+      {
+        path: 'session',
+        component: SessionComponent,
+      },
+      {
+        path: 'select-table',
+        component: SelectTableComponent
+      },
+      {
+        path: 'menu',
+        component: MenuComponent
+      },
+      {
+        path: 'payment',
+        component: PaymentComponent
+      },
+    ]
   },
 
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent
-  },
-
-  {
-    path: 'new-password',
-    component: NewPasswordComponent
-  },
 
 
   {
@@ -119,188 +88,132 @@ const appRoutes: Routes = [
     children:
       [
         {
-          path: '',
-          redirectTo: 'food-item',
-          pathMatch: 'full'
-        },
-        {
-          path: 'register',
-          component: RegisterComponent,
-          canActivate: [AuthGuard],
-          resolve:
-            { roles: RoleResolverService,
-              users: ModifiedUserResolverService
-            }
-        },
-        { path: 'order',
-          component: OrdersComponent,
-          canActivate: [AuthGuard],
+          path: 'food-items',
+          component: FoodItemsComponent,
           children:
             [
               {
-                path: 'list-view',
-                component: OrderListViewComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    orders: OrderResolverService
-                  }
+                path: 'food-item-list',
+                component: FoodItemListComponent,
+                children:
+                  [
+                    {
+                      path: ':id',
+                      component: FoodItemDetailsComponent
+                    },
+                    {
+                      path: ':id/edit-food-item',
+                      component: EditFoodItemComponent
+                    }
+                  ]
               },
               {
-                path: 'list-details/:id',
-                component: OrderListViewDetailsComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    orders: OrderResolverService
-                  }
+                path: 'add-new-food-item',
+                component: AddNewFoodItemComponent
+              },
+            ]
+        },
+        {
+          path: 'inventories',
+          component: InventoriesComponent,
+          children:
+            [
+              {
+                path: 'inventory-list',
+                component: InventoryListComponent,
+                children:
+                  [
+                    {
+                      path: ':id',
+                      component: InventoryDetailsComponent
+                    },
+                    {
+                      path: ':id/edit-inventory-item',
+                      component: EditInventoryItemComponent
+                    }
+                  ]
+              },
+              {
+                path: 'add-new-inventory-item',
+                component: AddNewInventoryItemComponent
               }
             ]
         },
-
         {
-          path: 'food-item',
-          component: FoodItemComponent,
-          canActivate: [AuthGuard],
+          path: 'orders',
+          component: OrdersComponent,
           children:
             [
               {
-                path: 'list-view',
-                component: FooditemListViewComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    foodItems: FoodItemResolverService
-                  }
-              },
-            {
-              path: 'list-details/:id',
-              component: ListDetailsComponent,
-              canActivate: [AuthGuard],
-              resolve:
-                {
-                  foodItems: FoodItemResolverService
-                }
-            },
-            {
-              path: 'add-new-food-item',
-              component: AddNewFoodItemComponent,
-              canActivate: [AuthGuard],
-              resolve:
-                {
-                  inventories: InventoryResolverService
-                }
-            },
-            {
-              path: 'add-food-item-image/:id',
-              component: AddFoodItemImageComponent,
-              canActivate: [AuthGuard],
-            },
-            {
-              path: 'edit-food-item/:id',
-              component: EditFoodItemComponent,
-              canActivate: [AuthGuard],
-              resolve:
-                {
-                  foodItems: FoodItemResolverService,
-                  inventories: InventoryResolverService
-                }
-            },
-            {
-              path: 'edit-food-item-image/:id',
-              component: EditFoodItemImageComponent,
-              canActivate: [AuthGuard],
-              resolve:
-                {
-                  foodItems: FoodItemResolverService
-                }
-            }
-          ]
+                path: 'order-list',
+                component: OrderListComponent,
+                children:
+                  [
+                    {
+                      path: ':id',
+                      component: OrderDetailsComponent
+                    }
+                  ]
+              }
+            ]
         },
         {
           path: 'tables',
           component: TablesComponent,
-          canActivate: [AuthGuard],
-          resolve:
-            {
-              tables: TableResolverService
-            },
           children:
             [
               {
-                path: 'add-new-tables',
-                component: AddNewTableComponent,
-                canActivate: [AuthGuard]
-              },
-              {
-                path: 'edit-tables/:id',
-                component: EditTableComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    tables: TableResolverService
-                  }
+                path: 'table-list',
+                component: TableListComponent,
+                children:
+                  [
+                    {
+                      path: ':id',
+                      component: TableDetailsComponent
+                    },
+                    {
+                      path: ':id/edit-table',
+                      component: EditTableComponent
+                    }
+                  ]
               }
             ]
-
         },
         {
-          path: 'inventories',
-          component: InventoryComponent,
-          canActivate: [AuthGuard],
-          children:
-            [
-              {
-                path: 'add-new-inventories',
-                component: AddNewInventoryComponent,
-                canActivate: [AuthGuard]
-              },
-              {
-                path: 'edit-inventories-item/:id',
-                component: EditInventoryItemComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    inventories: InventoryResolverService
-                  }
-              },
-              {
-                path: 'update-inventories-item/:id',
-                component: UpdateInventoryItemComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    inventories: InventoryResolverService
-                  }
-              },
-              {
-                path: 'list-view',
-                component: InventoryListViewComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    inventories: InventoryResolverService
-                  }
-              },
-              {
-                path: 'list-details/:id',
-                component: InventoryListDetailsComponent,
-                canActivate: [AuthGuard],
-                resolve:
-                  {
-                    inventories: InventoryResolverService
-                  }
-              }
-            ]
+          path: 'register',
+          component: RegisterComponent,
         }
       ]
-
   },
+
+
+
 
   {
     path : '',
-    redirectTo: '/login',
+    redirectTo: 'login',
     pathMatch : 'full'
+  },
+
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
+  },
+
+  {
+    path: 'new-password',
+    component: NewPasswordComponent
   },
 
   {

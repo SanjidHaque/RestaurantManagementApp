@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Route} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import {AdminService} from '../../../services/admin.service';
+import {Inventory} from '../../../models/inventory.model';
 
 
 @Component({
@@ -8,5 +10,10 @@ import {Route} from '@angular/router';
   styleUrls: ['./inventories.component.scss']
 })
 export class InventoriesComponent implements OnInit {
-  ngOnInit() {}
+  constructor(private route: ActivatedRoute,
+              private adminService: AdminService) { }
+
+  ngOnInit() {
+
+  }
 }

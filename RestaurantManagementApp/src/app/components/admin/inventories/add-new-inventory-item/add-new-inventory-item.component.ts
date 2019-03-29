@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {DataStorageService} from '../../../../services/data-storage.service';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {Inventory} from '../../../../models/inventory.model';
+import {AdminService} from '../../../../services/admin.service';
 
 @Component({
   selector: 'app-add-new-inventory',
@@ -13,11 +13,10 @@ import {Inventory} from '../../../../models/inventory.model';
 })
 
 export class AddNewInventoryItemComponent implements OnInit {
-  inventoryHistoryModel: InventoryHistory[] = [];
   isDisabled = false;
 
   constructor(private router: Router,
-              private pointOfSaleService: PointOfSaleService,
+              private adminService: AdminService,
               private dataStorageService: DataStorageService) {
   }
 
@@ -34,31 +33,30 @@ export class AddNewInventoryItemComponent implements OnInit {
       const unit = form.value.unit;
       const updateTime = new Date().toLocaleString();
 
-      const updateHistory =
-        new InventoryHistory(
-          updateHistoryId,
-          inventoryId,
-          quantity,
-          updateTime,
-          currentPrice
-        );
 
-      this.inventoryHistoryModel.push(updateHistory);
-      const newInventory = new Inventory(
+      const inventoryHistories: InventoryHistory[] = [new InventoryHistory(
+      updateHistoryId,
+      inventoryId,
+      quantity,
+      updateTime,
+      currentPrice
+    )];
+
+      const inventory = new Inventory(
         inventoryId,
         inventoryItemName,
         0,
         quantity,
         unit,
         currentPrice,
-        this.inventoryHistoryModel
+        inventoryHistories
       );
 
-       this.dataStorageService.addNewInventoryItem(newInventory).
+       this.dataStorageService.addNewInventoryItem(inventory).
        subscribe(
          (data: any) => {
            form.reset();
-           this.router.navigate(['admin/inventories/list-view']);
+           this.router.navigate(['admin/inventories']);
          }
        );
   }

@@ -304,8 +304,8 @@ namespace RMS_Server_.Controllers
 
 
         [HttpPost]
-        [Route("api/AddNewInventory")]
-        public IHttpActionResult AddInventoryItem(Inventory inventory)
+        [Route("api/AddNewInventoryItem")]
+        public IHttpActionResult AddNewInventoryItem(Inventory inventory)
         {
             if (inventory == null)
             {

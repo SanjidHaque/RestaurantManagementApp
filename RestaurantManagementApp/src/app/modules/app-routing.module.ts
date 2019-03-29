@@ -85,13 +85,6 @@ const appRoutes: Routes = [
       {
         roles: ['Admin']
       },
-    resolve:
-      {
-        inventories: InventoryResolverService,
-        foodItems: FoodItemResolverService,
-        tables: TableResolverService,
-        orders: OrderResolverService
-      },
     children:
       [
         {
@@ -143,6 +136,10 @@ const appRoutes: Routes = [
               {
                 path: 'inventory-list',
                 component: InventoryListComponent,
+                resolve:
+                  {
+                    inventories: InventoryResolverService
+                  },
                 children:
                   [
                     {

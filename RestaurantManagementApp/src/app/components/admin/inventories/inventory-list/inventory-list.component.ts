@@ -11,16 +11,19 @@ import {AdminService} from '../../../../services/admin.service';
 export class InventoryListComponent implements OnInit {
 
   inventories: Inventory[] = [];
-  constructor(private router: Router,
-              private adminService: AdminService) {}
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.inventories = this.adminService.getAllInventoryItem();
-    console.log(this.inventories);
+    this.route.data
+      .subscribe(
+        (data: Inventory[]) => {
+          this.inventories = data['inventories'];
+        }
+      );
   }
 
   viewDetails(inventory: Inventory) {
     const inventoryId =  inventory.Id;
-    this.router.navigate(['admin/inventories/food-item-details', inventoryId]);
+    // this.router.navigate(['admin/inventories/food-item-details', inventoryId]);
   }
 }

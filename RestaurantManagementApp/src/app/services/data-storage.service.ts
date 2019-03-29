@@ -69,7 +69,7 @@ export class DataStorageService {
   }
 
   addNewInventoryItem(inventory: Inventory) {
-    return this.http.post(this.rootUrl + '/api/AddNewInventory', inventory);
+    return this.http.post(this.rootUrl + '/api/AddNewInventoryItem', inventory);
   }
 
   editInventoryItem(inventory: Inventory) {

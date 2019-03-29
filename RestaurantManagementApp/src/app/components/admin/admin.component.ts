@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Data} from '@angular/router';
+import {AdminService} from '../../services/admin.service';
+import {Inventory} from '../../models/inventory.model';
 
 
 @Component({
@@ -8,9 +11,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+              private adminService: AdminService) { }
 
   ngOnInit() {
+   this.route.data
+     .subscribe(
+       (data: Inventory[]) => {
+         this.adminService.inventories = data['inventories'];
+       }
+     );
   }
 
 }

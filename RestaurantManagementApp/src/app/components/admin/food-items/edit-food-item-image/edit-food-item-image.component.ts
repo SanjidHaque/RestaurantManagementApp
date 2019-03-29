@@ -52,7 +52,7 @@ export class EditFoodItemImageComponent implements OnInit {
   }
   saveFoodItemImage(Image) {
     this.isDisabled = true;
-    this.dataStorageService.saveFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
+    this.dataStorageService.uploadFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
 
         console.log('done');

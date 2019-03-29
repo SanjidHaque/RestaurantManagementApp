@@ -10,11 +10,11 @@ import {AuthService} from '../../../services/auth.service';
 
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
 
   isDisabled = false;
   user: User;

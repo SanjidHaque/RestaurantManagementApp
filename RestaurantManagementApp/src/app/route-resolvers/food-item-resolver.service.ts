@@ -11,7 +11,7 @@ export class FoodItemResolverService  implements Resolve<FoodItem[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FoodItem[]> |
     Promise<FoodItem[]> | FoodItem[] {
-    return this.dataStorageService.getFoodItems();
+    return this.dataStorageService.getAllFoodItem();
   }
 
 }

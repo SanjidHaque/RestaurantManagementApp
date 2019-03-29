@@ -11,7 +11,7 @@ export class TableResolverService implements Resolve<Table[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Table[]> |
       Promise<Table[]> | Table[] {
-    return this._dataStorageService.getTables();
+    return this._dataStorageService.getAllTable();
   }
 
 }

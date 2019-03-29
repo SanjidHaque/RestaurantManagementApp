@@ -11,7 +11,7 @@ export class OrderResolverService implements Resolve<Order[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Order[]> |
     Promise<Order[]> | Order[] {
-    return this.dataStorageService.getOrders();
+    return this.dataStorageService.getAllOrder();
   }
 
 }

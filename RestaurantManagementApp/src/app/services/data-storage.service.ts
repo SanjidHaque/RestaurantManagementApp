@@ -20,7 +20,7 @@ export class DataStorageService {
 
 
 
-  saveFoodItemImage(foodItemId: string, fileToUpload: File) {
+  uploadFoodItemImage(foodItemId: string, fileToUpload: File) {
     if (fileToUpload.name !==  null || fileToUpload.name !== '') {
       const formData = new FormData();
       formData.append('Image', fileToUpload);
@@ -30,11 +30,12 @@ export class DataStorageService {
   }
 
 
-  getFoodItems() {
+  getAllFoodItem() {
     return this.http.get<FoodItem[]>(this.rootUrl + '/api/GetFoodItems');
   }
 
-  saveOrder(order: Order) {
+
+  addNewOrder(order: Order) {
     return this.http.post(this.rootUrl + '/api/StoreOrder', order);
   }
 
@@ -43,15 +44,15 @@ export class DataStorageService {
     return this.http.post(this.rootUrl + '/api/DeleteOrder', order);
   }
 
-  getOrders() {
+  getAllOrder() {
     return this.http.get<Order[]>(this.rootUrl + '/api/GetOrders');
   }
 
-  getInventories() {
+  getAllInventoryItem() {
     return this.http.get<Inventory[]>(this.rootUrl + '/api/GetInventories');
   }
 
-  getTables() {
+  getAllTable() {
     return this.http.get<Table[]>(this.rootUrl + '/api/GetTables');
   }
 

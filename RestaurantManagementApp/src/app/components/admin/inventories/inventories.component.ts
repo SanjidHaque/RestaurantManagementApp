@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Route} from '@angular/router';
 
 
 @Component({
@@ -7,8 +8,5 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./inventories.component.scss']
 })
 export class InventoriesComponent implements OnInit {
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

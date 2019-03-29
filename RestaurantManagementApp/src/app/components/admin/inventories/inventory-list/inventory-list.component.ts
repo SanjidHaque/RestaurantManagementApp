@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Inventory} from '../../../../models/inventory.model';
+import {AdminService} from '../../../../services/admin.service';
 
 @Component({
   selector: 'app-inventory-list',
@@ -10,16 +11,12 @@ import {Inventory} from '../../../../models/inventory.model';
 export class InventoryListComponent implements OnInit {
 
   inventories: Inventory[] = [];
-  constructor(private route: ActivatedRoute,
-              private router: Router
-              ) {}
+  constructor(private router: Router,
+              private adminService: AdminService) {}
 
   ngOnInit() {
-    this.route.data.
-    subscribe(
-      (data: Inventory[]) => {
-        this.inventories = data['inventories'];
-      });
+    this.inventories = this.adminService.getAllInventoryItem();
+    console.log(this.inventories);
   }
 
   viewDetails(inventory: Inventory) {

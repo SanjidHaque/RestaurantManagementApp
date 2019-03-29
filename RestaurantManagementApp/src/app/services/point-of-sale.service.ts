@@ -12,23 +12,23 @@ import {UUID} from 'angular2-uuid';
 
 @Injectable()
 export class PointOfSaleService {
-  public uuidCodeOne = '';
-  public totalPrice = 0;
-  public totalQuantity  = 0;
-  public orderedItems: OrderedItem[] = [];
-  public orderedItemsChanged = new Subject<OrderedItem[]>();
-  public order: Order;
-  public orderChanged = new Subject<Order>();
-  public orders: Order[] = [];
-  public ordersChanged = new Subject<Order[]>();
-  public foodItemSubTotal = 0;
-  public ingredients: Ingredients[] = [];
-  public foodItems: FoodItem[] = [];
-  public foodItemsChanged = new Subject<FoodItem[]>();
-  public inventories: Inventory[] = [];
-  public inventoriesChanged = new Subject<Inventory[]>();
-  public tables: Table[] = [];
-  public tablesChanged = new Subject<Table[]>();
+  uuidCodeOne = '';
+  totalPrice = 0;
+  totalQuantity  = 0;
+  orderedItems: OrderedItem[] = [];
+  orderedItemsChanged = new Subject<OrderedItem[]>();
+  order: Order;
+  orderChanged = new Subject<Order>();
+  orders: Order[] = [];
+  ordersChanged = new Subject<Order[]>();
+  foodItemSubTotal = 0;
+  ingredients: Ingredients[] = [];
+  foodItems: FoodItem[] = [];
+  foodItemsChanged = new Subject<FoodItem[]>();
+  inventories: Inventory[] = [];
+  inventoriesChanged = new Subject<Inventory[]>();
+  tables: Table[] = [];
+  tablesChanged = new Subject<Table[]>();
 
 
   constructor() {
@@ -36,9 +36,16 @@ export class PointOfSaleService {
   }
 
 
+  getAllInventoryItem() {
+    return this.inventories.slice();
+  }
+
    clearOrders() {
     this.orderedItems = [];
    }
+
+
+
 
    updateInventoryList(inventoryId: number, editedInventoryItem: Inventory) {
     for (let i = 0; i < this.inventories.length; i++) {

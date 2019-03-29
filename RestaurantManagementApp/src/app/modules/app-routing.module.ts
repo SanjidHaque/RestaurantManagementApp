@@ -13,7 +13,7 @@ import {ResetPasswordComponent} from '../components/reset-password/reset-passwor
 import {AdminComponent} from '../components/admin/admin.component';
 import {NewPasswordComponent} from '../components/new-password/new-password.component';
 import {OrdersComponent} from '../components/admin/orders/orders.component';
-import {RegisterComponent} from '../components/admin/register/register.component';
+import {RegistrationComponent} from '../components/admin/registration/registration.component';
 import {OrderResolverService} from '../route-resolvers/order-resolver.service';
 import {TablesComponent} from '../components/admin/tables/tables.component';
 import {AddNewTableComponent} from '../components/admin/tables/add-new-table/add-new-table.component';
@@ -85,13 +85,30 @@ const appRoutes: Routes = [
       {
         roles: ['Admin']
       },
+    resolve:
+      {
+        inventories: InventoryResolverService,
+        foodItems: FoodItemResolverService,
+        tables: TableResolverService,
+        orders: OrderResolverService
+      },
     children:
       [
+        {
+          path: '',
+          redirectTo: 'inventories',
+          pathMatch: 'full'
+        },
         {
           path: 'food-items',
           component: FoodItemsComponent,
           children:
             [
+              {
+                path: '',
+                redirectTo: 'food-item-list',
+                pathMatch: 'full'
+              },
               {
                 path: 'food-item-list',
                 component: FoodItemListComponent,
@@ -119,6 +136,11 @@ const appRoutes: Routes = [
           children:
             [
               {
+                path: '',
+                redirectTo: 'inventory-list',
+                pathMatch: 'full'
+              },
+              {
                 path: 'inventory-list',
                 component: InventoryListComponent,
                 children:
@@ -145,6 +167,11 @@ const appRoutes: Routes = [
           children:
             [
               {
+                path: '',
+                redirectTo: 'order-list',
+                pathMatch: 'full'
+              },
+              {
                 path: 'order-list',
                 component: OrderListComponent,
                 children:
@@ -163,6 +190,11 @@ const appRoutes: Routes = [
           children:
             [
               {
+                path: '',
+                redirectTo: 'table-list',
+                pathMatch: 'full'
+              },
+              {
                 path: 'table-list',
                 component: TableListComponent,
                 children:
@@ -180,14 +212,11 @@ const appRoutes: Routes = [
             ]
         },
         {
-          path: 'register',
-          component: RegisterComponent,
+          path: 'registration',
+          component: RegistrationComponent,
         }
       ]
   },
-
-
-
 
   {
     path : '',

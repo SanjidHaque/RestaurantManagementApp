@@ -11,7 +11,7 @@ export class InventoryResolverService  implements Resolve<Inventory[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Inventory[]> |
     Promise<Inventory[]> | Inventory[] {
-    return this.dataStorageService.getInventories();
+    return this.dataStorageService.getAllInventoryItem();
   }
 
 }

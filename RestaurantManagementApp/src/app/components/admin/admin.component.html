@@ -1,42 +1,85 @@
 
 
 <div class="row">
-  <div class="col-md-2 buttons">
 
-    <a routerLink = "/admin/food-item/grid-view" routerLinkActive = "active-link">
-    <div class="col-md-12 regulars">
-      Food Items
+  <div class="col-xl-2">
+
+    <div class="row"
+         style="
+         padding-top: 5px;
+         padding-bottom: 5px;">
+      <div class="col-xl-12">
+        <a
+          style="
+          text-decoration: none;
+          font-size: 18px; color: black;"
+          routerLink="inventories"
+          routerLinkActive="active">Inventories</a>
+      </div>
     </div>
-    </a>
 
-    <a routerLink = "/admin/inventory/list-view" routerLinkActive = "active-link">
-      <div class="col-md-12 regulars">
-        Inventories
+    <div class="row"
+         style="
+         padding-top: 5px;
+         padding-bottom: 5px;">
+      <div class="col-xl-12">
+        <a
+          style="
+          text-decoration: none;
+          font-size: 18px; color: black;"
+          routerLink="food-items"
+          routerLinkActive="active">Food Items</a>
       </div>
-    </a>
+    </div>
 
-    <a routerLink = "/admin/orders/list-view" routerLinkActive = "active-link ">
-      <div class="col-md-12 regulars ">
-        Orders
+    <div class="row"
+         style="
+         padding-top: 5px;
+         padding-bottom: 5px;">
+      <div class="col-xl-12">
+        <a
+          style="
+          text-decoration: none;
+          font-size: 18px; color: black;"
+          routerLink="orders"
+          routerLinkActive="active">Orders</a>
       </div>
-    </a>
+    </div>
 
-    <a routerLink = "/admin/tables" routerLinkActive = "active-link">
-      <div class="col-md-12 regulars">
-        Tables
+    <div class="row"
+         style="
+         padding-top: 5px;
+         padding-bottom: 5px;">
+      <div class="col-xl-12">
+        <a
+          style="
+          text-decoration: none;
+          font-size: 18px; color: black;"
+          routerLink="tables"
+          routerLinkActive="active">Tables</a>
       </div>
-    </a>
+    </div>
 
-    <a routerLink = "/admin/register" routerLinkActive = "active-link">
-      <div class="col-md-12 regulars">
-        Registration
+    <div class="row"
+         style="
+         padding-top: 5px;
+         padding-bottom: 5px;">
+      <div class="col-xl-12">
+        <a
+          style="
+          text-decoration: none;
+          font-size: 18px; color: black;"
+          routerLink="registration"
+          routerLinkActive="active">Registration</a>
       </div>
-    </a>
-
-
+    </div>
 
 
   </div>
-  <div class="col-md-10 go-left">
+  <div class="col-xl-10">
     <router-outlet></router-outlet>
   </div>
+</div>
+
+
+

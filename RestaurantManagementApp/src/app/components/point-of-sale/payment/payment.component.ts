@@ -125,7 +125,7 @@ export class PaymentComponent implements OnInit {
       this.inventoryCost, this.orderProfit );
     this.pointOfSaleService.addToOrderedList(this.order);
 
-    this._dataStorageService.saveOrder(this.order).subscribe();
+    this._dataStorageService.addNewOrder(this.order).subscribe();
     this.router.navigate(['receipt']);
   }
 

@@ -25,10 +25,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {NgProgressHttpModule} from '@ngx-progressbar/http';
 import {NgProgressModule} from '@ngx-progressbar/core';
 import {NgProgressRouterModule} from '@ngx-progressbar/router';
-import {AppMaterialModule} from './modules/app-material.module';
+import {NgBootstrapModule} from './modules/ng-bootstrap.module';
 import {PointOfSaleComponent} from './components/point-of-sale/point-of-sale.component';
 import {AdminComponent} from './components/admin/admin.component';
-import {RegisterComponent} from './components/admin/register/register.component';
+import {RegistrationComponent} from './components/admin/registration/registration.component';
 import {LoginComponent} from './components/login/login.component';
 import {PaymentComponent} from './components/point-of-sale/payment/payment.component';
 import {ReceiptComponent} from './components/point-of-sale/receipt/receipt.component';
@@ -61,6 +61,8 @@ import {FoodItemListComponent} from './components/admin/food-items/food-item-lis
 import {AddNewInventoryItemComponent} from './components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
 import {SessionComponent} from './components/point-of-sale/session/session.component';
 import {FoodItemsComponent} from './components/admin/food-items/food-items.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AdminService} from './services/admin.service';
 
 
 
@@ -70,7 +72,7 @@ import {FoodItemsComponent} from './components/admin/food-items/food-items.compo
     AppComponent,
     PointOfSaleComponent,
     LoginComponent,
-    RegisterComponent,
+    RegistrationComponent,
     AdminComponent,
     InventoriesComponent,
     MenuComponent,
@@ -111,7 +113,8 @@ import {FoodItemsComponent} from './components/admin/food-items/food-items.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppMaterialModule,
+    NgbModule,
+    NgBootstrapModule,
     HttpClientModule,
     CommonModule,
     FormsModule,
@@ -130,6 +133,7 @@ import {FoodItemsComponent} from './components/admin/food-items/food-items.compo
 
   providers: [
     PointOfSaleService,
+    AdminService,
     DataStorageService,
     TableResolverService,
     OrderResolverService,

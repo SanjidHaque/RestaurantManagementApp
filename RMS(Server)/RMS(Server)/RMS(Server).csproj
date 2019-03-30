@@ -226,6 +226,7 @@
     <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\RestaurantManagementAppController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -242,6 +243,18 @@
     <Compile Include="Migrations\201903271035427_someModelChangedThatIDontRemember.cs" />
     <Compile Include="Migrations\201903271035427_someModelChangedThatIDontRemember.Designer.cs">
       <DependentUpon>201903271035427_someModelChangedThatIDontRemember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903301759196_inventoryHistoryModelChanged.cs" />
+    <Compile Include="Migrations\201903301759196_inventoryHistoryModelChanged.Designer.cs">
+      <DependentUpon>201903301759196_inventoryHistoryModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903301808505_inventoryHistoryModelChangedAgain.cs" />
+    <Compile Include="Migrations\201903301808505_inventoryHistoryModelChangedAgain.Designer.cs">
+      <DependentUpon>201903301808505_inventoryHistoryModelChangedAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903301814312_inventoryModelChanged.cs" />
+    <Compile Include="Migrations\201903301814312_inventoryModelChanged.Designer.cs">
+      <DependentUpon>201903301814312_inventoryModelChanged.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -339,6 +352,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903271035427_someModelChangedThatIDontRemember.resx">
       <DependentUpon>201903271035427_someModelChangedThatIDontRemember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903301759196_inventoryHistoryModelChanged.resx">
+      <DependentUpon>201903301759196_inventoryHistoryModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903301808505_inventoryHistoryModelChangedAgain.resx">
+      <DependentUpon>201903301808505_inventoryHistoryModelChangedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903301814312_inventoryModelChanged.resx">
+      <DependentUpon>201903301814312_inventoryModelChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

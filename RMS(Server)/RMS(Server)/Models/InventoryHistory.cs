@@ -10,8 +10,8 @@ namespace RMS_Server_.Models
         public int Id { get; set; }
         public Inventory Inventory { get; set; }
         public int InventoryId { get; set; }
-        public int UpdatedQuantity { get; set; }
-        public string UpdateTime { get; set; }       
-        public int CurrentPrice { get; set; }  
+        public int BuyingQuantity { get; set; }
+        public string BuyingTime { get; set; }       
+        public int BuyingPrice { get; set; }  
     }
 }

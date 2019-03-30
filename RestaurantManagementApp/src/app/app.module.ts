@@ -51,7 +51,7 @@ import { TableListComponent } from './components/admin/tables/table-list/table-l
 import { TableDetailsComponent } from './components/admin/tables/table-list/table-details/table-details.component';
 import {OrderListComponent} from './components/admin/orders/order-list/order-list.component';
 import {InventoryListComponent} from './components/admin/inventories/inventory-list/inventory-list.component';
-import {InventoryDetailsComponent} from './components/admin/inventories/inventory-list/inventory-details/inventory-details.component';
+import {InventoryDetailsComponent} from './components/admin/inventories/inventory-details/inventory-details.component';
 import {UpdateInventoryItemComponent} from './components/admin/inventories/update-inventory-item/update-inventory-item.component';
 import {AddFoodItemImageComponent} from './components/admin/food-items/add-food-item-image/add-food-item-image.component';
 import {EditFoodItemImageComponent} from './components/admin/food-items/edit-food-item-image/edit-food-item-image.component';
@@ -63,6 +63,8 @@ import {SessionComponent} from './components/point-of-sale/session/session.compo
 import {FoodItemsComponent} from './components/admin/food-items/food-items.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminService} from './services/admin.service';
+import {HttpErrorInterceptor} from './http-error-interceptor/http-error.interceptor';
+import {InventoryDataStorageService} from './services/inventory-data-storage.service';
 
 
 
@@ -135,6 +137,7 @@ import {AdminService} from './services/admin.service';
     PointOfSaleService,
     AdminService,
     DataStorageService,
+    InventoryDataStorageService,
     TableResolverService,
     OrderResolverService,
     InventoryResolverService,
@@ -147,6 +150,11 @@ import {AdminService} from './services/admin.service';
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

@@ -25,7 +25,7 @@ import {FoodItemsComponent} from '../components/admin/food-items/food-items.comp
 import {OrderListComponent} from '../components/admin/orders/order-list/order-list.component';
 import {InventoriesComponent} from '../components/admin/inventories/inventories.component';
 import {InventoryListComponent} from '../components/admin/inventories/inventory-list/inventory-list.component';
-import {InventoryDetailsComponent} from '../components/admin/inventories/inventory-list/inventory-details/inventory-details.component';
+import {InventoryDetailsComponent} from '../components/admin/inventories/inventory-details/inventory-details.component';
 import {OrderDetailsComponent} from '../components/admin/orders/order-list/order-details/order-details.component';
 import {TableListComponent} from '../components/admin/tables/table-list/table-list.component';
 import {FoodItemDetailsComponent} from '../components/admin/food-items/food-item-list/food-item-details/food-item-details.component';
@@ -35,6 +35,7 @@ import {AddNewFoodItemComponent} from '../components/admin/food-items/add-new-fo
 import {EditInventoryItemComponent} from '../components/admin/inventories/edit-inventory-item/edit-inventory-item.component';
 import {AddNewInventoryItemComponent} from '../components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
 import {TableDetailsComponent} from '../components/admin/tables/table-list/table-details/table-details.component';
+import {UpdateInventoryItemComponent} from '../components/admin/inventories/update-inventory-item/update-inventory-item.component';
 
 
 const appRoutes: Routes = [
@@ -142,6 +143,10 @@ const appRoutes: Routes = [
                   }
               },
               {
+                path: 'add-new-inventory-item',
+                component: AddNewInventoryItemComponent
+              },
+              {
                 path: ':id',
                 component: InventoryDetailsComponent,
                 resolve:
@@ -158,8 +163,12 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: 'add-new-inventory-item',
-                component: AddNewInventoryItemComponent
+                path: ':id/update-inventory-item',
+                component: UpdateInventoryItemComponent,
+                resolve:
+                  {
+                    inventories: InventoryResolverService
+                  }
               }
             ]
         },

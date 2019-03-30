@@ -6,6 +6,7 @@ import {FoodItem} from '../models/food-item.model';
 import {Table} from '../models/table.model';
 import {InventoryHistory} from '../models/inventory-history.model';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class DataStorageService {
@@ -48,9 +49,7 @@ export class DataStorageService {
     return this.http.get<Order[]>(this.rootUrl + '/api/GetOrders');
   }
 
-  getAllInventoryItem() {
-    return this.http.get<Inventory[]>(this.rootUrl + '/api/GetInventories');
-  }
+
 
   getAllTable() {
     return this.http.get<Table[]>(this.rootUrl + '/api/GetTables');
@@ -68,22 +67,8 @@ export class DataStorageService {
     return this.http.post(this.rootUrl + '/api/DeleteTable', table);
   }
 
-  addNewInventoryItem(inventory: Inventory) {
-    return this.http.post(this.rootUrl + '/api/AddNewInventoryItem', inventory);
-  }
-
-  editInventoryItem(inventory: Inventory) {
-    return this.http.post(this.rootUrl + '/api/EditInventoryItem', inventory);
-  }
-
-  updateInventoryHistory(updateHistory: InventoryHistory) {
-    return this.http.post(this.rootUrl + '/api/UpdateInventoryHistory', updateHistory);
-  }
 
 
-  deleteInventoryItem(inventory: Inventory) {
-    return this.http.post(this.rootUrl + '/api/DeleteInventoryItem', inventory);
-  }
 
   addFoodItem(foodItem: FoodItem) {
     return this.http.post(this.rootUrl + '/api/AddFoodItem', foodItem);
@@ -96,4 +81,6 @@ export class DataStorageService {
   editFoodItem(foodItem: FoodItem) {
     return this.http.post(this.rootUrl + '/api/EditFoodItem', foodItem);
   }
+
+
 }

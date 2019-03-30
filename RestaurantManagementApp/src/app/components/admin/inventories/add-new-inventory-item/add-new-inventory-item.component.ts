@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
-import {DataStorageService} from '../../../../services/data-storage.service';
 import {Inventory} from '../../../../models/inventory.model';
 import {AdminService} from '../../../../services/admin.service';
+import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
 
 @Component({
   selector: 'app-add-new-inventory',
@@ -17,7 +17,7 @@ export class AddNewInventoryItemComponent implements OnInit {
 
   constructor(private router: Router,
               private adminService: AdminService,
-              private dataStorageService: DataStorageService) {
+              private inventoryDataStorageService: InventoryDataStorageService) {
   }
 
   ngOnInit() {
@@ -28,31 +28,32 @@ export class AddNewInventoryItemComponent implements OnInit {
       const inventoryId = null;
       const updateHistoryId = null;
       const inventoryItemName = form.value.name;
-      const quantity = form.value.quantity;
-      const currentPrice = form.value.currentPrice;
+      const buyingQuantity = form.value.quantity;
+      const buyingPrice = form.value.currentPrice;
       const unit = form.value.unit;
-      const updateTime = new Date().toLocaleString();
+      const buyingTime = new Date().toLocaleString();
 
 
       const inventoryHistories: InventoryHistory[] = [new InventoryHistory(
       updateHistoryId,
       inventoryId,
-      quantity,
-      updateTime,
-      currentPrice
+      buyingQuantity,
+      buyingTime,
+      buyingPrice
     )];
 
       const inventory = new Inventory(
         inventoryId,
         inventoryItemName,
         0,
-        quantity,
+        buyingQuantity,
         unit,
-        currentPrice,
-        inventoryHistories
+        buyingPrice,
+        inventoryHistories,
+        buyingTime
       );
 
-       this.dataStorageService.addNewInventoryItem(inventory).
+       this.inventoryDataStorageService.addNewInventoryItem(inventory).
        subscribe(
          (data: any) => {
            form.reset();
@@ -61,10 +62,4 @@ export class AddNewInventoryItemComponent implements OnInit {
        );
   }
 
-
-
-  onCancel() {
-    this.router.navigate(['admin/inventories/list-view']);
-
-  }
 }

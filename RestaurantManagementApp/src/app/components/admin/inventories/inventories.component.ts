@@ -10,8 +10,7 @@ import {Inventory} from '../../../models/inventory.model';
   styleUrls: ['./inventories.component.scss']
 })
 export class InventoriesComponent implements OnInit {
-  constructor(private route: ActivatedRoute,
-              private adminService: AdminService) { }
+  constructor() { }
 
   ngOnInit() {
 

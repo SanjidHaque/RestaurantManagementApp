@@ -31,7 +31,7 @@
         <th
           style="font-size: 14px; font-weight: 500; color: #000;"
           mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
-        <td mat-cell *matCellDef = "let row"> {{row.AveragePrice}} </td>
+        <td mat-cell *matCellDef = "let row"> {{row.AveragePrice}} BDT </td>
       </ng-container>
 
       <ng-container matColumnDef="Unit">
@@ -67,65 +67,4 @@
       [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
   </div>
 
-
-<!--<div class="sum-of-inv-body">-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-4 search-bar">-->
-      <!--<span class="fa fa-search"></span>-->
-      <!--<input class="box" type="text" [(ngModel)]="term" placeholder="Search by Receipt Ref...">-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-12">-->
-      <!--<div class="col-md-3 receipt">-->
-        <!--Product Name-->
-      <!--</div>-->
-      <!--<div class="col-md-3 price">-->
-        <!--Average Price-->
-      <!--</div>-->
-      <!--<div class="col-md-2 price">-->
-        <!--Unit-->
-      <!--</div>-->
-      <!--<div class="col-md-2 name">-->
-          <!--Available Quantity-->
-      <!--</div>-->
-      <!--<div class="col-md-2 price">-->
-        <!--Used Quantity-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
-  <!--<div class="row">-->
-    <!--<div class="col-md-12 body">-->
-      <!--<div class="row" *ngFor="let inventory of inventories | filter:term; let i = index">-->
-        <!--<a title="View This Item's Details"-->
-           <!--style="cursor: pointer" (click)="viewDetails(inventory)">-->
-          <!--<div class="col-md-12 f-name table-bordered">-->
-            <!--<div class="col-md-3 column-receipt">-->
-            <!--{{ inventory.Name }}-->
-            <!--</div>-->
-            <!--<div class="col-md-3 column">-->
-              <!--{{ inventory.AveragePrice }} BDT-->
-            <!--</div>-->
-            <!--<div class="col-md-2 column">-->
-              <!--{{inventory.Unit }}-->
-            <!--</div>-->
-            <!--<div class="col-md-2 column">-->
-               <!--{{inventory.RemainingQuantity }}-->
-            <!--</div>-->
-            <!--<div class="col-md-2 column">-->
-              <!--{{inventory.UsedQuantity }}-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</a>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<div class="row">-->
-  <!--<div class="col-md-12 detail">-->
-    <!--Total Products: {{ totalProducts }} (s)-->
-  <!--</div>-->
-<!--</div>-->
 </ng-template>

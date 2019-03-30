@@ -6,6 +6,7 @@ import {Inventory} from '../../../../models/inventory.model';
 import {DataStorageService} from '../../../../services/data-storage.service';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
+import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
 
 @Component({
   selector: 'app-update-inventory-item',
@@ -27,7 +28,7 @@ export class UpdateInventoryItemComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService ) {
+              private inventoryDataStorageService: InventoryDataStorageService ) {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -81,7 +82,7 @@ export class UpdateInventoryItemComponent implements OnInit {
           + Number.parseInt(quantity.toString());
       }
     }
-    this.dataStorageService.updateInventoryHistory(updateHistory).
+    this.inventoryDataStorageService.updateInventoryHistory(updateHistory).
     subscribe(
       (data: any) => {
         form.reset();

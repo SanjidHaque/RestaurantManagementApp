@@ -237,16 +237,7 @@ namespace RMS_Server_.Controllers
             return Ok(orders);
         }
 
-        [HttpGet]
-        [Route("api/GetInventories")]
-        public IHttpActionResult GetInventories()
-        {
-            List<Inventory> inventories = _context.Inventories
-                .Include(b => b.InventoryHistory)
-                .OrderBy(x => x.Name)
-                .ToList();
-            return Ok(inventories);
-        }
+        
 
         [HttpGet]
         [Route("api/GetTables")]
@@ -303,102 +294,7 @@ namespace RMS_Server_.Controllers
         }
 
 
-        [HttpPost]
-        [Route("api/AddNewInventoryItem")]
-        public IHttpActionResult AddNewInventoryItem(Inventory inventory)
-        {
-            if (inventory == null)
-            {
-                return NotFound();
-            }
-            _context.Inventories.Add(inventory);       
-            inventory.InventoryHistory.ForEach(x => { x.InventoryId = inventory.Id;});
-            _context.InventoryHistories.AddRange(inventory.InventoryHistory);
-            _context.SaveChanges();
-            return Ok();
-        }
-
-
-
-        [HttpPost]
-        [Route("api/EditInventoryItem")]
-        public IHttpActionResult EditInventoryItem(Inventory inventory)
-        {          
-            Inventory getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-            if (getEdited != null)
-            {
-                getEdited.Name = inventory.Name;
-                getEdited.Unit = inventory.Unit;
-                _context.SaveChanges();
-                return Ok();
-            }
-
-            return NotFound();
-        }
-
-
-        [HttpPost]
-        [Route("api/UpdateInventoryHistory")]
-        public IHttpActionResult UpdateInventoryHistory(InventoryHistory inventoryHistory)
-        {
-            if (inventoryHistory == null)
-            {
-                return NotFound();
-            }
-            Inventory inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistory.InventoryId);
-            if (inventory != null)
-            {
-                inventory.RemainingQuantity += inventoryHistory.UpdatedQuantity;
-                _context.InventoryHistories.Add(inventoryHistory);
-                _context.SaveChanges();
-                List<InventoryHistory> getInventoryHistories =
-                    _context.InventoryHistories
-                        .Where(q => q.InventoryId == inventoryHistory.InventoryId)
-                        .ToList();
-                int totalPrice = 0;
-                for (int i = 0; i < getInventoryHistories.Count; i++)
-                {
-                    totalPrice += (getInventoryHistories[i].CurrentPrice * getInventoryHistories[i].UpdatedQuantity);
-                }
-
-                int totalWeight = 0;
-                for (int i = 0; i < getInventoryHistories.Count; i++)
-                {
-                    totalWeight += getInventoryHistories[i].UpdatedQuantity;
-                }
-
-                int averagePrice = totalPrice / totalWeight;
-                inventory.AveragePrice = averagePrice;
-                _context.SaveChanges();
-                return Ok();
-            }
-
-            return NotFound();
-        }
-
-
-
-        [HttpPost]
-        [Route("api/DeleteInventoryItem")]
-        public IHttpActionResult DeleteInventoryItem(Inventory inventory)
-        {
-            if (inventory == null)
-            {
-                return NotFound();
-            }
-            List<Ingredient> getIngredientsDeleted = _context.Ingredients
-                .Where(p => p.InventoryId == inventory.Id)
-                .ToList();
-            _context.Ingredients.RemoveRange(getIngredientsDeleted);
-            List<InventoryHistory> deleteInvHistory = _context.InventoryHistories
-                .Where(q => q.InventoryId == inventory.Id)
-                .ToList();
-            _context.InventoryHistories.RemoveRange(deleteInvHistory);
-            Inventory getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-            if (getDeleted != null) _context.Inventories.Remove(getDeleted);
-            _context.SaveChanges();
-            return Ok();
-        }
+       
 
 
         [HttpPost]

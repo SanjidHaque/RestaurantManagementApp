@@ -1,0 +1,92 @@
+
+<div class="row">
+  <div class="col-xl-12">
+    <h6>General Information</h6>
+  </div>
+</div>
+
+<hr>
+
+<div class="row" style="font-weight: 500; font-size: 20px;">
+  <div class="col-xl-12">
+    Product's Name: {{ inventory.Name }}
+  </div>
+</div>
+
+<div class="row"style="font-weight: 500; font-size: 17px;">
+  <div class="col-xl-12">
+    Average Price: {{ inventory.AveragePrice }} BDT
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+    Available Quantity: {{ inventory.RemainingQuantity }} {{ inventory.Unit }} (s)
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    Used Quantity: {{ inventory.UsedQuantity }} {{ inventory.Unit }} (s)
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-xl-12">
+    <h6>Update Histories</h6>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xl-10">
+
+    <table border=1 cellpadding=10 width="100%">
+      <tr style="font-weight: 500;">
+        <td>Product's Quantity</td>
+        <td>Product's Unit</td>
+        <td>Buying Price</td>
+        <td>Buying Date</td>
+      </tr>
+
+      <tr *ngFor="let inventoryHistory of inventory.InventoryHistory">
+        <td>
+          {{ inventoryHistory.BuyingQuantity }}
+        </td>
+        <td >
+          {{ inventory.Unit }}
+        </td>
+        <td>
+          {{ inventoryHistory.BuyingPrice }}
+        </td>
+        <td>
+          {{ inventoryHistory.BuyingTime }}
+        </td>
+      </tr>
+    </table>
+
+
+  </div>
+</div>
+
+<br>
+
+<div class="row text-xl-right">
+  <div class="col-xl-10">
+
+    <button
+      routerLink="/admin/inventories/{{inventoryId}}/update-inventory-item"
+      class="btn btn-info">Update</button> &nbsp;
+
+    <button
+      routerLink="/admin/inventories/{{inventoryId}}/edit-inventory-item"
+      class="btn btn-warning">Edit</button> &nbsp;
+
+    <button
+      (click)="deleteInventoryItem()"
+      class="btn btn-danger">Delete</button>
+
+  </div>
+</div>

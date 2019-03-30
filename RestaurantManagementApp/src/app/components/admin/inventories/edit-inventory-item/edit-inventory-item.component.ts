@@ -6,6 +6,7 @@ import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {DataStorageService} from '../../../../services/data-storage.service';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
+import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
 
 @Component({
   selector: 'app-edit-inventory-item',
@@ -26,7 +27,7 @@ export class EditInventoryItemComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService ) {
+              private inventoryDataStorageService: InventoryDataStorageService ) {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -69,7 +70,7 @@ export class EditInventoryItemComponent implements OnInit {
     const editedInventoryItem = new Inventory(this.id, name, 0, this.quantity,
       unit, price, this.inventoryHistory);
 
-    this.dataStorageService.editInventoryItem(editedInventoryItem).
+    this.inventoryDataStorageService.editInventoryItem(editedInventoryItem).
     subscribe(
       (data: any) => {
 

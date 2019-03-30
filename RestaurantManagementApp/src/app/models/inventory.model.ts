@@ -8,6 +8,7 @@ export class Inventory {
    public Unit: string;
    public AveragePrice: number;
    public InventoryHistory: InventoryHistory[];
+   public BuyingTime: string;
 
    constructor(id: number,
                name: string,
@@ -15,7 +16,8 @@ export class Inventory {
                remainingQuantity: number,
                unit: string,
                averagePrice: number,
-               inventoryHistory: InventoryHistory[] = []
+               inventoryHistory: InventoryHistory[] = [],
+               buyingTime: string
    ) {
      this.Id = id;
      this.Name = name;
@@ -24,5 +26,6 @@ export class Inventory {
      this.Unit = unit;
      this.AveragePrice = averagePrice;
      this.InventoryHistory = inventoryHistory;
+     this.BuyingTime = buyingTime;
    }
 }

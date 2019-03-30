@@ -65,8 +65,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminService} from './services/admin.service';
 import {HttpErrorInterceptor} from './http-error-interceptor/http-error.interceptor';
 import {InventoryDataStorageService} from './services/inventory-data-storage.service';
-
-
+import { ToastrModule } from 'ng6-toastr-notifications';
 
 
 @NgModule({
@@ -130,7 +129,8 @@ import {InventoryDataStorageService} from './services/inventory-data-storage.ser
       min: 20,
       spinner: false,
       meteor: false
-    })
+    }),
+    ToastrModule.forRoot()
   ],
 
   providers: [

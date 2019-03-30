@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+
+import { ToastrManager } from 'ng6-toastr-notifications';
 import {Inventory} from '../../../../models/inventory.model';
-import {InventoryHistory} from '../../../../models/inventory-history.model';
-import {DataStorageService} from '../../../../services/data-storage.service';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
 
 @Component({
@@ -18,8 +16,9 @@ export class InventoryDetailsComponent implements OnInit {
  inventory: Inventory;
  inventories: Inventory[] = [];
 
- constructor(private route: ActivatedRoute,
-             private router: Router,
+ constructor(private router: Router,
+             private route: ActivatedRoute,
+             private toastr: ToastrManager,
              private inventoryDataStorageService: InventoryDataStorageService) {
     this.route.params
       .subscribe(
@@ -56,6 +55,7 @@ export class InventoryDetailsComponent implements OnInit {
     this.inventoryDataStorageService.deleteInventoryItem(this.inventoryId).
     subscribe(
       (data: any) => {
+        this.toastr.errorToastr('Item is deleted!');
         this.router.navigate(['admin/inventories']);
       }
     );

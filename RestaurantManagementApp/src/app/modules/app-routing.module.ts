@@ -139,18 +139,23 @@ const appRoutes: Routes = [
                 resolve:
                   {
                     inventories: InventoryResolverService
-                  },
-                children:
-                  [
-                    {
-                      path: ':id',
-                      component: InventoryDetailsComponent
-                    },
-                    {
-                      path: ':id/edit-inventory-item',
-                      component: EditInventoryItemComponent
-                    }
-                  ]
+                  }
+              },
+              {
+                path: ':id',
+                component: InventoryDetailsComponent,
+                resolve:
+                  {
+                    inventories: InventoryResolverService
+                  }
+              },
+              {
+                path: ':id/edit-inventory-item',
+                component: EditInventoryItemComponent,
+                resolve:
+                  {
+                    inventories: InventoryResolverService
+                  }
               },
               {
                 path: 'add-new-inventory-item',

@@ -55,7 +55,7 @@ export class EditInventoryItemComponent implements OnInit {
         this.name = this.inventoryList[i].Name;
         this.currentPrice = this.inventoryList[i].AveragePrice;
         this.unit = this.inventoryList[i].Unit;
-        this.inventoryHistory = this.inventoryList[i].InventoryHistoryModel;
+        this.inventoryHistory = this.inventoryList[i].InventoryHistory;
       }
     }
   }

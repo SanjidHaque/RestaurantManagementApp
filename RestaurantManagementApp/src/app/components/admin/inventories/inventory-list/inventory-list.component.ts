@@ -1,29 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Inventory} from '../../../../models/inventory.model';
-import {AdminService} from '../../../../services/admin.service';
+import {MatTableDataSource} from '@angular/material';
+import {MatSort} from '@angular/material';
+import {MatPaginator} from '@angular/material';
 
 @Component({
   selector: 'app-inventory-list',
   templateUrl: './inventory-list.component.html',
   styleUrls: ['./inventory-list.component.scss']
 })
-export class InventoryListComponent implements OnInit {
-
+export class InventoryListComponent implements OnInit, AfterViewInit {
   inventories: Inventory[] = [];
-  constructor(private route: ActivatedRoute) { }
+
+  displayedColumns: string[] =
+    [
+      'Name',
+      'AveragePrice',
+      'Unit',
+      'RemainingQuantity',
+      'UsedQuantity'
+    ];
+  dataSource: MatTableDataSource<Inventory>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data
       .subscribe(
         (data: Inventory[]) => {
           this.inventories = data['inventories'];
+          this.dataSource = new MatTableDataSource(this.inventories);
         }
       );
   }
 
-  viewDetails(inventory: Inventory) {
-    const inventoryId =  inventory.Id;
-    // this.router.navigate(['admin/inventories/food-item-details', inventoryId]);
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

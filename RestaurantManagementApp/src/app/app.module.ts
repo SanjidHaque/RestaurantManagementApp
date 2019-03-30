@@ -25,7 +25,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {NgProgressHttpModule} from '@ngx-progressbar/http';
 import {NgProgressModule} from '@ngx-progressbar/core';
 import {NgProgressRouterModule} from '@ngx-progressbar/router';
-import {NgBootstrapModule} from './modules/ng-bootstrap.module';
+import {AppUiModule} from './modules/app-ui.module';
 import {PointOfSaleComponent} from './components/point-of-sale/point-of-sale.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {RegistrationComponent} from './components/admin/registration/registration.component';
@@ -114,7 +114,7 @@ import {AdminService} from './services/admin.service';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    NgBootstrapModule,
+    AppUiModule,
     HttpClientModule,
     CommonModule,
     FormsModule,

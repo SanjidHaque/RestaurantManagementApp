@@ -75,7 +75,7 @@ export class UpdateInventoryItemComponent implements OnInit {
         currentPrice);
     for (let i = 0; i < this.pointOfSaleService.inventories.length; i++) {
       if ( this.pointOfSaleService.inventories[i].Id === this.id ) {
-        this.pointOfSaleService.inventories[i].InventoryHistoryModel.push(updateHistory);
+        this.pointOfSaleService.inventories[i].InventoryHistory.push(updateHistory);
         this.pointOfSaleService.inventories[i].RemainingQuantity  =
           Number.parseInt( this.pointOfSaleService.inventories[i].RemainingQuantity.toString())
           + Number.parseInt(quantity.toString());

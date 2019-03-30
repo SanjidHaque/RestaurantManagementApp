@@ -49,7 +49,7 @@ export class InventoryDetailsComponent implements OnInit {
     for (let i = 0; i < this.inventories.length; i++) {
       if (this.inventories[i].Id === this.inventoryId) {
         this.inventory = this.inventories[i];
-        this.inventoryHistories = this.inventories[i].InventoryHistoryModel;
+        this.inventoryHistories = this.inventories[i].InventoryHistory;
         this.index = i;
       }
     }

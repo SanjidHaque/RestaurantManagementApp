@@ -106,18 +106,19 @@ const appRoutes: Routes = [
               {
                 path: 'food-item-list',
                 component: FoodItemListComponent,
-                children:
-                  [
-                    {
-                      path: ':id',
-                      component: FoodItemDetailsComponent
-                    },
-                    {
-                      path: ':id/edit-food-item',
-                      component: EditFoodItemComponent
-                    }
-                  ]
+                resolve:
+                  {
+                    foodItems: FoodItemResolverService
+                  }
               },
+              {
+                path: ':id',
+                component: FoodItemDetailsComponent
+              },
+              {
+                path: ':id/edit-food-item',
+                component: EditFoodItemComponent
+              }
               {
                 path: 'add-new-food-item',
                 component: AddNewFoodItemComponent
@@ -188,7 +189,7 @@ const appRoutes: Routes = [
                 children:
                   [
                     {
-                      path: ':id',
+                      path: ':inventoryId',
                       component: OrderDetailsComponent
                     }
                   ]
@@ -211,11 +212,11 @@ const appRoutes: Routes = [
                 children:
                   [
                     {
-                      path: ':id',
+                      path: ':inventoryId',
                       component: TableDetailsComponent
                     },
                     {
-                      path: ':id/edit-table',
+                      path: ':inventoryId/edit-table',
                       component: EditTableComponent
                     }
                   ]

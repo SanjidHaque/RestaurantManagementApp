@@ -18,41 +18,50 @@
   </mat-form-field>
 
   <div class="mat-elevation-z8" style="box-shadow: none!important;">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table  mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="Name">
         <th
           style="font-size: 14px; font-weight: 500; color: #000;"
           mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+        <td
+          style="width: 25%"
+          mat-cell *matCellDef="let row"> {{row.Name}} </td>
       </ng-container>
+
 
       <ng-container matColumnDef="AveragePrice">
         <th
           style="font-size: 14px; font-weight: 500; color: #000;"
           mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
-        <td mat-cell *matCellDef = "let row"> {{row.AveragePrice}} BDT </td>
+        <td style="width: 20%" mat-cell *matCellDef = "let row"> {{row.AveragePrice}} BDT </td>
       </ng-container>
 
       <ng-container matColumnDef="Unit">
         <th
           style="font-size: 14px; font-weight: 500; color: #000;"
           mat-header-cell *matHeaderCellDef mat-sort-header> Unit </th>
-        <td mat-cell *matCellDef="let row"> {{row.Unit}} </td>
+        <td
+          style="width: 20%"
+          mat-cell *matCellDef="let row"> {{row.Unit}} </td>
       </ng-container>
 
       <ng-container matColumnDef="RemainingQuantity">
         <th
           style="font-size: 14px; font-weight: 500; color: #000;"
           mat-header-cell *matHeaderCellDef mat-sort-header> Remaining </th>
-        <td mat-cell *matCellDef="let row" > {{row.RemainingQuantity}} </td>
+        <td
+          style="width: 20%"
+          mat-cell *matCellDef="let row" > {{row.RemainingQuantity}} </td>
       </ng-container>
 
       <ng-container matColumnDef="UsedQuantity">
         <th
           style="font-size: 14px; font-weight: 500; color: #000;"
           mat-header-cell *matHeaderCellDef mat-sort-header> Used </th>
-        <td mat-cell *matCellDef="let row" > {{row.UsedQuantity}} </td>
+        <td
+          style="width: 20%"
+          mat-cell *matCellDef="let row" > {{row.UsedQuantity}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

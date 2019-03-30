@@ -29,7 +29,7 @@ export class AddNewInventoryItemComponent implements OnInit {
       const updateHistoryId = null;
       const inventoryItemName = form.value.name;
       const buyingQuantity = form.value.quantity;
-      const buyingPrice = form.value.currentPrice;
+      const buyingPrice = form.value.price;
       const unit = form.value.unit;
       const buyingTime = new Date().toLocaleString();
 

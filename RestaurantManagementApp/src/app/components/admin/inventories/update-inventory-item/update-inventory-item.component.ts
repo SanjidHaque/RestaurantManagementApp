@@ -3,7 +3,6 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Inventory} from '../../../../models/inventory.model';
-import {DataStorageService} from '../../../../services/data-storage.service';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
@@ -15,24 +14,19 @@ import {InventoryDataStorageService} from '../../../../services/inventory-data-s
 })
 export class UpdateInventoryItemComponent implements OnInit {
 
-  id: number;
-  name = '';
-  price: number;
-  quantity: number;
-  unit: string;
-  inventoryList: Inventory[] = [];
-  subscription: Subscription;
   isDisabled = false;
 
+  inventoryId: number;
+  inventory: Inventory;
+  inventories: Inventory[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private pointOfSaleService: PointOfSaleService,
               private inventoryDataStorageService: InventoryDataStorageService ) {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = params['id'];
+          this.inventoryId = +params['inventoryId'];
         }
       );
 
@@ -42,56 +36,41 @@ export class UpdateInventoryItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.pointOfSaleService.inventories = data['inventories'];
+        this.inventories = data['inventories'];
+        this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
+
+        if (this.inventory === undefined) {
+          window.alert('Item not found!');
+          this.router.navigate(['admin/inventories']);
+        }
       }
     );
-    this.inventoryList = this.pointOfSaleService.inventories;
-    this.subscription = this.pointOfSaleService.inventoriesChanged
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this.inventoryList = inventories;
-        }
-      );
-    for (let i = 0; i < this.inventoryList.length; i++) {
-      if ( this.inventoryList[i].Id === this.id ) {
-        this.unit = this.inventoryList[i].Unit;
-        this.name = this.inventoryList[i].Name;
-      }
-    }
   }
 
-  onUpdateItem(form: NgForm) {
+
+  onUpdateInventoryItem(form: NgForm) {
     this.isDisabled = true;
-    const inventoryId = this.id;
-    const updateHistoryId = null;
-    const quantity = form.value.quantity;
-    const currentPrice = form.value.currentPrice;
-    const time = new Date().toLocaleString();
-    const updateHistory =
-      new InventoryHistory(
-        updateHistoryId,
+    const inventoryId = this.inventoryId;
+    const inventoryHistoryId = null;
+    const buyingQuantity = form.value.quantity;
+    const buyingPrice = form.value.price;
+    const buyingTime = new Date().toLocaleString();
+    const updateHistory = new InventoryHistory(
+        inventoryHistoryId,
         inventoryId,
-        quantity,
-        time,
-        currentPrice);
-    for (let i = 0; i < this.pointOfSaleService.inventories.length; i++) {
-      if ( this.pointOfSaleService.inventories[i].Id === this.id ) {
-        this.pointOfSaleService.inventories[i].InventoryHistory.push(updateHistory);
-        this.pointOfSaleService.inventories[i].RemainingQuantity  =
-          Number.parseInt( this.pointOfSaleService.inventories[i].RemainingQuantity.toString())
-          + Number.parseInt(quantity.toString());
-      }
-    }
+        buyingQuantity,
+        buyingTime,
+        buyingPrice
+    );
+
     this.inventoryDataStorageService.updateInventoryHistory(updateHistory).
     subscribe(
       (data: any) => {
         form.reset();
-        this.router.navigate(['admin/inventories/food-item-details', inventoryId]);
+        this.router.navigate(['admin/inventories/', this.inventoryId]);
       }
     );
   }
 
-  onCancel() {
-    this.router.navigate(['admin/inventories/list-view']);
-  }
+
 }

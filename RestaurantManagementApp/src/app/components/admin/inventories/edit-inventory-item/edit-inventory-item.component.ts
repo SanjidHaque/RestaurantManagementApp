@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {Inventory} from '../../../../models/inventory.model';
-import {DataStorageService} from '../../../../services/data-storage.service';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
 
 @Component({
@@ -14,24 +10,19 @@ import {InventoryDataStorageService} from '../../../../services/inventory-data-s
   styleUrls: ['./edit-inventory-item.component.scss']
 })
 export class EditInventoryItemComponent implements OnInit {
-   id: number;
-   name = '';
-   currentPrice: number;
-   quantity: number;
-   unit: string;
-   inventoryHistory: InventoryHistory[] = [];
-   inventoryList: Inventory[] = [];
-   subscription: Subscription;
-   isDisabled = false;
+  isDisabled = false;
+
+  inventoryId: number;
+  inventory: Inventory;
+  inventories: Inventory[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private pointOfSaleService: PointOfSaleService,
-              private inventoryDataStorageService: InventoryDataStorageService ) {
+              private inventoryDataStorageService: InventoryDataStorageService) {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = params['id'];
+          this.inventoryId = +params['inventoryId'];
         }
       );
   }
@@ -40,48 +31,39 @@ export class EditInventoryItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.pointOfSaleService.inventories = data['inventories'];
+        this.inventories = data['inventories'];
+        this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
+
+        if (this.inventory === undefined) {
+          window.alert('Item not found!');
+          this.router.navigate(['admin/inventories']);
+        }
       }
     );
-    this.inventoryList = this.pointOfSaleService.inventories;
-    this.subscription = this.pointOfSaleService.inventoriesChanged
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this.inventoryList = inventories;
-        }
-      );
-    for (let i = 0; i < this.inventoryList.length; i++) {
-      if ( this.inventoryList[i].Id === this.id ) {
-
-        this.name = this.inventoryList[i].Name;
-        this.currentPrice = this.inventoryList[i].AveragePrice;
-        this.unit = this.inventoryList[i].Unit;
-        this.inventoryHistory = this.inventoryList[i].InventoryHistory;
-      }
-    }
   }
 
-  onEditItem(form: NgForm) {
+  onEditInventoryItem(form: NgForm) {
     this.isDisabled = true;
-    const id = this.id;
-    const name = form.value.name;
-    const price = form.value.currentPrice;
-    const unit = form.value.unit;
-    const editedInventoryItem = new Inventory(this.id, name, 0, this.quantity,
-      unit, price, this.inventoryHistory);
+    const editedInventoryItemName = form.value.name;
+
+    const editedInventoryItem = new Inventory(
+      this.inventoryId,
+      editedInventoryItemName,
+      0,
+      0,
+      '',
+      0,
+      [],
+      ''
+      );
 
     this.inventoryDataStorageService.editInventoryItem(editedInventoryItem).
     subscribe(
       (data: any) => {
-
-        this.pointOfSaleService.updateInventoryList(this.id, editedInventoryItem);
         form.reset();
-        this.router.navigate(['admin/inventories/food-item-details', this.id]);
+        this.router.navigate(['admin/inventories', this.inventoryId]);
       }
     );
   }
 
-  onCancel() {
-    this.router.navigate(['admin/inventories/food-item-details', this.id]);
-  }
 }

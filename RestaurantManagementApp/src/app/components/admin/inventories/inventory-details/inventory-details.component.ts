@@ -24,7 +24,7 @@ export class InventoryDetailsComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.inventoryId = +params['id'];
+          this.inventoryId = +params['inventoryId'];
         }
       );
   }
@@ -35,6 +35,7 @@ export class InventoryDetailsComponent implements OnInit {
       ( data: Inventory[]) => {
         this.inventories = data['inventories'];
         this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
+
         if (this.inventory === undefined) {
           window.alert('Item not found!');
           this.router.navigate(['admin/inventories']);

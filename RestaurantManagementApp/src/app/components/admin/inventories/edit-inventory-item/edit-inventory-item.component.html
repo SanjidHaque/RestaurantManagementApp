@@ -1,3 +1,4 @@
+<!--
 
 
 
@@ -59,3 +60,58 @@
 
 
 
+-->
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Edit Information of {{ inventory.Name }}
+  </div>
+</div>
+
+<br>
+
+
+<form (ngSubmit) = "onEditInventoryItem(editInventoryItem)" #editInventoryItem= "ngForm">
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="name">Item's Name</label>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        [ngModel]="inventory.Name"
+        name="name"
+        #name="ngModel"
+        required>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="name.invalid && (name.dirty || name.touched)">
+        Item's name is required!
+      </p>
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="editInventoryItem.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Save</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/inventories"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+
+</form>

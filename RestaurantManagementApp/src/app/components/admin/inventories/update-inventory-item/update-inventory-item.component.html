@@ -1,8 +1,9 @@
+<!--
 
 
 
 <div class="row">
-  <form (ngSubmit) = "onUpdateItem(updateItem)" #updateItem = "ngForm">
+  <form (ngSubmit) = "onUpdateInventoryItem(updateInventoryItem)" #updateInventoryItem = "ngForm">
     <div class="col-md-offset-1 col-md-9 order-detail">
       <div class="row buttons">
         <div class="col-md-2 back">
@@ -17,7 +18,7 @@
         </div>
         <div class="col-md-2 delete">
           <button class="back-button"
-                  [disabled]="!updateItem.valid || isDisabled"
+                  [disabled]="!updateInventoryItem.valid || isDisabled"
                   type="submit"
                   title="Update this item"
           ><i class="fa fa-wrench" aria-hidden="true"></i>
@@ -32,7 +33,7 @@
             <input
               min="1"
               type="number"
-              id="quantity"
+              inventoryId="quantity"
               class="form-control"
               ngModel
               name="quantity"
@@ -49,7 +50,7 @@
             <input
               min="1"
               type="number"
-              id="currentPrice"
+              inventoryId="currentPrice"
               class="form-control"
               ngModel
               name="currentPrice"
@@ -63,5 +64,76 @@
   </form>
 </div>
 
+-->
+
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Add new quantity for {{ inventory.Name }}
+  </div>
+</div>
+
+<br>
 
 
+<form (ngSubmit) = "onUpdateInventoryItem(updateInventoryItem)" #updateInventoryItem = "ngForm">
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+        <label for="quantity">Buying Quantity</label>
+        <input
+          min="1"
+          type="number"
+          id="quantity"
+          class="form-control"
+          ngModel
+          name="quantity"
+          #quantity="ngModel"
+          required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
+        Buying quantity is required!
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+        <label  for="price">Buying Price Per Unit</label>
+        <input
+          min="1"
+          type="number"
+          id="price"
+          class="form-control"
+          ngModel
+          name="price"
+          #price="ngModel"
+          required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="price.invalid && (price.dirty || price.touched)">
+        Buying price per unit is required!
+      </p>
+
+      </div>
+    </div>
+
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="updateInventoryItem.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Save</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/inventories/"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+</form>

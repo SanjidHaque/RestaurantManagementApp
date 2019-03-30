@@ -25,7 +25,7 @@ export class EditTableComponent implements OnInit, DoCheck {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.tableId = +params['id'];
+          this.tableId = +params['inventoryId'];
         }
       );
   }
@@ -49,7 +49,7 @@ export class EditTableComponent implements OnInit, DoCheck {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.tableId = params['id'];
+          this.tableId = params['inventoryId'];
         }
       );
     for ( let i = 0; i < this.tables.length; i++) {

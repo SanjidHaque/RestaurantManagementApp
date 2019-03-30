@@ -25,7 +25,7 @@ export class OrderDetailsComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.orderId = params['id'];
+          this.orderId = params['inventoryId'];
         }
       );
     }

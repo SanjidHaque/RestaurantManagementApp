@@ -50,11 +50,10 @@ namespace RMS_Server_.Controllers
         [Route("api/EditInventoryItem")]
         public IHttpActionResult EditInventoryItem(Inventory inventory)
         {
-            Inventory getEdited = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-            if (getEdited != null)
+            Inventory editInventoryItem = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+            if (editInventoryItem != null)
             {
-                getEdited.Name = inventory.Name;
-                getEdited.Unit = inventory.Unit;
+                editInventoryItem.Name = inventory.Name;
                 _context.SaveChanges();
                 return Ok();
             }
@@ -100,7 +99,7 @@ namespace RMS_Server_.Controllers
             return Ok();
         }
 
-        void CalculateAveragePrice(Inventory inventory, List<InventoryHistory> getInventoryHistories)
+        private void CalculateAveragePrice(Inventory inventory, List<InventoryHistory> getInventoryHistories)
         {
             int totalPrice = 0;
             int totalWeight = 0;

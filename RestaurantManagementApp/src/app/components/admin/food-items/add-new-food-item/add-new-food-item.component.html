@@ -69,7 +69,7 @@
                   type="number"
                   min="1"
                   class="form-control"
-                  [(ngModel)] = "salePrice"
+                  [(ngModel)] = "sellingPrice"
                   name="salePrice"
                   required
                 >
@@ -84,13 +84,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 winning-price" *ngIf="salePrice-inventoryCost >= 0;
+          <div class="col-md-12 winning-price" *ngIf="sellingPrice-inventoryCost >= 0;
           else loss">
-          Profit: {{ salePrice-inventoryCost }} BDT
+          Profit: {{ sellingPrice-inventoryCost }} BDT
           </div>
           <ng-template  #loss>
           <div class="col-md-3 loss">
-            Loss: {{ inventoryCost-salePrice }} BDT
+            Loss: {{ inventoryCost-sellingPrice }} BDT
           </div>
           </ng-template>
         </div>
@@ -102,7 +102,7 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="checkIfEmpty === 0; else notEmpty">
+    <div class="row" *ngIf="checkIfEmpty === 0; else checkIfInventoryIsEmpty">
       <div class="col-md-12 warning2">
         Your inventory is empty. Add items in your inventory first
       </div>
@@ -204,3 +204,135 @@
 
 
 
+
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Add New Food Item
+  </div>
+</div>
+
+<br>
+
+
+<div class="row form-group">
+  <div class="col-xl-6">
+
+    <label>Food Item's Name</label>
+    <input
+      type="text"
+      id="itemName"
+      class="form-control"
+      ngModel
+      name="itemName"
+      required>
+
+  </div>
+</div>
+
+
+<div class="row form-group">
+  <div class="col-xl-3">
+
+    <label>Selling Price</label>
+      <input
+        type="number"
+        min="1"
+        class="form-control"
+        [(ngModel)] = "sellingPrice"
+        name="sellingPrice"
+        required>
+
+  </div>
+
+  <div class="col-xl-3">
+    <label>Serial Number</label>
+    <input
+      type="text"
+      id="serialNumber"
+      class="form-control"
+      ngModel
+      name="serialNumber"
+      required>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-3" style="font-weight: 500;">
+    Inventory Cost: {{ inventoryCost }} BDT
+  </div>
+
+    <div class="col-md-3"
+         style="font-weight: 500; color: #008000"
+         *ngIf="sellingPrice-inventoryCost >= 0; else loss">
+       Profit {{ sellingPrice-inventoryCost }} BDT
+    </div>
+
+    <ng-template #loss>
+      <div class="col-md-3" style="color: #e30000; font-weight: 500;">
+        Loss {{ inventoryCost-sellingPrice }} BDT
+      </div>
+    </ng-template>
+
+</div>
+
+<br>
+
+<div class="row"
+     style="font-weight: 500;"
+     *ngIf="inventories.length === 0; else checkIfInventoryIsEmpty">
+  <div class="col-xl-6">
+    Your inventory is empty! Add items in your inventory first.
+  </div>
+</div>
+
+<br>
+
+
+<ng-template #checkIfInventoryIsEmpty>
+
+  <div class="row" style="font-weight: 500;">
+    <div class="col-xl-6">
+      Build Your Recipe From Below
+    </div>
+    <hr>
+  </div>
+
+  <form (ngSubmit) = "addIngredients(ingredients)" #ingredients = "ngForm">
+
+  <div class="row form-group">
+      <div class="col-xl-4">
+
+          <select
+            style="cursor: pointer;"
+            id="inventoryId"
+            class="form-control"
+            ngModel
+            required
+            name="inventoryId">
+            <option value="" selected disabled hidden>Select Ingredients</option>
+            <option
+              style="cursor: pointer;"
+              *ngFor="let inventory of inventories"
+              [value] ="inventory.Id">
+              {{ inventory.Name }}
+            </option>
+          </select>
+
+      </div>
+
+      <div class="col-xl-2">
+          <input
+            type="number"
+            min="1"
+            id="quantity"
+            class="form-control"
+            ngModel
+            name="quantity"
+            required
+            placeholder="Quantity">
+      </div>
+  </div>
+
+  </form>
+</ng-template>

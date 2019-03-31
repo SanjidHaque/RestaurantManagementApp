@@ -112,22 +112,6 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':id',
-                component: FoodItemDetailsComponent,
-                resolve:
-                  {
-                    foodItems: FoodItemResolverService
-                  }
-              },
-              {
-                path: ':id/edit-food-item',
-                component: EditFoodItemComponent,
-                resolve:
-                  {
-                    foodItems: FoodItemResolverService
-                  }
-              },
-              {
                 path: 'add-new-food-item',
                 component: AddNewFoodItemComponent,
                 resolve:
@@ -136,6 +120,22 @@ const appRoutes: Routes = [
                     inventories: InventoryResolverService
                   }
               },
+              {
+                path: ':foodItemId',
+                component: FoodItemDetailsComponent,
+                resolve:
+                  {
+                    foodItems: FoodItemResolverService
+                  }
+              },
+              {
+                path: ':foodItemId/edit-food-item',
+                component: EditFoodItemComponent,
+                resolve:
+                  {
+                    foodItems: FoodItemResolverService
+                  }
+              }
             ]
         },
         {

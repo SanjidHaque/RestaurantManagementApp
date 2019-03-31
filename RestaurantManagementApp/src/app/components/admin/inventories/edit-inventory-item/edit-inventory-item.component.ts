@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Inventory} from '../../../../models/inventory.model';
 import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-edit-inventory-item',
@@ -18,6 +19,7 @@ export class EditInventoryItemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private toastr: ToastrManager,
               private inventoryDataStorageService: InventoryDataStorageService) {
     this.route.params
       .subscribe(
@@ -46,24 +48,30 @@ export class EditInventoryItemComponent implements OnInit {
     this.isDisabled = true;
     const editedInventoryItemName = form.value.name;
 
-    const editedInventoryItem = new Inventory(
-      this.inventoryId,
-      editedInventoryItemName,
-      0,
-      0,
-      '',
-      0,
-      [],
-      ''
+    if (editedInventoryItemName !== this.inventory.Name) {
+      const editedInventoryItem = new Inventory(
+        this.inventoryId,
+        editedInventoryItemName,
+        0,
+        0,
+        '',
+        0,
+        [],
+        ''
       );
 
-    this.inventoryDataStorageService.editInventoryItem(editedInventoryItem).
-    subscribe(
-      (data: any) => {
-        form.reset();
-        this.router.navigate(['admin/inventories', this.inventoryId]);
-      }
-    );
+      this.inventoryDataStorageService.editInventoryItem(editedInventoryItem).
+      subscribe(
+        (data: any) => {
+          this.toastr.warningToastr('Information is updated.');
+          form.reset();
+          this.router.navigate(['admin/inventories', this.inventoryId]);
+        }
+      );
+    } else {
+      this.toastr.warningToastr('Information updated.');
+      this.router.navigate(['admin/inventories', this.inventoryId]);
+    }
   }
 
 }

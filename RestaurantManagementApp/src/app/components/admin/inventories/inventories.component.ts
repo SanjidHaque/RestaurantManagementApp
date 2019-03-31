@@ -1,8 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {AdminService} from '../../../services/admin.service';
-import {Inventory} from '../../../models/inventory.model';
-
 
 @Component({
   selector: 'app-inventory',

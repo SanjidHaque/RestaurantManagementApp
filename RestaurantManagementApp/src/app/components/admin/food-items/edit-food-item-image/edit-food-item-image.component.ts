@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FoodItem} from '../../../../models/food-item.model';
 import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
+import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class EditFoodItemImageComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: TableDataStorageService,
+              private foodItemDataStorageService: FoodItemDataStorageService,
   ) {this.route.params
     .subscribe(
       (params: Params) => {
@@ -52,7 +53,7 @@ export class EditFoodItemImageComponent implements OnInit {
   }
   saveFoodItemImage(Image) {
     this.isDisabled = true;
-    this.dataStorageService.uploadFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
+    this.foodItemDataStorageService.uploadFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
 
         console.log('done');

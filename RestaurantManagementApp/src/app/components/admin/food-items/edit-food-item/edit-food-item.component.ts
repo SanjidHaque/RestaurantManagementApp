@@ -158,7 +158,7 @@ export class EditFoodItemComponent implements OnInit {
 
   onSaveEditedFoodItem(form: NgForm) {
     const name = form.value.itemName;
-    const price = form.value.salePrice;
+    const price = form.value.sellingPrice;
     const serialNumber = form.value.serial;
     const foodItemIngredients = this.ingredients;
     const foodItemId = this.foodItemId;

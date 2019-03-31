@@ -20,10 +20,11 @@ export class AddNewFoodItemComponent implements OnInit {
   name: string;
   price: number;
   foodItemId : string;
-  salePrice = 0;
+  sellingPrice = 0;
   profit = 0;
   inventories: Inventory[] = [];
   ingredients: Ingredients[] = [];
+  foodItems: FoodItem[] = [];
   unit: number;
   inventoryCost = 0;
   checkIfEmpty = 0;
@@ -37,6 +38,7 @@ export class AddNewFoodItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
+        this.foodItems = data['foodItems'];
         this.inventories = data['inventories'];
       }
     );
@@ -52,6 +54,8 @@ export class AddNewFoodItemComponent implements OnInit {
     }
     return -1;
   }
+
+
 
   addIngredients(form: NgForm) {
     const ingredientId = null;
@@ -103,7 +107,7 @@ export class AddNewFoodItemComponent implements OnInit {
     this.isDisabled = true;
     const name = form.value.itemName;
     const serialNumber = form.value.serialNumber;
-    const price = form.value.salePrice;
+    const price = form.value.sellingPrice;
     const foodItemIngredients = this.ingredients;
     const foodItemId = UUID.UUID();
     const profit = price - this.inventoryCost;

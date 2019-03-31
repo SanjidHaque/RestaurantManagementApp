@@ -5,7 +5,7 @@ import {OrderedItem} from '../../../models/ordered-item.model';
 import {Order} from '../../../models/order.model';
 import {Inventory} from '../../../models/inventory.model';
 import {Table} from '../../../models/table.model';
-import {DataStorageService} from '../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../services/table-data-storage.service';
 import {PointOfSaleService} from '../../../services/point-of-sale.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class PaymentComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private pointOfSaleService: PointOfSaleService,
-              private _dataStorageService: DataStorageService,
+              private _dataStorageService: TableDataStorageService,
               private router: Router,
               private _route: ActivatedRoute) {
     this.tendered = 0;

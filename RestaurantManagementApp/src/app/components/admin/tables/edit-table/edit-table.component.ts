@@ -4,7 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Table} from '../../../../models/table.model';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
-import {DataStorageService} from '../../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 
 @Component({
   selector: 'app-edit-table',
@@ -21,7 +21,7 @@ export class EditTableComponent implements OnInit, DoCheck {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService) {
+              private dataStorageService: TableDataStorageService) {
     this.route.params
       .subscribe(
         (params: Params) => {

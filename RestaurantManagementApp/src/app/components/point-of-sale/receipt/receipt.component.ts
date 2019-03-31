@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {Order} from '../../../models/order.model';
 import {PointOfSaleService} from '../../../services/point-of-sale.service';
-import {DataStorageService} from '../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../services/table-data-storage.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class ReceiptComponent implements OnInit {
   order: Order;
 
   constructor(private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService,
+              private dataStorageService: TableDataStorageService,
               private router: Router) {
   }
 

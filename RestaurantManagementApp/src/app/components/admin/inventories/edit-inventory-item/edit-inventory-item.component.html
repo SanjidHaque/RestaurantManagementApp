@@ -1,66 +1,4 @@
-<!--
 
-
-
-<div class="row">
-  <form (ngSubmit) = "onEditItem(newItem)" #newItem = "ngForm">
-    <div class="col-md-offset-1 col-md-9 order-detail">
-      <div class="row buttons">
-        <div class="col-md-2 back">
-          <button class="back-button-cancel" (click)="onCancel()"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
-            Cancel</button>
-        </div>
-        <div class="col-md-8 edit-mode">
-          Edit Mode
-        </div>
-        <div class="col-md-2 delete">
-          <button class="back-button"
-                  [disabled]="!newItem.valid || isDisabled"
-                  type="submit"
-                  title="Save this item"
-          ><i class="fa fa-bookmark" aria-hidden="true"></i>
-            Save</button>
-        </div>
-      </div>
-      <div class="row prod-name">
-        <div class="col-md-8">
-          <div class="form-group">
-            <label for="name">Item's Name:</label>
-            <input
-              type="text"
-              id="name"
-              class="form-control"
-              [ngModel]="name"
-              name="name"
-              required
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="unit">Unit:</label>
-            <input
-              type="text"
-              min="1"
-              id="unit"
-              class="form-control"
-              [ngModel] = "unit"
-              name="unit"
-              required
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-
-
-
--->
 <div class="row" style="font-weight: 500;">
   <div class="col-xl-12">
     Edit Information of {{ inventory.Name }}
@@ -108,7 +46,7 @@
       &nbsp;
       <button
         type="button"
-        routerLink="/admin/inventories"
+        routerLink="/admin/inventories/{{inventoryId}}"
         class="btn btn-danger">Discard</button>
     </div>
   </div>

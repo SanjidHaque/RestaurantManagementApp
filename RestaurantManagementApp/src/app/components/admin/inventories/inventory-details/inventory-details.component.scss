@@ -1,0 +1,8 @@
+.my-pagination /deep/ .ngx-pagination a, .ngx-pagination button{
+  text-decoration: none;
+  outline: 0;
+}
+
+.my-pagination /deep/.ngx-pagination{
+  padding-left: 0;
+}

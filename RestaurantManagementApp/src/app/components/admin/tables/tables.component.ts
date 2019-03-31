@@ -2,7 +2,7 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Table} from '../../../models/table.model';
-import {DataStorageService} from '../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../services/table-data-storage.service';
 import {PointOfSaleService} from '../../../services/point-of-sale.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class TablesComponent implements OnInit, DoCheck {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private dataStorageService: DataStorageService,
+              private dataStorageService: TableDataStorageService,
               private pointOfSaleService: PointOfSaleService,
               ) { }
 

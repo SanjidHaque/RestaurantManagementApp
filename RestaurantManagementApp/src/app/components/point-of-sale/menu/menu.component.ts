@@ -4,7 +4,7 @@ import {UUID} from 'angular2-uuid';
 import {FoodItem} from '../../../models/food-item.model';
 import {Inventory} from '../../../models/inventory.model';
 import {Order} from '../../../models/order.model';
-import {DataStorageService} from '../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../services/table-data-storage.service';
 import {PointOfSaleService} from '../../../services/point-of-sale.service';
 import {OrderedItem} from '../../../models/ordered-item.model';
 
@@ -33,7 +33,7 @@ export class MenuComponent implements OnInit {
 
   subscription: Subscription;
   constructor(private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService) {
+              private dataStorageService: TableDataStorageService) {
     this.uuidCodeOne = UUID.UUID();
     this.uuidCodeTwo = UUID.UUID();
     this.uuidCodeThree = UUID.UUID();

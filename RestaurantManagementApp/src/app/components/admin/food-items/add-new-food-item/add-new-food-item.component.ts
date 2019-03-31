@@ -5,9 +5,10 @@ import {Subject, Subscription} from 'rxjs';
 import {UUID} from 'angular2-uuid';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredients} from '../../../../models/ingredients.model';
-import {DataStorageService} from '../../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {FoodItem} from '../../../../models/food-item.model';
+import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
 
 @Component({
   selector: 'app-add-new-food-item',
@@ -27,11 +28,9 @@ export class AddNewFoodItemComponent implements OnInit {
   inventoryCost = 0;
   checkIfEmpty = 0;
   isDisabled = false;
-  subscription: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService,
+              private foodItemDataStorageService: FoodItemDataStorageService,
            ) {}
 
   ngOnInit() {
@@ -122,7 +121,7 @@ export class AddNewFoodItemComponent implements OnInit {
     );
 
 
-    this.dataStorageService.addFoodItem(newFoodItem).
+    this.foodItemDataStorageService.addNewFoodItem(newFoodItem).
     subscribe(
       (data: any) => {
         form.reset();

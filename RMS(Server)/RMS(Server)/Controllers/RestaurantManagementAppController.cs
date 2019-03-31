@@ -156,13 +156,7 @@ namespace RMS_Server_.Controllers
 
         
 
-        [Route("api/GetFoodItems")]
-        [HttpGet]
-        public IHttpActionResult GetFoodItems()
-        {
-            List<FoodItem> foodItems = _context.FoodItems.Include(c => c.Ingredients).OrderBy(x => x.Name).ToList();
-            return Ok(foodItems);
-        }
+       
 
 
 
@@ -297,107 +291,7 @@ namespace RMS_Server_.Controllers
        
 
 
-        [HttpPost]
-        [Route("api/AddFoodItem")]
-        public IHttpActionResult AddFoodItem(FoodItem foodItem)
-        {
-            if (foodItem == null)
-            {
-                return NotFound();
-            }
-            _context.Ingredients.AddRange(foodItem.Ingredients);
-            _context.FoodItems.Add(foodItem);
-            _context.SaveChanges();
-            return Ok();
-        }
-
-        [HttpPost]
-        [Route("api/EditFoodItem")]
-        public IHttpActionResult EditFoodItem(FoodItem foodItem)
-        {
-            if (foodItem == null)
-            {
-                return NotFound();
-            }
-            FoodItem editedFoodItem = _context.FoodItems.Include(c => c.Ingredients).FirstOrDefault(p => p.Id == foodItem.Id);
-            if (editedFoodItem != null)
-            {
-                editedFoodItem.Name = foodItem.Name;
-                editedFoodItem.Price = foodItem.Price;
-             //   editedFoodItem.SerialNo = foodItem.SerialNo;
-                editedFoodItem.InventoryCost = foodItem.InventoryCost;
-                editedFoodItem.Profit = foodItem.Profit;
-                _context.Ingredients.RemoveRange(editedFoodItem.Ingredients);
-                _context.Ingredients.AddRange(foodItem.Ingredients);
-                _context.SaveChanges();
-                return Ok();
-            }
-
-            return NotFound();
-        }
-
-
-
-
-        [HttpPost]
-        [Route("api/DeleteFoodItem")]
-        public IHttpActionResult DeleteFoodItem(FoodItem foodItem)
-        {
-            if (foodItem == null)
-            {
-                return NotFound();
-            }
-            FoodItem deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItem.Id);
-            if (deleteFoodItem != null)
-            {
-                DeleteFoodItemImage(deleteFoodItem);
-                List<OrderedItem> getOrderedItems = _context.OrderedItems
-                    .Where(p => p.FoodItemId == foodItem.Id)
-                    .ToList();
-
-                _context.OrderedItems.RemoveRange(getOrderedItems);
-                List<Ingredient> deleteIngredients = _context.Ingredients
-                    .Where(p => p.FooditemId == foodItem.Id)
-                    .ToList();
-                _context.Ingredients.RemoveRange(deleteIngredients);
-                _context.FoodItems.Remove(deleteFoodItem);
-                _context.SaveChanges();
-                return Ok();
-            }
-
-            return NotFound();
-        }
-
-        [HttpPost]
-        [Route("api/SaveFoodItemImage")]
-        public IHttpActionResult SaveFoodItemImage()
-        {
-            HttpRequest httpRequest = HttpContext.Current.Request;
-            /*string imageName = null;
-            HttpRequest httpRequest = HttpContext.Current.Request;         
-            HttpPostedFile postedFile = httpRequest.Files["Image"];         
-            imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
-            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
-            string filePath = HttpContext.Current.Server.MapPath("~/Content/" + imageName);
-            postedFile.SaveAs(filePath);
-            string uploadedImageId = httpRequest["FoodItemId"];           
-            FoodItem foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == uploadedImageId);
-            if (foodItem != null) foodItem.FoodItemImageName = imageName;
-            _context.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.Created);*/
-            return Ok(httpRequest);
-        }
-
-
-      
-        public void DeleteFoodItemImage(FoodItem foodItem)
-        {
-            string filePath = HttpContext.Current.Server.MapPath("~/Content/" + foodItem.FoodItemImageName);
-            if ((System.IO.File.Exists(filePath)))
-            {
-                System.IO.File.Delete(filePath);
-            }
-        }
+        
  
 
     }

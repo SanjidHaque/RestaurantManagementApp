@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './modules/app-routing.module';
 import {PointOfSaleService} from './services/point-of-sale.service';
-import {DataStorageService} from './services/data-storage.service';
+import {TableDataStorageService} from './services/table-data-storage.service';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -66,6 +66,9 @@ import {AdminService} from './services/admin.service';
 import {HttpErrorInterceptor} from './http-error-interceptor/http-error.interceptor';
 import {InventoryDataStorageService} from './services/inventory-data-storage.service';
 import { ToastrModule } from 'ng6-toastr-notifications';
+import {FoodItemDataStorageService} from './services/food-item-data-storage.service';
+import {OrderDataStorageService} from './services/order-data-storage.service';
+import {AccountDataStorageService} from './services/account-data-storage.service';
 
 
 @NgModule({
@@ -136,8 +139,11 @@ import { ToastrModule } from 'ng6-toastr-notifications';
   providers: [
     PointOfSaleService,
     AdminService,
-    DataStorageService,
+    TableDataStorageService,
     InventoryDataStorageService,
+    FoodItemDataStorageService,
+    OrderDataStorageService,
+    AccountDataStorageService,
     TableResolverService,
     OrderResolverService,
     InventoryResolverService,

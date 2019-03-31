@@ -15,6 +15,7 @@ export class InventoryDetailsComponent implements OnInit {
  inventoryId: number;
  inventory: Inventory;
  inventories: Inventory[] = [];
+ pageNumber = 1;
 
  constructor(private router: Router,
              private route: ActivatedRoute,

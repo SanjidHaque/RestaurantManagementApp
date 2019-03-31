@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
-import {DataStorageService} from '../../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 import {Table} from '../../../../models/table.model';
 
 @Component({
@@ -15,7 +15,7 @@ export class AddNewTableComponent {
   isDisabled = false;
   constructor(private router: Router,
               private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService) {}
+              private dataStorageService: TableDataStorageService) {}
 
 
 

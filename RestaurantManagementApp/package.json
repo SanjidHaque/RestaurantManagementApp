@@ -42,6 +42,7 @@
     "ng2-redux": "^5.1.2",
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-loading": "^3.0.1",
+    "ngx-pagination": "^3.2.1",
     "redux": "^4.0.1",
     "rxjs": "^6.4.0",
     "tassign": "^1.0.0",

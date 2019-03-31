@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FoodItem} from '../../../../../models/food-item.model';
 import {Ingredients} from '../../../../../models/ingredients.model';
-import {DataStorageService} from '../../../../../services/data-storage.service';
 import {PointOfSaleService} from '../../../../../services/point-of-sale.service';
+import {FoodItemDataStorageService} from '../../../../../services/food-item-data-storage.service';
+import {TableDataStorageService} from '../../../../../services/table-data-storage.service';
 
 @Component({
   selector: 'app-list-details',
@@ -21,7 +22,8 @@ export class FoodItemDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private dataStorageService: DataStorageService,
+              private tableDataStorageService: TableDataStorageService,
+              private foodItemDataStorageService: FoodItemDataStorageService,
               private pointOfSaleService: PointOfSaleService,
              ) {
     this.route.params
@@ -33,7 +35,7 @@ export class FoodItemDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
+    this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImage';
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
@@ -43,8 +45,8 @@ export class FoodItemDetailsComponent implements OnInit {
     this.foodItems = this.pointOfSaleService.foodItems;
     this.pointOfSaleService.foodItemsChanged
       .subscribe(
-        (FoodItem: FoodItem[]) => {
-          this.foodItems = FoodItem;
+        (foodItem: FoodItem[]) => {
+          this.foodItems = foodItem;
         }
       );
     for (let i = 0; i < this.foodItems.length; i++) {
@@ -66,7 +68,7 @@ export class FoodItemDetailsComponent implements OnInit {
   }
 
   confirmEvent() {
-    this.dataStorageService.deleteFoodItem(this.foodItem).subscribe(
+    this.foodItemDataStorageService.deleteFoodItem(this.foodItemId).subscribe(
       (data: any) => {
         for (let i = 0; i < this.foodItems.length; i++) {
           if (this.foodItems[i].Id === this.foodItemId) {

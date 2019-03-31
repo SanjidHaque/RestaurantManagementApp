@@ -33,6 +33,26 @@
 </div>
 
 <br>
+
+<div class="row text-xl-left">
+  <div class="col-xl-10">
+
+    <button
+      routerLink="/admin/inventories/{{inventoryId}}/update-inventory-item"
+      class="btn btn-info">Update</button> &nbsp;
+
+    <button
+      routerLink="/admin/inventories/{{inventoryId}}/edit-inventory-item"
+      class="btn btn-warning">Edit</button> &nbsp;
+
+    <button
+      (click)="deleteInventoryItem()"
+      class="btn btn-danger">Delete</button>
+
+  </div>
+</div>
+
+<br>
 <div class="row">
   <div class="col-xl-12">
     <h6>Update Histories</h6>
@@ -51,7 +71,9 @@
         <td>Buying Date</td>
       </tr>
 
-      <tr *ngFor="let inventoryHistory of inventory.InventoryHistory">
+      <tr
+        *ngFor="let inventoryHistory of inventory.InventoryHistory
+         | paginate: { itemsPerPage: 3, currentPage: pageNumber }">
         <td>
           {{ inventoryHistory.BuyingQuantity }}
         </td>
@@ -68,6 +90,7 @@
     </table>
 
 
+
   </div>
 </div>
 
@@ -75,18 +98,9 @@
 
 <div class="row text-xl-right">
   <div class="col-xl-10">
-
-    <button
-      routerLink="/admin/inventories/{{inventoryId}}/update-inventory-item"
-      class="btn btn-info">Update</button> &nbsp;
-
-    <button
-      routerLink="/admin/inventories/{{inventoryId}}/edit-inventory-item"
-      class="btn btn-warning">Edit</button> &nbsp;
-
-    <button
-      (click)="deleteInventoryItem()"
-      class="btn btn-danger">Delete</button>
-
+    <pagination-controls
+      class="my-pagination"
+      [autoHide]="true"
+      (pageChange)="pageNumber = $event"></pagination-controls>
   </div>
 </div>

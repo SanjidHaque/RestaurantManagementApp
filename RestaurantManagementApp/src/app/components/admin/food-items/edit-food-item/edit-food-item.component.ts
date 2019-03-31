@@ -6,7 +6,8 @@ import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredients} from '../../../../models/ingredients.model';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
-import {DataStorageService} from '../../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../../services/table-data-storage.service';
+import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
 
 @Component({
   selector: 'app-edit-food-item',
@@ -30,9 +31,7 @@ export class EditFoodItemComponent implements OnInit {
   subscription: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private dataStorageService: DataStorageService,
-              private pointOfSaleService: PointOfSaleService,
-             ) {
+              private foodItemDataStorageService: FoodItemDataStorageService) {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -45,17 +44,10 @@ export class EditFoodItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
-        this.pointOfSaleService.foodItems = data['foodItems'];
+        this.foodItems = data['foodItems'];
       }
     );
 
-    this.foodItems = this.pointOfSaleService.foodItems;
-    this.pointOfSaleService.foodItemsChanged
-      .subscribe(
-        (foodItem: FoodItem[]) => {
-          this.foodItems = foodItem;
-        }
-      );
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].Id === +this.foodItemId) {
         this.foodItem = this.foodItems[i];
@@ -71,16 +63,16 @@ export class EditFoodItemComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Inventory[]) => {
-        this.pointOfSaleService.inventories = data['inventories'];
+    //    this.pointOfSaleService.inventories = data['inventories'];
       }
     );
-    this.inventories = this.pointOfSaleService.inventories;
-    this.subscription = this.pointOfSaleService.inventoriesChanged
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this.inventories = inventories;
-        }
-      );
+   // this.inventories = this.pointOfSaleService.inventories;
+   //  this.subscription = this.pointOfSaleService.inventoriesChanged
+   //    .subscribe(
+   //      (inventories: Inventory[]) => {
+   //        this.inventories = inventories;
+   //      }
+   //    );
   }
 
 
@@ -186,11 +178,11 @@ export class EditFoodItemComponent implements OnInit {
       null,
       foodItemIngredients
     );
-    this.dataStorageService.editFoodItem(editedFoodItem).
+    this.foodItemDataStorageService.editFoodItem(editedFoodItem).
     subscribe(
       (data: any) => {
 
-        this.pointOfSaleService.updateFoodItemList(editedFoodItem );
+  //      this.pointOfSaleService.updateFoodItemList(editedFoodItem );
         this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);
         form.reset();
       }

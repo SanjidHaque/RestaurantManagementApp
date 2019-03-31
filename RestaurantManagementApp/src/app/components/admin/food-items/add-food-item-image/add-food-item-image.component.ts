@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DataStorageService} from '../../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../../services/table-data-storage.service';
+import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
 
 @Component({
   selector: 'app-add-food-item-image',
@@ -17,7 +18,7 @@ export class AddFoodItemImageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private dataStorageService: DataStorageService
+              private foodItemDataStorageService: FoodItemDataStorageService
   ) {this.route.params
     .subscribe(
       (params: Params) => {
@@ -31,7 +32,7 @@ export class AddFoodItemImageComponent implements OnInit {
 
   saveFoodItemImage(Image) {
     this.isDisabled = true;
-    this.dataStorageService.uploadFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
+    this.foodItemDataStorageService.uploadFoodItemImage(this.foodItemId, this.fileToUpload).subscribe(
       data => {
         Image.value = null;
         this.imageUrl = '/assets/noImage.png';

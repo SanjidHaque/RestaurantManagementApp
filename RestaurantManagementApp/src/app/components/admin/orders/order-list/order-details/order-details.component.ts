@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {PointOfSaleService} from '../../../../../services/point-of-sale.service';
-import {DataStorageService} from '../../../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../../../services/table-data-storage.service';
 import {OrderedItem} from '../../../../../models/ordered-item.model';
 import {Order} from '../../../../../models/order.model';
 
@@ -19,7 +19,7 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private dataStorageService: DataStorageService,
+              private dataStorageService: TableDataStorageService,
               private pointOfSaleService: PointOfSaleService,
               ) {
     this.route.params

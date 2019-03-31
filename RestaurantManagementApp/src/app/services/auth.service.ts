@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {ModifiedUserModel} from '../models/modified-user.model';
 import {Role} from '../models/role.model';
-import {DataStorageService} from './data-storage.service';
+import {TableDataStorageService} from './table-data-storage.service';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +11,7 @@ export class AuthService {
   rootUrl = '';
 
   constructor(private http: HttpClient,
-              private dataStorageService: DataStorageService) {
+              private dataStorageService: TableDataStorageService) {
      this.rootUrl = this.dataStorageService.rootUrl;
   }
 

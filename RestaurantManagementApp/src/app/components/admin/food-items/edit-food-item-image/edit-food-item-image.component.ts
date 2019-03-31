@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FoodItem} from '../../../../models/food-item.model';
-import {DataStorageService} from '../../../../services/data-storage.service';
+import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 
 
@@ -22,7 +22,7 @@ export class EditFoodItemImageComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: DataStorageService,
+              private dataStorageService: TableDataStorageService,
   ) {this.route.params
     .subscribe(
       (params: Params) => {

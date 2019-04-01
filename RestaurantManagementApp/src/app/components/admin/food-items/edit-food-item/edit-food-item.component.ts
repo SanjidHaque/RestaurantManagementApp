@@ -132,7 +132,7 @@ export class EditFoodItemComponent implements OnInit {
       const foodItemId = null;
       const addNewIngredient = new Ingredients(
         ingredientId,
-        name,
+
         quantity,
         inventoryId,
         subTotal,

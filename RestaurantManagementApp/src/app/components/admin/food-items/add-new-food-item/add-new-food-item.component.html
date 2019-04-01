@@ -1,6 +1,6 @@
 
 
-<div class="row">
+<!--<div class="row">
   <form (ngSubmit) = "addNewFoodItem(newFoodItem)" #newFoodItem = "ngForm">
   <div class="col-md-offset-1 col-md-9 order-detail">
     <div class="row buttons">
@@ -173,7 +173,8 @@
     </div>
     <ng-template #ingredientsSelected>
     <div  class="scrollable-div" >
-      <div class="row table-bordered units-details" *ngFor="let products of ingredients, let i = index">
+      <div class="row table-bordered units-details"
+           *ngFor="let products of ingredients, let i = index">
         <div class="col-md-3 prod-name" >
           {{ i+1 }}. {{ products.Name }}
         </div>
@@ -193,14 +194,15 @@
         <div class="col-md-1 del-ing">
           <button title="Delete this ingredient"
             class="all-categories-button"
-            (click)="deleteIngredient(products,i)"><i class="fa fa-times-circle-o" aria-hidden="true"></i></button>
+            (click)="deleteIngredient(products,i)">
+            <i class="fa fa-times-circle-o" aria-hidden="true"></i></button>
         </div>
       </div>
     </div>
     </ng-template>
   </div>
   </form>
-</div>
+</div>-->
 
 
 
@@ -259,24 +261,28 @@
 
 <div class="row">
   <div class="col-xl-3" style="font-weight: 500;">
-    Inventory Cost: {{ inventoryCost }} BDT
+    Inventory Cost: {{ inventoryCost.toFixed(3) }} BDT
   </div>
 
     <div class="col-md-3"
          style="font-weight: 500; color: #008000"
          *ngIf="sellingPrice-inventoryCost >= 0; else loss">
-       Profit {{ sellingPrice-inventoryCost }} BDT
+       Profit {{ (sellingPrice-inventoryCost).toFixed(3) }} BDT
     </div>
 
     <ng-template #loss>
       <div class="col-md-3" style="color: #e30000; font-weight: 500;">
-        Loss {{ inventoryCost-sellingPrice }} BDT
+        Loss {{ (inventoryCost-sellingPrice).toFixed(3) }} BDT
       </div>
     </ng-template>
 
 </div>
 
-<br>
+<div class="row">
+  <div class="col-xl-6">
+    <hr>
+  </div>
+</div>
 
 <div class="row"
      style="font-weight: 500;"
@@ -295,10 +301,9 @@
     <div class="col-xl-6">
       Build Your Recipe From Below
     </div>
-    <hr>
   </div>
 
-  <form (ngSubmit) = "addIngredients(ingredients)" #ingredients = "ngForm">
+  <form (ngSubmit) = "addIngredients(addNewIngredients)" #addNewIngredients = "ngForm">
 
   <div class="row form-group">
       <div class="col-xl-4">
@@ -314,7 +319,7 @@
             <option
               style="cursor: pointer;"
               *ngFor="let inventory of inventories"
-              [value] ="inventory.Id">
+              [value]="inventory.Id">
               {{ inventory.Name }}
             </option>
           </select>
@@ -334,5 +339,83 @@
       </div>
   </div>
 
+    <div class="row text-xl-right">
+      <div class="col-xl-6">
+        <button
+          [disabled]="addNewIngredients.invalid"
+          type="submit"
+          (click)="addOrRemoveCheck('Add')"
+          class="btn btn-success">
+          Add</button> &nbsp;
+
+        <button
+          [disabled]="addNewIngredients.invalid"
+          type="submit"
+          (click)="addOrRemoveCheck('Remove')"
+          class="btn btn-danger">Remove</button>
+      </div>
+    </div>
+
+    <div *ngIf="ingredients.length !== 0">
+
+      <div class="row" style="font-weight: 500;">
+        <div class="col-xl-6">
+          Ingredients List
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-10">
+
+
+
+          <table border=1 cellpadding=10 width="100%">
+            <tr style="font-weight: 500;">
+              <td>Product's Name</td>
+              <td>Product's Quantity</td>
+              <td>Per Unit Price</td>
+              <td>Sub Total</td>
+            </tr>
+
+            <tr
+              *ngFor="let ingredient of ingredients; let i = index">
+              <td>
+                {{ getIngredientInfo(ingredient.InventoryId, 'Name') }}
+              </td>
+              <td>
+                {{ ingredient.Quantity }}
+                {{ getIngredientInfo(ingredient.InventoryId, 'Unit') }}
+              </td>
+              <td>
+                {{ getIngredientInfo(ingredient.InventoryId, 'Price') }}
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col-xl-6">
+                    {{ ingredient.SubTotal.toFixed(3) }}
+                  </div>
+                  <div class="col-xl-6 text-xl-right">
+                    <i
+                      style="cursor: pointer;"
+                      title="Remove this ingredient"
+                      (click)="deleteIngredient(i)"
+                      class="fas fa-times"></i>
+                  </div>
+                </div>
+
+
+              </td>
+
+
+            </tr>
+          </table>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
   </form>
 </ng-template>
+

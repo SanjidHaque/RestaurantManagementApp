@@ -1,13 +1,13 @@
-import {ActivatedRoute, Router} from '@angular/router';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Subject, Subscription} from 'rxjs';
 import {UUID} from 'angular2-uuid';
+import {NgForm} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+
+
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredients} from '../../../../models/ingredients.model';
-import {TableDataStorageService} from '../../../../services/table-data-storage.service';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
-import {FoodItem} from '../../../../models/food-item.model';
 import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
 
 @Component({
@@ -17,19 +17,19 @@ import {FoodItemDataStorageService} from '../../../../services/food-item-data-st
 })
 
 export class AddNewFoodItemComponent implements OnInit {
-  name: string;
-  price: number;
-  foodItemId : string;
-  sellingPrice = 0;
-  profit = 0;
+  isDisabled = false;
+
   inventories: Inventory[] = [];
   ingredients: Ingredients[] = [];
   foodItems: FoodItem[] = [];
-  unit: number;
+
+  sellingPrice = 0;
   inventoryCost = 0;
-  checkIfEmpty = 0;
-  isDisabled = false;
+  isAddToIngredientList: boolean;
+
+
   constructor(private route: ActivatedRoute,
+              private toastr: ToastrManager,
               private router: Router,
               private foodItemDataStorageService: FoodItemDataStorageService,
            ) {}
@@ -42,9 +42,15 @@ export class AddNewFoodItemComponent implements OnInit {
         this.inventories = data['inventories'];
       }
     );
-    this.inventoryCost = 0;
   }
 
+  addOrRemoveCheck(specifier: string) {
+    if (specifier === 'Add') {
+      this.isAddToIngredientList = true;
+    } else {
+      this.isAddToIngredientList = false;
+    }
+  }
 
   checkIfIngredientsExist(inventoryId: number) {
     for (let i = 0; i < this.ingredients.length; i++) {
@@ -55,53 +61,80 @@ export class AddNewFoodItemComponent implements OnInit {
     return -1;
   }
 
-
-
-  addIngredients(form: NgForm) {
-    const ingredientId = null;
-    const inventoryId = form.value.inventoryId;
-    let quantity = form.value.quantity;
-    const inventoryPrice = this.inventories.find(x => x.Id === inventoryId).AveragePrice;
-    let subTotal = quantity * inventoryPrice;
-
-    if (this.checkIfIngredientsExist(inventoryId) !== -1) {
-      this.ingredients[this.checkIfIngredientsExist(inventoryId)].Quantity
-        += Number.parseFloat(quantity.toString());
-      this.ingredients[this.checkIfIngredientsExist(inventoryId)].SubTotal
-        += Number.parseFloat(subTotal.toString());
-
-    } else {
-      const name = this.inventories.find(x => x.Id === inventoryId).Name;
-      subTotal = Number.parseFloat(subTotal.toFixed(2));
-      quantity = Number.parseFloat(quantity.toFixed(2));
-
-      const addIngredient = new Ingredients(
-        ingredientId,
-        name,
-        quantity,
-        inventoryId,
-        subTotal,
-        null
-      );
-      this.ingredients.push(addIngredient);
-    }
-      this.inventoryCost = this.inventoryCost + subTotal;
-    form.controls['quantity'].reset();
-}
-
-  deleteIngredient(ingredient: Ingredients, index: number) {
-    for (let i = 0; i < this.ingredients.length; i++) {
-      if (this.ingredients[i].Id === ingredient.Id ) {
-        this.inventoryCost -= this.ingredients[i].SubTotal;
+  getIngredientInfo(inventoryId: number, specifier: string) {
+    const inventory = this.inventories.find(x => x.Id === inventoryId);
+    if (inventory !== undefined || inventory !== null) {
+      if (specifier === 'Name') {
+        return inventory.Name;
+      }
+      if (specifier === 'Unit') {
+        return inventory.Unit;
+      }
+      if (specifier === 'Price') {
+        return inventory.AveragePrice;
       }
     }
-    this.ingredients.splice(index, 1);
+    return '';
   }
 
 
 
 
+  addIngredients(form: NgForm) {
+    const ingredientId = null;
+    const inventoryId = +form.value.inventoryId;
+    const quantity = form.value.quantity;
+    const averagePrice = this.inventories.find(x => x.Id === inventoryId).AveragePrice;
+    const subTotal = quantity * averagePrice;
+    const ingredientIndex = this.checkIfIngredientsExist(inventoryId);
 
+    if (this.isAddToIngredientList) {
+      if (ingredientIndex !== -1) {
+        this.ingredients[ingredientIndex].Quantity += quantity;
+        this.ingredients[ingredientIndex].SubTotal += subTotal;
+
+      } else {
+
+        const ingredient = new Ingredients(
+          ingredientId,
+          quantity,
+          inventoryId,
+          subTotal,
+          null
+        );
+        this.ingredients.push(ingredient);
+      }
+      this.inventoryCost += subTotal;
+    } else {
+
+      if (ingredientIndex !== -1) {
+
+        if (quantity < this.ingredients[ingredientIndex].Quantity) {
+
+          this.ingredients[ingredientIndex].Quantity -= quantity;
+          this.ingredients[ingredientIndex].SubTotal -= subTotal;
+          this.inventoryCost -= subTotal;
+
+
+        } else if (quantity === this.ingredients[ingredientIndex].Quantity) {
+          this.deleteIngredient(ingredientIndex);
+          this.inventoryCost -= subTotal;
+
+
+        } else {
+          this.toastr.errorToastr('Quantity is too large!');
+        }
+      } else {
+        this.toastr.errorToastr('This item does not exist. Add to ingredient list first.');
+      }
+    }
+    form.controls['quantity'].reset();
+}
+
+  deleteIngredient(index: number) {
+    this.inventoryCost -= this.ingredients[index].SubTotal;
+    this.ingredients.splice(index, 1);
+  }
 
   addNewFoodItem(form: NgForm) {
     this.isDisabled = true;
@@ -124,18 +157,12 @@ export class AddNewFoodItemComponent implements OnInit {
       foodItemIngredients
     );
 
-
     this.foodItemDataStorageService.addNewFoodItem(newFoodItem).
     subscribe(
-      (data: any) => {
+      (id: any) => {
         form.reset();
-       // this.router.navigate(['admin/food-item/add-food-item-image', foodItemId]);
+        this.router.navigate(['admin/food-items/', id]);
       }
     );
-  }
-
-
-  cancel() {
-    this.router.navigate(['admin/food-item/grid-view']);
   }
 }

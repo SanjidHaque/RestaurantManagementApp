@@ -28,7 +28,7 @@ import {InventoryListComponent} from '../components/admin/inventories/inventory-
 import {InventoryDetailsComponent} from '../components/admin/inventories/inventory-details/inventory-details.component';
 import {OrderDetailsComponent} from '../components/admin/orders/order-list/order-details/order-details.component';
 import {TableListComponent} from '../components/admin/tables/table-list/table-list.component';
-import {FoodItemDetailsComponent} from '../components/admin/food-items/food-item-list/food-item-details/food-item-details.component';
+import {FoodItemDetailsComponent} from '../components/admin/food-items/food-item-details/food-item-details.component';
 import {FoodItemListComponent} from '../components/admin/food-items/food-item-list/food-item-list.component';
 import {EditFoodItemComponent} from '../components/admin/food-items/edit-food-item/edit-food-item.component';
 import {AddNewFoodItemComponent} from '../components/admin/food-items/add-new-food-item/add-new-food-item.component';
@@ -125,7 +125,8 @@ const appRoutes: Routes = [
                 component: FoodItemDetailsComponent,
                 resolve:
                   {
-                    foodItems: FoodItemResolverService
+                    foodItems: FoodItemResolverService,
+                    inventories: InventoryResolverService
                   }
               },
               {

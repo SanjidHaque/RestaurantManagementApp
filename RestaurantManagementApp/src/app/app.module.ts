@@ -56,7 +56,7 @@ import {UpdateInventoryItemComponent} from './components/admin/inventories/updat
 import {AddFoodItemImageComponent} from './components/admin/food-items/add-food-item-image/add-food-item-image.component';
 import {EditFoodItemImageComponent} from './components/admin/food-items/edit-food-item-image/edit-food-item-image.component';
 import {OrderDetailsComponent} from './components/admin/orders/order-list/order-details/order-details.component';
-import {FoodItemDetailsComponent} from './components/admin/food-items/food-item-list/food-item-details/food-item-details.component';
+import {FoodItemDetailsComponent} from './components/admin/food-items/food-item-details/food-item-details.component';
 import {FoodItemListComponent} from './components/admin/food-items/food-item-list/food-item-list.component';
 import {AddNewInventoryItemComponent} from './components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
 import {SessionComponent} from './components/point-of-sale/session/session.component';

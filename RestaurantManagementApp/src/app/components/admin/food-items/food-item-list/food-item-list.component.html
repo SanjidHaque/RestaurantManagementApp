@@ -1,72 +1,88 @@
-<!--
 
-<div class="row empty" *ngIf="total === 0; else notEmpty">
+
+
+
+<div class="row" *ngIf="foodItems.length === 0; else notEmpty">
   <div class="col-md-12">
-    No item available. Click "Add New Item" to populate.
+    No item is available. Click "Add New Food" to populate.
   </div>
 </div>
-
 
 <ng-template #notEmpty>
-<div class="sum-of-inv-body">
-  <div class="row">
-    <div class="col-md-4 search-bar">
-      <span class="fa fa-search"></span>
-     <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Name...">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="col-md-3 receipt">
-        Product Name
-      </div>
-      <div class="col-md-3 name">
-        Selling Price
-      </div>
-      <div class="col-md-3 name">
-        Inventory Cost
-      </div>
-      <div class="col-md-3 price">
-        Estimated Profit
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 body">
-      <div class="row" *ngFor="let foodItem of foodItems | filter:term; let i = index">
-        <a title="View This Item's Details"
-           style="cursor: pointer" (click)="viewDetails(foodItem)">
-          <div class="col-md-12 f-name table-bordered">
-            <div class="col-md-3 column-receipt">
-          SN-{{ foodItem.SerialNumber }}. {{ foodItem.Name }}
-            </div>
-            <div class="col-md-3 column">
-              {{ foodItem.Price }} BDT
-            </div>
-            <div class="col-md-3 column">
-              {{ foodItem.InventoryCost }} BDT
-            </div>
-
-            <div class="col-md-3 column">
-              {{ foodItem.Profit }} BDT
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
 
-<div class="row">
-  <div class="col-md-12 detail">
-    Total Products: {{ total }} (s)
+  <mat-form-field>
+      <input
+        matInput
+        placeholder="Search...">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8" style="box-shadow: none!important;">
+    <table  mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="SerialNumber">
+        <th
+          style="font-size: 14px;  font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> SN </th>
+        <td
+          style="width: 5%"
+          mat-cell *matCellDef="let row"> {{row.SerialNumber}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Name">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td style="width: 25%" mat-cell *matCellDef = "let row"> {{row.Name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Price">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td
+          style="width: 15%"
+          mat-cell *matCellDef="let row"> {{row.Price}} BDT </td>
+      </ng-container>
+
+      <ng-container matColumnDef="InventoryCost">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Inventory Cost </th>
+        <td
+          style="width: 15%"
+          mat-cell *matCellDef="let row" > {{row.InventoryCost}} BDT </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Profit">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Profit </th>
+        <td
+          style="width: 15%"
+          mat-cell *matCellDef="let row" > {{row.Profit}} BDT</td>
+      </ng-container>
+
+      <ng-container matColumnDef="TotalSale">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Total Sale </th>
+        <td
+          style="width: 10%"
+          mat-cell *matCellDef="let row" > {{row.TotalSale}}(s)</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          style="cursor: pointer;"
+          title="See details"
+          routerLink="/admin/food-items/{{ row.Id }}">
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
   </div>
-</div>
 
 </ng-template>
-
--->
-
-

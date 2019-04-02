@@ -7,8 +7,16 @@ table {
   width: 100%;
 }
 
-/*
-td, th {
-  width: 25%;
+.mat-cell {
+  border: 1px solid #ab9090;
+  text-align: center;
 }
-*/
+
+.mat-header-cell {
+  border: 1px solid #ab9090;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}

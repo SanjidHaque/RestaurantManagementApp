@@ -1,7 +1,7 @@
 
 
 
-<div class="row empty" *ngIf="inventories.length === 0; else notEmpty">
+<div class="row" *ngIf="inventories.length === 0; else notEmpty">
   <div class="col-md-12">
     No item is available. Click "Add New Item" to populate.
   </div>
@@ -12,9 +12,10 @@
 
   <mat-form-field>
     <input
+      style="width: 100%;"
       matInput
       (keyup)="applyFilter($event.target.value)"
-      placeholder="Seacrh...">
+      placeholder="Search...">
   </mat-form-field>
 
   <div class="mat-elevation-z8" style="box-shadow: none!important;">

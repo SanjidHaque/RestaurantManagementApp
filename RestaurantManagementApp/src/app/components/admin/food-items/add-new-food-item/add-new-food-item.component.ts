@@ -182,10 +182,20 @@ export class AddNewFoodItemComponent implements OnInit {
 
 
   addNewFoodItem(form: NgForm) {
-    this.isDisabled = true;
-
-    const name = form.value.itemName;
     const serialNumber = form.value.serialNumber;
+
+    if (this.foodItems.filter(e => e.SerialNumber === serialNumber).length > 0) {
+      this.toastr.errorToastr('Duplicate serial number', 'Error!', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      return;
+    }
+
+
+    this.isDisabled = true;
+    const name = form.value.itemName;
     const sellingPrice = form.value.sellingPrice;
     const profit = sellingPrice - this.inventoryCost;
 
@@ -210,8 +220,8 @@ export class AddNewFoodItemComponent implements OnInit {
               (data: any) => {
                 this.imageUrl = '/assets/noImage.png';
                 form.reset();
-                this.toastr.successToastr('Added to shop!', 'Success', {
-                  toastLife: 10000,
+                this.toastr.successToastr('Added to shop', 'Success!', {
+                  toastTimeout: 10000,
                   newestOnTop: true,
                   showCloseButton: true
                 });
@@ -220,8 +230,8 @@ export class AddNewFoodItemComponent implements OnInit {
             );
         } else {
           form.reset();
-          this.toastr.successToastr('Added to shop!', 'Success', {
-            toastLife: 10000,
+          this.toastr.successToastr('Added to shop', 'Success!', {
+            toastTimeout: 10000,
             newestOnTop: true,
             showCloseButton: true
           });

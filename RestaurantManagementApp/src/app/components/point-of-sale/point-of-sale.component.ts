@@ -107,12 +107,12 @@ export class PointOfSaleComponent implements OnInit, DoCheck {
     const quantity = this.quantityOfItem.nativeElement.value;
     if ( serialNumber !== '' && quantity !== '') {
       for (let i = 0; i < this.foodItems.length; i++) {
-        if (this.foodItems[i].SerialNo === serialNumber) {
+        if (this.foodItems[i].SerialNumber === serialNumber) {
           this.UpdateCart(
             this.foodItems[i].Id,
             this.foodItems[i].Price,
             this.foodItems[i].Name,
-            this.foodItems[i].SerialNo,
+            this.foodItems[i].SerialNumber,
             this.foodItems[i].InventoryCost,
             true,
             quantity
@@ -129,12 +129,12 @@ export class PointOfSaleComponent implements OnInit, DoCheck {
     const quantity = this.quantityOfItem.nativeElement.value;
     if ( serialNumber !== '' && quantity !== '') {
       for (let i = 0; i < this.foodItems.length; i++ ) {
-        if (this.foodItems[i].SerialNo === serialNumber) {
+        if (this.foodItems[i].SerialNumber === serialNumber) {
           this.UpdateCart(
             this.foodItems[i].Id,
             this.foodItems[i].Price,
             this.foodItems[i].Name,
-            this.foodItems[i].SerialNo,
+            this.foodItems[i].SerialNumber,
             this.foodItems[i].InventoryCost,
             false,
             quantity

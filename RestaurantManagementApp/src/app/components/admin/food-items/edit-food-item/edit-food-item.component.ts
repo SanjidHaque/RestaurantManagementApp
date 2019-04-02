@@ -52,7 +52,7 @@ export class EditFoodItemComponent implements OnInit {
       if (this.foodItems[i].Id === +this.foodItemId) {
         this.foodItem = this.foodItems[i];
         this.itemName = this.foodItems[i].Name;
-        this.serialNumber = this.foodItems[i].SerialNo;
+        this.serialNumber = this.foodItems[i].SerialNumber;
         this.ingredients = this.foodItems[i].Ingredients;
         this.salePrice = this.foodItems[i].Price;
         this.inventoryCost = this.foodItems[i].InventoryCost;

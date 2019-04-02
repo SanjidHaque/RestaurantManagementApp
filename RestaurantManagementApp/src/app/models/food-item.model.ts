@@ -2,7 +2,7 @@ import {Ingredients} from './ingredients.model';
 
 export class FoodItem {
   public Id: number;
-  public SerialNo: string;
+  public SerialNumber: string;
   public Name: string;
   public Price: number;
   public InventoryCost: number;
@@ -12,7 +12,7 @@ export class FoodItem {
   public Ingredients: Ingredients[];
 
   constructor(id: number,
-              serialNo: string,
+              serialNumber: string,
               name: string,
               price: number,
               inventoryCost: number,
@@ -22,7 +22,7 @@ export class FoodItem {
               ingredients: Ingredients[]
   ) {
     this.Id = id;
-    this.SerialNo = serialNo;
+    this.SerialNumber = serialNumber;
     this.Name = name;
     this.Price = price;
     this.InventoryCost = inventoryCost;

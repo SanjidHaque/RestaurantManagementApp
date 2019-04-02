@@ -215,6 +215,27 @@
 
 <br>
 
+<form (ngSubmit) = "addNewFoodItem(newFoodItem)" #newFoodItem = "ngForm">
+
+
+  <div class="row">
+    <div class="col-xl-1">
+      <img [src]="imageUrl"
+           style="width: 150px;
+            height: 150px;">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xl-1">
+      <input type="file"
+             #Image
+             accept="image/*"
+             (change)="handleFileInput($event.target.files)">
+    </div>
+  </div>
+
+  <br>
 
 <div class="row form-group">
   <div class="col-xl-6">
@@ -226,9 +247,17 @@
       class="form-control"
       ngModel
       name="itemName"
+      #itemName="ngModel"
       required>
+    <p
+      style="color: red; margin-bottom: 0;"
+      *ngIf="itemName.invalid && (itemName.dirty || itemName.touched)">
+      Food item name is required!
+    </p>
 
   </div>
+
+
 </div>
 
 
@@ -242,7 +271,13 @@
         class="form-control"
         [(ngModel)] = "sellingPrice"
         name="sellingPrice"
+        #price="ngModel"
         required>
+    <p
+      style="color: red; margin-bottom: 0;"
+      *ngIf="price.invalid && (price.dirty || price.touched)">
+       Selling price is required!
+    </p>
 
   </div>
 
@@ -254,7 +289,13 @@
       class="form-control"
       ngModel
       name="serialNumber"
+      #serialNumber="ngModel"
       required>
+    <p
+      style="color: red; margin-bottom: 0;"
+      *ngIf="serialNumber.invalid && (serialNumber.dirty || serialNumber.touched)">
+      Serial number is required!
+    </p>
 
   </div>
 </div>
@@ -418,4 +459,24 @@
 
   </form>
 </ng-template>
+
+  <div class="row">
+    <div class="col-xl-10">
+      <hr>
+    </div>
+  </div>
+
+  <div class="row text-xl-right">
+    <div class="col-xl-10">
+      <button
+        [disabled]="newFoodItem.invalid || isDisabled"
+        class="btn btn-success" type="submit">Save</button>&nbsp;
+      <button
+        routerLink="/admin/food-items"
+        class="btn btn-danger" type="button">Discard</button>
+    </div>
+  </div>
+
+</form>
+
 

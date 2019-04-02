@@ -103,11 +103,12 @@ namespace RMS_Server_.Controllers
             imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
             string filePath = HttpContext.Current.Server.MapPath("~/Content/FoodItemImage" + imageName);
             postedFile.SaveAs(filePath);
-            string foodItemId = httpRequest["FoodItemId"];  
-            FoodItem foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == Int32.Parse(foodItemId));
+            string foodItemIdInString = httpRequest["FoodItemId"];
+            int foodItemId = Int32.Parse(foodItemIdInString);
+            FoodItem foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItemId);
             if (foodItem != null) foodItem.FoodItemImageName = imageName;
             _context.SaveChanges();
-            return Ok(httpRequest);
+            return Ok();
         }
 
 

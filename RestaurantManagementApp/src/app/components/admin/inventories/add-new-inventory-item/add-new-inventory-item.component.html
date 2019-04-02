@@ -34,24 +34,23 @@
   <div class="row form-group">
     <div class="col-xl-6">
 
-    <label for="price">Buying Price Per Unit</label>
-    <input
-      type="number"
-      min="1"
-      id="price"
-      class="form-control"
-      ngModel
-      name="price"
-      #price="ngModel"
-      required>
+      <label for="unit">Unit</label>
+      <input
+        type="text"
+        id="unit"
+        class="form-control"
+        ngModel
+        name="unit"
+        #unit="ngModel"
+        required>
       <p
         style="color: red; margin-bottom: 0;"
-        *ngIf="price.invalid && (price.dirty || price.touched)">
-        Buying price per unit  is required!
+        *ngIf="unit.invalid && (unit.dirty || unit.touched)">
+        Unit is required!
       </p>
-
     </div>
   </div>
+
 
   <div class="row form-group">
     <div class="col-xl-6">
@@ -74,28 +73,35 @@
     </div>
   </div>
 
+
   <div class="row form-group">
     <div class="col-xl-6">
 
-      <label for="unit">Unit</label>
+      <label for="price">Buying Price Per Unit</label>
       <input
-        type="text"
-        id="unit"
+        type="number"
+        min="1"
+        id="price"
         class="form-control"
         ngModel
-        name="unit"
-        #unit="ngModel"
+        name="price"
+        #price="ngModel"
         required>
       <p
         style="color: red; margin-bottom: 0;"
-        *ngIf="unit.invalid && (unit.dirty || unit.touched)">
-        Unit is required!
+        *ngIf="price.invalid && (price.dirty || price.touched)">
+        Buying price per unit  is required!
       </p>
+
     </div>
   </div>
 
 
-
+  <div class="row">
+    <div class="col-xl-6">
+      <hr>
+    </div>
+  </div>
 
 
 <div class="row">

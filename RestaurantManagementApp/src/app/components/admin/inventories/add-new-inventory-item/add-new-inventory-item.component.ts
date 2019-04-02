@@ -59,7 +59,11 @@ export class AddNewInventoryItemComponent implements OnInit {
        this.inventoryDataStorageService.addNewInventoryItem(inventory).
        subscribe(
          (data: any) => {
-           this.toastr.successToastr('Added to inventory!');
+           this.toastr.successToastr('Added to inventory!', 'Success', {
+             toastLife: 10000,
+             newestOnTop: true,
+             showCloseButton: true
+           });
            form.reset();
            this.router.navigate(['admin/inventories']);
          }

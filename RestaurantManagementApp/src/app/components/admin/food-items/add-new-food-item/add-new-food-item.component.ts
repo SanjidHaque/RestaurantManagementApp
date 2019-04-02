@@ -1,6 +1,6 @@
 import {UUID} from 'angular2-uuid';
 import {NgForm} from '@angular/forms';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 
@@ -27,6 +27,10 @@ export class AddNewFoodItemComponent implements OnInit {
   inventoryCost = 0;
   isAddToIngredientList: boolean;
 
+
+  fileToUpload: File = null;
+  imageUrl = 'assets/noImage.png';
+  @ViewChild('Image') Image: any;
 
   constructor(private route: ActivatedRoute,
               private toastr: ToastrManager,
@@ -116,53 +120,115 @@ export class AddNewFoodItemComponent implements OnInit {
           this.inventoryCost -= subTotal;
 
 
+
         } else if (quantity === this.ingredients[ingredientIndex].Quantity) {
-          this.deleteIngredient(ingredientIndex);
           this.inventoryCost -= subTotal;
+          this.deleteIngredient(ingredientIndex);
+          if (this.inventoryCost < 0) {
+            this.inventoryCost = 0;
+          }
+
 
 
         } else {
-          this.toastr.errorToastr('Quantity is too large!');
+          this.toastr.errorToastr(
+            'Quantity is too large!',
+            'Error',
+            {
+            newestOnTop: true,
+            showCloseButton: true
+          });
         }
       } else {
-        this.toastr.errorToastr('This item does not exist. Add to ingredient list first.');
+        this.toastr.errorToastr(
+          'This item does not exist. Add to ingredient list first.',
+          'Error',
+          {
+            newestOnTop: true,
+            showCloseButton: true
+          });
       }
     }
     form.controls['quantity'].reset();
 }
+
+  handleFileInput(file: FileList) {
+    const fileExtension = file.item(0).name.split('.').pop();
+
+    if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png') {
+      this.fileToUpload = file.item(0);
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imageUrl = event.target.result;
+      };
+      reader.readAsDataURL(this.fileToUpload);
+    } else {
+      this.imageUrl = 'assets/noImage.png';
+      this.toastr.errorToastr('Unsupported file format!', 'Error', {
+        toastLife: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+
+    }
+
+  }
 
   deleteIngredient(index: number) {
     this.inventoryCost -= this.ingredients[index].SubTotal;
     this.ingredients.splice(index, 1);
   }
 
+
+
   addNewFoodItem(form: NgForm) {
     this.isDisabled = true;
+
     const name = form.value.itemName;
     const serialNumber = form.value.serialNumber;
-    const price = form.value.sellingPrice;
-    const foodItemIngredients = this.ingredients;
-    const foodItemId = UUID.UUID();
-    const profit = price - this.inventoryCost;
+    const sellingPrice = form.value.sellingPrice;
+    const profit = sellingPrice - this.inventoryCost;
 
-    const newFoodItem = new FoodItem(
+    const foodItem = new FoodItem(
       null,
       serialNumber,
       name,
-      price,
+      sellingPrice,
       this.inventoryCost,
       profit,
       0,
       null,
-      foodItemIngredients
+      this.ingredients
     );
 
-    this.foodItemDataStorageService.addNewFoodItem(newFoodItem).
-    subscribe(
-      (id: any) => {
-        form.reset();
-        this.router.navigate(['admin/food-items/', id]);
-      }
-    );
+    this.foodItemDataStorageService.addNewFoodItem(foodItem)
+      .subscribe(
+      (foodItemId: any) => {
+        if (this.imageUrl !== 'assets/noImage.png') {
+          this.foodItemDataStorageService.uploadFoodItemImage(foodItemId, this.fileToUpload)
+            .subscribe(
+              (data: any) => {
+                this.imageUrl = '/assets/noImage.png';
+                form.reset();
+                this.toastr.successToastr('Added to shop!', 'Success', {
+                  toastLife: 10000,
+                  newestOnTop: true,
+                  showCloseButton: true
+                });
+                this.router.navigate(['admin/food-items/', foodItemId]);
+              }
+            );
+        } else {
+          form.reset();
+          this.toastr.successToastr('Added to shop!', 'Success', {
+            toastLife: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          this.router.navigate(['admin/food-items/', foodItemId]);
+        }
+      });
+
+
   }
 }

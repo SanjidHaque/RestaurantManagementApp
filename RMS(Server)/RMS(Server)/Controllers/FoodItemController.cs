@@ -45,7 +45,7 @@ namespace RMS_Server_.Controllers
 
 
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/EditFoodItem")]
         public IHttpActionResult EditFoodItem(FoodItem foodItem)
         {

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {FoodItem} from '../../../../models/food-item.model';
-import {Ingredients} from '../../../../models/ingredients.model';
+import {Ingredient} from '../../../../models/ingredient.model';
 import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
 import {Inventory} from '../../../../models/inventory.model';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-list-details',
@@ -20,12 +21,13 @@ export class FoodItemDetailsComponent implements OnInit {
   foodItems: FoodItem[] = [];
   inventories: Inventory[] = [];
 
-  ingredients: Ingredients[] = [];
+  ingredients: Ingredient[] = [];
   foodItem: FoodItem;
   foodItemId: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private toastr: ToastrManager,
               private tableDataStorageService: TableDataStorageService,
               private foodItemDataStorageService: FoodItemDataStorageService) {
     this.route.params
@@ -43,9 +45,13 @@ export class FoodItemDetailsComponent implements OnInit {
       ( data: FoodItem[]) => {
         this.foodItems = data['foodItems'];
         this.inventories = data['inventories'];
+        this.setFoodItemImage();
       }
     );
+  }
 
+
+  setFoodItemImage() {
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].Id === this.foodItemId) {
         this.foodItem = this.foodItems[i];
@@ -77,6 +83,11 @@ export class FoodItemDetailsComponent implements OnInit {
   confirmEvent() {
     this.foodItemDataStorageService.deleteFoodItem(this.foodItemId).subscribe(
       (data: any) => {
+        this.toastr.successToastr('Removed from shop', 'Success!', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
         this.router.navigate(['admin/food-items']);
       }
     );

@@ -5,7 +5,7 @@ import {OrderedItem} from '../models/ordered-item.model';
 import {Order} from '../models/order.model';
 import {Inventory} from '../models/inventory.model';
 import {FoodItem} from '../models/food-item.model';
-import {Ingredients} from '../models/ingredients.model';
+import {Ingredient} from '../models/ingredient.model';
 import {Table} from '../models/table.model';
 import {UUID} from 'angular2-uuid';
 
@@ -22,7 +22,7 @@ export class PointOfSaleService {
   orders: Order[] = [];
   ordersChanged = new Subject<Order[]>();
   foodItemSubTotal = 0;
-  ingredients: Ingredients[] = [];
+  ingredients: Ingredient[] = [];
   foodItems: FoodItem[] = [];
   foodItemsChanged = new Subject<FoodItem[]>();
   inventories: Inventory[] = [];

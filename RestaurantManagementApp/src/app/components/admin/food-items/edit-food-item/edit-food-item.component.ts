@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
-import {Ingredients} from '../../../../models/ingredients.model';
+import {Ingredient} from '../../../../models/ingredient.model';
 import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-edit-food-item',
@@ -15,181 +16,274 @@ import {FoodItemDataStorageService} from '../../../../services/food-item-data-st
   styleUrls: ['./edit-food-item.component.scss']
 })
 export class EditFoodItemComponent implements OnInit {
-  salePrice = 0;
-  profit = 0;
-  totalSale : number;
-  inventoryCost = 0;
-  itemName = '';
-  serialNumber = '';
-  foodItems: FoodItem[] = [];
-  inventories: Inventory[] = [];
-  ingredients: Ingredients[] = [];
-  ingredientsChanged = new Subject<Ingredients[]>();
-  foodItem: FoodItem;
-  foodItemId: number;
   isDisabled = false;
-  subscription: Subscription;
+  foodItemId: number;
+
+
+  inventories: Inventory[] = [];
+  foodItems: FoodItem[] = [];
+  foodItem: FoodItem;
+
+  sellingPrice = 0;
+  inventoryCost = 0;
+  isAddToIngredientList: boolean;
+
+  rootUrl = '';
+  fileToUpload: File = null;
+  imageUrl = '';
+  @ViewChild('Image') Image: any;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private toastr: ToastrManager,
+              private tableDataStorageService: TableDataStorageService,
               private foodItemDataStorageService: FoodItemDataStorageService) {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.foodItemId = +params['inventoryId'];
+          this.foodItemId = +params['foodItemId'];
         }
       );
   }
 
   ngOnInit() {
+    this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImage';
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
         this.foodItems = data['foodItems'];
+        this.inventories = data['inventories'];
+        this.setFoodItemImage();
       }
     );
 
+    this.foodItem = this.foodItems.find(x => x.Id === this.foodItemId);
+    if (this.foodItem === undefined || this.foodItem === null) {
+      this.toastr.errorToastr('Item is not found', 'Error', {
+        toastLife: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      this.router.navigate(['admin/inventories']);
+    } else {
+      this.sellingPrice = this.foodItem.Price;
+      this.inventoryCost = this.foodItem.InventoryCost;
+    }
+  }
+
+
+  setFoodItemImage() {
     for (let i = 0; i < this.foodItems.length; i++) {
-      if (this.foodItems[i].Id === +this.foodItemId) {
+      if (this.foodItems[i].Id === this.foodItemId) {
         this.foodItem = this.foodItems[i];
-        this.itemName = this.foodItems[i].Name;
-        this.serialNumber = this.foodItems[i].SerialNumber;
-        this.ingredients = this.foodItems[i].Ingredients;
-        this.salePrice = this.foodItems[i].Price;
-        this.inventoryCost = this.foodItems[i].InventoryCost;
-        this.profit = this.foodItems[i].Profit;
-        this.totalSale = this.foodItems[i].TotalSale;
-      }
-    }
-    this.route.data.
-    subscribe(
-      ( data: Inventory[]) => {
-    //    this.pointOfSaleService.inventories = data['inventories'];
-      }
-    );
-   // this.inventories = this.pointOfSaleService.inventories;
-   //  this.subscription = this.pointOfSaleService.inventoriesChanged
-   //    .subscribe(
-   //      (inventories: Inventory[]) => {
-   //        this.inventories = inventories;
-   //      }
-   //    );
-  }
-
-
-  getInventoryItemName(inventoryId: number) {
-    for (let i = 0; i < this.inventories.length; i++) {
-      if ( this.inventories[i].Id === inventoryId) {
-        return this.inventories[i].Name;
+        if ( this.foodItem.FoodItemImageName === null || this.foodItem.FoodItemImageName === '' ) {
+          this.imageUrl = 'assets/noImage.png';
+        } else {
+          this.imageUrl =  this.rootUrl + this.foodItem.FoodItemImageName;
+        }
       }
     }
   }
 
-
-  getInventoryItemUnit(inventoryId: number) {
-    for (let i = 0; i < this.inventories.length; i++) {
-      if ( this.inventories[i].Id === inventoryId) {
-        return this.inventories[i].Unit;
-      }
+  addOrRemoveCheck(specifier: string) {
+    if (specifier === 'Add') {
+      this.isAddToIngredientList = true;
+    } else {
+      this.isAddToIngredientList = false;
     }
   }
-
-
-  getInventoryItemPrice(inventoryId: number) {
-    for (let i = 0; i < this.inventories.length; i++) {
-      if ( this.inventories[i].Id === inventoryId) {
-        return this.inventories[i].AveragePrice;
-      }
-    }
-  }
-
 
   checkIfIngredientsExist(inventoryId: number) {
-    for (let i = 0; i < this.ingredients.length; i++) {
-      if (this.ingredients[i].InventoryId === inventoryId) {
+    for (let i = 0; i < this.foodItem.Ingredients.length; i++) {
+      if (this.foodItem.Ingredients[i].InventoryId === inventoryId) {
         return i;
+      }
+    }
+    return -1;
+  }
+
+  getIngredientInfo(inventoryId: number, specifier: string) {
+    const inventory = this.inventories.find(x => x.Id === inventoryId);
+    if (inventory !== undefined || inventory !== null) {
+      if (specifier === 'Name') {
+        return inventory.Name;
+      }
+      if (specifier === 'Unit') {
+        return inventory.Unit;
+      }
+      if (specifier === 'Price') {
+        return inventory.AveragePrice;
       }
     }
     return '';
   }
 
 
-  onAddIngredients(form: NgForm) {
-    const ingredientId = null;
-    const inventoryId = form.value.ingName;
-    const quantity = form.value.quantity;
 
-    const inventoryPrice = this.getInventoryItemPrice(inventoryId);
-    const subTotal = quantity * inventoryPrice;
-    if (this.checkIfIngredientsExist(inventoryId) !== '') {
-      this.ingredients[this.checkIfIngredientsExist(inventoryId)].Quantity
-        += Number.parseFloat(quantity.toString());
-      this.ingredients[this.checkIfIngredientsExist(inventoryId)].totalPrice
-        += Number.parseFloat(subTotal.toString());
+
+
+  handleFileInput(file: FileList) {
+    const fileExtension = file.item(0).name.split('.').pop();
+
+    if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png') {
+      this.fileToUpload = file.item(0);
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imageUrl = event.target.result;
+      };
+      reader.readAsDataURL(this.fileToUpload);
     } else {
+      this.imageUrl = 'assets/noImage.png';
+      this.toastr.errorToastr('Unsupported file format', 'Error', {
+        toastLife: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
 
-      const name = this.getInventoryItemName(inventoryId);
-      const inventoryUnit = this.getInventoryItemUnit(inventoryId);
-      const foodItemId = null;
-      const addNewIngredient = new Ingredients(
-        ingredientId,
-
-        quantity,
-        inventoryId,
-        subTotal,
-        foodItemId
-      );
-      this.ingredients.push(addNewIngredient);
-      this.ingredientsChanged.next(this.ingredients.slice());
     }
 
+  }
+
+  deleteIngredient(index: number) {
+    this.inventoryCost -= this.foodItem.Ingredients[index].SubTotal;
+    this.foodItem.Ingredients.splice(index, 1);
+  }
+
+  editIngredients(form: NgForm) {
+    const ingredientId = null;
+    const inventoryId = +form.value.inventoryId;
+    const quantity = form.value.quantity;
+    const averagePrice = this.inventories.find(x => x.Id === inventoryId).AveragePrice;
+    const subTotal = quantity * averagePrice;
+    const ingredientIndex = this.checkIfIngredientsExist(inventoryId);
+
+    if (this.isAddToIngredientList) {
+      if (ingredientIndex !== -1) {
+        this.foodItem.Ingredients[ingredientIndex].Quantity += quantity;
+        this.foodItem.Ingredients[ingredientIndex].SubTotal += subTotal;
+
+      } else {
+
+        const ingredient = new Ingredient(
+          ingredientId,
+          quantity,
+          inventoryId,
+          subTotal,
+          null
+        );
+        this.foodItem.Ingredients.push(ingredient);
+      }
+      this.inventoryCost += subTotal;
+    } else {
+
+      if (ingredientIndex !== -1) {
+
+        if (quantity < this.foodItem.Ingredients[ingredientIndex].Quantity) {
+
+          this.foodItem.Ingredients[ingredientIndex].Quantity -= quantity;
+          this.foodItem.Ingredients[ingredientIndex].SubTotal -= subTotal;
+          this.inventoryCost -= subTotal;
 
 
-    this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
-      + Number.parseInt(subTotal.toString());
+
+        } else if (quantity === this.foodItem.Ingredients[ingredientIndex].Quantity) {
+          this.inventoryCost -= subTotal;
+          this.deleteIngredient(ingredientIndex);
+          if (this.inventoryCost < 0) {
+            this.inventoryCost = 0;
+          }
+
+
+
+        } else {
+          this.toastr.errorToastr(
+            'Quantity is too large',
+            'Error',
+            {
+              newestOnTop: true,
+              showCloseButton: true
+            });
+        }
+      } else {
+        this.toastr.errorToastr(
+          'This item does not exist. Add to ingredient list first',
+          'Error',
+          {
+            newestOnTop: true,
+            showCloseButton: true
+          });
+      }
+    }
     form.controls['quantity'].reset();
   }
 
+  editFoodItem(form: NgForm) {
+    const serialNumber = form.value.serialNumber;
 
-  deleteIngredient(ingredient: Ingredients, index: number) {
-    this.inventoryCost = Number.parseInt(this.inventoryCost.toString())
-          - Number.parseInt(this.ingredients[index].SubTotal.toString());
-    this.ingredients.splice(index, 1);
-  }
-
-  onSaveEditedFoodItem(form: NgForm) {
-    const name = form.value.itemName;
-    const price = form.value.sellingPrice;
-    const serialNumber = form.value.serial;
-    const foodItemIngredients = this.ingredients;
-    const foodItemId = this.foodItemId;
-    const profit = price - this.inventoryCost;
-    for (let i = 0; i < this.ingredients.length; i++) {
-      this.ingredients[i].FoodItemId = this.foodItemId;
+    for (const value of this.foodItems) {
+      if (value.SerialNumber === serialNumber && value.Id !== this.foodItemId) {
+        this.toastr.errorToastr('Duplicate serial number', 'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        return;
+      }
     }
+
     this.isDisabled = true;
-    const editedFoodItem = new FoodItem(
-      foodItemId,
+    const name = form.value.itemName;
+    const sellingPrice = form.value.sellingPrice;
+    const profit = sellingPrice - this.inventoryCost;
+    for (const value of this.foodItem.Ingredients) {
+      value.Id = null;
+      value.FoodItemId = this.foodItemId;
+    }
+
+    const foodItem = new FoodItem(
+      this.foodItemId,
       serialNumber,
       name,
-      price,
+      sellingPrice,
       this.inventoryCost,
       profit,
       0,
       null,
-      foodItemIngredients
+      this.foodItem.Ingredients
     );
-    this.foodItemDataStorageService.editFoodItem(editedFoodItem).
-    subscribe(
-      (data: any) => {
 
-  //      this.pointOfSaleService.updateFoodItemList(editedFoodItem );
-        this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);
-        form.reset();
-      }
-    );
-  }
-  cancel() {
-    this.router.navigate(['admin/food-item/grid-details', this.foodItemId]);
-  }
+    this.foodItemDataStorageService.editFoodItem(foodItem)
+      .subscribe(
+        (data: any) => {
+          if (this.imageUrl !== 'assets/noImage.png' && this.fileToUpload !== null ) {
+            this.foodItemDataStorageService.
+            uploadFoodItemImage(this.foodItemId.toString(), this.fileToUpload)
+              .subscribe(
+                (response: any) => {
+                  this.imageUrl = '/assets/noImage.png';
+                  form.reset();
+                  this.toastr.successToastr('Information is updated', 'Success', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                  });
+                  this.router.navigate(['admin/food-items/', this.foodItemId]);
+                }
+              );
+          } else {
+            form.reset();
+            this.toastr.successToastr('Information is updated', 'Success', {
+              toastTimeout: 10000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
+            this.router.navigate(['admin/food-items/', this.foodItemId]);
+          }
+        });
 
+
+  }
 }
+
+
+

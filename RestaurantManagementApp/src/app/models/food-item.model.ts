@@ -1,4 +1,4 @@
-import {Ingredients} from './ingredients.model';
+import {Ingredient} from './ingredient.model';
 
 export class FoodItem {
   public Id: number;
@@ -9,7 +9,7 @@ export class FoodItem {
   public Profit: number;
   public TotalSale: number;
   public FoodItemImageName: string;
-  public Ingredients: Ingredients[];
+  public Ingredients: Ingredient[];
 
   constructor(id: number,
               serialNumber: string,
@@ -19,7 +19,7 @@ export class FoodItem {
               profit: number,
               totalSale: number,
               foodItemImageName: string,
-              ingredients: Ingredients[]
+              ingredients: Ingredient[]
   ) {
     this.Id = id;
     this.SerialNumber = serialNumber;

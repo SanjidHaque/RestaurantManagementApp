@@ -1,4 +1,4 @@
-export class Ingredients {
+export class Ingredient {
   public Id: number;
   public Quantity: number;
   public InventoryId: number;

@@ -1,4 +1,3 @@
-import {UUID} from 'angular2-uuid';
 import {NgForm} from '@angular/forms';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
-import {Ingredients} from '../../../../models/ingredients.model';
+import {Ingredient} from '../../../../models/ingredient.model';
 import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class AddNewFoodItemComponent implements OnInit {
   isDisabled = false;
 
   inventories: Inventory[] = [];
-  ingredients: Ingredients[] = [];
+  ingredients: Ingredient[] = [];
   foodItems: FoodItem[] = [];
 
   sellingPrice = 0;
@@ -99,7 +98,7 @@ export class AddNewFoodItemComponent implements OnInit {
 
       } else {
 
-        const ingredient = new Ingredients(
+        const ingredient = new Ingredient(
           ingredientId,
           quantity,
           inventoryId,
@@ -132,7 +131,7 @@ export class AddNewFoodItemComponent implements OnInit {
 
         } else {
           this.toastr.errorToastr(
-            'Quantity is too large!',
+            'Quantity is too large',
             'Error',
             {
             newestOnTop: true,
@@ -141,7 +140,7 @@ export class AddNewFoodItemComponent implements OnInit {
         }
       } else {
         this.toastr.errorToastr(
-          'This item does not exist. Add to ingredient list first.',
+          'This item does not exist. Add to ingredient list first',
           'Error',
           {
             newestOnTop: true,
@@ -164,7 +163,7 @@ export class AddNewFoodItemComponent implements OnInit {
       reader.readAsDataURL(this.fileToUpload);
     } else {
       this.imageUrl = 'assets/noImage.png';
-      this.toastr.errorToastr('Unsupported file format!', 'Error', {
+      this.toastr.errorToastr('Unsupported file format', 'Error', {
         toastLife: 10000,
         newestOnTop: true,
         showCloseButton: true
@@ -185,7 +184,7 @@ export class AddNewFoodItemComponent implements OnInit {
     const serialNumber = form.value.serialNumber;
 
     if (this.foodItems.filter(e => e.SerialNumber === serialNumber).length > 0) {
-      this.toastr.errorToastr('Duplicate serial number', 'Error!', {
+      this.toastr.errorToastr('Duplicate serial number', 'Error', {
         toastTimeout: 10000,
         newestOnTop: true,
         showCloseButton: true
@@ -220,7 +219,7 @@ export class AddNewFoodItemComponent implements OnInit {
               (data: any) => {
                 this.imageUrl = '/assets/noImage.png';
                 form.reset();
-                this.toastr.successToastr('Added to shop', 'Success!', {
+                this.toastr.successToastr('Added to shop', 'Success', {
                   toastTimeout: 10000,
                   newestOnTop: true,
                   showCloseButton: true
@@ -230,7 +229,7 @@ export class AddNewFoodItemComponent implements OnInit {
             );
         } else {
           form.reset();
-          this.toastr.successToastr('Added to shop', 'Success!', {
+          this.toastr.successToastr('Added to shop', 'Success', {
             toastTimeout: 10000,
             newestOnTop: true,
             showCloseButton: true

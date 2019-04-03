@@ -134,7 +134,8 @@ const appRoutes: Routes = [
                 component: EditFoodItemComponent,
                 resolve:
                   {
-                    foodItems: FoodItemResolverService
+                    foodItems: FoodItemResolverService,
+                    inventories: InventoryResolverService
                   }
               }
             ]

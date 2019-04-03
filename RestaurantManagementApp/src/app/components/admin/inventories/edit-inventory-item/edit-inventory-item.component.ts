@@ -36,7 +36,7 @@ export class EditInventoryItemComponent implements OnInit {
         this.inventories = data['inventories'];
         this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
 
-        if (this.inventory === undefined) {
+        if (this.inventory === undefined || this.inventory === null) {
           window.alert('Item not found!');
           this.router.navigate(['admin/inventories']);
         }

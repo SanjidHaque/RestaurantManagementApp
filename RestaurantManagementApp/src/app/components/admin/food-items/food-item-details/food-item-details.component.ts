@@ -39,7 +39,7 @@ export class FoodItemDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImage';
+    this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {

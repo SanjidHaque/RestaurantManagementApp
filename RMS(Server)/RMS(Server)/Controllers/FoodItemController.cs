@@ -101,21 +101,29 @@ namespace RMS_Server_.Controllers
             HttpPostedFile postedFile = httpRequest.Files["FoodItemImage"];         
             string imageName = new String(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
             imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(postedFile.FileName);
-            string filePath = HttpContext.Current.Server.MapPath("~/Content/FoodItemImage" + imageName);
+            string filePath = HttpContext.Current.Server.MapPath("~/Content/FoodItemImages/" + imageName);
             postedFile.SaveAs(filePath);
             string foodItemIdInString = httpRequest["FoodItemId"];
             int foodItemId = Int32.Parse(foodItemIdInString);
             FoodItem foodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItemId);
-            if (foodItem != null) foodItem.FoodItemImageName = imageName;
+            if (foodItem.FoodItemImageName == null)
+            {
+                foodItem.FoodItemImageName = imageName;
+            }
+            else
+            {
+                DeleteFoodItemImage(foodItem);
+                foodItem.FoodItemImageName = imageName;
+            }
             _context.SaveChanges();
-            return Ok();
+            return Ok();          
         }
 
 
 
         private void DeleteFoodItemImage(FoodItem foodItem)
         {
-            string filePath = HttpContext.Current.Server.MapPath("~/Content/" + foodItem.FoodItemImageName);
+            string filePath = HttpContext.Current.Server.MapPath("~/Content/FoodItemImages/" + foodItem.FoodItemImageName);
             if ((System.IO.File.Exists(filePath)))
             {
                 System.IO.File.Delete(filePath);

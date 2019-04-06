@@ -28,7 +28,7 @@ import {NgProgressRouterModule} from '@ngx-progressbar/router';
 import {AppUiModule} from './modules/app-ui.module';
 import {PointOfSaleComponent} from './components/point-of-sale/point-of-sale.component';
 import {AdminComponent} from './components/admin/admin.component';
-import {RegistrationComponent} from './components/admin/registration/registration.component';
+import {UsersComponent} from './components/admin/users/users.component';
 import {LoginComponent} from './components/login/login.component';
 import {PaymentComponent} from './components/point-of-sale/payment/payment.component';
 import {ReceiptComponent} from './components/point-of-sale/receipt/receipt.component';
@@ -48,14 +48,12 @@ import {AddNewFoodItemComponent} from './components/admin/food-items/add-new-foo
 import {MenuComponent} from './components/point-of-sale/menu/menu.component';
 import { SelectTableComponent } from './components/point-of-sale/select-table/select-table.component';
 import { TableListComponent } from './components/admin/tables/table-list/table-list.component';
-import { TableDetailsComponent } from './components/admin/tables/table-list/table-details/table-details.component';
+import { TableDetailsComponent } from './components/admin/tables/table-details/table-details.component';
 import {OrderListComponent} from './components/admin/orders/order-list/order-list.component';
 import {InventoryListComponent} from './components/admin/inventories/inventory-list/inventory-list.component';
 import {InventoryDetailsComponent} from './components/admin/inventories/inventory-details/inventory-details.component';
 import {UpdateInventoryItemComponent} from './components/admin/inventories/update-inventory-item/update-inventory-item.component';
-import {AddFoodItemImageComponent} from './components/admin/food-items/add-food-item-image/add-food-item-image.component';
-import {EditFoodItemImageComponent} from './components/admin/food-items/edit-food-item-image/edit-food-item-image.component';
-import {OrderDetailsComponent} from './components/admin/orders/order-list/order-details/order-details.component';
+import {OrderDetailsComponent} from './components/admin/orders/order-details/order-details.component';
 import {FoodItemDetailsComponent} from './components/admin/food-items/food-item-details/food-item-details.component';
 import {FoodItemListComponent} from './components/admin/food-items/food-item-list/food-item-list.component';
 import {AddNewInventoryItemComponent} from './components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
@@ -76,7 +74,7 @@ import {AccountDataStorageService} from './services/account-data-storage.service
     AppComponent,
     PointOfSaleComponent,
     LoginComponent,
-    RegistrationComponent,
+    UsersComponent,
     AdminComponent,
     InventoriesComponent,
     MenuComponent,
@@ -105,8 +103,6 @@ import {AccountDataStorageService} from './services/account-data-storage.service
     ForbiddenComponent,
     ResetPasswordComponent,
     NewPasswordComponent,
-    AddFoodItemImageComponent,
-    EditFoodItemImageComponent,
     UserFilterPipe,
     HeaderComponent,
     SelectTableComponent,

@@ -1,0 +1,30 @@
+
+<div class="row">
+  <div class="col-xl-12">
+    <h6>General Information</h6>
+  </div>
+</div>
+
+<hr>
+
+<div class="row" style="font-weight: 500; font-size: 20px;">
+  <div class="col-xl-12">
+    Product's Name: {{ table.Name }}
+  </div>
+</div>
+
+<br>
+
+<div class="row text-xl-left">
+  <div class="col-xl-10">
+
+    <button
+      routerLink="/admin/tables/{{tableId}}/edit-table"
+      class="btn btn-warning">Edit</button> &nbsp;
+
+    <button
+      (click)="deleteTable()"
+      class="btn btn-danger">Delete</button>
+
+  </div>
+</div>

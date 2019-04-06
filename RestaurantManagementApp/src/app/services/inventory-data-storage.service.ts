@@ -39,6 +39,6 @@ export class InventoryDataStorageService {
 
   deleteInventoryItem(inventoryId: number)  {
     return this.http.delete(
-      `${this.rootUrl + '/api/DeleteInventoryItem/'}/${inventoryId}`);
+      `${this.rootUrl + '/api/DeleteInventoryItem'}/${inventoryId}`);
   }
 }

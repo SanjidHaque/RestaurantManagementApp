@@ -1,34 +1,57 @@
-<div class="col-md-12 name">
-  <form (ngSubmit) = "onEditTable(newTable)" #newTable = "ngForm">
-    <div id="user-data">
-      <div class="form-group">
-        <label for="tableName">Edit Table's Name:</label>
-        <input
-          type="text"
-          id="tableName"
-          class="form-control"
-          [ngModel] = "tableName"
-          name="tableName"
-          required
-        >
-      </div>
 
-      <div class="form-group">
 
-        <div class="action">
-          <button class="all-categories-button"
-                  type="submit"
-                  [disabled]="!newTable.valid">
-            <i class="fa fa-wrench" aria-hidden="true"></i> Update</button>
-        </div>
-        <div class="action">
-          <button
-            class="all-categories-button"
-            type="button"
-            routerLink="admin/tables">
-            <i class="fa fa-times-circle-o" aria-hidden="true"></i> Cancel</button>
-        </div>
-      </div>
-    </div>
-  </form>
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Edit Information of {{ table.Name }}
+  </div>
 </div>
+
+<br>
+
+
+<form (ngSubmit) = "editTable(editedTable)" #editedTable= "ngForm">
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="name">Table's Name</label>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        [ngModel]="table.Name"
+        name="name"
+        #name="ngModel"
+        required>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="name.invalid && (name.dirty || name.touched)">
+        Table's name is required!
+      </p>
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="editedTable.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Save</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/tables/{{tableId}}"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+
+</form>
+

@@ -1,3 +1,45 @@
-<p>
-  table-list works!
-</p>
+
+
+
+<div class="row" *ngIf="tables.length === 0; else notEmpty">
+  <div class="col-md-12">
+    No table is available. Click "Add New Table" to populate.
+  </div>
+</div>
+
+<ng-template #notEmpty>
+
+
+  <mat-form-field>
+    <input
+      style="width: 100%;"
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Search...">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8" style="box-shadow: none!important;">
+    <table  mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="Name">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td
+          style="width: 25%"
+          mat-cell *matCellDef="let row"> {{row.Name}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          style="cursor: pointer;"
+          title="See details"
+          routerLink="/admin/tables/{{ row.Id }}">
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</ng-template>

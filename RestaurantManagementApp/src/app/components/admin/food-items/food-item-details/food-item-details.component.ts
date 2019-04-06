@@ -21,7 +21,6 @@ export class FoodItemDetailsComponent implements OnInit {
   foodItems: FoodItem[] = [];
   inventories: Inventory[] = [];
 
-  ingredients: Ingredient[] = [];
   foodItem: FoodItem;
   foodItemId: number;
 
@@ -83,7 +82,7 @@ export class FoodItemDetailsComponent implements OnInit {
   confirmEvent() {
     this.foodItemDataStorageService.deleteFoodItem(this.foodItemId).subscribe(
       (data: any) => {
-        this.toastr.successToastr('Removed from shop', 'Success!', {
+        this.toastr.successToastr('Removed from shop', 'Success', {
           toastTimeout: 10000,
           newestOnTop: true,
           showCloseButton: true

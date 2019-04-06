@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
-import {TableDataStorageService} from '../../../../services/table-data-storage.service';
+
 import {Table} from '../../../../models/table.model';
+import {TableDataStorageService} from '../../../../services/table-data-storage.service';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-add-new-table',
@@ -14,22 +15,24 @@ export class AddNewTableComponent {
 
   isDisabled = false;
   constructor(private router: Router,
-              private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: TableDataStorageService) {}
+              private toastr: ToastrManager,
+              private tableDataStorageService: TableDataStorageService) {}
 
 
 
-  onAddNewTable(form: NgForm) {
+  addNewTable(form: NgForm) {
     this.isDisabled = true;
     const id = null;
-    const name = form.value.name;
-    const newTable = new Table(id, name);
-    this.dataStorageService.addNewTable(newTable)
+    const tableName = form.value.name;
+    this.tableDataStorageService.addNewTable(new Table(id, tableName))
       .subscribe(
-        (tableId: number) => {
-          newTable.Id = tableId;
-          this.pointOfSaleService.addNewTable(newTable);
-          form.controls['name'].reset();
+        (data: any) => {
+          this.toastr.successToastr('Added to shop', 'Success', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          form.reset();
           this.router.navigate(['admin/tables']);
         }
     );

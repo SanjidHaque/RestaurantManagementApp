@@ -56,7 +56,11 @@ export class InventoryDetailsComponent implements OnInit {
     this.inventoryDataStorageService.deleteInventoryItem(this.inventoryId).
     subscribe(
       (data: any) => {
-        this.toastr.errorToastr('Item is deleted!');
+        this.toastr.successToastr('Removed from shop', 'Success!', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
         this.router.navigate(['admin/inventories']);
       }
     );

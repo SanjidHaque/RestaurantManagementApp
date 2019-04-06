@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {Subscription} from 'rxjs';
+
 import {Inventory} from '../../../../models/inventory.model';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-update-inventory-item',
@@ -22,6 +22,7 @@ export class UpdateInventoryItemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private toastr: ToastrManager,
               private inventoryDataStorageService: InventoryDataStorageService ) {
     this.route.params
       .subscribe(
@@ -66,6 +67,11 @@ export class UpdateInventoryItemComponent implements OnInit {
     this.inventoryDataStorageService.updateInventoryHistory(updateHistory).
     subscribe(
       (data: any) => {
+        this.toastr.successToastr('Information is updated', 'Success', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
         form.reset();
         this.router.navigate(['admin/inventories/', this.inventoryId]);
       }

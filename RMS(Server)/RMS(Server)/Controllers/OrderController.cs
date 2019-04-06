@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Mail;
-using System.Web;
 using System.Web.Http;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
@@ -13,15 +10,14 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
 using RMS_Server_.Models;
-using System.Web.Http.Cors;
 
 
 namespace RMS_Server_.Controllers
 { 
-    public class RestaurantManagementAppController : ApiController
+    public class OrderController : ApiController
     {
         private readonly ApplicationDbContext _context;
-        private RestaurantManagementAppController()
+        private OrderController()
         {
             _context = new ApplicationDbContext();
         }
@@ -161,13 +157,13 @@ namespace RMS_Server_.Controllers
 
 
 
-        [Route("api/StoreOrder")]
+        [Route("api/AddNewOrder")]
         [HttpPost]
-        public IHttpActionResult StoreOrder(Order orders)
+        public IHttpActionResult AddNewOrder(Order order)
         {
-            for (int i = 0; i < orders.OrderedItem.Count; i++)
+            for (int i = 0; i < order.OrderedItem.Count; i++)
             {
-                int foodItemId = orders.OrderedItem[i].FoodItemId;
+                int foodItemId = order.OrderedItem[i].FoodItemId;
                 FoodItem soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
                 if (soldFoodItem != null)
                 {
@@ -182,7 +178,7 @@ namespace RMS_Server_.Controllers
                         for (int k = 0; k < foodItems[j].Ingredients.Count; k++)
                         {
                             var quantity = foodItems[j].Ingredients[k].Quantity;
-                            var totalQuantity = quantity*orders.OrderedItem[i].FoodItemQuantity;
+                            var totalQuantity = quantity*order.OrderedItem[i].FoodItemQuantity;
                             int inventoryId = foodItems[j].Ingredients[k].InventoryId;
                             List<Inventory> inventory = _context.Inventories.ToList();
                             for (int l = 0; l < inventory.Count; l++)
@@ -197,23 +193,20 @@ namespace RMS_Server_.Controllers
                     }
                 }
             }
-            _context.OrderedItems.AddRange(orders.OrderedItem);
-            _context.Orders.Add(orders);
+            _context.OrderedItems.AddRange(order.OrderedItem);
+            _context.Orders.Add(order);
             _context.SaveChanges();
             return Ok();
         }
 
 
         [Route("api/DeleteOrder")]
-        [HttpPost]
-        public IHttpActionResult DeleteOrder(Order orders)
+        [HttpDelete]
+        public IHttpActionResult DeleteOrder(int orderId)
         {
-            Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orders.Id);
+            Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orderId);
             if (deleteOrder != null)
             {
-                List<OrderedItem> deleteOrderedItems = _context.OrderedItems
-                    .Where(b => b.OrderId == deleteOrder.Id).ToList();
-                _context.OrderedItems.RemoveRange(deleteOrderedItems);
                 _context.Orders.Remove(deleteOrder);
                 _context.SaveChanges();
                 return Ok();
@@ -224,68 +217,21 @@ namespace RMS_Server_.Controllers
  
            
         [HttpGet]
-        [Route("api/GetOrders")]
-        public IHttpActionResult GetOrders()
+        [Route("api/GetAllOrder")]
+        public IHttpActionResult GetAllOrder()
         {
-            List<Order> orders = _context.Orders.Include(b => b.OrderedItem).OrderBy(x => x.Profit).ToList();
+            List<Order> orders = _context.Orders
+                .Include(b => b.OrderedItem)
+                .OrderByDescending(x => x.Id)
+                .ToList();
             return Ok(orders);
         }
 
         
 
-        [HttpGet]
-        [Route("api/GetTables")]
-        public IHttpActionResult GetTables()
-        {
-            List<Table> tables = _context.Tables.OrderBy(x => x.Name).ToList();
-            return Ok(tables);
-        }
-
-        [HttpPost]
-        [Route("api/AddNewTable")]
-        public IHttpActionResult AddNewTable(Table table)
-        {
-            if (table != null)
-            {
-                _context.Tables.Add(table);
-                _context.SaveChanges();
-                return Ok(table.Id);
-            }
-
-            return NotFound();
-        }
+      
 
 
-        [HttpPost]
-        [Route("api/EditTable")]
-        public IHttpActionResult EditTable(Table table)
-        {
-            Table getEdited = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
-            if (getEdited != null)
-            {
-                getEdited.Name = table.Name;
-                _context.SaveChanges();
-                return Ok();
-            }
-
-            return NotFound();
-        }
-
-
-        [HttpPost]
-        [Route("api/DeleteTable")]
-        public IHttpActionResult DeleteTable(Table table)
-        {
-            Table deleteTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
-            if (deleteTable == null)
-            {
-                return NotFound();
-            }
-            _context.Tables.Remove(deleteTable);
-            _context.SaveChanges();
-            return Ok();
-
-        }
 
 
        

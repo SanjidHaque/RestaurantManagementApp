@@ -1,6 +1,7 @@
+<!--
 <div class="col-md-12 name">
 
-  <form (ngSubmit) = "onAddNewTable(newTable)" #newTable = "ngForm">
+  <form (ngSubmit) = "addNewTable(newTable)" #newTable = "ngForm">
     <div id="user-data">
       <div class="form-group">
         <label for="name">Table's Name:</label>
@@ -35,3 +36,58 @@
   </form>
 
 </div>
+-->
+
+
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Add New Table
+  </div>
+</div>
+
+<br>
+
+<form (ngSubmit) = "addNewTable(newTable)" #newTable = "ngForm">
+
+<div class="row">
+  <div class="col-xl-6">
+          <label for="name">Table's Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            ngModel
+            name="name"
+            #name="ngModel"
+            required>
+    <p
+      style="color: red; margin-bottom: 0;"
+      *ngIf="name.invalid && (name.dirty || name.touched)">
+      Table name is required!
+    </p>
+
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-xl-6">
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="newTable.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Save</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/tables"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+
+</form>

@@ -7,8 +7,13 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
 
+import {ToastrManager} from 'ng6-toastr-notifications';
+@Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
+   constructor(private toastr: ToastrManager) {}
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
       .pipe(
@@ -20,7 +25,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           } else {
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
           }
-          window.alert(errorMessage);
+          this.toastr.errorToastr(errorMessage, 'Error', {
+            toastTimeout: 20000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
           return throwError(errorMessage);
         })
       )

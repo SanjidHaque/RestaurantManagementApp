@@ -10,7 +10,7 @@ import {PointOfSaleService} from '../../../services/point-of-sale.service';
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss']
 })
-export class TablesComponent implements OnInit, DoCheck {
+export class TablesComponent {
 
   tables: Table[] ;
   subscription: Subscription;
@@ -18,30 +18,25 @@ export class TablesComponent implements OnInit, DoCheck {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private dataStorageService: TableDataStorageService,
-              private pointOfSaleService: PointOfSaleService,
-              ) { }
+              private dataStorageService: TableDataStorageService) { }
 
-  ngOnInit() {
-    this.route.data.
-    subscribe(
-      ( data: Table[]) => {
-        this.pointOfSaleService.tables = data['tables'];
-      }
-    );
-    this.tables = this.pointOfSaleService.tables;
-    this.subscription = this.pointOfSaleService.tablesChanged
-      .subscribe(
-        (tables: Table[]) => {
-          this.tables = tables;
-        }
-      );
-    this.totalTable = this.tables.length;
-  }
-  ngDoCheck() {
-    this.totalTable = this.tables.length;
-  }
-
+  // ngOnInit() {
+  //   this.route.data.
+  //   subscribe(
+  //     ( data: Table[]) => {
+  //       this.pointOfSaleService.tables = data['tables'];
+  //     }
+  //   );
+  //   this.tables = this.pointOfSaleService.tables;
+  //   this.subscription = this.pointOfSaleService.tablesChanged
+  //     .subscribe(
+  //       (tables: Table[]) => {
+  //         this.tables = tables;
+  //       }
+  //     );
+  //   this.totalTable = this.tables.length;
+  // }
+  //
   addNewTable() {
     this.router.navigate(['admin/tables/add-new-tables']);
   }
@@ -59,7 +54,7 @@ export class TablesComponent implements OnInit, DoCheck {
   }
 
   confirmEvent(table: Table, index: number) {
-    this.dataStorageService.deleteTable(table).
+    this.dataStorageService.deleteTable(1).
     subscribe(
       (data: any) => {
         this.tables.splice(index, 1);

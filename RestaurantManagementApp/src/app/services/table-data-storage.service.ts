@@ -1,16 +1,11 @@
 import {Injectable} from '@angular/core';
-
-import {Order} from '../models/order.model';
-import {Inventory} from '../models/inventory.model';
-import {FoodItem} from '../models/food-item.model';
-import {Table} from '../models/table.model';
-import {InventoryHistory} from '../models/inventory-history.model';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+
+import {Table} from '../models/table.model';
+
 
 @Injectable()
 export class TableDataStorageService {
-
   backEndPort = '1548';
   rootUrl = 'http://localhost:' + this.backEndPort;
 
@@ -19,47 +14,19 @@ export class TableDataStorageService {
   constructor(private http: HttpClient) {
   }
 
-
-
-
-
-
-
-  addNewOrder(order: Order) {
-    return this.http.post(this.rootUrl + '/api/StoreOrder', order);
-  }
-
-
-  deleteOrder(order: Order) {
-    return this.http.post(this.rootUrl + '/api/DeleteOrder', order);
-  }
-
-  getAllOrder() {
-    return this.http.get<Order[]>(this.rootUrl + '/api/GetOrders');
-  }
-
-
-
   getAllTable() {
-    return this.http.get<Table[]>(this.rootUrl + '/api/GetTables');
+    return this.http.get<Table[]>(this.rootUrl + '/api/GetAllTable');
   }
 
   addNewTable(table: Table) {
-    return this.http.post(this.rootUrl + '/api/AddNewTable', table);
+    return this.http.post<Table[]>(this.rootUrl + '/api/AddNewTable', table);
   }
 
   editTable(table: Table) {
-    return this.http.post(this.rootUrl + '/api/EditTable', table);
+    return this.http.put<Table[]>(this.rootUrl + '/api/EditTable', table);
   }
 
-  deleteTable(table: Table) {
-    return this.http.post(this.rootUrl + '/api/DeleteTable', table);
+  deleteTable(tableId: number) {
+    return this.http.delete(`${this.rootUrl + '/api/DeleteTable'}/${tableId}`);
   }
-
-
-
-
-
-
-
 }

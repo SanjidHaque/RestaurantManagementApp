@@ -13,7 +13,7 @@ import {ResetPasswordComponent} from '../components/reset-password/reset-passwor
 import {AdminComponent} from '../components/admin/admin.component';
 import {NewPasswordComponent} from '../components/new-password/new-password.component';
 import {OrdersComponent} from '../components/admin/orders/orders.component';
-import {RegistrationComponent} from '../components/admin/registration/registration.component';
+import {UsersComponent} from '../components/admin/users/users.component';
 import {OrderResolverService} from '../route-resolvers/order-resolver.service';
 import {TablesComponent} from '../components/admin/tables/tables.component';
 import {AddNewTableComponent} from '../components/admin/tables/add-new-table/add-new-table.component';
@@ -26,7 +26,7 @@ import {OrderListComponent} from '../components/admin/orders/order-list/order-li
 import {InventoriesComponent} from '../components/admin/inventories/inventories.component';
 import {InventoryListComponent} from '../components/admin/inventories/inventory-list/inventory-list.component';
 import {InventoryDetailsComponent} from '../components/admin/inventories/inventory-details/inventory-details.component';
-import {OrderDetailsComponent} from '../components/admin/orders/order-list/order-details/order-details.component';
+import {OrderDetailsComponent} from '../components/admin/orders/order-details/order-details.component';
 import {TableListComponent} from '../components/admin/tables/table-list/table-list.component';
 import {FoodItemDetailsComponent} from '../components/admin/food-items/food-item-details/food-item-details.component';
 import {FoodItemListComponent} from '../components/admin/food-items/food-item-list/food-item-list.component';
@@ -34,7 +34,7 @@ import {EditFoodItemComponent} from '../components/admin/food-items/edit-food-it
 import {AddNewFoodItemComponent} from '../components/admin/food-items/add-new-food-item/add-new-food-item.component';
 import {EditInventoryItemComponent} from '../components/admin/inventories/edit-inventory-item/edit-inventory-item.component';
 import {AddNewInventoryItemComponent} from '../components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
-import {TableDetailsComponent} from '../components/admin/tables/table-list/table-details/table-details.component';
+import {TableDetailsComponent} from '../components/admin/tables/table-details/table-details.component';
 import {UpdateInventoryItemComponent} from '../components/admin/inventories/update-inventory-item/update-inventory-item.component';
 
 
@@ -201,13 +201,18 @@ const appRoutes: Routes = [
               {
                 path: 'order-list',
                 component: OrderListComponent,
-                children:
-                  [
-                    {
-                      path: ':id',
-                      component: OrderDetailsComponent
-                    }
-                  ]
+                resolve:
+                  {
+                    orders: OrderResolverService
+                  }
+              },
+              {
+                path: ':id',
+                component: OrderDetailsComponent,
+                resolve:
+                  {
+                    orders: OrderResolverService
+                  }
               }
             ]
         },
@@ -224,23 +229,36 @@ const appRoutes: Routes = [
               {
                 path: 'table-list',
                 component: TableListComponent,
-                children:
-                  [
-                    {
-                      path: ':id',
-                      component: TableDetailsComponent
-                    },
-                    {
-                      path: ':id/edit-table',
-                      component: EditTableComponent
-                    }
-                  ]
+                resolve:
+                  {
+                    tables: TableResolverService
+                  }
+              },
+              {
+                path: 'add-new-table',
+                component: AddNewTableComponent
+              },
+              {
+                path: ':tableId',
+                component: TableDetailsComponent,
+                resolve:
+                  {
+                    tables: TableResolverService
+                  }
+              },
+              {
+                path: ':tableId/edit-table',
+                component: EditTableComponent,
+                resolve:
+                  {
+                    tables: TableResolverService
+                  }
               }
             ]
         },
         {
-          path: 'registration',
-          component: RegistrationComponent,
+          path: 'users',
+          component: UsersComponent,
         }
       ]
   },

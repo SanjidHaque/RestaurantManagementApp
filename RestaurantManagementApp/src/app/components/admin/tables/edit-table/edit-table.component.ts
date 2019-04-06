@@ -1,9 +1,9 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
 import {Table} from '../../../../models/table.model';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
 import {TableDataStorageService} from '../../../../services/table-data-storage.service';
 
 @Component({
@@ -11,68 +11,70 @@ import {TableDataStorageService} from '../../../../services/table-data-storage.s
   templateUrl: './edit-table.component.html',
   styleUrls: ['./edit-table.component.scss']
 })
-export class EditTableComponent implements OnInit, DoCheck {
-  tables: Table[] ;
-  tableId: number;
-  tableName = '';
-  subscription: Subscription;
+export class EditTableComponent implements OnInit {
   isDisabled = false;
+  tableId: number;
+
+  tables: Table[];
+  table: Table;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private pointOfSaleService: PointOfSaleService,
-              private dataStorageService: TableDataStorageService) {
+              private toastr: ToastrManager,
+              private tableDataStorageService: TableDataStorageService) {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.tableId = +params['inventoryId'];
+          this.tableId = +params['tableId'];
         }
       );
   }
 
   ngOnInit() {
-    this.tables = this.pointOfSaleService.tables;
-    this.subscription = this.pointOfSaleService.tablesChanged
-      .subscribe(
-        (tables: Table[]) => {
-          this.tables = tables;
+    this.route.data.subscribe(
+      ( data: Table[]) => {
+        this.tables = data['tables'];
+        this.table = this.tables.find( x => x.Id === this.tableId);
+
+        if (this.table === undefined) {
+          this.toastr.errorToastr('Table is not found', 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          this.router.navigate(['admin/tables']);
         }
-      );
-    for ( let i = 0; i < this.tables.length; i++) {
-      if ( this.tables[i].Id === this.tableId ) {
-        this.tableName = this.tables[i].Name;
       }
-    }
+    );
   }
 
-  ngDoCheck() {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.tableId = params['inventoryId'];
-        }
-      );
-    for ( let i = 0; i < this.tables.length; i++) {
-      if ( this.tables[i].Id === this.tableId ) {
-        this.tableName = this.tables[i].Name;
-      }
-    }
-  }
 
-  onEditTable(form: NgForm) {
+
+  editTable(form: NgForm) {
     this.isDisabled = true;
-    const name = form.value.tableName;
-    const editedTable = new Table(this.tableId, name);
-    const ifExist = this.pointOfSaleService.editTable(editedTable);
-    if (ifExist) {
-      this.dataStorageService.editTable(editedTable)
+    const tableName = form.value.name;
+
+    if (tableName !== this.table.Name) {
+      this.tableDataStorageService.editTable(new Table(this.tableId, tableName))
         .subscribe(
           (data: any) => {
+            this.toastr.successToastr('Information is updated', 'Success', {
+              toastTimeout: 10000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
             form.reset();
             this.router.navigate(['admin/tables']);
           }
         );
+    } else {
+      this.toastr.successToastr('Information is updated', 'Success', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      form.reset();
+      this.router.navigate(['admin/tables']);
     }
   }
-
 }

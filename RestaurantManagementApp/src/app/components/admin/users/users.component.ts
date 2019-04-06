@@ -10,11 +10,11 @@ import {AuthService} from '../../../services/auth.service';
 
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class UsersComponent implements OnInit {
 
   isDisabled = false;
   user: User;
@@ -22,7 +22,6 @@ export class RegistrationComponent implements OnInit {
   modifiedUser: ModifiedUserModel[] = [];
   emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   roles : Role[] = [];
-  subscription: Subscription;
 
 
   constructor(private authService: AuthService,

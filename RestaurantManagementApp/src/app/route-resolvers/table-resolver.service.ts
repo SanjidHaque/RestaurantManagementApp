@@ -7,11 +7,11 @@ import {TableDataStorageService} from '../services/table-data-storage.service';
 @Injectable()
 export class TableResolverService implements Resolve<Table[]> {
 
-  constructor(private _dataStorageService: TableDataStorageService) { }
+  constructor(private tableDataStorageService: TableDataStorageService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Table[]> |
       Promise<Table[]> | Table[] {
-    return this._dataStorageService.getAllTable();
+    return this.tableDataStorageService.getAllTable();
   }
 
 }

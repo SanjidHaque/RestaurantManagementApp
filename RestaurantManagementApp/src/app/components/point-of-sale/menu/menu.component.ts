@@ -4,8 +4,8 @@ import {UUID} from 'angular2-uuid';
 import {FoodItem} from '../../../models/food-item.model';
 import {Inventory} from '../../../models/inventory.model';
 import {Order} from '../../../models/order.model';
-import {TableDataStorageService} from '../../../services/table-data-storage.service';
-import {PointOfSaleService} from '../../../services/point-of-sale.service';
+import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
+import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
 import {OrderedItem} from '../../../models/ordered-item.model';
 
 @Component({

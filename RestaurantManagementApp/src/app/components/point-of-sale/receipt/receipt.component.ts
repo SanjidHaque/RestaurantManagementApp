@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {Order} from '../../../models/order.model';
-import {PointOfSaleService} from '../../../services/point-of-sale.service';
-import {TableDataStorageService} from '../../../services/table-data-storage.service';
+import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
+import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
 
 
 @Component({

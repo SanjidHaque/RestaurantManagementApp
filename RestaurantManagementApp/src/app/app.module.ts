@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './modules/app-routing.module';
-import {PointOfSaleService} from './services/point-of-sale.service';
-import {TableDataStorageService} from './services/table-data-storage.service';
+import {PointOfSaleService} from './services/shared/point-of-sale.service';
+import {TableDataStorageService} from './services/data-storage/table-data-storage.service';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -13,7 +13,7 @@ import {TableResolverService} from './route-resolvers/table-resolver.service';
 import {OrderResolverService} from './route-resolvers/order-resolver.service';
 import {InventoryResolverService} from './route-resolvers/inventory-resolver.service';
 import {FoodItemResolverService} from './route-resolvers/food-item-resolver.service';
-import {AuthService} from './services/auth.service';
+import {AuthService} from './services/shared/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
@@ -60,13 +60,18 @@ import {AddNewInventoryItemComponent} from './components/admin/inventories/add-n
 import {SessionComponent} from './components/point-of-sale/session/session.component';
 import {FoodItemsComponent} from './components/admin/food-items/food-items.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {AdminService} from './services/admin.service';
+import {AdminService} from './services/shared/admin.service';
 import {HttpErrorInterceptor} from './http-error-interceptor/http-error.interceptor';
-import {InventoryDataStorageService} from './services/inventory-data-storage.service';
+import {InventoryDataStorageService} from './services/data-storage/inventory-data-storage.service';
 import { ToastrModule } from 'ng6-toastr-notifications';
-import {FoodItemDataStorageService} from './services/food-item-data-storage.service';
-import {OrderDataStorageService} from './services/order-data-storage.service';
-import {AccountDataStorageService} from './services/account-data-storage.service';
+import {FoodItemDataStorageService} from './services/data-storage/food-item-data-storage.service';
+import {OrderDataStorageService} from './services/data-storage/order-data-storage.service';
+import {AccountDataStorageService} from './services/data-storage/account-data-storage.service';
+import { AddNewUserComponent } from './components/admin/users/add-new-user/add-new-user.component';
+import { UserDetailsComponent } from './components/admin/users/user-details/user-details.component';
+import { UserListComponent } from './components/admin/users/user-list/user-list.component';
+import { EditUserComponent } from './components/admin/users/edit-user/edit-user.component';
+
 
 
 @NgModule({
@@ -108,7 +113,11 @@ import {AccountDataStorageService} from './services/account-data-storage.service
     SelectTableComponent,
     TableListComponent,
     TableDetailsComponent,
-    SessionComponent
+    SessionComponent,
+    AddNewUserComponent,
+    UserDetailsComponent,
+    UserListComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

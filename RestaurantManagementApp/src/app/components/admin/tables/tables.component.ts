@@ -2,8 +2,8 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Table} from '../../../models/table.model';
-import {TableDataStorageService} from '../../../services/table-data-storage.service';
-import {PointOfSaleService} from '../../../services/point-of-sale.service';
+import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
+import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
 
 @Component({
   selector: 'app-tables',

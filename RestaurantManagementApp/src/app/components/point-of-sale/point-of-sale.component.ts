@@ -4,8 +4,8 @@ import {Subscription} from 'rxjs';
 import {FoodItem} from '../../models/food-item.model';
 import {Order} from '../../models/order.model';
 import {OrderedItem} from '../../models/ordered-item.model';
-import {AuthService} from '../../services/auth.service';
-import {PointOfSaleService} from '../../services/point-of-sale.service';
+import {AuthService} from '../../services/shared/auth.service';
+import {PointOfSaleService} from '../../services/shared/point-of-sale.service';
 import {Inventory} from '../../models/inventory.model';
 
 

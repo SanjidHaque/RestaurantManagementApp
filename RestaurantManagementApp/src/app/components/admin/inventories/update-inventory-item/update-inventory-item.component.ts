@@ -4,7 +4,7 @@ import {NgForm} from '@angular/forms';
 
 import {Inventory} from '../../../../models/inventory.model';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
-import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
+import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({

@@ -5,8 +5,8 @@ import {OrderedItem} from '../../../models/ordered-item.model';
 import {Order} from '../../../models/order.model';
 import {Inventory} from '../../../models/inventory.model';
 import {Table} from '../../../models/table.model';
-import {TableDataStorageService} from '../../../services/table-data-storage.service';
-import {PointOfSaleService} from '../../../services/point-of-sale.service';
+import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
+import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
 
 @Component({
   selector: 'app-payment',

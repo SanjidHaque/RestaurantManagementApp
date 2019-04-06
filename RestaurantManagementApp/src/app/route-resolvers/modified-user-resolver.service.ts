@@ -1,4 +1,4 @@
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../services/shared/auth.service';
 import {ModifiedUserModel} from '../models/modified-user.model';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';

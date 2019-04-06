@@ -3,8 +3,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {FoodItem} from '../../../../models/food-item.model';
 import {Ingredient} from '../../../../models/ingredient.model';
-import {TableDataStorageService} from '../../../../services/table-data-storage.service';
-import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
+import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
+import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
 import {Inventory} from '../../../../models/inventory.model';
 import {ToastrManager} from 'ng6-toastr-notifications';
 

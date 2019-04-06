@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 
 import {Order} from '../../../../models/order.model';
-import {OrderDataStorageService} from '../../../../services/order-data-storage.service';
+import {OrderDataStorageService} from '../../../../services/data-storage/order-data-storage.service';
 
 @Component({
   selector: 'app-order-details',

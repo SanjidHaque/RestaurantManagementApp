@@ -3,10 +3,10 @@ import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {User} from '../../../models/user';
+import {User} from '../../../models/user.model';
 import {ModifiedUserModel} from '../../../models/modified-user.model';
 import {Role} from '../../../models/role.model';
-import {AuthService} from '../../../services/auth.service';
+import {AuthService} from '../../../services/shared/auth.service';
 
 
 @Component({

@@ -5,9 +5,9 @@ import {Subject, Subscription} from 'rxjs';
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredient} from '../../../../models/ingredient.model';
-import {PointOfSaleService} from '../../../../services/point-of-sale.service';
-import {TableDataStorageService} from '../../../../services/table-data-storage.service';
-import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
+import {PointOfSaleService} from '../../../../services/shared/point-of-sale.service';
+import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
+import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({

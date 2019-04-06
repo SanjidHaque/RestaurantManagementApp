@@ -4,7 +4,7 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {Table} from '../../../../models/table.model';
-import {TableDataStorageService} from '../../../../services/table-data-storage.service';
+import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 
 @Component({
   selector: 'app-edit-table',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Table} from '../models/table.model';
 import {Observable} from 'rxjs';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {TableDataStorageService} from '../services/table-data-storage.service';
+import {TableDataStorageService} from '../services/data-storage/table-data-storage.service';
 
 @Injectable()
 export class TableResolverService implements Resolve<Table[]> {

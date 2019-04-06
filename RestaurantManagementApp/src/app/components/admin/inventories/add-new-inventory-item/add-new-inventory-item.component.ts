@@ -5,8 +5,8 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 
 import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {Inventory} from '../../../../models/inventory.model';
-import {AdminService} from '../../../../services/admin.service';
-import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
+import {AdminService} from '../../../../services/shared/admin.service';
+import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({
   selector: 'app-add-new-inventory',

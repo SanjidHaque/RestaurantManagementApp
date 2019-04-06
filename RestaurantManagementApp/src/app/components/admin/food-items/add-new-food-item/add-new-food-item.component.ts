@@ -7,7 +7,7 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredient} from '../../../../models/ingredient.model';
-import {FoodItemDataStorageService} from '../../../../services/food-item-data-storage.service';
+import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
 
 @Component({
   selector: 'app-add-new-food-item',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Order} from '../models/order.model';
 import {Observable} from 'rxjs';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {OrderDataStorageService} from '../services/order-data-storage.service';
+import {OrderDataStorageService} from '../services/data-storage/order-data-storage.service';
 
 @Injectable()
 export class OrderResolverService implements Resolve<Order[]> {

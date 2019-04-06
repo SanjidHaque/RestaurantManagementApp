@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {Inventory} from '../../../../models/inventory.model';
-import {InventoryDataStorageService} from '../../../../services/inventory-data-storage.service';
+import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({
   selector: 'app-inventory-details',

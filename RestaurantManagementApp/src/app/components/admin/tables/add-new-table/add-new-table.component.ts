@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 
 import {Table} from '../../../../models/table.model';
-import {TableDataStorageService} from '../../../../services/table-data-storage.service';
+import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({

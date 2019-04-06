@@ -121,7 +121,7 @@ namespace RMS_Server_.Controllers
             return NotFound();
         }
         
-        [Route("api/Register")]
+        [Route("api/AddNewUser")]
         [HttpPost]
         public IdentityResult Register(AccountModel model)
         {

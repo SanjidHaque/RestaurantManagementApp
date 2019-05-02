@@ -17,8 +17,7 @@ import {AuthService} from './services/shared/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
-import {RoleResolverService} from './route-resolvers/role-resolver';
-import {ModifiedUserResolverService} from './route-resolvers/modified-user-resolver.service';
+import {UserResolverService} from './route-resolvers/user-resolver.service';
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -71,6 +70,7 @@ import { AddNewUserComponent } from './components/admin/users/add-new-user/add-n
 import { UserDetailsComponent } from './components/admin/users/user-details/user-details.component';
 import { UserListComponent } from './components/admin/users/user-list/user-list.component';
 import { EditUserComponent } from './components/admin/users/edit-user/edit-user.component';
+import {RoleResolverService} from './route-resolvers/role-resolver.service';
 
 
 
@@ -154,7 +154,7 @@ import { EditUserComponent } from './components/admin/users/edit-user/edit-user.
     InventoryResolverService,
     FoodItemResolverService,
     RoleResolverService,
-    ModifiedUserResolverService,
+    UserResolverService,
     AuthService,
     AuthGuard,
     {

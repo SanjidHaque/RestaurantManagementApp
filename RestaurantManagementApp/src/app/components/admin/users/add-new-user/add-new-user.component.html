@@ -1,3 +1,270 @@
-<p>
-  add-new-user works!
-</p>
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Add New User
+  </div>
+</div>
+
+<br>
+
+
+
+
+
+
+
+<!--<div class="row">
+  <div class="col-md-offset-1 col-md-5">
+    <form #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+
+      <div class="row">
+        <div class="col-md-12 new-user">
+          Create a new user
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+            >UserModel Name</label>
+          </div>
+          <div class="col-md-12">
+            <input class="validate form-control"
+                   type="text"
+                   name="UserName"
+                   #UserName="ngModel"
+                   [(ngModel)]="user.UserName"
+                   placeholder="Should be unique and cannot contain any space"
+                   required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+              [attr.data-error]="Password.errors!=null?(Password.errors.required?
+            'Required field!':'Minimum 3 characters needed'):''">Password</label>
+          </div>
+          <div class="col-md-12">
+            <input
+              class="validate form-control"
+              type="password"
+              name="Password"
+              #Password="ngModel"
+              [(ngModel)]="user.Password"
+              placeholder="At least 3 characters long"
+              required
+              minlength="3">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="col-md-12">
+            <label
+            >Email
+            </label>
+          </div>
+          <div class="col-md-12">
+            <input class="validate form-control"
+                   type="text"
+                   name="Email"
+                   #Email="ngModel"
+                   [(ngModel)]="user.Email"
+                   [pattern]="emailPattern"
+                   required>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 form-group">
+        <label>Choose a role from here</label>
+        <select
+          style="cursor: pointer;"
+          id="roleName"
+          name="roleName"
+          class="form-control"
+          ngModel
+          required
+        >
+          <option  *ngFor="let item of roles" [value] ="item.Name"  > {{ item.Name }} </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-md-12 button">
+          <button [disabled]="!userRegistrationForm.valid || isDisabled"
+                  class="btn btn-primary"
+                  type="submit">
+            Submit</button>
+
+        </div>
+      </div>
+    </form>
+  </div>-->
+
+<form (ngSubmit) = "register(user)" #user= "ngForm">
+
+  <div class="row form-group">
+    <div class="col-xl-3">
+
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        id="firstName"
+        class="form-control"
+        ngModel
+        required
+        #firstName="ngModel"
+        name="firstName">
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+        First name is required!
+      </p>
+
+
+    </div>
+
+    <div class="col-xl-3">
+
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        id="lastName"
+        class="form-control"
+        ngModel
+        name="lastName">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-4">
+
+      <label for="email">Email*</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        ngModel
+        name="email"
+        #email="ngModel"
+        required>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="email.invalid && (email.dirty || email.touched)">
+        Email is required!
+      </p>
+
+    </div>
+
+    <div class="col-xl-2">
+
+      <label for="phoneNumber">Phone Number</label>
+      <input
+        type="text"
+        id="phoneNumber"
+        class="form-control"
+        ngModel
+        name="phoneNumber">
+
+    </div>
+
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-3">
+
+      <label for="firstName">Password*</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        ngModel
+        name="password"
+        #password="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="password.invalid && (password.dirty || password.touched)">
+        Password is required!
+      </p>
+
+    </div>
+
+    <div class="col-xl-3">
+
+      <label for="confirmPassword">Confirm Password*</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        class="form-control"
+        ngModel
+        name="confirmPassword"
+        #confirmPassword="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+        Confirmation is required!
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="roleId">Role*</label>
+      <select
+        style="cursor: pointer;"
+        id="roleId"
+        class="form-control"
+        ngModel
+        required
+        #roleId="ngModel"
+        name="roleId">
+        <option value="" selected disabled hidden>Select Role</option>
+        <option
+          style="cursor: pointer;"
+          *ngFor="let role of roles"
+          [value]="role.Id">
+          {{ role.Name }}
+        </option>
+      </select>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="roleId.invalid && (roleId.dirty || roleId.touched)">
+        Role is required!
+      </p>
+
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-xl-6">
+      <hr>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="user.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Save</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/inventories"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+
+</form>

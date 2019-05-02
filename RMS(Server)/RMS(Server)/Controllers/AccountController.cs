@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -18,14 +18,16 @@ using RMS_Server_.Results;
 
 namespace RMS_Server_.Controllers
 {
-    
+
     public class AccountController : ApiController
     {
+        private readonly ApplicationDbContext _context;
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -48,6 +50,70 @@ namespace RMS_Server_.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+
+//        [AllowAnonymous]
+//        [HttpPost]
+//        [Route("api/Register")]
+//        public async Task<IHttpActionResult> Register(UserAccount userAccount)
+//        {
+////            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+////            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+//
+//            if (userAccount == null)
+//            {
+//                return NotFound();
+//            }
+//
+//            string dateTime = DateTime.Now.ToString("dddd, dd MMMM yyyy, hh:mm tt");
+//
+//            var user = new ApplicationUser()
+//            {
+//                UserName = "aswas",
+//                Email = userAccount.Email,
+//                PhoneNumber = userAccount.PhoneNumber
+//            };
+//
+//            user.FirstName = userAccount.FirstName;
+//            user.LastName = userAccount.LastName;
+//            user.AddingDateTime = DateTime.Now.ToString("dddd, dd MMMM yyyy, hh:mm tt");
+////            manager.PasswordValidator = new PasswordValidator
+////            {
+////                RequiredLength = 6
+////            };
+//            IdentityResult result = await UserManager.CreateAsync(user, userAccount.Password);
+//
+//            if (!result.Succeeded)
+//            {
+//                return GetErrorResult(result);
+//            }
+//
+//            return Ok();
+//        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("api/GetAllRole")]
+        public IHttpActionResult GetAllRole()
+        {
+            RoleStore<IdentityRole> roleStore = new RoleStore<IdentityRole>(_context);
+            RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(roleStore);
+
+            var roles = roleManager.Roles.Select(x => new {x.Id, x.Name }).ToList();
+            return Ok(roles);
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("api/GetAllUser")]
+        public IHttpActionResult GetAllUser()
+        {
+            List<ApplicationUser> users = _context.Users.ToList();           
+            return Ok(users);
+        }
+
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -316,27 +382,8 @@ namespace RMS_Server_.Controllers
             return logins;
         }
 
-        // POST api/Account/Register
-        [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
-        }
+       
+        
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

@@ -25,7 +25,7 @@ export class AuthService {
       DateTime : dateTime
     };
     const reqHeader = new HttpHeaders({'No-Auth': 'True'});
-    return this.http.post(this.rootUrl + '/api/User/Register', body);
+    return this.http.post(this.rootUrl + '/api/UserAccount/Register', body);
   }
 
   userAuthentication(userName, password) {

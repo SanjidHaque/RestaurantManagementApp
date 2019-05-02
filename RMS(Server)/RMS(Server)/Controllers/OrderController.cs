@@ -102,17 +102,17 @@ namespace RMS_Server_.Controllers
 
         [Route("api/DeleteUser")]
         [HttpPost]
-        public IHttpActionResult DeleteUser(AccountModel accountModel)
+        public IHttpActionResult DeleteUser(UserAccount userAccount)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
-            ApplicationUser user = _context.Users.FirstOrDefault(p => p.UserName == accountModel.UserName);
+            ApplicationUser user = _context.Users.FirstOrDefault(p => p.UserName == userAccount.FirstName);
             ModifiedUser modifiedUser = _context.ModifiedUsers
-                .FirstOrDefault(q => q.UserName == accountModel.UserName);
+                .FirstOrDefault(q => q.UserName == userAccount.FirstName);
 
             if (user != null && modifiedUser != null)
             {
-                manager.RemoveFromRole(user.Id, accountModel.Role);
+                manager.RemoveFromRole(user.Id, userAccount.Role);
                 _context.Users.Remove(user);              
                 _context.ModifiedUsers.Remove(modifiedUser);
                 _context.SaveChanges();
@@ -121,14 +121,15 @@ namespace RMS_Server_.Controllers
             return NotFound();
         }
         
-        [Route("api/AddNewUser")]
+        [Route("api/Register")]
         [HttpPost]
-        public IdentityResult Register(AccountModel model)
+        [AllowAnonymous]
+        public IdentityResult Register(UserAccount model)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
            
-            ApplicationUser user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
+            ApplicationUser user = new ApplicationUser() { UserName = model.FirstName, Email = model.Email };
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 3
@@ -137,15 +138,15 @@ namespace RMS_Server_.Controllers
             if (result.Succeeded)
             {
                 manager.AddToRoles(user.Id, model.Role);
-                var modifiedUser = new ModifiedUser()
-                {
-                    UserName = model.UserName,
-                    Email = model.Email,
-                    Role = model.Role,
-                    DateTime = model.DateTime
-                };
-                _context.ModifiedUsers.Add(modifiedUser);
-                _context.SaveChanges();
+//                var modifiedUser = new ModifiedUser()
+//                {
+//                    UserName = model.FirstName,
+//                    Email = model.Email,
+//                    Role = model.Role,
+//                    DateTime = model.DateTime
+//                };
+//                _context.ModifiedUsers.Add(modifiedUser);
+//                _context.SaveChanges();
             }
             return result;
         }

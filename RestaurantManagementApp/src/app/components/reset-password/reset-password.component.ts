@@ -20,7 +20,7 @@ export class ResetPasswordComponent implements OnInit {
   getResetCode(form: NgForm) {
     this.isDisabled = true;
     this.authService.resetPassword(form.value.UserName).subscribe((data: any) => {
-       if (data === 'User Name Found') {
+       if (data === 'UserAccount Name Found') {
          this.isDisabled = false;
         form.reset();
         alert('A password recovery code has sent to your email');

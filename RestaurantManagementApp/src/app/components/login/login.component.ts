@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
        (err : HttpErrorResponse) => {
          this.isLoginError = true;
          if (this.isLoginError === true ) {
-           alert('User name or password is incorrect!');
+           alert('UserAccount name or password is incorrect!');
            this.isDisabled = false;
          }
        });

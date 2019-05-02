@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {User} from '../../../models/user.model';
+import {UserAccount} from '../../../models/user-account.model';
 import {ModifiedUserModel} from '../../../models/modified-user.model';
 import {Role} from '../../../models/role.model';
 import {AuthService} from '../../../services/shared/auth.service';
@@ -17,7 +17,7 @@ import {AuthService} from '../../../services/shared/auth.service';
 export class UsersComponent implements OnInit {
 
   isDisabled = false;
-  user: User;
+  user: UserAccount;
   term = '';
   modifiedUser: ModifiedUserModel[] = [];
   emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.resetForm();
+  //  this.resetForm();
     this.route.data.
     subscribe(
       ( data: Date) => {
@@ -40,16 +40,16 @@ export class UsersComponent implements OnInit {
 
 
 
-  resetForm(form?: NgForm) {
-    if (form != null) {
-      form.reset();
-    }
-    this.user = {
-      UserName: '',
-      Password: '',
-      Email: ''
-    }
-  }
+  // resetForm(form?: NgForm) {
+  //   if (form != null) {
+  //     form.reset();
+  //   }
+  //   this.user = {
+  //     UserName: '',
+  //     Password: '',
+  //     Email: ''
+  //   }
+  // }
 
 
   OnSubmit(form: NgForm) {
@@ -71,7 +71,7 @@ export class UsersComponent implements OnInit {
              (users: any) => {
                this.modifiedUser = users;
                alert('Registration Successful!');
-               this.resetForm(form);
+             //  this.resetForm(form);
              }
          );
 

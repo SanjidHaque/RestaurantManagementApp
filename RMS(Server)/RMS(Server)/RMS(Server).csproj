@@ -262,9 +262,17 @@
     <Compile Include="Migrations\201904021201205_ingredientModelChanged.Designer.cs">
       <DependentUpon>201904021201205_ingredientModelChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905021620337_dateTimeAddedInUserTable.cs" />
+    <Compile Include="Migrations\201905021620337_dateTimeAddedInUserTable.Designer.cs">
+      <DependentUpon>201905021620337_dateTimeAddedInUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905021640593_nameFieldsAdded.cs" />
+    <Compile Include="Migrations\201905021640593_nameFieldsAdded.Designer.cs">
+      <DependentUpon>201905021640593_nameFieldsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\ForgotPassword.cs" />
@@ -370,6 +378,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904021201205_ingredientModelChanged.resx">
       <DependentUpon>201904021201205_ingredientModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021620337_dateTimeAddedInUserTable.resx">
+      <DependentUpon>201905021620337_dateTimeAddedInUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021640593_nameFieldsAdded.resx">
+      <DependentUpon>201905021640593_nameFieldsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

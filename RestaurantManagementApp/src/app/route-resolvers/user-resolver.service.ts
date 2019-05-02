@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 @Injectable()
-export class ModifiedUserResolverService  implements Resolve<ModifiedUserModel[]> {
+export class UserResolverService implements Resolve<ModifiedUserModel[]> {
 
   constructor(private userService: AuthService) { }
 

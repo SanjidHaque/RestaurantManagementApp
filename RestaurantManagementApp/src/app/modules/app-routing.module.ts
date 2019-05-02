@@ -36,6 +36,12 @@ import {EditInventoryItemComponent} from '../components/admin/inventories/edit-i
 import {AddNewInventoryItemComponent} from '../components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
 import {TableDetailsComponent} from '../components/admin/tables/table-details/table-details.component';
 import {UpdateInventoryItemComponent} from '../components/admin/inventories/update-inventory-item/update-inventory-item.component';
+import {UserListComponent} from '../components/admin/users/user-list/user-list.component';
+import {UserResolverService} from '../route-resolvers/user-resolver.service';
+import {AddNewUserComponent} from '../components/admin/users/add-new-user/add-new-user.component';
+import {UserDetailsComponent} from '../components/admin/users/user-details/user-details.component';
+import {EditUserComponent} from '../components/admin/users/edit-user/edit-user.component';
+import {RoleResolverService} from '../route-resolvers/role-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -259,6 +265,46 @@ const appRoutes: Routes = [
         {
           path: 'users',
           component: UsersComponent,
+          children:
+            [
+              {
+                path: '',
+                redirectTo: 'user-list',
+                pathMatch: 'full'
+              },
+              {
+                path: 'user-list',
+                component: UserListComponent,
+                resolve:
+                  {
+                    tables: UserResolverService
+                  }
+              },
+              {
+                path: 'add-new-user',
+                component: AddNewUserComponent,
+                resolve:
+                  {
+                    roles: RoleResolverService
+                  }
+              },
+              {
+                path: ':userId',
+                component: UserDetailsComponent,
+                resolve:
+                  {
+                    tables: UserResolverService
+                  }
+              },
+              {
+                path: ':userId/edit-user',
+                component: EditUserComponent,
+                resolve:
+                  {
+                    tables: UserResolverService
+                  }
+              }
+            ]
         }
       ]
   },

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web.Http;
 using System.Data.Entity;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,15 +14,14 @@ using RMS_Server_.Models;
 
 
 namespace RMS_Server_.Controllers
-{ 
+{
     public class OrderController : ApiController
     {
         private readonly ApplicationDbContext _context;
         private OrderController()
         {
             _context = new ApplicationDbContext();
-        }
-       
+        }      
 
         [HttpPost]
         [Route("api/ResetPassword")]
@@ -58,8 +58,6 @@ namespace RMS_Server_.Controllers
                 smtp.Credentials = nc;
                 smtp.Send(msg);
 
-          
-
                 string callbackUrl = string.Format("http://www.google.com?userId={0}&code={1}", user.Id, code);
                 manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
@@ -71,7 +69,7 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         [Route("api/NewPassword")]
         [AllowAnonymous]
-        public string NewPassword(ForgotPassword forgotPassword)
+        public IHttpActionResult NewPassword(ForgotPassword forgotPassword)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
@@ -84,79 +82,15 @@ namespace RMS_Server_.Controllers
                 String hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
                 userStore.SetPasswordHashAsync(user, hashedNewPassword);
                 userStore.UpdateAsync(user);
-                return "Successful";
-            }
-            return "Not Successful";
-        }
-
-
-
-        [Route("api/GetUsersList")]
-        [HttpGet]
-        public IHttpActionResult GetUsersList()
-        {
-           List<ModifiedUser> modifiedUser = _context.ModifiedUsers.OrderBy(x => x.UserName).ToList();
-           return Ok(modifiedUser);
-        }
-
-
-        [Route("api/DeleteUser")]
-        [HttpPost]
-        public IHttpActionResult DeleteUser(UserAccount userAccount)
-        {
-            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
-            ApplicationUser user = _context.Users.FirstOrDefault(p => p.UserName == userAccount.FirstName);
-            ModifiedUser modifiedUser = _context.ModifiedUsers
-                .FirstOrDefault(q => q.UserName == userAccount.FirstName);
-
-            if (user != null && modifiedUser != null)
-            {
-                manager.RemoveFromRole(user.Id, userAccount.Role);
-                _context.Users.Remove(user);              
-                _context.ModifiedUsers.Remove(modifiedUser);
-                _context.SaveChanges();
                 return Ok();
             }
             return NotFound();
         }
-        
-        [Route("api/Register")]
-        [HttpPost]
-        [AllowAnonymous]
-        public IdentityResult Register(UserAccount model)
-        {
-            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
-           
-            ApplicationUser user = new ApplicationUser() { UserName = model.FirstName, Email = model.Email };
-            manager.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 3
-            };
-            IdentityResult result = manager.Create(user, model.Password);
-            if (result.Succeeded)
-            {
-                manager.AddToRoles(user.Id, model.Role);
-//                var modifiedUser = new ModifiedUser()
-//                {
-//                    UserName = model.FirstName,
-//                    Email = model.Email,
-//                    Role = model.Role,
-//                    DateTime = model.DateTime
-//                };
-//                _context.ModifiedUsers.Add(modifiedUser);
-//                _context.SaveChanges();
-            }
-            return result;
-        }
 
-        
-
-       
 
 
 
+        
 
         [Route("api/AddNewOrder")]
         [HttpPost]
@@ -215,7 +149,6 @@ namespace RMS_Server_.Controllers
 
             return NotFound();
         }
- 
            
         [HttpGet]
         [Route("api/GetAllOrder")]
@@ -227,19 +160,6 @@ namespace RMS_Server_.Controllers
                 .ToList();
             return Ok(orders);
         }
-
-        
-
-      
-
-
-
-
-       
-
-
-        
- 
 
     }
 }

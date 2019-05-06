@@ -52,44 +52,40 @@ namespace RMS_Server_.Controllers
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
 
-//        [AllowAnonymous]
-//        [HttpPost]
-//        [Route("api/Register")]
-//        public async Task<IHttpActionResult> Register(UserAccount userAccount)
-//        {
-////            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-////            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
-//
-//            if (userAccount == null)
-//            {
-//                return NotFound();
-//            }
-//
-//            string dateTime = DateTime.Now.ToString("dddd, dd MMMM yyyy, hh:mm tt");
-//
-//            var user = new ApplicationUser()
-//            {
-//                UserName = "aswas",
-//                Email = userAccount.Email,
-//                PhoneNumber = userAccount.PhoneNumber
-//            };
-//
-//            user.FirstName = userAccount.FirstName;
-//            user.LastName = userAccount.LastName;
-//            user.AddingDateTime = DateTime.Now.ToString("dddd, dd MMMM yyyy, hh:mm tt");
-////            manager.PasswordValidator = new PasswordValidator
-////            {
-////                RequiredLength = 6
-////            };
-//            IdentityResult result = await UserManager.CreateAsync(user, userAccount.Password);
-//
-//            if (!result.Succeeded)
-//            {
-//                return GetErrorResult(result);
-//            }
-//
-//            return Ok();
-//        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("api/Register")]
+        public IHttpActionResult Register(UserAccount userAccount)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+
+            ApplicationUser user = new ApplicationUser
+            {
+                UserName = userAccount.UserName,
+                Email = userAccount.Email,
+                PhoneNumber = userAccount.PhoneNumber,
+                FirstName = userAccount.FirstName,
+                LastName = userAccount.LastName,
+                AddingDateTime = DateTime.Now.ToString("dddd, dd MMMM yyyy, hh:mm tt")
+            };
+
+            manager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6
+            };
+            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            {
+                RequireUniqueEmail = true
+            };
+            IdentityResult result = manager.Create(user, userAccount.Password);
+            if (result.Succeeded)
+            {
+                manager.AddToRole(user.Id, userAccount.RoleName);
+                return Ok(result);
+            }
+            return Ok(result);
+        }
 
 
         [HttpGet]
@@ -110,10 +106,60 @@ namespace RMS_Server_.Controllers
         [Route("api/GetAllUser")]
         public IHttpActionResult GetAllUser()
         {
-            List<ApplicationUser> users = _context.Users.ToList();           
-            return Ok(users);
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            List<UserAccount> userAccounts = new List<UserAccount>();
+            List<ApplicationUser> users = _context.Users.ToList(); 
+            
+            foreach (var user in users)
+            {
+                foreach (var role in user.Roles)
+                {
+                    string roleName = "";
+                    if (role.RoleId == "1")
+                    {
+                        roleName = "Admin";
+                    }
+                    else
+                    {
+                        roleName = "Cashier";
+                    }
+                    UserAccount userAccount = new UserAccount()
+                    {
+                        UserName = user.UserName,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        PhoneNumber = user.PhoneNumber,
+                        Password = "",
+                        AddingDateTime = user.AddingDateTime,
+                        RoleName = roleName
+                    };
+                    userAccounts.Add(userAccount);
+                }
+            }
+
+            return Ok(userAccounts);
         }
 
+
+        [Route("api/DeleteUser/{userId}")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public IHttpActionResult DeleteUser(string userId)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            ApplicationUser user = _context.Users.FirstOrDefault(p => p.Id == userId);
+
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

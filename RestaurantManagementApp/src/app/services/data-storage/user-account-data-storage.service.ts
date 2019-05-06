@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TableDataStorageService} from './table-data-storage.service';
 import {Table} from '../../models/table.model';
 import {Role} from '../../models/role.model';
+import {UserAccount} from '../../models/user-account.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountDataStorageService {
+export class UserAccountDataStorageService {
 
   private rootUrl = '';
 
@@ -18,6 +19,15 @@ export class AccountDataStorageService {
 
   getAllRole() {
     return this.http.get<Role[]>(this.rootUrl + '/api/GetAllRole');
+  }
+
+  register(userAccount: UserAccount) {
+    const reqHeader = new HttpHeaders({'No-Auth': 'True'});
+    return this.http.post(this.rootUrl + '/api/Register', userAccount);
+  }
+
+  getAllUser() {
+
   }
 
 }

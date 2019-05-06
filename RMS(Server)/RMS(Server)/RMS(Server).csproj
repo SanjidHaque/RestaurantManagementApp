@@ -270,6 +270,10 @@
     <Compile Include="Migrations\201905021640593_nameFieldsAdded.Designer.cs">
       <DependentUpon>201905021640593_nameFieldsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905061938159_ModeifiedUserModelDelete3d.cs" />
+    <Compile Include="Migrations\201905061938159_ModeifiedUserModelDelete3d.Designer.cs">
+      <DependentUpon>201905061938159_ModeifiedUserModelDelete3d.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\UserAccount.cs" />
@@ -280,7 +284,6 @@
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\InventoryHistory.cs" />
-    <Compile Include="Models\ModifiedUser.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderedItem.cs" />
     <Compile Include="Models\Table.cs" />
@@ -384,6 +387,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905021640593_nameFieldsAdded.resx">
       <DependentUpon>201905021640593_nameFieldsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905061938159_ModeifiedUserModelDelete3d.resx">
+      <DependentUpon>201905061938159_ModeifiedUserModelDelete3d.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

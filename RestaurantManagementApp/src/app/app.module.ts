@@ -65,7 +65,7 @@ import {InventoryDataStorageService} from './services/data-storage/inventory-dat
 import { ToastrModule } from 'ng6-toastr-notifications';
 import {FoodItemDataStorageService} from './services/data-storage/food-item-data-storage.service';
 import {OrderDataStorageService} from './services/data-storage/order-data-storage.service';
-import {AccountDataStorageService} from './services/data-storage/account-data-storage.service';
+import {UserAccountDataStorageService} from './services/data-storage/user-account-data-storage.service';
 import { AddNewUserComponent } from './components/admin/users/add-new-user/add-new-user.component';
 import { UserDetailsComponent } from './components/admin/users/user-details/user-details.component';
 import { UserListComponent } from './components/admin/users/user-list/user-list.component';
@@ -148,7 +148,7 @@ import {RoleResolverService} from './route-resolvers/role-resolver.service';
     InventoryDataStorageService,
     FoodItemDataStorageService,
     OrderDataStorageService,
-    AccountDataStorageService,
+    UserAccountDataStorageService,
     TableResolverService,
     OrderResolverService,
     InventoryResolverService,

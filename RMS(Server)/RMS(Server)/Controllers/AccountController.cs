@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.OAuth;
 using RMS_Server_.Models;
 using RMS_Server_.Results;
@@ -156,6 +159,87 @@ namespace RMS_Server_.Controllers
             {
                 _context.Users.Remove(user);
                 _context.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+
+
+       
+
+        [Route("api/EditRoleName")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> EditRoleName()
+        {
+            RoleStore<IdentityRole> roleStore = new RoleStore<IdentityRole>(_context);
+            RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(roleStore);
+            var role = await roleManager.FindByIdAsync("2");
+
+            role.Name = "Worker";
+            await roleManager.UpdateAsync(role);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/ResetPassword")]
+        [AllowAnonymous]
+        public string ResetPassword(ForgotPassword forgotPassword)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
+
+            manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
+            ApplicationUser user = manager.FindByName(forgotPassword.UserName);
+
+            if (user != null)
+            {
+                string code = manager.GeneratePasswordResetToken(user.Id);
+                string email = manager.GetEmail(user.Id);
+                string fromaddr = "apphodoo@gmail.com";
+                string toaddr = email;
+                string password = "hodoo123";
+
+
+                System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+                msg.Subject = "Hodoo Reset Password";
+                msg.From = new MailAddress(fromaddr);
+                msg.Body = "\n\nReset Code:  " + user.Id + "\n\n\n";
+                msg.To.Add(new MailAddress(toaddr));
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.EnableSsl = true;
+                NetworkCredential nc = new NetworkCredential(fromaddr, password);
+                smtp.Credentials = nc;
+                smtp.Send(msg);
+
+                string callbackUrl = string.Format("http://www.google.com?userId={0}&code={1}", user.Id, code);
+                manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                return "User Name Found";
+            }
+            return "User Name Not Found";
+        }
+
+        [HttpPost]
+        [Route("api/NewPassword")]
+        [AllowAnonymous]
+        public IHttpActionResult NewPassword(ForgotPassword forgotPassword)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
+
+            manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
+            ApplicationUser user = manager.FindById(forgotPassword.Id);
+            if (user != null)
+            {
+                String hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
+                userStore.SetPasswordHashAsync(user, hashedNewPassword);
+                userStore.UpdateAsync(user);
                 return Ok();
             }
             return NotFound();

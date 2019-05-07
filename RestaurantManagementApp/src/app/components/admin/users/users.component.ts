@@ -32,8 +32,7 @@ export class UsersComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Date) => {
-        this.roles = data['roles'];
-        this.modifiedUser = data['users'];
+      //  this.roles = data['roles'];
       }
     );
   }

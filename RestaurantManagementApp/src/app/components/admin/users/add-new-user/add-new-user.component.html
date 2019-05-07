@@ -138,16 +138,16 @@
   <div class="row form-group">
     <div class="col-xl-6">
 
-      <label for="role">Role*</label>
+      <label for="roleName">Role*</label>
       <select
         style="cursor: pointer;"
-        id="role"
+        id="roleName"
         class="form-control"
         ngModel
         required
-        #role="ngModel"
-        name="role">
-        <option value="" selected disabled hidden>Select Role</option>
+        #roleName="ngModel"
+        name="roleName">
+        <option value="" selected>Select Role</option>
         <option
           style="cursor: pointer;"
           *ngFor="let role of roles"
@@ -158,7 +158,7 @@
 
       <p
         style="color: red; margin-bottom: 0;"
-        *ngIf="role.invalid && (role.dirty || role.touched)">
+        *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)">
         Role is required!
       </p>
 

@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-cell {
+  border: 1px solid #ab9090;
+  text-align: center;
+}
+
+.mat-header-cell {
+  border: 1px solid #ab9090;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}

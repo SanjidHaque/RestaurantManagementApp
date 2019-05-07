@@ -52,7 +52,7 @@ export class AddNewUserComponent implements OnInit {
       form.value.password,
       form.value.phoneNumber,
       '',
-      ['', form.value.role]
+       form.value.roleName
     );
     this.userAccountDataStorageService.register(userAccount)
       .subscribe(

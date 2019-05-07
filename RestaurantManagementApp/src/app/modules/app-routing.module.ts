@@ -277,7 +277,7 @@ const appRoutes: Routes = [
                 component: UserListComponent,
                 resolve:
                   {
-                    tables: UserResolverService
+                    users: UserResolverService
                   }
               },
               {
@@ -293,7 +293,7 @@ const appRoutes: Routes = [
                 component: UserDetailsComponent,
                 resolve:
                   {
-                    tables: UserResolverService
+                    users: UserResolverService
                   }
               },
               {
@@ -301,7 +301,7 @@ const appRoutes: Routes = [
                 component: EditUserComponent,
                 resolve:
                   {
-                    tables: UserResolverService
+                    users: UserResolverService
                   }
               }
             ]

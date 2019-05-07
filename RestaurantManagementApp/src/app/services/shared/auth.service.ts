@@ -81,7 +81,7 @@ export class AuthService {
   }
 
   getUsers() {
-    return this.http.get<ModifiedUserModel[]>(this.rootUrl + '/api/GetUsersList');
+ //   return this.http.get<ModifiedUserModel[]>(this.rootUrl + '/api/GetUsersList');
   }
 
 }

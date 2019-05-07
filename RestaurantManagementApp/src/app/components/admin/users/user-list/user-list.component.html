@@ -1,3 +1,66 @@
-<p>
-  user-list works!
-</p>
+
+  <mat-form-field>
+    <input
+      style="width: 100%;"
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Search...">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8" style="box-shadow: none!important;">
+    <table  mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="UserName">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> User Name</th>
+        <td
+          style="width: 15%"
+          mat-cell *matCellDef="let row"> {{row.UserName}} </td>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="RoleName">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+        <td
+          style="width: 10%"
+          mat-cell *matCellDef="let row"> {{row.RoleName}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="PhoneNumber">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+        <td
+          style="width: 10%"
+          mat-cell *matCellDef="let row"> 01988161616</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="AddingDateTime">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Adding Date </th>
+        <td
+          style="width: 20%"
+          mat-cell *matCellDef="let row"> {{row.AddingDateTime}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          style="cursor: pointer;"
+          title="See details"
+          routerLink="/admin/users/{{ row.Id }}">
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+
+

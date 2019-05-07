@@ -27,6 +27,14 @@ export class UserAccountDataStorageService {
   }
 
   getAllUser() {
+    return this.http.get<UserAccount[]>(this.rootUrl + '/api/GetAllUser');
+  }
+
+  editUser() {
+
+  }
+
+  deleteUser() {
 
   }
 

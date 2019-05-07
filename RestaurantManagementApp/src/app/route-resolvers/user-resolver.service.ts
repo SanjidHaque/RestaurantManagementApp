@@ -1,17 +1,18 @@
-import {AuthService} from '../services/shared/auth.service';
-import {ModifiedUserModel} from '../models/modified-user.model';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+
+import {UserAccount} from '../models/user-account.model';
+import {UserAccountDataStorageService} from '../services/data-storage/user-account-data-storage.service';
 
 @Injectable()
-export class UserResolverService implements Resolve<ModifiedUserModel[]> {
+export class UserResolverService implements Resolve<UserAccount[]> {
 
-  constructor(private userService: AuthService) { }
+  constructor(private userAccountDataStorageService: UserAccountDataStorageService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ModifiedUserModel[]> |
-    Promise<ModifiedUserModel[]> | ModifiedUserModel[] {
-    return this.userService.getUsers();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserAccount[]> |
+    Promise<UserAccount[]> | UserAccount[] {
+    return this.userAccountDataStorageService.getAllUser();
   }
 
 }

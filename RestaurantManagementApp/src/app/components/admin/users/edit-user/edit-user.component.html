@@ -1,3 +1,180 @@
-<p>
-  edit-user works!
-</p>
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Edit Information of {{ userAccount.UserName }}
+  </div>
+</div>
+
+<br>
+
+
+<form (ngSubmit) = "editUserAccount(userAccount)" #userAccount= "ngForm">
+
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="email">User Name*</label>
+      <input
+        type="text"
+        id="userName"
+        class="form-control"
+        [ngModel]="userAccount.UserName"
+        name="userName"
+        #userName="ngModel"
+        required>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+        User Name is required!
+      </p>
+
+    </div>
+
+
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        id="fullName"
+        class="form-control"
+        ngModel
+        name="fullName">
+
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-4">
+
+      <label for="email">Email*</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        ngModel
+        name="email"
+        #email="ngModel"
+        required>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="email.invalid && (email.dirty || email.touched)">
+        Email is required!
+      </p>
+
+    </div>
+
+    <div class="col-xl-2">
+
+      <label for="phoneNumber">Phone Number</label>
+      <input
+        type="text"
+        id="phoneNumber"
+        class="form-control"
+        ngModel
+        name="phoneNumber">
+
+    </div>
+
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-3">
+
+      <label for="firstName">Password*</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        ngModel
+        name="password"
+        #password="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="password.invalid && (password.dirty || password.touched)">
+        Password is required!
+      </p>
+
+    </div>
+
+    <div class="col-xl-3">
+
+      <label for="confirmPassword">Confirm Password*</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        class="form-control"
+        ngModel
+        name="confirmPassword"
+        #confirmPassword="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+        Confirmation is required!
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="roleName">Role*</label>
+      <select
+        style="cursor: pointer;"
+        id="roleName"
+        class="form-control"
+        ngModel
+        required
+        #roleName="ngModel"
+        name="roleName">
+        <option value="" selected>Select Role</option>
+        <option
+          style="cursor: pointer;"
+          *ngFor="let role of roles"
+          [value]="role.Name">
+          {{ role.Name }}
+        </option>
+      </select>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)">
+        Role is required!
+      </p>
+
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-xl-6">
+      <hr>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="userAccount.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Save</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/inventories"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+
+</form>

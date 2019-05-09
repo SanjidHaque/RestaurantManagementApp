@@ -27,7 +27,7 @@ export class ResetPasswordComponent implements OnInit {
         this.router.navigate(['/new-password']);
       } else {
          this.isDisabled = false;
-        alert('Incorrect user name!');
+        alert('Incorrect userAccount name!');
       }
     });
 

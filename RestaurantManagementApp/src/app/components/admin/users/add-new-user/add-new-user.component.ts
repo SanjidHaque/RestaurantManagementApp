@@ -33,7 +33,7 @@ export class AddNewUserComponent implements OnInit {
       );
   }
 
-  register(form: NgForm) {
+  addNewUserAccount(form: NgForm) {
     if (form.value.password !== form.value.confirmPassword) {
       this.toastr.errorToastr('Passwords do not match', 'Error', {
         toastTimeout: 10000,
@@ -47,8 +47,7 @@ export class AddNewUserComponent implements OnInit {
     const userAccount = new UserAccount(
       '',
       form.value.userName,
-      form.value.firstName,
-      form.value.lastName,
+      form.value.fullName,
       form.value.email,
       form.value.password,
       form.value.phoneNumber,
@@ -59,7 +58,7 @@ export class AddNewUserComponent implements OnInit {
       .subscribe(
         (result: any) => {
           if (result.Succeeded) {
-            this.toastr.successToastr('New user added', 'Success', {
+            this.toastr.successToastr('New userAccount added', 'Success', {
               toastTimeout: 10000,
               newestOnTop: true,
               showCloseButton: true

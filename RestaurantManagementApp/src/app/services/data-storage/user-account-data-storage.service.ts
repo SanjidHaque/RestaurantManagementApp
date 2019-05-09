@@ -24,19 +24,19 @@ export class UserAccountDataStorageService {
 
   register(userAccount: UserAccount) {
     const reqHeader = new HttpHeaders({'No-Auth': 'True'});
-    return this.http.post(this.rootUrl + '/api/Register', userAccount);
+    return this.http.post(this.rootUrl + '/api/AddNewUserAccount', userAccount);
   }
 
-  getAllUser() {
-    return this.http.get<UserAccount[]>(this.rootUrl + '/api/GetAllUser');
+  getAllUserAccount() {
+    return this.http.get<UserAccount[]>(this.rootUrl + '/api/GetAllUserAccount');
   }
 
-  editUser(userAccount: UserAccount) {
-    return this.http.put<UserAccount>(this.rootUrl + '/api/EditUser', userAccount);
+  editUserAccount(userAccount: UserAccount) {
+    return this.http.put<UserAccount>(this.rootUrl + '/api/EditUserAccount', userAccount);
   }
 
-  deleteUser(userId: string) {
-    return this.http.delete(`${this.rootUrl + '/api/DeleteUser'}/${userId}` );
+  deleteUserAccount(userAccountId: string) {
+    return this.http.delete(`${this.rootUrl + '/api/DeleteUserAccount'}/${userAccountId}` );
   }
 
 }

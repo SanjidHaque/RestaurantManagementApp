@@ -37,7 +37,11 @@ export class InventoryDetailsComponent implements OnInit {
         this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
 
         if (this.inventory === undefined) {
-          window.alert('Item not found!');
+          this.toastr.errorToastr('Item not found', 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
           this.router.navigate(['admin/inventories']);
         }
       }

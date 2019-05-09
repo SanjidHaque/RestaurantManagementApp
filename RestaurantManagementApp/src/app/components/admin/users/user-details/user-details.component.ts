@@ -23,7 +23,7 @@ export class UserDetailsComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['userId'];
+          this.userId = params['userAccountId'];
         }
       );
   }
@@ -31,7 +31,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(
       ( data: UserAccount[]) => {
-        this.users = data['users'];
+        this.users = data['userAccounts'];
         this.user = this.users.find( x => x.Id === this.userId);
 
         if (this.user === undefined) {
@@ -40,30 +40,30 @@ export class UserDetailsComponent implements OnInit {
             newestOnTop: true,
             showCloseButton: true
           });
-          this.router.navigate(['admin/users']);
+          this.router.navigate(['admin/userAccounts']);
         }
       }
     );
   }
 
   deleteUser() {
-    const dialog = confirm('Delete this user?\n' +
-      'You will lose any kind of data associated with the current user!');
+    const dialog = confirm('Delete this user account?\n' +
+      'You will lose any kind of data associated with the current userAccount!');
     if (dialog === true) {
-    //  this.confirmEvent();
+      this.confirmEvent();
     }
   }
 
-  // confirmEvent() {
-  //   this.userAccountDataStorageService.deleteUser(this.userId).subscribe(
-  //     (data: any) => {
-  //       this.toastr.successToastr('Removed from shop', 'Success', {
-  //         toastTimeout: 10000,
-  //         newestOnTop: true,
-  //         showCloseButton: true
-  //       });
-  //       this.router.navigate(['admin/users']);
-  //     });
-  // }
+  confirmEvent() {
+    this.userAccountDataStorageService.deleteUserAccount(this.userId).subscribe(
+      (data: any) => {
+        this.toastr.successToastr('Removed from shop', 'Success', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        this.router.navigate(['admin/userAccounts']);
+      });
+  }
 
 }

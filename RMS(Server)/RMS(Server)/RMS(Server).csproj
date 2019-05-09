@@ -274,6 +274,10 @@
     <Compile Include="Migrations\201905061938159_ModeifiedUserModelDelete3d.Designer.cs">
       <DependentUpon>201905061938159_ModeifiedUserModelDelete3d.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905091216073_fullName.cs" />
+    <Compile Include="Migrations\201905091216073_fullName.Designer.cs">
+      <DependentUpon>201905091216073_fullName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -391,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905061938159_ModeifiedUserModelDelete3d.resx">
       <DependentUpon>201905061938159_ModeifiedUserModelDelete3d.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905091216073_fullName.resx">
+      <DependentUpon>201905091216073_fullName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

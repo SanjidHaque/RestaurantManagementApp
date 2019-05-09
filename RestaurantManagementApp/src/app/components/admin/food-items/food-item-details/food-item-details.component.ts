@@ -42,9 +42,18 @@ export class FoodItemDetailsComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
-        this.foodItems = data['foodItems'];
-        this.inventories = data['inventories'];
-        this.setFoodItemImage();
+        if (this.foodItem === undefined) {
+          this.toastr.errorToastr('Item not found', 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          this.router.navigate(['admin/food-items']);
+        } else {
+          this.foodItems = data['foodItems'];
+          this.inventories = data['inventories'];
+          this.setFoodItemImage();
+        }
       }
     );
   }

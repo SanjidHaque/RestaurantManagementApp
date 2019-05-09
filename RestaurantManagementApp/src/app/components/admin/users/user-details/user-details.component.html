@@ -20,9 +20,9 @@
 </div>
 <br>
 
-<div class="row" *ngIf="user.FirstName !== '' || user.LastName !== ''">
+<div class="row" *ngIf="user.FullName !== ''">
   <div class="col-xl-12">
-    Full Name: {{ user.FirstName}} {{ user.LastName }}
+    Full Name: {{ user.FullName}}
   </div>
 </div>
 
@@ -51,14 +51,16 @@
   <div class="col-xl-10">
 
     <button
-      routerLink="/admin/users/{{userId}}/edit-user"
-      class="btn btn-primary">Change Password</button>
-
+      routerLink="/admin/users/{{userId}}/change-password-by-admin"
+      class="btn btn-info">Change Password</button> &nbsp;
     <button
       routerLink="/admin/users/{{userId}}/edit-user"
       class="btn btn-warning">Edit</button> &nbsp;
 
     <button
+      [hidden]="
+      user.Id === '6ed0a6d2-e6b1-47a8-b33f-fc40932b2f3d' ||
+      user.Id === 'e9c7a759-7ef7-4dc0-9348-736406d6e8cd'"
       (click)="deleteUser()"
       class="btn btn-danger">Delete</button>
 

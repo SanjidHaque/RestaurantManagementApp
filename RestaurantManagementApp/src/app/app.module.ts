@@ -71,6 +71,7 @@ import { UserDetailsComponent } from './components/admin/users/user-details/user
 import { UserListComponent } from './components/admin/users/user-list/user-list.component';
 import { EditUserComponent } from './components/admin/users/edit-user/edit-user.component';
 import {RoleResolverService} from './route-resolvers/role-resolver.service';
+import { ChangePasswordByAdminComponent } from './components/admin/users/change-password-by-admin/change-password-by-admin.component';
 
 
 
@@ -117,7 +118,8 @@ import {RoleResolverService} from './route-resolvers/role-resolver.service';
     AddNewUserComponent,
     UserDetailsComponent,
     UserListComponent,
-    EditUserComponent
+    EditUserComponent,
+    ChangePasswordByAdminComponent
   ],
   imports: [
     BrowserModule,

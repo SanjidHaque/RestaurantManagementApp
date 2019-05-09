@@ -12,7 +12,7 @@ export class UserResolverService implements Resolve<UserAccount[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserAccount[]> |
     Promise<UserAccount[]> | UserAccount[] {
-    return this.userAccountDataStorageService.getAllUser();
+    return this.userAccountDataStorageService.getAllUserAccount();
   }
 
 }

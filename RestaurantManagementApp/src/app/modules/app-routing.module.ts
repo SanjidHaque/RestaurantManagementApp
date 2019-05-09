@@ -42,6 +42,7 @@ import {AddNewUserComponent} from '../components/admin/users/add-new-user/add-ne
 import {UserDetailsComponent} from '../components/admin/users/user-details/user-details.component';
 import {EditUserComponent} from '../components/admin/users/edit-user/edit-user.component';
 import {RoleResolverService} from '../route-resolvers/role-resolver.service';
+import {ChangePasswordByAdminComponent} from '../components/admin/users/change-password-by-admin/change-password-by-admin.component';
 
 
 const appRoutes: Routes = [
@@ -127,7 +128,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':foodItemId',
+                path: ':foodItem-id',
                 component: FoodItemDetailsComponent,
                 resolve:
                   {
@@ -136,7 +137,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':foodItemId/edit-food-item',
+                path: ':foodItem-id/edit-food-item',
                 component: EditFoodItemComponent,
                 resolve:
                   {
@@ -169,7 +170,7 @@ const appRoutes: Routes = [
                 component: AddNewInventoryItemComponent
               },
               {
-                path: ':inventoryId',
+                path: ':inventory-id',
                 component: InventoryDetailsComponent,
                 resolve:
                   {
@@ -177,7 +178,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':inventoryId/edit-inventory-item',
+                path: ':inventory-id/edit-inventory-item',
                 component: EditInventoryItemComponent,
                 resolve:
                   {
@@ -185,7 +186,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':inventoryId/update-inventory-item',
+                path: ':inventory-id/update-inventory-item',
                 component: UpdateInventoryItemComponent,
                 resolve:
                   {
@@ -245,7 +246,7 @@ const appRoutes: Routes = [
                 component: AddNewTableComponent
               },
               {
-                path: ':tableId',
+                path: ':table-id',
                 component: TableDetailsComponent,
                 resolve:
                   {
@@ -253,7 +254,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':tableId/edit-table',
+                path: ':table-id/edit-table',
                 component: EditTableComponent,
                 resolve:
                   {
@@ -263,17 +264,17 @@ const appRoutes: Routes = [
             ]
         },
         {
-          path: 'users',
+          path: 'user-accounts',
           component: UsersComponent,
           children:
             [
               {
                 path: '',
-                redirectTo: 'user-list',
+                redirectTo: 'user-account-list',
                 pathMatch: 'full'
               },
               {
-                path: 'user-list',
+                path: 'user-account-list',
                 component: UserListComponent,
                 resolve:
                   {
@@ -281,7 +282,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: 'add-new-user',
+                path: 'add-new-user-account',
                 component: AddNewUserComponent,
                 resolve:
                   {
@@ -289,7 +290,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':userId',
+                path: ':user-account-id',
                 component: UserDetailsComponent,
                 resolve:
                   {
@@ -297,8 +298,16 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':userId/edit-user',
+                path: ':user-account-id/edit-user-account',
                 component: EditUserComponent,
+                resolve:
+                  {
+                    users: UserResolverService
+                  }
+              },
+              {
+                path: ':user-account-id/change-password-by-admin',
+                component: ChangePasswordByAdminComponent,
                 resolve:
                   {
                     users: UserResolverService

@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit {
   //   if (form != null) {
   //     form.reset();
   //   }
-  //   this.user = {
+  //   this.userAccount = {
   //     UserName: '',
   //     Password: '',
   //     Email: ''
@@ -67,8 +67,8 @@ export class UsersComponent implements OnInit {
             dateTime);
          // this.authService.getUsers()
          //   .subscribe(
-         //     (users: any) => {
-         //       this.modifiedUser = users;
+         //     (userAccounts: any) => {
+         //       this.modifiedUser = userAccounts;
          //       alert('Registration Successful!');
          //     //  this.resetForm(form);
          //     }
@@ -83,16 +83,16 @@ export class UsersComponent implements OnInit {
   }
 
 
-  // deleteUser(user: ModifiedUserModel, index: number) {
-  //   const dialog = confirm('Delete this user?\n' +
-  //     'You will lose any kind of data associated with the current user!');
+  // deleteUserAccount(userAccount: ModifiedUserModel, index: number) {
+  //   const dialog = confirm('Delete this userAccount?\n' +
+  //     'You will lose any kind of data associated with the current userAccount!');
   //   if (dialog === true) {
-  //     this.authService.deleteUser(user).subscribe(
+  //     this.authService.deleteUserAccount(userAccount).subscribe(
   //       (data: any) => {
   //         this.authService.getUsers()
   //           .subscribe(
-  //             (users: any) => {
-  //               this.modifiedUser = users;
+  //             (userAccounts: any) => {
+  //               this.modifiedUser = userAccounts;
   //             }
   //           );
   //       }

@@ -10,8 +10,7 @@ namespace RMS_Server_.Models
     public class ApplicationUser : IdentityUser
     {
         public string AddingDateTime { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
                                
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)

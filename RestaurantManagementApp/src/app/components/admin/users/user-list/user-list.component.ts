@@ -11,7 +11,7 @@ import {UserAccount} from '../../../../models/user-account.model';
 })
 export class UserListComponent implements OnInit, AfterViewInit {
 
-  users: UserAccount[] = [];
+  userAccounts: UserAccount[] = [];
 
   displayedColumns: string[] =
     [
@@ -31,8 +31,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
     this.route.data
       .subscribe(
         (data: Table[]) => {
-          this.users = data['users'];
-          this.dataSource = new MatTableDataSource(this.users);
+          this.userAccounts = data['userAccounts'];
+          this.dataSource = new MatTableDataSource(this.userAccounts);
         }
       );
   }

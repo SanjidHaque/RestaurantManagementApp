@@ -68,8 +68,7 @@ namespace RMS_Server_.Controllers
                 UserName = userAccount.UserName,
                 Email = userAccount.Email,
                 PhoneNumber = userAccount.PhoneNumber,
-                FirstName = userAccount.FirstName,
-                LastName = userAccount.LastName,
+                FullName = userAccount.FullName,
                 AddingDateTime = DateTime.Now.ToString("dddd, dd MMMM yyyy, hh:mm tt")
             };
 
@@ -131,8 +130,7 @@ namespace RMS_Server_.Controllers
                     {
                         Id = applicationUser.Id,
                         UserName = applicationUser.UserName,
-                        FirstName = applicationUser.FirstName,
-                        LastName = applicationUser.LastName,
+                        FullName = applicationUser.FullName,
                         Email = applicationUser.Email,
                         PhoneNumber = applicationUser.PhoneNumber,
                         Password = "",
@@ -161,23 +159,6 @@ namespace RMS_Server_.Controllers
                 return Ok();
             }
             return NotFound();
-        }
-
-
-       
-
-        [Route("api/EditRoleName")]
-        [HttpPut]
-        [AllowAnonymous]
-        public async Task<IHttpActionResult> EditRoleName()
-        {
-            RoleStore<IdentityRole> roleStore = new RoleStore<IdentityRole>(_context);
-            RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(roleStore);
-            IdentityRole role = await roleManager.FindByIdAsync("2");
-
-            role.Name = "Worker";
-            await roleManager.UpdateAsync(role);
-            return Ok();
         }
 
 
@@ -250,8 +231,7 @@ namespace RMS_Server_.Controllers
             }
                        
             applicationUser.UserName = editUserAccount.UserName;
-            applicationUser.FirstName = editUserAccount.FirstName;
-            applicationUser.LastName = editUserAccount.LastName;
+            applicationUser.FullName = editUserAccount.FullName;
             applicationUser.Email = editUserAccount.Email;
             applicationUser.PhoneNumber = editUserAccount.PhoneNumber;
             await manager.UpdateAsync(applicationUser);

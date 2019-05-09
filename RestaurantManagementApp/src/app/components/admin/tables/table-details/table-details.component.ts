@@ -23,7 +23,7 @@ export class TableDetailsComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.tableId = +params['tableId'];
+          this.tableId = +params['table-id'];
         }
       );
   }
@@ -35,7 +35,7 @@ export class TableDetailsComponent implements OnInit {
         this.table = this.tables.find( x => x.Id === this.tableId);
 
         if (this.table === undefined) {
-          this.toastr.errorToastr('Table is not found', 'Error', {
+          this.toastr.errorToastr('Table not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
             showCloseButton: true

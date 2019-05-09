@@ -2,8 +2,7 @@ export class UserAccount {
   constructor(
     public Id: string,
     public UserName: string,
-    public FirstName: string,
-    public LastName: string,
+    public FullName: string,
     public Email: string,
     public Password: string,
     public PhoneNumber: string,

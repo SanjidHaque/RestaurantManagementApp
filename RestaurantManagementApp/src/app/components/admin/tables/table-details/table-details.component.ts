@@ -65,7 +65,6 @@ export class TableDetailsComponent implements OnInit {
         });
         this.router.navigate(['admin/tables']);
       });
-
   }
 
 }

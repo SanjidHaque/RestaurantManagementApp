@@ -1,12 +1,13 @@
 export class UserAccount {
   constructor(
-    public userName: string,
-    public firstName: string,
-    public lastName: string,
-    public email: string,
-    public password: string,
-    public phoneNumber: string,
-    public addingDateTime: string,
-    public roleName: string
+    public Id: string,
+    public UserName: string,
+    public FirstName: string,
+    public LastName: string,
+    public Email: string,
+    public Password: string,
+    public PhoneNumber: string,
+    public AddingDateTime: string,
+    public RoleName: string
   ) {}
 }

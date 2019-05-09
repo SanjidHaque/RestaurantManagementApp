@@ -20,7 +20,7 @@ namespace RMS_Server_.Migrations
         {
             //context.Roles.AddOrUpdate(
             //    new IdentityRole { Id = "1", Name = "Admin" },
-            //    new IdentityRole { Id = "2", Name = "Cashier" }
+            //    new IdentityRole { Id = "2", Name = "Worker" }
             //);
 
             //var userStore = new UserStore<ApplicationUser>(context);
@@ -35,7 +35,7 @@ namespace RMS_Server_.Migrations
 
             //var cashier = new ApplicationUser
             //{
-            //    UserName = "Cashier",
+            //    UserName = "Worker",
             //    Email = "hodooalpha@gmail.com"
             //};
             //userManager.Create(cashier, "123456");

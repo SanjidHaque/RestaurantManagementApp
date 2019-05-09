@@ -65,14 +65,14 @@ export class UsersComponent implements OnInit {
             form.value.Email,
             form.value.roleName,
             dateTime);
-         this.authService.getUsers()
-           .subscribe(
-             (users: any) => {
-               this.modifiedUser = users;
-               alert('Registration Successful!');
-             //  this.resetForm(form);
-             }
-         );
+         // this.authService.getUsers()
+         //   .subscribe(
+         //     (users: any) => {
+         //       this.modifiedUser = users;
+         //       alert('Registration Successful!');
+         //     //  this.resetForm(form);
+         //     }
+         // );
 
         } else {
           this.isDisabled = false;
@@ -83,21 +83,21 @@ export class UsersComponent implements OnInit {
   }
 
 
-  deleteUser(user: ModifiedUserModel, index: number) {
-    const dialog = confirm('Delete this user?\n' +
-      'You will lose any kind of data associated with the current user!');
-    if (dialog === true) {
-      this.authService.deleteUser(user).subscribe(
-        (data: any) => {
-          this.authService.getUsers()
-            .subscribe(
-              (users: any) => {
-                this.modifiedUser = users;
-              }
-            );
-        }
-      )
-    }
-  }
+  // deleteUser(user: ModifiedUserModel, index: number) {
+  //   const dialog = confirm('Delete this user?\n' +
+  //     'You will lose any kind of data associated with the current user!');
+  //   if (dialog === true) {
+  //     this.authService.deleteUser(user).subscribe(
+  //       (data: any) => {
+  //         this.authService.getUsers()
+  //           .subscribe(
+  //             (users: any) => {
+  //               this.modifiedUser = users;
+  //             }
+  //           );
+  //       }
+  //     )
+  //   }
+  // }
 
 }

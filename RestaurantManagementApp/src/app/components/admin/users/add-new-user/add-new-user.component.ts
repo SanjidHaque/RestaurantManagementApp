@@ -45,6 +45,7 @@ export class AddNewUserComponent implements OnInit {
 
     this.isDisabled = true;
     const userAccount = new UserAccount(
+      '',
       form.value.userName,
       form.value.firstName,
       form.value.lastName,

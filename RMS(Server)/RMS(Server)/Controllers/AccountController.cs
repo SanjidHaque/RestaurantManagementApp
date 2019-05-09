@@ -57,8 +57,8 @@ namespace RMS_Server_.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/Register")]
-        public IHttpActionResult Register(UserAccount userAccount)
+        [Route("api/AddNewUserAccount")]
+        public IHttpActionResult AddNewUserAccount(UserAccount userAccount)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
@@ -106,36 +106,37 @@ namespace RMS_Server_.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("api/GetAllUser")]
-        public IHttpActionResult GetAllUser()
+        [Route("api/GetAllUserAccount")]
+        public IHttpActionResult GetAllUserAccount()
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
             List<UserAccount> userAccounts = new List<UserAccount>();
-            List<ApplicationUser> users = _context.Users.ToList(); 
+            List<ApplicationUser> applicationUsers = _context.Users.ToList(); 
             
-            foreach (var user in users)
+            foreach (var applicationUser in applicationUsers)
             {
-                foreach (var role in user.Roles)
+                foreach (var role in applicationUser.Roles)
                 {
-                    string roleName = "";
+                    string roleName;
                     if (role.RoleId == "1")
                     {
                         roleName = "Admin";
                     }
                     else
                     {
-                        roleName = "Cashier";
+                        roleName = "Worker";
                     }
                     UserAccount userAccount = new UserAccount()
                     {
-                        UserName = user.UserName,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Email = user.Email,
-                        PhoneNumber = user.PhoneNumber,
+                        Id = applicationUser.Id,
+                        UserName = applicationUser.UserName,
+                        FirstName = applicationUser.FirstName,
+                        LastName = applicationUser.LastName,
+                        Email = applicationUser.Email,
+                        PhoneNumber = applicationUser.PhoneNumber,
                         Password = "",
-                        AddingDateTime = user.AddingDateTime,
+                        AddingDateTime = applicationUser.AddingDateTime,
                         RoleName = roleName
                     };
                     userAccounts.Add(userAccount);
@@ -146,14 +147,12 @@ namespace RMS_Server_.Controllers
         }
 
 
-        [Route("api/DeleteUser/{userId}")]
+        [Route("api/DeleteUserAccount/{userAccountId}")]
         [HttpDelete]
         [AllowAnonymous]
-        public IHttpActionResult DeleteUser(string userId)
+        public IHttpActionResult DeleteUserAccount(string userAccountId)
         {
-            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
-            ApplicationUser user = _context.Users.FirstOrDefault(p => p.Id == userId);
+            ApplicationUser user = _context.Users.FirstOrDefault(p => p.Id == userAccountId);
 
             if (user != null)
             {
@@ -174,12 +173,94 @@ namespace RMS_Server_.Controllers
         {
             RoleStore<IdentityRole> roleStore = new RoleStore<IdentityRole>(_context);
             RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(roleStore);
-            var role = await roleManager.FindByIdAsync("2");
+            IdentityRole role = await roleManager.FindByIdAsync("2");
 
             role.Name = "Worker";
             await roleManager.UpdateAsync(role);
             return Ok();
         }
+
+
+        [Route("api/ChangePasswordByAdmin")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> ChangePasswordyAdmin(ChangePassword changePassword)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            ApplicationUser applicationUser = await manager.FindByIdAsync(changePassword.UserAccountId);
+
+            if (applicationUser == null)
+            {
+                return NotFound();
+            }
+
+            string hashedNewPassword = manager.PasswordHasher.HashPassword(changePassword.NewPassword);
+            await userStore.SetPasswordHashAsync(applicationUser, hashedNewPassword);
+            await userStore.UpdateAsync(applicationUser);
+            return Ok();
+        }
+
+
+        [Route("api/ChangePasswordyWorker")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> ChangePasswordyWorker(ChangePassword changePassword)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+            ApplicationUser applicationUser = await manager.FindByIdAsync(changePassword.UserAccountId);
+
+            if (applicationUser == null)
+            {
+                return NotFound();
+            }
+
+            IdentityResult result = await manager.ChangePasswordAsync(changePassword.UserAccountId, changePassword.CurrentPassword,changePassword.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        [Route("api/EditUserAccount")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> EditUserAccount(UserAccount editUserAccount)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+
+            ApplicationUser applicationUser = manager.FindById(editUserAccount.Id);
+            if (applicationUser == null)
+            {
+                return NotFound();
+            }
+
+            string roleId = applicationUser.Roles.SingleOrDefault()?.RoleId;
+            string roleName = _context.Roles.SingleOrDefault(r => r.Id == roleId)?.Name;
+
+            if (roleName != editUserAccount.RoleName)
+            {
+                manager.RemoveFromRole(applicationUser.Id, roleName);
+                manager.AddToRole(applicationUser.Id, editUserAccount.RoleName);
+            }
+                       
+            applicationUser.UserName = editUserAccount.UserName;
+            applicationUser.FirstName = editUserAccount.FirstName;
+            applicationUser.LastName = editUserAccount.LastName;
+            applicationUser.Email = editUserAccount.Email;
+            applicationUser.PhoneNumber = editUserAccount.PhoneNumber;
+            await manager.UpdateAsync(applicationUser);
+
+            return Ok();
+        }
+
+
+
 
         [HttpPost]
         [Route("api/ResetPassword")]
@@ -202,7 +283,7 @@ namespace RMS_Server_.Controllers
                 string password = "hodoo123";
 
 
-                System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+                MailMessage msg = new System.Net.Mail.MailMessage();
                 msg.Subject = "Hodoo Reset Password";
                 msg.From = new MailAddress(fromaddr);
                 msg.Body = "\n\nReset Code:  " + user.Id + "\n\n\n";
@@ -216,7 +297,7 @@ namespace RMS_Server_.Controllers
                 smtp.Credentials = nc;
                 smtp.Send(msg);
 
-                string callbackUrl = string.Format("http://www.google.com?userId={0}&code={1}", user.Id, code);
+                string callbackUrl = string.Format("http://www.google.com?userAccountId={0}&code={1}", user.Id, code);
                 manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                 return "User Name Found";
@@ -227,7 +308,7 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         [Route("api/NewPassword")]
         [AllowAnonymous]
-        public IHttpActionResult NewPassword(ForgotPassword forgotPassword)
+        public async Task<IHttpActionResult> NewPassword(ForgotPassword forgotPassword)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
@@ -237,9 +318,9 @@ namespace RMS_Server_.Controllers
             ApplicationUser user = manager.FindById(forgotPassword.Id);
             if (user != null)
             {
-                String hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
-                userStore.SetPasswordHashAsync(user, hashedNewPassword);
-                userStore.UpdateAsync(user);
+                string hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
+                await userStore.SetPasswordHashAsync(user, hashedNewPassword);
+                await userStore.UpdateAsync(user);
                 return Ok();
             }
             return NotFound();

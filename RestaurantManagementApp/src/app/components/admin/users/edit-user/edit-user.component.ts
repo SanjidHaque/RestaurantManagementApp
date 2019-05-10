@@ -3,6 +3,9 @@ import {UserAccount} from '../../../../models/user-account.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {UserAccountDataStorageService} from '../../../../services/data-storage/user-account-data-storage.service';
+import {Role} from '../../../../models/role.model';
+import {NgForm} from '@angular/forms';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
 
 @Component({
   selector: 'app-edit-user',
@@ -10,10 +13,12 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
+  isDisabled = false;
 
   userAccountId: string;
   userAccount: UserAccount;
   userAccounts: UserAccount[] = [];
+  roles: Role[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -22,7 +27,7 @@ export class EditUserComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userAccountId = params['userAccountId'];
+          this.userAccountId = params['user-account-id'];
         }
       );
   }
@@ -30,6 +35,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(
       ( data: UserAccount[]) => {
+        this.roles = data['roles'];
         this.userAccounts = data['userAccounts'];
         this.userAccount = this.userAccounts.find(x => x.Id === this.userAccountId);
 
@@ -39,14 +45,34 @@ export class EditUserComponent implements OnInit {
             newestOnTop: true,
             showCloseButton: true
           });
-          this.router.navigate(['admin/userAccounts']);
+          this.router.navigate(['admin/user-accounts']);
         }
       }
     );
   }
 
-  editUserAccount() {
-    // this.userAccountDataStorageService.editUserAccount( {})
+  editUserAccount(form: NgForm) {
+    this.isDisabled = true;
+    this.userAccountDataStorageService.editUserAccount(new UserAccount(
+      this.userAccountId,
+      form.value.userName,
+      form.value.FullName,
+      form.value.email,
+      '',
+      form.value.phoneNumber,
+      '',
+      form.value.roleName,
+    )).subscribe(
+      (data: any) => {
+        this.toastr.successToastr('Information updated!', 'Success', {
+          toastLife: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        form.reset();
+        this.router.navigate(['admin/user-accounts', this.userAccountId]);
+      }
+    );
   }
 
 }

@@ -41,7 +41,7 @@ export class EditFoodItemComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.foodItemId = +params['foodItemId'];
+          this.foodItemId = +params['food-item-id'];
         }
       );
   }

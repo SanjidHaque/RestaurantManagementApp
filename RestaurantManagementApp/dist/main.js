@@ -3145,60 +3145,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_auth_guard__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./auth/auth.guard */ "./src/app/auth/auth.guard.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./auth/auth.interceptor */ "./src/app/auth/auth.interceptor.ts");
-/* harmony import */ var _route_resolvers_role_resolver__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./route-resolvers/role-resolver */ "./src/app/route-resolvers/role-resolver.ts");
-/* harmony import */ var _route_resolvers_modified_user_resolver_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./route-resolvers/modified-user-resolver.service */ "./src/app/route-resolvers/modified-user-resolver.service.ts");
-/* harmony import */ var _pipes_user_filter_pipe__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pipes/user-filter.pipe */ "./src/app/pipes/user-filter.pipe.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/material/progress-bar */ "./node_modules/@angular/material/esm5/progress-bar.es5.js");
-/* harmony import */ var _ngx_progressbar_http__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @ngx-progressbar/http */ "./node_modules/@ngx-progressbar/http/fesm5/ngx-progressbar-http.js");
-/* harmony import */ var _ngx_progressbar_core__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @ngx-progressbar/core */ "./node_modules/@ngx-progressbar/core/fesm5/ngx-progressbar-core.js");
-/* harmony import */ var _ngx_progressbar_router__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @ngx-progressbar/router */ "./node_modules/@ngx-progressbar/router/fesm5/ngx-progressbar-router.js");
-/* harmony import */ var _modules_app_ui_module__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./modules/app-ui.module */ "./src/app/modules/app-ui.module.ts");
-/* harmony import */ var _components_point_of_sale_point_of_sale_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/point-of-sale/point-of-sale.component */ "./src/app/components/point-of-sale/point-of-sale.component.ts");
-/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
-/* harmony import */ var _components_admin_users_users_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/admin/users/users.component */ "./src/app/components/admin/users/users.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_point_of_sale_payment_payment_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/point-of-sale/payment/payment.component */ "./src/app/components/point-of-sale/payment/payment.component.ts");
-/* harmony import */ var _components_point_of_sale_receipt_receipt_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/point-of-sale/receipt/receipt.component */ "./src/app/components/point-of-sale/receipt/receipt.component.ts");
-/* harmony import */ var _components_admin_tables_tables_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/admin/tables/tables.component */ "./src/app/components/admin/tables/tables.component.ts");
-/* harmony import */ var _components_admin_tables_add_new_table_add_new_table_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/admin/tables/add-new-table/add-new-table.component */ "./src/app/components/admin/tables/add-new-table/add-new-table.component.ts");
-/* harmony import */ var _components_admin_orders_orders_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/admin/orders/orders.component */ "./src/app/components/admin/orders/orders.component.ts");
-/* harmony import */ var _components_admin_tables_edit_table_edit_table_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./components/admin/tables/edit-table/edit-table.component */ "./src/app/components/admin/tables/edit-table/edit-table.component.ts");
-/* harmony import */ var _components_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/page-not-found/page-not-found.component */ "./src/app/components/page-not-found/page-not-found.component.ts");
-/* harmony import */ var _components_new_password_new_password_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/new-password/new-password.component */ "./src/app/components/new-password/new-password.component.ts");
-/* harmony import */ var _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/reset-password/reset-password.component */ "./src/app/components/reset-password/reset-password.component.ts");
-/* harmony import */ var _components_forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/forbidden/forbidden.component */ "./src/app/components/forbidden/forbidden.component.ts");
-/* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/header/header.component */ "./src/app/components/header/header.component.ts");
-/* harmony import */ var _components_admin_inventories_inventories_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/admin/inventories/inventories.component */ "./src/app/components/admin/inventories/inventories.component.ts");
-/* harmony import */ var _components_admin_food_items_edit_food_item_edit_food_item_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/admin/food-items/edit-food-item/edit-food-item.component */ "./src/app/components/admin/food-items/edit-food-item/edit-food-item.component.ts");
-/* harmony import */ var _components_admin_inventories_edit_inventory_item_edit_inventory_item_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/admin/inventories/edit-inventory-item/edit-inventory-item.component */ "./src/app/components/admin/inventories/edit-inventory-item/edit-inventory-item.component.ts");
-/* harmony import */ var _components_admin_food_items_add_new_food_item_add_new_food_item_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/admin/food-items/add-new-food-item/add-new-food-item.component */ "./src/app/components/admin/food-items/add-new-food-item/add-new-food-item.component.ts");
-/* harmony import */ var _components_point_of_sale_menu_menu_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/point-of-sale/menu/menu.component */ "./src/app/components/point-of-sale/menu/menu.component.ts");
-/* harmony import */ var _components_point_of_sale_select_table_select_table_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/point-of-sale/select-table/select-table.component */ "./src/app/components/point-of-sale/select-table/select-table.component.ts");
-/* harmony import */ var _components_admin_tables_table_list_table_list_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/admin/tables/table-list/table-list.component */ "./src/app/components/admin/tables/table-list/table-list.component.ts");
-/* harmony import */ var _components_admin_tables_table_details_table_details_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/admin/tables/table-details/table-details.component */ "./src/app/components/admin/tables/table-details/table-details.component.ts");
-/* harmony import */ var _components_admin_orders_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/admin/orders/order-list/order-list.component */ "./src/app/components/admin/orders/order-list/order-list.component.ts");
-/* harmony import */ var _components_admin_inventories_inventory_list_inventory_list_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/admin/inventories/inventory-list/inventory-list.component */ "./src/app/components/admin/inventories/inventory-list/inventory-list.component.ts");
-/* harmony import */ var _components_admin_inventories_inventory_details_inventory_details_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/admin/inventories/inventory-details/inventory-details.component */ "./src/app/components/admin/inventories/inventory-details/inventory-details.component.ts");
-/* harmony import */ var _components_admin_inventories_update_inventory_item_update_inventory_item_component__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/admin/inventories/update-inventory-item/update-inventory-item.component */ "./src/app/components/admin/inventories/update-inventory-item/update-inventory-item.component.ts");
-/* harmony import */ var _components_admin_orders_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/admin/orders/order-details/order-details.component */ "./src/app/components/admin/orders/order-details/order-details.component.ts");
-/* harmony import */ var _components_admin_food_items_food_item_details_food_item_details_component__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/admin/food-items/food-item-details/food-item-details.component */ "./src/app/components/admin/food-items/food-item-details/food-item-details.component.ts");
-/* harmony import */ var _components_admin_food_items_food_item_list_food_item_list_component__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/admin/food-items/food-item-list/food-item-list.component */ "./src/app/components/admin/food-items/food-item-list/food-item-list.component.ts");
-/* harmony import */ var _components_admin_inventories_add_new_inventory_item_add_new_inventory_item_component__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component */ "./src/app/components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component.ts");
-/* harmony import */ var _components_point_of_sale_session_session_component__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/point-of-sale/session/session.component */ "./src/app/components/point-of-sale/session/session.component.ts");
-/* harmony import */ var _components_admin_food_items_food_items_component__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./components/admin/food-items/food-items.component */ "./src/app/components/admin/food-items/food-items.component.ts");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-/* harmony import */ var _services_shared_admin_service__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./services/shared/admin.service */ "./src/app/services/shared/admin.service.ts");
-/* harmony import */ var _http_error_interceptor_http_error_interceptor__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./http-error-interceptor/http-error.interceptor */ "./src/app/http-error-interceptor/http-error.interceptor.ts");
-/* harmony import */ var _services_data_storage_inventory_data_storage_service__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./services/data-storage/inventory-data-storage.service */ "./src/app/services/data-storage/inventory-data-storage.service.ts");
-/* harmony import */ var ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ng6-toastr-notifications */ "./node_modules/ng6-toastr-notifications/fesm5/ng6-toastr-notifications.js");
-/* harmony import */ var _services_data_storage_food_item_data_storage_service__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./services/data-storage/food-item-data-storage.service */ "./src/app/services/data-storage/food-item-data-storage.service.ts");
-/* harmony import */ var _services_data_storage_order_data_storage_service__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./services/data-storage/order-data-storage.service */ "./src/app/services/data-storage/order-data-storage.service.ts");
-/* harmony import */ var _services_data_storage_account_data_storage_service__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./services/data-storage/account-data-storage.service */ "./src/app/services/data-storage/account-data-storage.service.ts");
-/* harmony import */ var _components_admin_users_add_new_user_add_new_user_component__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/admin/users/add-new-user/add-new-user.component */ "./src/app/components/admin/users/add-new-user/add-new-user.component.ts");
-/* harmony import */ var _components_admin_users_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/admin/users/user-details/user-details.component */ "./src/app/components/admin/users/user-details/user-details.component.ts");
-/* harmony import */ var _components_admin_users_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/admin/users/user-list/user-list.component */ "./src/app/components/admin/users/user-list/user-list.component.ts");
-/* harmony import */ var _components_admin_users_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/admin/users/edit-user/edit-user.component */ "./src/app/components/admin/users/edit-user/edit-user.component.ts");
+/* harmony import */ var _route_resolvers_user_account_resolver_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./route-resolvers/user-account-resolver.service */ "./src/app/route-resolvers/user-account-resolver.service.ts");
+/* harmony import */ var _pipes_user_filter_pipe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pipes/user-filter.pipe */ "./src/app/pipes/user-filter.pipe.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/progress-bar */ "./node_modules/@angular/material/esm5/progress-bar.es5.js");
+/* harmony import */ var _ngx_progressbar_http__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ngx-progressbar/http */ "./node_modules/@ngx-progressbar/http/fesm5/ngx-progressbar-http.js");
+/* harmony import */ var _ngx_progressbar_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @ngx-progressbar/core */ "./node_modules/@ngx-progressbar/core/fesm5/ngx-progressbar-core.js");
+/* harmony import */ var _ngx_progressbar_router__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @ngx-progressbar/router */ "./node_modules/@ngx-progressbar/router/fesm5/ngx-progressbar-router.js");
+/* harmony import */ var _modules_app_ui_module__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./modules/app-ui.module */ "./src/app/modules/app-ui.module.ts");
+/* harmony import */ var _components_point_of_sale_point_of_sale_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/point-of-sale/point-of-sale.component */ "./src/app/components/point-of-sale/point-of-sale.component.ts");
+/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
+/* harmony import */ var _components_admin_users_users_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/admin/users/users.component */ "./src/app/components/admin/users/users.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _components_point_of_sale_payment_payment_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/point-of-sale/payment/payment.component */ "./src/app/components/point-of-sale/payment/payment.component.ts");
+/* harmony import */ var _components_point_of_sale_receipt_receipt_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/point-of-sale/receipt/receipt.component */ "./src/app/components/point-of-sale/receipt/receipt.component.ts");
+/* harmony import */ var _components_admin_tables_tables_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/admin/tables/tables.component */ "./src/app/components/admin/tables/tables.component.ts");
+/* harmony import */ var _components_admin_tables_add_new_table_add_new_table_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/admin/tables/add-new-table/add-new-table.component */ "./src/app/components/admin/tables/add-new-table/add-new-table.component.ts");
+/* harmony import */ var _components_admin_orders_orders_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/admin/orders/orders.component */ "./src/app/components/admin/orders/orders.component.ts");
+/* harmony import */ var _components_admin_tables_edit_table_edit_table_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/admin/tables/edit-table/edit-table.component */ "./src/app/components/admin/tables/edit-table/edit-table.component.ts");
+/* harmony import */ var _components_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./components/page-not-found/page-not-found.component */ "./src/app/components/page-not-found/page-not-found.component.ts");
+/* harmony import */ var _components_new_password_new_password_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/new-password/new-password.component */ "./src/app/components/new-password/new-password.component.ts");
+/* harmony import */ var _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/reset-password/reset-password.component */ "./src/app/components/reset-password/reset-password.component.ts");
+/* harmony import */ var _components_forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/forbidden/forbidden.component */ "./src/app/components/forbidden/forbidden.component.ts");
+/* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/header/header.component */ "./src/app/components/header/header.component.ts");
+/* harmony import */ var _components_admin_inventories_inventories_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/admin/inventories/inventories.component */ "./src/app/components/admin/inventories/inventories.component.ts");
+/* harmony import */ var _components_admin_food_items_edit_food_item_edit_food_item_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/admin/food-items/edit-food-item/edit-food-item.component */ "./src/app/components/admin/food-items/edit-food-item/edit-food-item.component.ts");
+/* harmony import */ var _components_admin_inventories_edit_inventory_item_edit_inventory_item_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/admin/inventories/edit-inventory-item/edit-inventory-item.component */ "./src/app/components/admin/inventories/edit-inventory-item/edit-inventory-item.component.ts");
+/* harmony import */ var _components_admin_food_items_add_new_food_item_add_new_food_item_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/admin/food-items/add-new-food-item/add-new-food-item.component */ "./src/app/components/admin/food-items/add-new-food-item/add-new-food-item.component.ts");
+/* harmony import */ var _components_point_of_sale_menu_menu_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/point-of-sale/menu/menu.component */ "./src/app/components/point-of-sale/menu/menu.component.ts");
+/* harmony import */ var _components_point_of_sale_select_table_select_table_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/point-of-sale/select-table/select-table.component */ "./src/app/components/point-of-sale/select-table/select-table.component.ts");
+/* harmony import */ var _components_admin_tables_table_list_table_list_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/admin/tables/table-list/table-list.component */ "./src/app/components/admin/tables/table-list/table-list.component.ts");
+/* harmony import */ var _components_admin_tables_table_details_table_details_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/admin/tables/table-details/table-details.component */ "./src/app/components/admin/tables/table-details/table-details.component.ts");
+/* harmony import */ var _components_admin_orders_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/admin/orders/order-list/order-list.component */ "./src/app/components/admin/orders/order-list/order-list.component.ts");
+/* harmony import */ var _components_admin_inventories_inventory_list_inventory_list_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/admin/inventories/inventory-list/inventory-list.component */ "./src/app/components/admin/inventories/inventory-list/inventory-list.component.ts");
+/* harmony import */ var _components_admin_inventories_inventory_details_inventory_details_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/admin/inventories/inventory-details/inventory-details.component */ "./src/app/components/admin/inventories/inventory-details/inventory-details.component.ts");
+/* harmony import */ var _components_admin_inventories_update_inventory_item_update_inventory_item_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/admin/inventories/update-inventory-item/update-inventory-item.component */ "./src/app/components/admin/inventories/update-inventory-item/update-inventory-item.component.ts");
+/* harmony import */ var _components_admin_orders_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/admin/orders/order-details/order-details.component */ "./src/app/components/admin/orders/order-details/order-details.component.ts");
+/* harmony import */ var _components_admin_food_items_food_item_details_food_item_details_component__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/admin/food-items/food-item-details/food-item-details.component */ "./src/app/components/admin/food-items/food-item-details/food-item-details.component.ts");
+/* harmony import */ var _components_admin_food_items_food_item_list_food_item_list_component__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/admin/food-items/food-item-list/food-item-list.component */ "./src/app/components/admin/food-items/food-item-list/food-item-list.component.ts");
+/* harmony import */ var _components_admin_inventories_add_new_inventory_item_add_new_inventory_item_component__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component */ "./src/app/components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component.ts");
+/* harmony import */ var _components_point_of_sale_session_session_component__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/point-of-sale/session/session.component */ "./src/app/components/point-of-sale/session/session.component.ts");
+/* harmony import */ var _components_admin_food_items_food_items_component__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/admin/food-items/food-items.component */ "./src/app/components/admin/food-items/food-items.component.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _services_shared_admin_service__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./services/shared/admin.service */ "./src/app/services/shared/admin.service.ts");
+/* harmony import */ var _http_error_interceptor_http_error_interceptor__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./http-error-interceptor/http-error.interceptor */ "./src/app/http-error-interceptor/http-error.interceptor.ts");
+/* harmony import */ var _services_data_storage_inventory_data_storage_service__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./services/data-storage/inventory-data-storage.service */ "./src/app/services/data-storage/inventory-data-storage.service.ts");
+/* harmony import */ var ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ng6-toastr-notifications */ "./node_modules/ng6-toastr-notifications/fesm5/ng6-toastr-notifications.js");
+/* harmony import */ var _services_data_storage_food_item_data_storage_service__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./services/data-storage/food-item-data-storage.service */ "./src/app/services/data-storage/food-item-data-storage.service.ts");
+/* harmony import */ var _services_data_storage_order_data_storage_service__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./services/data-storage/order-data-storage.service */ "./src/app/services/data-storage/order-data-storage.service.ts");
+/* harmony import */ var _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./services/data-storage/user-account-data-storage.service */ "./src/app/services/data-storage/user-account-data-storage.service.ts");
+/* harmony import */ var _components_admin_users_add_new_user_add_new_user_component__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/admin/users/add-new-user/add-new-user.component */ "./src/app/components/admin/users/add-new-user/add-new-user.component.ts");
+/* harmony import */ var _components_admin_users_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/admin/users/user-details/user-details.component */ "./src/app/components/admin/users/user-details/user-details.component.ts");
+/* harmony import */ var _components_admin_users_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/admin/users/user-list/user-list.component */ "./src/app/components/admin/users/user-list/user-list.component.ts");
+/* harmony import */ var _components_admin_users_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/admin/users/edit-user/edit-user.component */ "./src/app/components/admin/users/edit-user/edit-user.component.ts");
+/* harmony import */ var _route_resolvers_role_resolver_service__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./route-resolvers/role-resolver.service */ "./src/app/route-resolvers/role-resolver.service.ts");
+/* harmony import */ var _components_admin_users_change_password_by_admin_change_password_by_admin_component__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/admin/users/change-password-by-admin/change-password-by-admin.component */ "./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.ts");
+
 
 
 
@@ -3279,83 +3281,84 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
-                _components_point_of_sale_point_of_sale_component__WEBPACK_IMPORTED_MODULE_28__["PointOfSaleComponent"],
-                _components_login_login_component__WEBPACK_IMPORTED_MODULE_31__["LoginComponent"],
-                _components_admin_users_users_component__WEBPACK_IMPORTED_MODULE_30__["UsersComponent"],
-                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_29__["AdminComponent"],
-                _components_admin_inventories_inventories_component__WEBPACK_IMPORTED_MODULE_43__["InventoriesComponent"],
-                _components_point_of_sale_menu_menu_component__WEBPACK_IMPORTED_MODULE_47__["MenuComponent"],
-                _components_point_of_sale_menu_menu_component__WEBPACK_IMPORTED_MODULE_47__["MenuComponent"],
-                _components_admin_food_items_add_new_food_item_add_new_food_item_component__WEBPACK_IMPORTED_MODULE_46__["AddNewFoodItemComponent"],
-                _components_admin_food_items_edit_food_item_edit_food_item_component__WEBPACK_IMPORTED_MODULE_44__["EditFoodItemComponent"],
-                _components_admin_inventories_edit_inventory_item_edit_inventory_item_component__WEBPACK_IMPORTED_MODULE_45__["EditInventoryItemComponent"],
+                _components_point_of_sale_point_of_sale_component__WEBPACK_IMPORTED_MODULE_27__["PointOfSaleComponent"],
+                _components_login_login_component__WEBPACK_IMPORTED_MODULE_30__["LoginComponent"],
+                _components_admin_users_users_component__WEBPACK_IMPORTED_MODULE_29__["UsersComponent"],
+                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_28__["AdminComponent"],
+                _components_admin_inventories_inventories_component__WEBPACK_IMPORTED_MODULE_42__["InventoriesComponent"],
+                _components_point_of_sale_menu_menu_component__WEBPACK_IMPORTED_MODULE_46__["MenuComponent"],
+                _components_point_of_sale_menu_menu_component__WEBPACK_IMPORTED_MODULE_46__["MenuComponent"],
+                _components_admin_food_items_add_new_food_item_add_new_food_item_component__WEBPACK_IMPORTED_MODULE_45__["AddNewFoodItemComponent"],
+                _components_admin_food_items_edit_food_item_edit_food_item_component__WEBPACK_IMPORTED_MODULE_43__["EditFoodItemComponent"],
+                _components_admin_inventories_edit_inventory_item_edit_inventory_item_component__WEBPACK_IMPORTED_MODULE_44__["EditInventoryItemComponent"],
                 _pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_9__["FilterPipe"],
-                _components_point_of_sale_payment_payment_component__WEBPACK_IMPORTED_MODULE_32__["PaymentComponent"],
-                _components_point_of_sale_receipt_receipt_component__WEBPACK_IMPORTED_MODULE_33__["ReceiptComponent"],
-                _components_admin_tables_tables_component__WEBPACK_IMPORTED_MODULE_34__["TablesComponent"],
-                _components_admin_tables_add_new_table_add_new_table_component__WEBPACK_IMPORTED_MODULE_35__["AddNewTableComponent"],
-                _components_admin_inventories_add_new_inventory_item_add_new_inventory_item_component__WEBPACK_IMPORTED_MODULE_58__["AddNewInventoryItemComponent"],
-                _components_admin_orders_orders_component__WEBPACK_IMPORTED_MODULE_36__["OrdersComponent"],
-                _components_admin_orders_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_51__["OrderListComponent"],
-                _components_admin_orders_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_55__["OrderDetailsComponent"],
+                _components_point_of_sale_payment_payment_component__WEBPACK_IMPORTED_MODULE_31__["PaymentComponent"],
+                _components_point_of_sale_receipt_receipt_component__WEBPACK_IMPORTED_MODULE_32__["ReceiptComponent"],
+                _components_admin_tables_tables_component__WEBPACK_IMPORTED_MODULE_33__["TablesComponent"],
+                _components_admin_tables_add_new_table_add_new_table_component__WEBPACK_IMPORTED_MODULE_34__["AddNewTableComponent"],
+                _components_admin_inventories_add_new_inventory_item_add_new_inventory_item_component__WEBPACK_IMPORTED_MODULE_57__["AddNewInventoryItemComponent"],
+                _components_admin_orders_orders_component__WEBPACK_IMPORTED_MODULE_35__["OrdersComponent"],
+                _components_admin_orders_order_list_order_list_component__WEBPACK_IMPORTED_MODULE_50__["OrderListComponent"],
+                _components_admin_orders_order_details_order_details_component__WEBPACK_IMPORTED_MODULE_54__["OrderDetailsComponent"],
                 _pipes_order_pipe__WEBPACK_IMPORTED_MODULE_10__["OrderPipe"],
-                _components_admin_food_items_food_items_component__WEBPACK_IMPORTED_MODULE_60__["FoodItemsComponent"],
-                _components_admin_food_items_food_item_list_food_item_list_component__WEBPACK_IMPORTED_MODULE_57__["FoodItemListComponent"],
-                _components_admin_food_items_food_item_details_food_item_details_component__WEBPACK_IMPORTED_MODULE_56__["FoodItemDetailsComponent"],
-                _components_admin_inventories_inventory_list_inventory_list_component__WEBPACK_IMPORTED_MODULE_52__["InventoryListComponent"],
-                _components_admin_inventories_inventory_details_inventory_details_component__WEBPACK_IMPORTED_MODULE_53__["InventoryDetailsComponent"],
-                _components_admin_inventories_update_inventory_item_update_inventory_item_component__WEBPACK_IMPORTED_MODULE_54__["UpdateInventoryItemComponent"],
-                _components_admin_tables_edit_table_edit_table_component__WEBPACK_IMPORTED_MODULE_37__["EditTableComponent"],
-                _components_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_38__["PageNotFoundComponent"],
-                _components_forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_41__["ForbiddenComponent"],
-                _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_40__["ResetPasswordComponent"],
-                _components_new_password_new_password_component__WEBPACK_IMPORTED_MODULE_39__["NewPasswordComponent"],
-                _pipes_user_filter_pipe__WEBPACK_IMPORTED_MODULE_21__["UserFilterPipe"],
-                _components_header_header_component__WEBPACK_IMPORTED_MODULE_42__["HeaderComponent"],
-                _components_point_of_sale_select_table_select_table_component__WEBPACK_IMPORTED_MODULE_48__["SelectTableComponent"],
-                _components_admin_tables_table_list_table_list_component__WEBPACK_IMPORTED_MODULE_49__["TableListComponent"],
-                _components_admin_tables_table_details_table_details_component__WEBPACK_IMPORTED_MODULE_50__["TableDetailsComponent"],
-                _components_point_of_sale_session_session_component__WEBPACK_IMPORTED_MODULE_59__["SessionComponent"],
-                _components_admin_users_add_new_user_add_new_user_component__WEBPACK_IMPORTED_MODULE_69__["AddNewUserComponent"],
-                _components_admin_users_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_70__["UserDetailsComponent"],
-                _components_admin_users_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_71__["UserListComponent"],
-                _components_admin_users_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_72__["EditUserComponent"]
+                _components_admin_food_items_food_items_component__WEBPACK_IMPORTED_MODULE_59__["FoodItemsComponent"],
+                _components_admin_food_items_food_item_list_food_item_list_component__WEBPACK_IMPORTED_MODULE_56__["FoodItemListComponent"],
+                _components_admin_food_items_food_item_details_food_item_details_component__WEBPACK_IMPORTED_MODULE_55__["FoodItemDetailsComponent"],
+                _components_admin_inventories_inventory_list_inventory_list_component__WEBPACK_IMPORTED_MODULE_51__["InventoryListComponent"],
+                _components_admin_inventories_inventory_details_inventory_details_component__WEBPACK_IMPORTED_MODULE_52__["InventoryDetailsComponent"],
+                _components_admin_inventories_update_inventory_item_update_inventory_item_component__WEBPACK_IMPORTED_MODULE_53__["UpdateInventoryItemComponent"],
+                _components_admin_tables_edit_table_edit_table_component__WEBPACK_IMPORTED_MODULE_36__["EditTableComponent"],
+                _components_page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_37__["PageNotFoundComponent"],
+                _components_forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_40__["ForbiddenComponent"],
+                _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_39__["ResetPasswordComponent"],
+                _components_new_password_new_password_component__WEBPACK_IMPORTED_MODULE_38__["NewPasswordComponent"],
+                _pipes_user_filter_pipe__WEBPACK_IMPORTED_MODULE_20__["UserFilterPipe"],
+                _components_header_header_component__WEBPACK_IMPORTED_MODULE_41__["HeaderComponent"],
+                _components_point_of_sale_select_table_select_table_component__WEBPACK_IMPORTED_MODULE_47__["SelectTableComponent"],
+                _components_admin_tables_table_list_table_list_component__WEBPACK_IMPORTED_MODULE_48__["TableListComponent"],
+                _components_admin_tables_table_details_table_details_component__WEBPACK_IMPORTED_MODULE_49__["TableDetailsComponent"],
+                _components_point_of_sale_session_session_component__WEBPACK_IMPORTED_MODULE_58__["SessionComponent"],
+                _components_admin_users_add_new_user_add_new_user_component__WEBPACK_IMPORTED_MODULE_68__["AddNewUserComponent"],
+                _components_admin_users_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_69__["UserDetailsComponent"],
+                _components_admin_users_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_70__["UserListComponent"],
+                _components_admin_users_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_71__["EditUserComponent"],
+                _components_admin_users_change_password_by_admin_change_password_by_admin_component__WEBPACK_IMPORTED_MODULE_73__["ChangePasswordByAdminComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _modules_app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
-                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_61__["NgbModule"],
-                _modules_app_ui_module__WEBPACK_IMPORTED_MODULE_27__["AppUiModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_60__["NgbModule"],
+                _modules_app_ui_module__WEBPACK_IMPORTED_MODULE_26__["AppUiModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_17__["HttpClientModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_7__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_22__["BrowserAnimationsModule"],
-                _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_23__["MatProgressBarModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"],
+                _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_22__["MatProgressBarModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_17__["HttpClientModule"],
-                _ngx_progressbar_http__WEBPACK_IMPORTED_MODULE_24__["NgProgressHttpModule"],
-                _ngx_progressbar_router__WEBPACK_IMPORTED_MODULE_26__["NgProgressRouterModule"],
-                _ngx_progressbar_core__WEBPACK_IMPORTED_MODULE_25__["NgProgressModule"].withConfig({
+                _ngx_progressbar_http__WEBPACK_IMPORTED_MODULE_23__["NgProgressHttpModule"],
+                _ngx_progressbar_router__WEBPACK_IMPORTED_MODULE_25__["NgProgressRouterModule"],
+                _ngx_progressbar_core__WEBPACK_IMPORTED_MODULE_24__["NgProgressModule"].withConfig({
                     color: '#6a7ce6',
                     min: 20,
                     spinner: false,
                     meteor: false
                 }),
-                ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_65__["ToastrModule"].forRoot()
+                ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_64__["ToastrModule"].forRoot()
             ],
             providers: [
                 _services_shared_point_of_sale_service__WEBPACK_IMPORTED_MODULE_5__["PointOfSaleService"],
-                _services_shared_admin_service__WEBPACK_IMPORTED_MODULE_62__["AdminService"],
+                _services_shared_admin_service__WEBPACK_IMPORTED_MODULE_61__["AdminService"],
                 _services_data_storage_table_data_storage_service__WEBPACK_IMPORTED_MODULE_6__["TableDataStorageService"],
-                _services_data_storage_inventory_data_storage_service__WEBPACK_IMPORTED_MODULE_64__["InventoryDataStorageService"],
-                _services_data_storage_food_item_data_storage_service__WEBPACK_IMPORTED_MODULE_66__["FoodItemDataStorageService"],
-                _services_data_storage_order_data_storage_service__WEBPACK_IMPORTED_MODULE_67__["OrderDataStorageService"],
-                _services_data_storage_account_data_storage_service__WEBPACK_IMPORTED_MODULE_68__["AccountDataStorageService"],
+                _services_data_storage_inventory_data_storage_service__WEBPACK_IMPORTED_MODULE_63__["InventoryDataStorageService"],
+                _services_data_storage_food_item_data_storage_service__WEBPACK_IMPORTED_MODULE_65__["FoodItemDataStorageService"],
+                _services_data_storage_order_data_storage_service__WEBPACK_IMPORTED_MODULE_66__["OrderDataStorageService"],
+                _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_67__["UserAccountDataStorageService"],
                 _route_resolvers_table_resolver_service__WEBPACK_IMPORTED_MODULE_11__["TableResolverService"],
                 _route_resolvers_order_resolver_service__WEBPACK_IMPORTED_MODULE_12__["OrderResolverService"],
                 _route_resolvers_inventory_resolver_service__WEBPACK_IMPORTED_MODULE_13__["InventoryResolverService"],
                 _route_resolvers_food_item_resolver_service__WEBPACK_IMPORTED_MODULE_14__["FoodItemResolverService"],
-                _route_resolvers_role_resolver__WEBPACK_IMPORTED_MODULE_19__["RoleResolverService"],
-                _route_resolvers_modified_user_resolver_service__WEBPACK_IMPORTED_MODULE_20__["ModifiedUserResolverService"],
+                _route_resolvers_role_resolver_service__WEBPACK_IMPORTED_MODULE_72__["RoleResolverService"],
+                _route_resolvers_user_account_resolver_service__WEBPACK_IMPORTED_MODULE_19__["UserAccountResolverService"],
                 _services_shared_auth_service__WEBPACK_IMPORTED_MODULE_15__["AuthService"],
                 _auth_auth_guard__WEBPACK_IMPORTED_MODULE_16__["AuthGuard"],
                 {
@@ -3365,7 +3368,7 @@ var AppModule = /** @class */ (function () {
                 },
                 {
                     provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_17__["HTTP_INTERCEPTORS"],
-                    useClass: _http_error_interceptor_http_error_interceptor__WEBPACK_IMPORTED_MODULE_63__["HttpErrorInterceptor"],
+                    useClass: _http_error_interceptor_http_error_interceptor__WEBPACK_IMPORTED_MODULE_62__["HttpErrorInterceptor"],
                     multi: true
                 }
             ],
@@ -3496,7 +3499,7 @@ var AuthInterceptor = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div class=\"row\">\r\n\r\n  <div class=\"col-xl-2\">\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"inventories\"\r\n          routerLinkActive=\"active\">Inventories</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"food-items\"\r\n          routerLinkActive=\"active\">Food Items</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"orders\"\r\n          routerLinkActive=\"active\">Orders</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"tables\"\r\n          routerLinkActive=\"active\">Tables</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"users\"\r\n          routerLinkActive=\"active\">Users</a>\r\n      </div>\r\n    </div>\r\n\r\n\r\n  </div>\r\n  <div class=\"col-xl-10\">\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n</div>\r\n<br><br>\r\n\r\n\r\n\r\n"
+module.exports = "\r\n\r\n<div class=\"row\">\r\n\r\n  <div class=\"col-xl-2\">\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"inventories\"\r\n          routerLinkActive=\"active\">Inventories</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"food-items\"\r\n          routerLinkActive=\"active\">Food Items</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"orders\"\r\n          routerLinkActive=\"active\">Orders</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"tables\"\r\n          routerLinkActive=\"active\">Tables</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row\"\r\n         style=\"\r\n         padding-top: 5px;\r\n         padding-bottom: 5px;\">\r\n      <div class=\"col-xl-12\">\r\n        <a\r\n          style=\"\r\n          text-decoration: none;\r\n          font-size: 18px; color: black;\"\r\n          routerLink=\"user-accounts\"\r\n          routerLinkActive=\"active\">User Accounts</a>\r\n      </div>\r\n    </div>\r\n\r\n\r\n  </div>\r\n  <div class=\"col-xl-10\">\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n</div>\r\n<br><br>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -3844,7 +3847,7 @@ var EditFoodItemComponent = /** @class */ (function () {
         this.imageUrl = '';
         this.route.params
             .subscribe(function (params) {
-            _this.foodItemId = +params['foodItemId'];
+            _this.foodItemId = +params['food-item-id'];
         });
     }
     EditFoodItemComponent.prototype.ngOnInit = function () {
@@ -4118,7 +4121,7 @@ var FoodItemDetailsComponent = /** @class */ (function () {
         this.inventories = [];
         this.route.params
             .subscribe(function (params) {
-            _this.foodItemId = +params['foodItemId'];
+            _this.foodItemId = +params['food-item-id'];
         });
     }
     FoodItemDetailsComponent.prototype.ngOnInit = function () {
@@ -4129,6 +4132,14 @@ var FoodItemDetailsComponent = /** @class */ (function () {
             _this.foodItems = data['foodItems'];
             _this.inventories = data['inventories'];
             _this.setFoodItemImage();
+            if (_this.foodItem === undefined) {
+                _this.toastr.errorToastr('Item not found', 'Error', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                });
+                _this.router.navigate(['admin/food-items']);
+            }
         });
     };
     FoodItemDetailsComponent.prototype.setFoodItemImage = function () {
@@ -4449,7 +4460,7 @@ var AddNewInventoryItemComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"row\" style=\"font-weight: 500;\">\r\n  <div class=\"col-xl-12\">\r\n    Edit Information of {{ inventory.Name }}\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n\r\n<form (ngSubmit) = \"onEditInventoryItem(editInventoryItem)\" #editInventoryItem= \"ngForm\">\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"col-xl-6\">\r\n\r\n      <label for=\"name\">Item's Name</label>\r\n      <input\r\n        type=\"text\"\r\n        id=\"name\"\r\n        class=\"form-control\"\r\n        [ngModel]=\"inventory.Name\"\r\n        name=\"name\"\r\n        #name=\"ngModel\"\r\n        required>\r\n\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"name.invalid && (name.dirty || name.touched)\">\r\n        Item's name is required!\r\n      </p>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6 text-xl-right\">\r\n      <button\r\n        [disabled]=\"editInventoryItem.invalid || isDisabled\"\r\n        type=\"submit\"\r\n        class=\"btn btn-success\">Save</button>\r\n      &nbsp;\r\n      <button\r\n        type=\"button\"\r\n        routerLink=\"/admin/inventories/{{inventoryId}}\"\r\n        class=\"btn btn-danger\">Discard</button>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</form>\r\n"
+module.exports = "\r\n<div class=\"row\" style=\"font-weight: 500;\">\r\n  <div class=\"col-xl-12\">\r\n    Edit Information of {{ inventory.Name }}\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n\r\n<form (ngSubmit) = \"editInventoryItem(editInventoryItem)\" #editInventoryItem= \"ngForm\">\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"col-xl-6\">\r\n\r\n      <label for=\"name\">Item's Name</label>\r\n      <input\r\n        type=\"text\"\r\n        id=\"name\"\r\n        class=\"form-control\"\r\n        [ngModel]=\"inventory.Name\"\r\n        name=\"name\"\r\n        #name=\"ngModel\"\r\n        required>\r\n\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"name.invalid && (name.dirty || name.touched)\">\r\n        Item's name is required!\r\n      </p>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6 text-xl-right\">\r\n      <button\r\n        [disabled]=\"editInventoryItem.invalid || isDisabled\"\r\n        type=\"submit\"\r\n        class=\"btn btn-success\">Save</button>\r\n      &nbsp;\r\n      <button\r\n        type=\"button\"\r\n        routerLink=\"/admin/inventories/{{inventoryId}}\"\r\n        class=\"btn btn-danger\">Discard</button>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</form>\r\n"
 
 /***/ }),
 
@@ -4497,7 +4508,7 @@ var EditInventoryItemComponent = /** @class */ (function () {
         this.inventories = [];
         this.route.params
             .subscribe(function (params) {
-            _this.inventoryId = +params['inventoryId'];
+            _this.inventoryId = +params['inventory-id'];
         });
     }
     EditInventoryItemComponent.prototype.ngOnInit = function () {
@@ -4507,12 +4518,16 @@ var EditInventoryItemComponent = /** @class */ (function () {
             _this.inventories = data['inventories'];
             _this.inventory = _this.inventories.find(function (x) { return x.Id === _this.inventoryId; });
             if (_this.inventory === undefined || _this.inventory === null) {
-                window.alert('Item not found!');
+                _this.toastr.errorToastr('Item not found', 'Error', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                });
                 _this.router.navigate(['admin/inventories']);
             }
         });
     };
-    EditInventoryItemComponent.prototype.onEditInventoryItem = function (form) {
+    EditInventoryItemComponent.prototype.editInventoryItem = function (form) {
         var _this = this;
         this.isDisabled = true;
         var editedInventoryItemName = form.value.name;
@@ -4619,7 +4634,7 @@ var InventoriesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    <h6>General Information</h6>\r\n  </div>\r\n</div>\r\n\r\n<hr>\r\n\r\n<div class=\"row\" style=\"font-weight: 500; font-size: 20px;\">\r\n  <div class=\"col-xl-12\">\r\n    Product's Name: {{ inventory.Name }}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\"style=\"font-weight: 500; font-size: 17px;\">\r\n  <div class=\"col-xl-12\">\r\n    Average Price: {{ inventory.AveragePrice }} BDT\r\n  </div>\r\n</div>\r\n<br>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    Available Quantity: {{ inventory.RemainingQuantity }} {{ inventory.Unit }} (s)\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    Used Quantity: {{ inventory.UsedQuantity }} {{ inventory.Unit }} (s)\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n<div class=\"row text-xl-left\">\r\n  <div class=\"col-xl-10\">\r\n\r\n    <button\r\n      routerLink=\"/admin/inventories/{{inventoryId}}/update-inventory-item\"\r\n      class=\"btn btn-info\">Update</button> &nbsp;\r\n\r\n    <button\r\n      routerLink=\"/admin/inventories/{{inventoryId}}/edit-inventory-item\"\r\n      class=\"btn btn-warning\">Edit</button> &nbsp;\r\n\r\n    <button\r\n      (click)=\"deleteInventoryItem()\"\r\n      class=\"btn btn-danger\">Delete</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    <h6>Update Histories</h6>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-10\">\r\n\r\n    <table border=1 cellpadding=10 width=\"100%\">\r\n      <tr style=\"font-weight: 500;\">\r\n        <td>Product's Quantity</td>\r\n        <td>Product's Unit</td>\r\n        <td>Buying Price</td>\r\n        <td>Buying Date</td>\r\n      </tr>\r\n\r\n      <tr\r\n        *ngFor=\"let inventoryHistory of inventory.InventoryHistory\r\n         | paginate: { itemsPerPage: 3, currentPage: pageNumber }\">\r\n        <td>\r\n          {{ inventoryHistory.BuyingQuantity }}\r\n        </td>\r\n        <td >\r\n          {{ inventory.Unit }}\r\n        </td>\r\n        <td>\r\n          {{ inventoryHistory.BuyingPrice }}\r\n        </td>\r\n        <td>\r\n          {{ inventoryHistory.BuyingTime }}\r\n        </td>\r\n      </tr>\r\n    </table>\r\n\r\n\r\n\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n<div class=\"row text-xl-right\">\r\n  <div class=\"col-xl-10\">\r\n    <pagination-controls\r\n      class=\"my-pagination\"\r\n      [autoHide]=\"true\"\r\n      (pageChange)=\"pageNumber = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n"
+module.exports = "\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    <h6>General Information</h6>\r\n  </div>\r\n</div>\r\n\r\n<hr>\r\n\r\n<div class=\"row\" style=\"font-weight: 500; font-size: 20px;\">\r\n  <div class=\"col-xl-12\">\r\n    Product's Name: {{ inventory.Name }}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\"style=\"font-weight: 500; font-size: 17px;\">\r\n  <div class=\"col-xl-12\">\r\n    Average Price: {{ inventory.AveragePrice }} BDT\r\n  </div>\r\n</div>\r\n<br>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    Available Quantity: {{ inventory.RemainingQuantity }} {{ inventory.Unit }} (s)\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    Used Quantity: {{ inventory.UsedQuantity }} {{ inventory.Unit }} (s)\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n<div class=\"row text-xl-left\">\r\n  <div class=\"col-xl-10\">\r\n\r\n    <button\r\n      routerLink=\"/admin/inventories/{{inventoryId}}/update-inventory-item\"\r\n      class=\"btn btn-info\">Update</button> &nbsp;\r\n\r\n    <button\r\n      routerLink=\"/admin/inventories/{{inventoryId}}/edit-inventory-item\"\r\n      class=\"btn btn-warning\">Edit</button> &nbsp;\r\n\r\n    <button\r\n      (click)=\"deleteInventoryItem()\"\r\n      class=\"btn btn-danger\">Delete</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    <h6>Update Histories</h6>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-10\">\r\n\r\n    <table border=1 cellpadding=10 width=\"100%\">\r\n      <tr style=\"font-weight: 500;\">\r\n        <td>Product's Quantity</td>\r\n        <td>Product's Unit</td>\r\n        <td>Buying Price</td>\r\n        <td>Buying Date</td>\r\n      </tr>\r\n\r\n      <tr\r\n        *ngFor=\"let inventoryHistory of inventory.InventoryHistory\r\n         | paginate: { itemsPerPage: 3, currentPage: pageNumber }\">\r\n        <td>\r\n          {{ inventoryHistory.BuyingQuantity }}\r\n        </td>\r\n        <td >\r\n          {{ inventory.Unit }}\r\n        </td>\r\n        <td>\r\n          {{ inventoryHistory.BuyingPrice }}\r\n        </td>\r\n        <td>\r\n          {{ inventoryHistory.BuyingTime }}\r\n        </td>\r\n      </tr>\r\n    </table>\r\n\r\n\r\n\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n<div class=\"row text-xl-right\">\r\n  <div class=\"col-xl-10\">\r\n    <pagination-controls\r\n      class=\"my-pagination\"\r\n      [autoHide]=\"true\"\r\n      (pageChange)=\"pageNumber = $event\"></pagination-controls>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4665,7 +4680,7 @@ var InventoryDetailsComponent = /** @class */ (function () {
         this.pageNumber = 1;
         this.route.params
             .subscribe(function (params) {
-            _this.inventoryId = +params['inventoryId'];
+            _this.inventoryId = +params['inventory-id'];
         });
     }
     InventoryDetailsComponent.prototype.ngOnInit = function () {
@@ -4675,7 +4690,11 @@ var InventoryDetailsComponent = /** @class */ (function () {
             _this.inventories = data['inventories'];
             _this.inventory = _this.inventories.find(function (x) { return x.Id === _this.inventoryId; });
             if (_this.inventory === undefined) {
-                window.alert('Item not found!');
+                _this.toastr.errorToastr('Item not found', 'Error', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                });
                 _this.router.navigate(['admin/inventories']);
             }
         });
@@ -4867,7 +4886,7 @@ var UpdateInventoryItemComponent = /** @class */ (function () {
         this.inventories = [];
         this.route.params
             .subscribe(function (params) {
-            _this.inventoryId = +params['inventoryId'];
+            _this.inventoryId = +params['inventory-id'];
         });
     }
     UpdateInventoryItemComponent.prototype.ngOnInit = function () {
@@ -5164,7 +5183,7 @@ var OrdersComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--\r\n<div class=\"col-md-12 name\">\r\n\r\n  <form (ngSubmit) = \"addNewTable(newTable)\" #newTable = \"ngForm\">\r\n    <div id=\"user-data\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">Table's Name:</label>\r\n        <input\r\n          type=\"text\"\r\n          id=\"name\"\r\n          class=\"form-control\"\r\n          ngModel\r\n          name=\"name\"\r\n          required\r\n        >\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n\r\n        <div class=\"action\">\r\n          <button class=\"all-categories-button\"\r\n                  type=\"submit\"\r\n                  [disabled]=\"!newTable.valid || isDisabled\">\r\n            <i class=\"fa fa-bookmark\" aria-hidden=\"true\"></i> Save</button>\r\n        </div>\r\n        <div class=\"action\">\r\n          <button\r\n            class=\"all-categories-button\"\r\n            routerLink=\"admin/tables\"\r\n            type=\"button\">\r\n            <i class=\"fa fa-times-circle-o\" aria-hidden=\"true\"></i> Cancel</button>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  </form>\r\n\r\n</div>\r\n-->\r\n\r\n\r\n<div class=\"row\" style=\"font-weight: 500;\">\r\n  <div class=\"col-xl-12\">\r\n    Add New Table\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n<form (ngSubmit) = \"addNewTable(newTable)\" #newTable = \"ngForm\">\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-6\">\r\n          <label for=\"name\">Table's Name</label>\r\n          <input\r\n            type=\"text\"\r\n            id=\"name\"\r\n            class=\"form-control\"\r\n            ngModel\r\n            name=\"name\"\r\n            #name=\"ngModel\"\r\n            required>\r\n    <p\r\n      style=\"color: red; margin-bottom: 0;\"\r\n      *ngIf=\"name.invalid && (name.dirty || name.touched)\">\r\n      Table name is required!\r\n    </p>\r\n\r\n  </div>\r\n</div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6\">\r\n      <hr>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6 text-xl-right\">\r\n      <button\r\n        [disabled]=\"newTable.invalid || isDisabled\"\r\n        type=\"submit\"\r\n        class=\"btn btn-success\">Save</button>\r\n      &nbsp;\r\n      <button\r\n        type=\"button\"\r\n        routerLink=\"/admin/tables\"\r\n        class=\"btn btn-danger\">Discard</button>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</form>\r\n"
+module.exports = "<!--\r\n<div class=\"col-md-12 name\">\r\n\r\n  <form (ngSubmit) = \"addNewTable(newTable)\" #newTable = \"ngForm\">\r\n    <div id=\"userAccount-data\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">Table's Name:</label>\r\n        <input\r\n          type=\"text\"\r\n          id=\"name\"\r\n          class=\"form-control\"\r\n          ngModel\r\n          name=\"name\"\r\n          required\r\n        >\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n\r\n        <div class=\"action\">\r\n          <button class=\"all-categories-button\"\r\n                  type=\"submit\"\r\n                  [disabled]=\"!newTable.valid || isDisabled\">\r\n            <i class=\"fa fa-bookmark\" aria-hidden=\"true\"></i> Save</button>\r\n        </div>\r\n        <div class=\"action\">\r\n          <button\r\n            class=\"all-categories-button\"\r\n            routerLink=\"admin/tables\"\r\n            type=\"button\">\r\n            <i class=\"fa fa-times-circle-o\" aria-hidden=\"true\"></i> Cancel</button>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  </form>\r\n\r\n</div>\r\n-->\r\n\r\n\r\n<div class=\"row\" style=\"font-weight: 500;\">\r\n  <div class=\"col-xl-12\">\r\n    Add New Table\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n<form (ngSubmit) = \"addNewTable(newTable)\" #newTable = \"ngForm\">\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-6\">\r\n          <label for=\"name\">Table's Name</label>\r\n          <input\r\n            type=\"text\"\r\n            id=\"name\"\r\n            class=\"form-control\"\r\n            ngModel\r\n            name=\"name\"\r\n            #name=\"ngModel\"\r\n            required>\r\n    <p\r\n      style=\"color: red; margin-bottom: 0;\"\r\n      *ngIf=\"name.invalid && (name.dirty || name.touched)\">\r\n      Table name is required!\r\n    </p>\r\n\r\n  </div>\r\n</div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6\">\r\n      <hr>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6 text-xl-right\">\r\n      <button\r\n        [disabled]=\"newTable.invalid || isDisabled\"\r\n        type=\"submit\"\r\n        class=\"btn btn-success\">Save</button>\r\n      &nbsp;\r\n      <button\r\n        type=\"button\"\r\n        routerLink=\"/admin/tables\"\r\n        class=\"btn btn-danger\">Discard</button>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</form>\r\n"
 
 /***/ }),
 
@@ -5295,7 +5314,7 @@ var EditTableComponent = /** @class */ (function () {
         this.isDisabled = false;
         this.route.params
             .subscribe(function (params) {
-            _this.tableId = +params['tableId'];
+            _this.tableId = +params['table-id'];
         });
     }
     EditTableComponent.prototype.ngOnInit = function () {
@@ -5364,7 +5383,7 @@ var EditTableComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"row\">\n  <div class=\"col-xl-12\">\n    <h6>General Information</h6>\n  </div>\n</div>\n\n<hr>\n\n<div class=\"row\" style=\"font-weight: 500; font-size: 20px;\">\n  <div class=\"col-xl-12\">\n    Product's Name: {{ table.Name }}\n  </div>\n</div>\n\n<br>\n\n<div class=\"row text-xl-left\">\n  <div class=\"col-xl-10\">\n\n    <button\n      routerLink=\"/admin/tables/{{tableId}}/edit-table\"\n      class=\"btn btn-warning\">Edit</button> &nbsp;\n\n    <button\n      (click)=\"deleteTable()\"\n      class=\"btn btn-danger\">Delete</button>\n\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"row\">\n  <div class=\"col-xl-12\">\n    <h6>General Information</h6>\n  </div>\n</div>\n\n<hr>\n\n<div class=\"row\" style=\"font-weight: 500; font-size: 20px;\">\n  <div class=\"col-xl-12\">\n    Table's Name: {{ table.Name }}\n  </div>\n</div>\n\n<br>\n\n<div class=\"row text-xl-left\">\n  <div class=\"col-xl-10\">\n\n    <button\n      routerLink=\"/admin/tables/{{tableId}}/edit-table\"\n      class=\"btn btn-warning\">Edit</button> &nbsp;\n\n    <button\n      (click)=\"deleteTable()\"\n      class=\"btn btn-danger\">Delete</button>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -5409,7 +5428,7 @@ var TableDetailsComponent = /** @class */ (function () {
         this.tables = [];
         this.route.params
             .subscribe(function (params) {
-            _this.tableId = +params['tableId'];
+            _this.tableId = +params['table-id'];
         });
     }
     TableDetailsComponent.prototype.ngOnInit = function () {
@@ -5418,7 +5437,7 @@ var TableDetailsComponent = /** @class */ (function () {
             _this.tables = data['tables'];
             _this.table = _this.tables.find(function (x) { return x.Id === _this.tableId; });
             if (_this.table === undefined) {
-                _this.toastr.errorToastr('Table is not found', 'Error', {
+                _this.toastr.errorToastr('Table not found', 'Error', {
                     toastTimeout: 10000,
                     newestOnTop: true,
                     showCloseButton: true
@@ -5587,65 +5606,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TablesComponent", function() { return TablesComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_data_storage_table_data_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/data-storage/table-data-storage.service */ "./src/app/services/data-storage/table-data-storage.service.ts");
-
-
 
 
 var TablesComponent = /** @class */ (function () {
-    function TablesComponent(route, router, dataStorageService) {
-        this.route = route;
-        this.router = router;
-        this.dataStorageService = dataStorageService;
-        this.totalTable = 0;
+    function TablesComponent() {
     }
-    // ngOnInit() {
-    //   this.route.data.
-    //   subscribe(
-    //     ( data: Table[]) => {
-    //       this.pointOfSaleService.tables = data['tables'];
-    //     }
-    //   );
-    //   this.tables = this.pointOfSaleService.tables;
-    //   this.subscription = this.pointOfSaleService.tablesChanged
-    //     .subscribe(
-    //       (tables: Table[]) => {
-    //         this.tables = tables;
-    //       }
-    //     );
-    //   this.totalTable = this.tables.length;
-    // }
-    //
-    TablesComponent.prototype.addNewTable = function () {
-        this.router.navigate(['admin/tables/add-new-tables']);
-    };
-    TablesComponent.prototype.editTable = function (table) {
-        this.router.navigate(['admin/tables/edit-tables', table.Id]);
-    };
-    TablesComponent.prototype.deleteTable = function (table, index) {
-        var dialog = confirm('Delete this tables?\n' +
-            'You will lose any kind of data associated with the current tables!');
-        if (dialog === true) {
-            this.confirmEvent(table, index);
-        }
-    };
-    TablesComponent.prototype.confirmEvent = function (table, index) {
-        var _this = this;
-        this.dataStorageService.deleteTable(1).
-            subscribe(function (data) {
-            _this.tables.splice(index, 1);
-        });
-    };
     TablesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-tables',
             template: __webpack_require__(/*! ./tables.component.html */ "./src/app/components/admin/tables/tables.component.html"),
             styles: [__webpack_require__(/*! ./tables.component.scss */ "./src/app/components/admin/tables/tables.component.scss")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            _services_data_storage_table_data_storage_service__WEBPACK_IMPORTED_MODULE_3__["TableDataStorageService"]])
+        })
     ], TablesComponent);
     return TablesComponent;
 }());
@@ -5661,7 +5632,7 @@ var TablesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  add-new-user works!\n</p>\n"
+module.exports = "<div class=\"row\" style=\"font-weight: 500;\">\r\n  <div class=\"col-xl-12\">\r\n    Add New User\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n\r\n<form (ngSubmit) = \"addNewUserAccount(userAccount)\" #userAccount= \"ngForm\">\r\n\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"col-xl-6\">\r\n\r\n      <label for=\"email\">User Name*</label>\r\n      <input\r\n        type=\"text\"\r\n        id=\"userName\"\r\n        class=\"form-control\"\r\n        ngModel\r\n        name=\"userName\"\r\n        #userName=\"ngModel\"\r\n        required>\r\n\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"userName.invalid && (userName.dirty || userName.touched)\">\r\n        User Name is required!\r\n      </p>\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"col-xl-6\">\r\n\r\n      <label for=\"fullName\">Full Name</label>\r\n      <input\r\n        type=\"text\"\r\n        id=\"fullName\"\r\n        class=\"form-control\"\r\n        ngModel\r\n        name=\"fullName\">\r\n\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"col-xl-4\">\r\n\r\n      <label for=\"email\">Email*</label>\r\n      <input\r\n        type=\"email\"\r\n        id=\"email\"\r\n        class=\"form-control\"\r\n        ngModel\r\n        name=\"email\"\r\n        #email=\"ngModel\"\r\n        required>\r\n\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"email.invalid && (email.dirty || email.touched)\">\r\n        Email is required!\r\n      </p>\r\n\r\n    </div>\r\n\r\n    <div class=\"col-xl-2\">\r\n\r\n      <label for=\"phoneNumber\">Phone Number</label>\r\n      <input\r\n        type=\"text\"\r\n        id=\"phoneNumber\"\r\n        class=\"form-control\"\r\n        ngModel\r\n        name=\"phoneNumber\">\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"col-xl-3\">\r\n\r\n      <label for=\"firstName\">Password*</label>\r\n      <input\r\n        type=\"password\"\r\n        id=\"password\"\r\n        class=\"form-control\"\r\n        ngModel\r\n        name=\"password\"\r\n        #password=\"ngModel\"\r\n        required>\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"password.invalid && (password.dirty || password.touched)\">\r\n        Password is required!\r\n      </p>\r\n\r\n    </div>\r\n\r\n    <div class=\"col-xl-3\">\r\n\r\n      <label for=\"confirmPassword\">Confirm Password*</label>\r\n      <input\r\n        type=\"password\"\r\n        id=\"confirmPassword\"\r\n        class=\"form-control\"\r\n        ngModel\r\n        name=\"confirmPassword\"\r\n        #confirmPassword=\"ngModel\"\r\n        required>\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)\">\r\n        Confirmation is required!\r\n      </p>\r\n\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"col-xl-6\">\r\n\r\n      <label for=\"roleName\">Role*</label>\r\n      <select\r\n        style=\"cursor: pointer;\"\r\n        id=\"roleName\"\r\n        class=\"form-control\"\r\n        ngModel\r\n        required\r\n        #roleName=\"ngModel\"\r\n        name=\"roleName\">\r\n        <option value=\"\" selected>Select Role</option>\r\n        <option\r\n          style=\"cursor: pointer;\"\r\n          *ngFor=\"let role of roles\"\r\n          [value]=\"role.Name\">\r\n          {{ role.Name }}\r\n        </option>\r\n      </select>\r\n\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"roleName.invalid && (roleName.dirty || roleName.touched)\">\r\n        Role is required!\r\n      </p>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6\">\r\n      <hr>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-xl-6 text-xl-right\">\r\n      <button\r\n        [disabled]=\"userAccount.invalid || isDisabled\"\r\n        type=\"submit\"\r\n        class=\"btn btn-success\">Save</button>\r\n      &nbsp;\r\n      <button\r\n        type=\"button\"\r\n        routerLink=\"/admin/inventories\"\r\n        class=\"btn btn-danger\">Discard</button>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</form>\r\n"
 
 /***/ }),
 
@@ -5688,12 +5659,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddNewUserComponent", function() { return AddNewUserComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng6-toastr-notifications */ "./node_modules/ng6-toastr-notifications/fesm5/ng6-toastr-notifications.js");
+/* harmony import */ var _models_user_account_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../models/user-account.model */ "./src/app/models/user-account.model.ts");
+/* harmony import */ var _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../services/data-storage/user-account-data-storage.service */ "./src/app/services/data-storage/user-account-data-storage.service.ts");
+
+
+
+
 
 
 var AddNewUserComponent = /** @class */ (function () {
-    function AddNewUserComponent() {
+    function AddNewUserComponent(router, route, toastr, userAccountDataStorageService) {
+        this.router = router;
+        this.route = route;
+        this.toastr = toastr;
+        this.userAccountDataStorageService = userAccountDataStorageService;
+        this.isDisabled = false;
+        this.roles = [];
     }
     AddNewUserComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.data
+            .subscribe(function (data) {
+            _this.roles = data['roles'];
+        });
+    };
+    AddNewUserComponent.prototype.addNewUserAccount = function (form) {
+        var _this = this;
+        if (form.value.password !== form.value.confirmPassword) {
+            this.toastr.errorToastr('Passwords do not match', 'Error', {
+                toastTimeout: 10000,
+                newestOnTop: true,
+                showCloseButton: true
+            });
+            return;
+        }
+        this.isDisabled = true;
+        var userAccount = new _models_user_account_model__WEBPACK_IMPORTED_MODULE_4__["UserAccount"]('', form.value.userName, form.value.fullName, form.value.email, form.value.password, form.value.phoneNumber, '', form.value.roleName);
+        this.userAccountDataStorageService.register(userAccount)
+            .subscribe(function (result) {
+            if (result.Succeeded) {
+                _this.toastr.successToastr('New userAccount added', 'Success', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                });
+                form.reset();
+            }
+            else {
+                _this.toastr.errorToastr(result.Errors[0], 'Error', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                });
+                _this.isDisabled = false;
+            }
+        });
     };
     AddNewUserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -5701,9 +5723,68 @@ var AddNewUserComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./add-new-user.component.html */ "./src/app/components/admin/users/add-new-user/add-new-user.component.html"),
             styles: [__webpack_require__(/*! ./add-new-user.component.scss */ "./src/app/components/admin/users/add-new-user/add-new-user.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_3__["ToastrManager"],
+            _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_5__["UserAccountDataStorageService"]])
     ], AddNewUserComponent);
     return AddNewUserComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.html":
+/*!*********************************************************************************************************!*\
+  !*** ./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.html ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  change-password-by-admin works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.scss":
+/*!*********************************************************************************************************!*\
+  !*** ./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.scss ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYWRtaW4vdXNlcnMvY2hhbmdlLXBhc3N3b3JkLWJ5LWFkbWluL2NoYW5nZS1wYXNzd29yZC1ieS1hZG1pbi5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.ts":
+/*!*******************************************************************************************************!*\
+  !*** ./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.ts ***!
+  \*******************************************************************************************************/
+/*! exports provided: ChangePasswordByAdminComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangePasswordByAdminComponent", function() { return ChangePasswordByAdminComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var ChangePasswordByAdminComponent = /** @class */ (function () {
+    function ChangePasswordByAdminComponent() {
+    }
+    ChangePasswordByAdminComponent.prototype.ngOnInit = function () {
+    };
+    ChangePasswordByAdminComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-change-password-by-admin',
+            template: __webpack_require__(/*! ./change-password-by-admin.component.html */ "./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.html"),
+            styles: [__webpack_require__(/*! ./change-password-by-admin.component.scss */ "./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], ChangePasswordByAdminComponent);
+    return ChangePasswordByAdminComponent;
 }());
 
 
@@ -5717,7 +5798,7 @@ var AddNewUserComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  edit-user works!\n</p>\n"
+module.exports = "<div class=\"row\" style=\"font-weight: 500;\">\n  <div class=\"col-xl-12\">\n    Edit Information of {{ userAccount.UserName }}\n  </div>\n</div>\n\n<br>\n\n\n<form (ngSubmit) = \"editUserAccount(userAccount)\" #userAccount= \"ngForm\">\n\n\n  <div class=\"row form-group\">\n    <div class=\"col-xl-6\">\n\n      <label for=\"email\">User Name*</label>\n      <input\n        type=\"text\"\n        id=\"userName\"\n        class=\"form-control\"\n        [ngModel]=\"'hvhgvgh'\"\n        name=\"userName\"\n        #userName=\"ngModel\"\n        required>\n\n      <p\n        style=\"color: red; margin-bottom: 0;\"\n        *ngIf=\"userName.invalid && (userName.dirty || userName.touched)\">\n        User Name is required!\n      </p>\n\n    </div>\n\n\n  </div>\n\n  <div class=\"row form-group\">\n    <div class=\"col-xl-6\">\n\n      <label for=\"fullName\">Full Name</label>\n      <input\n        type=\"text\"\n        id=\"fullName\"\n        class=\"form-control\"\n        [ngModel]=\"userAccount.FullName\"\n        name=\"fullName\">\n\n    </div>\n  </div>\n\n  <div class=\"row form-group\">\n    <div class=\"col-xl-4\">\n\n      <label for=\"email\">Email*</label>\n      <input\n        type=\"email\"\n        id=\"email\"\n        class=\"form-control\"\n        [ngModel]=\"userAccount.Email\"\n        name=\"email\"\n        #email=\"ngModel\"\n        required>\n\n      <p\n        style=\"color: red; margin-bottom: 0;\"\n        *ngIf=\"email.invalid && (email.dirty || email.touched)\">\n        Email is required!\n      </p>\n\n    </div>\n\n    <div class=\"col-xl-2\">\n\n      <label for=\"phoneNumber\">Phone Number</label>\n      <input\n        type=\"text\"\n        id=\"phoneNumber\"\n        class=\"form-control\"\n        [ngModel]=\"userAccount.PhoneNumber\"\n        name=\"phoneNumber\">\n\n    </div>\n\n  </div>\n\n\n\n  <div class=\"row form-group\">\n    <div class=\"col-xl-6\">\n\n      <label for=\"roleName\">Role*</label>\n      <select\n        style=\"cursor: pointer;\"\n        id=\"roleName\"\n        class=\"form-control\"\n        [ngModel]=\"userAccount.RoleName\"\n        required\n        #roleName=\"ngModel\"\n        name=\"roleName\">\n        <option\n          style=\"cursor: pointer;\"\n          *ngFor=\"let role of roles\"\n          [value]=\"role.Name\">\n          {{ role.Name }}\n        </option>\n      </select>\n\n      <p\n        style=\"color: red; margin-bottom: 0;\"\n        *ngIf=\"roleName.invalid && (roleName.dirty || roleName.touched)\">\n        Role is required!\n      </p>\n\n    </div>\n  </div>\n\n\n\n  <div class=\"row\">\n    <div class=\"col-xl-6\">\n      <hr>\n    </div>\n  </div>\n\n\n  <div class=\"row\">\n    <div class=\"col-xl-6 text-xl-right\">\n      <button\n        [disabled]=\"userAccount.invalid || isDisabled\"\n        type=\"submit\"\n        class=\"btn btn-success\">Save</button>\n      &nbsp;\n      <button\n        type=\"button\"\n        routerLink=\"/admin/inventories\"\n        class=\"btn btn-danger\">Discard</button>\n    </div>\n  </div>\n\n\n</form>\n"
 
 /***/ }),
 
@@ -5744,12 +5825,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditUserComponent", function() { return EditUserComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng6-toastr-notifications */ "./node_modules/ng6-toastr-notifications/fesm5/ng6-toastr-notifications.js");
+/* harmony import */ var _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/data-storage/user-account-data-storage.service */ "./src/app/services/data-storage/user-account-data-storage.service.ts");
+
+
+
 
 
 var EditUserComponent = /** @class */ (function () {
-    function EditUserComponent() {
+    function EditUserComponent(router, route, toastr, userAccountDataStorageService) {
+        var _this = this;
+        this.router = router;
+        this.route = route;
+        this.toastr = toastr;
+        this.userAccountDataStorageService = userAccountDataStorageService;
+        this.userAccounts = [];
+        this.roles = [];
+        this.route.params
+            .subscribe(function (params) {
+            _this.userAccountId = params['user-account-id'];
+        });
     }
     EditUserComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.data.subscribe(function (data) {
+            _this.roles = data['roles'];
+            _this.userAccounts = data['userAccounts'];
+            _this.userAccount = _this.userAccounts.find(function (x) { return x.Id === _this.userAccountId; });
+            if (_this.userAccount === undefined) {
+                _this.toastr.errorToastr('User is not found', 'Error', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                });
+                _this.router.navigate(['admin/userAccounts']);
+            }
+        });
+    };
+    EditUserComponent.prototype.editUserAccount = function () {
+        // this.userAccountDataStorageService.editUserAccount( {})
     };
     EditUserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -5757,7 +5872,10 @@ var EditUserComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./edit-user.component.html */ "./src/app/components/admin/users/edit-user/edit-user.component.html"),
             styles: [__webpack_require__(/*! ./edit-user.component.scss */ "./src/app/components/admin/users/edit-user/edit-user.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_3__["ToastrManager"],
+            _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_4__["UserAccountDataStorageService"]])
     ], EditUserComponent);
     return EditUserComponent;
 }());
@@ -5773,7 +5891,7 @@ var EditUserComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  user-details works!\n</p>\n"
+module.exports = "\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    <h6>General Information</h6>\r\n  </div>\r\n</div>\r\n\r\n<hr>\r\n\r\n<div class=\"row\" style=\"font-weight: 500; font-size: 20px;\">\r\n  <div class=\"col-xl-12\">\r\n    User Name: {{ userAccount.UserName}}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\"style=\"font-weight: 500; font-size: 17px;\">\r\n  <div class=\"col-xl-12\">\r\n    Role: {{ userAccount.RoleName }}\r\n  </div>\r\n</div>\r\n<br>\r\n\r\n<div class=\"row\" *ngIf=\"userAccount.FullName !== null\">\r\n  <div class=\"col-xl-12\">\r\n    Full Name: {{ userAccount.FullName}}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    Email: {{ userAccount.Email }}\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\" *ngIf=\"userAccount.PhoneNumber !== null\">\r\n  <div class=\"col-xl-12\">\r\n     Phone Number: {{ userAccount.PhoneNumber }}\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n<div class=\"row\">\r\n  <div class=\"col-xl-12\">\r\n    Addind Date Time: {{ userAccount.AddingDateTime }}\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n<div class=\"row text-xl-left\">\r\n  <div class=\"col-xl-10\">\r\n\r\n    <button\r\n      routerLink=\"/admin/user-accounts/{{userId}}/change-password-by-admin\"\r\n      class=\"btn btn-info\">Change Password</button> &nbsp;\r\n    <button\r\n      routerLink=\"/admin/user-accounts/{{userId}}/edit-user-account\"\r\n      class=\"btn btn-warning\">Edit</button> &nbsp;\r\n\r\n    <button\r\n      [hidden]=\"\r\n      userAccount.Id === '6ed0a6d2-e6b1-47a8-b33f-fc40932b2f3d' ||\r\n      userAccount.Id === 'e9c7a759-7ef7-4dc0-9348-736406d6e8cd'\"\r\n      (click)=\"deleteUser()\"\r\n      class=\"btn btn-danger\">Delete</button>\r\n\r\n  </div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -5800,12 +5918,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserDetailsComponent", function() { return UserDetailsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng6-toastr-notifications */ "./node_modules/ng6-toastr-notifications/fesm5/ng6-toastr-notifications.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/data-storage/user-account-data-storage.service */ "./src/app/services/data-storage/user-account-data-storage.service.ts");
+
+
+
 
 
 var UserDetailsComponent = /** @class */ (function () {
-    function UserDetailsComponent() {
+    function UserDetailsComponent(router, route, toastr, userAccountDataStorageService) {
+        var _this = this;
+        this.router = router;
+        this.route = route;
+        this.toastr = toastr;
+        this.userAccountDataStorageService = userAccountDataStorageService;
+        this.userAccounts = [];
+        this.route.params
+            .subscribe(function (params) {
+            _this.userId = params['user-account-id'];
+        });
     }
     UserDetailsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.data.subscribe(function (data) {
+            _this.userAccounts = data['userAccounts'];
+            _this.userAccount = _this.userAccounts.find(function (x) { return x.Id === _this.userId; });
+            if (_this.userAccount === undefined) {
+                _this.toastr.errorToastr('User is not found', 'Error', {
+                    toastTimeout: 10000,
+                    newestOnTop: true,
+                    showCloseButton: true
+                });
+                _this.router.navigate(['admin/userAccounts']);
+            }
+        });
+    };
+    UserDetailsComponent.prototype.deleteUser = function () {
+        var dialog = confirm('Delete this userAccount account?\n' +
+            'You will lose any kind of data associated with the current userAccount!');
+        if (dialog === true) {
+            this.confirmEvent();
+        }
+    };
+    UserDetailsComponent.prototype.confirmEvent = function () {
+        var _this = this;
+        this.userAccountDataStorageService.deleteUserAccount(this.userId).subscribe(function (data) {
+            _this.toastr.successToastr('Removed from shop', 'Success', {
+                toastTimeout: 10000,
+                newestOnTop: true,
+                showCloseButton: true
+            });
+            _this.router.navigate(['admin/userAccounts']);
+        });
     };
     UserDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -5813,7 +5978,10 @@ var UserDetailsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./user-details.component.html */ "./src/app/components/admin/users/user-details/user-details.component.html"),
             styles: [__webpack_require__(/*! ./user-details.component.scss */ "./src/app/components/admin/users/user-details/user-details.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+            ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_2__["ToastrManager"],
+            _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_4__["UserAccountDataStorageService"]])
     ], UserDetailsComponent);
     return UserDetailsComponent;
 }());
@@ -5829,7 +5997,7 @@ var UserDetailsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  user-list works!\n</p>\n"
+module.exports = "\r\n  <mat-form-field>\r\n    <input\r\n      style=\"width: 100%;\"\r\n      matInput\r\n      (keyup)=\"applyFilter($event.target.value)\"\r\n      placeholder=\"Search...\">\r\n  </mat-form-field>\r\n\r\n  <div class=\"mat-elevation-z8\" style=\"box-shadow: none!important;\">\r\n    <table  mat-table [dataSource]=\"dataSource\" matSort>\r\n\r\n      <ng-container matColumnDef=\"UserName\">\r\n        <th\r\n          style=\"font-size: 14px; font-weight: 500; color: #000;\"\r\n          mat-header-cell *matHeaderCellDef mat-sort-header> User Name</th>\r\n        <td\r\n          style=\"width: 15%\"\r\n          mat-cell *matCellDef=\"let row\"> {{row.UserName}} </td>\r\n      </ng-container>\r\n\r\n\r\n\r\n      <ng-container matColumnDef=\"RoleName\">\r\n        <th\r\n          style=\"font-size: 14px; font-weight: 500; color: #000;\"\r\n          mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>\r\n        <td\r\n          style=\"width: 10%\"\r\n          mat-cell *matCellDef=\"let row\"> {{row.RoleName}} </td>\r\n      </ng-container>\r\n\r\n\r\n      <ng-container matColumnDef=\"PhoneNumber\">\r\n        <th\r\n          style=\"font-size: 14px; font-weight: 500; color: #000;\"\r\n          mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>\r\n        <td\r\n          style=\"width: 10%\"\r\n          mat-cell *matCellDef=\"let row\"> {{ row.PhoneNumber }}</td>\r\n      </ng-container>\r\n\r\n\r\n      <ng-container matColumnDef=\"AddingDateTime\">\r\n        <th\r\n          style=\"font-size: 14px; font-weight: 500; color: #000;\"\r\n          mat-header-cell *matHeaderCellDef mat-sort-header> Adding Date </th>\r\n        <td\r\n          style=\"width: 20%\"\r\n          mat-cell *matCellDef=\"let row\"> {{row.AddingDateTime}} </td>\r\n      </ng-container>\r\n\r\n\r\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"\r\n          style=\"cursor: pointer;\"\r\n          title=\"See details\"\r\n          routerLink=\"/admin/user-accounts/{{ row.Id }}\">\r\n      </tr>\r\n    </table>\r\n\r\n    <mat-paginator\r\n      [pageSizeOptions]=\"[5, 10, 25, 50]\" showFirstLastButtons></mat-paginator>\r\n  </div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -5840,7 +6008,7 @@ module.exports = "<p>\n  user-list works!\n</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYWRtaW4vdXNlcnMvdXNlci1saXN0L3VzZXItbGlzdC5jb21wb25lbnQuc2NzcyJ9 */"
+module.exports = "table {\n  width: 100%; }\n\n.mat-form-field {\n  font-size: 14px;\n  width: 100%; }\n\n.mat-cell {\n  border: 1px solid #ab9090;\n  text-align: center; }\n\n.mat-header-cell {\n  border: 1px solid #ab9090; }\n\n:host ::ng-deep .mat-sort-header-container {\n  display: flex;\n  justify-content: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hZG1pbi91c2Vycy91c2VyLWxpc3QvRDpcXFdlYiBEZXZlbG9wbWVudFxcUHJvamVjdHNcXFJlc3RhdXJhbnRNYW5hZ2VtZW50QXBwXFxSZXN0YXVyYW50TWFuYWdlbWVudEFwcC9zcmNcXGFwcFxcY29tcG9uZW50c1xcYWRtaW5cXHVzZXJzXFx1c2VyLWxpc3RcXHVzZXItbGlzdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVcsRUFBQTs7QUFHYjtFQUNFLGVBQWU7RUFDZixXQUFXLEVBQUE7O0FBR2I7RUFDRSx5QkFBeUI7RUFDekIsa0JBQWtCLEVBQUE7O0FBR3BCO0VBQ0UseUJBQXlCLEVBQUE7O0FBRzNCO0VBQ0UsYUFBYTtFQUNiLHVCQUF1QixFQUFBIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9hZG1pbi91c2Vycy91c2VyLWxpc3QvdXNlci1saXN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG4ubWF0LWZvcm0tZmllbGQge1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxuICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLm1hdC1jZWxsIHtcclxuICBib3JkZXI6IDFweCBzb2xpZCAjYWI5MDkwO1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLm1hdC1oZWFkZXItY2VsbCB7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgI2FiOTA5MDtcclxufVxyXG5cclxuOmhvc3QgOjpuZy1kZWVwIC5tYXQtc29ydC1oZWFkZXItY29udGFpbmVyIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG59XHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -5856,20 +6024,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserListComponent", function() { return UserListComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
 
 
 var UserListComponent = /** @class */ (function () {
-    function UserListComponent() {
+    function UserListComponent(route) {
+        this.route = route;
+        this.userAccounts = [];
+        this.displayedColumns = [
+            'UserName',
+            'RoleName',
+            'PhoneNumber',
+            'AddingDateTime'
+        ];
     }
     UserListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.data
+            .subscribe(function (data) {
+            _this.userAccounts = data['userAccounts'];
+            _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](_this.userAccounts);
+        });
     };
+    UserListComponent.prototype.ngAfterViewInit = function () {
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+    };
+    UserListComponent.prototype.applyFilter = function (filterValue) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"])
+    ], UserListComponent.prototype, "paginator", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSort"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSort"])
+    ], UserListComponent.prototype, "sort", void 0);
     UserListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-user-list',
             template: __webpack_require__(/*! ./user-list.component.html */ "./src/app/components/admin/users/user-list/user-list.component.html"),
             styles: [__webpack_require__(/*! ./user-list.component.scss */ "./src/app/components/admin/users/user-list/user-list.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
     ], UserListComponent);
     return UserListComponent;
 }());
@@ -5885,7 +6089,7 @@ var UserListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div class=\"row main-row\">\r\n    <div class=\"col-md-8 header\">\r\n      UserModel Registration\r\n    </div>\r\n    <a routerLink=\"/control-panel\">\r\n      <div class=\"col-md-offset-1 col-md-2 dashboard\">\r\n        Back to Dashboard\r\n      </div>\r\n    </a>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-offset-1 col-md-5\">\r\n    <form #userRegistrationForm=\"ngForm\" (ngSubmit)=\"OnSubmit(userRegistrationForm)\">\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-md-12 new-user\">\r\n          Create a new user\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-md-12 form-group\">\r\n          <div class=\"col-md-12\">\r\n            <label\r\n            >UserModel Name</label>\r\n          </div>\r\n          <div class=\"col-md-12\">\r\n          <input class=\"validate form-control\"\r\n                 type=\"text\"\r\n                 name=\"UserName\"\r\n                 #UserName=\"ngModel\"\r\n                 [(ngModel)]=\"user.UserName\"\r\n                 placeholder=\"Should be unique and cannot contain any space\"\r\n                 required>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-md-12 form-group\">\r\n          <div class=\"col-md-12\">\r\n            <label\r\n              [attr.data-error]=\"Password.errors!=null?(Password.errors.required?\r\n            'Required field!':'Minimum 3 characters needed'):''\">Password</label>\r\n          </div>\r\n          <div class=\"col-md-12\">\r\n          <input\r\n            class=\"validate form-control\"\r\n            type=\"password\"\r\n            name=\"Password\"\r\n            #Password=\"ngModel\"\r\n            [(ngModel)]=\"user.Password\"\r\n            placeholder=\"At least 3 characters long\"\r\n            required\r\n            minlength=\"3\">\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-md-12 form-group\">\r\n          <div class=\"col-md-12\">\r\n            <label\r\n            >Email\r\n            </label>\r\n          </div>\r\n          <div class=\"col-md-12\">\r\n          <input class=\"validate form-control\"\r\n                 type=\"text\"\r\n                 name=\"Email\"\r\n                 #Email=\"ngModel\"\r\n                 [(ngModel)]=\"user.Email\"\r\n                 [pattern]=\"emailPattern\"\r\n                 required>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-12 form-group\">\r\n        <label>Choose a role from here</label>\r\n        <select\r\n          style=\"cursor: pointer;\"\r\n          id=\"roleName\"\r\n          name=\"roleName\"\r\n          class=\"form-control\"\r\n          ngModel\r\n          required\r\n          >\r\n          <option  *ngFor=\"let item of roles\" [value] =\"item.Name\"  > {{ item.Name }} </option>\r\n        </select>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-md-12 button\">\r\n          <button [disabled]=\"!userRegistrationForm.valid || isDisabled\"\r\n                  class=\"btn btn-primary\"\r\n                  type=\"submit\">\r\n            Submit</button>\r\n\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n  <div class=\"col-md-5\">\r\n    <div class=\"row users\">\r\n      <div class=\"col-md-4\">\r\n        Users\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n        <input class=\"box\"\r\n               type=\"text\"\r\n               [(ngModel)]=\"term\"\r\n               placeholder=\"Search by UserModel Name...\">\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row body\">\r\n      <div class=\"col-md-12 table-bordered\" *ngFor=\"let user of modifiedUser | userFilter:term; let i= index\">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12 content\">\r\n            {{ i+1 }}. {{ user.UserName }}\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12 content\">\r\n           Role assigned: {{ user.Role }}\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12 content\">\r\n            Email: {{ user.Email }}\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-10 content\">\r\n            Added on: {{ user.DateTime }}\r\n          </div>\r\n          <div class=\"col-md-2\" *ngIf=\"user.UserName !== 'Admin'\r\n          && user.UserName !== 'Cashier'\">\r\n            <i\r\n              title=\"Remove this user\"\r\n              style=\"cursor: pointer\"\r\n              (click)=\"deleteUser(user, i)\"\r\n              class=\"fa fa-times-circle-o remove-order\"\r\n              aria-hidden=\"true\"></i>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12 total\">\r\n        Total {{ modifiedUser.length }} (s)\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<br>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-xl-6\">\r\n    <h5>Manage Your Users</h5>\r\n  </div>\r\n  <div class=\"col-xl-6 text-xl-right\">\r\n    <button\r\n      routerLink=\"/admin/users/add-new-user\"\r\n      class=\"btn btn-success\">Add New User</button>\r\n  </div>\r\n</div>\r\n\r\n<hr>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -5931,24 +6135,22 @@ var UsersComponent = /** @class */ (function () {
         this.roles = [];
     }
     UsersComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.resetForm();
+        //  this.resetForm();
         this.route.data.
             subscribe(function (data) {
-            _this.roles = data['roles'];
-            _this.modifiedUser = data['users'];
+            //  this.roles = data['roles'];
         });
     };
-    UsersComponent.prototype.resetForm = function (form) {
-        if (form != null) {
-            form.reset();
-        }
-        this.user = {
-            UserName: '',
-            Password: '',
-            Email: ''
-        };
-    };
+    // resetForm(form?: NgForm) {
+    //   if (form != null) {
+    //     form.reset();
+    //   }
+    //   this.userAccount = {
+    //     UserName: '',
+    //     Password: '',
+    //     Email: ''
+    //   }
+    // }
     UsersComponent.prototype.OnSubmit = function (form) {
         var _this = this;
         this.isDisabled = true;
@@ -5958,31 +6160,20 @@ var UsersComponent = /** @class */ (function () {
             if (data.Succeeded === true) {
                 _this.isDisabled = false;
                 var newUser = new _models_modified_user_model__WEBPACK_IMPORTED_MODULE_3__["ModifiedUserModel"](form.value.UserName, form.value.Email, form.value.roleName, dateTime);
-                _this.authService.getUsers()
-                    .subscribe(function (users) {
-                    _this.modifiedUser = users;
-                    alert('Registration Successful!');
-                    _this.resetForm(form);
-                });
+                // this.authService.getUsers()
+                //   .subscribe(
+                //     (userAccounts: any) => {
+                //       this.modifiedUser = userAccounts;
+                //       alert('Registration Successful!');
+                //     //  this.resetForm(form);
+                //     }
+                // );
             }
             else {
                 _this.isDisabled = false;
                 alert(data.Errors[0]);
             }
         });
-    };
-    UsersComponent.prototype.deleteUser = function (user, index) {
-        var _this = this;
-        var dialog = confirm('Delete this user?\n' +
-            'You will lose any kind of data associated with the current user!');
-        if (dialog === true) {
-            this.authService.deleteUser(user).subscribe(function (data) {
-                _this.authService.getUsers()
-                    .subscribe(function (users) {
-                    _this.modifiedUser = users;
-                });
-            });
-        }
     };
     UsersComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -6128,7 +6319,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n\r\n\r\n<div class=\"row\"\r\n     style=\"\r\n     font-family: 'Times New Roman', sans-serif;\r\n     font-size: 100px;\r\n     text-align: center;\r\n     padding-top: 35px;\"\r\n>\r\n  <div class=\"\r\n  col-xl-12\">\r\n    hodoo\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"row\"\r\n     style=\"\r\n     text-align: center;\r\n     font-size: 25px;\">\r\n  <div class=\"\r\n  col-xl-12\r\n  \">\r\n    UserModel Login\r\n  </div>\r\n</div>\r\n\r\n\r\n<br>\r\n\r\n<form\r\n  autocomplete=\"off\"\r\n  #userLoginForm=\"ngForm\"\r\n  (ngSubmit)=\"OnSubmit()\">\r\n\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"offset-xl-4 col-xl-4\">\r\n      <label style=\"font-weight: 300;\">UserModel Name</label>\r\n      <input class=\"form-control\"\r\n             type=\"text\"\r\n             name=\"userName\"\r\n             ngModel\r\n             #userName=\"ngModel\"\r\n             required>\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"userName.invalid && (userName.dirty || userName.touched)\">\r\n        UserModel name is required!\r\n      </p>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"offset-xl-4 col-xl-4\">\r\n      <label style=\"font-weight: 300;\">Password</label>\r\n      <input\r\n        class=\"form-control\"\r\n        type=\"password\"\r\n        name=\"password\"\r\n        ngModel\r\n        #password=\"ngModel\"\r\n        required>\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"password.invalid && (password.dirty || password.touched)\">\r\n        Password is required!\r\n      </p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\"\r\n       style=\"text-align: center;\">\r\n    <div class=\"\r\n        col-xl-12\r\n        \">\r\n      <button\r\n        [disabled]=\"isDisabled || userLoginForm.invalid\"\r\n        class=\"btn btn-primary\"\r\n        type=\"submit\">\r\n        Login</button>\r\n\r\n    </div>\r\n  </div>\r\n\r\n  <br>\r\n  <div class=\"row\"\r\n       style=\"text-align: center;\">\r\n    <div class=\"\r\n        col-xl-12\r\n       \">\r\n      <a\r\n        style=\"text-decoration: none;\"\r\n        routerLink=\"/reset-password\">Forgot your password?</a>\r\n    </div>\r\n  </div>\r\n\r\n</form>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+module.exports = "\r\n\r\n\r\n\r\n<div class=\"row\"\r\n     style=\"\r\n     font-family: 'Times New Roman', sans-serif;\r\n     font-size: 100px;\r\n     text-align: center;\r\n     padding-top: 35px;\"\r\n>\r\n  <div class=\"\r\n  col-xl-12\">\r\n    hodoo\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"row\"\r\n     style=\"\r\n     text-align: center;\r\n     font-size: 25px;\">\r\n  <div class=\"\r\n  col-xl-12\r\n  \">\r\n    User Login\r\n  </div>\r\n</div>\r\n\r\n\r\n<br>\r\n\r\n<form\r\n  autocomplete=\"off\"\r\n  #userLoginForm=\"ngForm\"\r\n  (ngSubmit)=\"OnSubmit()\">\r\n\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"offset-xl-4 col-xl-4\">\r\n      <label style=\"font-weight: 300;\">User Name</label>\r\n      <input class=\"form-control\"\r\n             type=\"text\"\r\n             name=\"userName\"\r\n             ngModel\r\n             #userName=\"ngModel\"\r\n             required>\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"userName.invalid && (userName.dirty || userName.touched)\">\r\n        User name is required!\r\n      </p>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"row form-group\">\r\n    <div class=\"offset-xl-4 col-xl-4\">\r\n      <label style=\"font-weight: 300;\">Password</label>\r\n      <input\r\n        class=\"form-control\"\r\n        type=\"password\"\r\n        name=\"password\"\r\n        ngModel\r\n        #password=\"ngModel\"\r\n        required>\r\n      <p\r\n        style=\"color: red; margin-bottom: 0;\"\r\n        *ngIf=\"password.invalid && (password.dirty || password.touched)\">\r\n        Password is required!\r\n      </p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\"\r\n       style=\"text-align: center;\">\r\n    <div class=\"\r\n        col-xl-12\r\n        \">\r\n      <button\r\n        [disabled]=\"isDisabled || userLoginForm.invalid\"\r\n        class=\"btn btn-primary\"\r\n        type=\"submit\">\r\n        Login</button>\r\n\r\n    </div>\r\n  </div>\r\n\r\n  <br>\r\n  <div class=\"row\"\r\n       style=\"text-align: center;\">\r\n    <div class=\"\r\n        col-xl-12\r\n       \">\r\n      <a\r\n        style=\"text-decoration: none;\"\r\n        routerLink=\"/reset-password\">Forgot your password?</a>\r\n    </div>\r\n  </div>\r\n\r\n</form>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -6192,7 +6383,7 @@ var LoginComponent = /** @class */ (function () {
         }, function (err) {
             _this.isLoginError = true;
             if (_this.isLoginError === true) {
-                alert('User name or password is incorrect!');
+                alert('UserAccount name or password is incorrect!');
                 _this.isDisabled = false;
             }
         });
@@ -7204,7 +7395,7 @@ var ResetPasswordComponent = /** @class */ (function () {
         var _this = this;
         this.isDisabled = true;
         this.authService.resetPassword(form.value.UserName).subscribe(function (data) {
-            if (data === 'User Name Found') {
+            if (data === 'UserAccount Name Found') {
                 _this.isDisabled = false;
                 form.reset();
                 alert('A password recovery code has sent to your email');
@@ -7212,7 +7403,7 @@ var ResetPasswordComponent = /** @class */ (function () {
             }
             else {
                 _this.isDisabled = false;
-                alert('Incorrect user name!');
+                alert('Incorrect userAccount name!');
             }
         });
     };
@@ -7495,6 +7686,34 @@ var Table = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/models/user-account.model.ts":
+/*!**********************************************!*\
+  !*** ./src/app/models/user-account.model.ts ***!
+  \**********************************************/
+/*! exports provided: UserAccount */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserAccount", function() { return UserAccount; });
+var UserAccount = /** @class */ (function () {
+    function UserAccount(Id, UserName, FullName, Email, Password, PhoneNumber, AddingDateTime, RoleName) {
+        this.Id = Id;
+        this.UserName = UserName;
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Password = Password;
+        this.PhoneNumber = PhoneNumber;
+        this.AddingDateTime = AddingDateTime;
+        this.RoleName = RoleName;
+    }
+    return UserAccount;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/modules/app-routing.module.ts":
 /*!***********************************************!*\
   !*** ./src/app/modules/app-routing.module.ts ***!
@@ -7544,6 +7763,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_inventories_add_new_inventory_item_add_new_inventory_item_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component */ "./src/app/components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component.ts");
 /* harmony import */ var _components_admin_tables_table_details_table_details_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../components/admin/tables/table-details/table-details.component */ "./src/app/components/admin/tables/table-details/table-details.component.ts");
 /* harmony import */ var _components_admin_inventories_update_inventory_item_update_inventory_item_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../components/admin/inventories/update-inventory-item/update-inventory-item.component */ "./src/app/components/admin/inventories/update-inventory-item/update-inventory-item.component.ts");
+/* harmony import */ var _components_admin_users_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../components/admin/users/user-list/user-list.component */ "./src/app/components/admin/users/user-list/user-list.component.ts");
+/* harmony import */ var _route_resolvers_user_account_resolver_service__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../route-resolvers/user-account-resolver.service */ "./src/app/route-resolvers/user-account-resolver.service.ts");
+/* harmony import */ var _components_admin_users_add_new_user_add_new_user_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../components/admin/users/add-new-user/add-new-user.component */ "./src/app/components/admin/users/add-new-user/add-new-user.component.ts");
+/* harmony import */ var _components_admin_users_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../components/admin/users/user-details/user-details.component */ "./src/app/components/admin/users/user-details/user-details.component.ts");
+/* harmony import */ var _components_admin_users_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../components/admin/users/edit-user/edit-user.component */ "./src/app/components/admin/users/edit-user/edit-user.component.ts");
+/* harmony import */ var _route_resolvers_role_resolver_service__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../route-resolvers/role-resolver.service */ "./src/app/route-resolvers/role-resolver.service.ts");
+/* harmony import */ var _components_admin_users_change_password_by_admin_change_password_by_admin_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../components/admin/users/change-password-by-admin/change-password-by-admin.component */ "./src/app/components/admin/users/change-password-by-admin/change-password-by-admin.component.ts");
+
+
+
+
+
+
+
 
 
 
@@ -7655,7 +7888,7 @@ var appRoutes = [
                         }
                     },
                     {
-                        path: ':foodItemId',
+                        path: ':food-item-id',
                         component: _components_admin_food_items_food_item_details_food_item_details_component__WEBPACK_IMPORTED_MODULE_31__["FoodItemDetailsComponent"],
                         resolve: {
                             foodItems: _route_resolvers_food_item_resolver_service__WEBPACK_IMPORTED_MODULE_7__["FoodItemResolverService"],
@@ -7663,7 +7896,7 @@ var appRoutes = [
                         }
                     },
                     {
-                        path: ':foodItemId/edit-food-item',
+                        path: ':food-item-id/edit-food-item',
                         component: _components_admin_food_items_edit_food_item_edit_food_item_component__WEBPACK_IMPORTED_MODULE_33__["EditFoodItemComponent"],
                         resolve: {
                             foodItems: _route_resolvers_food_item_resolver_service__WEBPACK_IMPORTED_MODULE_7__["FoodItemResolverService"],
@@ -7693,21 +7926,21 @@ var appRoutes = [
                         component: _components_admin_inventories_add_new_inventory_item_add_new_inventory_item_component__WEBPACK_IMPORTED_MODULE_36__["AddNewInventoryItemComponent"]
                     },
                     {
-                        path: ':inventoryId',
+                        path: ':inventory-id',
                         component: _components_admin_inventories_inventory_details_inventory_details_component__WEBPACK_IMPORTED_MODULE_28__["InventoryDetailsComponent"],
                         resolve: {
                             inventories: _route_resolvers_inventory_resolver_service__WEBPACK_IMPORTED_MODULE_5__["InventoryResolverService"]
                         }
                     },
                     {
-                        path: ':inventoryId/edit-inventory-item',
+                        path: ':inventory-id/edit-inventory-item',
                         component: _components_admin_inventories_edit_inventory_item_edit_inventory_item_component__WEBPACK_IMPORTED_MODULE_35__["EditInventoryItemComponent"],
                         resolve: {
                             inventories: _route_resolvers_inventory_resolver_service__WEBPACK_IMPORTED_MODULE_5__["InventoryResolverService"]
                         }
                     },
                     {
-                        path: ':inventoryId/update-inventory-item',
+                        path: ':inventory-id/update-inventory-item',
                         component: _components_admin_inventories_update_inventory_item_update_inventory_item_component__WEBPACK_IMPORTED_MODULE_38__["UpdateInventoryItemComponent"],
                         resolve: {
                             inventories: _route_resolvers_inventory_resolver_service__WEBPACK_IMPORTED_MODULE_5__["InventoryResolverService"]
@@ -7761,14 +7994,14 @@ var appRoutes = [
                         component: _components_admin_tables_add_new_table_add_new_table_component__WEBPACK_IMPORTED_MODULE_19__["AddNewTableComponent"]
                     },
                     {
-                        path: ':tableId',
+                        path: ':table-id',
                         component: _components_admin_tables_table_details_table_details_component__WEBPACK_IMPORTED_MODULE_37__["TableDetailsComponent"],
                         resolve: {
                             tables: _route_resolvers_table_resolver_service__WEBPACK_IMPORTED_MODULE_6__["TableResolverService"]
                         }
                     },
                     {
-                        path: ':tableId/edit-table',
+                        path: ':table-id/edit-table',
                         component: _components_admin_tables_edit_table_edit_table_component__WEBPACK_IMPORTED_MODULE_20__["EditTableComponent"],
                         resolve: {
                             tables: _route_resolvers_table_resolver_service__WEBPACK_IMPORTED_MODULE_6__["TableResolverService"]
@@ -7777,8 +8010,51 @@ var appRoutes = [
                 ]
             },
             {
-                path: 'users',
+                path: 'user-accounts',
                 component: _components_admin_users_users_component__WEBPACK_IMPORTED_MODULE_16__["UsersComponent"],
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'user-account-list',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'user-account-list',
+                        component: _components_admin_users_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_39__["UserListComponent"],
+                        resolve: {
+                            userAccounts: _route_resolvers_user_account_resolver_service__WEBPACK_IMPORTED_MODULE_40__["UserAccountResolverService"]
+                        }
+                    },
+                    {
+                        path: 'add-new-user-account',
+                        component: _components_admin_users_add_new_user_add_new_user_component__WEBPACK_IMPORTED_MODULE_41__["AddNewUserComponent"],
+                        resolve: {
+                            roles: _route_resolvers_role_resolver_service__WEBPACK_IMPORTED_MODULE_44__["RoleResolverService"]
+                        }
+                    },
+                    {
+                        path: ':user-account-id',
+                        component: _components_admin_users_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_42__["UserDetailsComponent"],
+                        resolve: {
+                            userAccounts: _route_resolvers_user_account_resolver_service__WEBPACK_IMPORTED_MODULE_40__["UserAccountResolverService"]
+                        }
+                    },
+                    {
+                        path: ':user-account-id/edit-user-account',
+                        component: _components_admin_users_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_43__["EditUserComponent"],
+                        resolve: {
+                            roles: _route_resolvers_role_resolver_service__WEBPACK_IMPORTED_MODULE_44__["RoleResolverService"],
+                            userAccounts: _route_resolvers_user_account_resolver_service__WEBPACK_IMPORTED_MODULE_40__["UserAccountResolverService"]
+                        }
+                    },
+                    {
+                        path: ':user-account-id/change-password-by-admin',
+                        component: _components_admin_users_change_password_by_admin_change_password_by_admin_component__WEBPACK_IMPORTED_MODULE_45__["ChangePasswordByAdminComponent"],
+                        resolve: {
+                            userAccounts: _route_resolvers_user_account_resolver_service__WEBPACK_IMPORTED_MODULE_40__["UserAccountResolverService"]
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -8072,40 +8348,6 @@ var InventoryResolverService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/route-resolvers/modified-user-resolver.service.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/route-resolvers/modified-user-resolver.service.ts ***!
-  \*******************************************************************/
-/*! exports provided: ModifiedUserResolverService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModifiedUserResolverService", function() { return ModifiedUserResolverService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_shared_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/shared/auth.service */ "./src/app/services/shared/auth.service.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-
-var ModifiedUserResolverService = /** @class */ (function () {
-    function ModifiedUserResolverService(userService) {
-        this.userService = userService;
-    }
-    ModifiedUserResolverService.prototype.resolve = function (route, state) {
-        return this.userService.getUsers();
-    };
-    ModifiedUserResolverService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_shared_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
-    ], ModifiedUserResolverService);
-    return ModifiedUserResolverService;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/route-resolvers/order-resolver.service.ts":
 /*!***********************************************************!*\
   !*** ./src/app/route-resolvers/order-resolver.service.ts ***!
@@ -8140,10 +8382,10 @@ var OrderResolverService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/route-resolvers/role-resolver.ts":
-/*!**************************************************!*\
-  !*** ./src/app/route-resolvers/role-resolver.ts ***!
-  \**************************************************/
+/***/ "./src/app/route-resolvers/role-resolver.service.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/route-resolvers/role-resolver.service.ts ***!
+  \**********************************************************/
 /*! exports provided: RoleResolverService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -8151,21 +8393,21 @@ var OrderResolverService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RoleResolverService", function() { return RoleResolverService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_shared_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/shared/auth.service */ "./src/app/services/shared/auth.service.ts");
+/* harmony import */ var _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/data-storage/user-account-data-storage.service */ "./src/app/services/data-storage/user-account-data-storage.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
 
 
 var RoleResolverService = /** @class */ (function () {
-    function RoleResolverService(userService) {
-        this.userService = userService;
+    function RoleResolverService(accountDataStorageService) {
+        this.accountDataStorageService = accountDataStorageService;
     }
     RoleResolverService.prototype.resolve = function (route, state) {
-        return this.userService.getAllRoles();
+        return this.accountDataStorageService.getAllRole();
     };
     RoleResolverService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_shared_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_1__["UserAccountDataStorageService"]])
     ], RoleResolverService);
     return RoleResolverService;
 }());
@@ -8208,39 +8450,34 @@ var TableResolverService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/services/data-storage/account-data-storage.service.ts":
-/*!***********************************************************************!*\
-  !*** ./src/app/services/data-storage/account-data-storage.service.ts ***!
-  \***********************************************************************/
-/*! exports provided: AccountDataStorageService */
+/***/ "./src/app/route-resolvers/user-account-resolver.service.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/route-resolvers/user-account-resolver.service.ts ***!
+  \******************************************************************/
+/*! exports provided: UserAccountResolverService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountDataStorageService", function() { return AccountDataStorageService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserAccountResolverService", function() { return UserAccountResolverService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _table_data_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./table-data-storage.service */ "./src/app/services/data-storage/table-data-storage.service.ts");
+/* harmony import */ var _services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/data-storage/user-account-data-storage.service */ "./src/app/services/data-storage/user-account-data-storage.service.ts");
 
 
 
-
-var AccountDataStorageService = /** @class */ (function () {
-    function AccountDataStorageService(http, tableDataStorageService) {
-        this.http = http;
-        this.tableDataStorageService = tableDataStorageService;
-        this.rootUrl = '';
-        this.rootUrl = tableDataStorageService.rootUrl;
+var UserAccountResolverService = /** @class */ (function () {
+    function UserAccountResolverService(userAccountDataStorageService) {
+        this.userAccountDataStorageService = userAccountDataStorageService;
     }
-    AccountDataStorageService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-            providedIn: 'root'
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
-            _table_data_storage_service__WEBPACK_IMPORTED_MODULE_3__["TableDataStorageService"]])
-    ], AccountDataStorageService);
-    return AccountDataStorageService;
+    UserAccountResolverService.prototype.resolve = function (route, state) {
+        return this.userAccountDataStorageService.getAllUserAccount();
+    };
+    UserAccountResolverService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_data_storage_user_account_data_storage_service__WEBPACK_IMPORTED_MODULE_2__["UserAccountDataStorageService"]])
+    ], UserAccountResolverService);
+    return UserAccountResolverService;
 }());
 
 
@@ -8454,6 +8691,63 @@ var TableDataStorageService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/data-storage/user-account-data-storage.service.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/services/data-storage/user-account-data-storage.service.ts ***!
+  \****************************************************************************/
+/*! exports provided: UserAccountDataStorageService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserAccountDataStorageService", function() { return UserAccountDataStorageService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _table_data_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./table-data-storage.service */ "./src/app/services/data-storage/table-data-storage.service.ts");
+
+
+
+
+var UserAccountDataStorageService = /** @class */ (function () {
+    function UserAccountDataStorageService(http, tableDataStorageService) {
+        this.http = http;
+        this.tableDataStorageService = tableDataStorageService;
+        this.rootUrl = '';
+        this.rootUrl = tableDataStorageService.rootUrl;
+    }
+    UserAccountDataStorageService.prototype.getAllRole = function () {
+        return this.http.get(this.rootUrl + '/api/GetAllRole');
+    };
+    UserAccountDataStorageService.prototype.register = function (userAccount) {
+        var reqHeader = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'No-Auth': 'True' });
+        return this.http.post(this.rootUrl + '/api/AddNewUserAccount', userAccount);
+    };
+    UserAccountDataStorageService.prototype.getAllUserAccount = function () {
+        return this.http.get(this.rootUrl + '/api/GetAllUserAccount');
+    };
+    UserAccountDataStorageService.prototype.editUserAccount = function (userAccount) {
+        return this.http.put(this.rootUrl + '/api/EditUserAccount', userAccount);
+    };
+    UserAccountDataStorageService.prototype.deleteUserAccount = function (userAccountId) {
+        return this.http.delete(this.rootUrl + '/api/DeleteUserAccount' + "/" + userAccountId);
+    };
+    UserAccountDataStorageService.prototype.changePasswordByAdmin = function () {
+    };
+    UserAccountDataStorageService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _table_data_storage_service__WEBPACK_IMPORTED_MODULE_3__["TableDataStorageService"]])
+    ], UserAccountDataStorageService);
+    return UserAccountDataStorageService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/shared/admin.service.ts":
 /*!**************************************************!*\
   !*** ./src/app/services/shared/admin.service.ts ***!
@@ -8524,7 +8818,7 @@ var AuthService = /** @class */ (function () {
             DateTime: dateTime
         };
         var reqHeader = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'No-Auth': 'True' });
-        return this.http.post(this.rootUrl + '/api/User/Register', body);
+        return this.http.post(this.rootUrl + '/api/UserAccount/Register', body);
     };
     AuthService.prototype.userAuthentication = function (userName, password) {
         var data = 'username=' + userName + '&password=' + password + '&grant_type=password';
@@ -8568,7 +8862,7 @@ var AuthService = /** @class */ (function () {
         return this.http.post(this.rootUrl + '/api/DeleteUser', user);
     };
     AuthService.prototype.getUsers = function () {
-        return this.http.get(this.rootUrl + '/api/GetUsersList');
+        //   return this.http.get<ModifiedUserModel[]>(this.rootUrl + '/api/GetUsersList');
     };
     AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),

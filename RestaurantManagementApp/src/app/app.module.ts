@@ -17,7 +17,7 @@ import {AuthService} from './services/shared/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
-import {UserResolverService} from './route-resolvers/user-resolver.service';
+import {UserAccountResolverService} from './route-resolvers/user-account-resolver.service';
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -156,7 +156,7 @@ import { ChangePasswordByAdminComponent } from './components/admin/users/change-
     InventoryResolverService,
     FoodItemResolverService,
     RoleResolverService,
-    UserResolverService,
+    UserAccountResolverService,
     AuthService,
     AuthGuard,
     {

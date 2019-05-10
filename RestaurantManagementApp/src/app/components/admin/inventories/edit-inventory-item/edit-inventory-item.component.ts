@@ -24,7 +24,7 @@ export class EditInventoryItemComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.inventoryId = +params['inventoryId'];
+          this.inventoryId = +params['inventory-id'];
         }
       );
   }
@@ -37,14 +37,18 @@ export class EditInventoryItemComponent implements OnInit {
         this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
 
         if (this.inventory === undefined || this.inventory === null) {
-          window.alert('Item not found!');
+          this.toastr.errorToastr('Item not found', 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
           this.router.navigate(['admin/inventories']);
         }
       }
     );
   }
 
-  onEditInventoryItem(form: NgForm) {
+  editInventoryItem(form: NgForm) {
     this.isDisabled = true;
     const editedInventoryItemName = form.value.name;
 

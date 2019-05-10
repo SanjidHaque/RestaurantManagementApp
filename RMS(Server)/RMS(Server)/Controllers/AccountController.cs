@@ -197,7 +197,7 @@ namespace RMS_Server_.Controllers
                 return NotFound();
             }
 
-            IdentityResult result = await manager.ChangePasswordAsync(changePassword.UserAccountId, changePassword.CurrentPassword,changePassword.NewPassword);
+            IdentityResult result = await manager.ChangePasswordAsync(changePassword.UserAccountId, changePassword.OldPassword,changePassword.NewPassword);
 
             if (!result.Succeeded)
             {

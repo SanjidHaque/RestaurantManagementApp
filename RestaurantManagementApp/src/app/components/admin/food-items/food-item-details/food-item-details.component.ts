@@ -32,7 +32,7 @@ export class FoodItemDetailsComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.foodItemId = +params['foodItemId'];
+          this.foodItemId = +params['food-item-id'];
         }
       );
   }
@@ -42,6 +42,11 @@ export class FoodItemDetailsComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: FoodItem[]) => {
+        this.foodItems = data['foodItems'];
+        this.inventories = data['inventories'];
+
+        this.setFoodItemImage();
+
         if (this.foodItem === undefined) {
           this.toastr.errorToastr('Item not found', 'Error', {
             toastTimeout: 10000,
@@ -49,10 +54,6 @@ export class FoodItemDetailsComponent implements OnInit {
             showCloseButton: true
           });
           this.router.navigate(['admin/food-items']);
-        } else {
-          this.foodItems = data['foodItems'];
-          this.inventories = data['inventories'];
-          this.setFoodItemImage();
         }
       }
     );

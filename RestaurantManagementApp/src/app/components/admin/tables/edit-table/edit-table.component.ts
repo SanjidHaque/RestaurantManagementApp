@@ -25,7 +25,7 @@ export class EditTableComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.tableId = +params['tableId'];
+          this.tableId = +params['table-id'];
         }
       );
   }

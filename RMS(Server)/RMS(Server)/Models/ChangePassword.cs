@@ -8,7 +8,7 @@ namespace RMS_Server_.Models
     public class ChangePassword
     {
         public string UserAccountId { get; set; }
-        public string CurrentPassword { get; set; }
+        public string OldPassword { get; set; }
         public string NewPassword { get; set; }
     }
 }

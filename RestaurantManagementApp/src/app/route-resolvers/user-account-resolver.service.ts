@@ -6,7 +6,7 @@ import {UserAccount} from '../models/user-account.model';
 import {UserAccountDataStorageService} from '../services/data-storage/user-account-data-storage.service';
 
 @Injectable()
-export class UserResolverService implements Resolve<UserAccount[]> {
+export class UserAccountResolverService implements Resolve<UserAccount[]> {
 
   constructor(private userAccountDataStorageService: UserAccountDataStorageService) { }
 

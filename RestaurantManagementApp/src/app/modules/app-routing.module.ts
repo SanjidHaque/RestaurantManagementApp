@@ -37,7 +37,7 @@ import {AddNewInventoryItemComponent} from '../components/admin/inventories/add-
 import {TableDetailsComponent} from '../components/admin/tables/table-details/table-details.component';
 import {UpdateInventoryItemComponent} from '../components/admin/inventories/update-inventory-item/update-inventory-item.component';
 import {UserListComponent} from '../components/admin/users/user-list/user-list.component';
-import {UserResolverService} from '../route-resolvers/user-resolver.service';
+import {UserAccountResolverService} from '../route-resolvers/user-account-resolver.service';
 import {AddNewUserComponent} from '../components/admin/users/add-new-user/add-new-user.component';
 import {UserDetailsComponent} from '../components/admin/users/user-details/user-details.component';
 import {EditUserComponent} from '../components/admin/users/edit-user/edit-user.component';
@@ -128,7 +128,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':foodItem-id',
+                path: ':food-item-id',
                 component: FoodItemDetailsComponent,
                 resolve:
                   {
@@ -137,7 +137,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':foodItem-id/edit-food-item',
+                path: ':food-item-id/edit-food-item',
                 component: EditFoodItemComponent,
                 resolve:
                   {
@@ -278,7 +278,7 @@ const appRoutes: Routes = [
                 component: UserListComponent,
                 resolve:
                   {
-                    users: UserResolverService
+                    userAccounts: UserAccountResolverService
                   }
               },
               {
@@ -294,7 +294,7 @@ const appRoutes: Routes = [
                 component: UserDetailsComponent,
                 resolve:
                   {
-                    users: UserResolverService
+                    userAccounts: UserAccountResolverService
                   }
               },
               {
@@ -302,7 +302,8 @@ const appRoutes: Routes = [
                 component: EditUserComponent,
                 resolve:
                   {
-                    users: UserResolverService
+                    roles: RoleResolverService,
+                    userAccounts: UserAccountResolverService
                   }
               },
               {
@@ -310,7 +311,7 @@ const appRoutes: Routes = [
                 component: ChangePasswordByAdminComponent,
                 resolve:
                   {
-                    users: UserResolverService
+                    userAccounts: UserAccountResolverService
                   }
               }
             ]

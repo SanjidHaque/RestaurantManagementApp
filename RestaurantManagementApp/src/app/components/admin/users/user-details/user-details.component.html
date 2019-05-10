@@ -9,39 +9,39 @@
 
 <div class="row" style="font-weight: 500; font-size: 20px;">
   <div class="col-xl-12">
-    User Name: {{ user.UserName}}
+    User Name: {{ userAccount.UserName}}
   </div>
 </div>
 
 <div class="row"style="font-weight: 500; font-size: 17px;">
   <div class="col-xl-12">
-    Role: {{ user.RoleName }}
+    Role: {{ userAccount.RoleName }}
   </div>
 </div>
 <br>
 
-<div class="row" *ngIf="user.FullName !== ''">
+<div class="row" *ngIf="userAccount.FullName !== null">
   <div class="col-xl-12">
-    Full Name: {{ user.FullName}}
+    Full Name: {{ userAccount.FullName}}
   </div>
 </div>
 
 <div class="row">
   <div class="col-xl-12">
-    Email: {{ user.Email }}
+    Email: {{ userAccount.Email }}
   </div>
 </div>
 
-<div class="row" *ngIf="user.PhoneNumber !== ''">
+<div class="row" *ngIf="userAccount.PhoneNumber !== null">
   <div class="col-xl-12">
-     Phone Number: {{ user.PhoneNumber }}
+     Phone Number: {{ userAccount.PhoneNumber }}
   </div>
 </div>
 
 <br>
 <div class="row">
   <div class="col-xl-12">
-    Addind Date Time: {{ user.AddingDateTime }}
+    Addind Date Time: {{ userAccount.AddingDateTime }}
   </div>
 </div>
 
@@ -51,16 +51,16 @@
   <div class="col-xl-10">
 
     <button
-      routerLink="/admin/users/{{userId}}/change-password-by-admin"
+      routerLink="/admin/user-accounts/{{userId}}/change-password-by-admin"
       class="btn btn-info">Change Password</button> &nbsp;
     <button
-      routerLink="/admin/users/{{userId}}/edit-user"
+      routerLink="/admin/user-accounts/{{userId}}/edit-user-account"
       class="btn btn-warning">Edit</button> &nbsp;
 
     <button
       [hidden]="
-      user.Id === '6ed0a6d2-e6b1-47a8-b33f-fc40932b2f3d' ||
-      user.Id === 'e9c7a759-7ef7-4dc0-9348-736406d6e8cd'"
+      userAccount.Id === '6ed0a6d2-e6b1-47a8-b33f-fc40932b2f3d' ||
+      userAccount.Id === 'e9c7a759-7ef7-4dc0-9348-736406d6e8cd'"
       (click)="deleteUser()"
       class="btn btn-danger">Delete</button>
 

@@ -13,8 +13,8 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
 export class UserDetailsComponent implements OnInit {
 
   userId: string;
-  user: UserAccount;
-  users: UserAccount[] = [];
+  userAccount: UserAccount;
+  userAccounts: UserAccount[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -23,7 +23,7 @@ export class UserDetailsComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.userId = params['userAccountId'];
+          this.userId = params['user-account-id'];
         }
       );
   }
@@ -31,10 +31,10 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(
       ( data: UserAccount[]) => {
-        this.users = data['userAccounts'];
-        this.user = this.users.find( x => x.Id === this.userId);
+        this.userAccounts = data['userAccounts'];
+        this.userAccount = this.userAccounts.find(x => x.Id === this.userId);
 
-        if (this.user === undefined) {
+        if (this.userAccount === undefined) {
           this.toastr.errorToastr('User is not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -47,7 +47,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   deleteUser() {
-    const dialog = confirm('Delete this user account?\n' +
+    const dialog = confirm('Delete this userAccount account?\n' +
       'You will lose any kind of data associated with the current userAccount!');
     if (dialog === true) {
       this.confirmEvent();

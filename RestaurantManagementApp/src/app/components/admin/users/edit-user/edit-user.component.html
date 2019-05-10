@@ -7,13 +7,13 @@
 <br>
 
 
-<form (ngSubmit) = "editUserAccount(userAccount)" #userAccount= "ngForm">
+<form (ngSubmit) = "editUserAccount(userAccountForm)" #userAccountForm= "ngForm">
 
 
   <div class="row form-group">
     <div class="col-xl-6">
 
-      <label for="email">User Name*</label>
+      <label for="userName">User Name*</label>
       <input
         type="text"
         id="userName"
@@ -42,7 +42,7 @@
         type="text"
         id="fullName"
         class="form-control"
-        ngModel
+        [ngModel]="userAccount.FullName"
         name="fullName">
 
     </div>
@@ -56,7 +56,7 @@
         type="email"
         id="email"
         class="form-control"
-        ngModel
+        [ngModel]="userAccount.Email"
         name="email"
         #email="ngModel"
         required>
@@ -76,52 +76,14 @@
         type="text"
         id="phoneNumber"
         class="form-control"
-        ngModel
+        [ngModel]="userAccount.PhoneNumber"
         name="phoneNumber">
 
     </div>
 
   </div>
 
-  <div class="row form-group">
-    <div class="col-xl-3">
 
-      <label for="firstName">Password*</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        ngModel
-        name="password"
-        #password="ngModel"
-        required>
-      <p
-        style="color: red; margin-bottom: 0;"
-        *ngIf="password.invalid && (password.dirty || password.touched)">
-        Password is required!
-      </p>
-
-    </div>
-
-    <div class="col-xl-3">
-
-      <label for="confirmPassword">Confirm Password*</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        class="form-control"
-        ngModel
-        name="confirmPassword"
-        #confirmPassword="ngModel"
-        required>
-      <p
-        style="color: red; margin-bottom: 0;"
-        *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
-        Confirmation is required!
-      </p>
-
-    </div>
-  </div>
 
   <div class="row form-group">
     <div class="col-xl-6">
@@ -131,11 +93,10 @@
         style="cursor: pointer;"
         id="roleName"
         class="form-control"
-        ngModel
+        [ngModel]="userAccount.RoleName"
         required
         #roleName="ngModel"
         name="roleName">
-        <option value="" selected>Select Role</option>
         <option
           style="cursor: pointer;"
           *ngFor="let role of roles"
@@ -165,13 +126,13 @@
   <div class="row">
     <div class="col-xl-6 text-xl-right">
       <button
-        [disabled]="userAccount.invalid || isDisabled"
+        [disabled]="userAccountForm.invalid || isDisabled"
         type="submit"
         class="btn btn-success">Save</button>
       &nbsp;
       <button
         type="button"
-        routerLink="/admin/inventories"
+        routerLink="/admin/user-accounts"
         class="btn btn-danger">Discard</button>
     </div>
   </div>

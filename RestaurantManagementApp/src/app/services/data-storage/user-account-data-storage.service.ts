@@ -5,6 +5,7 @@ import {Table} from '../../models/table.model';
 import {Role} from '../../models/role.model';
 import {UserAccount} from '../../models/user-account.model';
 import {FoodItem} from '../../models/food-item.model';
+import {ChangePassword} from '../../models/change-password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,11 @@ export class UserAccountDataStorageService {
 
   deleteUserAccount(userAccountId: string) {
     return this.http.delete(`${this.rootUrl + '/api/DeleteUserAccount'}/${userAccountId}` );
+  }
+
+  changePasswordByAdmin(changePassword: ChangePassword) {
+    return this.http.put<ChangePassword>(this.rootUrl + '/api/ChangePasswordByAdmin',
+      changePassword);
   }
 
 }

@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrManager} from 'ng6-toastr-notifications';
-import {Table} from '../../../../models/table.model';
-import {MatTableDataSource} from '@angular/material';
-import {Role} from '../../../../models/role.model';
 import {NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Router} from '@angular/router';
+
+import {Role} from '../../../../models/role.model';
 import {UserAccount} from '../../../../models/user-account.model';
 import {UserAccountDataStorageService} from '../../../../services/data-storage/user-account-data-storage.service';
 
@@ -16,7 +15,6 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
 export class AddNewUserComponent implements OnInit {
   isDisabled = false;
   roles: Role[] = [];
-
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -58,7 +56,7 @@ export class AddNewUserComponent implements OnInit {
       .subscribe(
         (result: any) => {
           if (result.Succeeded) {
-            this.toastr.successToastr('New userAccount added', 'Success', {
+            this.toastr.successToastr('New user account added', 'Success', {
               toastTimeout: 10000,
               newestOnTop: true,
               showCloseButton: true

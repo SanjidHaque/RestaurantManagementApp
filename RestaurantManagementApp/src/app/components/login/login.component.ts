@@ -1,49 +1,42 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpErrorResponse} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
-import {AuthService} from '../../services/shared/auth.service';
+import {Component, ViewChild} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+
+import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  @ViewChild('userLoginForm') form: NgForm;
-
+export class LoginComponent {
   isLoginError = false;
   isDisabled = false;
-  constructor(private authService: AuthService,
+
+  constructor(private userAccountDataStorageService: UserAccountDataStorageService,
+              private toastr: ToastrManager,
               private router : Router) { }
 
-  ngOnInit() {}
 
-  OnSubmit() {
-    if (this.form.value.userName === '' ||  this.form.value.password === '') {
-      return;
-    }
+
+  login(form: NgForm) {
+    const userName  = form.value.userName;
+    const password  = form.value.password;
+    if (userName === '' || password === '') { return; }
+
     this.isDisabled = true;
-     this.authService.
-     userAuthentication(this.form.value.userName, this.form.value.password)
+    this.userAccountDataStorageService.login(userName, password)
        .subscribe(
          (data : any) => {
          localStorage.setItem('userToken', data.access_token);
          localStorage.setItem('userRoles', data.role);
-         localStorage.setItem('userName', this.form.value.userName);
-         if (this.authService.roleMatch(['Cashier'])) {
-           this.router.navigate(['/pos']);
-         } else {
-           this.router.navigate(['/pos']);
-         }
-
+         localStorage.setItem('userNameForLogin', data.userName);
+         this.router.navigate(['/pos']);
        },
-       (err : HttpErrorResponse) => {
-         this.isLoginError = true;
-         if (this.isLoginError === true ) {
-           alert('UserAccount name or password is incorrect!');
-           this.isDisabled = false;
-         }
+       (error : HttpErrorResponse) => {
+        this.isDisabled = false;
        });
   }
 }

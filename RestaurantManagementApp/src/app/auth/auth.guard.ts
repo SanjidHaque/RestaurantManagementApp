@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import { Observable } from 'rxjs';
-import {AuthService} from '../services/shared/auth.service';
+
+import {UserAccountDataStorageService} from '../services/data-storage/user-account-data-storage.service';
 
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private router : Router,
-              private userService : AuthService) {}
+              private userAccountDataStorageService : UserAccountDataStorageService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     if (localStorage.getItem('userToken') != null) {
       const roles = next.data['roles'] as string;
       if (roles) {
-        const match = this.userService.roleMatch(roles);
+        const match = this.userAccountDataStorageService.roleMatch(roles);
         if (match) {
           return true;
         } else {

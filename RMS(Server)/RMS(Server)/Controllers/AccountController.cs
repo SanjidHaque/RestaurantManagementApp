@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -245,28 +246,29 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         [Route("api/ResetPassword")]
         [AllowAnonymous]
-        public string ResetPassword(ForgotPassword forgotPassword)
+        public IHttpActionResult ResetPassword(ChangePassword changePassword)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
             DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
 
             manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
-            ApplicationUser user = manager.FindByName(forgotPassword.UserName);
+            ApplicationUser user = manager.FindByName(changePassword.UserAccountName);
+           
 
             if (user != null)
             {
+                
                 string code = manager.GeneratePasswordResetToken(user.Id);
-                string email = manager.GetEmail(user.Id);
                 string fromaddr = "apphodoo@gmail.com";
-                string toaddr = email;
+                string toaddr = manager.GetEmail(user.Id);
                 string password = "hodoo123";
 
 
-                MailMessage msg = new System.Net.Mail.MailMessage();
+                MailMessage msg = new MailMessage();
                 msg.Subject = "Hodoo Reset Password";
                 msg.From = new MailAddress(fromaddr);
-                msg.Body = "\n\nReset Code:  " + user.Id + "\n\n\n";
+                msg.Body = "\n\nPassword Reset Code:\n\n " + code + "\n\n\n";
                 msg.To.Add(new MailAddress(toaddr));
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
@@ -276,34 +278,37 @@ namespace RMS_Server_.Controllers
                 NetworkCredential nc = new NetworkCredential(fromaddr, password);
                 smtp.Credentials = nc;
                 smtp.Send(msg);
-
-                string callbackUrl = string.Format("http://www.google.com?userAccountId={0}&code={1}", user.Id, code);
-                manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                return "User Name Found";
+                return Ok("User name found");
             }
-            return "User Name Not Found";
+
+            return Ok("User name not found");
         }
 
         [HttpPost]
         [Route("api/NewPassword")]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> NewPassword(ForgotPassword forgotPassword)
+        public async Task<IHttpActionResult> NewPassword(ChangePassword changePassword)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
             DpapiDataProtectionProvider provider = new DpapiDataProtectionProvider("Sample");
 
             manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
-            ApplicationUser user = manager.FindById(forgotPassword.Id);
-            if (user != null)
+            ApplicationUser user = manager.FindByName(changePassword.UserAccountName);
+            if (user == null)
             {
-                string hashedNewPassword = manager.PasswordHasher.HashPassword(forgotPassword.NewPassword);
-                await userStore.SetPasswordHashAsync(user, hashedNewPassword);
-                await userStore.UpdateAsync(user);
-                return Ok();
+                return Ok("User not found");
             }
-            return NotFound();
+           
+            var result = await manager.ResetPasswordAsync
+                (user.Id, changePassword.PasswordResetCode,changePassword.NewPassword);
+
+            if (result.Succeeded)
+            {
+                return Ok(result);
+            }
+            
+            return Ok(result);
         }
 
         // GET api/Account/UserInfo
@@ -320,6 +325,8 @@ namespace RMS_Server_.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
+
+       
 
         // POST api/Account/Logout
         [Route("Logout")]

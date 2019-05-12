@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {UserAccount} from '../../../../models/user-account.model';
-import {Role} from '../../../../models/role.model';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {ToastrManager} from 'ng6-toastr-notifications';
-import {UserAccountDataStorageService} from '../../../../services/data-storage/user-account-data-storage.service';
-import {ChangePassword} from '../../../../models/change-password.model';
 import {NgForm} from '@angular/forms';
-import {conditionallyCreateMapObjectLiteral} from '@angular/compiler/src/render3/view/util';
+import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
+import {UserAccount} from '../../../../models/user-account.model';
+import {ChangePassword} from '../../../../models/change-password.model';
+import {UserAccountDataStorageService} from '../../../../services/data-storage/user-account-data-storage.service';
 
 @Component({
   selector: 'app-change-password-by-admin',
@@ -75,7 +74,9 @@ export class ChangePasswordByAdminComponent implements OnInit {
       new ChangePassword(
         this.userAccountId,
         '',
-        form.value.newPassword
+        '',
+        form.value.newPassword,
+        ''
       )
     ).subscribe(
       (data: any) => {

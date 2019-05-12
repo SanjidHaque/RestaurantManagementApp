@@ -7,6 +7,7 @@ import {OrderedItem} from '../../models/ordered-item.model';
 import {AuthService} from '../../services/shared/auth.service';
 import {PointOfSaleService} from '../../services/shared/point-of-sale.service';
 import {Inventory} from '../../models/inventory.model';
+import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
 
 
 @Component({
@@ -36,14 +37,14 @@ export class PointOfSaleComponent implements OnInit, DoCheck {
   constructor(private pointOfSaleService: PointOfSaleService,
               private router: Router,
               private route: ActivatedRoute,
-              private userService : AuthService,
+              private userAccountDataStorageService : UserAccountDataStorageService,
   ) {
   }
 
 
   ngOnInit() {
     this.orderedItems = this.pointOfSaleService.getOrderedItemsList();
-    if (this.userService.roleMatch(['Admin'])) {
+    if (this.userAccountDataStorageService.roleMatch(['Admin'])) {
       this.checkOut = true;
     }
 

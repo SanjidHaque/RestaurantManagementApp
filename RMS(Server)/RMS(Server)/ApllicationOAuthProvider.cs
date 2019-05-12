@@ -23,26 +23,26 @@ namespace RMS_Server_
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            var manager = new UserManager<ApplicationUser>(userStore);
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
             var user = await manager.FindAsync(context.UserName, context.Password);
             if (user != null)
             {
-                var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim("Username", user.UserName));
-                identity.AddClaim(new Claim("Email", user.Email));
-                identity.AddClaim(new Claim("LoggedOn", DateTime.Now.ToString()));
-                var userRoles = manager.GetRoles(user.Id);
+                ClaimsIdentity identity = new ClaimsIdentity(context.Options.AuthenticationType);
+                IList<string> userRoles = manager.GetRoles(user.Id);
                 foreach (string roleName in userRoles)
                 {
                     identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
                 }
-                var additionalData = new AuthenticationProperties(new Dictionary<string, string>{
+                AuthenticationProperties additionalData = new AuthenticationProperties(new Dictionary<string, string>{
                     { 
                         "role", Newtonsoft.Json.JsonConvert.SerializeObject(userRoles)
+                    },
+                    {
+                        "userName", user.UserName
                     }
                 });
-                var token = new AuthenticationTicket(identity, additionalData); 
+                AuthenticationTicket token = new AuthenticationTicket(identity, additionalData); 
                 context.Validated(token);
             }
             else

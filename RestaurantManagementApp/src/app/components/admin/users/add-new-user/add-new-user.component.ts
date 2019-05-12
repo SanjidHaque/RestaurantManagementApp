@@ -52,7 +52,7 @@ export class AddNewUserComponent implements OnInit {
       '',
        form.value.roleName
     );
-    this.userAccountDataStorageService.register(userAccount)
+    this.userAccountDataStorageService.addNewUserAccount(userAccount)
       .subscribe(
         (result: any) => {
           if (result.Succeeded) {

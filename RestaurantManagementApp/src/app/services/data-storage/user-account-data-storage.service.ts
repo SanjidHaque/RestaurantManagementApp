@@ -19,11 +19,45 @@ export class UserAccountDataStorageService {
     this.rootUrl = tableDataStorageService.rootUrl;
   }
 
+  login(userName, password) {
+    const data = 'username=' + userName + '&password=' + password + '&grant_type=password';
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/x-www-urlencoded',
+      'No-Auth': 'True'
+    });
+    return this.http.post(this.rootUrl + '/token', data, { headers: reqHeader });
+  }
+
+  roleMatch(allowedRoles) {
+    let isMatch = false;
+    const userRole = JSON.parse(JSON.stringify(localStorage.getItem('userRoles')));
+
+    allowedRoles.forEach(element => {
+      if (userRole.indexOf(element) > -1) {
+        isMatch = true;
+        return false;
+      }
+    });
+    return isMatch;
+  }
+
+
+  resetPassword(changePassword: ChangePassword) {
+    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.post(this.rootUrl + '/api/ResetPassword', changePassword, { headers: reqHeader });
+  }
+
+  newPassword(changePassword: ChangePassword) {
+    const reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.post(this.rootUrl + '/api/NewPassword', changePassword, { headers: reqHeader});
+  }
+
+
   getAllRole() {
     return this.http.get<Role[]>(this.rootUrl + '/api/GetAllRole');
   }
 
-  register(userAccount: UserAccount) {
+  addNewUserAccount(userAccount: UserAccount) {
     const reqHeader = new HttpHeaders({'No-Auth': 'True'});
     return this.http.post(this.rootUrl + '/api/AddNewUserAccount', userAccount);
   }

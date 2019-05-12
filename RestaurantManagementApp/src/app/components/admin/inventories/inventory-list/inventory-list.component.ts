@@ -25,8 +25,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private route: ActivatedRoute) {
-  }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data

@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Table} from '../../../../models/table.model';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+
+import {Table} from '../../../../models/table.model';
 import {UserAccount} from '../../../../models/user-account.model';
 
 @Component({

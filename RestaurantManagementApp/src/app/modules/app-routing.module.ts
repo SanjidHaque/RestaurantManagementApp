@@ -43,6 +43,10 @@ import {UserDetailsComponent} from '../components/admin/users/user-details/user-
 import {EditUserComponent} from '../components/admin/users/edit-user/edit-user.component';
 import {RoleResolverService} from '../route-resolvers/role-resolver.service';
 import {ChangePasswordByAdminComponent} from '../components/admin/users/change-password-by-admin/change-password-by-admin.component';
+import {SettingsComponent} from '../components/admin/settings/settings.component';
+import {SettingListComponent} from '../components/admin/settings/setting-list/setting-list.component';
+import {SettingResolverService} from '../route-resolvers/setting-resolver.service';
+import {EditSettingComponent} from '../components/admin/settings/edit-setting/edit-setting.component';
 
 
 const appRoutes: Routes = [
@@ -315,6 +319,38 @@ const appRoutes: Routes = [
                   }
               }
             ]
+        },
+
+        {
+          path: 'settings',
+          component: SettingsComponent,
+          children:
+           [
+             {
+               path: '',
+               component: SettingListComponent,
+               resolve:
+                 {
+                   settings: SettingResolverService
+                 }
+             },
+             {
+               path: 'setting-list',
+               component: SettingListComponent,
+               resolve:
+                 {
+                   settings: SettingResolverService
+                 }
+             },
+             {
+               path: ':setting-id/edit-setting',
+               component: EditSettingComponent,
+               resolve:
+                 {
+                   settings: SettingResolverService
+                 }
+             }
+           ]
         }
       ]
   },

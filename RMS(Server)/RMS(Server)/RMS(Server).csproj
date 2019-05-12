@@ -229,6 +229,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\TableController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -278,9 +279,14 @@
     <Compile Include="Migrations\201905091216073_fullName.Designer.cs">
       <DependentUpon>201905091216073_fullName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905180846365_settingModelAdded.cs" />
+    <Compile Include="Migrations\201905180846365_settingModelAdded.Designer.cs">
+      <DependentUpon>201905180846365_settingModelAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FoodItem.cs" />
@@ -351,6 +357,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Mvc\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -362,7 +374,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\FoodItemImages\" />
-    <Folder Include="Image\" />
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
@@ -398,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905091216073_fullName.resx">
       <DependentUpon>201905091216073_fullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905180846365_settingModelAdded.resx">
+      <DependentUpon>201905180846365_settingModelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

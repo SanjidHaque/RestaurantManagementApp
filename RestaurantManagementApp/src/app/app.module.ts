@@ -13,7 +13,6 @@ import {TableResolverService} from './route-resolvers/table-resolver.service';
 import {OrderResolverService} from './route-resolvers/order-resolver.service';
 import {InventoryResolverService} from './route-resolvers/inventory-resolver.service';
 import {FoodItemResolverService} from './route-resolvers/food-item-resolver.service';
-import {AuthService} from './services/shared/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
@@ -72,6 +71,10 @@ import { UserListComponent } from './components/admin/users/user-list/user-list.
 import { EditUserComponent } from './components/admin/users/edit-user/edit-user.component';
 import {RoleResolverService} from './route-resolvers/role-resolver.service';
 import { ChangePasswordByAdminComponent } from './components/admin/users/change-password-by-admin/change-password-by-admin.component';
+import { SettingsComponent } from './components/admin/settings/settings.component';
+import { SettingListComponent } from './components/admin/settings/setting-list/setting-list.component';
+import { EditSettingComponent } from './components/admin/settings/edit-setting/edit-setting.component';
+import {SettingResolverService} from './route-resolvers/setting-resolver.service';
 
 
 
@@ -119,7 +122,10 @@ import { ChangePasswordByAdminComponent } from './components/admin/users/change-
     UserDetailsComponent,
     UserListComponent,
     EditUserComponent,
-    ChangePasswordByAdminComponent
+    ChangePasswordByAdminComponent,
+    SettingsComponent,
+    SettingListComponent,
+    EditSettingComponent
   ],
   imports: [
     BrowserModule,
@@ -156,8 +162,8 @@ import { ChangePasswordByAdminComponent } from './components/admin/users/change-
     InventoryResolverService,
     FoodItemResolverService,
     RoleResolverService,
+    SettingResolverService,
     UserAccountResolverService,
-    AuthService,
     AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,

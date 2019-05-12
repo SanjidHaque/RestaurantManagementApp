@@ -32,8 +32,8 @@
 
 <form
   autocomplete="off"
-  #userLoginForm="ngForm"
-  (ngSubmit)="OnSubmit()">
+  #loginForm="ngForm"
+  (ngSubmit)="login(loginForm)">
 
 
   <div class="row form-group">
@@ -79,7 +79,7 @@
         col-xl-12
         ">
       <button
-        [disabled]="isDisabled || userLoginForm.invalid"
+        [disabled]="isDisabled || loginForm.invalid"
         class="btn btn-primary"
         type="submit">
         Login</button>

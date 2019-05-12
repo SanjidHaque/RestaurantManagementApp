@@ -1,36 +1,87 @@
-import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/shared/auth.service';
+import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+
+import {ChangePassword} from '../../models/change-password.model';
+import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
 
 @Component({
   selector: 'app-new-password',
   templateUrl: './new-password.component.html',
   styleUrls: ['./new-password.component.scss']
 })
-export class NewPasswordComponent implements OnInit {
+export class NewPasswordComponent {
   isDisabled = false;
-  constructor(private authService: AuthService,
+
+  constructor(private userAccountDataStorageService: UserAccountDataStorageService,
+              private toastr: ToastrManager,
               private router : Router) { }
 
-  ngOnInit() {
-  }
 
   resetPassword(form: NgForm) {
     this.isDisabled  = true;
-    if ( form.value.password !==  form.value.confirmPassword ) {
+    if (form.value.newPassword.length < 6) {
+      this.toastr.errorToastr('Password must be at least 6 characters long',
+        'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+      return;
+    }
+
+    if ( form.value.newPassword !==  form.value.confirmPassword ) {
       this.isDisabled = false;
-      alert('Your password did not match!');
-      form.controls['password'].reset();
-      form.controls['confirmPassword'].reset();
+      this.toastr.errorToastr(
+        'Passwords do not match',
+        'Error',
+        {
+          toastTimeout: 20000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+
     } else {
-      this.authService.newPassword(form.value.password, form.value.code)
-        .subscribe((data: any) => {
-        if (data === 'Successful') {
-          alert('password changed successfully! You can login now.');
+      this.userAccountDataStorageService.newPassword(
+        new ChangePassword(
+          '',
+          JSON.parse(JSON.stringify(localStorage.getItem('userNameForResetPassword'))),
+          '',
+          form.value.newPassword,
+          form.value.passwordResetCode
+        )
+      ).subscribe((data: any) => {
+        if (data === 'User not found') {
+          this.isDisabled = false;
+          this.toastr.successToastr(
+            'Password reset successfully, log in here',
+            'Success',
+            {
+              toastTimeout: 20000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
+        } else if (data.Succeeded) {
+          this.toastr.successToastr(
+            'Password reset successfully, log in here',
+            'Success',
+            {
+              toastTimeout: 20000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
           this.router.navigate(['/login']);
         } else {
-          alert('Incorrect reset code! Try again.');
+          this.isDisabled = false;
+          this.toastr.errorToastr(
+            data.Errors[0],
+            'Error',
+            {
+              toastTimeout: 20000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
         }
         });
     }

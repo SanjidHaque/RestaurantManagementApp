@@ -31,6 +31,8 @@ namespace RMS_Server_.Models
         public DbSet<OrderedItem> OrderedItems { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<InventoryHistory> InventoryHistories { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

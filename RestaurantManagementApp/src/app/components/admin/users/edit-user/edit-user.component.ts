@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {UserAccount} from '../../../../models/user-account.model';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {ToastrManager} from 'ng6-toastr-notifications';
-import {UserAccountDataStorageService} from '../../../../services/data-storage/user-account-data-storage.service';
-import {Role} from '../../../../models/role.model';
 import {NgForm} from '@angular/forms';
-import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
+import {Role} from '../../../../models/role.model';
+import {UserAccount} from '../../../../models/user-account.model';
+import {UserAccountDataStorageService} from '../../../../services/data-storage/user-account-data-storage.service';
 
 @Component({
   selector: 'app-edit-user',

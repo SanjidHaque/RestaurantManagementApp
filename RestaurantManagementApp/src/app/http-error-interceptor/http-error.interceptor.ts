@@ -20,11 +20,18 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         retry(1),
         catchError((error: HttpErrorResponse) => {
           let errorMessage = '';
+
+
+
           if (error.error instanceof ErrorEvent) {
             errorMessage = `Error: ${error.error.message}`;
           } else {
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            if (error.error.error === 'invalid_grant') {
+              errorMessage = 'Username or password is incorrect'
+            }
           }
+
           this.toastr.errorToastr(errorMessage, 'Error', {
             toastTimeout: 20000,
             newestOnTop: true,

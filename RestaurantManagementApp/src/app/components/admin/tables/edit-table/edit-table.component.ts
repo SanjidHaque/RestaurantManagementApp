@@ -64,7 +64,7 @@ export class EditTableComponent implements OnInit {
               showCloseButton: true
             });
             form.reset();
-            this.router.navigate(['admin/tables']);
+            this.router.navigate(['admin/settings']);
           }
         );
     } else {
@@ -74,7 +74,7 @@ export class EditTableComponent implements OnInit {
         showCloseButton: true
       });
       form.reset();
-      this.router.navigate(['admin/tables']);
+      this.router.navigate(['admin/settings']);
     }
   }
 }

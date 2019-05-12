@@ -1,0 +1,100 @@
+<div class="row" style="font-weight: 500; font-size: 17px;">
+  <div class="col-xl-12">
+
+    Shop's name: {{ setting.ShopName }}
+
+  </div>
+</div>
+
+<div class="row" style="font-weight: 500; font-size: 17px;">
+  <div class="col-xl-12">
+
+    Shop's Address: {{ setting.ShopAddress }}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-12">
+
+    Shop's Phone Number: {{ setting.ShopPhone }}
+
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-xl-12">
+
+    Shop's Email: {{ setting.ShopEmail }}
+
+  </div>
+</div>
+
+<div class="row"
+     *ngIf="setting.ShopFacebookPage !== null">
+  <div class="col-xl-12">
+
+    Shop's Facebook Page: {{ setting.ShopFacebookPage }}
+
+  </div>
+</div>
+
+
+<br>
+<div class="row">
+  <div class="col-xl-12">
+
+    Vat Amount: {{ setting.VatAmount }} %
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-12">
+
+    Vat Registration Number: {{ setting.VatRegNumber }}
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xl-12">
+
+    Vat Type: {{ setting.VatType }}
+
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-xl-12">
+
+    Service Charge: {{ setting.ServiceCharge }} %
+
+  </div>
+</div>
+
+<div class="row" *ngIf="setting.AdditionalInformation !== null">
+  <div class="col-xl-12">
+
+    Additional Information: {{ setting.AdditionalInformation }}
+
+  </div>
+</div>
+
+
+<br>
+
+<div class="row text-xl-left">
+  <div class="col-xl-10">
+
+    <button
+      routerLink="/admin/settings/edit-setting"
+      class="btn btn-warning">Edit</button> &nbsp;
+
+  </div>
+</div>

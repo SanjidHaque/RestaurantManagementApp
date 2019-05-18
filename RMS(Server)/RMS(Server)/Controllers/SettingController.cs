@@ -39,6 +39,7 @@ namespace RMS_Server_.Controllers
                 setting.VatType = editSetting.VatType;
                 setting.ServiceCharge = editSetting.ServiceCharge;
                 setting.AdditionalInformation = editSetting.AdditionalInformation;
+                _context.SaveChanges();
                 return Ok();
             }
 

@@ -13,10 +13,10 @@ namespace RMS_Server_.Models
         public string ShopPhone { get; set; }
         public string ShopEmail { get; set; }
         public string ShopFacebookPage { get; set; }
-        public float VatAmount { get; set; }
+        public float? VatAmount { get; set; }
         public string VatRegNumber { get; set; }
         public string VatType { get; set; }
-        public float ServiceCharge { get; set; }
+        public float? ServiceCharge { get; set; }
         public string AdditionalInformation { get; set; }
     }
 }

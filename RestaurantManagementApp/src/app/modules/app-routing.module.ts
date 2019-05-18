@@ -343,7 +343,7 @@ const appRoutes: Routes = [
                  }
              },
              {
-               path: ':setting-id/edit-setting',
+               path: 'edit-setting',
                component: EditSettingComponent,
                resolve:
                  {

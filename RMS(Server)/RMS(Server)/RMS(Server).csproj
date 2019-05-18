@@ -287,6 +287,10 @@
     <Compile Include="Migrations\201905181327316_settingModelChanged.Designer.cs">
       <DependentUpon>201905181327316_settingModelChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905181750572_settingModelChangedAgainMakeNullableProps.cs" />
+    <Compile Include="Migrations\201905181750572_settingModelChangedAgainMakeNullableProps.Designer.cs">
+      <DependentUpon>201905181750572_settingModelChangedAgainMakeNullableProps.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -419,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905181327316_settingModelChanged.resx">
       <DependentUpon>201905181327316_settingModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905181750572_settingModelChangedAgainMakeNullableProps.resx">
+      <DependentUpon>201905181750572_settingModelChangedAgainMakeNullableProps.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

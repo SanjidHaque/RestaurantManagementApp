@@ -1,28 +1,23 @@
-import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import { Component } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
-import {ChangePassword} from '../../models/change-password.model';
 
-import {ToastrManager} from 'ng6-toastr-notifications';
-import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
 import {ChangePassword} from '../../models/change-password.model';
+import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent {
   isDisabled = false;
 
   constructor(private userAccountDataStorageService: UserAccountDataStorageService,
               private toastr: ToastrManager,
               private router : Router) { }
 
-  ngOnInit() {
-  }
 
   getPasswordResetCode(form: NgForm) {
     this.isDisabled = true;

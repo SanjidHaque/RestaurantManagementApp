@@ -14,20 +14,45 @@
   <div class="row form-group">
     <div class="col-xl-6">
 
-      <label for="name">Shop's Name</label>
+      <label for="shopName">Shop's Name</label>
       <input
         type="text"
-        id="name"
+        id="shopName"
         class="form-control"
         [ngModel]="setting.ShopName"
-        name="name"
-        #name="ngModel"
+        name="shopName"
+        #shopName="ngModel"
         required>
 
       <p
         style="color: red; margin-bottom: 0;"
-        *ngIf="name.invalid && (name.dirty || name.touched)">
+        *ngIf="shopName.invalid && (shopName.dirty || shopName.touched)">
         Shop's name is required!
+      </p>
+
+    </div>
+  </div>
+
+
+
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="shopAddress">Shop's Address</label>
+      <textarea
+        id="shopAddress"
+        class="form-control"
+        [ngModel]="setting.ShopAddress"
+        name="shopAddress"
+        #shopAddress="ngModel"
+        required>
+      </textarea>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="shopAddress.invalid && (shopAddress.dirty || shopAddress.touched)">
+        Shop address is required!
       </p>
 
     </div>
@@ -37,37 +62,140 @@
   <div class="row form-group">
     <div class="col-xl-6">
 
-      <label for="vat">Vat</label>
+      <label for="shopPhone">Shop's Phone</label>
       <input
-        type="number"
-        id="vat"
+        type="text"
+        id="shopPhone"
         class="form-control"
-        [ngModel]="setting.VatAmount"
-        name="vat"
-        #vat="ngModel"
+        [ngModel]="setting.ShopPhone"
+        name="shopPhone"
+        #shopPhone="ngModel"
         required>
 
       <p
         style="color: red; margin-bottom: 0;"
-        *ngIf="vat.invalid && (vat.dirty || vat.touched)">
-        Vat is required!
+        *ngIf="shopPhone.invalid && (shopPhone.dirty || shopPhone.touched)">
+        Shop's phone number is required!
       </p>
 
     </div>
   </div>
 
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="shopEmail">Shop's Email</label>
+      <input
+        type="text"
+        id="shopEmail"
+        class="form-control"
+        [ngModel]="setting.ShopEmail"
+        name="shopEmail"
+        #shopEmail="ngModel"
+        required>
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="shopEmail.invalid && (shopEmail.dirty || shopEmail.touched)">
+        Shop's email is required!
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="shopFacebookPage">Facebok Page URL</label>
+      <input
+        type="text"
+        id="shopFacebookPage"
+        class="form-control"
+        [ngModel]="setting.ShopFacebookPage"
+        name="shopFacebookPage">
+
+    </div>
+  </div>
+
+  <div class="row form-group">
+
+    <div class="col-xl-3">
+
+      <label for="vatRegNumber">Vat Registration No</label>
+      <input
+        type="text"
+        id="vatRegNumber"
+        class="form-control"
+        [ngModel]="setting.VatRegNumber"
+        name="vatRegNumber">
+
+    </div>
+
+    <div class="col-xl-3">
+
+      <label for="vatType">Vat Type</label>
+      <input
+        type="text"
+        id="vatType"
+        class="form-control"
+        [ngModel]="setting.VatType"
+        name="vatType">
+
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-xl-3">
+
+      <label for="vatAmount">Vat Amount %</label>
+      <input
+        type="number"
+        id="vatAmount"
+        class="form-control"
+        [ngModel]="setting.VatAmount"
+        name="vatAmount">
+
+    </div>
+
+    <div class="col-xl-3">
+
+      <label for="serviceCharge">Service Charge %</label>
+      <input
+        type="number"
+        id="serviceCharge"
+        class="form-control"
+        [ngModel]="setting.ServiceCharge"
+        name="serviceCharge">
+
+    </div>
+  </div>
+
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="additionalInformation">Additional Information</label>
+      <textarea
+        id="additionalInformation"
+        class="form-control"
+        [ngModel]="setting.AdditionalInformation"
+        name="additionalInformation">
+      </textarea>
+
+    </div>
+  </div>
 
 
   <div class="row">
     <div class="col-xl-6 text-xl-right">
       <button
-        [disabled]="editedTable.invalid || isDisabled"
+        [disabled]="editedSetting.invalid || isDisabled"
         type="submit"
         class="btn btn-success">Save</button>
       &nbsp;
       <button
         type="button"
-        routerLink="/admin/tables/{{tableId}}"
+        routerLink="/admin/settings/"
         class="btn btn-danger">Discard</button>
     </div>
   </div>

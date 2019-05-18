@@ -283,6 +283,10 @@
     <Compile Include="Migrations\201905180846365_settingModelAdded.Designer.cs">
       <DependentUpon>201905180846365_settingModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905181327316_settingModelChanged.cs" />
+    <Compile Include="Migrations\201905181327316_settingModelChanged.Designer.cs">
+      <DependentUpon>201905181327316_settingModelChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -412,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905180846365_settingModelAdded.resx">
       <DependentUpon>201905180846365_settingModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905181327316_settingModelChanged.resx">
+      <DependentUpon>201905181327316_settingModelChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

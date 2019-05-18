@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
+import {ChangePassword} from '../../models/change-password.model';
 
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';

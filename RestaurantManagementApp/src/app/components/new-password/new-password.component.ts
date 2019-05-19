@@ -1,6 +1,6 @@
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
 
 import {ChangePassword} from '../../models/change-password.model';
@@ -54,14 +54,15 @@ export class NewPasswordComponent {
       ).subscribe((data: any) => {
         if (data === 'User not found') {
           this.isDisabled = false;
-          this.toastr.successToastr(
-            'Password reset successfully, log in here',
-            'Success',
+          this.toastr.errorToastr(
+            data,
+            'Error',
             {
               toastTimeout: 20000,
               newestOnTop: true,
               showCloseButton: true
             });
+          return;
         } else if (data.Succeeded) {
           this.toastr.successToastr(
             'Password reset successfully, log in here',
@@ -75,7 +76,7 @@ export class NewPasswordComponent {
         } else {
           this.isDisabled = false;
           this.toastr.errorToastr(
-            data.Errors[0],
+            'Token invalid or has expired',
             'Error',
             {
               toastTimeout: 20000,
@@ -83,7 +84,7 @@ export class NewPasswordComponent {
               showCloseButton: true
             });
         }
-        });
+      });
     }
   }
 }

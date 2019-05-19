@@ -291,6 +291,30 @@
     <Compile Include="Migrations\201905181750572_settingModelChangedAgainMakeNullableProps.Designer.cs">
       <DependentUpon>201905181750572_settingModelChangedAgainMakeNullableProps.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905190921203_userTableChanged.cs" />
+    <Compile Include="Migrations\201905190921203_userTableChanged.Designer.cs">
+      <DependentUpon>201905190921203_userTableChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191026217_userTableChangedAgain.cs" />
+    <Compile Include="Migrations\201905191026217_userTableChangedAgain.Designer.cs">
+      <DependentUpon>201905191026217_userTableChangedAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191028288_userTableChangedAgainAgain.cs" />
+    <Compile Include="Migrations\201905191028288_userTableChangedAgainAgain.Designer.cs">
+      <DependentUpon>201905191028288_userTableChangedAgainAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191030333_userTableChangedAgainAgainAgainAgain.cs" />
+    <Compile Include="Migrations\201905191030333_userTableChangedAgainAgainAgainAgain.Designer.cs">
+      <DependentUpon>201905191030333_userTableChangedAgainAgainAgainAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191039049_userTable.cs" />
+    <Compile Include="Migrations\201905191039049_userTable.Designer.cs">
+      <DependentUpon>201905191039049_userTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191050283_userTableSuperNew.cs" />
+    <Compile Include="Migrations\201905191050283_userTableSuperNew.Designer.cs">
+      <DependentUpon>201905191050283_userTableSuperNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -426,6 +450,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905181750572_settingModelChangedAgainMakeNullableProps.resx">
       <DependentUpon>201905181750572_settingModelChangedAgainMakeNullableProps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905190921203_userTableChanged.resx">
+      <DependentUpon>201905190921203_userTableChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191026217_userTableChangedAgain.resx">
+      <DependentUpon>201905191026217_userTableChangedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191028288_userTableChangedAgainAgain.resx">
+      <DependentUpon>201905191028288_userTableChangedAgainAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191030333_userTableChangedAgainAgainAgainAgain.resx">
+      <DependentUpon>201905191030333_userTableChangedAgainAgainAgainAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191039049_userTable.resx">
+      <DependentUpon>201905191039049_userTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191050283_userTableSuperNew.resx">
+      <DependentUpon>201905191050283_userTableSuperNew.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -247,7 +247,7 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         [Route("api/ResetPassword")]
         [AllowAnonymous]
-        public IHttpActionResult ResetPassword(ChangePassword changePassword)
+        public async  Task<IHttpActionResult> ResetPassword(ChangePassword changePassword)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
@@ -260,10 +260,17 @@ namespace RMS_Server_.Controllers
             if (user != null)
             {
                 
-                string code = manager.GeneratePasswordResetToken(user.Id);
+                string code = Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[/+=]", "");
+                user.CustomPasswordResetToken = code;
+                user.CustomPasswordResetTokenIssuedDateTime = DateTime.Now;
+                await manager.UpdateAsync(user);
+
+                                
+
                 string fromaddr = "apphodoo@gmail.com";
                 string toaddr = manager.GetEmail(user.Id);
                 string password = "hodoo123";
+
 
 
                 MailMessage msg = new MailMessage();
@@ -300,16 +307,29 @@ namespace RMS_Server_.Controllers
             {
                 return Ok("User not found");
             }
-           
-            var result = await manager.ResetPasswordAsync
-                (user.Id, changePassword.PasswordResetCode,changePassword.NewPassword);
 
-            if (result.Succeeded)
+            TimeSpan difference = DateTime.Now - user.CustomPasswordResetTokenIssuedDateTime;
+            int totalMinutes = (int)difference.TotalMinutes;
+
+            if (totalMinutes < 1 && (user.CustomPasswordResetToken == changePassword.PasswordResetCode))
             {
+                var token = manager.GeneratePasswordResetToken(user.Id);
+
+                var result = await manager.ResetPasswordAsync(user.Id, token, changePassword.NewPassword);
+
+                if (result.Succeeded)
+                {
+
+                    user.CustomPasswordResetToken = null;
+                    user.CustomPasswordResetTokenIssuedDateTime = DateTime.Now.AddDays(-100);
+                    await manager.UpdateAsync(user);
+                    return Ok(result);
+                }
+
                 return Ok(result);
             }
-            
-            return Ok(result);
+
+            return Ok("Token invalid or has expired");
         }
 
         // GET api/Account/UserInfo

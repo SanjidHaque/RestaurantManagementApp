@@ -44,7 +44,7 @@ export class ResetPasswordComponent {
          this.router.navigate(['/new-password']);
       } else {
          this.isDisabled = false;
-         this.toastr.successToastr(
+         this.toastr.errorToastr(
            'Incorrect user name',
            'Error',
            {

@@ -26,7 +26,7 @@ export class EditSettingComponent implements OnInit {
 
   editSetting(form: NgForm) {
     this.isDisabled = true;
-    
+
     this.settingDataStorageService.editSetting(
       new Setting(
         null,

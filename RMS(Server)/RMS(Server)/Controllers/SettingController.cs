@@ -17,7 +17,7 @@ namespace RMS_Server_.Controllers
         [Route("api/GetAllSetting")]
         public IHttpActionResult GetAllSetting()
         {
-            Setting setting = _context.Settings.FirstOrDefault();
+            Setting setting = _context.Settings.FirstOrDefault(x => x.Id == 1);
             return Ok(setting);
         }
 
@@ -26,7 +26,7 @@ namespace RMS_Server_.Controllers
         [Route("api/EditSetting")]
         public IHttpActionResult EditSetting(Setting editSetting)
         {
-            Setting setting = _context.Settings.FirstOrDefault();
+            Setting setting = _context.Settings.FirstOrDefault(x => x.Id == 1);
             if (setting != null)
             {
                 setting.ShopName = editSetting.ShopName;
@@ -39,6 +39,7 @@ namespace RMS_Server_.Controllers
                 setting.VatType = editSetting.VatType;
                 setting.ServiceCharge = editSetting.ServiceCharge;
                 setting.AdditionalInformation = editSetting.AdditionalInformation;
+                setting.PrintChefsOrderReceipt = editSetting.PrintChefsOrderReceipt;
                 _context.SaveChanges();
                 return Ok();
             }

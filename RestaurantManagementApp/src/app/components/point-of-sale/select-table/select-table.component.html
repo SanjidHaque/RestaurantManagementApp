@@ -1,3 +1,25 @@
-<p>
-  select-table works!
-</p>
+<div class="row">
+  <div class="col-xl-12" style="font-size: 17px; font-weight: 500; text-align: center;">
+    Please select a table to create an order
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-xl-3"
+       routerLink="/pos/{{ table.Id }}/menu"
+       style="
+       cursor: pointer;
+       font-weight: 500;
+       border: 2px solid white;
+       border-radius: 4px;
+       text-align: center;
+       padding: 50px 50px 50px 50px;
+       background-color: lightseagreen;"
+       *ngFor="let table of tables">
+
+    {{ table.Name }}
+
+  </div>
+</div>

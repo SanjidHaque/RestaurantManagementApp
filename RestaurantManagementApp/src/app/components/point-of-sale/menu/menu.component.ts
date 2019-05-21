@@ -7,6 +7,8 @@ import {Order} from '../../../models/order.model';
 import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
 import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
 import {OrderedItem} from '../../../models/ordered-item.model';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivateRoutes} from '@angular/router/src/operators/activate_routes';
 
 @Component({
   selector: 'app-food-items',
@@ -15,6 +17,10 @@ import {OrderedItem} from '../../../models/ordered-item.model';
 })
 
 export class MenuComponent implements OnInit {
+
+  tableId: number;
+
+
   index: number;
   total: number;
   foodItems: FoodItem[] = [];
@@ -33,29 +39,44 @@ export class MenuComponent implements OnInit {
 
   subscription: Subscription;
   constructor(private pointOfSaleService: PointOfSaleService,
+              private route: ActivatedRoute,
               private dataStorageService: TableDataStorageService) {
+    this.route.params.subscribe((params: Params) => this.tableId = +params['table-id']);
+
     this.uuidCodeOne = UUID.UUID();
     this.uuidCodeTwo = UUID.UUID();
     this.uuidCodeThree = UUID.UUID();
+
+
+
   }
 
   ngOnInit() {
-    this.rootUrl = this.dataStorageService.rootUrl + '/Content/';
-    this.foodItems = this.pointOfSaleService.foodItems;
-    this.pointOfSaleService.foodItemsChanged
-      .subscribe(
-        (foodItem: FoodItem[]) => {
-          this.foodItems = foodItem;
-        }
-      );
+    this.route.data.subscribe((data: any) => this.foodItems = data['foodItems']);
 
-    this.inventories = this.pointOfSaleService.inventories;
-    this.subscription = this.pointOfSaleService.inventoriesChanged
-      .subscribe(
-        (inventories: Inventory[]) => {
-          this.inventories = inventories;
-        }
-      );
+
+
+
+    this.rootUrl = this.dataStorageService.rootUrl + '/Content/FoodItemImages/';
+
+
+
+    // this.foodItems = this.pointOfSaleService.foodItems;
+
+    // this.pointOfSaleService.foodItemsChanged
+    //   .subscribe(
+    //     (foodItem: FoodItem[]) => {
+    //       this.foodItems = foodItem;
+    //     }
+    //   );
+
+   // this.inventories = this.pointOfSaleService.inventories;
+   //  this.subscription = this.pointOfSaleService.inventoriesChanged
+   //    .subscribe(
+   //      (inventories: Inventory[]) => {
+   //        this.inventories = inventories;
+   //      }
+   //    );
     this.total = this.foodItems.length;
      for (let i = 0; i < this.foodItems.length; i++) {
        if (this.foodItems[i].FoodItemImageName === null || this.foodItems[i].FoodItemImageName === '' ) {
@@ -130,11 +151,11 @@ export class MenuComponent implements OnInit {
                     this.pointOfSaleService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
                   } else {
 
-                    const purchasedFood =
-                      new OrderedItem(orderItemId, null,  foodItemId,
-                        quantity  , price , subTotal);
-
-                    this.pointOfSaleService.addToOrderedItemsList(purchasedFood);
+                    // const purchasedFood =
+                    //   new OrderedItem(orderItemId, null,  foodItemId,
+                    //     quantity  , price , subTotal);
+                    //
+                    // this.pointOfSaleService.addToOrderedItemsList(purchasedFood);
                   }
                   this.pointOfSaleService.totalQuantity
                     = Number.parseInt(this.pointOfSaleService.totalQuantity.toString())

@@ -120,10 +120,10 @@ export class PaymentComponent implements OnInit {
       - Number.parseInt(totalPrice.toString());
     const dateTime = new Date().toLocaleString();
 
-    this.order = new Order(orderId, this.pointOfSaleService.orderedItems, totalPrice,
-      this.tendered, this.change, dateTime , this.table,
-      this.inventoryCost, this.orderProfit );
-    this.pointOfSaleService.addToOrderedList(this.order);
+    // this.order = new Order(orderId, this.pointOfSaleService.orderedItems, totalPrice,
+    //   this.tendered, this.change, dateTime , this.table,
+    //   this.inventoryCost, this.orderProfit );
+    // this.pointOfSaleService.addToOrderedList(this.order);
 
   //  this._dataStorageService.addNewOrder(this.order).subscribe();
     this.router.navigate(['receipt']);

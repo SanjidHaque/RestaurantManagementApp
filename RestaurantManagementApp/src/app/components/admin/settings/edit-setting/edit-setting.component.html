@@ -185,6 +185,22 @@
     </div>
   </div>
 
+  <div class="row checkbox">
+    <div class="col-xl-12">
+
+      <label for="printChefsOrderReceipt">Print receipt for chef
+        <input
+          name="printChefsOrderReceipt"
+          id="printChefsOrderReceipt"
+          type="checkbox"
+          (change)="changeCheckBoxValue($event)"
+          [checked]="setting.PrintChefsOrderReceipt"
+          >
+      </label>
+
+    </div>
+  </div>
+
 
   <div class="row">
     <div class="col-xl-6 text-xl-right">

@@ -315,9 +315,30 @@
     <Compile Include="Migrations\201905191050283_userTableSuperNew.Designer.cs">
       <DependentUpon>201905191050283_userTableSuperNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905191209586_settingModelChanged1.cs" />
+    <Compile Include="Migrations\201905191209586_settingModelChanged1.Designer.cs">
+      <DependentUpon>201905191209586_settingModelChanged1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905201001240_orderAndTableModelChanged.cs" />
+    <Compile Include="Migrations\201905201001240_orderAndTableModelChanged.Designer.cs">
+      <DependentUpon>201905201001240_orderAndTableModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905201004239_orderAndTableModelChangedAgain.cs" />
+    <Compile Include="Migrations\201905201004239_orderAndTableModelChangedAgain.Designer.cs">
+      <DependentUpon>201905201004239_orderAndTableModelChangedAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905211051584_orderSeesionModelAdded.cs" />
+    <Compile Include="Migrations\201905211051584_orderSeesionModelAdded.Designer.cs">
+      <DependentUpon>201905211051584_orderSeesionModelAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905211052352_orderSeesionModelAddedAgain.cs" />
+    <Compile Include="Migrations\201905211052352_orderSeesionModelAddedAgain.Designer.cs">
+      <DependentUpon>201905211052352_orderSeesionModelAddedAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\OrderSession.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -468,6 +489,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905191050283_userTableSuperNew.resx">
       <DependentUpon>201905191050283_userTableSuperNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191209586_settingModelChanged1.resx">
+      <DependentUpon>201905191209586_settingModelChanged1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905201001240_orderAndTableModelChanged.resx">
+      <DependentUpon>201905201001240_orderAndTableModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905201004239_orderAndTableModelChangedAgain.resx">
+      <DependentUpon>201905201004239_orderAndTableModelChangedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905211051584_orderSeesionModelAdded.resx">
+      <DependentUpon>201905211051584_orderSeesionModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905211052352_orderSeesionModelAddedAgain.resx">
+      <DependentUpon>201905211052352_orderSeesionModelAddedAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

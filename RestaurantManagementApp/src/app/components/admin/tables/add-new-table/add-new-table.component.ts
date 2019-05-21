@@ -24,7 +24,7 @@ export class AddNewTableComponent {
     this.isDisabled = true;
     const id = null;
     const tableName = form.value.name;
-    this.tableDataStorageService.addNewTable(new Table(id, tableName))
+    this.tableDataStorageService.addNewTable(new Table(id, tableName, 'Empty'))
       .subscribe(
         (data: any) => {
           this.toastr.successToastr('Added to shop', 'Success', {

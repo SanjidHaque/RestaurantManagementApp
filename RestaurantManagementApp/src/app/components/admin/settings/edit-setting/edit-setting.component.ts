@@ -24,6 +24,10 @@ export class EditSettingComponent implements OnInit {
     this.route.data.subscribe( (data: Setting) => this.setting = data['settings']);
   }
 
+  changeCheckBoxValue(event: any) {
+    this.setting.PrintChefsOrderReceipt = event.target.checked;
+  }
+
   editSetting(form: NgForm) {
     this.isDisabled = true;
 
@@ -39,7 +43,8 @@ export class EditSettingComponent implements OnInit {
         form.value.vatRegNumber,
         form.value.vatType,
         form.value.serviceCharge,
-        form.value.additionalInformation
+        form.value.additionalInformation,
+        this.setting.PrintChefsOrderReceipt
       )
     ).subscribe( (data: any) => {
       this.toastr.successToastr('Information updated', 'Success', {

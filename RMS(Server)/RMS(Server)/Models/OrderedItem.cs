@@ -3,8 +3,8 @@
     public class OrderedItem
     {
         public int Id { get; set; }
-        public Order Order { get; set; }
-        public int OrderId { get; set; }
+        public OrderSession OrderSession { get; set; }
+        public int OrderSessionId { get; set; } 
         public FoodItem FoodItem { get; set; }
         public int FoodItemId { get; set; }
         public int FoodItemQuantity { get; set; }

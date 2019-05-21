@@ -1,3 +1,4 @@
+<!--
 <div class="row">
   <div class="col-md-offset-1 col-md-9 order-detail">
     <div class="row buttons">
@@ -57,8 +58,8 @@
     </div>
 
 
-<div *ngIf="order.OrderedItem.length !== 0; else orderedItemsDeleted" class="scrollable-div" >
-    <div class="row table-bordered units-details" *ngFor="let products of order.OrderedItem">
+<div *ngIf="order.OrderedItems.length !== 0; else orderedItemsDeleted" class="scrollable-div" >
+    <div class="row table-bordered units-details" *ngFor="let products of order.OrderedItems">
       <div class="col-md-3" >
         {{ products.FoodItemName }}
       </div>
@@ -150,3 +151,4 @@
 </div>
 
 
+-->

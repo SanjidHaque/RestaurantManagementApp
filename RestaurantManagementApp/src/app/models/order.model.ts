@@ -1,33 +1,37 @@
-import {OrderedItem} from './ordered-item.model';
+import {OrderSession} from './order-session.model';
 
 export class Order {
   public Id: number;
-  public OrderedItem: OrderedItem[];
+  public OrderSessions: OrderSession[];
   public TotalPrice: number;
   public Tendered: number;
   public Change: number;
   public DateTime: string;
-  public TableNumber: string;
   public InventoryCost: number;
   public Profit: number;
+  public TableId: number;
+  public CurrentState: string;
 
   constructor(id: number,
-              orderedItem: OrderedItem[],
+              orderSessions: OrderSession[],
               totalPrice: number,
               tendered: number,
               change: number,
               dateTime: string,
-              tableNumber: string,
               inventoryCost: number,
-              profit: number) {
+              profit: number,
+              tableId: number,
+              currentState: string
+  ) {
     this.Id = id;
-    this.OrderedItem = orderedItem;
+    this.OrderSessions = orderSessions;
     this.TotalPrice = totalPrice;
     this.Tendered = tendered;
     this.Change = change;
     this.DateTime = dateTime;
-    this.TableNumber = tableNumber;
     this.InventoryCost = inventoryCost;
     this.Profit = profit;
+    this.TableId = tableId;
+    this.CurrentState = currentState;
   }
 }

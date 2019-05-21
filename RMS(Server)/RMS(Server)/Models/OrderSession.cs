@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace RMS_Server_.Models
 {
-    public class Table
+    public class OrderSession
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public Order Order { get; set; }
+        public int OrderId { get; set; }        
+        public List<OrderedItem> OrderedItems { get; set; }
         public string CurrentState { get; set; }
     }
 }

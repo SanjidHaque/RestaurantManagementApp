@@ -55,7 +55,7 @@ export class EditTableComponent implements OnInit {
     const tableName = form.value.name;
 
     if (tableName !== this.table.Name) {
-      this.tableDataStorageService.editTable(new Table(this.tableId, tableName))
+      this.tableDataStorageService.editTable(new Table(this.tableId, tableName, this.table.CurrentState))
         .subscribe(
           (data: any) => {
             this.toastr.successToastr('Information is updated', 'Success', {

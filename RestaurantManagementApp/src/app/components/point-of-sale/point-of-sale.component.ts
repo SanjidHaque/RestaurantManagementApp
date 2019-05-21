@@ -211,10 +211,10 @@ export class PointOfSaleComponent implements OnInit, DoCheck {
                     this.pointOfSaleService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
                   } else {
 
-                    const purchasedFood = new OrderedItem(orderItemId,  '0',  foodItemId,
-                      quantity, price , subTotal);
+                    // const purchasedFood = new OrderedItem(orderItemId, ,  '0',  foodItemId,
+                    //   quantity, price , subTotal);
 
-                    this.pointOfSaleService.addToOrderedItemsList(purchasedFood);
+                //    this.pointOfSaleService.addToOrderedItemsList(purchasedFood);
                   }
                   this.pointOfSaleService.totalQuantity
                     = Number.parseInt(this.pointOfSaleService.totalQuantity.toString())

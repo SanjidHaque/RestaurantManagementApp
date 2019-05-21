@@ -10,6 +10,7 @@ export class Setting {
     public VatRegNumber: string,
     public VatType: string,
     public ServiceCharge: number,
-    public AdditionalInformation: string
+    public AdditionalInformation: string,
+    public PrintChefsOrderReceipt: boolean
   ) {}
 }

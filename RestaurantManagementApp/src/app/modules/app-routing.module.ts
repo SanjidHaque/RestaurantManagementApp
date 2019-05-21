@@ -19,7 +19,6 @@ import {TablesComponent} from '../components/admin/tables/tables.component';
 import {AddNewTableComponent} from '../components/admin/tables/add-new-table/add-new-table.component';
 import {EditTableComponent} from '../components/admin/tables/edit-table/edit-table.component';
 import {PageNotFoundComponent} from '../components/page-not-found/page-not-found.component';
-import {SessionComponent} from '../components/point-of-sale/session/session.component';
 import {SelectTableComponent} from '../components/point-of-sale/select-table/select-table.component';
 import {FoodItemsComponent} from '../components/admin/food-items/food-items.component';
 import {OrderListComponent} from '../components/admin/orders/order-list/order-list.component';
@@ -65,25 +64,30 @@ const appRoutes: Routes = [
     [
       {
         path: '',
-        redirectTo: 'session',
+        redirectTo: 'select-table',
         pathMatch: 'full'
       },
       {
-        path: 'session',
-        component: SessionComponent,
-      },
-      {
         path: 'select-table',
-        component: SelectTableComponent
+        component: SelectTableComponent,
+        resolve:
+          {
+            tables: TableResolverService
+          }
       },
       {
-        path: 'menu',
-        component: MenuComponent
+        path: ':tableId/menu',
+        component: MenuComponent,
+        resolve:
+          {
+            tables: TableResolverService,
+            foodItems: FoodItemResolverService
+          }
       },
       {
         path: 'payment',
         component: PaymentComponent
-      },
+      }
     ]
   },
 

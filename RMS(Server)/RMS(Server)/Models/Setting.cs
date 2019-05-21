@@ -18,5 +18,6 @@ namespace RMS_Server_.Models
         public string VatType { get; set; }
         public float? ServiceCharge { get; set; }
         public string AdditionalInformation { get; set; }
+        public bool PrintChefsOrderReceipt { get; set; }    
     }
 }

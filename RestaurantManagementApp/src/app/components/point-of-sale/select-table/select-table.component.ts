@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Table} from '../../../models/table.model';
+import {ActivatedRoute} from '@angular/router';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-select-table',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectTableComponent implements OnInit {
 
-  constructor() { }
+  tables: Table[] = [];
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.data.subscribe((data: Table[]) => this.tables = data['tables'] );
   }
+
 
 }

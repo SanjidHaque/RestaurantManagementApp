@@ -1,67 +1,230 @@
-<div class="row empty" *ngIf="total === 0; else notEmpty">
-  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-  No item is available
+<!--<div class="row empty" *ngIf="total === 0; else notEmpty">-->
+  <!--<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">-->
+  <!--No item is available-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--<ng-template #notEmpty>-->
+
+<!--<div class="row">-->
+  <!--<div class="col-lg-3 col-md-3 food-body">-->
+      <!--<i class="fa fa-search"></i>-->
+      <!--<input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">-->
+  <!--</div>-->
+<!--</div>-->
+
+
+
+
+<!--<div class="row left">-->
+    <!--<div class="col-lg-4 col-md-4"-->
+         <!--*ngFor="let foodItems of foodItems | filter:term-->
+        <!--; let i = index">-->
+      <!--<div class="row">-->
+        <!--<div class="col-lg-8 col-md-8 name">-->
+       <!--SN-{{ foodItems.SerialNo }}.   {{ foodItems.Name }}-->
+        <!--</div>-->
+        <!--<div class="col-lg-4 col-md-4 price">-->
+          <!--{{ foodItems.Price }} BDT-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="row">-->
+        <!--<div class="col-lg-12 col-md-12 ">-->
+          <!--<img [src]="foodItems.FoodItemImageName"-->
+               <!--class="image"-->
+          <!--&gt;-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="row">-->
+        <!--<div class="col-lg-4 col-md-4">-->
+          <!--<button-->
+            <!--class="all-categories-button"-->
+            <!--(click)="UpdateCart(foodItems.Id, foodItems.Price,-->
+            <!--foodItems.Name, foodItems.SerialNo, foodItems.InventoryCost, true, i)">-->
+            <!--Add-->
+          <!--</button>-->
+        <!--</div>-->
+        <!--<div class="col-lg-4 col-md-4 input-box">-->
+          <!--<input type="number"-->
+                 <!--min="1"-->
+                 <!--id="amount"-->
+                 <!--class="form-control"-->
+                 <!--[(ngModel)]="selectedQuantity[i]"-->
+                 <!--#amountInput-->
+          <!--&gt;-->
+        <!--</div>-->
+        <!--<div class="col-lg-4 col-md-4">-->
+          <!--<button-->
+            <!--class="all-categories-button"-->
+            <!--(click)="UpdateCart(foodItems.Id, foodItems.Price,foodItems.Name,-->
+             <!--foodItems.InventoryCost, false, i)">-->
+            <!--Remove-->
+          <!--</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--</ng-template>-->
+
+
+<div class="row" *ngIf="foodItems.length === 0; else notEmpty">
+  <div class="col-xl-12" style="text-align: center; font-weight: 500;">
+
+    Can't create order, no food item is available.
+
   </div>
 </div>
 
 <ng-template #notEmpty>
 
-<div class="row">
-  <div class="col-lg-3 col-md-3 food-body">
-      <i class="fa fa-search"></i>
-      <input class="box" type="text" [(ngModel)]="term" placeholder="Search Products...">
-  </div>
-</div>
 
+  <div class="row">
 
-
-
-<div class="row left">
-    <div class="col-lg-4 col-md-4"
-         *ngFor="let foodItems of foodItems | filter:term
-        ; let i = index">
-      <div class="row">
-        <div class="col-lg-8 col-md-8 name">
-       SN-{{ foodItems.SerialNo }}.   {{ foodItems.Name }}
-        </div>
-        <div class="col-lg-4 col-md-4 price">
-          {{ foodItems.Price }} BDT
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12 col-md-12 ">
-          <img [src]="foodItems.FoodItemImageName"
-               class="image"
-          >
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-4">
-          <button
-            class="all-categories-button"
-            (click)="UpdateCart(foodItems.Id, foodItems.Price,
-            foodItems.Name, foodItems.SerialNo, foodItems.InventoryCost, true, i)">
-            Add
-          </button>
-        </div>
-        <div class="col-lg-4 col-md-4 input-box">
-          <input type="number"
-                 min="1"
-                 id="amount"
-                 class="form-control"
-                 [(ngModel)]="selectedQuantity[i]"
-                 #amountInput
-          >
-        </div>
-        <div class="col-lg-4 col-md-4">
-          <button
-            class="all-categories-button"
-            (click)="UpdateCart(foodItems.Id, foodItems.Price,foodItems.Name,
-             foodItems.InventoryCost, false, i)">
-            Remove
-          </button>
-        </div>
-      </div>
+    <div class="col-xl-1" style="padding-bottom: 2px; padding-top: 2px;">
+      <button
+        routerLink="/pos"
+        class="btn btn-info">Back</button>
     </div>
-</div>
+
+    <div class="col-xl-2" style="padding-bottom: 2px; padding-top: 2px;">
+
+      <input
+        type="text"
+        id="serialNumber"
+        placeholder="Serial No"
+        class="form-control"
+        ngModel
+        name="serialNumber"
+        required>
+
+    </div>
+
+    <div class="col-xl-2" style="padding-bottom: 2px; padding-top: 2px;">
+
+      <input
+        type="number"
+        id="quantity"
+        class="form-control"
+        ngModel
+        name="quantity"
+        required>
+
+    </div>
+
+    <div class="col-xl-2"
+         style="padding-bottom: 2px; padding-top: 2px;">
+
+      <button class="btn btn-success">Add</button> &nbsp;
+
+      <button class="btn btn-danger">Remove</button>
+
+    </div>
+
+    <div class="col-xl-5" style="padding-bottom: 2px; padding-top: 2px;">
+
+      <input
+        type="text"
+        [(ngModel)]="term"
+        placeholder="Search..."
+        id="searchFoodItem"
+        class="form-control"
+        name="searchFoodItem">
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row">
+
+    <div class="col-xl-4">
+
+      <div class="row">
+        <div class="col-xl-12 text-xl-center" style="font-weight: 500;">
+
+          Cart
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="col-xl-8">
+
+      <div class="row">
+
+        <div
+          class="col-xl-4 col-md-4 col-lg-4 col-6"
+          *ngFor="let foodItem of foodItems | filter: term ">
+
+          <div class="row">
+            <div class="col-xl-12"
+                 style="
+                 font-weight: 500;
+                 word-break: break-all;">
+
+              {{ foodItem.SerialNumber }}. {{ foodItem.Name }} - {{ foodItem.Price }} BDT
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-12">
+              <img
+                style="
+              height: 200px;
+              width: 100%;
+              border: 2px solid white;
+              border-radius: 5px;"
+                [src]="foodItem.FoodItemImageName">
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xl-12">
+
+              <button
+                style="width: 100%;"
+                class="btn btn-success">Add</button>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-12">
+
+              <input
+                type="number"
+                min="1"
+                ngModel
+                id="addToCart"
+                class="form-control"
+                name="addToCart">
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-12">
+
+              <button
+                style="width: 100%;"
+                class="btn btn-danger">Remove</button>
+
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
 </ng-template>
+

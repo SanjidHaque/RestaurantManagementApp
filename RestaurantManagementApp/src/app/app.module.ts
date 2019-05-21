@@ -55,7 +55,6 @@ import {OrderDetailsComponent} from './components/admin/orders/order-details/ord
 import {FoodItemDetailsComponent} from './components/admin/food-items/food-item-details/food-item-details.component';
 import {FoodItemListComponent} from './components/admin/food-items/food-item-list/food-item-list.component';
 import {AddNewInventoryItemComponent} from './components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
-import {SessionComponent} from './components/point-of-sale/session/session.component';
 import {FoodItemsComponent} from './components/admin/food-items/food-items.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminService} from './services/shared/admin.service';
@@ -117,7 +116,6 @@ import {SettingResolverService} from './route-resolvers/setting-resolver.service
     SelectTableComponent,
     TableListComponent,
     TableDetailsComponent,
-    SessionComponent,
     AddNewUserComponent,
     UserDetailsComponent,
     UserListComponent,

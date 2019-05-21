@@ -28,39 +28,39 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public IHttpActionResult AddNewOrder(Order order)
         {
-            for (int i = 0; i < order.OrderedItem.Count; i++)
-            {
-                int foodItemId = order.OrderedItem[i].FoodItemId;
-                FoodItem soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
-                if (soldFoodItem != null)
-                {
-                    soldFoodItem.TotalSale++;
-                }
-             
-                List<FoodItem> foodItems = _context.FoodItems.Include(b => b.Ingredients).ToList();
-                for (int j = 0; j < foodItems.Count; j++)
-                {
-                    if (foodItems[j].Id == foodItemId)
-                    {
-                        for (int k = 0; k < foodItems[j].Ingredients.Count; k++)
-                        {
-                            var quantity = foodItems[j].Ingredients[k].Quantity;
-                            var totalQuantity = quantity*order.OrderedItem[i].FoodItemQuantity;
-                            int inventoryId = foodItems[j].Ingredients[k].InventoryId;
-                            List<Inventory> inventory = _context.Inventories.ToList();
-                            for (int l = 0; l < inventory.Count; l++)
-                            {
-                                if (inventory[l].Id == inventoryId)
-                                {
-                                    inventory[l].UsedQuantity += totalQuantity;
-                                    inventory[l].RemainingQuantity -= totalQuantity;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            _context.OrderedItems.AddRange(order.OrderedItem);
+//            for (int i = 0; i < order.OrderedItems.Count; i++)
+//            {
+//                int foodItemId = order.OrderedItems[i].FoodItemId;
+//                FoodItem soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
+//                if (soldFoodItem != null)
+//                {
+//                    soldFoodItem.TotalSale++;
+//                }
+//             
+//                List<FoodItem> foodItems = _context.FoodItems.Include(b => b.Ingredients).ToList();
+//                for (int j = 0; j < foodItems.Count; j++)
+//                {
+//                    if (foodItems[j].Id == foodItemId)
+//                    {
+//                        for (int k = 0; k < foodItems[j].Ingredients.Count; k++)
+//                        {
+//                            var quantity = foodItems[j].Ingredients[k].Quantity;
+//                            var totalQuantity = quantity*order.OrderedItems[i].FoodItemQuantity;
+//                            int inventoryId = foodItems[j].Ingredients[k].InventoryId;
+//                            List<Inventory> inventory = _context.Inventories.ToList();
+//                            for (int l = 0; l < inventory.Count; l++)
+//                            {
+//                                if (inventory[l].Id == inventoryId)
+//                                {
+//                                    inventory[l].UsedQuantity += totalQuantity;
+//                                    inventory[l].RemainingQuantity -= totalQuantity;
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            _context.OrderedItems.AddRange(order.OrderedItems);
             _context.Orders.Add(order);
             _context.SaveChanges();
             return Ok();
@@ -87,7 +87,7 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult GetAllOrder()
         {
             List<Order> orders = _context.Orders
-                .Include(b => b.OrderedItem)
+                .Include(b => b.OrderSessions.Select(c => c.OrderedItems))
                 .OrderByDescending(x => x.Id)
                 .ToList();
             return Ok(orders);

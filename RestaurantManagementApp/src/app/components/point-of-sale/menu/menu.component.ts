@@ -9,6 +9,10 @@ import {PointOfSaleService} from '../../../services/shared/point-of-sale.service
 import {OrderedItem} from '../../../models/ordered-item.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ActivateRoutes} from '@angular/router/src/operators/activate_routes';
+import {NgForm} from '@angular/forms';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {Table} from '../../../models/table.model';
+import {OrderSession} from '../../../models/order-session.model';
 
 @Component({
   selector: 'app-food-items',
@@ -19,169 +23,282 @@ import {ActivateRoutes} from '@angular/router/src/operators/activate_routes';
 export class MenuComponent implements OnInit {
 
   tableId: number;
+  table: Table;
+  tables: Table[] = [];
 
-
-  index: number;
-  total: number;
   foodItems: FoodItem[] = [];
   inventories: Inventory[] = [];
-  selectedQuantity = [];
-  order: Order[];
-  condition = false;
-  @ViewChild('amountInput') amountInputRef: ElementRef;
-  uuidCodeOne = '';
-  uuidCodeTwo = '';
-  uuidCodeThree = '';
-  quantity : number;
+
+  order: Order;
+  orderSessions: OrderSession[] = [];
+  orderedItems: OrderedItem[] = [];
+
 
   imageUrl = 'assets/noImage.png';
   rootUrl = '';
 
-  subscription: Subscription;
   constructor(private pointOfSaleService: PointOfSaleService,
               private route: ActivatedRoute,
+              private router: Router,
+              private toastr: ToastrManager,
               private dataStorageService: TableDataStorageService) {
     this.route.params.subscribe((params: Params) => this.tableId = +params['table-id']);
-
-    this.uuidCodeOne = UUID.UUID();
-    this.uuidCodeTwo = UUID.UUID();
-    this.uuidCodeThree = UUID.UUID();
-
-
-
   }
+
 
   ngOnInit() {
-    this.route.data.subscribe((data: any) => this.foodItems = data['foodItems']);
+    this.route.data.subscribe((data: any) => {
+      this.foodItems = data['foodItems'];
+      this.tables = data['tables'];
+      this.inventories = data['inventories'];
+    });
 
+    this.table = this.tables.find(x => x.Id === this.tableId);
 
+    if (this.table === undefined) {
+      this.toastr.errorToastr('This table is no longer available', 'Error', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      this.router.navigate(['pos']);
+    } else {
 
+      this.order = this.table.Orders.find(x => x.CurrentState === ('Ordered' || 'Served'));
 
-    this.rootUrl = this.dataStorageService.rootUrl + '/Content/FoodItemImages/';
+      this.rootUrl = this.dataStorageService.rootUrl + '/Content/FoodItemImages/';
+      this.setFoodItemImage();
 
-
-
-    // this.foodItems = this.pointOfSaleService.foodItems;
-
-    // this.pointOfSaleService.foodItemsChanged
-    //   .subscribe(
-    //     (foodItem: FoodItem[]) => {
-    //       this.foodItems = foodItem;
-    //     }
-    //   );
-
-   // this.inventories = this.pointOfSaleService.inventories;
-   //  this.subscription = this.pointOfSaleService.inventoriesChanged
-   //    .subscribe(
-   //      (inventories: Inventory[]) => {
-   //        this.inventories = inventories;
-   //      }
-   //    );
-    this.total = this.foodItems.length;
-     for (let i = 0; i < this.foodItems.length; i++) {
-       if (this.foodItems[i].FoodItemImageName === null || this.foodItems[i].FoodItemImageName === '' ) {
-         this.foodItems[i].FoodItemImageName = this.imageUrl;
-       } else {
-         this.foodItems[i].FoodItemImageName =  this.rootUrl + this.foodItems[i].FoodItemImageName;
-       }
-     }
+    }
   }
 
 
-
-
-
-  UpdateCart(id: number, price: number,
-             name: string, serialNo: string, makingCost: number, isAdd: boolean, index: any) {
-
-    this.quantity = this.selectedQuantity[index];
-    if (this.quantity > 0) {
-      const foodItemId = id;
-      const foodItemName = name;
-      const Price = price;
-      const orderId = null;
-      if ( this.pointOfSaleService.checkIfOrderedItemExist(id, orderId) === null) {
-        const orderItemId = null;
-        if ( isAdd === true ) {
-          this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-            foodItemName, serialNo, Price, makingCost );
-        } else {
-          this.RemoveFromCart(orderItemId, orderId,  this.quantity,
-            foodItemId, foodItemName, Price, makingCost );
-        }
+  setFoodItemImage() {
+    for (let i = 0; i < this.foodItems.length; i++) {
+      if (this.foodItems[i].FoodItemImageName === null
+        || this.foodItems[i].FoodItemImageName === '' ) {
+        this.foodItems[i].FoodItemImageName = this.imageUrl;
       } else {
-        const orderItemId = this.pointOfSaleService.checkIfOrderedItemExist(id, orderId);
-        if ( isAdd === true ) {
-          this.AddToCart( orderItemId, orderId,  this.quantity, foodItemId,
-            foodItemName, serialNo, Price, makingCost );
-        } else {
-          this.RemoveFromCart(orderItemId, orderId,  this.quantity,
-            foodItemId, foodItemName, Price, makingCost );
-        }
+        this.foodItems[i].FoodItemImageName =
+          this.rootUrl + this.foodItems[i].FoodItemImageName;
       }
     }
   }
 
 
 
-  AddToCart(orderItemId: number, orderId: number, quantity: number,
-             foodItemId: number, foodItemName: string, serialNo: string, price: number,
-             makingCost: number ) {
+  updateCart(form, foodItem: FoodItem, isAdd: boolean) {
+    const quantity = form.value.indirectQuantity;
 
-    for (let j = 0; j < this.foodItems.length; j++) {
-      if (this.foodItems[j].Id === foodItemId) {
-        let check = 0;
-        for (let k = 0; k < this.foodItems[j].Ingredients.length; k++ ) {
-          const inventoryQuantity =  this.foodItems[j].Ingredients[k].Quantity;
-          const totalQuantity = inventoryQuantity * quantity;
-          const inventoryId = this.foodItems[j].Ingredients[k].InventoryId;
-          for (let l = 0; l < this.inventories.length; l++) {
-            if (this.pointOfSaleService.inventories[l].Id === inventoryId) {
-              if (this.pointOfSaleService.inventories[l].RemainingQuantity > totalQuantity ) {
+    if (quantity % 1 !== 0) {
+       this.toastr.errorToastr('Value cannot be fractional', 'Error', {
+         toastTimeout: 10000,
+         newestOnTop: true,
+         showCloseButton: true
+       });
+       return;
+    }
 
-                check++;
+    if (quantity <= 0) {
+      this.toastr.errorToastr('Value cannot be negative or zero', 'Error', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      return;
+    }
 
-                if ( check === this.foodItems[j].Ingredients.length) {
-                  this.pointOfSaleService.inventories[l].RemainingQuantity -= totalQuantity;
-                  const subTotal = this.pointOfSaleService.FoodItemSubTotalPrice(price, quantity);
-                  this.pointOfSaleService.grandTotalPrice(subTotal);
-                  this.condition = this.pointOfSaleService.checkExistingFoodItem(foodItemId);
 
-                  if ( this.condition  ) {
-                    this.pointOfSaleService.increaseOnExistingFoodItem(foodItemId, quantity, subTotal );
-                  } else {
+    if (isAdd) {
+      this.checkIfInventoryExists(quantity, foodItem);
 
-                    // const purchasedFood =
-                    //   new OrderedItem(orderItemId, null,  foodItemId,
-                    //     quantity  , price , subTotal);
-                    //
-                    // this.pointOfSaleService.addToOrderedItemsList(purchasedFood);
-                  }
-                  this.pointOfSaleService.totalQuantity
-                    = Number.parseInt(this.pointOfSaleService.totalQuantity.toString())
-                    + Number.parseInt(quantity.toString());
-                }
+      const foodItemId = foodItem.Id;
+      const foodItemName = foodItem.Name;
+      const price = foodItem.Price;
+      const orderId = null;
+      const subTotal = this.pointOfSaleService.FoodItemSubTotalPrice(price, quantity);
+      const orderedItem = new OrderedItem(
+        null,
+        null,
+        null,
+        foodItem.Id,
+        quantity,
+        subTotal
+      );
 
-              }
+      if (!isAdd) {
 
+      }
+
+      if (this.order === undefined) {
+
+        const orderedItems: OrderedItem[] = [];
+        orderedItems.push(orderedItem);
+
+        const orderSession = new OrderSession(
+          null,
+          null,
+          orderedItems,
+          'Not Ordered'
+        );
+
+        const orderSessions: OrderSession[] = [];
+        orderSessions.push(orderSession);
+
+        const order = new Order(
+          null,
+          orderSessions,
+          0,
+          null,
+          null,
+          new Date().toLocaleString(),
+          0,
+          0,
+          this.tableId,
+          'Not Ordered'
+        );
+
+        this.order = order;
+      } else {
+
+        let orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
+
+        if (orderSession === undefined) {
+
+          const orderedItems: OrderedItem[] = [];
+          orderedItems.push(orderedItem);
+
+          orderSession = new OrderSession(
+            null,
+            null,
+            orderedItems,
+            'Not Ordered'
+          );
+
+          this.order.OrderSessions.push(orderSession);
+
+
+        } else {
+
+          const existingOrderedItem = this.pointOfSaleService.checkIfOrderedItemExist(foodItemId, orderSession.OrderedItems);
+
+          if (existingOrderedItem === null) {
+            if (isAdd) {
+              orderSession.OrderedItems.push(orderedItem);
+            } else {
+              return;
             }
+
+          } else {
+
+
+              existingOrderedItem.FoodItemQuantity += quantity;
+              existingOrderedItem.TotalPrice += subTotal;
+
+
+
+             // existingOrderedItem.FoodItemQuantity -= quantity;
+            //  existingOrderedItem.TotalPrice -= subTotal;
+
 
           }
 
         }
+
+      }
+
+
+      console.log(this.order);
+    } else {
+
+    }
+
+
+    
+
+    }
+
+
+  placeOrder() {
+
+  }
+
+  serveOrder() {
+
+  }
+
+
+  checkIfInventoryExists(quantity: number, foodItem: FoodItem) {
+    for (let j = 0; j < this.foodItems.length; j++) {
+
+      if (this.foodItems[j].Id === foodItem.Id) {
+        let check = 0;
+        for (let k = 0; k < this.foodItems[j].Ingredients.length; k++ ) {
+
+          const inventoryQuantity =  this.foodItems[j].Ingredients[k].Quantity;
+          const totalQuantity = inventoryQuantity * quantity;
+          const inventoryId = this.foodItems[j].Ingredients[k].InventoryId;
+
+          for (let l = 0; l < this.inventories.length; l++) {
+
+            if (this.pointOfSaleService.inventories[l].Id === inventoryId) {
+
+              if (this.inventories[l].RemainingQuantity > totalQuantity ) {
+
+                check++;
+
+              }
+            }
+          }
+        }
         if (check < this.foodItems[j].Ingredients.length) {
-          alert('Insufficient inventories, please update your inventories first');
+          this.toastr.errorToastr('Insufficient inventories', 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
         }
         break;
       }
     }
   }
 
-  RemoveFromCart(orderItemId: number, orderId: number, quantity: number,
-                 foodItemId: number, foodItemName: string, price: number,
-                 makingCost: number) {
-      const subTotal = this.pointOfSaleService.FoodItemSubTotalPrice(price, quantity);
-      this.pointOfSaleService.removeFromFoodItemCart(foodItemId, quantity, subTotal);
 
+  addToCart(quantity: number, foodItem: FoodItem) {
+
+    for (let j = 0; j < this.foodItems.length; j++) {
+      if (this.foodItems[j].Id === foodItem.Id) {
+
+        for (let k = 0; k < this.foodItems[j].Ingredients.length; k++ ) {
+
+          const inventoryQuantity =  this.foodItems[j].Ingredients[k].Quantity;
+          const totalQuantity = inventoryQuantity * quantity;
+          const inventoryId = this.foodItems[j].Ingredients[k].InventoryId;
+
+          for (let l = 0; l < this.inventories.length; l++) {
+
+            if (this.pointOfSaleService.inventories[l].Id === inventoryId) {
+
+                 //  const subTotal = foodItem.Price * quantity;
+                 //
+                 // this.pointOfSaleService.checkIfOrderedItemExist(foodItem.Id, );
+                 //
+                 //  if (condition) {
+                 //
+                 //  } else {
+                 //
+                 //  }
+
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  removeFromCart(quantity: number, foodItem: FoodItem) {
+      const subTotal = this.pointOfSaleService.FoodItemSubTotalPrice(foodItem.Price, quantity);
+      this.pointOfSaleService.removeFromFoodItemCart(foodItem.Id, quantity, subTotal);
   }
 }

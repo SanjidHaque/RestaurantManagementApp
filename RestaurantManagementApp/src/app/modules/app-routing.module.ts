@@ -76,12 +76,13 @@ const appRoutes: Routes = [
           }
       },
       {
-        path: ':tableId/menu',
+        path: ':table-id/menu',
         component: MenuComponent,
         resolve:
           {
             tables: TableResolverService,
-            foodItems: FoodItemResolverService
+            foodItems: FoodItemResolverService,
+            inventories: InventoryResolverService
           }
       },
       {

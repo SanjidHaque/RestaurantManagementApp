@@ -1,107 +1,107 @@
 
 
 
-<div *ngIf="order">
-  <div class="row main-row">
-    <div class="col-md-offset-9 col-md-3">
-      <a style="cursor: pointer"
-         (click)="discardOrder()"
-         title="Destroy Current Order">
-        <div class="col-md-1 dashboard">
-          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-        </div>
-      </a>
-    </div>
-  </div>
+<!--<div *ngIf="order">-->
+  <!--<div class="row main-row">-->
+    <!--<div class="col-md-offset-9 col-md-3">-->
+      <!--<a style="cursor: pointer"-->
+         <!--(click)="discardOrder()"-->
+         <!--title="Destroy Current Order">-->
+        <!--<div class="col-md-1 dashboard">-->
+          <!--<i class="fa fa-times-circle-o" aria-hidden="true"></i>-->
+        <!--</div>-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</div>-->
 
 
-  <div class="row upper-div" >
-    <div class="col-md-offset-3 col-md-6 change">
-      Change: {{ order.Change }} BDT
-    </div>
-    <div class="col-md-3 next-order-div">
-      <button
-        (click)="nextOrder()"
-        class="back">
-        Next Order
-        <i class="fa fa-angle-double-right"></i></button>
-    </div>
-  </div>
+  <!--<div class="row upper-div" >-->
+    <!--<div class="col-md-offset-3 col-md-6 change">-->
+      <!--Change: {{ order.Change }} BDT-->
+    <!--</div>-->
+    <!--<div class="col-md-3 next-order-div">-->
+      <!--<button-->
+        <!--(click)="nextOrder()"-->
+        <!--class="back">-->
+        <!--Next Order-->
+        <!--<i class="fa fa-angle-double-right"></i></button>-->
+    <!--</div>-->
+  <!--</div>-->
 
 
-  <div class="row" >
-    <div class="col-md-offset-2 col-md-8 receipt">
-      <button (click)="print()" class="back"><i class="fa fa-print"></i> Print Receipt</button>
-    </div>
-  </div>
+  <!--<div class="row" >-->
+    <!--<div class="col-md-offset-2 col-md-8 receipt">-->
+      <!--<button (click)="print()" class="back"><i class="fa fa-print"></i> Print Receipt</button>-->
+    <!--</div>-->
+  <!--</div>-->
 
 
-  <div class="row print-row">
-    <div class="col-md-offset-4 col-md-4" id="print-section">
+  <!--<div class="row print-row">-->
+    <!--<div class="col-md-offset-4 col-md-4" id="print-section">-->
 
-      <div class="intro">
+      <!--<div class="intro">-->
 
-        <div class="row date-time" >
-          <div class="col-md-12">
-            {{ order.DateTime }}
-          </div>
-        </div>
-        <div class="row id ">
-          <div class="cl-md-12">
-            {{ order.Id }}
-          </div>
-        </div>
+        <!--<div class="row date-time" >-->
+          <!--<div class="col-md-12">-->
+            <!--{{ order.DateTime }}-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row id ">-->
+          <!--<div class="cl-md-12">-->
+            <!--{{ order.Id }}-->
+          <!--</div>-->
+        <!--</div>-->
 
-      </div>
-
-
-      <div class="row">
-        <div class="col-md-12 table-no">
-          Table: {{ order.TableNumber }}
-        </div>
-      </div>
-
-      <div class="col-md-12 hodoo">
-        Hodoo
-      </div>
+      <!--</div>-->
 
 
-      <div class="col-md-12 main" *ngFor="let orders of order.OrderedItems">
-        <div class="col-md-4 name">{{ orders.FoodItemName }}</div>
-        <div class="col-md-2 price">{{ orders.Price }}</div>
-        <div class="col-md-1 mul">x</div>
-        <div class="col-md-2 quantity">{{ orders.FoodItemQuantity }}</div>
-        <div class="col-md-1 equal">=</div>
-        <div class="col-md-2 sub-total">{{ orders.FoodItemSubTotal }}</div>
-      </div>
-      <div class="col-md-12 total-div">
-        <div class="col-md-6 total">Total:</div>
-        <div class="col-md-6 total-bdt">{{ order.TotalPrice }} BDT</div>
-      </div>
+      <!--<div class="row">-->
+        <!--<div class="col-md-12 table-no">-->
+          <!--Table: {{ order.TableNumber }}-->
+        <!--</div>-->
+      <!--</div>-->
 
-      <div class="col-md-12 tendered-div">
-        <div class="col-md-6 tendered">Tendered:</div>
-        <div class="col-md-6 tendered-bdt">{{ order.Tendered }} BDT</div>
-      </div>
-
-      <div class="col-md-12 change-div">
-        <div class="col-md-6 change-cash">Change:</div>
-        <div class="col-md-6 change-bdt">{{ order.Change }} BDT</div>
-      </div>
-
-      <div class="col-md-12 choosing-hodoo">
-        Thank you for choosing Hodoo!
-      </div>
-    </div>
-  </div>
-</div>
+      <!--<div class="col-md-12 hodoo">-->
+        <!--Hodoo-->
+      <!--</div>-->
 
 
-<div class="row" *ngIf="!order">
-  <div class="col-md-12 no-receipt">
-    You have no receipt to print
-  </div>
-  <div class="col-md-12 go-back-to-pos">
-    <a routerLink="/our-offers/regulars">Go Back to Point of Sale</a>
-  </div>
-</div>
+      <!--<div class="col-md-12 main" *ngFor="let orders of order.OrderedItems">-->
+        <!--<div class="col-md-4 name">{{ orders.FoodItemName }}</div>-->
+        <!--<div class="col-md-2 price">{{ orders.Price }}</div>-->
+        <!--<div class="col-md-1 mul">x</div>-->
+        <!--<div class="col-md-2 quantity">{{ orders.FoodItemQuantity }}</div>-->
+        <!--<div class="col-md-1 equal">=</div>-->
+        <!--<div class="col-md-2 sub-total">{{ orders.FoodItemSubTotal }}</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-12 total-div">-->
+        <!--<div class="col-md-6 total">Total:</div>-->
+        <!--<div class="col-md-6 total-bdt">{{ order.TotalPrice }} BDT</div>-->
+      <!--</div>-->
+
+      <!--<div class="col-md-12 tendered-div">-->
+        <!--<div class="col-md-6 tendered">Tendered:</div>-->
+        <!--<div class="col-md-6 tendered-bdt">{{ order.Tendered }} BDT</div>-->
+      <!--</div>-->
+
+      <!--<div class="col-md-12 change-div">-->
+        <!--<div class="col-md-6 change-cash">Change:</div>-->
+        <!--<div class="col-md-6 change-bdt">{{ order.Change }} BDT</div>-->
+      <!--</div>-->
+
+      <!--<div class="col-md-12 choosing-hodoo">-->
+        <!--Thank you for choosing Hodoo!-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+<!--<div class="row" *ngIf="!order">-->
+  <!--<div class="col-md-12 no-receipt">-->
+    <!--You have no receipt to print-->
+  <!--</div>-->
+  <!--<div class="col-md-12 go-back-to-pos">-->
+    <!--<a routerLink="/our-offers/regulars">Go Back to Point of Sale</a>-->
+  <!--</div>-->
+<!--</div>-->

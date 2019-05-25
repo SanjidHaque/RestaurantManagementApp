@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using RMS_Server_.Models;
@@ -14,14 +15,19 @@ namespace RMS_Server_.Controllers
         }
         [HttpGet]
         [Route("api/GetAllTable")]
+        [AllowAnonymous]
         public IHttpActionResult GetAllTable()
         {
-            List<Table> tables = _context.Tables.OrderByDescending(x => x.Id).ToList();
+            List<Table> tables = _context.Tables
+                .Include(x => x.Orders)
+                .OrderByDescending(x => x.Id)
+                .ToList();
             return Ok(tables);
         }
 
         [HttpPost]
         [Route("api/AddNewTable")]
+
         public IHttpActionResult AddNewTable(Table table)
         {
             if (table != null)

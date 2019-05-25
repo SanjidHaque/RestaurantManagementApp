@@ -184,12 +184,24 @@ export class AddNewFoodItemComponent implements OnInit {
     const serialNumber = form.value.serialNumber;
 
     if (this.foodItems.filter(e => e.SerialNumber === serialNumber).length > 0) {
+
       this.toastr.errorToastr('Duplicate serial number', 'Error', {
         toastTimeout: 10000,
         newestOnTop: true,
         showCloseButton: true
       });
       return;
+    }
+
+    if (this.ingredients.length === 0) {
+
+      this.toastr.errorToastr('Select at least one ingredient', 'Error', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      return;
+
     }
 
 

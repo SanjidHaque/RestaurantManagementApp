@@ -60,11 +60,10 @@ export class PointOfSaleService {
     }
   }
 
-  checkIfOrderedItemExist(foodItemId: number, orderId: number) {
-    for (let i = 0; i < this.orderedItems.length; i++) {
-      if (this.orderedItems[i].FoodItemId === foodItemId
-        && this.orderedItems[i].OrderId === orderId) {
-        return this.orderedItems[i].Id;
+  checkIfOrderedItemExist(foodItemId: number, orderedItems: OrderedItem[]) {
+    for (let i = 0; i < orderedItems.length; i++) {
+      if (orderedItems[i].FoodItemId === foodItemId) {
+        return orderedItems[i];
       }
     }
     return null;
@@ -102,8 +101,8 @@ export class PointOfSaleService {
 
 
 
-  FoodItemSubTotalPrice(price: number, quantity: number) {
-    this.foodItemSubTotal = price * quantity;
+  FoodItemSubTotalPrice(price: number, ore: number) {
+    this.foodItemSubTotal = price * ore;
     return this.foodItemSubTotal;
   }
 
@@ -117,19 +116,19 @@ export class PointOfSaleService {
     }
   }
 
-  increaseOnExistingFoodItem(foodItemId: number, quantity: number, subTotal: number) {
-    for (let i = 0 ; i < this.orderedItems.length; i++ ) {
+  increaseOnExistingFoodItem(foodItemId: number, quantity: number, subTotal: number, orderedItem: OrderedItem) {
+    // for (let i = 0 ; i < orderedItems.length; i++ ) {
 
-      if (this.orderedItems[i].FoodItemId === foodItemId) {
+      if (orderedItem.FoodItemId === foodItemId) {
 
-        this.orderedItems[i].FoodItemQuantity =
-          Number.parseInt(this.orderedItems[i].FoodItemQuantity.toString(), 2)
+        orderedItem.FoodItemQuantity =
+          Number.parseInt(orderedItem.FoodItemQuantity.toString(), 2)
           + Number.parseInt(quantity.toString(), 2);
 
-        this.orderedItems[i].TotalPrice =
-          Number.parseInt(this.orderedItems[i].TotalPrice.toString(), 2)
+        orderedItem.TotalPrice =
+          Number.parseInt(orderedItem.TotalPrice.toString(), 2)
           + Number.parseInt(subTotal.toString(), 2);
-      }
+      // }
     }
   }
 }

@@ -335,6 +335,18 @@
     <Compile Include="Migrations\201905211052352_orderSeesionModelAddedAgain.Designer.cs">
       <DependentUpon>201905211052352_orderSeesionModelAddedAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905221817529_orderModelChanged1.cs" />
+    <Compile Include="Migrations\201905221817529_orderModelChanged1.Designer.cs">
+      <DependentUpon>201905221817529_orderModelChanged1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905221822475_orderModelChangedAgain.cs" />
+    <Compile Include="Migrations\201905221822475_orderModelChangedAgain.Designer.cs">
+      <DependentUpon>201905221822475_orderModelChangedAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905221823142_tableModelChanged.cs" />
+    <Compile Include="Migrations\201905221823142_tableModelChanged.Designer.cs">
+      <DependentUpon>201905221823142_tableModelChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -504,6 +516,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905211052352_orderSeesionModelAddedAgain.resx">
       <DependentUpon>201905211052352_orderSeesionModelAddedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905221817529_orderModelChanged1.resx">
+      <DependentUpon>201905221817529_orderModelChanged1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905221822475_orderModelChangedAgain.resx">
+      <DependentUpon>201905221822475_orderModelChangedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905221823142_tableModelChanged.resx">
+      <DependentUpon>201905221823142_tableModelChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,117 +1,117 @@
 
 
-<div class="row main-row">
-<div class="col-lg-offset-9 col-md-offset-9 col-lg-3 col-md-3 col-sm-12 col-xs-12">
-  <a style="cursor: pointer"
-     (click)="discardOrder()"
-     title="Destroy Current Order">
-    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 dashboard">
-      <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-    </div>
-  </a>
-</div>
-</div>
+<!--<div class="row main-row">-->
+<!--<div class="col-lg-offset-9 col-md-offset-9 col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
+  <!--<a style="cursor: pointer"-->
+     <!--(click)="discardOrder()"-->
+     <!--title="Destroy Current Order">-->
+    <!--<div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 dashboard">-->
+      <!--<i class="fa fa-times-circle-o" aria-hidden="true"></i>-->
+    <!--</div>-->
+  <!--</a>-->
+<!--</div>-->
+<!--</div>-->
 
 
 
-<div class="row">
-  <div class="
-  col-lg-offset-2
-   col-md-offset-2
-   col-sm-offset-2
-   col-lg-2 col-md-2 col-sm-2 col-xs-4">
-    <button
-      class="back"
-      (click)="back()">
-      <i class="fa fa-angle-double-left"></i>
-       Back</button>
-  </div>
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 payment">
-    Payment
-  </div>
-  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-    <button
-      class="back "
-      [ngClass]="[!checkCertainAmount() ? 'back' : 'un-back']"
-      [disabled] = "!checkCertainAmount()"
-      (click)="validate()">
-      Validate
-      <i class="fa fa-angle-double-right"></i></button>
-  </div>
-</div>
+<!--<div class="row">-->
+  <!--<div class="-->
+  <!--col-lg-offset-2-->
+   <!--col-md-offset-2-->
+   <!--col-sm-offset-2-->
+   <!--col-lg-2 col-md-2 col-sm-2 col-xs-4">-->
+    <!--<button-->
+      <!--class="back"-->
+      <!--(click)="back()">-->
+      <!--<i class="fa fa-angle-double-left"></i>-->
+       <!--Back</button>-->
+  <!--</div>-->
+  <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 payment">-->
+    <!--Payment-->
+  <!--</div>-->
+  <!--<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">-->
+    <!--<button-->
+      <!--class="back "-->
+      <!--[ngClass]="[!checkCertainAmount() ? 'back' : 'un-back']"-->
+      <!--[disabled] = "!checkCertainAmount()"-->
+      <!--(click)="validate()">-->
+      <!--Validate-->
+      <!--<i class="fa fa-angle-double-right"></i></button>-->
+  <!--</div>-->
+<!--</div>-->
 
 
 
-<div class="row">
-  <div class="
-  col-lg-offset-3
-  col-md-offset-3
-  col-sm-offset-3
-  col-xs-offset-3
-  col-lg-6
-  col-md-6
-  col-sm-6
-  col-xs-6
-  grand-total">
-    {{ grandTotal }} BDT
-  </div>
-</div>
+<!--<div class="row">-->
+  <!--<div class="-->
+  <!--col-lg-offset-3-->
+  <!--col-md-offset-3-->
+  <!--col-sm-offset-3-->
+  <!--col-xs-offset-3-->
+  <!--col-lg-6-->
+  <!--col-md-6-->
+  <!--col-sm-6-->
+  <!--col-xs-6-->
+  <!--grand-total">-->
+    <!--{{ grandTotal }} BDT-->
+  <!--</div>-->
+<!--</div>-->
 
-<div class="bar">
+<!--<div class="bar">-->
 
-<div class="row title-row">
-  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12">
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due">
-      Due
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change">
-      Remaining
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 tendered">
-      Tendered
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change">
-      Change
-    </div>
-  </div>
-</div>
+<!--<div class="row title-row">-->
+  <!--<div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12">-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due">-->
+      <!--Due-->
+    <!--</div>-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change">-->
+      <!--Remaining-->
+    <!--</div>-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 tendered">-->
+      <!--Tendered-->
+    <!--</div>-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change">-->
+      <!--Change-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
-<div class="row content-row">
-  <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12 content">
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box">
-      {{ grandTotal }}
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box" *ngIf="!checkCertainChange(); else showZero">
-      {{ grandTotal - tendered }}
-    </div>
-      <ng-template #showZero>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box">
-          0
-        </div>
-      </ng-template>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-      <input type="number"
-             min="0"
-             id="amount"
-             class="form-control"
-             [(ngModel)]="tendered"
-      >
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change-box" *ngIf="checkCertainAmount()">
-      {{ tendered - grandTotal }}
-    </div>
-  </div>
-</div>
-</div>
+<!--<div class="row content-row">-->
+  <!--<div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12 content">-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box">-->
+      <!--{{ grandTotal }}-->
+    <!--</div>-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box" *ngIf="!checkCertainChange(); else showZero">-->
+      <!--{{ grandTotal - tendered }}-->
+    <!--</div>-->
+      <!--<ng-template #showZero>-->
+        <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 due-box">-->
+          <!--0-->
+        <!--</div>-->
+      <!--</ng-template>-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">-->
+      <!--<input type="number"-->
+             <!--min="0"-->
+             <!--id="amount"-->
+             <!--class="form-control"-->
+             <!--[(ngModel)]="tendered"-->
+      <!--&gt;-->
+    <!--</div>-->
+    <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 change-box" *ngIf="checkCertainAmount()">-->
+      <!--{{ tendered - grandTotal }}-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-<div class="row table">
-    <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12">
-      <select
-        (change)="selectChangeHandler($event)">
-        <option value="">Select a Table</option>
-        <option *ngFor="let table of tables" value="{{ table.Name }}"
-                > {{ table.Name }} </option>
-      </select>
-    </div>
-</div>
+<!--<div class="row table">-->
+    <!--<div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-12 col-xs-12">-->
+      <!--<select-->
+        <!--(change)="selectChangeHandler($event)">-->
+        <!--<option value="">Select a Table</option>-->
+        <!--<option *ngFor="let table of tables" value="{{ table.Name }}"-->
+                <!--&gt; {{ table.Name }} </option>-->
+      <!--</select>-->
+    <!--</div>-->
+<!--</div>-->
 

@@ -11,5 +11,6 @@ namespace RMS_Server_.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string CurrentState { get; set; }
-    }
+        public List<Order> Orders { get; set; }
+    }   
 }

@@ -1,14 +1,13 @@
+import {NgForm} from '@angular/forms';
+import {ToastrManager} from 'ng6-toastr-notifications';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
-import {Subject, Subscription} from 'rxjs';
+
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredient} from '../../../../models/ingredient.model';
-import {PointOfSaleService} from '../../../../services/shared/point-of-sale.service';
 import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
-import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-edit-food-item',
@@ -229,6 +228,17 @@ export class EditFoodItemComponent implements OnInit {
         });
         return;
       }
+    }
+
+    if (this.foodItem.Ingredients.length === 0) {
+
+      this.toastr.errorToastr('Select at least one ingredient', 'Error', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      return;
+
     }
 
     this.isDisabled = true;

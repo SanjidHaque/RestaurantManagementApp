@@ -8,7 +8,6 @@ namespace RMS_Server_.Models
     public class Order
     {
         public int Id { get; set; }
-        public string ReceiptNumber { get; set; }
         public List<OrderSession> OrderSessions { get; set; }
         public int? TotalPrice { get; set; }
         public int? Tendered { get; set; }

@@ -1,6 +1,5 @@
 export class OrderedItem {
   public Id: number;
-  public ReceiptNumber: string;
   public OrderId: number;
   public OrderSessionId: number;
   public FoodItemId: number;
@@ -8,7 +7,6 @@ export class OrderedItem {
   public TotalPrice: number;
 
   constructor(id: number,
-              receiptNumber: string,
               orderId: number,
               orderSessionId: number,
               foodItemId: number,
@@ -16,7 +14,6 @@ export class OrderedItem {
               totalPrice: number,
              ) {
     this.Id = id;
-    this.ReceiptNumber = receiptNumber;
     this.OrderId = orderId;
     this.OrderSessionId = orderSessionId;
     this.FoodItemId = foodItemId;

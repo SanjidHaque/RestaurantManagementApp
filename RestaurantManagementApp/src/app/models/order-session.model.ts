@@ -4,7 +4,7 @@ export class OrderSession {
   constructor(
     public Id: number,
     public OrderId: number,
-    public OrderedItems: OrderedItem[],
+    public OrderedItems: OrderedItem[] = [],
     public CurrentState: string
   ) {}
 }

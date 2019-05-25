@@ -21,7 +21,6 @@ import {OrderSession} from '../../../models/order-session.model';
 })
 
 export class MenuComponent implements OnInit {
-
   tableId: number;
   table: Table;
   tables: Table[] = [];
@@ -30,9 +29,6 @@ export class MenuComponent implements OnInit {
   inventories: Inventory[] = [];
 
   order: Order;
-  orderSessions: OrderSession[] = [];
-  orderedItems: OrderedItem[] = [];
-
 
   imageUrl = 'assets/noImage.png';
   rootUrl = '';
@@ -63,9 +59,7 @@ export class MenuComponent implements OnInit {
       });
       this.router.navigate(['pos']);
     } else {
-
       this.order = this.table.Orders.find(x => x.CurrentState === ('Ordered' || 'Served'));
-
       this.rootUrl = this.dataStorageService.rootUrl + '/Content/FoodItemImages/';
       this.setFoodItemImage();
 
@@ -87,36 +81,20 @@ export class MenuComponent implements OnInit {
 
 
 
-  updateCart(form, foodItem: FoodItem, isAdd: boolean) {
+
+  updateCart(form, foodItem: FoodItem, isAddToCart: boolean) {
     const quantity = form.value.indirectQuantity;
+    this.pointOfSaleService.checkCartConditions(quantity);
 
-    if (quantity % 1 !== 0) {
-       this.toastr.errorToastr('Value cannot be fractional', 'Error', {
-         toastTimeout: 10000,
-         newestOnTop: true,
-         showCloseButton: true
-       });
-       return;
-    }
+    const foodItemId = foodItem.Id;
+    const foodItemName = foodItem.Name;
+    const price = foodItem.Price;
+    const orderId = null;
+    const subTotal = price * quantity;
 
-    if (quantity <= 0) {
-      this.toastr.errorToastr('Value cannot be negative or zero', 'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
-      return;
-    }
+    if (isAddToCart) {
+      this.pointOfSaleService.checkIfInventoryExists(quantity, foodItem, this.foodItems, this.inventories);
 
-
-    if (isAdd) {
-      this.checkIfInventoryExists(quantity, foodItem);
-
-      const foodItemId = foodItem.Id;
-      const foodItemName = foodItem.Name;
-      const price = foodItem.Price;
-      const orderId = null;
-      const subTotal = this.pointOfSaleService.FoodItemSubTotalPrice(price, quantity);
       const orderedItem = new OrderedItem(
         null,
         null,
@@ -125,10 +103,6 @@ export class MenuComponent implements OnInit {
         quantity,
         subTotal
       );
-
-      if (!isAdd) {
-
-      }
 
       if (this.order === undefined) {
 
@@ -160,10 +134,8 @@ export class MenuComponent implements OnInit {
 
         this.order = order;
       } else {
-
         let orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
-
-        if (orderSession === undefined) {
+        if (orderSession === null) {
 
           const orderedItems: OrderedItem[] = [];
           orderedItems.push(orderedItem);
@@ -179,126 +151,58 @@ export class MenuComponent implements OnInit {
 
 
         } else {
-
           const existingOrderedItem = this.pointOfSaleService.checkIfOrderedItemExist(foodItemId, orderSession.OrderedItems);
 
           if (existingOrderedItem === null) {
-            if (isAdd) {
               orderSession.OrderedItems.push(orderedItem);
-            } else {
-              return;
-            }
 
           } else {
-
-
               existingOrderedItem.FoodItemQuantity += quantity;
               existingOrderedItem.TotalPrice += subTotal;
 
-
-
-             // existingOrderedItem.FoodItemQuantity -= quantity;
-            //  existingOrderedItem.TotalPrice -= subTotal;
-
-
           }
-
         }
-
       }
 
-
-      console.log(this.order);
     } else {
+      if (this.order === undefined) {
+        return;
+      }
 
+      const orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
+      if (orderSession === null) {
+        return;
+      }
+
+      const existingOrderedItem = this.pointOfSaleService.checkIfOrderedItemExist(foodItemId, orderSession.OrderedItems);
+      if (existingOrderedItem === null) {
+        return;
+      }
+
+      if (quantity > existingOrderedItem.FoodItemQuantity)  {
+        this.toastr.errorToastr('Value is too big', 'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        return;
+      }
+
+      existingOrderedItem.FoodItemQuantity -= quantity;
+      existingOrderedItem.TotalPrice -= subTotal;
+
+      if (existingOrderedItem.FoodItemQuantity === 0) {
+        const index = orderSession.OrderedItems.findIndex(x => x.FoodItemId === existingOrderedItem.FoodItemId);
+        orderSession.OrderedItems.splice(index, 1);
+      }
     }
-
-
-    
-
-    }
+  }
 
 
   placeOrder() {
-
   }
 
   serveOrder() {
-
   }
 
-
-  checkIfInventoryExists(quantity: number, foodItem: FoodItem) {
-    for (let j = 0; j < this.foodItems.length; j++) {
-
-      if (this.foodItems[j].Id === foodItem.Id) {
-        let check = 0;
-        for (let k = 0; k < this.foodItems[j].Ingredients.length; k++ ) {
-
-          const inventoryQuantity =  this.foodItems[j].Ingredients[k].Quantity;
-          const totalQuantity = inventoryQuantity * quantity;
-          const inventoryId = this.foodItems[j].Ingredients[k].InventoryId;
-
-          for (let l = 0; l < this.inventories.length; l++) {
-
-            if (this.pointOfSaleService.inventories[l].Id === inventoryId) {
-
-              if (this.inventories[l].RemainingQuantity > totalQuantity ) {
-
-                check++;
-
-              }
-            }
-          }
-        }
-        if (check < this.foodItems[j].Ingredients.length) {
-          this.toastr.errorToastr('Insufficient inventories', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
-        }
-        break;
-      }
-    }
-  }
-
-
-  addToCart(quantity: number, foodItem: FoodItem) {
-
-    for (let j = 0; j < this.foodItems.length; j++) {
-      if (this.foodItems[j].Id === foodItem.Id) {
-
-        for (let k = 0; k < this.foodItems[j].Ingredients.length; k++ ) {
-
-          const inventoryQuantity =  this.foodItems[j].Ingredients[k].Quantity;
-          const totalQuantity = inventoryQuantity * quantity;
-          const inventoryId = this.foodItems[j].Ingredients[k].InventoryId;
-
-          for (let l = 0; l < this.inventories.length; l++) {
-
-            if (this.pointOfSaleService.inventories[l].Id === inventoryId) {
-
-                 //  const subTotal = foodItem.Price * quantity;
-                 //
-                 // this.pointOfSaleService.checkIfOrderedItemExist(foodItem.Id, );
-                 //
-                 //  if (condition) {
-                 //
-                 //  } else {
-                 //
-                 //  }
-
-            }
-          }
-        }
-
-      }
-    }
-  }
-
-  removeFromCart(quantity: number, foodItem: FoodItem) {
-      const subTotal = this.pointOfSaleService.FoodItemSubTotalPrice(foodItem.Price, quantity);
-      this.pointOfSaleService.removeFromFoodItemCart(foodItem.Id, quantity, subTotal);
-  }
 }

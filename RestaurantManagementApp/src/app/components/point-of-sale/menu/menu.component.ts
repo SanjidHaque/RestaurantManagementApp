@@ -1,6 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {UUID} from 'angular2-uuid';
+import {Component, OnInit} from '@angular/core';
 import {FoodItem} from '../../../models/food-item.model';
 import {Inventory} from '../../../models/inventory.model';
 import {Order} from '../../../models/order.model';
@@ -8,8 +6,7 @@ import {TableDataStorageService} from '../../../services/data-storage/table-data
 import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
 import {OrderedItem} from '../../../models/ordered-item.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {ActivateRoutes} from '@angular/router/src/operators/activate_routes';
-import {NgForm} from '@angular/forms';
+
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {Table} from '../../../models/table.model';
 import {OrderSession} from '../../../models/order-session.model';
@@ -65,6 +62,8 @@ export class MenuComponent implements OnInit {
 
     }
   }
+
+
 
 
   setFoodItemImage() {
@@ -169,7 +168,7 @@ export class MenuComponent implements OnInit {
         return;
       }
 
-      const orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
+      let orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
       if (orderSession === null) {
         return;
       }
@@ -198,6 +197,24 @@ export class MenuComponent implements OnInit {
     }
   }
 
+
+  getFoodItemInformation(type: string, foodItemId: number) {
+    const foodItem = this.foodItems.find(x => x.Id === foodItemId);
+    if (foodItem === undefined || foodItem === null) {
+      return '';
+    }
+    if (type === 'Name and Serial') {
+      return foodItem.SerialNumber + '. ' + foodItem.Name;
+    }
+    if (type === 'Price') {
+      return foodItem.Price;
+    }
+  }
+
+
+  removeFromCart(index: number, orderedItems: OrderedItem[]) {
+    orderedItems.splice(index, 1);
+  }
 
   placeOrder() {
   }

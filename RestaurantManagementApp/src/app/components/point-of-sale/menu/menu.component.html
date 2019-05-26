@@ -151,7 +151,8 @@
     <div class="col-xl-4">
 
       <div class="row">
-        <div class="col-xl-12 text-xl-center" style="font-weight: 500;">
+        <div class="col-xl-12 text-xl-center"
+             style="font-weight: 500; font-size: 16px;">
           <i class="fa fa-shopping-cart"></i> Cart
         </div>
       </div>
@@ -161,16 +162,99 @@
 
       <div *ngIf="order !== undefined; else orderExists">
 
-        <div class="row" *ngFor="let orderSession of order.OrderSessions">
+        <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
           <div class="col-xl-12">
 
-            <div class="row" *ngFor="let orderedItems of orderSession.OrderedItems">
-              <div class="col-xl-12">
+            <div *ngIf="orderSession.OrderedItems.length !== 0">
 
+              <div class="row"
+                   style="text-align: left;
+                 font-weight: 500;
+                 padding-top: 2px;
+                 padding-bottom: 2px;">
+                <div class="col-xl-12">
+                  Session: {{ i + 1 }}
+                </div>
+              </div>
+              <hr>
 
+              <div class="row" style="font-size: 13px;">
+                <div class="col-xl-6" style="word-break: break-word">
+
+                  SN & Name
+
+                </div>
+
+                <div class="col-xl-2" style="word-break: break-word">
+
+                  Price
+
+                </div>
+
+                <div class="col-xl-2" style="word-break: break-word">
+
+                  Qty
+
+                </div>
+
+                <div class="col-xl-2" style="word-break: break-word">
+
+                  Total
+
+                </div>
+              </div>
+
+              <div style="font-size: 13px; padding-top: 10px;"
+                   *ngFor="let orderedItem of orderSession.OrderedItems; let j = index">
+
+                <div class="row">
+                  <div class="col-xl-6" style="word-break: break-word">
+                    {{ getFoodItemInformation('Name and Serial', orderedItem.FoodItemId) }}
+                  </div>
+
+                  <div class="col-xl-2" style="word-break: break-word">
+                    {{ getFoodItemInformation('Price', orderedItem.FoodItemId) }}
+                  </div>
+
+                  <div class="col-xl-2" style="word-break: break-word">
+                    {{ orderedItem.FoodItemQuantity }}
+                  </div>
+
+                  <div class="col-xl-2" style="word-break: break-word">
+                    {{ orderedItem.TotalPrice }}
+                  </div>
+                </div>
+
+                <div class="row" >
+                  <div class="col-xl-12" style="text-align: right;">
+
+                    <i
+                      title="Remove"
+                      style="cursor: pointer"
+                      (click)="removeFromCart(j, orderSession.OrderedItems)"
+                      class="fa fa-times-circle-o remove-order"
+                      aria-hidden="true"></i>
+
+                  </div>
+                </div>
+
+                <hr>
 
               </div>
+
+              <div class="row">
+                <div class="col-xl-12">
+
+                  <button class="btn btn-warning">Order</button> &nbsp;
+                  <button class="btn btn-info">Serve</button> &nbsp;
+                  <button class="btn btn-success">Print</button> &nbsp;
+                  <button class="btn btn-danger">Cancel</button>
+
+                </div>
+              </div>
+
             </div>
+
 
           </div>
         </div>
@@ -192,34 +276,7 @@
 
       </ng-template>
 
-
-
-          <!--<div *ngIf="order.FoodItemQuantity !== 0">-->
-            <!--<div class="row">-->
-              <!--<div class="col-lg-offset-1 col-md-offset-1 col-lg-7 col-md-7 name">-->
-                <!--{{ i+1 }}. {{ order.FoodItemName }}  (SN-{{ order.FoodItemSerialNo }})-->
-              <!--</div>-->
-              <!--<div class="col-lg-3 col-md-3 sub-total">-->
-                <!--{{ order.FoodItemSubTotal }} BDT-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div class="row">-->
-              <!--<div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 quantity">-->
-                <!--{{ order.FoodItemQuantity }} Unit(s) at {{ order.Price }} BDT/Unit(s)-->
-              <!--</div>-->
-              <!--<div class="col-lg-1 col-md-1">-->
-                <!--<i-->
-                  <!--title="Remove this ordered item"-->
-                  <!--style="cursor: pointer"-->
-                  <!--(click)="removeFromCart(i)"-->
-                  <!--class="fa fa-times-circle-o remove-order"-->
-                  <!--aria-hidden="true"></i>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<hr class="content">-->
-          <!--</div>-->
-
-        </div>
+  </div>
 
 
 

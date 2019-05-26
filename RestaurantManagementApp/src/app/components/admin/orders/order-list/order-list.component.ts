@@ -27,16 +27,11 @@ export class OrderListComponent implements OnInit {
     this.route.data.
     subscribe(
       ( data: Order[]) => {
-        this.pointOfSaleService.order = data['order'];
+      //  this.pointOfSaleService.order = data['order'];
       }
     );
-    this.orders = this.pointOfSaleService.orders;
-    this.pointOfSaleService.ordersChanged
-      .subscribe(
-        (order: Order[]) => {
-          this.orders = order;
-        }
-      );
+
+
     for (let i = 0; i < this.orders.length; i++ ) {
 
       this.grossSale = this.grossSale
@@ -49,7 +44,7 @@ export class OrderListComponent implements OnInit {
         + Number.parseInt(this.orders[i].Profit.toString());
     }
 
-    this.totalOrder = this.pointOfSaleService.orders.length;
+
   }
 
   viewDetails(orderList: Order) {

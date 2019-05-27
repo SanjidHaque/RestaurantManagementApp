@@ -271,13 +271,29 @@
                 <div class="col-xl-12">
 
                   <button
-                    (click)="placeOrder()"
-                    class="btn btn-warning">Order</button> &nbsp;
-
-                  <button class="btn btn-info">Serve</button> &nbsp;
+                    *ngIf="order.CurrentState === 'Ordered'"
+                    (click)="cancelOrder(orderSession)"
+                    class="btn btn-danger">Cancel Order</button> &nbsp;
 
                   <button
-                    [disabled]="!setting.PrintChefsOrderReceipt"
+                    (click)="placeOrder()"
+                    *ngIf="order.CurrentState === 'Not Ordered'"
+                    class="btn btn-warning">Order</button> &nbsp;
+
+                  <button
+                    (click)="serveOrder(orderSession)"
+                    *ngIf="order.CurrentState === 'Not Ordered'"
+                    [disabled]="order.CurrentState === 'Not Ordered'"
+                    class="btn btn-info">Serve</button> &nbsp;
+
+
+                  <button
+                    *ngIf="order.CurrentState === 'Served'"
+                    disabled
+                    class="btn btn-info">Served</button> &nbsp;
+
+                  <button
+                    [disabled]="!setting.PrintChefsOrderReceipt || order.CurrentState === 'Not Ordered'"
                     class="btn btn-success">Print</button> &nbsp;
 
                   <button

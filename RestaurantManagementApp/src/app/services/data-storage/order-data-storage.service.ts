@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Order} from '../../models/order.model';
 import {HttpClient} from '@angular/common/http';
 import {TableDataStorageService} from './table-data-storage.service';
+import {OrderSession} from '../../models/order-session.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class OrderDataStorageService {
 
   placeOrder(order: Order) {
     return this.http.post<Order>(this.rootUrl + '/api/PlaceOrder', order);
+  }
+
+  serveOrder(orderSession: OrderSession) {
+    return this.http.put<OrderSession>(this.rootUrl + '/api/ServeOrder', orderSession);
   }
 
   deleteOrder(orderId: number) {

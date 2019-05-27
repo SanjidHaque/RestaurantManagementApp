@@ -103,6 +103,93 @@ namespace RMS_Server_.Controllers
         }
 
 
+
+        [Route("api/CancelOrder")]
+        [HttpPost]
+        public IHttpActionResult CancelOrder(OrderSession orderSession)
+        {
+           
+
+            foreach (var orderOrderSession in order.OrderSessions)
+            {
+                if (orderOrderSession.CurrentState == "Not Ordered")
+                {
+                    foreach (var orderedItem in orderOrderSession.OrderedItems)
+                    {
+                        FoodItem foodItem = _context.FoodItems.FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+                        if (foodItem != null)
+                        {
+                            foreach (var foodItemIngredient in foodItem.Ingredients)
+                            {
+                                var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+
+                                Inventory inventory =
+                                    inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
+                                if (inventory != null)
+                                {
+                                    inventory.RemainingQuantity -= inventoryQuantity;
+                                    inventory.UsedQuantity += inventoryQuantity;
+                                }
+                            }
+
+                            foodItem.TotalSale++;
+                        }
+                    }
+                }
+            }
+
+            if (order.Id == -1)
+            {
+                _context.Orders.Add(order);
+            }
+
+            OrderSession orderSession = order.OrderSessions.FirstOrDefault(x => x.CurrentState == "Not Ordered");
+
+            if (orderSession != null)
+            {
+                orderSession.CurrentState = "Ordered";
+            }
+
+
+            Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
+            if (table != null)
+            {
+                table.CurrentState = "Ordered";
+            }
+
+            order.CurrentState = "Ordered";
+            _context.SaveChanges();
+            return Ok(new { Text = "Order placed successfully", Order = order });
+        }
+
+        [Route("api/ServeOrder")]
+        [HttpPut]
+        public IHttpActionResult ServeOrder(OrderSession orderSession)
+        {
+            OrderSession getOrderSession = _context.OrderSessions.FirstOrDefault(x => x.Id == orderSession.Id);
+            if (getOrderSession != null)
+            {
+                getOrderSession.CurrentState = "Served";
+                Order order = _context.Orders.FirstOrDefault(x => x.Id == getOrderSession.OrderId);
+                if (order != null)
+                {
+                    order.CurrentState = "Served";
+                    Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
+                    if (table != null)
+                    {
+                        table.CurrentState = "Served";
+                    }
+
+                    _context.SaveChanges();
+                    return Ok("Order served successfully");
+                }
+            }
+
+            return Ok("Order not found");
+        }
+
+
+
         [Route("api/DeleteOrder")]
         [HttpDelete]
         public IHttpActionResult DeleteOrder(int orderId)

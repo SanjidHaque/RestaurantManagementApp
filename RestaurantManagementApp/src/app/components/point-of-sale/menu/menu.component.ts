@@ -285,7 +285,28 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  serveOrder() {
+  serveOrder(orderSession: OrderSession) {
+    this.orderDataStorageService.serveOrder(orderSession).subscribe( (data: any) => {
+      if (data === 'Order served successfully') {
+        this.toastr.successToastr(data, 'Success', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        orderSession.CurrentState = 'Served';
+      }
+
+      if (data === 'Order not found') {
+        this.toastr.errorToastr(data, 'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+      }
+    });
+  }
+
+  cancelOrder(orderSession: OrderSession) {
 
   }
 

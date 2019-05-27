@@ -8,6 +8,6 @@
         public FoodItem FoodItem { get; set; }
         public int FoodItemId { get; set; }
         public int FoodItemQuantity { get; set; }
-        public int SubTotal { get; set; }
+        public int TotalPrice { get; set; }
     }
 }

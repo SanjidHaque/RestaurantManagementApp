@@ -19,7 +19,7 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult GetAllTable()
         {
             List<Table> tables = _context.Tables
-                .Include(x => x.Orders)
+                .Include(x => x.Orders.Select(y => y.OrderSessions.Select(z => z.OrderedItems)))
                 .OrderByDescending(x => x.Id)
                 .ToList();
             return Ok(tables);

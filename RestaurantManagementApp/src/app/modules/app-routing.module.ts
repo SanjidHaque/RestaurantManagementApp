@@ -82,7 +82,8 @@ const appRoutes: Routes = [
           {
             tables: TableResolverService,
             foodItems: FoodItemResolverService,
-            inventories: InventoryResolverService
+            inventories: InventoryResolverService,
+            setting: SettingResolverService
           }
       },
       {

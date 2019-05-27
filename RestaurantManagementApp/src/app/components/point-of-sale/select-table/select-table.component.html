@@ -16,8 +16,13 @@
        border: 2px solid white;
        border-radius: 4px;
        text-align: center;
-       padding: 50px 50px 50px 50px;
-       background-color: lightseagreen;"
+       padding: 50px 50px 50px 50px;"
+
+       [ngClass]="
+       {'empty': table.CurrentState === 'Empty',
+        'ordered': table.CurrentState === 'Ordered',
+        'served': table.CurrentState === 'Served' }"
+
        *ngFor="let table of tables">
 
     {{ table.Name }} ({{ table.CurrentState }})

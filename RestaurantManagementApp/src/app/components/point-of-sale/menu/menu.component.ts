@@ -10,6 +10,9 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {Table} from '../../../models/table.model';
 import {OrderSession} from '../../../models/order-session.model';
+import {NgForm} from '@angular/forms';
+import {Setting} from '../../../models/setting.model';
+import {OrderDataStorageService} from '../../../services/data-storage/order-data-storage.service';
 
 @Component({
   selector: 'app-food-items',
@@ -24,6 +27,7 @@ export class MenuComponent implements OnInit {
 
   foodItems: FoodItem[] = [];
   inventories: Inventory[] = [];
+  setting: Setting;
 
   order: Order;
 
@@ -31,6 +35,7 @@ export class MenuComponent implements OnInit {
   rootUrl = '';
 
   constructor(private pointOfSaleService: PointOfSaleService,
+              private orderDataStorageService: OrderDataStorageService,
               private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrManager,
@@ -44,6 +49,7 @@ export class MenuComponent implements OnInit {
       this.foodItems = data['foodItems'];
       this.tables = data['tables'];
       this.inventories = data['inventories'];
+      this.setting = data['setting'];
     });
 
     this.table = this.tables.find(x => x.Id === this.tableId);
@@ -56,7 +62,7 @@ export class MenuComponent implements OnInit {
       });
       this.router.navigate(['pos']);
     } else {
-      this.order = this.table.Orders.find(x => x.CurrentState === ('Ordered' || 'Served'));
+      this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered');
       this.rootUrl = this.dataStorageService.rootUrl + '/Content/FoodItemImages/';
       this.setFoodItemImage();
 
@@ -81,8 +87,16 @@ export class MenuComponent implements OnInit {
 
 
 
-  updateCart(form, foodItem: FoodItem, isAddToCart: boolean) {
-    const quantity = form.value.indirectQuantity;
+  updateCart(foodItem: FoodItem, isAddToCart: boolean, form?: NgForm, directQuantity?: number ) {
+
+    let quantity;
+
+    if (directQuantity !== undefined) {
+      quantity = directQuantity;
+    } else {
+      quantity = form.value.indirectQuantity;
+    }
+
     this.pointOfSaleService.checkCartConditions(quantity);
 
     const foodItemId = foodItem.Id;
@@ -92,7 +106,10 @@ export class MenuComponent implements OnInit {
     const subTotal = price * quantity;
 
     if (isAddToCart) {
-      this.pointOfSaleService.checkIfInventoryExists(quantity, foodItem, this.foodItems, this.inventories);
+
+      if (!this.pointOfSaleService.checkIfInventoryExists(quantity, foodItem, this.foodItems, this.inventories)) {
+        return;
+      }
 
       const orderedItem = new OrderedItem(
         null,
@@ -102,6 +119,10 @@ export class MenuComponent implements OnInit {
         quantity,
         subTotal
       );
+
+      if (!this.pointOfSaleService.deductInventories(foodItem, this.inventories, quantity)) {
+        return;
+      }
 
       if (this.order === undefined) {
 
@@ -119,7 +140,7 @@ export class MenuComponent implements OnInit {
         orderSessions.push(orderSession);
 
         const order = new Order(
-          null,
+          -1,
           orderSessions,
           0,
           null,
@@ -163,12 +184,16 @@ export class MenuComponent implements OnInit {
         }
       }
 
+      this.order.TotalPrice += subTotal;
+      this.order.InventoryCost +=  (foodItem.InventoryCost * quantity);
+      this.order.Profit += (this.order.TotalPrice - this.order.InventoryCost);
+
     } else {
       if (this.order === undefined) {
         return;
       }
 
-      let orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
+      const orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
       if (orderSession === null) {
         return;
       }
@@ -189,6 +214,9 @@ export class MenuComponent implements OnInit {
 
       existingOrderedItem.FoodItemQuantity -= quantity;
       existingOrderedItem.TotalPrice -= subTotal;
+      this.order.TotalPrice -= subTotal;
+      this.order.InventoryCost -=  (foodItem.InventoryCost * quantity);
+      this.order.Profit -= (this.order.TotalPrice - this.order.InventoryCost);
 
       if (existingOrderedItem.FoodItemQuantity === 0) {
         const index = orderSession.OrderedItems.findIndex(x => x.FoodItemId === existingOrderedItem.FoodItemId);
@@ -212,14 +240,69 @@ export class MenuComponent implements OnInit {
   }
 
 
+  updateCartFromSerialNumber(form: NgForm, isAddToCart: boolean) {
+    const serialNumber  = form.value.serialNumber;
+    const quantity  = form.value.quantity;
+    const foodItem = this.foodItems.find(x => x.SerialNumber === serialNumber);
+    this.updateCart(foodItem, isAddToCart, null , quantity)
+  }
+
   removeFromCart(index: number, orderedItems: OrderedItem[]) {
     orderedItems.splice(index, 1);
   }
 
   placeOrder() {
+    this.orderDataStorageService.placeOrder(this.order).subscribe((data: any) => {
+      if (data === '') {
+        this.toastr.errorToastr('Try again later', 'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        return;
+      }
+
+      if (data.Text === 'Insufficient inventories') {
+        this.toastr.errorToastr(data.Text, 'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        return;
+      }
+
+      if (data.Text === 'Order placed successfully') {
+        this.toastr.successToastr(data.Text, 'Success', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        this.order = data.Order;
+        return;
+      }
+
+
+    });
   }
 
   serveOrder() {
+
   }
+
+  getSessionTotalPrice(orderSession: OrderSession) {
+    let totalPrice = 0;
+    orderSession.OrderedItems.forEach((value) => { totalPrice += value.TotalPrice; });
+    return totalPrice;
+  }
+
+  clearOrderSession(orderSession: OrderSession) {
+    const answer = confirm('Clear order list?');
+    if (answer) {
+      orderSession.OrderedItems = [];
+    }
+  }
+
+
+
 
 }

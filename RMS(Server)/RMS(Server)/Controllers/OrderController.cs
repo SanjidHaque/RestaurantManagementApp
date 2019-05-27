@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Web.Http;
 using System.Data.Entity;
-using System.Web.Security;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security.DataProtection;
 using RMS_Server_.Models;
 
 
@@ -24,46 +16,90 @@ namespace RMS_Server_.Controllers
         }      
 
 
-        [Route("api/AddNewOrder")]
+        [Route("api/PlaceOrder")]
         [HttpPost]
-        public IHttpActionResult AddNewOrder(Order order)
+        public IHttpActionResult PlaceOrder(Order order)
         {
-//            for (int i = 0; i < order.OrderedItems.Count; i++)
-//            {
-//                int foodItemId = order.OrderedItems[i].FoodItemId;
-//                FoodItem soldFoodItem = _context.FoodItems.FirstOrDefault(a => a.Id == foodItemId);
-//                if (soldFoodItem != null)
-//                {
-//                    soldFoodItem.TotalSale++;
-//                }
-//             
-//                List<FoodItem> foodItems = _context.FoodItems.Include(b => b.Ingredients).ToList();
-//                for (int j = 0; j < foodItems.Count; j++)
-//                {
-//                    if (foodItems[j].Id == foodItemId)
-//                    {
-//                        for (int k = 0; k < foodItems[j].Ingredients.Count; k++)
-//                        {
-//                            var quantity = foodItems[j].Ingredients[k].Quantity;
-//                            var totalQuantity = quantity*order.OrderedItems[i].FoodItemQuantity;
-//                            int inventoryId = foodItems[j].Ingredients[k].InventoryId;
-//                            List<Inventory> inventory = _context.Inventories.ToList();
-//                            for (int l = 0; l < inventory.Count; l++)
-//                            {
-//                                if (inventory[l].Id == inventoryId)
-//                                {
-//                                    inventory[l].UsedQuantity += totalQuantity;
-//                                    inventory[l].RemainingQuantity -= totalQuantity;
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            _context.OrderedItems.AddRange(order.OrderedItems);
-            _context.Orders.Add(order);
+            List<Inventory> inventories = _context.Inventories.ToList();
+
+            foreach (var orderOrderSession in order.OrderSessions)
+            {
+                if (orderOrderSession.CurrentState == "Not Ordered")
+                {
+                    foreach (var orderedItem in orderOrderSession.OrderedItems)
+                    {
+                        FoodItem foodItem = _context.FoodItems.Include(x => x.Ingredients).FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+                        if (foodItem != null)
+                        {
+                            foreach (var foodItemIngredient in foodItem.Ingredients)
+                            {
+                                var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+
+                                Inventory inventory =
+                                    inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
+                                if (inventory != null)
+                                {
+                                    if (inventoryQuantity > inventory.RemainingQuantity)
+                                    {
+                                        return Ok( new { Text = "Insufficient inventories"});
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var orderOrderSession in order.OrderSessions)
+            {
+                if (orderOrderSession.CurrentState == "Not Ordered")
+                {
+                    foreach (var orderedItem in orderOrderSession.OrderedItems)
+                    {
+                        FoodItem foodItem = _context.FoodItems.FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+                        if (foodItem != null)
+                        {
+                            foreach (var foodItemIngredient in foodItem.Ingredients)
+                            {
+                                var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+
+                                Inventory inventory =
+                                    inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
+                                if (inventory != null)
+                                {
+                                    inventory.RemainingQuantity -= inventoryQuantity;
+                                    inventory.UsedQuantity += inventoryQuantity;
+                                }
+                            }
+
+                            foodItem.TotalSale++;
+                        }
+                    }
+                }
+            }
+
+            if (order.Id == -1)
+            {
+                _context.Orders.Add(order);
+            }
+
+            OrderSession orderSession = order.OrderSessions.FirstOrDefault(x => x.CurrentState == "Not Ordered");
+
+            if (orderSession != null)
+            {
+                orderSession.CurrentState = "Ordered";
+            }
+
+
+            Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
+            if (table != null)
+            {
+                table.CurrentState = "Ordered";
+            }
+
+            order.CurrentState = "Ordered";
             _context.SaveChanges();
-            return Ok();
+            return Ok( new { Text = "Order placed successfully", Order = order });
         }
 
 
@@ -83,6 +119,7 @@ namespace RMS_Server_.Controllers
         }
            
         [HttpGet]
+        [AllowAnonymous]
         [Route("api/GetAllOrder")]
         public IHttpActionResult GetAllOrder()
         {

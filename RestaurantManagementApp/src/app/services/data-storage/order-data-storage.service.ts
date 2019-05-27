@@ -19,8 +19,8 @@ export class OrderDataStorageService {
     return this.http.get<Order[]>(this.rootUrl + '/api/GetAllOrder');
   }
 
-  addNewOrder(order: Order) {
-    return this.http.post<Order>(this.rootUrl + '/api/AddNewOrder', order);
+  placeOrder(order: Order) {
+    return this.http.post<Order>(this.rootUrl + '/api/PlaceOrder', order);
   }
 
   deleteOrder(orderId: number) {

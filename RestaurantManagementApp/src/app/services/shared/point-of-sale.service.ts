@@ -26,7 +26,6 @@ export class PointOfSaleService {
     for (let j = 0; j < foodItems.length; j++) {
 
       if (foodItems[j].Id === foodItem.Id) {
-        let check = 0;
         for (let k = 0; k < foodItems[j].Ingredients.length; k++ ) {
 
           const inventoryQuantity =  foodItems[j].Ingredients[k].Quantity;
@@ -35,25 +34,39 @@ export class PointOfSaleService {
 
           for (let l = 0; l < inventories.length; l++) {
             if (inventories[l].Id === inventoryId) {
-              if (inventories[l].RemainingQuantity > totalQuantity ) {
-                check++;
+              if (inventories[l].RemainingQuantity < totalQuantity ) {
+                this.toastr.errorToastr('Insufficient inventories', 'Error', {
+                  toastTimeout: 10000,
+                  newestOnTop: true,
+                  showCloseButton: true
+                });
+                return false;
               }
             }
           }
         }
-
-        if (check < foodItems[j].Ingredients.length) {
-          this.toastr.errorToastr('Insufficient inventories', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
-        }
-        break;
+        return true;
       }
     }
   }
 
+
+  deductInventories(foodItem: FoodItem, inventories: Inventory[], foodItemQuantity: number) {
+    for (let i = 0; i < foodItem.Ingredients.length; i++) {
+      const totalQuantity = foodItem.Ingredients[i].Quantity *  foodItemQuantity;
+      const inventory = inventories.find(x => x.Id === foodItem.Ingredients[i].InventoryId);
+      if (inventory === null || inventory === undefined)  {
+        this.toastr.errorToastr('Related inventories may not found', 'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        return false;
+      }
+      inventory.RemainingQuantity -= totalQuantity;
+    }
+    return true;
+  }
 
   checkCartConditions(quantity: number) {
     if (quantity % 1 !== 0) {

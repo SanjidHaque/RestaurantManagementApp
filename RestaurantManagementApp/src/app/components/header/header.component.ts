@@ -1,5 +1,6 @@
 import {Router} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   public userName: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private userDataStorageService: UserAccountDataStorageService) { }
 
   ngOnInit() {
     this.userName = JSON.parse(JSON.stringify(localStorage.getItem('userNameForLogin')));

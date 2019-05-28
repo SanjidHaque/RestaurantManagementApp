@@ -368,10 +368,16 @@ export class MenuComponent implements OnInit {
     return totalPrice;
   }
 
-  clearOrderSession(orderSession: OrderSession) {
+  clearOrderSession(index: number) {
     const answer = confirm('Clear order list?');
     if (answer) {
-      orderSession.OrderedItems = [];
+
+      this.order.OrderSessions.splice(index, 1);
+
+      if (this.order.OrderSessions.length === 0) {
+        this.order.OrderSessions = [];
+        this.order = undefined;
+      }
     }
   }
 

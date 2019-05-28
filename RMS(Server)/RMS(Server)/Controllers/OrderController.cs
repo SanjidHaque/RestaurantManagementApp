@@ -82,6 +82,17 @@ namespace RMS_Server_.Controllers
             {
                 _context.Orders.Add(order);
             }
+            else
+            {
+                OrderSession unSavedOrderedSession = order.OrderSessions.FirstOrDefault(x => x.CurrentState == "Not Ordered");
+                if (unSavedOrderedSession != null)
+                {
+                    unSavedOrderedSession.OrderId = order.Id;
+                    _context.OrderSessions.Add(unSavedOrderedSession);
+                    _context.SaveChanges();
+                }
+               
+            }
 
             OrderSession orderSession = order.OrderSessions.FirstOrDefault(x => x.CurrentState == "Not Ordered");
 

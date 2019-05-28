@@ -156,7 +156,7 @@ export class MenuComponent implements OnInit {
         this.order = order;
       } else {
         let orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
-        if (orderSession === null) {
+        if (orderSession === undefined) {
 
           const orderedItems: OrderedItem[] = [];
           orderedItems.push(orderedItem);
@@ -245,6 +245,16 @@ export class MenuComponent implements OnInit {
     const serialNumber  = form.value.serialNumber;
     const quantity  = form.value.quantity;
     const foodItem = this.foodItems.find(x => x.SerialNumber === serialNumber);
+
+    if (foodItem === undefined) {
+      this.toastr.errorToastr('Wrong Serial Number', 'Error', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+      return;
+    }
+
     this.updateCart(foodItem, isAddToCart, null , quantity)
   }
 
@@ -253,6 +263,12 @@ export class MenuComponent implements OnInit {
   }
 
   placeOrder() {
+
+    const dialog = confirm('Place this order?');
+    if (!dialog) {
+      return;
+    }
+
     this.orderDataStorageService.placeOrder(this.order).subscribe((data: any) => {
       if (data === '') {
         this.toastr.errorToastr('Try again later', 'Error', {
@@ -287,6 +303,11 @@ export class MenuComponent implements OnInit {
   }
 
   serveOrder(orderSession: OrderSession) {
+    const dialog = confirm('Serve this order?');
+    if (!dialog) {
+      return;
+    }
+
     this.orderDataStorageService.serveOrder(orderSession).subscribe( (data: any) => {
       if (data === 'Order served successfully') {
         this.toastr.successToastr(data, 'Success', {
@@ -310,6 +331,11 @@ export class MenuComponent implements OnInit {
   }
 
   cancelOrder(orderSession: OrderSession) {
+    const dialog = confirm('Cancel this order?');
+    if (!dialog) {
+      return;
+    }
+
     this.orderDataStorageService.cancelOrder(orderSession).subscribe((data: any) => {
 
         for (let i = 0; this.order.OrderSessions.length; i++) {
@@ -320,7 +346,7 @@ export class MenuComponent implements OnInit {
         }
 
         if (this.order.OrderSessions.length === 0) {
-          this.order = null;
+          this.order = undefined;
         } else {
           const lastIndex = this.order.OrderSessions.length - 1;
           this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;

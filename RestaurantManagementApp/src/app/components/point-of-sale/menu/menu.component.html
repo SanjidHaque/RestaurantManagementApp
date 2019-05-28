@@ -85,7 +85,7 @@
       <button
         type="button"
         routerLink="/pos"
-        class="btn btn-info">Back</button>
+        class="btn btn-info">Tables</button>
     </div>
 
 
@@ -177,7 +177,7 @@
 
 
 
-      <div *ngIf="order !== undefined && order !== null; else orderExists">
+      <div *ngIf="order !== undefined; else orderExists">
 
         <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
           <div class="col-xl-12">
@@ -187,7 +187,7 @@
               <div class="row"
                    style="text-align: left;
                  font-weight: 500;
-                 padding-top: 2px;
+                 padding-top: 10px;
                  padding-bottom: 2px;">
                 <div class="col-xl-12">
                   Session: {{ i + 1 }}
@@ -242,7 +242,7 @@
                   </div>
                 </div>
 
-                <div class="row" >
+                <div class="row" *ngIf="orderSession.CurrentState === 'Not Ordered'">
                   <div class="col-xl-12" style="text-align: right;">
 
                     <i
@@ -271,32 +271,33 @@
                 <div class="col-xl-12">
 
                   <button
-                    *ngIf="order.CurrentState === 'Ordered' || order.CurrentState === 'Served'"
+                    *ngIf="orderSession.CurrentState !== 'Not Ordered'"
                     (click)="cancelOrder(orderSession)"
                     class="btn btn-danger">Cancel Order</button> &nbsp;
 
                   <button
                     (click)="placeOrder()"
-                    *ngIf="order.CurrentState === 'Not Ordered'"
+                    *ngIf="orderSession.CurrentState === 'Not Ordered'"
                     class="btn btn-warning">Order</button> &nbsp;
 
                   <button
                     (click)="serveOrder(orderSession)"
-                    *ngIf="order.CurrentState === 'Not Ordered' || order.CurrentState === 'Ordered'"
-                    [disabled]="order.CurrentState === 'Not Ordered'"
+                    *ngIf="orderSession.CurrentState === 'Not Ordered' || orderSession.CurrentState === 'Ordered'"
+                    [disabled]="orderSession.CurrentState === 'Not Ordered'"
                     class="btn btn-info">Serve</button> &nbsp;
 
 
                   <button
-                    *ngIf="order.CurrentState === 'Served'"
+                    *ngIf="orderSession.CurrentState === 'Served'"
                     disabled
                     class="btn btn-info">Served</button> &nbsp;
 
                   <button
-                    [disabled]="!setting.PrintChefsOrderReceipt || order.CurrentState === 'Not Ordered'"
+                    [disabled]="!setting.PrintChefsOrderReceipt || orderSession.CurrentState === 'Not Ordered'"
                     class="btn btn-success">Print</button> &nbsp;
 
                   <button
+                    [disabled]="orderSession.CurrentState !== 'Not Ordered'"
                     (click)="clearOrderSession(orderSession)"
                     class="btn btn-danger">Clear</button>
 
@@ -322,7 +323,7 @@
           <div class="col-xl-12">
 
             <button
-              [disabled]="order.CurrentState !== 'Ordered'"
+              [disabled]="order.CurrentState === 'Not Ordered'"
               routerLink="/pos/payment"
               class="btn btn-success">Payment</button>
 

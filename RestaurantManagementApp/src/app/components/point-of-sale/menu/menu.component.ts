@@ -62,7 +62,8 @@ export class MenuComponent implements OnInit {
       });
       this.router.navigate(['pos']);
     } else {
-      this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered');
+      this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered'
+        || x.CurrentState === 'Served');
       this.rootUrl = this.dataStorageService.rootUrl + '/Content/FoodItemImages/';
       this.setFoodItemImage();
 
@@ -294,6 +295,8 @@ export class MenuComponent implements OnInit {
           showCloseButton: true
         });
         orderSession.CurrentState = 'Served';
+        this.order.CurrentState = 'Served';
+        this.table.CurrentState = 'Served';
       }
 
       if (data === 'Order not found') {
@@ -307,7 +310,30 @@ export class MenuComponent implements OnInit {
   }
 
   cancelOrder(orderSession: OrderSession) {
+    this.orderDataStorageService.cancelOrder(orderSession).subscribe((data: any) => {
 
+        for (let i = 0; this.order.OrderSessions.length; i++) {
+          if (this.order.OrderSessions[i].Id === orderSession.Id) {
+            this.order.OrderSessions.splice(i, 1);
+            break;
+          }
+        }
+
+        if (this.order.OrderSessions.length === 0) {
+          this.order = null;
+        } else {
+          const lastIndex = this.order.OrderSessions.length - 1;
+          this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;
+          this.table.CurrentState = this.order.CurrentState;
+        }
+
+      this.toastr.successToastr('Order canceled successfully', 'Success', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+
+    });
   }
 
   getSessionTotalPrice(orderSession: OrderSession) {

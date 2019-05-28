@@ -105,61 +105,73 @@ namespace RMS_Server_.Controllers
 
 
         [Route("api/CancelOrder")]
-        [HttpPost]
+        [HttpPut]
         public IHttpActionResult CancelOrder(OrderSession orderSession)
         {
-           
+            List<Inventory> inventories = _context.Inventories.ToList();
 
-            foreach (var orderOrderSession in order.OrderSessions)
+            foreach (var orderedItem in orderSession.OrderedItems)
             {
-                if (orderOrderSession.CurrentState == "Not Ordered")
+                FoodItem foodItem = _context.FoodItems.Include(x => x.Ingredients).FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+                if (foodItem != null)
                 {
-                    foreach (var orderedItem in orderOrderSession.OrderedItems)
+                    foreach (var foodItemIngredient in foodItem.Ingredients)
                     {
-                        FoodItem foodItem = _context.FoodItems.FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
-                        if (foodItem != null)
+                        var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+
+                        Inventory inventory =
+                            inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
+                        if (inventory != null)
                         {
-                            foreach (var foodItemIngredient in foodItem.Ingredients)
-                            {
-                                var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
-
-                                Inventory inventory =
-                                    inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
-                                if (inventory != null)
-                                {
-                                    inventory.RemainingQuantity -= inventoryQuantity;
-                                    inventory.UsedQuantity += inventoryQuantity;
-                                }
-                            }
-
-                            foodItem.TotalSale++;
+                            inventory.RemainingQuantity += inventoryQuantity;
+                            inventory.UsedQuantity -= inventoryQuantity;
                         }
                     }
+
+                    foodItem.TotalSale--;
                 }
             }
 
-            if (order.Id == -1)
+            OrderSession getOrderSession = _context.OrderSessions.FirstOrDefault(x => x.Id == orderSession.Id);
+            if (getOrderSession != null)
             {
-                _context.Orders.Add(order);
+                _context.OrderSessions.Remove(getOrderSession);
+                _context.SaveChanges();
             }
 
-            OrderSession orderSession = order.OrderSessions.FirstOrDefault(x => x.CurrentState == "Not Ordered");
+          
 
-            if (orderSession != null)
+            Order order = _context.Orders.Include(x => x.OrderSessions).FirstOrDefault(x => x.Id == orderSession.OrderId);
+            if (order != null)
             {
-                orderSession.CurrentState = "Ordered";
+                Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
+                if (order.OrderSessions.Count == 0)
+                {
+                    if (table != null)
+                    {
+                        table.CurrentState = "Empty";
+                    }
+                    _context.Orders.Remove(order);
+
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    int lastIndex = order.OrderSessions.Count - 1;
+                    order.CurrentState = order.OrderSessions[lastIndex].CurrentState;
+
+                    
+                    if (table != null)
+                    {
+                        table.CurrentState = order.CurrentState;
+                    }
+                }
+
             }
 
 
-            Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
-            if (table != null)
-            {
-                table.CurrentState = "Ordered";
-            }
-
-            order.CurrentState = "Ordered";
             _context.SaveChanges();
-            return Ok(new { Text = "Order placed successfully", Order = order });
+            return Ok();
         }
 
         [Route("api/ServeOrder")]

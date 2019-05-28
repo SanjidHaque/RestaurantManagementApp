@@ -177,7 +177,7 @@
 
 
 
-      <div *ngIf="order !== undefined; else orderExists">
+      <div *ngIf="order !== undefined && order !== null; else orderExists">
 
         <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
           <div class="col-xl-12">
@@ -271,7 +271,7 @@
                 <div class="col-xl-12">
 
                   <button
-                    *ngIf="order.CurrentState === 'Ordered'"
+                    *ngIf="order.CurrentState === 'Ordered' || order.CurrentState === 'Served'"
                     (click)="cancelOrder(orderSession)"
                     class="btn btn-danger">Cancel Order</button> &nbsp;
 
@@ -282,7 +282,7 @@
 
                   <button
                     (click)="serveOrder(orderSession)"
-                    *ngIf="order.CurrentState === 'Not Ordered'"
+                    *ngIf="order.CurrentState === 'Not Ordered' || order.CurrentState === 'Ordered'"
                     [disabled]="order.CurrentState === 'Not Ordered'"
                     class="btn btn-info">Serve</button> &nbsp;
 
@@ -322,6 +322,7 @@
           <div class="col-xl-12">
 
             <button
+              [disabled]="order.CurrentState !== 'Ordered'"
               routerLink="/pos/payment"
               class="btn btn-success">Payment</button>
 

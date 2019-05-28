@@ -28,6 +28,10 @@ export class OrderDataStorageService {
     return this.http.put<OrderSession>(this.rootUrl + '/api/ServeOrder', orderSession);
   }
 
+  cancelOrder(orderSession: OrderSession) {
+    return this.http.put<OrderSession>(this.rootUrl + '/api/CancelOrder', orderSession);
+  }
+
   deleteOrder(orderId: number) {
     return this.http.delete(`${this.rootUrl + '/api/DeleteOrder'}/${orderId}`);
   }

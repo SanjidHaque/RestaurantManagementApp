@@ -351,6 +351,22 @@
     <Compile Include="Migrations\201905271211088_orderedItemModelChanged.Designer.cs">
       <DependentUpon>201905271211088_orderedItemModelChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905291020472_orderModelChangedAgainOn.cs" />
+    <Compile Include="Migrations\201905291020472_orderModelChangedAgainOn.Designer.cs">
+      <DependentUpon>201905291020472_orderModelChangedAgainOn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905291021178_orderModelChangedAgainOnAndOn.cs" />
+    <Compile Include="Migrations\201905291021178_orderModelChangedAgainOnAndOn.Designer.cs">
+      <DependentUpon>201905291021178_orderModelChangedAgainOnAndOn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905291349527_Order.cs" />
+    <Compile Include="Migrations\201905291349527_Order.Designer.cs">
+      <DependentUpon>201905291349527_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905291808123_orderModelChangedAgainOnAndOn1.cs" />
+    <Compile Include="Migrations\201905291808123_orderModelChangedAgainOnAndOn1.Designer.cs">
+      <DependentUpon>201905291808123_orderModelChangedAgainOnAndOn1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -532,6 +548,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905271211088_orderedItemModelChanged.resx">
       <DependentUpon>201905271211088_orderedItemModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905291020472_orderModelChangedAgainOn.resx">
+      <DependentUpon>201905291020472_orderModelChangedAgainOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905291021178_orderModelChangedAgainOnAndOn.resx">
+      <DependentUpon>201905291021178_orderModelChangedAgainOnAndOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905291349527_Order.resx">
+      <DependentUpon>201905291349527_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905291808123_orderModelChangedAgainOnAndOn1.resx">
+      <DependentUpon>201905291808123_orderModelChangedAgainOnAndOn1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

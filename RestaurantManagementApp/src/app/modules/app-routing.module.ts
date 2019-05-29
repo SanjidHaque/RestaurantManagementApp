@@ -87,8 +87,14 @@ const appRoutes: Routes = [
           }
       },
       {
-        path: 'payment',
-        component: PaymentComponent
+        path: ':table-id/payment',
+        component: PaymentComponent,
+        resolve:
+          {
+            tables: TableResolverService,
+            setting: SettingResolverService,
+            foodItems: FoodItemResolverService
+          }
       }
     ]
   },

@@ -56,7 +56,7 @@ export class EditUserComponent implements OnInit {
     this.userAccountDataStorageService.editUserAccount(new UserAccount(
       this.userAccountId,
       form.value.userName,
-      form.value.FullName,
+      form.value.fullName,
       form.value.email,
       '',
       form.value.phoneNumber,

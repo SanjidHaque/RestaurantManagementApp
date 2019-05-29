@@ -96,9 +96,13 @@ namespace RMS_Server_.Controllers
 
             OrderSession orderSession = order.OrderSessions.FirstOrDefault(x => x.CurrentState == "Not Ordered");
 
-            if (orderSession != null)
+            if (orderSession != null && order.Id != -1)
             {
                 orderSession.CurrentState = "Ordered";
+                orderSession.OrderedItems.ForEach(x =>
+                {
+                   order.TotalPrice +=  x.TotalPrice;
+                });
             }
 
 
@@ -155,6 +159,11 @@ namespace RMS_Server_.Controllers
             Order order = _context.Orders.Include(x => x.OrderSessions).FirstOrDefault(x => x.Id == orderSession.OrderId);
             if (order != null)
             {
+                orderSession.OrderedItems.ForEach(x =>
+                {
+                    order.TotalPrice -= x.TotalPrice;
+                });
+
                 Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
                 if (order.OrderSessions.Count == 0)
                 {
@@ -180,7 +189,7 @@ namespace RMS_Server_.Controllers
 
             }
 
-
+            
             _context.SaveChanges();
             return Ok();
         }

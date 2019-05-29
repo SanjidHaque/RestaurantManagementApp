@@ -13,7 +13,8 @@
 
   <form #updateCartFormBySerialNumber = "ngForm">
 
-    <div class="row text-md-center text-lg-center text-sm-center text-center" style="font-weight: 500; padding-bottom: 10px;">
+    <div
+      class="row text-md-center text-lg-center text-sm-center text-center" style="font-weight: 500; padding-bottom: 10px;">
       <div class="col-xl-12">
 
         Menu
@@ -23,9 +24,10 @@
 
 
 
-  <div class="row">
+  <div class="row"
+       style="padding-bottom: 2px; padding-top: 2px;">
 
-    <div class="col-xl-1 col-lg-1" style="padding-bottom: 2px; padding-top: 2px;">
+    <div class="col-xl-1 col-lg-1 small-padding" >
       <button
         type="button"
         routerLink="/pos"
@@ -33,7 +35,8 @@
     </div>
 
 
-    <div class="col-xl-2 col-lg-2 col-md-5 col-sm-6 col-6" style="padding-bottom: 2px; padding-top: 2px;">
+    <div
+      class="col-xl-2 col-lg-2 col-md-5 col-sm-6 col-6 small-padding">
 
       <input
         type="text"
@@ -46,7 +49,7 @@
 
     </div>
 
-    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6" style="padding-bottom: 2px; padding-top: 2px;">
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 small-padding">
 
       <input
         type="number"
@@ -59,8 +62,8 @@
 
     </div>
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-12 text-md-left"
-         style="padding-bottom: 2px; padding-top: 2px;">
+    <div
+      class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-12 text-md-left small-padding">
 
       <button
         (click)="updateCartFromSerialNumber(updateCartFormBySerialNumber, true)"
@@ -79,7 +82,7 @@
 
 
 
-    <div class="col-xl-5 col-lg-4 small-padding" style="padding-bottom: 2px; padding-top: 2px;">
+    <div class="col-xl-5 col-lg-4 small-padding">
 
       <input
         type="text"
@@ -266,7 +269,7 @@
 
             <button
               [disabled]="order.CurrentState === 'Not Ordered'"
-              routerLink="/pos/payment"
+              routerLink="/pos/{{ tableId }}/payment"
               class="btn btn-success">Payment</button>
 
           </div>

@@ -115,3 +115,157 @@
     <!--</div>-->
 <!--</div>-->
 
+
+
+<div class="row text-md-center text-lg-center text-sm-center text-center" style="font-weight: 500; padding-bottom: 10px;">
+  <div class="col-xl-12">
+
+    Payment
+
+  </div>
+</div>
+
+
+<div class="row" style="padding-bottom: 2px; padding-top: 2px;">
+  <div class="col-xl-1 col-lg-1">
+    <button
+      type="button"
+      routerLink="/pos/{{ tableId }}/menu"
+      class="btn btn-info">Menu</button>
+  </div>
+</div>
+
+<br>
+
+<div class="row" style="padding-bottom: 2px; padding-top: 2px;">
+
+  <div class="col-xl-2 col-lg-2" style="font-weight: 500;`">
+
+    <label>Total</label>
+    <input
+      disabled
+      type="number"
+      min="0"
+      class="form-control"
+      [ngModel]="order.TotalPrice">
+  </div>
+
+  <div class="col-xl-2 col-lg-2" style="font-weight: 500;">
+
+    <label>Tendered</label>
+    <input
+      type="number"
+      min="0"
+      class="form-control"
+      [(ngModel)]="tendered">
+
+  </div>
+
+
+    <div class="col-xl-2 col-lg-2" *ngIf="(tendered - order.TotalPrice) >= 0; else showZero">
+
+      <label>Change</label>
+      <input
+        disabled
+        type="number"
+        min="0"
+        class="form-control"
+        [ngModel]="tendered - order.TotalPrice">
+
+    </div>
+
+  <ng-template #showZero>
+
+    <div class="col-xl-2 col-lg-2" style="font-weight: 500;">
+      <label>Change</label>
+      <input
+        disabled
+        type="number"
+        min="0"
+        class="form-control"
+        [ngModel]="'0'">
+    </div>
+
+  </ng-template>
+
+</div>
+
+<br>
+
+<div class="row" >
+  <div class="col-xl-8">
+
+    <div class="row" style="text-align: center; font-weight: 500;">
+      <div class="col-xl-12">
+
+        Cart
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row" style="font-size: 15px;">
+
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" style="word-break: break-word">
+
+        SN & Name
+
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+
+        Price
+
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+
+        Quantity
+
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+
+        Total
+
+      </div>
+
+    </div>
+
+    <div style="font-size: 15px; padding-top: 20px;">
+
+      <div *ngFor="let orderedItem of mergedArrayOfOrderedItems">
+
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" style="word-break: break-word">
+            {{ getFoodItemInformation('Name and Serial', orderedItem.FoodItemId) }}
+          </div>
+
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+            {{ getFoodItemInformation('Price', orderedItem.FoodItemId) }}
+          </div>
+
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+            {{ orderedItem.FoodItemQuantity }}
+          </div>
+
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+            {{ orderedItem.TotalPrice }}
+          </div>
+        </div>
+
+        <hr>
+      </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+
+
+

@@ -13,9 +13,12 @@ export class TableListComponent implements OnInit, AfterViewInit {
 
   tables: Table[] = [];
 
+
   displayedColumns: string[] =
     [
-      'Name'
+      'Name',
+      'CurrentState',
+      'TotalOrders'
     ];
   dataSource: MatTableDataSource<Table>;
   @ViewChild(MatPaginator) paginator: MatPaginator;

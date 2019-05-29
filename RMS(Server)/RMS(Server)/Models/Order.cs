@@ -10,6 +10,7 @@ namespace RMS_Server_.Models
         public int Id { get; set; }
         public List<OrderSession> OrderSessions { get; set; }
         public int? TotalPrice { get; set; }
+        public int? GrossTotalPrice { get; set; }
         public int? Tendered { get; set; }
         public int? Change { get; set; }
         public string DateTime { get; set; }
@@ -17,6 +18,10 @@ namespace RMS_Server_.Models
         public float? Profit { get; set; }
         public Table Table { get; set; }
         public int TableId { get; set; }
-        public string CurrentState { get; set; }    
+        public string CurrentState { get; set; }
+        public float? Vat { get; set; }
+        public float? ServiceCharge { get; set; }
+        public string DiscountType { get; set; }
+        public float? DiscountAmount { get; set; }
     }
 }

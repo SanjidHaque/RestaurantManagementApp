@@ -4,6 +4,7 @@ import {FoodItem} from '../../models/food-item.model';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {Inventory} from '../../models/inventory.model';
 import {OrderedItem} from '../../models/ordered-item.model';
+import {Order} from '../../models/order.model';
 
 
 @Injectable()
@@ -86,6 +87,38 @@ export class PointOfSaleService {
       });
       return;
     }
+  }
+
+  mergeOrderedItems(order: Order) {
+    let orderedItems: OrderedItem[] = [];
+    orderedItems = order.OrderSessions[0].OrderedItems;
+
+    if (order.OrderSessions.length === 1) {
+      return orderedItems;
+    }
+
+    for (let i = 1; i < order.OrderSessions.length; i++) {
+
+      for (let j = 0; j < order.OrderSessions[i].OrderedItems.length; j++) {
+
+        const foodItemId = order.OrderSessions[i].OrderedItems[j].FoodItemId;
+
+        for (let k = 0; k < orderedItems.length; k++) {
+
+          if (orderedItems[k].FoodItemId === foodItemId) {
+            orderedItems[k].FoodItemQuantity += order.OrderSessions[i].OrderedItems[j].FoodItemQuantity;
+            orderedItems[k].TotalPrice += order.OrderSessions[i].OrderedItems[j].TotalPrice;
+            break;
+          }
+
+          if (k === orderedItems.length)  {
+            orderedItems.push(order.OrderSessions[i].OrderedItems[j]);
+          }
+        }
+      }
+    }
+
+    return orderedItems;
   }
 
 }

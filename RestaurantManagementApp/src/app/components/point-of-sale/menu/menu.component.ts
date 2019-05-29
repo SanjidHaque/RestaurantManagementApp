@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrManager,
-              private dataStorageService: TableDataStorageService) {
+              private tableDataStorageService: TableDataStorageService) {
     this.route.params.subscribe((params: Params) => this.tableId = +params['table-id']);
   }
 
@@ -64,7 +64,7 @@ export class MenuComponent implements OnInit {
     } else {
       this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered'
         || x.CurrentState === 'Served');
-      this.rootUrl = this.dataStorageService.rootUrl + '/Content/FoodItemImages/';
+      this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
       this.setFoodItemImage();
 
     }
@@ -144,13 +144,18 @@ export class MenuComponent implements OnInit {
           -1,
           orderSessions,
           0,
+          0,
           null,
           null,
           new Date().toLocaleString(),
           0,
           0,
           this.tableId,
-          'Not Ordered'
+          'Not Ordered',
+          null,
+          null,
+          '',
+          null
         );
 
         this.order = order;
@@ -187,7 +192,6 @@ export class MenuComponent implements OnInit {
 
       this.order.TotalPrice += subTotal;
       this.order.InventoryCost +=  (foodItem.InventoryCost * quantity);
-      this.order.Profit += (this.order.TotalPrice - this.order.InventoryCost);
 
     } else {
       if (this.order === undefined) {
@@ -259,6 +263,7 @@ export class MenuComponent implements OnInit {
   }
 
   removeFromCart(index: number, orderedItems: OrderedItem[]) {
+    this.order.TotalPrice -= orderedItems[index].TotalPrice;
     orderedItems.splice(index, 1);
   }
 
@@ -338,8 +343,13 @@ export class MenuComponent implements OnInit {
 
     this.orderDataStorageService.cancelOrder(orderSession).subscribe((data: any) => {
 
-        for (let i = 0; this.order.OrderSessions.length; i++) {
+      for (let i = 0; this.order.OrderSessions.length; i++) {
           if (this.order.OrderSessions[i].Id === orderSession.Id) {
+
+            this.order.OrderSessions[i].OrderedItems.forEach((value) => {
+              this.order.TotalPrice -= value.TotalPrice;
+            });
+
             this.order.OrderSessions.splice(i, 1);
             break;
           }
@@ -372,6 +382,9 @@ export class MenuComponent implements OnInit {
     const answer = confirm('Clear order list?');
     if (answer) {
 
+      this.order.OrderSessions[index].OrderedItems.forEach((value) => {
+        this.order.TotalPrice -= value.TotalPrice;
+      });
       this.order.OrderSessions.splice(index, 1);
 
       if (this.order.OrderSessions.length === 0) {

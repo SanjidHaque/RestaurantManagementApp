@@ -9,7 +9,7 @@ table {
 
 .mat-cell {
   border: 1px solid #ab9090;
-  text-align: left;
+  text-align: center;
 }
 
 .mat-header-cell {
@@ -18,5 +18,5 @@ table {
 
 :host ::ng-deep .mat-sort-header-container {
   display: flex;
-  justify-content: left;
+  justify-content: center;
 }

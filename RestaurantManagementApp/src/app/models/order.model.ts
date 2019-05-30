@@ -15,6 +15,7 @@ export class Order {
   public Vat: number;
   public ServiceCharge: number;
   public DiscountType: string;
+  public DiscountRate: number;
   public DiscountAmount: number;
   public UserName: string;
 
@@ -33,6 +34,7 @@ export class Order {
               vat: number,
               serviceCharge: number,
               discountType: string,
+              discountRate: number,
               discountAmount: number,
               userName: string
   ) {
@@ -50,6 +52,7 @@ export class Order {
     this.Vat = vat;
     this.ServiceCharge = serviceCharge;
     this.DiscountType = discountType;
+    this.DiscountRate = discountRate;
     this.DiscountAmount = discountAmount;
     this.UserName = userName;
   }

@@ -157,7 +157,8 @@ export class MenuComponent implements OnInit {
           null,
           null,
           '',
-          null,
+          0,
+          0,
           this.userName
         );
 

@@ -11,6 +11,7 @@ import {Setting} from '../../../models/setting.model';
 import {OrderDataStorageService} from '../../../services/data-storage/order-data-storage.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {FoodItem} from '../../../models/food-item.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-payment',
@@ -58,10 +59,61 @@ export class PaymentComponent implements OnInit {
           || x.CurrentState === 'Served');
 
         this.mergedArrayOfOrderedItems = this.pointOfSaleService.mergeOrderedItems(this.order);
-        console.log(this.mergedArrayOfOrderedItems);
+        this.setOrderVat();
+        this.setOrderServiceCharge();
+        this.setOrderGrossTotalPrice();
+        this.setInitialOrderDiscount();
       }
     });
   }
+
+
+  setInitialOrderDiscount() {
+    this.order.DiscountType = '';
+    this.order.DiscountRate = 0;
+    this.order.DiscountAmount = 0;
+  }
+
+  calculateOrderDiscount(form: NgForm) {
+    this.setOrderGrossTotalPrice();
+    if (form.value.discountType === 'flat') {
+      this.order.DiscountType = 'Flat';
+      this.order.DiscountRate = form.value.discountRate;
+      this.order.DiscountAmount = form.value.discountRate;
+    } else {
+      this.order.DiscountType = 'Percent';
+      this.order.DiscountRate = form.value.discountRate;
+      this.order.DiscountAmount =  (this.order.GrossTotalPrice * form.value.discountRate) / 100;
+    }
+    this.order.GrossTotalPrice -= this.order.DiscountAmount;
+  }
+
+  removeOrderDiscount() {
+    this.setInitialOrderDiscount();
+    this.setOrderGrossTotalPrice();
+  }
+
+  setOrderGrossTotalPrice() {
+    this.order.GrossTotalPrice = this.order.TotalPrice + this.order.Vat + this.order.ServiceCharge;
+  }
+
+
+  setOrderServiceCharge() {
+    if (this.setting.ServiceCharge === 0 || this.setting.ServiceCharge === null) {
+      this.order.ServiceCharge = 0;
+    } else {
+      this.order.ServiceCharge = (this.order.TotalPrice * this.setting.ServiceCharge) / 100;
+    }
+  }
+
+  setOrderVat() {
+    if (this.setting.VatAmount === 0 || this.setting.VatAmount === null) {
+      this.order.Vat = 0;
+    } else {
+      this.order.Vat = (this.order.TotalPrice * this.setting.VatAmount) / 100;
+    }
+  }
+
 
   getFoodItemInformation(type: string, foodItemId: number) {
     const foodItem = this.foodItems.find(x => x.Id === foodItemId);

@@ -162,7 +162,9 @@
   </div>
 
 
-    <div class="col-xl-2 col-lg-2" *ngIf="(tendered - order.TotalPrice) >= 0; else showZero">
+    <div class="col-xl-2 col-lg-2"
+         style="font-weight: 500;"
+         *ngIf="(tendered - order.TotalPrice) >= 0; else showZero">
 
       <label>Change</label>
       <input
@@ -187,6 +189,57 @@
     </div>
 
   </ng-template>
+
+
+
+  <div class="col-xl-4 col-lg-4" style="font-weight: 500;">
+    <form #discountForm ="ngForm">
+
+          <div class="row form-group">
+            <div class="col-xl-6">
+
+              <label>Discount Rate</label>
+              <input
+                required
+                name="discountRate"
+                id="discountRate"
+                type="number"
+                ngModel
+                min="1"
+                class="form-control">
+
+            </div>
+
+            <div class="col-xl-6">
+
+              <label for="discountType">Type</label>
+              <select
+                required
+                ngModel class="form-control" name="discountType" id="discountType">
+                <option value="" selected disabled hidden>Select</option>
+                <option value="flat" selected>Flat</option>
+                <option value="percent">Percent</option>
+              </select>
+
+            </div>
+          </div>
+
+    </form>
+
+  </div>
+
+  <div class="col-xl-1 col-lg-1" style="padding-top: 32px;">
+
+    <button
+      type="submit"
+      [disabled]="discountForm.invalid"
+      (click)="calculateOrderDiscount(discountForm)"
+      class="btn btn-success">Add</button>
+
+  </div>
+
+
+
 
 </div>
 
@@ -256,6 +309,79 @@
         </div>
 
         <hr>
+      </div>
+
+
+      <div
+        class="row"
+        style="text-align: right; padding-top: 5px; padding-bottom: 5px; font-weight: 500;">
+        <div class="col-xl-12">
+
+          Total: {{ order.TotalPrice }} BDT
+
+        </div>
+      </div>
+
+      <div
+        *ngIf="setting.VatAmount !== null"
+        class="row"
+        style="text-align: right; padding-top: 5px; padding-bottom: 5px; font-weight: 500;">
+        <div class="col-xl-12">
+
+          Vat {{ setting.VatAmount }}%: {{ order.Vat.toFixed(2) }} BDT
+
+        </div>
+      </div>
+
+      <div class="row"
+        *ngIf="setting.ServiceCharge !== null"
+        style="text-align: right; padding-top: 5px; padding-bottom: 5px; font-weight: 500;">
+        <div class="col-xl-12">
+
+          Service Charge {{ setting.ServiceCharge }}%: {{ order.ServiceCharge.toFixed(2) }} BDT
+
+        </div>
+      </div>
+
+      <div class="row"
+           *ngIf="order.DiscountRate !== 0"
+           style="text-align: right; padding-top: 5px; padding-bottom: 5px; font-weight: 500;">
+        <div class="col-xl-12">
+
+         <span *ngIf="order.DiscountType === 'Percent'">
+           Discount {{ order.DiscountRate }}%: {{ order.DiscountAmount }} BDT
+          <i
+            title="Remove discount"
+            style="cursor: pointer"
+            (click)="removeOrderDiscount()"
+            class="fa fa-times-circle-o"
+            aria-hidden="true"></i>
+           </span>
+
+         <span *ngIf="order.DiscountType === 'Flat'">
+           Flat Discount {{ order.DiscountRate }} BDT
+          <i
+            title="Remove discount"
+            style="cursor: pointer"
+            (click)="removeOrderDiscount()"
+            class="fa fa-times-circle-o"
+            aria-hidden="true"></i>
+           </span>
+
+        </div>
+      </div>
+
+      <div class="row"
+           style="text-align: right;
+           padding-top: 5px;
+           padding-bottom: 5px;
+           font-size: 17px;
+           font-weight: bold;">
+        <div class="col-xl-12">
+
+          Gross Total: {{ order.GrossTotalPrice.toFixed(2) }} BDT
+
+        </div>
       </div>
 
 

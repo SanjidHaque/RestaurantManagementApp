@@ -16,6 +16,7 @@ export class Order {
   public ServiceCharge: number;
   public DiscountType: string;
   public DiscountAmount: number;
+  public UserName: string;
 
 
   constructor(id: number,
@@ -32,7 +33,8 @@ export class Order {
               vat: number,
               serviceCharge: number,
               discountType: string,
-              discountAmount: number
+              discountAmount: number,
+              userName: string
   ) {
     this.Id = id;
     this.OrderSessions = orderSessions;
@@ -49,5 +51,6 @@ export class Order {
     this.ServiceCharge = serviceCharge;
     this.DiscountType = discountType;
     this.DiscountAmount = discountAmount;
+    this.UserName = userName;
   }
 }

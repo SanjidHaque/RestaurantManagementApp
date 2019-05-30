@@ -12,7 +12,6 @@ import {ToastrManager} from 'ng6-toastr-notifications';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  isLoginError = false;
   isDisabled = false;
 
   constructor(private userAccountDataStorageService: UserAccountDataStorageService,

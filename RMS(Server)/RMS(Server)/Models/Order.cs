@@ -23,5 +23,6 @@ namespace RMS_Server_.Models
         public float? ServiceCharge { get; set; }
         public string DiscountType { get; set; }
         public float? DiscountAmount { get; set; }
+        public string Username { get; set; }    
     }
 }

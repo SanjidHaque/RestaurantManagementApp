@@ -58,6 +58,16 @@ export class TableDetailsComponent implements OnInit {
     this.tableDataStorageService.deleteTable(this.tableId).
     subscribe(
       (data: any) => {
+        if (data === 'Failed') {
+          this.toastr.errorToastr('This table cannot be deleted for reporting purpose',
+            'Error', {
+              toastTimeout: 10000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
+          return;
+        }
+
         this.toastr.successToastr('Removed from shop', 'Success', {
           toastTimeout: 10000,
           newestOnTop: true,

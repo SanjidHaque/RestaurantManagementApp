@@ -87,6 +87,12 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteInventoryItem/{inventoryId}")]
         public IHttpActionResult DeleteInventoryItem(int inventoryId)
         {
+            Ingredient ingredient = _context.Ingredients.FirstOrDefault(x => x.InventoryId == inventoryId);
+            if (ingredient != null)
+            {
+                return Ok("Failed");
+            }
+
             Inventory getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventoryId);
             if (getDeleted != null)
             {

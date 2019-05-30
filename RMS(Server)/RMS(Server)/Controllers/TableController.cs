@@ -60,6 +60,12 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteTable/{tableId}")]
         public IHttpActionResult DeleteTable(int tableId)
         {
+            Order order = _context.Orders.FirstOrDefault(x => x.TableId == tableId);
+            if (order != null)
+            {
+                return Ok("Failed");
+            }
+
             Table deleteTable = _context.Tables.FirstOrDefault(p => p.Id == tableId);
             if (deleteTable == null)
             {

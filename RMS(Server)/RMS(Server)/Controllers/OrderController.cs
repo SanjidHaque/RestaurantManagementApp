@@ -69,10 +69,12 @@ namespace RMS_Server_.Controllers
                                 {
                                     inventory.RemainingQuantity -= inventoryQuantity;
                                     inventory.UsedQuantity += inventoryQuantity;
+                                    _context.SaveChanges();
                                 }
                             }
 
                             foodItem.TotalSale++;
+                            _context.SaveChanges();
                         }
                     }
                 }
@@ -80,6 +82,7 @@ namespace RMS_Server_.Controllers
 
             if (order.Id == -1)
             {
+                order.CurrentState = "Ordered";
                 _context.Orders.Add(order);
             }
             else
@@ -91,18 +94,22 @@ namespace RMS_Server_.Controllers
                     _context.OrderSessions.Add(unSavedOrderedSession);
                     _context.SaveChanges();
                 }
-               
+
+
+                Order getExistingOrder = _context.Orders.FirstOrDefault(x => x.Id == order.Id);
+                if (getExistingOrder != null)
+                {
+                    getExistingOrder.CurrentState =  "Ordered";
+                    getExistingOrder.TotalPrice = order.TotalPrice;
+                    _context.SaveChanges();
+                }
             }
 
             OrderSession orderSession = order.OrderSessions.FirstOrDefault(x => x.CurrentState == "Not Ordered");
 
-            if (orderSession != null && order.Id != -1)
+            if (orderSession != null)
             {
                 orderSession.CurrentState = "Ordered";
-                orderSession.OrderedItems.ForEach(x =>
-                {
-                   order.TotalPrice +=  x.TotalPrice;
-                });
             }
 
 
@@ -112,7 +119,7 @@ namespace RMS_Server_.Controllers
                 table.CurrentState = "Ordered";
             }
 
-            order.CurrentState = "Ordered";
+            
             _context.SaveChanges();
             return Ok( new { Text = "Order placed successfully", Order = order });
         }
@@ -172,7 +179,6 @@ namespace RMS_Server_.Controllers
                         table.CurrentState = "Empty";
                     }
                     _context.Orders.Remove(order);
-
                     _context.SaveChanges();
                 }
                 else

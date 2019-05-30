@@ -30,6 +30,7 @@ export class MenuComponent implements OnInit {
   setting: Setting;
 
   order: Order;
+  userName: string;
 
   imageUrl = 'assets/noImage.png';
   rootUrl = '';
@@ -50,6 +51,7 @@ export class MenuComponent implements OnInit {
       this.tables = data['tables'];
       this.inventories = data['inventories'];
       this.setting = data['setting'];
+      this.userName = JSON.parse(JSON.stringify(localStorage.getItem('userNameForLogin')));
     });
 
     this.table = this.tables.find(x => x.Id === this.tableId);
@@ -155,7 +157,8 @@ export class MenuComponent implements OnInit {
           null,
           null,
           '',
-          null
+          null,
+          this.userName
         );
 
         this.order = order;
@@ -299,6 +302,7 @@ export class MenuComponent implements OnInit {
           newestOnTop: true,
           showCloseButton: true
         });
+        this.table.CurrentState = 'Ordered';
         this.order = data.Order;
         return;
       }
@@ -357,6 +361,7 @@ export class MenuComponent implements OnInit {
 
         if (this.order.OrderSessions.length === 0) {
           this.order = undefined;
+          this.table.CurrentState = 'Empty';
         } else {
           const lastIndex = this.order.OrderSessions.length - 1;
           this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;

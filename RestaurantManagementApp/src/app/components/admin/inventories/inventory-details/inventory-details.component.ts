@@ -60,7 +60,18 @@ export class InventoryDetailsComponent implements OnInit {
     this.inventoryDataStorageService.deleteInventoryItem(this.inventoryId).
     subscribe(
       (data: any) => {
-        this.toastr.successToastr('Removed from shop', 'Success!', {
+
+        if (data === 'Failed') {
+          this.toastr.errorToastr('This item cannot be deleted for reporting purpose',
+            'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          return;
+        }
+
+        this.toastr.successToastr('Removed from shop', 'Success', {
           toastTimeout: 10000,
           newestOnTop: true,
           showCloseButton: true

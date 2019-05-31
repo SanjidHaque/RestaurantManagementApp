@@ -130,18 +130,37 @@
 
             <div *ngIf="orderSession.OrderedItems.length !== 0">
 
-              <div class="row"
-                   style="text-align: left;
+              <div class="row" style="text-align: left;
                  font-weight: 500;
-                 padding-top: 10px;
+                 padding-top: 30px;
                  padding-bottom: 2px;">
                 <div class="col-xl-12">
                   Session: {{ i + 1 }}
                 </div>
               </div>
+
+
+              <div class="row"
+                   *ngIf="orderSession.OrderedDateTime !== ''"
+                   style="font-size: 13px; font-weight: 500; padding-bottom: 5px; padding-top: 5px;">
+                <div class="col-xl-12">
+                  Ordered at: {{ orderSession.OrderedDateTime }}
+                </div>
+              </div>
+
+              <div class="row"
+                   *ngIf="orderSession.ServedDateTime !== ''"
+                   style="font-size: 13px; font-weight: 500; padding-bottom: 5px; padding-top: 5px;">
+                <div class="col-xl-12">
+                  Served at: {{ orderSession.ServedDateTime }}
+                </div>
+
+              </div>
+
               <hr>
 
-              <div class="row" style="font-size: 13px;">
+
+              <div class="row" style="font-size: 13px; padding-top: 10px;">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" style="word-break: break-word">
 
                   SN & Name

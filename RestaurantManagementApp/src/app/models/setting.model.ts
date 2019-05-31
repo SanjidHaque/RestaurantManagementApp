@@ -6,10 +6,10 @@ export class Setting {
     public ShopPhone: string,
     public ShopEmail: string,
     public ShopFacebookPage: string,
-    public VatAmount: number,
+    public VatRate: number,
     public VatRegNumber: string,
     public VatType: string,
-    public ServiceCharge: number,
+    public ServiceChargeRate: number,
     public AdditionalInformation: string,
     public PrintChefsOrderReceipt: boolean
   ) {}

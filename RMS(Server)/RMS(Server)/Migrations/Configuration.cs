@@ -41,7 +41,7 @@ namespace RMS_Server_.Migrations
             //userManager.Create(cashier, "123456");
             //userManager.AddToRole(cashier.Id, "Cashier");
 
-            context.Settings.AddOrUpdate( x => x.Id, new Setting { ShopName = "Master Chef", VatAmount = 2} );
+           
         }
     }
 }

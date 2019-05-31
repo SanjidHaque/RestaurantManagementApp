@@ -34,10 +34,10 @@ namespace RMS_Server_.Controllers
                 setting.ShopPhone = editSetting.ShopPhone;
                 setting.ShopEmail = editSetting.ShopEmail;
                 setting.ShopFacebookPage = editSetting.ShopFacebookPage;
-                setting.VatAmount = editSetting.VatAmount;
+                setting.VatRate = editSetting.VatRate;
                 setting.VatRegNumber = editSetting.VatRegNumber;
                 setting.VatType = editSetting.VatType;
-                setting.ServiceCharge = editSetting.ServiceCharge;
+                setting.ServiceChargeRate = editSetting.ServiceChargeRate;
                 setting.AdditionalInformation = editSetting.AdditionalInformation;
                 setting.PrintChefsOrderReceipt = editSetting.PrintChefsOrderReceipt;
                 _context.SaveChanges();

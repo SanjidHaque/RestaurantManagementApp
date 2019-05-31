@@ -19,10 +19,11 @@ namespace RMS_Server_.Models
         public Table Table { get; set; }
         public int TableId { get; set; }
         public string CurrentState { get; set; }
-        public float? Vat { get; set; }
-        public float? ServiceCharge { get; set; }
+        public float? VatAmount { get; set; }
+        public float? ServiceChargeAmount { get; set; }
         public string DiscountType { get; set; }
+        public float? DiscountRate { get; set; }    
         public float? DiscountAmount { get; set; }
-        public string Username { get; set; }    
+        public string SalesPersonName { get; set; }    
     }
 }

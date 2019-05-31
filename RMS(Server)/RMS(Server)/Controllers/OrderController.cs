@@ -91,6 +91,7 @@ namespace RMS_Server_.Controllers
                 if (unSavedOrderedSession != null)
                 {
                     unSavedOrderedSession.OrderId = order.Id;
+                    unSavedOrderedSession.OrderedDateTime = unSavedOrderedSession.OrderedDateTime;
                     _context.OrderSessions.Add(unSavedOrderedSession);
                     _context.SaveChanges();
                 }
@@ -208,6 +209,7 @@ namespace RMS_Server_.Controllers
             if (getOrderSession != null)
             {
                 getOrderSession.CurrentState = "Served";
+                getOrderSession.ServedDateTime = orderSession.ServedDateTime;
                 Order order = _context.Orders.FirstOrDefault(x => x.Id == getOrderSession.OrderId);
                 if (order != null)
                 {

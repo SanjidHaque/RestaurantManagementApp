@@ -94,23 +94,24 @@ export class PaymentComponent implements OnInit {
   }
 
   setOrderGrossTotalPrice() {
-    this.order.GrossTotalPrice = this.order.TotalPrice + this.order.Vat + this.order.ServiceCharge;
+    this.order.GrossTotalPrice = this.order.TotalPrice + this.order.VatAmount
+      + this.order.ServiceChargeAmount;
   }
 
 
   setOrderServiceCharge() {
-    if (this.setting.ServiceCharge === 0 || this.setting.ServiceCharge === null) {
-      this.order.ServiceCharge = 0;
+    if (this.setting.ServiceChargeRate === 0 || this.setting.ServiceChargeRate === null) {
+      this.order.ServiceChargeAmount = 0;
     } else {
-      this.order.ServiceCharge = (this.order.TotalPrice * this.setting.ServiceCharge) / 100;
+      this.order.ServiceChargeAmount = (this.order.TotalPrice * this.setting.ServiceChargeRate) / 100;
     }
   }
 
   setOrderVat() {
-    if (this.setting.VatAmount === 0 || this.setting.VatAmount === null) {
-      this.order.Vat = 0;
+    if (this.setting.VatRate === 0 || this.setting.VatRate === null) {
+      this.order.VatAmount = 0;
     } else {
-      this.order.Vat = (this.order.TotalPrice * this.setting.VatAmount) / 100;
+      this.order.VatAmount = (this.order.TotalPrice * this.setting.VatRate) / 100;
     }
   }
 

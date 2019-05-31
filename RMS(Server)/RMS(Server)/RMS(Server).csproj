@@ -371,6 +371,14 @@
     <Compile Include="Migrations\201905301034004_OrderModelPropertyUSerNameAdded.Designer.cs">
       <DependentUpon>201905301034004_OrderModelPropertyUSerNameAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905301845516_OrderModelsNewPropertyAdded.cs" />
+    <Compile Include="Migrations\201905301845516_OrderModelsNewPropertyAdded.Designer.cs">
+      <DependentUpon>201905301845516_OrderModelsNewPropertyAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905301915187_settingModelChanged2.cs" />
+    <Compile Include="Migrations\201905301915187_settingModelChanged2.Designer.cs">
+      <DependentUpon>201905301915187_settingModelChanged2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -567,6 +575,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905301034004_OrderModelPropertyUSerNameAdded.resx">
       <DependentUpon>201905301034004_OrderModelPropertyUSerNameAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301845516_OrderModelsNewPropertyAdded.resx">
+      <DependentUpon>201905301845516_OrderModelsNewPropertyAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301915187_settingModelChanged2.resx">
+      <DependentUpon>201905301915187_settingModelChanged2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

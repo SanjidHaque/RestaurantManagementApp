@@ -5,6 +5,8 @@ export class OrderSession {
     public Id: number,
     public OrderId: number,
     public OrderedItems: OrderedItem[] = [],
-    public CurrentState: string
+    public CurrentState: string,
+    public OrderedDateTime: string,
+    public ServedDateTime: string
   ) {}
 }

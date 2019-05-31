@@ -12,12 +12,12 @@ export class Order {
   public Profit: number;
   public TableId: number;
   public CurrentState: string;
-  public Vat: number;
-  public ServiceCharge: number;
+  public VatAmount: number;
+  public ServiceChargeAmount: number;
   public DiscountType: string;
   public DiscountRate: number;
   public DiscountAmount: number;
-  public UserName: string;
+  public SalesPersonName: string;
 
 
   constructor(id: number,
@@ -31,12 +31,12 @@ export class Order {
               profit: number,
               tableId: number,
               currentState: string,
-              vat: number,
-              serviceCharge: number,
+              vatAmount: number,
+              serviceChargeAmount: number,
               discountType: string,
               discountRate: number,
               discountAmount: number,
-              userName: string
+              salesPersonName: string
   ) {
     this.Id = id;
     this.OrderSessions = orderSessions;
@@ -49,11 +49,11 @@ export class Order {
     this.Profit = profit;
     this.TableId = tableId;
     this.CurrentState = currentState;
-    this.Vat = vat;
-    this.ServiceCharge = serviceCharge;
+    this.VatAmount = vatAmount;
+    this.ServiceChargeAmount = serviceChargeAmount;
     this.DiscountType = discountType;
     this.DiscountRate = discountRate;
     this.DiscountAmount = discountAmount;
-    this.UserName = userName;
+    this.SalesPersonName = salesPersonName;
   }
 }

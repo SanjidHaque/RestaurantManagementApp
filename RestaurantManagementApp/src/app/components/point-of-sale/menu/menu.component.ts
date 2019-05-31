@@ -13,6 +13,8 @@ import {OrderSession} from '../../../models/order-session.model';
 import {NgForm} from '@angular/forms';
 import {Setting} from '../../../models/setting.model';
 import {OrderDataStorageService} from '../../../services/data-storage/order-data-storage.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-food-items',
@@ -136,7 +138,9 @@ export class MenuComponent implements OnInit {
           null,
           null,
           orderedItems,
-          'Not Ordered'
+          'Not Ordered',
+          '',
+          ''
         );
 
         const orderSessions: OrderSession[] = [];
@@ -174,7 +178,9 @@ export class MenuComponent implements OnInit {
             null,
             null,
             orderedItems,
-            'Not Ordered'
+            'Not Ordered',
+            '',
+            ''
           );
 
           this.order.OrderSessions.push(orderSession);
@@ -272,11 +278,13 @@ export class MenuComponent implements OnInit {
   }
 
   placeOrder() {
-
     const dialog = confirm('Place this order?');
     if (!dialog) {
       return;
     }
+
+    const orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
+    orderSession.OrderedDateTime = moment().format('h:mm:ss A, Do MMMM YYYY');
 
     this.orderDataStorageService.placeOrder(this.order).subscribe((data: any) => {
       if (data === '') {
@@ -317,6 +325,8 @@ export class MenuComponent implements OnInit {
     if (!dialog) {
       return;
     }
+
+    orderSession.ServedDateTime = moment().format('h:mm:ss A, Do MMMM YYYY');
 
     this.orderDataStorageService.serveOrder(orderSession).subscribe( (data: any) => {
       if (data === 'Order served successfully') {
@@ -364,9 +374,20 @@ export class MenuComponent implements OnInit {
           this.order = undefined;
           this.table.CurrentState = 'Empty';
         } else {
+
           const lastIndex = this.order.OrderSessions.length - 1;
-          this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;
-          this.table.CurrentState = this.order.CurrentState;
+          if (this.order.OrderSessions[lastIndex].Id === null) {
+            this.order.Id = -1;
+            this.order.CurrentState = 'Not Ordered';
+            this.table.CurrentState = 'Empty';
+          } else {
+            this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;
+            this.table.CurrentState = this.order.CurrentState;
+          }
+
+
+
+
         }
 
       this.toastr.successToastr('Order canceled successfully', 'Success', {

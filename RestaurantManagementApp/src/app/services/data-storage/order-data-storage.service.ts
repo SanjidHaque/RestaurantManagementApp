@@ -21,7 +21,7 @@ export class OrderDataStorageService {
   }
 
   placeOrder(order: Order) {
-    return this.http.post<Order>(this.rootUrl + '/api/PlaceOrder', order);
+    return this.http.put<Order>(this.rootUrl + '/api/PlaceOrder', order);
   }
 
   serveOrder(orderSession: OrderSession) {

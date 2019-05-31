@@ -374,12 +374,20 @@ export class MenuComponent implements OnInit {
           this.order = undefined;
           this.table.CurrentState = 'Empty';
         } else {
-
           const lastIndex = this.order.OrderSessions.length - 1;
+
+
           if (this.order.OrderSessions[lastIndex].Id === null) {
-            this.order.Id = -1;
-            this.order.CurrentState = 'Not Ordered';
-            this.table.CurrentState = 'Empty';
+
+            if (this.order.OrderSessions.length === 1) {
+              this.order.Id = -1;
+              this.order.CurrentState = 'Not Ordered';
+              this.table.CurrentState = 'Empty';
+            } else {
+              this.order.CurrentState = this.order.OrderSessions[lastIndex - 1].CurrentState;
+              this.table.CurrentState = this.order.CurrentState;
+            }
+
           } else {
             this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;
             this.table.CurrentState = this.order.CurrentState;

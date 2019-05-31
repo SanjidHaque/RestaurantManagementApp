@@ -17,7 +17,7 @@ namespace RMS_Server_.Controllers
 
 
         [Route("api/PlaceOrder")]
-        [HttpPost]
+        [HttpPut]
         public IHttpActionResult PlaceOrder(Order order)
         {
             List<Inventory> inventories = _context.Inventories.ToList();
@@ -84,6 +84,7 @@ namespace RMS_Server_.Controllers
             {
                 order.CurrentState = "Ordered";
                 _context.Orders.Add(order);
+                _context.SaveChanges();
             }
             else
             {
@@ -111,20 +112,32 @@ namespace RMS_Server_.Controllers
             if (orderSession != null)
             {
                 orderSession.CurrentState = "Ordered";
+                _context.SaveChanges();
             }
 
 
             Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
             if (table != null)
             {
-                table.CurrentState = "Ordered";
+
+              //  table.CurrentState = "Ordered";
+
+                ChangeTableState(table, "Ordered");
+             
             }
 
+           
             
-            _context.SaveChanges();
+           
             return Ok( new { Text = "Order placed successfully", Order = order });
         }
 
+
+        private void ChangeTableState(Table table, string currentState)
+        {
+            table.CurrentState = currentState;
+            _context.SaveChanges();
+        }
 
 
         [Route("api/CancelOrder")]
@@ -155,6 +168,8 @@ namespace RMS_Server_.Controllers
                 }
             }
 
+            _context.SaveChanges();
+
             OrderSession getOrderSession = _context.OrderSessions.FirstOrDefault(x => x.Id == orderSession.Id);
             if (getOrderSession != null)
             {
@@ -171,13 +186,16 @@ namespace RMS_Server_.Controllers
                 {
                     order.TotalPrice -= x.TotalPrice;
                 });
+                _context.SaveChanges();
 
                 Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
                 if (order.OrderSessions.Count == 0)
                 {
                     if (table != null)
                     {
-                        table.CurrentState = "Empty";
+                        ChangeTableState(table, "Empty");
+                       // table.CurrentState = "Empty";
+                      //  _context.SaveChanges();
                     }
                     _context.Orders.Remove(order);
                     _context.SaveChanges();
@@ -186,18 +204,18 @@ namespace RMS_Server_.Controllers
                 {
                     int lastIndex = order.OrderSessions.Count - 1;
                     order.CurrentState = order.OrderSessions[lastIndex].CurrentState;
+                    _context.SaveChanges();
 
-                    
                     if (table != null)
                     {
-                        table.CurrentState = order.CurrentState;
+                        ChangeTableState(table, order.CurrentState);
+                        // table.CurrentState = order.CurrentState;
+                        // _context.SaveChanges();
                     }
                 }
 
             }
-
-            
-            _context.SaveChanges();
+           
             return Ok();
         }
 
@@ -210,17 +228,21 @@ namespace RMS_Server_.Controllers
             {
                 getOrderSession.CurrentState = "Served";
                 getOrderSession.ServedDateTime = orderSession.ServedDateTime;
+                _context.SaveChanges();
                 Order order = _context.Orders.FirstOrDefault(x => x.Id == getOrderSession.OrderId);
                 if (order != null)
                 {
                     order.CurrentState = "Served";
+                    _context.SaveChanges();
                     Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
                     if (table != null)
                     {
-                        table.CurrentState = "Served";
+                        ChangeTableState(table, "Served");
+                      //  table.CurrentState = "Served";
+                      //  _context.SaveChanges();
                     }
 
-                    _context.SaveChanges();
+                 
                     return Ok("Order served successfully");
                 }
             }

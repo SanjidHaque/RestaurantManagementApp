@@ -1,202 +1,81 @@
-  /*
+#invoice-POS{
+  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+  padding:2mm;
+  margin: 0 auto;
+  width: 44mm;
+  background: #FFF;
 
 
-  .back{
-    width:100%;
-    height:100%;
-    font-family:"Arial Narrow";
-    color: #d32039;
-    background-color: #ffffdf;
-    border: 1.2px solid #ae0000;
-    border-radius: .4vw;
-    font-size: 2vw;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    margin-top: 3vh;
-    font-weight: bold;
-    display: inline-block;
+  ::selection {background: #f31544; color: #FFF;}
+  h1{
+    font-size: 1.5em;
+    color: #222;
+  }
+  h2{font-size: .9em;}
+  h3{
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 2em;
+  }
+  p{
+    font-size: .7em;
+    color: #666;
+    line-height: 1.2em;
   }
 
-  .back:hover{
-    background-color: white;
-    color: #7e0000;
-    font-family:"Arial Narrow";
-    font-weight:bold;
-    border: 1.2px solid #7e0000;
-    border-radius: .4vw;
+  #top, #mid,#bot{ /* Targets all id with 'col-' */
+    border-bottom: 1px solid #EEE;
   }
 
-  .back:focus{
-    outline: 0;
+  #top{min-height: 100px;}
+  #mid{min-height: 80px;}
+  #bot{ min-height: 50px;}
+
+  #top .logo{
+    //float: left;
+    height: 60px;
+    width: 60px;
+    background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+    background-size: 60px 60px;
   }
-
-
-  .un-back{
-    width:100%;
-    height:100%;
-    font-family:"Arial Narrow";
-    color: #ffffdf;
-    background-color: #d32039;
-    border: 1.2px solid #ae0000;
-    border-radius: .4vw;
-    font-size: 2vw;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    margin-top: 3vh;
-    font-weight: bold;
+  .clientlogo{
+    float: left;
+    height: 60px;
+    width: 60px;
+    background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+    background-size: 60px 60px;
+    border-radius: 50px;
   }
-
-
-  .un-back:hover{
-    background-color: #d32039;
-    color: #ffffdf;
-    font-family:"Arial Narrow";
-    font-weight:bold;
-    border: 1.2px solid #ae0000;
-    border-radius: .4vw;
+  .info{
+    display: block;
+    //float:left;
+    margin-left: 0;
   }
-
-  .un-back:focus{
-    outline: 0;
+  .title{
+    float: right;
   }
-
-  .payment{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-weight: bold;
-    font-size: 2.5vw;
-    text-align: center;
-    padding-top: 5vh;
+  .title p{text-align: right;}
+  table{
+    width: 100%;
+    border-collapse: collapse;
   }
-  .bar{
-    margin-top: 40px;
+  td{
+    //padding: 5px 0 5px 15px;
+    //border: 1px solid #EEE
   }
-
-
-  .grand-total{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 7vw;
-    text-align: center;
-    padding-top: 2vh;
-
+  .tabletitle{
+    //padding: 5px;
+    font-size: .5em;
+    background: #EEE;
   }
+  .service{border-bottom: 1px solid #EEE;}
+  .item{width: 24mm;}
+  .itemtext{font-size: .5em;}
 
-  .content{
-    border: .17vw solid #7e0000;
-    border-radius: .8vw;
-    background-color: #ffffdf;
-  }
-
-  .due, .tendered, .change{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 3vw;
-  }
-
-
-  .due-box{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 3vw;
-  }
-
-  .change-box{
-    font-family:"Arial Narrow";
-    color: #7e0000;
-    font-size: 3vw;
+  #legalcopy{
+    margin-top: 5mm;
   }
 
 
 
-  input{
-    font-size: 3vw;
-    color: #7e0000;
-    font-family: "Arial Narrow";
-    border: .2vw solid #d32039;
-    width: 11.6vw;
-    height: auto;
-    padding-top: 0;
-    padding-left: .9vw;
-  }
-
-  input:focus{
-    border: .2vw solid #7e0000;
-  }
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  .table{
-    text-align: center;
-    margin-top: 1vh;
-  }
-
-
-  .drop-down{
-    text-align: center;
-  }
-  select{
-    background-color: #ffffdf;
-    color: #7e0000;
-    font-family:"align-self: ;";
-    font-size: 2vw;
-    text-align: center;
-    border: 1px solid #7e0000;
-    border-radius: .5vw;
-    outline:none;
-    text-align: left;
-    cursor:pointer;
-    padding-right: 4vw;
-    padding-left: 4vw;
-    padding-top: .5vw;
-    padding-bottom: .5vw;
-    font-weight: bold;
-  }
-
-  option{
-    color: #7e0000;
-    text-align: left;
-    cursor:pointer;
-    font-weight: bold;
-  }
-
-
-  .dashboard{
-    width:20%;
-    height:100%;
-    font-family:"Arial Narrow";
-    color: #aa0909;
-    background-color: ghostwhite;
-    font-size:2.8vw;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 1vh;
-  }
-
-
-
-  .dashboard:hover{
-    color: #6a0d0e;
-    background-color: ghostwhite;
-    font-family:"Arial Narrow";
-    font-weight:bold;
-  }
-
-  .pop-up{
-    color: #7e0000;
-    font-size: 16px;
-    font-family: "Berlin Sans FB";
-    text-align: center;
-  }
-
-  .main-row{
-    border-bottom: 2px double #dfdfdf;
-  }
-
-
-
-
-  */
+}

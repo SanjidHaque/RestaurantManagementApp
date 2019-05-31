@@ -28,6 +28,10 @@ export class OrderDataStorageService {
     return this.http.put<OrderSession>(this.rootUrl + '/api/ServeOrder', orderSession);
   }
 
+  validateOrder(order: Order) {
+    return this.http.put<Order>(this.rootUrl + '/api/ValidateOrder', order);
+  }
+
   cancelOrder(orderSession: OrderSession) {
     return this.http.put<OrderSession>(this.rootUrl + '/api/CancelOrder', orderSession);
   }

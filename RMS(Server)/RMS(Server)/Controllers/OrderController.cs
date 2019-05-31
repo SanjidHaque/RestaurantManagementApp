@@ -250,6 +250,38 @@ namespace RMS_Server_.Controllers
             return Ok("Order not found");
         }
 
+        [Route("api/ValidateOrder")]
+        [HttpPut]
+        public IHttpActionResult ValidateOrder(Order order)
+        {
+            Order getOrder = _context.Orders.Include(x => x.OrderSessions).FirstOrDefault(x => x.Id == order.Id);
+            Table table = _context.Tables.FirstOrDefault(x => x.Id == order.TableId);
+            if (getOrder == null)
+            {
+                return Ok("Order not found");
+            }
+
+            getOrder.Change = order.Change;
+            getOrder.Tendered = order.Tendered;
+            getOrder.ServiceChargeAmount = order.ServiceChargeAmount;
+            getOrder.VatAmount = order.VatAmount;
+            getOrder.CurrentState = "Paid";
+            getOrder.DiscountAmount = order.DiscountAmount;
+            getOrder.DiscountRate = order.DiscountRate;
+            getOrder.DiscountType = order.DiscountType;
+            getOrder.SalesPersonName = order.SalesPersonName;
+            getOrder.GrossTotalPrice = order.GrossTotalPrice;
+            getOrder.DateTime = order.OrderSessions[0].OrderedDateTime;
+
+            getOrder.OrderSessions.ForEach(x =>
+            {
+                x.CurrentState = "Paid";
+            });
+            _context.SaveChanges();
+            ChangeTableState(table, "Empty");
+            return Ok();
+        }
+
 
 
         [Route("api/DeleteOrder")]

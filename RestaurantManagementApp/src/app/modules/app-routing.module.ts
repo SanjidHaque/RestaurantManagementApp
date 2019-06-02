@@ -226,15 +226,19 @@ const appRoutes: Routes = [
                 component: OrderListComponent,
                 resolve:
                   {
-                    orders: OrderResolverService
+                    orders: OrderResolverService,
+                    tables: TableResolverService
                   }
               },
               {
-                path: ':id',
+                path: ':orderId',
                 component: OrderDetailsComponent,
                 resolve:
                   {
-                    orders: OrderResolverService
+                    orders: OrderResolverService,
+                    tables: TableResolverService,
+                    foodItems: FoodItemResolverService,
+                    setting: SettingResolverService
                   }
               }
             ]

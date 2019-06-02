@@ -1,101 +1,102 @@
-<!--
-<div class="row empty" *ngIf="totalOrder === 0; else notEmpty">
+
+
+
+
+<div class="row" *ngIf="orders.length === 0; else notEmpty">
   <div class="col-md-12">
-    No order has arrived yet.
+    No order is arrived yet. Go to POS to create an order.
   </div>
 </div>
-
 
 <ng-template #notEmpty>
 
-<div class="sum-of-inv-body">
-<div class="row">
-  <div class="col-md-4 search-bar">
-    <span class="fa fa-search"></span>
-    <input class="box" type="text" [(ngModel)]="term" placeholder="Search by Receipt Ref...">
-  </div>
-</div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="col-md-2 receipt">
-        Receipt Ref
-      </div>
-      <div class="col-md-2 name">
-        Order Date
-      </div>
-      <div class="col-md-2 name">
-        Table No
-      </div>
-      <div class="col-md-2 price">
-        Selling Price
-      </div>
-      <div class="col-md-2 price">
-        Inventory Cost
-      </div>
-      <div class="col-md-2 price">
-        Profit in Order
-      </div>
-    </div>
+
+  <mat-form-field>
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Search by order Id...">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8" style="box-shadow: none!important;">
+    <table  mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="Id">
+        <th
+          style="font-size: 14px;  font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td
+          style="width: 8%"
+          mat-cell *matCellDef="let row"> {{row.Id}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="DateTime">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000; text-align: center;"
+          mat-header-cell *matHeaderCellDef> DateTime </th>
+        <td style="width: 20%; word-break: break-word;" mat-cell *matCellDef = "let row">
+          {{ row.DateTime }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="GrossTotalPrice">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Gross Total Price</th>
+        <td
+          style="width: 15%"
+          mat-cell *matCellDef="let row" > {{row.GrossTotalPrice}} BDT </td>
+      </ng-container>
+
+      <ng-container matColumnDef="InventoryCost">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Inventory Cost </th>
+        <td
+          style="width: 15%"
+          mat-cell *matCellDef="let row" > {{row.InventoryCost}} BDT</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Profit">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Profit </th>
+        <td
+          style="width: 10%"
+          mat-cell *matCellDef="let row" > {{row.Profit}} BDT </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="TableId">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Table </th>
+        <td
+          style="width: 10%"
+          mat-cell *matCellDef="let row" >  {{ adminService.getTableName(tables, row.TableId) }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="CurrentState">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Current State </th>
+        <td
+          style="width: 12%"
+          mat-cell *matCellDef="let row" > {{row.CurrentState}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          style="cursor: pointer;"
+          title="See details"
+          routerLink="/admin/orders/{{ row.Id }}">
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
   </div>
 
-  <div class="row">
-    <div class="col-md-12 body">
-      <div class="row" *ngFor="let orderList of orders | order:term; let i = index">
-        <a title="View This Order's Details"
-          style="cursor: pointer" (click)="viewDetails(orderList)">
-        <div class="col-md-12 f-name table-bordered">
-          <div class="col-md-2 column-receipt">
-          {{ orderList.Id }}
-          </div>
-          <div class="col-md-2 column">
-            {{ orderList.DateTime }}
-          </div>
-          <div class="col-md-2 column">
-            {{orderList.TableNumber }}
-          </div>
-
-          <div class="col-md-2 column">
-            {{ orderList.totalPrice }} BDT
-          </div>
-
-          <div class="col-md-2 column">
-            {{ orderList.InventoryCost }} BDT
-          </div>
-
-          <div class="col-md-2 column">
-            {{ orderList.Profit }} BDT
-          </div>
-        </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12 Summary">
-    Summary
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 detail">
-    Total Order: {{ totalOrder }} (s)
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 detail">
-    Total Sale: {{ grossSale }} BDT
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 detail">
-    Total Inventory Cost: {{ grossCost }} BDT
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 detail">
-    Total Profit: {{ grossProfit }} BDT
-  </div>
-</div>
 </ng-template>
--->

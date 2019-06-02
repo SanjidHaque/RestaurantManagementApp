@@ -256,7 +256,7 @@
         <div class="col-xl-12">
 
          <span *ngIf="order.DiscountType === 'Percent'">
-           Discount {{ order.DiscountRate }}%: {{ order.DiscountAmount }} BDT
+           Discount {{ order.DiscountRate }}%: {{ order.DiscountAmount.toFixed(2) }} BDT
           <i
             title="Remove discount"
             style="cursor: pointer"
@@ -298,103 +298,107 @@
 
   <div class="col-xl-4">
 
-
-    <!--<div id="invoice-POS">-->
-
-      <!--<div id="top">-->
-        <!--<div class="logo"></div>-->
-        <!--<div class="info">-->
-          <!--<h2>SBISTechs Inc</h2>-->
-        <!--</div>&lt;!&ndash;End Info&ndash;&gt;-->
-      <!--</div>&lt;!&ndash;End InvoiceTop&ndash;&gt;-->
-
-      <!--<div id="mid">-->
-        <!--<div class="info">-->
-          <!--<h2>Contact Info</h2>-->
-          <!--<p>-->
-            <!--Address : street city, state 0000<br>-->
-            <!--Email   : JohnDoe@gmail.com<br>-->
-            <!--Phone   : 555-555-5555<br>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>&lt;!&ndash;End Invoice Mid&ndash;&gt;-->
-
-      <!--<div id="bot">-->
-
-        <!--<div id="table">-->
-          <!--<table>-->
-            <!--<tr class="tabletitle">-->
-              <!--<td class="item"><h2>Item</h2></td>-->
-              <!--<td class="Hours"><h2>Qty</h2></td>-->
-              <!--<td class="Rate"><h2>Sub Total</h2></td>-->
-            <!--</tr>-->
-
-            <!--<tr class="service">-->
-              <!--<td class="tableitem"><p class="itemtext">Communication</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">5</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">$375.00</p></td>-->
-            <!--</tr>-->
-
-            <!--<tr class="service">-->
-              <!--<td class="tableitem"><p class="itemtext">Asset Gathering</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">3</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">$225.00</p></td>-->
-            <!--</tr>-->
-
-            <!--<tr class="service">-->
-              <!--<td class="tableitem"><p class="itemtext">Design Development</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">5</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">$375.00</p></td>-->
-            <!--</tr>-->
-
-            <!--<tr class="service">-->
-              <!--<td class="tableitem"><p class="itemtext">Animation</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">20</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">$1500.00</p></td>-->
-            <!--</tr>-->
-
-            <!--<tr class="service">-->
-              <!--<td class="tableitem"><p class="itemtext">Animation Revisions</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">10</p></td>-->
-              <!--<td class="tableitem"><p class="itemtext">$750.00</p></td>-->
-            <!--</tr>-->
-
-
-            <!--<tr class="tabletitle">-->
-              <!--<td></td>-->
-              <!--<td class="Rate"><h2>tax</h2></td>-->
-              <!--<td class="payment"><h2>$419.25</h2></td>-->
-            <!--</tr>-->
-
-            <!--<tr class="tabletitle">-->
-              <!--<td></td>-->
-              <!--<td class="Rate"><h2>Total</h2></td>-->
-              <!--<td class="payment"><h2>$3,644.25</h2></td>-->
-            <!--</tr>-->
-
-          <!--</table>-->
-        <!--</div>&lt;!&ndash;End Table&ndash;&gt;-->
-
-        <!--<div id="legalcopy">-->
-          <!--<p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.-->
-          <!--</p>-->
-        <!--</div>-->
-
-      <!--</div>&lt;!&ndash;End InvoiceBot&ndash;&gt;-->
-    <!--</div>&lt;!&ndash;End Invoice&ndash;&gt;-->
-
-
     <div id="print-section">
 
-      <div class="test"
-           style="padding-top: 30px;
-           padding-bottom: 30px; background-color: #6a0d0e;">
+      <div id="invoice-POS">
 
-        <span style="font-size: 30px;"></span> hgsdkjhsadjhk
+        <div id="top">
+          <div class="logo"></div>
+          <div class="info">
+            <h2>SBISTechs Inc</h2>
+          </div><!--End Info-->
+        </div><!--End InvoiceTop-->
 
+        <div id="mid">
+          <div class="info">
+            <h2>Contact Info</h2>
+            <p>
+              Address : street city, state 0000<br>
+              Email   : JohnDoe@gmail.com<br>
+              Phone   : 555-555-5555<br>
+            </p>
+          </div>
+        </div><!--End Invoice Mid-->
+
+        <div id="bot">
+
+          <div id="table">
+            <table>
+              <tr class="tabletitle">
+                <td class="item"><h2>Item</h2></td>
+                <td class="Hours"><h2>Qty</h2></td>
+                <td class="Rate"><h2>Sub Total</h2></td>
+              </tr>
+
+              <tr class="service">
+                <td class="tableitem"><p class="itemtext">Communication</p></td>
+                <td class="tableitem"><p class="itemtext">5</p></td>
+                <td class="tableitem"><p class="itemtext">$375.00</p></td>
+              </tr>
+
+              <tr class="service">
+                <td class="tableitem"><p class="itemtext">Asset Gathering</p></td>
+                <td class="tableitem"><p class="itemtext">3</p></td>
+                <td class="tableitem"><p class="itemtext">$225.00</p></td>
+              </tr>
+
+              <tr class="service">
+                <td class="tableitem"><p class="itemtext">Design Development</p></td>
+                <td class="tableitem"><p class="itemtext">5</p></td>
+                <td class="tableitem"><p class="itemtext">$375.00</p></td>
+              </tr>
+
+              <tr class="service">
+                <td class="tableitem"><p class="itemtext">Animation</p></td>
+                <td class="tableitem"><p class="itemtext">20</p></td>
+                <td class="tableitem"><p class="itemtext">$1500.00</p></td>
+              </tr>
+
+              <tr class="service">
+                <td class="tableitem"><p class="itemtext">Animation Revisions</p></td>
+                <td class="tableitem"><p class="itemtext">10</p></td>
+                <td class="tableitem"><p class="itemtext">$750.00</p></td>
+              </tr>
+
+
+              <tr class="tabletitle">
+                <td></td>
+                <td class="Rate"><h2>tax</h2></td>
+                <td class="payment"><h2>$419.25</h2></td>
+              </tr>
+
+              <tr class="tabletitle">
+                <td></td>
+                <td class="Rate"><h2>Total</h2></td>
+                <td class="payment"><h2>$3,644.25</h2></td>
+              </tr>
+
+            </table>
+          </div><!--End Table-->
+
+          <div id="legalcopy">
+            <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
+            </p>
+          </div>
+
+        </div><!--End InvoiceBot-->
       </div>
 
     </div>
+
+    <!--End Invoice-->
+
+
+    <!--<div id="print-section">-->
+
+      <!--<div class="test">-->
+
+        <!--sphgsdkjhsadjhk-->
+
+        <!--jjsjsj-->
+      <!--</div>-->
+
+    <!--</div>-->
 
   </div>
 

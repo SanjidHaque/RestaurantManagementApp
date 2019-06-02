@@ -1,154 +1,220 @@
-<!--
 <div class="row">
-  <div class="col-md-offset-1 col-md-9 order-detail">
-    <div class="row buttons">
-      <div class="col-md-2 back">
-        <button class="back-button" (click)="goBack()"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-          Back</button>
-      </div>
-      <div class="col-md-offset-8 col-md-2 delete">
-        <button class="back-button" (click)="deleteOrder()"><i class="fa fa-trash" aria-hidden="true"></i>
-          Delete</button>
-      </div>
-    </div>
-
-
-    <div class="row upper-div">
-      <div class="col-md-7 order-header">
-        <div class="row">
-          <div class="col-md-3 order-ref">
-            Order Ref
-          </div>
-          <div class="col-md-9 id">
-            {{ order.Id }}
-          </div>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="row">
-          <div class="col-md-5 order-date">
-            Order Date
-          </div>
-          <div class="col-md-7 date">
-            {{ order.DateTime }}
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row prod">
-      <div class="col-md-12">
-        Products
-      </div>
-    </div>
-    <div class="row units ">
-      <div class="col-md-3">
-        Product
-      </div>
-      <div class="col-md-3 ">
-        Quantity
-      </div>
-      <div class="col-md-3 ">
-        Unit Price
-      </div>
-      <div class="col-md-3 ">
-        Sub Total
-      </div>
-    </div>
-
-
-<div *ngIf="order.OrderedItems.length !== 0; else orderedItemsDeleted" class="scrollable-div" >
-    <div class="row table-bordered units-details" *ngFor="let products of order.OrderedItems">
-      <div class="col-md-3" >
-        {{ products.FoodItemName }}
-      </div>
-      <div class="col-md-3">
-        {{ products.FoodItemQuantity }}
-      </div>
-      <div class="col-md-3">
-        {{ products.Price}}
-      </div>
-      <div class="col-md-3">
-        {{ products.FoodItemSubTotal }}
-      </div>
-    </div>
+  <div class="col-xl-12">
+    <h6>General Information</h6>
+  </div>
 </div>
 
-    <ng-template #orderedItemsDeleted>
-
-      <div class="row">
-        <div class="col-md-12"
-             style="font-family: sans-serif;
-             padding-top: 15px;
-             opacity: .8;
-             font-size: 13px;
-             font-weight: bold;
-             color: #aa0909;">
-
-          Related records are deleted.
-
-        </div>
-      </div>
-
-    </ng-template>
-
-    <div class="row ">
-      <div class="col-md-offset-8 col-md-1 total">
-        Total:
-      </div>
-      <div class="col-md-2 bdt">
-        {{ order.TotalPrice }} BDT
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 prod">
-        Payments and Additional Informations
-      </div>
-    </div>
-    <div class="row units">
-      <div class="col-md-2">
-        Total
-      </div>
-      <div class="col-md-2">
-        Tendered
-      </div>
-      <div class="col-md-2">
-        Change
-      </div>
-      <div class="col-md-2">
-        Inventory Cost
-      </div>
-      <div class="col-md-2">
-        Profit
-      </div>
-      <div class="col-md-2">
-        Table
-      </div>
-    </div>
-
-    <div class="row units-details">
-      <div class="col-md-2">
-        {{ order.TotalPrice }}
-      </div>
-      <div class="col-md-2">
-        {{ order.Tendered }}
-      </div>
-      <div class="col-md-2">
-        {{ order.Change }}
-      </div>
-      <div class="col-md-2">
-        {{ order.InventoryCost }}
-      </div>
-      <div class="col-md-2">
-        {{ order.Profit }}
-      </div>
-      <div class="col-md-2">
-        {{ order.TableNumber }}
-      </div>
-    </div>
-    </div>
+<hr>
+<div class="row" style="font-weight: 500; font-size: 20px;">
+  <div class="col-xl-12">
+    Order ID: {{ order.Id }}
+  </div>
 </div>
 
 
--->
+<br>
+<div class="row" style="font-weight: 500; font-size: 17px;">
+  <div class="col-xl-12">
+    Current State: {{ order.CurrentState }}
+  </div>
+</div>
+
+
+
+<div class="row" style="font-weight: 500; font-size: 17px;">
+  <div class="col-xl-12">
+    Sales Person: {{ order.SalesPersonName }}
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-xl-12">
+
+    Inventory Cost: {{ order.InventoryCost }} BDT
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-12">
+
+    Profit: {{ order.Profit }} BDT
+
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-xl-10">
+
+    <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
+      <div class="col-xl-12">
+
+        <div class="row" style="text-align: left;
+
+                 padding-top: 30px;
+                 padding-bottom: 2px;">
+          <div class="col-xl-12">
+            Session: {{ i + 1 }}
+          </div>
+        </div>
+
+
+        <div class="row"
+             *ngIf="orderSession.OrderedDateTime !== ''"
+             style="font-size: 13px;  padding-bottom: 5px; padding-top: 5px;">
+          <div class="col-xl-12">
+            Ordered at: {{ orderSession.OrderedDateTime }}
+          </div>
+        </div>
+
+        <div class="row"
+             *ngIf="orderSession.ServedDateTime !== ''"
+             style="font-size: 13px; padding-bottom: 5px; padding-top: 5px;">
+          <div class="col-xl-12">
+            Served at: {{ orderSession.ServedDateTime }}
+          </div>
+
+        </div>
+
+        <table border=1 cellpadding=10 width="100%">
+          <tr style="font-weight: 500;">
+            <td>SN & Name</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+          </tr>
+
+          <tr
+            *ngFor="let orderedItem of orderSession.OrderedItems
+         | paginate: { itemsPerPage: 3, currentPage: pageNumber }">
+            <td>
+              {{ getFoodItemInformation('Name and Serial', orderedItem.FoodItemId) }}
+            </td>
+            <td >
+              {{ getFoodItemInformation('Price', orderedItem.FoodItemId) }}
+            </td>
+            <td>
+              {{ orderedItem.FoodItemQuantity }}
+            </td>
+            <td>
+              {{ orderedItem.TotalPrice }}
+            </td>
+          </tr>
+        </table>
+
+        <div class="row" style=" padding-top: 5px;">
+          <div class="col-xl-12">
+
+           Session Total: {{ getSessionTotalPrice(orderSession) }} BDT
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <br>
+
+    <div
+      class="row">
+      <div class="col-xl-12">
+
+        Total: {{ order.TotalPrice }} BDT
+
+      </div>
+    </div>
+
+
+
+
+
+
+    <div
+      *ngIf="setting.VatRate !== null"
+      class="row"
+      >
+      <div class="col-xl-12">
+
+        Vat {{ setting.VatRate }}%: {{ order.VatAmount.toFixed(2) }} BDT
+
+      </div>
+    </div>
+
+    <div class="row"
+         *ngIf="setting.ServiceChargeRate !== null"
+        >
+      <div class="col-xl-12">
+
+        Service Charge {{ setting.ServiceChargeRate }}%: {{ order.ServiceChargeAmount.toFixed(2) }} BDT
+
+      </div>
+    </div>
+
+    <div class="row"
+         *ngIf="order.DiscountRate !== 0">
+      <div class="col-xl-12">
+
+         <span *ngIf="order.DiscountType === 'Percent'">
+           Discount {{ order.DiscountRate }}%: {{ order.DiscountAmount.toFixed(2) }} BDT
+           </span>
+
+        <span *ngIf="order.DiscountType === 'Flat'">
+           Flat Discount {{ order.DiscountRate }} BDT
+           </span>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="row"
+         style="
+           font-size: 17px;
+           font-weight: 500;">
+      <div class="col-xl-12">
+
+        Gross Total: {{ order.GrossTotalPrice.toFixed(2) }} BDT
+
+      </div>
+    </div>
+    <br>
+
+    <div class="row" *ngIf="order.Tendered !== null">
+      <div class="col-xl-12">
+
+        Tendered: {{ order.Tendered }} BDT
+
+      </div>
+    </div>
+
+
+    <div class="row"
+         *ngIf="order.Change !== null" >
+      <div class="col-xl-12">
+
+        Change: {{ order.Change }} BDT
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<br>
+
+<div class="row text-xl-left">
+  <div class="col-xl-10">
+
+    <button
+      (click)="deleteOrder()"
+      class="btn btn-danger">Delete</button>
+
+  </div>
+</div>
+

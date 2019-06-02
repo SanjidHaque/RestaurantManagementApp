@@ -70,6 +70,7 @@ export class MenuComponent implements OnInit {
         || x.CurrentState === 'Served');
       this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
       this.setFoodItemImage();
+      console.log(this.order);
 
     }
   }
@@ -153,7 +154,7 @@ export class MenuComponent implements OnInit {
           0,
           null,
           null,
-          new Date().toLocaleString(),
+          '',
           0,
           0,
           this.tableId,
@@ -201,7 +202,9 @@ export class MenuComponent implements OnInit {
       }
 
       this.order.TotalPrice += subTotal;
+      this.order.GrossTotalPrice = this.order.TotalPrice;
       this.order.InventoryCost +=  (foodItem.InventoryCost * quantity);
+      this.order.Profit =  this.order.GrossTotalPrice - this.order.InventoryCost;
 
     } else {
       if (this.order === undefined) {
@@ -230,8 +233,10 @@ export class MenuComponent implements OnInit {
       existingOrderedItem.FoodItemQuantity -= quantity;
       existingOrderedItem.TotalPrice -= subTotal;
       this.order.TotalPrice -= subTotal;
+      this.order.GrossTotalPrice = this.order.TotalPrice;
       this.order.InventoryCost -=  (foodItem.InventoryCost * quantity);
-      this.order.Profit -= (this.order.TotalPrice - this.order.InventoryCost);
+      this.order.Profit = this.order.TotalPrice - this.order.InventoryCost;
+
 
       if (existingOrderedItem.FoodItemQuantity === 0) {
         const index = orderSession.OrderedItems.findIndex(x => x.FoodItemId === existingOrderedItem.FoodItemId);
@@ -285,6 +290,10 @@ export class MenuComponent implements OnInit {
 
     const orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
     orderSession.OrderedDateTime = moment().format('h:mm:ss A, Do MMMM YYYY');
+    if (this.order.DateTime === '') {
+      this.order.DateTime = orderSession.OrderedDateTime;
+    }
+
 
     this.orderDataStorageService.placeOrder(this.order).subscribe((data: any) => {
       if (data === '') {

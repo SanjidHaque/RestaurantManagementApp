@@ -21,9 +21,11 @@ export class FoodItemListComponent implements OnInit, AfterViewInit {
       'Profit',
       'TotalSale'
     ];
+
   dataSource: MatTableDataSource<FoodItem>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {

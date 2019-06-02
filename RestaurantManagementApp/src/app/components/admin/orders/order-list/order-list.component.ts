@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+
+import {Table} from '../../../../models/table.model';
 import {Order} from '../../../../models/order.model';
-import {PointOfSaleService} from '../../../../services/shared/point-of-sale.service';
-
-
+import {FoodItem} from '../../../../models/food-item.model';
+import {AdminService} from '../../../../services/shared/admin.service';
 
 @Component({
   selector: 'app-order-list',
@@ -11,44 +13,51 @@ import {PointOfSaleService} from '../../../../services/shared/point-of-sale.serv
   styleUrls: ['./order-list.component.scss']
 })
 
-export class OrderListComponent implements OnInit {
-
+export class OrderListComponent implements OnInit, AfterViewInit {
   orders: Order[] = [];
-  grossSale = 0;
-  grossCost = 0;
-  grossProfit = 0;
-  totalOrder = 0;
+  tables: Table[] = [];
+
+  displayedColumns: string[] =
+    [
+      'Id',
+      'DateTime',
+      'GrossTotalPrice',
+      'InventoryCost',
+      'Profit',
+      'TableId',
+      'CurrentState'
+    ];
+
+  dataSource: MatTableDataSource<Order>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private pointOfSaleService: PointOfSaleService,
-              ) { }
+              public adminService: AdminService) { }
 
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: Order[]) => {
-      //  this.pointOfSaleService.order = data['order'];
+      ( data: FoodItem[]) => {
+        this.orders = data['orders'];
+        this.tables = data['tables'];
+        this.dataSource = new MatTableDataSource(this.orders);
+
       }
     );
+  }
 
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
 
-    for (let i = 0; i < this.orders.length; i++ ) {
-
-      this.grossSale = this.grossSale
-        + Number.parseInt(this.orders[i].TotalPrice.toString());
-
-      this.grossCost = this.grossCost
-        + Number.parseInt(this.orders[i].InventoryCost.toString());
-
-      this.grossProfit = this.grossProfit
-        + Number.parseInt(this.orders[i].Profit.toString());
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-
-
   }
 
-  viewDetails(orderList: Order) {
-    const orderId =  orderList.Id;
-    this.router.navigate(['admin/order/food-item-details', orderId]);
-  }
 }
+

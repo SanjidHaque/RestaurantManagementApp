@@ -29,7 +29,7 @@ export class OrderDataStorageService {
   }
 
   validateOrder(order: Order) {
-    return this.http.put<Order>(this.rootUrl + '/api/ValidateOrder', order);
+    return this.http.post<Order>(this.rootUrl + '/api/ValidateOrder', order);
   }
 
   cancelOrder(orderSession: OrderSession) {

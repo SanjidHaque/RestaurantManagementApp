@@ -60,6 +60,7 @@ export class PaymentComponent implements OnInit {
       } else {
         this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered'
           || x.CurrentState === 'Served');
+        console.log(this.order);
 
         if (this.order === undefined) {
           this.toastr.errorToastr('Order not found', 'Error', {
@@ -99,6 +100,7 @@ export class PaymentComponent implements OnInit {
       this.order.DiscountAmount =  (this.order.GrossTotalPrice * form.value.discountRate) / 100;
     }
     this.order.GrossTotalPrice -= this.order.DiscountAmount;
+    this.order.GrossTotalPrice = Math.ceil(this.order.GrossTotalPrice);
   }
 
   removeOrderDiscount() {
@@ -109,6 +111,8 @@ export class PaymentComponent implements OnInit {
   setOrderGrossTotalPrice() {
     this.order.GrossTotalPrice = this.order.TotalPrice + this.order.VatAmount
       + this.order.ServiceChargeAmount;
+
+    this.order.GrossTotalPrice = Math.ceil(this.order.GrossTotalPrice);
   }
 
 
@@ -152,7 +156,7 @@ export class PaymentComponent implements OnInit {
     this.isDisabled = true;
     this.order.Tendered = this.tendered;
     this.order.Change = this.tendered - this.order.GrossTotalPrice;
-    this.order.Change = this.tendered - this.order.GrossTotalPrice;
+    this.order.Profit = this.order.GrossTotalPrice - this.order.InventoryCost;
     this.order.SalesPersonName = this.userName;
 
 
@@ -190,121 +194,85 @@ export class PaymentComponent implements OnInit {
         <head>
           <title></title>
         <style>
- @media print
- {
-  @page {
-      margin: 0.5cm;
-  }
-  .intro{
-  text-align: center;
-  }
-  .test {
-  background-color: red;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  }
-  .hodoo{
-    font-family:"Inconsolata";
-    font-size: 4vw;
-    text-align: center;
-    padding-top: 10px;
-  }
-  .date-time{
-   font-family:"Inconsolata";
-   font-size: 4vw;
-   display: inline-block;
-   text-align:center;
-  }
-.id{
-   font-family:"Inconsolata";
-   font-size: 4vw;
-   display: inline;
-   text-align: center;
-}
-.name, .price, .quantity, .equal, .sub-total, .mul{
-    font-family:"Inconsolata";
-    font-size: 3vw;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    display: inline;
-    text-align:left;
-  }
-  .main{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-  }
-  .name{
-  text-align:left;
-  }
-.intro{
-    margin-top: 15px;
-  }
+        @media print {
+        #invoice-POS{
+  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+  padding:2mm;
+  margin: 0 auto;
+  width: 44mm;
+  background: #FFF;
 
 
-.sub-total{
-text-align: right;
-}
+  ::selection {background: #f31544; color: #FFF;}
+  h1{
+    font-size: 1.5em;
+    color: #222;
+  }
+  h2{font-size: .9em;}
+  h3{
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 2em;
+  }
+  p{
+    font-size: .7em;
+    color: #666;
+    line-height: 1.2em;
+  }
 
-  .choosing-hodoo{
-    font-family:"Inconsolata",cursive;
-    font-size: 3vw;
-    padding-top: 15px;
-    padding-bottom: 20px;
-    text-align: center;
+  #top, #mid,#bot{ /* Targets all id with 'col-' */
+    border-bottom: 1px solid #EEE;
   }
-  .total-div{
-    padding-bottom: 8px;
-    padding-top: 8px;
-    text-align:center;
+
+  #top{min-height: 100px;}
+  #mid{min-height: 80px;}
+  #bot{ min-height: 50px;}
+
+  #top .logo{
+    //float: left;
+    height: 60px;
+    width: 60px;
+    background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+    background-size: 60px 60px;
   }
-  .total{
-    font-family:"Inconsolata";
-    font-size: 4vw;
-     display: inline-block;
+  .clientlogo{
+    float: left;
+    height: 60px;
+    width: 60px;
+    background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+    background-size: 60px 60px;
+    border-radius: 50px;
   }
-  .total-bdt{
-    font-family:"Inconsolata";
-    font-size: 4vw;
-     display: inline-block;
+  .info{
+    display: block;
+    //float:left;
+    margin-left: 0;
   }
-   .change-div{
-    padding-top: 8px;
-    padding-bottom: 8px;
-    text-align: center;
+  .title{
+    float: right;
   }
-  .change-bdt{
-    font-family:"Inconsolata";
-    font-size: 4vw;
-     display: inline-block;
+  .title p{text-align: right;}
+  table{
+    width: 100%;
+    border-collapse: collapse;
   }
-  .change-cash{
-    font-family:"Inconsolata";
-    font-size: 4vw;
-    display: inline-block;
+  td{
+    //padding: 5px 0 5px 15px;
+    //border: 1px solid #EEE
   }
-.tendered-div{
-    padding-top: 8px;
-    padding-bottom: 8px;
-    text-align: center;
+  .tabletitle{
+    //padding: 5px;
+    font-size: .5em;
+    background: #EEE;
   }
-  .tendered{
-    font-family:"Inconsolata";
-    font-size: 4vw;
-    display: inline-block;
-  }
-  .tendered-bdt{
-    font-family:"Inconsolata";
-    font-size: 4vw;
-    display: inline-block;
-  }
-  .table-no{
-    text-align: center;
-    font-family:"Inconsolata";
-    font-size: 4vw;
-  }
- }
-</style>
+  .service{border-bottom: 1px solid #EEE;}
+  .item{width: 24mm;}
+  .itemtext{font-size: .5em;}
+
+  #legalcopy{
+    margin-top: 5mm;
+  } }
+ } </style>
         </head>
      <body onload="window.print();window.close()">${printContents}</body>
       </html>`

@@ -379,6 +379,18 @@
     <Compile Include="Migrations\201905301915187_settingModelChanged2.Designer.cs">
       <DependentUpon>201905301915187_settingModelChanged2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906021144459_orderAGain.cs" />
+    <Compile Include="Migrations\201906021144459_orderAGain.Designer.cs">
+      <DependentUpon>201906021144459_orderAGain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906021151513_orderAGaina.cs" />
+    <Compile Include="Migrations\201906021151513_orderAGaina.Designer.cs">
+      <DependentUpon>201906021151513_orderAGaina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906021204142_orderAGainaa.cs" />
+    <Compile Include="Migrations\201906021204142_orderAGainaa.Designer.cs">
+      <DependentUpon>201906021204142_orderAGainaa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -581,6 +593,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905301915187_settingModelChanged2.resx">
       <DependentUpon>201905301915187_settingModelChanged2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906021144459_orderAGain.resx">
+      <DependentUpon>201906021144459_orderAGain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906021151513_orderAGaina.resx">
+      <DependentUpon>201906021151513_orderAGaina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906021204142_orderAGainaa.resx">
+      <DependentUpon>201906021204142_orderAGainaa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

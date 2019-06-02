@@ -286,7 +286,7 @@ namespace RMS_Server_.Controllers
 
 
 
-        [Route("api/DeleteOrder")]
+        [Route("api/DeleteOrder/{orderId}")]
         [HttpDelete]
         [AllowAnonymous]
         public IHttpActionResult DeleteOrder(int orderId)
@@ -300,7 +300,7 @@ namespace RMS_Server_.Controllers
                 return Ok();
             }
 
-            return NotFound();
+            return Ok("Order not found");
         }
            
         [HttpGet]

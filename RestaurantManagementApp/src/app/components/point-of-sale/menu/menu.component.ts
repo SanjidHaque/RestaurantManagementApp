@@ -70,8 +70,6 @@ export class MenuComponent implements OnInit {
         || x.CurrentState === 'Served');
       this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
       this.setFoodItemImage();
-      console.log(this.order);
-
     }
   }
 

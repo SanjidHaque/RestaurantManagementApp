@@ -60,7 +60,6 @@ export class PaymentComponent implements OnInit {
       } else {
         this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered'
           || x.CurrentState === 'Served');
-        console.log(this.order);
 
         if (this.order === undefined) {
           this.toastr.errorToastr('Order not found', 'Error', {

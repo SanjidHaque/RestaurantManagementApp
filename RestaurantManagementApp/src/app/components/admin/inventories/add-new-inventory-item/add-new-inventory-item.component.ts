@@ -27,14 +27,19 @@ export class AddNewInventoryItemComponent implements OnInit {
   }
 
   addNewInventoryItem(form: NgForm) {
-    this.isDisabled = true;
+    const buyingPrice = form.value.price;
+    if (!this.adminService.checkPricingConditions(buyingPrice)) {
+      return;
+    }
+
+      this.isDisabled = true;
       const inventoryId = null;
       const updateHistoryId = null;
       const inventoryItemName = form.value.name;
       const buyingQuantity = form.value.quantity;
-      const buyingPrice = form.value.price;
       const unit = form.value.unit;
       const buyingTime = new Date().toLocaleString();
+
 
 
       const inventoryHistories: InventoryHistory[] = [new InventoryHistory(

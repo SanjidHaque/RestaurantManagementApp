@@ -8,6 +8,7 @@ import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredient} from '../../../../models/ingredient.model';
 import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
+import {AdminService} from '../../../../services/shared/admin.service';
 
 @Component({
   selector: 'app-add-new-food-item',
@@ -33,6 +34,7 @@ export class AddNewFoodItemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private toastr: ToastrManager,
+              private adminService: AdminService,
               private router: Router,
               private foodItemDataStorageService: FoodItemDataStorageService,
            ) {}
@@ -79,6 +81,8 @@ export class AddNewFoodItemComponent implements OnInit {
     }
     return '';
   }
+
+
 
 
 
@@ -204,10 +208,15 @@ export class AddNewFoodItemComponent implements OnInit {
 
     }
 
+    const sellingPrice = form.value.sellingPrice;
+
+    if (!this.adminService.checkPricingConditions(sellingPrice)) {
+      return;
+    }
 
     this.isDisabled = true;
     const name = form.value.itemName;
-    const sellingPrice = form.value.sellingPrice;
+
     const profit = sellingPrice - this.inventoryCost;
 
     const foodItem = new FoodItem(

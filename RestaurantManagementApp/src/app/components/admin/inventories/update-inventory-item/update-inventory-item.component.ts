@@ -6,6 +6,7 @@ import {Inventory} from '../../../../models/inventory.model';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
+import {AdminService} from '../../../../services/shared/admin.service';
 
 @Component({
   selector: 'app-update-inventory-item',
@@ -22,6 +23,7 @@ export class UpdateInventoryItemComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private adminService: AdminService,
               private toastr: ToastrManager,
               private inventoryDataStorageService: InventoryDataStorageService ) {
     this.route.params
@@ -50,11 +52,16 @@ export class UpdateInventoryItemComponent implements OnInit {
 
 
   onUpdateInventoryItem(form: NgForm) {
+    const buyingPrice = form.value.price;
+    if (!this.adminService.checkPricingConditions(buyingPrice)) {
+      return;
+    }
+
     this.isDisabled = true;
     const inventoryId = this.inventoryId;
     const inventoryHistoryId = null;
     const buyingQuantity = form.value.quantity;
-    const buyingPrice = form.value.price;
+
     const buyingTime = new Date().toLocaleString();
     const updateHistory = new InventoryHistory(
         inventoryHistoryId,

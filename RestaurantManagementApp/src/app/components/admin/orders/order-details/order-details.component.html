@@ -131,13 +131,9 @@
 
 
 
-
-
-
     <div
-      *ngIf="setting.VatRate !== null"
-      class="row"
-      >
+      *ngIf="setting.VatRate !== null && setting.VatRate !== 0"
+      class="row">
       <div class="col-xl-12">
 
         Vat {{ setting.VatRate }}%: {{ order.VatAmount.toFixed(2) }} BDT
@@ -146,7 +142,7 @@
     </div>
 
     <div class="row"
-         *ngIf="setting.ServiceChargeRate !== null"
+         *ngIf="setting.ServiceChargeRate !== null && setting.ServiceChargeRate !== 0"
         >
       <div class="col-xl-12">
 
@@ -206,12 +202,12 @@
 </div>
 
 
-<br>
 
 <div class="row text-xl-left">
   <div class="col-xl-10">
 
     <button
+      [disabled]="isDisabled"
       (click)="deleteOrder()"
       class="btn btn-danger">Delete</button>
 

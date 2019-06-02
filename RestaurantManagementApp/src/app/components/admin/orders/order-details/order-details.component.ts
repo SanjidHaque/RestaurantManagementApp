@@ -16,6 +16,7 @@ import {Setting} from '../../../../models/setting.model';
 })
 
 export class OrderDetailsComponent implements OnInit {
+  isDisabled = false;
 
   orderId: number;
   order: Order;
@@ -87,7 +88,26 @@ export class OrderDetailsComponent implements OnInit {
      return;
     }
 
+    this.isDisabled = true;
+    this.orderDataStorageService.deleteOrder(this.orderId).subscribe((data: any) => {
+      if (data === 'Order not found') {
+        this.isDisabled = false;
+        this.toastr.errorToastr( data,  'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+      }
+      return;
+    });
 
+
+    this.toastr.successToastr( 'Order deleted successfully',  'Error', {
+      toastTimeout: 10000,
+      newestOnTop: true,
+      showCloseButton: true
+    });
+    this.router.navigate(['admin/orders']);
   }
 
 }

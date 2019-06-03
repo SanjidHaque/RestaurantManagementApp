@@ -169,13 +169,20 @@ export class PaymentComponent implements OnInit {
           newestOnTop: true,
           showCloseButton: true
         });
+        return;
       }
-
-      this.order.CurrentState = 'Paid';
-      this.toastr.successToastr('Order validated', 'Success', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
+      this.tableDataStorageService.changeTableState(new Table(
+        this.order.TableId,
+        '',
+        'Empty',
+        []
+      )).subscribe((response: any) => {
+        this.order.CurrentState = 'Paid';
+        this.toastr.successToastr('Order validated', 'Success', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
       });
     });
   }

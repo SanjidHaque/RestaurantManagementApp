@@ -38,7 +38,43 @@
 
          *ngFor="let table of tables">
 
-      {{ table.Name }} ({{ table.CurrentState }})
+      <div class="row">
+        <div class="col-xl-12">
+          {{ table.Name }} ({{ table.CurrentState }})
+        </div>
+      </div>
+
+      <!--<div class="row"-->
+
+           <!--style="font-size: 13px; font-weight: 500;">-->
+        <!--<div class="col-xl-12">-->
+            <!--{{ getLastOrderSessionTimes(table) }}-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <div class="row"
+           *ngIf="getLastOrderSessionTimes(table, 'Ordered') !== ''"
+           style="font-size: 13px; font-weight: 500;">
+        <div class="col-xl-12">
+
+
+          Ordered at:  {{ getLastOrderSessionTimes(table, 'Ordered') }}
+
+        </div>
+      </div>
+
+
+      <div class="row"
+           *ngIf="getLastOrderSessionTimes(table, 'Served') !== ''"
+           style="font-size: 13px; font-weight: 500;">
+        <div class="col-xl-12">
+
+
+          Served at:  {{ getLastOrderSessionTimes(table, 'Served') }}
+
+        </div>
+      </div>
+
 
     </div>
   </div>

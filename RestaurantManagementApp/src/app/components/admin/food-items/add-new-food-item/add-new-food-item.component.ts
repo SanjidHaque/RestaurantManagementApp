@@ -30,7 +30,7 @@ export class AddNewFoodItemComponent implements OnInit {
 
   fileToUpload: File = null;
   imageUrl = 'assets/noImage.png';
-  @ViewChild('Image') Image: any;
+  @ViewChild('Image', { static: false }) Image: any;
 
   constructor(private route: ActivatedRoute,
               private toastr: ToastrManager,

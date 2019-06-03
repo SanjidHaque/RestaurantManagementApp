@@ -31,7 +31,7 @@ export class EditFoodItemComponent implements OnInit {
   rootUrl = '';
   fileToUpload: File = null;
   imageUrl = '';
-  @ViewChild('Image') Image: any;
+  @ViewChild('Image',  { static: false }) Image: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,

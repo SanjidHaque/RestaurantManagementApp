@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Inventory} from '../../../../models/inventory.model';
-import {MatTableDataSource} from '@angular/material';
-import {MatSort} from '@angular/material';
-import {MatPaginator} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-inventory-list',
@@ -22,8 +22,8 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
       'UsedQuantity'
     ];
   dataSource: MatTableDataSource<Inventory>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private route: ActivatedRoute) {}
 

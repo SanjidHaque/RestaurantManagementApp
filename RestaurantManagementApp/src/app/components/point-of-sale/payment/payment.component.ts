@@ -36,6 +36,7 @@ export class PaymentComponent implements OnInit {
 
   constructor(private pointOfSaleService: PointOfSaleService,
               private orderDataStorageService: OrderDataStorageService,
+              private tableDataStorageService: TableDataStorageService,
               private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrManager) {

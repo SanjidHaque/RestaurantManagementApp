@@ -29,4 +29,8 @@ export class TableDataStorageService {
   deleteTable(tableId: number) {
     return this.http.delete(`${this.rootUrl + '/api/DeleteTable'}/${tableId}`);
   }
+
+  changeTableState(table: Table) {
+    return this.http.put<Table[]>(this.rootUrl + '/api/ChangeTableState', table);
+  }
 }

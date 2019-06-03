@@ -101,7 +101,9 @@ export class MenuComponent implements OnInit {
       quantity = form.value.indirectQuantity;
     }
 
-    this.pointOfSaleService.checkCartConditions(quantity);
+    if (!this.pointOfSaleService.checkCartConditions(quantity)) {
+      return;
+    }
 
     const foodItemId = foodItem.Id;
     const foodItemName = foodItem.Name;
@@ -313,17 +315,23 @@ export class MenuComponent implements OnInit {
       }
 
       if (data.Text === 'Order placed successfully') {
-        this.toastr.successToastr(data.Text, 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
-        this.table.CurrentState = 'Ordered';
-        this.order = data.Order;
-        return;
+        this.tableDataStorageService.changeTableState(new Table(
+          this.order.TableId,
+          '',
+          'Ordered',
+          []
+        )).subscribe((response: any) => {
+            this.toastr.successToastr(data.Text, 'Success', {
+              toastTimeout: 10000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
+            this.table.CurrentState = 'Ordered';
+            this.order = data.Order;
+            return;
+          }
+        );
       }
-
-
     });
   }
 
@@ -336,15 +344,28 @@ export class MenuComponent implements OnInit {
     orderSession.ServedDateTime = moment().format('h:mm:ss A, Do MMMM YYYY');
 
     this.orderDataStorageService.serveOrder(orderSession).subscribe( (data: any) => {
+
       if (data === 'Order served successfully') {
-        this.toastr.successToastr(data, 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
+
+        this.tableDataStorageService.changeTableState(new Table(
+          this.order.TableId,
+          '',
+          'Served',
+          []
+        )).subscribe((response: any) => {
+
+          this.toastr.successToastr(data, 'Success', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+
+          orderSession.CurrentState = 'Served';
+          this.order.CurrentState = 'Served';
+          this.table.CurrentState = 'Served';
+          return;
         });
-        orderSession.CurrentState = 'Served';
-        this.order.CurrentState = 'Served';
-        this.table.CurrentState = 'Served';
+
       }
 
       if (data === 'Order not found') {
@@ -365,7 +386,14 @@ export class MenuComponent implements OnInit {
 
     this.orderDataStorageService.cancelOrder(orderSession).subscribe((data: any) => {
 
-      for (let i = 0; this.order.OrderSessions.length; i++) {
+      this.tableDataStorageService.changeTableState(new Table(
+        this.order.TableId,
+        '',
+        'Empty',
+        []
+      )).subscribe((response: any) => {
+
+        for (let i = 0; this.order.OrderSessions.length; i++) {
           if (this.order.OrderSessions[i].Id === orderSession.Id) {
 
             this.order.OrderSessions[i].OrderedItems.forEach((value) => {
@@ -399,16 +427,14 @@ export class MenuComponent implements OnInit {
             this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;
             this.table.CurrentState = this.order.CurrentState;
           }
-
-
-
-
         }
 
-      this.toastr.successToastr('Order canceled successfully', 'Success', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
+        this.toastr.successToastr('Order canceled successfully', 'Success', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        return;
       });
 
     });
@@ -435,8 +461,5 @@ export class MenuComponent implements OnInit {
       }
     }
   }
-
-
-
 
 }

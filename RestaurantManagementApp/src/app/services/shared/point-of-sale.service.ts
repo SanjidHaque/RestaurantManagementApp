@@ -76,7 +76,7 @@ export class PointOfSaleService {
         newestOnTop: true,
         showCloseButton: true
       });
-      return;
+      return false;
     }
 
     if (quantity <= 0) {
@@ -85,8 +85,9 @@ export class PointOfSaleService {
         newestOnTop: true,
         showCloseButton: true
       });
-      return;
+      return false;
     }
+    return true;
   }
 
   mergeOrderedItems(order: Order) {

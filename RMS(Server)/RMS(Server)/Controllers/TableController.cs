@@ -60,21 +60,45 @@ namespace RMS_Server_.Controllers
         }
 
 
+
+
         [HttpDelete]
         [Route("api/DeleteTable/{tableId}")]
         public IHttpActionResult DeleteTable(int tableId)
         {
 
-
-            Table deleteTable = _context.Tables.FirstOrDefault(p => p.Id == tableId);
+            Table deleteTable = _context.Tables.Include(x => x.Orders).FirstOrDefault(p => p.Id == tableId);
             if (deleteTable == null)
             {
                 return NotFound();
             }
+            
+            if (deleteTable.Orders.Count != 0)
+            {
+                return Ok("Failed");
+            }
+
+            
             _context.Tables.Remove(deleteTable);
             _context.SaveChanges();
             return Ok();
 
+        }
+
+
+        [HttpPut]
+        [Route("api/ChangeTableState")]
+        public IHttpActionResult ChangeTableState(Table table)
+        {
+            Table changeTabeStateDefault = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+            if (changeTabeStateDefault != null)
+            {
+                changeTabeStateDefault.CurrentState = table.CurrentState;
+                _context.SaveChanges();
+                return Ok();
+            }
+
+            return NotFound();
         }
     }
 }

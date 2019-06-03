@@ -99,15 +99,16 @@ export class OrderDetailsComponent implements OnInit {
         });
       }
       return;
+
+      this.toastr.successToastr( 'Order deleted successfully',  'Error', {
+        toastTimeout: 10000,
+        newestOnTop: true,
+        showCloseButton: true
+      });
+
+      this.router.navigate(['admin/orders']);
     });
 
-
-    this.toastr.successToastr( 'Order deleted successfully',  'Error', {
-      toastTimeout: 10000,
-      newestOnTop: true,
-      showCloseButton: true
-    });
-    this.router.navigate(['admin/orders']);
   }
 
 }

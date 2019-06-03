@@ -8,7 +8,6 @@ import {TableDataStorageService} from './services/data-storage/table-data-storag
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
-import { OrderPipe } from './pipes/order.pipe';
 import {TableResolverService} from './route-resolvers/table-resolver.service';
 import {OrderResolverService} from './route-resolvers/order-resolver.service';
 import {InventoryResolverService} from './route-resolvers/inventory-resolver.service';
@@ -17,7 +16,6 @@ import {AuthGuard} from './auth/auth.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {UserAccountResolverService} from './route-resolvers/user-account-resolver.service';
-import { UserFilterPipe } from './pipes/user-filter.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {NgProgressHttpModule} from '@ngx-progressbar/http';
@@ -74,6 +72,7 @@ import { SettingsComponent } from './components/admin/settings/settings.componen
 import { SettingListComponent } from './components/admin/settings/setting-list/setting-list.component';
 import { EditSettingComponent } from './components/admin/settings/edit-setting/edit-setting.component';
 import {SettingResolverService} from './route-resolvers/setting-resolver.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -99,7 +98,6 @@ import {SettingResolverService} from './route-resolvers/setting-resolver.service
     OrdersComponent,
     OrderListComponent,
     OrderDetailsComponent,
-    OrderPipe,
     FoodItemsComponent,
     FoodItemListComponent,
     FoodItemDetailsComponent,
@@ -111,7 +109,6 @@ import {SettingResolverService} from './route-resolvers/setting-resolver.service
     ForbiddenComponent,
     ResetPasswordComponent,
     NewPasswordComponent,
-    UserFilterPipe,
     HeaderComponent,
     SelectTableComponent,
     TableListComponent,
@@ -144,7 +141,8 @@ import {SettingResolverService} from './route-resolvers/setting-resolver.service
       spinner: false,
       meteor: false
     }),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
 
   providers: [

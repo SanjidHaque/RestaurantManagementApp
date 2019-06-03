@@ -119,13 +119,6 @@ namespace RMS_Server_.Controllers
             }
 
 
-            Order getOrder = _context.Orders.Include(x => x.Table).FirstOrDefault(y => y.Id == order.Id);
-            if (getOrder != null)
-            {
-                getOrder.Table.CurrentState = "Ordered";
-            }
-            _context.SaveChanges();
-
             return Ok( new { Text = "Order placed successfully", Order = order });
         }
 
@@ -171,9 +164,8 @@ namespace RMS_Server_.Controllers
 
           
 
-            Order order = _context.Orders.Include(x => x.Table).FirstOrDefault(x => x.Id == orderSession.OrderId);
+            Order order = _context.Orders.Include(c => c.OrderSessions).FirstOrDefault(x => x.Id == orderSession.OrderId);
 
-            List<OrderSession> orderSessions = _context.OrderSessions.Include(c => c.Order).ToList();
             List<FoodItem> foodItems = _context.FoodItems.ToList();
 
             if (order != null)
@@ -194,13 +186,11 @@ namespace RMS_Server_.Controllers
                 });
 
                 order.GrossTotalPrice = order.TotalPrice;
-
                 order.Profit = order.TotalPrice - order.InventoryCost;
-                order.Table.CurrentState = "Empty";
                 _context.SaveChanges();
 
               
-                if (order.OrderSessions == null)
+                if (order.OrderSessions.Count == 0)
                 {
                   
                     _context.Orders.Remove(order);
@@ -210,7 +200,6 @@ namespace RMS_Server_.Controllers
                 {
                     int lastIndex = order.OrderSessions.Count - 1;
                     order.CurrentState = order.OrderSessions[lastIndex].CurrentState;
-                    order.Table.CurrentState = order.CurrentState;
                     _context.SaveChanges();
                 }
 
@@ -230,11 +219,10 @@ namespace RMS_Server_.Controllers
                 getOrderSession.ServedDateTime = orderSession.ServedDateTime;
                 _context.SaveChanges();
 
-                Order order = _context.Orders.Include(y => y.Table).FirstOrDefault(x => x.Id == getOrderSession.OrderId);
+                Order order = _context.Orders.FirstOrDefault(x => x.Id == getOrderSession.OrderId);
                 if (order != null)
                 {
                     order.CurrentState = "Served";
-                    order.Table.CurrentState = "Served";
                     _context.SaveChanges();
                     return Ok("Order served successfully");
                 }
@@ -253,8 +241,7 @@ namespace RMS_Server_.Controllers
             {
                 return Ok("Order not found");
             }
-            Order getOrder = _context.Orders.Include(x => x.Table).FirstOrDefault(x => x.Id == order.Id);
-            List<OrderSession> orderSessions = _context.OrderSessions.Include(c => c.Order).ToList();
+            Order getOrder = _context.Orders.Include(x => x.OrderSessions).FirstOrDefault(x => x.Id == order.Id);
             
             if (getOrder == null)
             {
@@ -278,7 +265,6 @@ namespace RMS_Server_.Controllers
                 x.CurrentState = "Paid";
             });
 
-            getOrder.Table.CurrentState = "Empty";
             _context.SaveChanges();
             
             return Ok();
@@ -291,10 +277,9 @@ namespace RMS_Server_.Controllers
         [AllowAnonymous]
         public IHttpActionResult DeleteOrder(int orderId)
         {
-            Order deleteOrder = _context.Orders.Include(x => x.Table).FirstOrDefault(a => a.Id == orderId);
+            Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orderId);
             if (deleteOrder != null)
-            {
-                deleteOrder.Table.CurrentState = "Empty";
+            {             
                 _context.Orders.Remove(deleteOrder);
                 _context.SaveChanges();
                 return Ok();

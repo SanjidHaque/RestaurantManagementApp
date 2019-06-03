@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {FoodItem} from '../../../../models/food-item.model';
-import {Ingredient} from '../../../../models/ingredient.model';
 import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
 import {Inventory} from '../../../../models/inventory.model';
@@ -90,8 +89,24 @@ export class FoodItemDetailsComponent implements OnInit {
   }
 
   confirmEvent() {
+
+
+
+
     this.foodItemDataStorageService.deleteFoodItem(this.foodItemId).subscribe(
       (data: any) => {
+
+        if (data === 'Failed') {
+          this.toastr.errorToastr('This food cannot be deleted for reporting purpose',
+            'Error', {
+              toastTimeout: 10000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
+          return;
+        }
+
+
         this.toastr.successToastr('Removed from shop', 'Success', {
           toastTimeout: 10000,
           newestOnTop: true,

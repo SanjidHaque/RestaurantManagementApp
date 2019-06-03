@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects.DataClasses;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -80,7 +79,15 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteFoodItem/{foodItemId}")]
         public IHttpActionResult DeleteFoodItem(int foodItemId)
         {
+
+            var orderedItemsCount = _context.OrderedItems.Where(x => x.Id == foodItemId).ToList().Count;
+            if (orderedItemsCount != 0)
+            {
+                return Ok("Failed");
+            }
+
             FoodItem deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItemId);
+
             if (deleteFoodItem != null)
             {
                 DeleteFoodItemImage(deleteFoodItem);

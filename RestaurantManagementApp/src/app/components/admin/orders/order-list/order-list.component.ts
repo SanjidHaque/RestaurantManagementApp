@@ -1,6 +1,7 @@
 import {ActivatedRoute} from '@angular/router';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import * as moment from 'moment';
 
 import {Table} from '../../../../models/table.model';
 import {Order} from '../../../../models/order.model';
@@ -57,6 +58,39 @@ export class OrderListComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+  filterOrdersByDate() {
+    // const startDate = new Date('3rd June 2019');
+    //
+    // console.log(startDate);
+    //
+    // const endDate = new Date('3rd June 2019');
+    //
+    // const selectedMembers = this.orders.filter(
+    //   m => new Date(m.DateTime) > startDate && new Date(m.DateTime) < endDate);
+    //
+    //
+    // console.log(selectedMembers);
+
+
+   // moment().format('h:mm:ss A, Do MMMM YYYY');
+
+
+
+    const compareDate = moment('12:03:50 AM, 3rd June 2019', 'h:mm:ss A, Do MMMM YYYY');
+
+    const startDate   = moment('12:03:50 AM, 3rd June 2019', 'h:mm:ss A, Do MMMM YYYY');
+    const endDate     = moment('12:03:51 AM, 3rd June 2019', 'h:mm:ss A, Do MMMM YYYY');
+
+    const getDate = moment( new Date('Mon Jun 03 2019 23:41:33 GMT+0600 (Bangladesh Standard Time)'))
+      .format('h:mm:ss A, Do MMMM YYYY');
+
+    console.log(getDate);
+// omitting the optional third parameter, 'units'
+    compareDate.isBetween(startDate, endDate);
+    // console.log(compareDate.isBetween(startDate, endDate, null, '[]'));
   }
 
 }

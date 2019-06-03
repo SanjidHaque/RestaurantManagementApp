@@ -6,16 +6,29 @@
   <div class="col-md-12">
     No order is arrived yet. Go to POS to create an order.
   </div>
+</div><div class="row">
+  <div class="col-xs-12 col-12 col-md-4 form-group">
+    <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline>
+  </div>
 </div>
 
 <ng-template #notEmpty>
+
+
+  <div class="row">
+    <div class="col-xl-12">
+
+      <button (click)="filterOrdersByDate()" class="btn btn-primary">Filter</button>
+
+    </div>
+  </div>
 
 
   <mat-form-field>
     <input
       matInput
       (keyup)="applyFilter($event.target.value)"
-      placeholder="Search by order Id...">
+      placeholder="Search...">
   </mat-form-field>
 
   <div class="mat-elevation-z8" style="box-shadow: none!important;">

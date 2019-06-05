@@ -207,17 +207,17 @@ export class MenuComponent implements OnInit {
       this.order.Profit =  this.order.GrossTotalPrice - this.order.InventoryCost;
 
     } else {
-      if (this.order === undefined) {
+      if (this.order === null || this.order === undefined) {
         return;
       }
 
       const orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
-      if (orderSession === null) {
+      if (orderSession === null || orderSession === undefined) {
         return;
       }
 
       const existingOrderedItem = this.pointOfSaleService.checkIfOrderedItemExist(foodItemId, orderSession.OrderedItems);
-      if (existingOrderedItem === null) {
+      if (existingOrderedItem === null || existingOrderedItem === undefined) {
         return;
       }
 
@@ -343,14 +343,34 @@ export class MenuComponent implements OnInit {
 
     orderSession.ServedDateTime = moment().format('h:mm:ss A, Do MMMM YYYY');
 
+
+
     this.orderDataStorageService.serveOrder(orderSession).subscribe( (data: any) => {
+
+      orderSession.CurrentState = 'Served';
+
+      let count = 0;
+      for (let i = 0; i < this.order.OrderSessions.length; i++) {
+        if (this.order.OrderSessions[i].CurrentState === 'Served') {
+          count++;
+        }
+      }
+
+      if (count === this.order.OrderSessions.length) {
+        this.order.CurrentState = 'Served';
+        this.table.CurrentState = 'Served';
+      } else {
+        this.order.CurrentState = 'Ordered';
+        this.table.CurrentState = 'Ordered';
+      }
+
 
       if (data === 'Order served successfully') {
 
         this.tableDataStorageService.changeTableState(new Table(
           this.order.TableId,
           '',
-          'Served',
+          this.table.CurrentState,
           []
         )).subscribe((response: any) => {
 
@@ -360,9 +380,8 @@ export class MenuComponent implements OnInit {
             showCloseButton: true
           });
 
-          orderSession.CurrentState = 'Served';
-          this.order.CurrentState = 'Served';
-          this.table.CurrentState = 'Served';
+
+
           return;
         });
 
@@ -386,12 +405,10 @@ export class MenuComponent implements OnInit {
 
     this.orderDataStorageService.cancelOrder(orderSession).subscribe((data: any) => {
 
-      this.tableDataStorageService.changeTableState(new Table(
-        this.order.TableId,
-        '',
-        'Empty',
-        []
-      )).subscribe((response: any) => {
+
+
+
+
 
         for (let i = 0; this.order.OrderSessions.length; i++) {
           if (this.order.OrderSessions[i].Id === orderSession.Id) {
@@ -409,24 +426,52 @@ export class MenuComponent implements OnInit {
           this.order = undefined;
           this.table.CurrentState = 'Empty';
         } else {
-          const lastIndex = this.order.OrderSessions.length - 1;
 
+          const completeOrders = this.order.OrderSessions.filter(
+            x => x.CurrentState === 'Ordered'
+          );
 
-          if (this.order.OrderSessions[lastIndex].Id === null) {
-
-            if (this.order.OrderSessions.length === 1) {
-              this.order.Id = -1;
-              this.order.CurrentState = 'Not Ordered';
-              this.table.CurrentState = 'Empty';
-            } else {
-              this.order.CurrentState = this.order.OrderSessions[lastIndex - 1].CurrentState;
-              this.table.CurrentState = this.order.CurrentState;
-            }
-
+          if (completeOrders.length > 0) {
+            this.order.CurrentState = 'Ordered';
+            this.table.CurrentState = 'Ordered';
           } else {
-            this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;
-            this.table.CurrentState = this.order.CurrentState;
+            this.order.CurrentState = 'Served';
+            this.table.CurrentState = 'Served';
           }
+
+
+          // this.tableDataStorageService.changeTableState(new Table(
+          //   this.order.TableId,
+          //   '',
+          //   this.table.CurrentState,
+          //   []
+          // )).subscribe((response: any) => {});
+
+          const lastIndex = this.order.OrderSessions.length - 1;
+          if (this.order.OrderSessions[lastIndex].Id === null && this.order.OrderSessions.length === 1) {
+
+                this.order.Id = -1;
+                this.order.CurrentState = 'Not Ordered';
+                this.table.CurrentState = 'Empty';
+          }
+
+          // const lastIndex = this.order.OrderSessions.length - 1;
+          //
+          // if (this.order.OrderSessions[lastIndex].Id === null) {
+          //
+          //   if (this.order.OrderSessions.length === 1) {
+          //     this.order.Id = -1;
+          //     this.order.CurrentState = 'Not Ordered';
+          //     this.table.CurrentState = 'Empty';
+          //   } else {
+          //     this.order.CurrentState = this.order.OrderSessions[lastIndex - 1].CurrentState;
+          //     this.table.CurrentState = this.order.CurrentState;
+          //   }
+          //
+          // } else {
+          //   this.order.CurrentState = this.order.OrderSessions[lastIndex].CurrentState;
+          //   this.table.CurrentState = this.order.CurrentState;
+          // }
         }
 
         this.toastr.successToastr('Order canceled successfully', 'Success', {
@@ -435,7 +480,8 @@ export class MenuComponent implements OnInit {
           showCloseButton: true
         });
         return;
-      });
+
+
 
     });
   }

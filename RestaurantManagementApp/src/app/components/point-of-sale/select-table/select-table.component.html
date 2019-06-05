@@ -20,7 +20,7 @@
   <br>
 
   <div class="row">
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-6"
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6"
          routerLink="/pos/{{ table.Id }}/menu"
          style="
        word-break: break-word;
@@ -38,42 +38,74 @@
 
          *ngFor="let table of tables">
 
-      <div class="row">
+      <div class="row" *ngIf="table.CurrentState === 'Empty' ">
         <div class="col-xl-12">
           {{ table.Name }} ({{ table.CurrentState }})
         </div>
       </div>
 
-      <!--<div class="row"-->
 
-           <!--style="font-size: 13px; font-weight: 500;">-->
-        <!--<div class="col-xl-12">-->
-            <!--{{ getLastOrderSessionTimes(table) }}-->
+
+      <!--<div *ngIf="table.CurrentState === 'Ordered' ">-->
+
+        <!--<div class="row" >-->
+          <!--<div class="col-xl-12">-->
+            <!--{{ table.Name }} ({{ table.CurrentState }})-->
+          <!--</div>-->
         <!--</div>-->
+
+        <!--<div class="row" >-->
+          <!--<div class="col-xl-12">-->
+            <!---->
+            <!--{{ getOrderedTime(table) }}-->
+            <!---->
+          <!--</div>-->
+        <!--</div>-->
+        <!---->
+        <!---->
+      <!--</div>-->
+      <!---->
+      <!--<div *ngIf="table.CurrentState === 'Served' ">-->
+
+        <!--<div class="row" >-->
+          <!--<div class="col-xl-12">-->
+            <!--{{ table.Name }} ({{ table.CurrentState }})-->
+          <!--</div>-->
+        <!--</div>-->
+
+
+        <!--<div class="row" >-->
+          <!--<div class="col-xl-12">-->
+
+            <!--{{ getOrderedTime(table) }}-->
+
+          <!--</div>-->
+        <!--</div>-->
+
+
+        <!--<div class="row" >-->
+          <!--<div class="col-xl-12">-->
+
+            <!--{{ getServedTime(table) }}-->
+
+          <!--</div>-->
+        <!--</div>-->
+        <!---->
       <!--</div>-->
 
+
+
+
+
       <div class="row"
-           *ngIf="getLastOrderSessionTimes(table, 'Ordered') !== ''"
+
            style="font-size: 13px; font-weight: 500;">
         <div class="col-xl-12">
-
-
-          Ordered at:  {{ getLastOrderSessionTimes(table, 'Ordered') }}
-
+            {{ getLastOrderSessionTimes(table) }}
         </div>
       </div>
 
 
-      <div class="row"
-           *ngIf="getLastOrderSessionTimes(table, 'Served') !== ''"
-           style="font-size: 13px; font-weight: 500;">
-        <div class="col-xl-12">
-
-
-          Served at:  {{ getLastOrderSessionTimes(table, 'Served') }}
-
-        </div>
-      </div>
 
 
     </div>

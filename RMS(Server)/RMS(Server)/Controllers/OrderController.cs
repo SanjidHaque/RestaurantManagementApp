@@ -222,7 +222,25 @@ namespace RMS_Server_.Controllers
                 Order order = _context.Orders.FirstOrDefault(x => x.Id == getOrderSession.OrderId);
                 if (order != null)
                 {
-                    order.CurrentState = "Served";
+
+                    int count = 0;
+                    for (int i = 0; i < order.OrderSessions.Count; i++)
+                    {
+                        if (order.OrderSessions[i].CurrentState == "Served")
+                        {
+                            count++;
+                        }
+                    }
+
+                    if (count == order.OrderSessions.Count)
+                    {
+                        order.CurrentState = "Served";                      
+                    }
+                    else
+                    {
+                        order.CurrentState = "Ordered";
+                    }
+
                     _context.SaveChanges();
                     return Ok("Order served successfully");
                 }

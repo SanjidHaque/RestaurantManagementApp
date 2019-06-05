@@ -17,24 +17,27 @@ export class SelectTableComponent implements OnInit {
     this.route.data.subscribe((data: Table[]) => this.tables = data['tables'] );
   }
 
-
-
-
-  getLastOrderSessionTimes(table: Table, timeType: string) {
-    const order = table.Orders.find(x => x.TableId === table.Id);
-
+  getLastOrderSessionTimes(table: Table) {
     if (table.CurrentState === 'Empty') {
       return '';
 
-    } else if (timeType === 'Ordered') {
+    } else if (table.CurrentState === 'Ordered') {
+      const order = table.Orders.find(x => x.CurrentState === 'Ordered');
       const lastIndex = order.OrderSessions.length - 1;
-      return order.OrderSessions[lastIndex].OrderedDateTime;
+      return 'Ordered at: ' + order.OrderSessions[lastIndex].OrderedDateTime;
 
     } else {
-
+      const order = table.Orders.find(x => x.CurrentState === 'Served');
       const lastIndex = order.OrderSessions.length - 1;
-      return order.OrderSessions[lastIndex].ServedDateTime;
+      return 'Ordered at: ' + order.OrderSessions[lastIndex].OrderedDateTime +
+        '\n' + 'Served at: ' + order.OrderSessions[lastIndex].ServedDateTime;
     }
   }
+
+
+
+
+
+
 
 }

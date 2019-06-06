@@ -90,7 +90,7 @@ namespace RMS_Server_.Controllers
         [Route("api/ChangeTableState")]
         public IHttpActionResult ChangeTableState(Table table)
         {
-            Table changeTabeStateDefault = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+                                                                                                    Table changeTabeStateDefault = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
             if (changeTabeStateDefault != null)
             {
                 changeTabeStateDefault.CurrentState = table.CurrentState;

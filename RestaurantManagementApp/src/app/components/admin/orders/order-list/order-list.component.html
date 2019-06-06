@@ -6,25 +6,60 @@
   <div class="col-md-12">
     No order is arrived yet. Go to POS to create an order.
   </div>
-</div><div class="row">
-  <div class="col-xs-12 col-12 col-md-4 form-group">
-    <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline>
-  </div>
 </div>
+
+
+
 
 <ng-template #notEmpty>
 
+    <form (ngSubmit)="filterOrdersByDate(orderFilterForm)" #orderFilterForm = "ngForm">
 
-  <div class="row">
-    <div class="col-xl-12">
+      <div class="row" style="padding-left: 15px;">
 
-      <button (click)="filterOrdersByDate()" class="btn btn-primary">Filter</button>
+        <div class="col-xl-">
 
-    </div>
-  </div>
+          <button
+            (click)="defaultOrders()"
+            type="button"
+            class="btn btn-primary">All Orders</button>
+
+        </div>
 
 
-  <mat-form-field>
+        <div class="col-xl-4">
+
+          <input
+            type="text"
+            id="date"
+            autocomplete="off"
+            onkeydown="return false"
+            ngModel
+            name="date"
+            required
+            class="form-control"
+            placeholder="Date range"
+            [bsConfig]="{ rangeInputFormat: 'Do MMMM YYYY', containerClass: 'theme-dark-blue'}"
+            bsDaterangepicker/>
+
+        </div>
+
+        <div class="col-xl-2">
+
+          <button
+            type="submit"
+            [disabled] = "orderFilterForm.invalid"
+            class="btn btn-primary">Filter Orders</button>
+
+        </div>
+      </div>
+
+    </form>
+
+
+
+
+  <mat-form-field style="padding-top: 20px;">
     <input
       matInput
       (keyup)="applyFilter($event.target.value)"
@@ -109,7 +144,74 @@
     </table>
 
     <mat-paginator
-      [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+      [pageSizeOptions]="[100, 250, 500, 1000]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+  <div class="row" style="font-size: 17px; font-weight: 500;">
+    <div class="col-xl-12">
+
+      Reports
+
+    </div>
+  </div>
+  <hr>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total orders: {{ filteredOrders.length }}(s)
+
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Selling Amount: {{ getOrderReport('totalSellingAmount').toFixed(2) }} BDT
+
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Inventory Cost: {{ getOrderReport('totalInventoryCost').toFixed(2) }} BDT
+
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Profit Gained: {{ getOrderReport('totalProfitGained').toFixed(2) }} BDT
+
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Discount Given: {{ getOrderReport('totalDiscountGiven').toFixed(2) }} BDT
+
+    </div>
+  </div>
+
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Vat Collected: {{ getOrderReport('totalVatCollected').toFixed(2) }} BDT
+
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Service Charge Collected: {{ getOrderReport('totalServiceChargeCollected').toFixed(2) }} BDT
+
+    </div>
   </div>
 
 </ng-template>

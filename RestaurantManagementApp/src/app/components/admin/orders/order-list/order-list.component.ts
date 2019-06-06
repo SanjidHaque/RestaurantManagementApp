@@ -9,6 +9,7 @@ import {Table} from '../../../../models/table.model';
 import {Order} from '../../../../models/order.model';
 import {FoodItem} from '../../../../models/food-item.model';
 import {AdminService} from '../../../../services/shared/admin.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-order-list',
@@ -18,6 +19,8 @@ import {AdminService} from '../../../../services/shared/admin.service';
 
 export class OrderListComponent implements OnInit, AfterViewInit {
   orders: Order[] = [];
+  filteredOrders: Order[] = [];
+
   tables: Table[] = [];
 
   displayedColumns: string[] =
@@ -44,8 +47,8 @@ export class OrderListComponent implements OnInit, AfterViewInit {
       ( data: FoodItem[]) => {
         this.orders = data['orders'];
         this.tables = data['tables'];
+        this.filteredOrders = this.orders;
         this.dataSource = new MatTableDataSource(this.orders);
-
       }
     );
   }
@@ -56,43 +59,95 @@ export class OrderListComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(filterValue: string) {
+    this.dataSource.data = [];
+    this.dataSource.data = this.orders;
+
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+    this.filteredOrders = this.dataSource.data;
+  }
+
+  defaultOrders() {
+    this.dataSource.data = [];
+    this.dataSource.data = this.orders;
+    this.filteredOrders = this.orders;
+  }
+
+  filterOrdersByDate(form: NgForm) {
+    const startDate = moment(form.value.date[0], 'h:mm:ss A, Do MMMM YYYY');
+    const endDate = moment(form.value.date[1], 'h:mm:ss A, Do MMMM YYYY');
+    this.filteredOrders = [];
+    this.dataSource.data = [];
+
+    for (let i = 0; i < this.orders.length; i++) {
+      const ifDateExist = this.orders[i].OrderSessions[0].OrderedDateTime;
+      const ifTrue = moment(ifDateExist,  'h:mm:ss A, Do MMMM YYYY').
+      isBetween(startDate, endDate, 'day', '[]');
+
+      if (ifTrue) {
+        this.filteredOrders.push(this.orders[i]);
+      }
+    }
+    this.dataSource.data = this.filteredOrders;
   }
 
 
-  filterOrdersByDate() {
-    // const startDate = new Date('3rd June 2019');
-    //
-    // console.log(startDate);
-    //
-    // const endDate = new Date('3rd June 2019');
-    //
-    // const selectedMembers = this.orders.filter(
-    //   m => new Date(m.DateTime) > startDate && new Date(m.DateTime) < endDate);
-    //
-    //
-    // console.log(selectedMembers);
+  getOrderReport(type: string) {
+    if (type === 'totalSellingAmount') {
+      let totalSellingAmount = 0;
+      this.filteredOrders.forEach( (x) => {
+        totalSellingAmount += x.GrossTotalPrice;
+      });
 
+      return totalSellingAmount;
+    }
 
-   // moment().format('h:mm:ss A, Do MMMM YYYY');
+    if (type === 'totalInventoryCost') {
+      let totalInventoryCost = 0;
+      this.filteredOrders.forEach( (x) => {
+        totalInventoryCost += x.InventoryCost;
+      });
 
+      return totalInventoryCost;
+    }
 
+    if (type === 'totalProfitGained') {
+      let totalProfitGained = 0;
+      this.filteredOrders.forEach( (x) => {
+        totalProfitGained += x.Profit;
+      });
 
-    const compareDate = moment('12:03:50 AM, 3rd June 2019', 'h:mm:ss A, Do MMMM YYYY');
+      return totalProfitGained;
+    }
 
-    const startDate   = moment('12:03:50 AM, 3rd June 2019', 'h:mm:ss A, Do MMMM YYYY');
-    const endDate     = moment('12:03:51 AM, 3rd June 2019', 'h:mm:ss A, Do MMMM YYYY');
+    if (type === 'totalDiscountGiven') {
+      let totalDiscountGiven = 0;
+      this.filteredOrders.forEach( (x) => {
+        totalDiscountGiven += x.DiscountAmount;
+      });
 
-    const getDate = moment( new Date('Mon Jun 03 2019 23:41:33 GMT+0600 (Bangladesh Standard Time)'))
-      .format('h:mm:ss A, Do MMMM YYYY');
+      return totalDiscountGiven;
+    }
 
-    console.log(getDate);
-// omitting the optional third parameter, 'units'
-    compareDate.isBetween(startDate, endDate);
-    // console.log(compareDate.isBetween(startDate, endDate, null, '[]'));
+    if (type === 'totalVatCollected') {
+      let totalVatCollected = 0;
+      this.filteredOrders.forEach( (x) => {
+        totalVatCollected += x.VatAmount;
+      });
+      return totalVatCollected;
+    }
+
+    if (type === 'totalServiceChargeCollected') {
+      let totalServiceChargeCollected = 0;
+      this.filteredOrders.forEach( (x) => {
+        totalServiceChargeCollected += x.ServiceChargeAmount;
+      });
+      return totalServiceChargeCollected;
+    }
+
+    return '';
   }
 
 }

@@ -198,8 +198,19 @@ namespace RMS_Server_.Controllers
                 }
                 else
                 {
-                    int lastIndex = order.OrderSessions.Count - 1;
-                    order.CurrentState = order.OrderSessions[lastIndex].CurrentState;
+
+                    var completeOrders = order.OrderSessions.Where(
+                        x => x.CurrentState == "Ordered"
+                    ).ToList();
+
+                    if (completeOrders.Count > 0)
+                    {
+                        order.CurrentState = "Ordered";
+                    }
+                    else
+                    {
+                        order.CurrentState = "Served";
+                    }
                     _context.SaveChanges();
                 }
 

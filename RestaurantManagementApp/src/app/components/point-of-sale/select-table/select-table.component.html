@@ -38,7 +38,7 @@
 
          *ngFor="let table of tables">
 
-      <div class="row" *ngIf="table.CurrentState === 'Empty' ">
+      <div class="row">
         <div class="col-xl-12">
           {{ table.Name }} ({{ table.CurrentState }})
         </div>
@@ -46,66 +46,19 @@
 
 
 
-      <!--<div *ngIf="table.CurrentState === 'Ordered' ">-->
-
-        <!--<div class="row" >-->
-          <!--<div class="col-xl-12">-->
-            <!--{{ table.Name }} ({{ table.CurrentState }})-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="row" >-->
-          <!--<div class="col-xl-12">-->
-            <!---->
-            <!--{{ getOrderedTime(table) }}-->
-            <!---->
-          <!--</div>-->
-        <!--</div>-->
-        <!---->
-        <!---->
-      <!--</div>-->
-      <!---->
-      <!--<div *ngIf="table.CurrentState === 'Served' ">-->
-
-        <!--<div class="row" >-->
-          <!--<div class="col-xl-12">-->
-            <!--{{ table.Name }} ({{ table.CurrentState }})-->
-          <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="row" >-->
-          <!--<div class="col-xl-12">-->
-
-            <!--{{ getOrderedTime(table) }}-->
-
-          <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="row" >-->
-          <!--<div class="col-xl-12">-->
-
-            <!--{{ getServedTime(table) }}-->
-
-          <!--</div>-->
-        <!--</div>-->
-        <!---->
-      <!--</div>-->
-
-
-
-
-
-      <div class="row"
-
-           style="font-size: 13px; font-weight: 500;">
+      <div class="row">
         <div class="col-xl-12">
-            {{ getLastOrderSessionTimes(table) }}
+            {{ getLastOrderSessionTimes(table).orderedTime }}
         </div>
       </div>
 
 
+
+      <div class="row">
+        <div class="col-xl-12">
+          {{ getLastOrderSessionTimes(table).servedTime }}
+        </div>
+      </div>
 
 
     </div>

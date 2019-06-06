@@ -20,24 +20,29 @@ export class SelectTableComponent implements OnInit {
   getLastOrderSessionTimes(table: Table) {
     if (table.CurrentState === 'Empty') {
       return '';
-
-    } else if (table.CurrentState === 'Ordered') {
-      const order = table.Orders.find(x => x.CurrentState === 'Ordered');
-      const lastIndex = order.OrderSessions.length - 1;
-      return 'Ordered at: ' + order.OrderSessions[lastIndex].OrderedDateTime;
-
-    } else {
-      const order = table.Orders.find(x => x.CurrentState === 'Served');
-      const lastIndex = order.OrderSessions.length - 1;
-      return 'Ordered at: ' + order.OrderSessions[lastIndex].OrderedDateTime +
-        '\n' + 'Served at: ' + order.OrderSessions[lastIndex].ServedDateTime;
     }
+
+    const order = table.Orders.find(
+      x => x.CurrentState === 'Ordered' || x.CurrentState === 'Served');
+    const lastIndex = order.OrderSessions.length - 1;
+    let orderedTime, servedTime;
+    console.log(order);
+
+
+    if (table.CurrentState === 'Ordered') {
+
+      for (let i = 0; i < order.OrderSessions.length; i++) {
+        if (order.OrderSessions[i].CurrentState === 'Ordered') {
+          orderedTime = order.OrderSessions[i].OrderedDateTime;
+          servedTime = '';
+          break;
+        }
+      }
+    } else {
+      orderedTime = order.OrderSessions[lastIndex].OrderedDateTime;
+      servedTime = order.OrderSessions[lastIndex].ServedDateTime;
+    }
+
+    return  { orderedTime: orderedTime, servedTime: servedTime };
   }
-
-
-
-
-
-
-
 }

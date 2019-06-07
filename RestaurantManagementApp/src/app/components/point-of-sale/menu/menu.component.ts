@@ -246,6 +246,7 @@ export class MenuComponent implements OnInit {
   }
 
 
+
   getFoodItemInformation(type: string, foodItemId: number) {
     const foodItem = this.foodItems.find(x => x.Id === foodItemId);
     if (foodItem === undefined || foodItem === null) {

@@ -4,3 +4,17 @@
     padding-top: 7px;
   }
 }
+
+
+@media screen {
+  #receipt {
+    display: none;
+  }
+}
+
+
+@media print {
+  #receipt {
+    display : block;
+  }
+}

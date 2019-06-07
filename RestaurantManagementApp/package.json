@@ -44,6 +44,7 @@
     "ngx-bootstrap": "^4.2.0",
     "ngx-loading": "^3.0.1",
     "ngx-pagination": "^3.2.1",
+    "ngx-print": "^1.2.0-beta.2",
     "redux": "^4.0.1",
     "rxjs": "^6.5.2",
     "tassign": "^1.0.0",

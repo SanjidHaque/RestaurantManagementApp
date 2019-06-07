@@ -109,7 +109,6 @@ export class PointOfSaleService {
           if (orderedItems[k].FoodItemId === foodItemId) {
             orderedItems[k].FoodItemQuantity += order.OrderSessions[i].OrderedItems[j].FoodItemQuantity;
             orderedItems[k].TotalPrice += order.OrderSessions[i].OrderedItems[j].TotalPrice;
-            break;
           }
 
           if (k === orderedItems.length)  {

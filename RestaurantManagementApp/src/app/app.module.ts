@@ -73,6 +73,7 @@ import { SettingListComponent } from './components/admin/settings/setting-list/s
 import { EditSettingComponent } from './components/admin/settings/edit-setting/edit-setting.component';
 import {SettingResolverService} from './route-resolvers/setting-resolver.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {NgxPrintModule} from 'ngx-print';
 
 
 
@@ -142,7 +143,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       meteor: false
     }),
     ToastrModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgxPrintModule
   ],
 
   providers: [

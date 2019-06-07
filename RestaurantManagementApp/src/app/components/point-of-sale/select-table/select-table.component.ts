@@ -26,7 +26,6 @@ export class SelectTableComponent implements OnInit {
       x => x.CurrentState === 'Ordered' || x.CurrentState === 'Served');
     const lastIndex = order.OrderSessions.length - 1;
     let orderedTime, servedTime;
-    console.log(order);
 
 
     if (table.CurrentState === 'Ordered') {

@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 import {OrderedItem} from '../../../models/ordered-item.model';
 import {Order} from '../../../models/order.model';
-import {Inventory} from '../../../models/inventory.model';
 import {Table} from '../../../models/table.model';
 import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
 import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
@@ -138,8 +136,8 @@ export class PaymentComponent implements OnInit {
     if (foodItem === undefined || foodItem === null) {
       return '';
     }
-    if (type === 'Name and Serial') {
-      return foodItem.SerialNumber + '. ' + foodItem.Name;
+    if (type === 'Name') {
+      return foodItem.Name;
     }
     if (type === 'Price') {
       return foodItem.Price;
@@ -188,104 +186,110 @@ export class PaymentComponent implements OnInit {
   }
 
 
-
-
-
-  printOrderReceipt() {
-    let printContents, popupWin;
-    printContents = document.getElementById('print-section').innerHTML;
-    popupWin = window.open('document.URL,', '_blank');
-    popupWin.document.open();
-    popupWin.document.write(`
-      <html>
-        <head>
-          <title></title>
-        <style>
-        @media print {
-        #invoice-POS{
-  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
-  padding:2mm;
-  margin: 0 auto;
-  width: 44mm;
-  background: #FFF;
-
-
-  ::selection {background: #f31544; color: #FFF;}
-  h1{
-    font-size: 1.5em;
-    color: #222;
-  }
-  h2{font-size: .9em;}
-  h3{
-    font-size: 1.2em;
-    font-weight: 300;
-    line-height: 2em;
-  }
-  p{
-    font-size: .7em;
-    color: #666;
-    line-height: 1.2em;
+  getTableName(tableId: Table) {
+    const table = this.tables.find(x => x.Id === tableId);
+    if (table === undefined) {
+      return '';
+    }
+    return table.Name;
   }
 
-  #top, #mid,#bot{ /* Targets all id with 'col-' */
-    border-bottom: 1px solid #EEE;
-  }
 
-  #top{min-height: 100px;}
-  #mid{min-height: 80px;}
-  #bot{ min-height: 50px;}
+//   printOrderReceipt() {
+//     let printContents, popupWin;
+//     printContents = document.getElementById('print-section').innerHTML;
+//     popupWin = window.open('document.URL,', '_blank');
+//     popupWin.document.open();
+//     popupWin.document.write(`
+//       <html>
+//         <head>
+//           <title></title>
+//         <style>
+//         @media print {
+//         #invoice-POS{
+//   box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+//   padding:2mm;
+//   margin: 0 auto;
+//   width: 44mm;
+//   background: #FFF;
 
-  #top .logo{
-    //float: left;
-    height: 60px;
-    width: 60px;
-    background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
-    background-size: 60px 60px;
-  }
-  .clientlogo{
-    float: left;
-    height: 60px;
-    width: 60px;
-    background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
-    background-size: 60px 60px;
-    border-radius: 50px;
-  }
-  .info{
-    display: block;
-    //float:left;
-    margin-left: 0;
-  }
-  .title{
-    float: right;
-  }
-  .title p{text-align: right;}
-  table{
-    width: 100%;
-    border-collapse: collapse;
-  }
-  td{
-    //padding: 5px 0 5px 15px;
-    //border: 1px solid #EEE
-  }
-  .tabletitle{
-    //padding: 5px;
-    font-size: .5em;
-    background: #EEE;
-  }
-  .service{border-bottom: 1px solid #EEE;}
-  .item{width: 24mm;}
-  .itemtext{font-size: .5em;}
 
-  #legalcopy{
-    margin-top: 5mm;
-  } }
- } </style>
-        </head>
-     <body onload="window.print();window.close()">${printContents}</body>
-      </html>`
-    );
-    popupWin.document.close();
-  }
+//   ::selection {background: #f31544; color: #FFF;}
+//   h1{
+//     font-size: 1.5em;
+//     color: #222;
+//   }
+//   h2{font-size: .9em;}
+//   h3{
+//     font-size: 1.2em;
+//     font-weight: 300;
+//     line-height: 2em;
+//   }
+//   p{
+//     font-size: .7em;
+//     color: #666;
+//     line-height: 1.2em;
+//   }
+
+//   #top, #mid,#bot{ /* Targets all id with 'col-' */
+//     border-bottom: 1px solid #EEE;
+//   }
+
+//   #top{min-height: 100px;}
+//   #mid{min-height: 80px;}
+//   #bot{ min-height: 50px;}
+
+//   #top .logo{
+//     //float: left;
+//     height: 60px;
+//     width: 60px;
+//     background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+//     background-size: 60px 60px;
+//   }
+//   .clientlogo{
+//     float: left;
+//     height: 60px;
+//     width: 60px;
+//     background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+//     background-size: 60px 60px;
+//     border-radius: 50px;
+//   }
+//   .info{
+//     display: block;
+//     //float:left;
+//     margin-left: 0;
+//   }
+//   .title{
+//     float: right;
+//   }
+//   .title p{text-align: right;}
+//   table{
+//     width: 100%;
+//     border-collapse: collapse;
+//   }
+//   td{
+//     //padding: 5px 0 5px 15px;
+//     //border: 1px solid #EEE
+//   }
+//   .tabletitle{
+//     //padding: 5px;
+//     font-size: .5em;
+//     background: #EEE;
+//   }
+//   .service{border-bottom: 1px solid #EEE;}
+//   .item{width: 24mm;}
+//   .itemtext{font-size: .5em;}
+
+//   #legalcopy{
+//     margin-top: 5mm;
+//   } }
+//  } </style>
+//         </head>
+//      <body onload="window.print();window.close()">${printContents}</body>
+//       </html>`
+//     );
+//     popupWin.document.close();
+//   }
 
 }
 

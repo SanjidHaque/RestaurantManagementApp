@@ -103,17 +103,21 @@ export class PointOfSaleService {
       for (let j = 0; j < order.OrderSessions[i].OrderedItems.length; j++) {
 
         const foodItemId = order.OrderSessions[i].OrderedItems[j].FoodItemId;
+        let flag = false;
 
         for (let k = 0; k < orderedItems.length; k++) {
 
           if (orderedItems[k].FoodItemId === foodItemId) {
             orderedItems[k].FoodItemQuantity += order.OrderSessions[i].OrderedItems[j].FoodItemQuantity;
             orderedItems[k].TotalPrice += order.OrderSessions[i].OrderedItems[j].TotalPrice;
+            flag = true;
           }
 
-          if (k === orderedItems.length)  {
-            orderedItems.push(order.OrderSessions[i].OrderedItems[j]);
-          }
+
+        }
+        if (!flag)  {
+          orderedItems.push(order.OrderSessions[i].OrderedItems[j]);
+          flag = false;
         }
       }
     }

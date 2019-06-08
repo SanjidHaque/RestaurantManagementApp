@@ -112,8 +112,6 @@ export class PointOfSaleService {
             orderedItems[k].TotalPrice += order.OrderSessions[i].OrderedItems[j].TotalPrice;
             flag = true;
           }
-
-
         }
         if (!flag)  {
           orderedItems.push(order.OrderSessions[i].OrderedItems[j]);

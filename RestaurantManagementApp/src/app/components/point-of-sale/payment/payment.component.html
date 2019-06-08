@@ -56,7 +56,7 @@
       type="number"
       min="0"
       class="form-control"
-      [ngModel]="order.TotalPrice">
+      [ngModel]="order.GrossTotalPrice">
   </div>
 
   <div class="col-xl-2 col-lg-2" style="font-weight: 500;">
@@ -73,7 +73,7 @@
 
     <div class="col-xl-2 col-lg-2"
          style="font-weight: 500;"
-         *ngIf="(tendered - order.TotalPrice) >= 0; else showZero">
+         *ngIf="(tendered - order.GrossTotalPrice) >= 0; else showZero">
 
       <label>Change</label>
       <input
@@ -81,7 +81,7 @@
         type="number"
         min="0"
         class="form-control"
-        [ngModel]="tendered - order.TotalPrice">
+        [ngModel]="tendered - order.GrossTotalPrice">
 
     </div>
 

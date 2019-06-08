@@ -22,26 +22,7 @@ export class ReceiptComponent implements OnInit {
 
   }
 
-//   discardOrder() {
-//     const dialog = confirm('Delete this order?\n' +
-//       'You will lose any kind of data associated with the current order!');
-//     if (dialog === true) {
-//       this.confirmEvent();
-//     }
-//   }
-//
-//   confirmEvent() {
-//     this.pointOfSaleService.clearOrders();
-//     this.pointOfSaleService.totalPrice = 0;
-//     this.pointOfSaleService.totalQuantity = 0;
-//     this.router.navigate(['our-offers/regulars']);
-//     this.pointOfSaleService.deleteOrder(this.order);
-//     // this.dataStorageService.deleteOrder(1).subscribe();
-//   }
-//
-//
-//
-//
+
   print(): void {
     let printContents, popupWin;
     printContents = document.getElementById('print-section').innerHTML;

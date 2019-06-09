@@ -39,4 +39,8 @@ export class OrderDataStorageService {
   deleteOrder(orderId: number) {
     return this.http.delete(`${this.rootUrl + '/api/DeleteOrder'}/${orderId}`);
   }
+
+  revertInventory(orderSession: OrderSession) {
+    return this.http.put<OrderSession>(this.rootUrl + '/api/RevertInventory', orderSession);
+  }
 }

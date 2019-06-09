@@ -27,7 +27,6 @@ import {AdminComponent} from './components/admin/admin.component';
 import {UsersComponent} from './components/admin/users/users.component';
 import {LoginComponent} from './components/login/login.component';
 import {PaymentComponent} from './components/point-of-sale/payment/payment.component';
-import {ReceiptComponent} from './components/point-of-sale/receipt/receipt.component';
 import {TablesComponent} from './components/admin/tables/tables.component';
 import {AddNewTableComponent} from './components/admin/tables/add-new-table/add-new-table.component';
 import {OrdersComponent} from './components/admin/orders/orders.component';
@@ -74,6 +73,7 @@ import { EditSettingComponent } from './components/admin/settings/edit-setting/e
 import {SettingResolverService} from './route-resolvers/setting-resolver.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {NgxPrintModule} from 'ngx-print';
+import { OrderCancelOptionComponent } from './bottom-sheets/order-cancel-option/order-cancel-option.component';
 
 
 
@@ -92,7 +92,6 @@ import {NgxPrintModule} from 'ngx-print';
     EditInventoryItemComponent,
     FilterPipe,
     PaymentComponent,
-    ReceiptComponent,
     TablesComponent,
     AddNewTableComponent,
     AddNewInventoryItemComponent,
@@ -121,7 +120,8 @@ import {NgxPrintModule} from 'ngx-print';
     ChangePasswordByAdminComponent,
     SettingsComponent,
     SettingListComponent,
-    EditSettingComponent
+    EditSettingComponent,
+    OrderCancelOptionComponent
   ],
   imports: [
     BrowserModule,

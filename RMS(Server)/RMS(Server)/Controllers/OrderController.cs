@@ -124,10 +124,9 @@ namespace RMS_Server_.Controllers
 
 
 
-
-        [Route("api/CancelOrder")]
+        [Route("api/RevertInventory")]
         [HttpPut]
-        public IHttpActionResult CancelOrder(OrderSession orderSession)
+        public IHttpActionResult RevertInventory(OrderSession orderSession)
         {
             List<Inventory> inventories = _context.Inventories.ToList();
 
@@ -146,23 +145,30 @@ namespace RMS_Server_.Controllers
                         {
                             inventory.RemainingQuantity += inventoryQuantity;
                             inventory.UsedQuantity -= inventoryQuantity;
+                            _context.SaveChanges();
                         }
                     }
 
                     foodItem.TotalSale--;
+                    _context.SaveChanges();
                 }
             }
 
-            _context.SaveChanges();
+            return Ok();
+        }
 
+
+        [Route("api/CancelOrder")]
+        [HttpPut]
+        public IHttpActionResult CancelOrder(OrderSession orderSession)
+        {
+         
             OrderSession getOrderSession = _context.OrderSessions.FirstOrDefault(x => x.Id == orderSession.Id);
             if (getOrderSession != null)
             {
                 _context.OrderSessions.Remove(getOrderSession);
                 _context.SaveChanges();
             }
-
-          
 
             Order order = _context.Orders.Include(c => c.OrderSessions).FirstOrDefault(x => x.Id == orderSession.OrderId);
 

@@ -12,7 +12,7 @@
 
 <div class="row" style="padding-bottom: 2px; padding-top: 2px;">
 
-  <div class="col-xl-4 col-lg-2">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
     <button
       type="button"
       routerLink="/pos/"
@@ -41,14 +41,13 @@
 
   </div>
 
-
 </div>
 
 <br>
 
 <div class="row" style="padding-bottom: 2px; padding-top: 2px;">
 
-  <div class="col-xl-2 col-lg-2" style="font-weight: 500;`">
+  <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 tendered-bar" style="font-weight: 500;`">
 
     <label>Total</label>
     <input
@@ -59,7 +58,7 @@
       [ngModel]="order.GrossTotalPrice">
   </div>
 
-  <div class="col-xl-2 col-lg-2" style="font-weight: 500;">
+  <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 tendered-bar" style="font-weight: 500;">
 
     <label>Tendered</label>
     <input
@@ -71,7 +70,7 @@
   </div>
 
 
-    <div class="col-xl-2 col-lg-2"
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 tendered-bar"
          style="font-weight: 500;"
          *ngIf="(tendered - order.GrossTotalPrice) >= 0; else showZero">
 
@@ -87,7 +86,7 @@
 
   <ng-template #showZero>
 
-    <div class="col-xl-2 col-lg-2" style="font-weight: 500;">
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 tendered-bar" style="font-weight: 500;">
       <label>Change</label>
       <input
         disabled
@@ -101,11 +100,11 @@
 
 
 
-  <div class="col-xl-4 col-lg-4" style="font-weight: 500;">
+  <div class="col-xl-4 col-lg-4 col-md-12 bottom" style="font-weight: 500;">
     <form #discountForm ="ngForm">
 
           <div class="row form-group">
-            <div class="col-xl-6">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
 
               <label>Discount Rate</label>
               <input
@@ -119,14 +118,14 @@
 
             </div>
 
-            <div class="col-xl-6">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
 
               <label for="discountType">Type</label>
               <select
+                [(ngModel)]=  "percent"
                 required
-                ngModel class="form-control" name="discountType" id="discountType">
-                <option value="" selected disabled hidden>Select</option>
-                <option value="flat" selected>Flat</option>
+                class="form-control" name="discountType" id="discountType">
+                <option value="flat" selected = "selected">Flat</option>
                 <option value="percent">Percent</option>
               </select>
 
@@ -137,7 +136,7 @@
 
   </div>
 
-  <div class="col-xl-1 col-lg-1" style="padding-top: 32px;">
+  <div class="col-xl-1 col-lg-1 col-md-1 top">
 
     <button
       type="submit"
@@ -447,7 +446,7 @@
           <td style="text-align: right;">{{ order.VatAmount.toFixed(2) }}</td>
         </tr>
 
-        <tr>
+        <tr *ngIf="setting.ServiceChargeRate !== null &&  setting.ServiceChargeRate !== ''">
           <td>Service Charge {{ setting.ServiceChargeRate }}%</td>
           <td></td>
           <td></td>
@@ -472,7 +471,7 @@
           <td>Gross Total</td>
           <td></td>
           <td></td>
-          <td style="text-align: right;">{{ order.GrossTotalPrice }}</td>
+          <td style="text-align: right;">{{ order.GrossTotalPrice.toFixed(2) }}</td>
         </tr>
 
         <tr *ngIf="order.Tendered !== null">
@@ -486,7 +485,7 @@
           <td>Change</td>
           <td></td>
           <td></td>
-          <td style="text-align: right;">{{ order.Change }}</td>
+          <td style="text-align: right;">{{ order.Change.toFixed(2) }}</td>
         </tr>
 
       </table>

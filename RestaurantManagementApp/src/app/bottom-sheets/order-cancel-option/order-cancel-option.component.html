@@ -1,0 +1,26 @@
+<mat-nav-list>
+  <div
+    style="cursor: pointer;"
+    (click)="closeSheet('Revert')">
+
+    <span>Cancel order with reverting inventory</span>
+    <hr>
+  </div>
+
+  <div
+    style="cursor: pointer;"
+    (click)="closeSheet('Do not revert')">
+
+    <span>Cancel order without reverting inventory</span>
+    <hr>
+  </div>
+
+
+  <div
+    style="cursor: pointer;"
+    (click)="closeSheet('Dismiss')">
+
+    <span>Dismiss</span>
+
+  </div>
+</mat-nav-list>

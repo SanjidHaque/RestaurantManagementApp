@@ -11,3 +11,23 @@
     display : block;
   }
 }
+
+
+@media (min-width: 992px) {
+  .top {
+    padding-top: 32px;
+  }
+}
+
+@media (max-width: 991px) {
+  .bottom {
+    padding-top: 20px;
+  }
+}
+
+
+@media (max-width: 575px) {
+  .tendered-bar {
+    padding-bottom: 20px;
+  }
+}

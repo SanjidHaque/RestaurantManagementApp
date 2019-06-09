@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit {
 
   isDisabled = false;
   userName: string;
+  percent = 'percent';
 
   tableId: number;
   table: Table;

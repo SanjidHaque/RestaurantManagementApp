@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {OrderedItem} from '../../../models/ordered-item.model';
-import {Order} from '../../../models/order.model';
-import {Table} from '../../../models/table.model';
-import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
-import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
-import {Setting} from '../../../models/setting.model';
-import {OrderDataStorageService} from '../../../services/data-storage/order-data-storage.service';
-import {ToastrManager} from 'ng6-toastr-notifications';
-import {FoodItem} from '../../../models/food-item.model';
 import {NgForm} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
+import {Table} from '../../../models/table.model';
+import {Order} from '../../../models/order.model';
+import {Setting} from '../../../models/setting.model';
+import {FoodItem} from '../../../models/food-item.model';
+import {OrderedItem} from '../../../models/ordered-item.model';
+import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
+import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
+import {OrderDataStorageService} from '../../../services/data-storage/order-data-storage.service';
 
 @Component({
   selector: 'app-payment',
@@ -147,7 +148,6 @@ export class PaymentComponent implements OnInit {
 
 
   validateOrder() {
-
     if (!confirm('Validate this order?')) {
       return;
     }
@@ -157,7 +157,6 @@ export class PaymentComponent implements OnInit {
     this.order.Change = this.tendered - this.order.GrossTotalPrice;
     this.order.Profit = this.order.GrossTotalPrice - this.order.InventoryCost;
     this.order.SalesPersonName = this.userName;
-
 
     this.orderDataStorageService.validateOrder(this.order).subscribe((data: any) => {
 

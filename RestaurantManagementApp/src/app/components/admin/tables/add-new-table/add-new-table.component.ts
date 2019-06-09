@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import { Component } from '@angular/core';
 
 import {Table} from '../../../../models/table.model';
-import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
+import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 
 @Component({
   selector: 'app-add-new-table',

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+
 import {FoodItem} from '../../models/food-item.model';
 import {TableDataStorageService} from './table-data-storage.service';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodItemDataStorageService {
-
   private rootUrl = '';
 
   constructor(private http: HttpClient,

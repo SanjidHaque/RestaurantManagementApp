@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import {ToastrManager} from 'ng6-toastr-notifications';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 import {Role} from '../../../../models/role.model';
 import {UserAccount} from '../../../../models/user-account.model';

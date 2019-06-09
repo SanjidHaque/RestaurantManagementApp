@@ -6,9 +6,9 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredient} from '../../../../models/ingredient.model';
+import {AdminService} from '../../../../services/shared/admin.service';
 import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
-import {AdminService} from '../../../../services/shared/admin.service';
 
 @Component({
   selector: 'app-edit-food-item',

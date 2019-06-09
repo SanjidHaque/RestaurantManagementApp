@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 
 import {Table} from '../../models/table.model';
 
-
 @Injectable()
 export class TableDataStorageService {
   backEndPort = '1548';

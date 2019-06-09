@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
 import {Inventory} from '../../../../models/inventory.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
-import {ToastrManager} from 'ng6-toastr-notifications';
-import {AdminService} from '../../../../services/shared/admin.service';
+
 
 @Component({
   selector: 'app-edit-inventory-item',

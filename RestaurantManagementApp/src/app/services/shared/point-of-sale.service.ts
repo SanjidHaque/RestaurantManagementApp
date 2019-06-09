@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-
-import {FoodItem} from '../../models/food-item.model';
 import {ToastrManager} from 'ng6-toastr-notifications';
+
+import {Order} from '../../models/order.model';
+import {FoodItem} from '../../models/food-item.model';
 import {Inventory} from '../../models/inventory.model';
 import {OrderedItem} from '../../models/ordered-item.model';
-import {Order} from '../../models/order.model';
 
 
 @Injectable()
 export class PointOfSaleService {
+
   constructor(private toastr: ToastrManager) { }
-
-
 
   checkIfOrderedItemExist(foodItemId: number, orderedItems: OrderedItem[]) {
     for (let i = 0; i < orderedItems.length; i++) {

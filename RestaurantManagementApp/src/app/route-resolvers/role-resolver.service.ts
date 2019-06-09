@@ -1,9 +1,9 @@
 import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 
 import {Role} from '../models/role.model';
 import {UserAccountDataStorageService} from '../services/data-storage/user-account-data-storage.service';
-import {Injectable} from '@angular/core';
 
 @Injectable()
 export class RoleResolverService implements Resolve<Role[]> {

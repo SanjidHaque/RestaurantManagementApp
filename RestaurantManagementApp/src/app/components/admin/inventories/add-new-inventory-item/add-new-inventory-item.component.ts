@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
-import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {AdminService} from '../../../../services/shared/admin.service';
+import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({

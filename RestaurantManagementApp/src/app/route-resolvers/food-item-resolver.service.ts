@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+
 import {FoodItem} from '../models/food-item.model';
 import {FoodItemDataStorageService} from '../services/data-storage/food-item-data-storage.service';
 

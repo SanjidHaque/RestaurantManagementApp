@@ -18,7 +18,6 @@ export class NewPasswordComponent {
               private toastr: ToastrManager,
               private router : Router) { }
 
-
   resetPassword(form: NgForm) {
     this.isDisabled  = true;
     if (form.value.newPassword.length < 6) {

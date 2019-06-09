@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {Inventory} from '../../../../models/inventory.model';
 import {InventoryHistory} from '../../../../models/inventory-history.model';
-import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
-import {ToastrManager} from 'ng6-toastr-notifications';
 import {AdminService} from '../../../../services/shared/admin.service';
+import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({
   selector: 'app-update-inventory-item',
@@ -14,7 +14,6 @@ import {AdminService} from '../../../../services/shared/admin.service';
   styleUrls: ['./update-inventory-item.component.scss']
 })
 export class UpdateInventoryItemComponent implements OnInit {
-
   isDisabled = false;
 
   inventoryId: number;

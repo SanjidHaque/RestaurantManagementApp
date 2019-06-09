@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {TableDataStorageService} from './table-data-storage.service';
+
 import {Inventory} from '../../models/inventory.model';
-import {Observable} from 'rxjs';
+import {TableDataStorageService} from './table-data-storage.service';
 import {InventoryHistory} from '../../models/inventory-history.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InventoryDataStorageService {
-
   private rootUrl = '';
 
   constructor(private http: HttpClient,

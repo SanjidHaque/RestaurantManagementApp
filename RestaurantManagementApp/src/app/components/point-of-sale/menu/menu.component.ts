@@ -1,20 +1,20 @@
+import * as moment from 'moment';
+import {NgForm} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
-import {FoodItem} from '../../../models/food-item.model';
-import {Inventory} from '../../../models/inventory.model';
-import {Order} from '../../../models/order.model';
-import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
-import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
-import {OrderedItem} from '../../../models/ordered-item.model';
+import {MatBottomSheet} from '@angular/material';
+import {ToastrManager} from 'ng6-toastr-notifications';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import {ToastrManager} from 'ng6-toastr-notifications';
 import {Table} from '../../../models/table.model';
-import {OrderSession} from '../../../models/order-session.model';
-import {NgForm} from '@angular/forms';
+import {Order} from '../../../models/order.model';
 import {Setting} from '../../../models/setting.model';
+import {FoodItem} from '../../../models/food-item.model';
+import {Inventory} from '../../../models/inventory.model';
+import {OrderedItem} from '../../../models/ordered-item.model';
+import {OrderSession} from '../../../models/order-session.model';
+import {PointOfSaleService} from '../../../services/shared/point-of-sale.service';
+import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
 import {OrderDataStorageService} from '../../../services/data-storage/order-data-storage.service';
-import * as moment from 'moment';
-import {MatBottomSheet} from '@angular/material';
 import {OrderCancelOptionComponent} from '../../../bottom-sheets/order-cancel-option/order-cancel-option.component';
 
 
@@ -49,7 +49,6 @@ export class MenuComponent implements OnInit {
     this.route.params.subscribe((params: Params) => this.tableId = +params['table-id']);
   }
 
-
   ngOnInit() {
     this.route.data.subscribe((data: any) => {
       this.foodItems = data['foodItems'];
@@ -76,9 +75,6 @@ export class MenuComponent implements OnInit {
     }
   }
 
-
-
-
   setFoodItemImage() {
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].FoodItemImageName === null
@@ -91,11 +87,7 @@ export class MenuComponent implements OnInit {
     }
   }
 
-
-
-
   updateCart(foodItem: FoodItem, isAddToCart: boolean, form?: NgForm, directQuantity?: number ) {
-
     let quantity;
 
     if (directQuantity !== undefined) {
@@ -189,7 +181,6 @@ export class MenuComponent implements OnInit {
 
           this.order.OrderSessions.push(orderSession);
 
-
         } else {
           const existingOrderedItem = this.pointOfSaleService.checkIfOrderedItemExist(foodItemId, orderSession.OrderedItems);
 
@@ -199,7 +190,6 @@ export class MenuComponent implements OnInit {
           } else {
               existingOrderedItem.FoodItemQuantity += quantity;
               existingOrderedItem.TotalPrice += subTotal;
-
           }
         }
       }
@@ -247,8 +237,6 @@ export class MenuComponent implements OnInit {
       }
     }
   }
-
-
 
   getFoodItemInformation(type: string, foodItemId: number) {
     const foodItem = this.foodItems.find(x => x.Id === foodItemId);
@@ -366,7 +354,6 @@ export class MenuComponent implements OnInit {
         this.table.CurrentState = 'Ordered';
       }
 
-
       if (data === 'Order served successfully') {
 
         this.tableDataStorageService.changeTableState(new Table(
@@ -381,9 +368,6 @@ export class MenuComponent implements OnInit {
             newestOnTop: true,
             showCloseButton: true
           });
-
-
-
           return;
         });
 
@@ -444,7 +428,6 @@ export class MenuComponent implements OnInit {
         this.order.CurrentState = 'Served';
         this.table.CurrentState = 'Served';
       }
-
 
       const lastIndex = this.order.OrderSessions.length - 1;
       if (this.order.OrderSessions[lastIndex].Id === null && this.order.OrderSessions.length === 1) {

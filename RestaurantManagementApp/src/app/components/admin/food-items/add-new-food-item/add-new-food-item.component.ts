@@ -1,14 +1,13 @@
 import {NgForm} from '@angular/forms';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-
-
 import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
 import {Ingredient} from '../../../../models/ingredient.model';
-import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
 import {AdminService} from '../../../../services/shared/admin.service';
+import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
 
 @Component({
   selector: 'app-add-new-food-item',

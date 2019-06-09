@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Table} from '../../../models/table.model';
 import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+import {Table} from '../../../models/table.model';
 
 @Component({
   selector: 'app-select-table',
@@ -8,7 +9,6 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./select-table.component.scss']
 })
 export class SelectTableComponent implements OnInit {
-
   tables: Table[] = [];
 
   constructor(private route: ActivatedRoute) {}
@@ -27,7 +27,6 @@ export class SelectTableComponent implements OnInit {
     const lastIndex = order.OrderSessions.length - 1;
     let orderedTime, servedTime;
 
-
     if (table.CurrentState === 'Ordered') {
 
       for (let i = 0; i < order.OrderSessions.length; i++) {
@@ -41,7 +40,6 @@ export class SelectTableComponent implements OnInit {
       orderedTime = order.OrderSessions[lastIndex].OrderedDateTime;
       servedTime = order.OrderSessions[lastIndex].ServedDateTime;
     }
-
     return  { orderedTime: orderedTime, servedTime: servedTime };
   }
 }

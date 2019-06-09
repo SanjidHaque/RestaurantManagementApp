@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {FoodItem} from '../../../../models/food-item.model';
+import {Inventory} from '../../../../models/inventory.model';
 import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
 import {FoodItemDataStorageService} from '../../../../services/data-storage/food-item-data-storage.service';
-import {Inventory} from '../../../../models/inventory.model';
-import {ToastrManager} from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-list-details',

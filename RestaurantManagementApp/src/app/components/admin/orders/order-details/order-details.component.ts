@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import {ToastrManager} from 'ng6-toastr-notifications';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import {Order} from '../../../../models/order.model';
-import {OrderDataStorageService} from '../../../../services/data-storage/order-data-storage.service';
 import {Table} from '../../../../models/table.model';
-import {ToastrManager} from 'ng6-toastr-notifications';
+import {Order} from '../../../../models/order.model';
+import {Setting} from '../../../../models/setting.model';
 import {FoodItem} from '../../../../models/food-item.model';
 import {OrderSession} from '../../../../models/order-session.model';
-import {Setting} from '../../../../models/setting.model';
+import {OrderDataStorageService} from '../../../../services/data-storage/order-data-storage.service';
 
 @Component({
   selector: 'app-order-details',
@@ -97,8 +97,8 @@ export class OrderDetailsComponent implements OnInit {
           newestOnTop: true,
           showCloseButton: true
         });
+        return;
       }
-      return;
 
       this.toastr.successToastr( 'Order deleted successfully',  'Error', {
         toastTimeout: 10000,

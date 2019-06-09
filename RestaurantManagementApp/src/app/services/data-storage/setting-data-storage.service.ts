@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {TableDataStorageService} from './table-data-storage.service';
-import {FoodItem} from '../../models/food-item.model';
+
 import {Setting} from '../../models/setting.model';
+import {TableDataStorageService} from './table-data-storage.service';
 
 @Injectable({
   providedIn: 'root'

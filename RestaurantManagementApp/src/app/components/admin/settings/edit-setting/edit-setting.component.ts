@@ -1,9 +1,9 @@
 import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrManager} from 'ng6-toastr-notifications';
 
 import {Setting} from '../../../../models/setting.model';
-import {ToastrManager} from 'ng6-toastr-notifications';
 import {SettingDataStorageService} from '../../../../services/data-storage/setting-data-storage.service';
 
 @Component({

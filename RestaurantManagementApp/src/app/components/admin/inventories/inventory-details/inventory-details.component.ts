@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import { ToastrManager } from 'ng6-toastr-notifications';
 import {Inventory} from '../../../../models/inventory.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 

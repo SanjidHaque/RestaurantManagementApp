@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import {Inventory} from '../models/inventory.model';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+
+import {Inventory} from '../models/inventory.model';
 import {InventoryDataStorageService} from '../services/data-storage/inventory-data-storage.service';
 
 @Injectable()

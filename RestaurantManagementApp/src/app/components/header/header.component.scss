@@ -1,5 +1,13 @@
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .top-padding {
     padding-top: 15px;
   }
 }
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+

@@ -114,8 +114,8 @@
     <div class="col-xl-4">
 
       <div class="row">
-        <div class="col-xl-12 text-xl-center"
-             style="font-weight: 500; font-size: 16px;">
+        <div class="col-xl-12"
+             style="font-weight: 500; font-size: 16px; text-align: center;">
           <i class="fa fa-shopping-cart"></i> Cart
         </div>
       </div>
@@ -123,7 +123,7 @@
 
 
 
-      <div *ngIf="order !== undefined; else orderExists">
+      <div *ngIf="order !== undefined && order !== null; else orderExists">
 
         <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
           <div class="col-xl-12">
@@ -179,7 +179,8 @@
 
                 </div>
 
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"
+                     style="word-break: break-word; padding-bottom: 10px;">
 
                   Total
 
@@ -212,7 +213,7 @@
                     <i
                       title="Remove from list"
                       style="cursor: pointer"
-                      (click)="removeFromCart(j, orderSession.OrderedItems)"
+                      (click)="removeFromCart(j, orderSession)"
                       class="fa fa-times-circle-o"
                       aria-hidden="true"></i>
 
@@ -365,7 +366,7 @@
 
               </div>
 
-              <div class="row" style="padding-top: 5px;">
+              <div class="row" style="padding-top: 20px; padding-bottom: 20px;">
                 <div class="col-xl-12">
 
                   <button
@@ -420,7 +421,7 @@
           </div>
         </div>
 
-        <div class="row text-xl-right" style="padding-top: 5px;padding-bottom: 5px;">
+        <div class="row text-xl-right" style="padding-top: 10px;padding-bottom: 10px;">
           <div class="col-xl-12">
 
             <button
@@ -459,14 +460,14 @@
       <div class="row">
 
         <div
-          class="col-xl-4 col-md-4 col-lg-4 col-6"
+          class="col-xl-3 col-md-3 col-lg-3 col-sm-4 col-6"
           *ngFor="let foodItem of foodItems | filter: term ;let i = index">
 
           <div class="row">
             <div class="col-xl-12"
                  style="
                  font-weight: 500;
-                 word-break: break-all;">
+                 word-break: break-word;">
 
               {{ foodItem.SerialNumber }}. {{ foodItem.Name }} - {{ foodItem.Price }} BDT
 
@@ -476,9 +477,9 @@
           <div class="row">
             <div class="col-xl-12">
               <img
+
                 style="
-              height: 235px;
-              width: 100%;
+                height: 100%; width: 100%;
               border: 2px solid white;
               border-radius: 5px;"
                 [src]="foodItem.FoodItemImageName">

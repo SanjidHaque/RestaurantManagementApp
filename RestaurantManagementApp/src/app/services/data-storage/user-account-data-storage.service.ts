@@ -29,13 +29,13 @@ export class UserAccountDataStorageService {
   roleMatch(allowedRoles) {
     let isMatch = false;
     const userRole = JSON.parse(JSON.stringify(localStorage.getItem('userRoles')));
-
     allowedRoles.forEach(element => {
       if (userRole.indexOf(element) > -1) {
         isMatch = true;
         return false;
       }
     });
+
     return isMatch;
   }
 

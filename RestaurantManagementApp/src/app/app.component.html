@@ -1,11 +1,9 @@
-
-
 <ng-progress></ng-progress>
 
 
-
 <div
-  class="container-fluid"
+  class="container-fluid small-screen-hide"
+  style="position: fixed; z-index: 3; background-color: #fff;"
   *ngIf="
   router.url !== '/login' &&
   router.url !== '/new-password' &&
@@ -15,8 +13,86 @@
 
 
 
+<div class="big-screen-hide">
 
-<div class="container-fluid body-content">
+
+  <mat-toolbar
+    style="
+    padding-top: 10px; padding-bottom: 10px;
+    position: fixed;
+    z-index: 3;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.09);">
+    <div >
+      <div
+        style="">
+        <i class="fas fa-bars"
+           style="font-size: 25px; cursor: pointer;" (click)="sidenav.toggle()"> &nbsp;
+          <span  style="font-size: 45px; font-weight: normal;">hodoo</span>
+        </i>
+      </div>
+    </div>
+  </mat-toolbar>
+
+
+
+  <mat-sidenav-container  class="custom-sidenav-container">
+
+    <mat-sidenav style="padding-left: 30px; padding-right: 30px;"
+                 #sidenav mode="over" [(opened)]="opened">
+
+      <div
+        style="font-size: 45px;
+      font-family: 'Times New Roman', sans-serif;">
+
+      <span
+        style="outline: 0; cursor: pointer;"
+        (click)="sidenav.close()"
+        routerLink="/pos">hodoo</span>
+
+      </div>
+
+      <div>
+        <a
+          style="text-decoration: none; font-size: 19px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/pos"
+          routerLinkActive="active">Point of Sale</a>
+      </div>
+
+      <div style="padding-top: 5px;">
+        <a
+          *ngIf="userDataStorageService.roleMatch(['Admin'])"
+          style="text-decoration: none; font-size: 19px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/admin"
+          routerLinkActive="active">Administration</a>
+      </div>
+
+      <div style="padding-top: 20px; font-weight: bold;">
+        <i style="font-weight: bold;" class="fa fa-user-o"></i> {{ userName }} &nbsp;
+      </div>
+
+      <div style="padding-top: 10px;">
+        <button class="btn btn-primary"
+                (click)="logOut(); sidenav.close()">Logout</button>
+      </div>
+
+
+    </mat-sidenav>
+
+
+
+  </mat-sidenav-container>
+
+</div>
+
+
+
+
+
+<div class="container-fluid body-content big-screen small-screen"
+     style="position: absolute; z-index: 2">
   <div class="row ">
     <div class="col-md-12">
       <router-outlet></router-outlet>

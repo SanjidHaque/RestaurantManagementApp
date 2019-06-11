@@ -8,6 +8,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderCancelOptionComponent} from '../bottom-sheets/order-cancel-option/order-cancel-option.component';
@@ -23,7 +25,9 @@ import {OrderCancelOptionComponent} from '../bottom-sheets/order-cancel-option/o
     MatSortModule,
     MatInputModule,
     MatListModule,
+    MatToolbarModule,
     MatBottomSheetModule,
+    MatSidenavModule,
     NgxPaginationModule
   ],
   exports: [
@@ -33,7 +37,9 @@ import {OrderCancelOptionComponent} from '../bottom-sheets/order-cancel-option/o
     MatSortModule,
     MatInputModule,
     MatListModule,
+    MatToolbarModule,
     MatBottomSheetModule,
+    MatSidenavModule,
     NgxPaginationModule
   ],
   entryComponents: [

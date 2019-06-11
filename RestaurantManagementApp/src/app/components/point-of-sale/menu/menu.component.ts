@@ -269,9 +269,17 @@ export class MenuComponent implements OnInit {
     this.updateCart(foodItem, isAddToCart, null , quantity)
   }
 
-  removeFromCart(index: number, orderedItems: OrderedItem[]) {
-    this.order.TotalPrice -= orderedItems[index].TotalPrice;
-    orderedItems.splice(index, 1);
+  removeFromCart(index: number, orderSession: OrderSession) {
+    this.order.TotalPrice -= orderSession.OrderedItems[index].TotalPrice;
+    orderSession.OrderedItems.splice(index, 1);
+
+    if (orderSession.OrderedItems.length === 0) {
+      const orderSessionIndex = this.order.OrderSessions.findIndex(x => x.Id === orderSession.Id);
+      this.order.OrderSessions.splice(orderSessionIndex, 1);
+    }
+    if (this.order.OrderSessions.length === 0) {
+      this.order = undefined;
+    }
   }
 
   placeOrder() {
@@ -491,7 +499,6 @@ export class MenuComponent implements OnInit {
       this.order.OrderSessions.splice(index, 1);
 
       if (this.order.OrderSessions.length === 0) {
-        this.order.OrderSessions = [];
         this.order = undefined;
       }
     }

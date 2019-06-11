@@ -1,106 +1,173 @@
 <ng-progress></ng-progress>
 
 
-<div
-  class="container-fluid small-screen-hide"
-  style="position: fixed; z-index: 3; background-color: #fff;"
-  *ngIf="
-  router.url !== '/login' &&
-  router.url !== '/new-password' &&
-  router.url !== '/reset-password'" >
-  <app-header></app-header>
-</div>
+  <div class="row" *ngIf="screenWidth < 768">
 
-
-
-<div class="big-screen-hide">
-
-
-  <mat-toolbar
-    style="
-    padding-top: 10px; padding-bottom: 10px;
-    position: fixed;
-    z-index: 3;
-    background-color: #fff;
-    border-bottom: 1px solid rgba(0,0,0,0.09);">
-    <div >
       <div
-        style="">
+        *ngIf="
+        router.url !== '/login' &&
+        router.url !== '/new-password' &&
+        router.url !== '/reset-password'"
+        class="col-xl-12"
+        style="
+        position: fixed;
+        z-index: 3;
+        padding-top: 5px;
+        padding-left: 25px;
+        padding-bottom: 5px;
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0,0,0,0.09);">
         <i class="fas fa-bars"
-           style="font-size: 25px; cursor: pointer;" (click)="sidenav.toggle()"> &nbsp;
-          <span  style="font-size: 45px; font-weight: normal;">hodoo</span>
+           style="
+           font-size: 25px;
+           cursor: pointer;"
+           (click)="sidenav.toggle()"> &nbsp;
+          <span
+            style="
+            font-size: 45px;
+            font-weight: normal;">
+            hodoo
+          </span>
         </i>
       </div>
-    </div>
-  </mat-toolbar>
+
+  </div>
 
 
 
-  <mat-sidenav-container  class="custom-sidenav-container">
+  <div
+    class="container-fluid"
+    style="position: fixed; z-index: 3; background-color: #fff;"
+    *ngIf="
+    screenWidth > 767 &&
+    router.url !== '/login' &&
+    router.url !== '/new-password' &&
+    router.url !== '/reset-password'" >
+    <app-header></app-header>
+  </div>
 
-    <mat-sidenav style="padding-left: 30px; padding-right: 30px;"
-                 #sidenav mode="over" [(opened)]="opened">
 
-      <div
-        style="font-size: 45px;
-      font-family: 'Times New Roman', sans-serif;">
 
-      <span
-        style="outline: 0; cursor: pointer;"
-        (click)="sidenav.close()"
-        routerLink="/pos">hodoo</span>
 
-      </div>
 
-      <div>
+  <mat-sidenav-container class="example-container">
+
+    <mat-sidenav
+      style="padding-left: 20px; padding-right: 20px; padding-top: 75px;"
+      #sidenav
+      mode="over"
+      [(opened)]="opened">
+
+
+      <div style="padding-top: 5px; padding-bottom: 5px;">
         <a
-          style="text-decoration: none; font-size: 19px; color: black;"
+          style="text-decoration: none; font-size: 16px; color: black; outline: 0;"
           (click)="sidenav.close()"
           routerLink="/pos"
           routerLinkActive="active">Point of Sale</a>
       </div>
 
-      <div style="padding-top: 5px;">
+      <div style="padding-top: 5px; padding-bottom: 5px;">
         <a
           *ngIf="userDataStorageService.roleMatch(['Admin'])"
-          style="text-decoration: none; font-size: 19px; color: black;"
+          style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
-          routerLink="/admin"
-          routerLinkActive="active">Administration</a>
+          routerLink="/admin/inventories"
+          routerLinkActive="active">Inventories</a>
       </div>
 
-      <div style="padding-top: 20px; font-weight: bold;">
-        <i style="font-weight: bold;" class="fa fa-user-o"></i> {{ userName }} &nbsp;
+      <div style="padding-top: 5px; padding-bottom: 5px;">
+        <a
+          *ngIf="userDataStorageService.roleMatch(['Admin'])"
+          style="text-decoration: none; font-size: 16px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/admin/food-items"
+          routerLinkActive="active">Food Items</a>
+      </div>
+
+      <div style="padding-top: 5px; padding-bottom: 5px;">
+        <a
+          *ngIf="userDataStorageService.roleMatch(['Admin'])"
+          style="text-decoration: none; font-size: 16px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/admin/orders"
+          routerLinkActive="active">Orders</a>
+      </div>
+
+      <div style="padding-top: 5px; padding-bottom: 5px;">
+        <a
+          *ngIf="userDataStorageService.roleMatch(['Admin'])"
+          style="text-decoration: none; font-size: 16px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/admin/tables"
+          routerLinkActive="active">Tables</a>
+      </div>
+
+      <div style="padding-top: 5px; padding-bottom: 5px;">
+        <a
+          *ngIf="userDataStorageService.roleMatch(['Admin'])"
+          style="text-decoration: none; font-size: 16px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/admin/user-accounts"
+          routerLinkActive="active">Users</a>
+      </div>
+
+      <div style="padding-top: 5px; padding-bottom: 5px;">
+        <a
+          *ngIf="userDataStorageService.roleMatch(['Admin'])"
+          style="text-decoration: none; font-size: 16px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/admin/settings"
+          routerLinkActive="active">Settings</a>
+      </div>
+
+
+
+      <div style="padding-top: 20px; font-weight: bold; font-size: 13px; word-break: break-all;">
+        <i style="font-weight: bold;" class="fas fa-shield-alt"></i> {{ userName }} &nbsp;
       </div>
 
       <div style="padding-top: 10px;">
-        <button class="btn btn-primary"
-                (click)="logOut(); sidenav.close()">Logout</button>
+        <button
+          class="btn btn-primary btn-sm"
+          (click)="logOut();
+          sidenav.close()">
+          Logout
+        </button>
       </div>
-
 
     </mat-sidenav>
 
 
+    <mat-sidenav-content>
+
+      <div
+        class="container-fluid body-content"
+        style="
+        position: absolute;
+        z-index: 2">
+
+        <div class="row ">
+          <div class="col-md-12">
+            <router-outlet></router-outlet>
+            <br>
+            <br>
+          </div>
+        </div>
+
+      </div>
+
+    </mat-sidenav-content>
 
   </mat-sidenav-container>
 
-</div>
 
 
 
 
 
-<div class="container-fluid body-content big-screen small-screen"
-     style="position: absolute; z-index: 2">
-  <div class="row ">
-    <div class="col-md-12">
-      <router-outlet></router-outlet>
-      <br>
-      <br>
-    </div>
-  </div>
-</div>
+
+
 
 
 

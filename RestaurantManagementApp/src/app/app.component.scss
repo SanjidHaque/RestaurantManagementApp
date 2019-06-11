@@ -1,48 +1,21 @@
-@media (max-width: 767px) {
-  .small-screen-hide {
-    display: none;
-  }
-  .small-screen {
-    margin-top: 70px;
-  }
-}
-
-@media (min-width: 768px) {
-  .big-screen-hide {
-    display: none;
-  }
-  .big-screen {
-    margin-top: 80px;
-  }
-}
 
 .mat-drawer-container {
   background-color: #fff;
 }
 
-
-
-
-
 .body-content {
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 90px;
 }
 
-
-.custom-sidenav-container {
-  position: inherit;
-  height: 500%;
-  display: inherit;
-  transform: inherit;
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-//.example-container {
-//  position: absolute;
-//  top: 0;
-//  bottom: 0;
-//  left: 0;
-//  right: 0;
-//}
 
 

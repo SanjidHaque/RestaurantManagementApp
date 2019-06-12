@@ -312,7 +312,11 @@ namespace RMS_Server_.Controllers
         {
             Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orderId);
             if (deleteOrder != null)
-            {             
+            {
+                if (deleteOrder.CurrentState == "Ordered" || deleteOrder.CurrentState == "Served")
+                {
+                    return Ok("Order is active now");
+                }
                 _context.Orders.Remove(deleteOrder);
                 _context.SaveChanges();
                 return Ok();
@@ -326,9 +330,8 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult GetAllOrder()
         {
 
-            List<Order> orders = _context.Orders.Include(x => x.OrderSessions)
-                .OrderByDescending(y => y.Id)
-                .ToList();
+            List<Order> orders = _context.Orders.OrderByDescending(x => x.Id).ToList();
+            List<OrderSession> orderSessions = _context.OrderSessions.Include(x => x.Order).ToList();
             List<OrderedItem> orderedItems = _context.OrderedItems.Include(c => c.OrderSession).ToList();
             return Ok(orders);
         }

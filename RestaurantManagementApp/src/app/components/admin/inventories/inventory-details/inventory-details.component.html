@@ -34,24 +34,17 @@
 
 <br>
 
+
 <div class="row text-xl-left">
-  <div class="col-xl-10">
+  <div class="col-xl-12 col-12">
 
     <button
       routerLink="/admin/inventories/{{inventoryId}}/update-inventory-quantity"
-      class="btn btn-info">Update</button>&nbsp;
+      class="btn btn-info">Update Quantity</button>&nbsp;
 
     <button
       routerLink="/admin/inventories/{{inventoryId}}/remove-inventory-quantity"
       class="btn btn-dark">Remove Quantity</button>&nbsp;
-
-    <button
-      routerLink="/admin/inventories/{{inventoryId}}/edit-inventory-item"
-      class="btn btn-warning">Edit</button> &nbsp;
-
-    <button
-      (click)="deleteInventoryItem()"
-      class="btn btn-danger">Delete</button>
 
   </div>
 </div>
@@ -65,7 +58,7 @@
 
 
 <div class="row">
-  <div class="col-xl-10">
+  <div class="col-xl-6">
 
     <table border=1 cellpadding=10 width="100%">
       <tr style="font-weight: 500;">
@@ -101,10 +94,25 @@
 <br>
 
 <div class="row text-xl-right">
-  <div class="col-xl-10">
+  <div class="col-xl-6">
     <pagination-controls
       class="my-pagination"
       [autoHide]="true"
       (pageChange)="pageNumber = $event"></pagination-controls>
+  </div>
+</div>
+
+
+<div class="row text-xl-left">
+  <div class="col-xl-12 col-12">
+
+    <button
+      routerLink="/admin/inventories/{{inventoryId}}/edit-inventory-item"
+      class="btn btn-warning">Edit</button> &nbsp;
+
+    <button
+      (click)="deleteInventoryItem()"
+      class="btn btn-danger">Delete</button>
+
   </div>
 </div>

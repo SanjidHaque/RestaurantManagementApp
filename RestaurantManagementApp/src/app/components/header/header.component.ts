@@ -11,7 +11,6 @@ import {UserAccountDataStorageService} from '../../services/data-storage/user-ac
 })
 export class HeaderComponent implements OnInit {
   userName: string;
-  opened: boolean;
 
   constructor(private router: Router,
               private pointOfSaleService: PointOfSaleService,

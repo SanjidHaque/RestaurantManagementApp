@@ -2,11 +2,10 @@
 
 
 
-<div class="row">
 
-  <mat-toolbar
-    *ngIf="screenWidth < 992">
+<div class="container-fluid" *ngIf="screenWidth < 992">
 
+  <div class="row">
     <div
       *ngIf="
         router.url !== '/login' &&
@@ -14,7 +13,6 @@
         router.url !== '/reset-password'"
       class="col-xl-12"
       style="
-
         z-index: 3;
         padding-top: 10px;
         padding-bottom: 10px;
@@ -29,15 +27,18 @@
         <span
           style="
             font-size: 45px;
+            font-family: 'Times New Roman', serif;
             font-weight: normal;">
             hodoo
           </span>
       </i>
     </div>
-
-  </mat-toolbar>
+  </div>
 
 </div>
+
+
+
 
 
 
@@ -160,11 +161,9 @@
         position: absolute;
         z-index: 2">
 
-        <div class="row ">
+        <div class="row">
           <div class="col-md-12">
             <router-outlet></router-outlet>
-            <br>
-            <br>
           </div>
         </div>
 

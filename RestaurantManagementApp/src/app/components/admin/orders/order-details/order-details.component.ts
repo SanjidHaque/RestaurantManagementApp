@@ -100,6 +100,17 @@ export class OrderDetailsComponent implements OnInit {
         return;
       }
 
+      if (data === 'Order is active now') {
+        this.isDisabled = false;
+        this.toastr.errorToastr( data,  'Error', {
+          toastTimeout: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+        return;
+      }
+
+
       this.toastr.successToastr( 'Order deleted successfully',  'Error', {
         toastTimeout: 10000,
         newestOnTop: true,

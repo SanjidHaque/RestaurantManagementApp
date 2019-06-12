@@ -3,39 +3,107 @@
 
 <div class="row">
 
-  <div class="col-xl-1 col-lg-2 col-md-2"
-       style="font-size: 45px;
-       font-family: 'Times New Roman',serif;">
+  <div
+    style="
+    font-size: 45px;
+    padding-left: 10px;
+    padding-right: 40px;
+    font-family: 'Times New Roman',serif;">
     <span
       style="outline: 0; cursor: pointer;"
       routerLink="/pos">hodoo</span>
   </div>
 
-  <div class="col-xl-2 col-lg-2 col-md-3
-  text-xl-right text-lg-right text-md-right top-padding">
+
+  <div
+    style="
+    border-left: 1px solid #c2c2c2;
+    padding-left: 13px; padding-right: 5px; padding-top: 20px;">
     <a
-      style="text-decoration: none; font-size: 19px; color: black;"
-      routerLink="/pos"
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
+      routerLink="pos"
       routerLinkActive="active">Point of Sale</a>
   </div>
 
-  <div class="col-xl-2 col-lg-2 col-md-3 top-padding" >
+
+  <div
+    *ngIf="userDataStorageService.roleMatch(['Admin'])"
+    style="padding-left: 5px; padding-right: 5px; padding-top: 20px;">
     <a
-      *ngIf="userDataStorageService.roleMatch(['Admin'])"
-      style="text-decoration: none; font-size: 19px; color: black;"
-      routerLink="/admin"
-      routerLinkActive="active">Administration</a>
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
+      routerLink="admin/inventories"
+      routerLinkActive="active">Inventories</a>
   </div>
 
-  <div class="col-xl-7 col-lg-6 col-md-4
-             text-xl-right text-lg-right text-md-right"
-       style="padding-top: 20px; font-weight: bold;">
-    <i style="font-weight: bold;" class="fa fa-user-o"></i> {{ userName }} &nbsp;
-
-    <button class="btn btn-primary" (click)="logOut()">Logout</button>
+  <div
+    *ngIf="userDataStorageService.roleMatch(['Admin'])"
+    style="padding-left: 5px;padding-right: 5px; padding-top: 20px;">
+    <a
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
+      routerLink="admin/food-items"
+      routerLinkActive="active">Food Items</a>
   </div>
 
+  <div
+    *ngIf="userDataStorageService.roleMatch(['Admin'])"
+    style="padding-left: 5px;padding-right: 5px; padding-top: 20px;">
+    <a
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
+      routerLink="admin/orders"
+      routerLinkActive="active">Orders</a>
+  </div>
 
+  <div
+    *ngIf="userDataStorageService.roleMatch(['Admin'])"
+    style="padding-left: 5px;padding-right: 5px; padding-top: 20px;">
+    <a
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
+      routerLink="admin/tables"
+      routerLinkActive="active">Tables</a>
+  </div>
+
+  <div
+    *ngIf="userDataStorageService.roleMatch(['Admin'])"
+    style="padding-left: 5px;padding-right: 5px; padding-top: 20px;">
+    <a
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
+      routerLink="admin/user-accounts"
+      routerLinkActive="active">User Accounts</a>
+  </div>
+
+  <div
+    *ngIf="userDataStorageService.roleMatch(['Admin'])"
+    style="
+    padding-left: 5px;
+    border-right: 1px solid #c2c2c2;
+    padding-right: 13px;
+    padding-top: 20px;">
+    <a
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
+      routerLink="admin/settings"
+      routerLinkActive="active">Settings</a>
+  </div>
+
+  <div style="padding-left: 10px; padding-right: 5px; padding-top: 20px;" >
+    <i style="font-weight: bold;" class="fas fa-shield-alt"></i>
+    <span style="font-weight: 500;"> {{ userName }} </span>&nbsp;
+
+    <button class="btn btn-primary btn-sm" (click)="logOut()">Logout</button>
+  </div>
 
 </div>
 

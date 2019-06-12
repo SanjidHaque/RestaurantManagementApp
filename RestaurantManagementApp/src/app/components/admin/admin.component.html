@@ -1,80 +1,4 @@
-
-
-
-
-
-<div class="row"
-     *ngIf="screenWidth >= 768"
-     style="position: fixed;
-     z-index: 3;
-     border-bottom: 1px solid rgba(0,0,0,0.09);
-     padding-bottom: 10px;
-     padding-top: 20px;
-     margin-top: -30px;
-     background-color: #fff;
-     width: 100%;">
-
-      <div style="padding-left: 15px; padding-right: 5px;">
-        <a
-          style="
-          text-decoration: none;
-          font-size: 17px; color: black;"
-          routerLink="inventories"
-          routerLinkActive="active">Inventories</a>
-      </div>
-
-      <div style="padding-left: 5px;padding-right: 5px;">
-        <a
-          style="
-          text-decoration: none;
-          font-size: 17px; color: black;"
-          routerLink="food-items"
-          routerLinkActive="active">Food Items</a>
-      </div>
-
-      <div style="padding-left: 5px;padding-right: 5px;">
-        <a
-          style="
-          text-decoration: none;
-          font-size: 17px; color: black;"
-          routerLink="orders"
-          routerLinkActive="active">Orders</a>
-      </div>
-
-      <div style="padding-left: 5px;padding-right: 5px;">
-        <a
-          style="
-          text-decoration: none;
-          font-size: 17px; color: black;"
-          routerLink="tables"
-          routerLinkActive="active">Tables</a>
-      </div>
-
-      <div style="padding-left: 5px;padding-right: 5px;">
-        <a
-          style="
-          text-decoration: none;
-          font-size: 17px; color: black;"
-          routerLink="user-accounts"
-          routerLinkActive="active">User Accounts</a>
-      </div>
-
-      <div style="padding-left: 5px;padding-right: 5px;">
-        <a
-          style="
-          text-decoration: none;
-          font-size: 17px; color: black;"
-          routerLink="settings"
-          routerLinkActive="active">Settings</a>
-      </div>
-
-
-  </div>
-
-
-
-
-<div class="row panel-margin" style="position: relative; z-index: 2">
+<div class="row">
   <div class="col-xl-12">
 
     <router-outlet></router-outlet>
@@ -82,8 +6,8 @@
   </div>
 </div>
 
-
-<br><br>
+<br>
+<br>
 
 
 

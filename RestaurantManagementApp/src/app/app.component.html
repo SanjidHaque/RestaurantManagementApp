@@ -5,7 +5,7 @@
 <div class="row">
 
   <mat-toolbar
-    *ngIf="screenWidth < 768">
+    *ngIf="screenWidth < 992">
 
     <div
       *ngIf="
@@ -42,12 +42,11 @@
 
 
 
-
   <div
     class="container-fluid"
     style="position: fixed; z-index: 3; background-color: #fff;"
     *ngIf="
-    screenWidth > 767 &&
+    screenWidth >= 992 &&
     router.url !== '/login' &&
     router.url !== '/new-password' &&
     router.url !== '/reset-password'" >

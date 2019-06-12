@@ -125,6 +125,17 @@
 
       <div *ngIf="order !== undefined && order !== null; else orderExists">
 
+        <div class="row"
+             *ngIf="order.Id !== null && order.Id !== -1"
+             style="text-align: center;
+             padding-top: 5px;
+             padding-bottom: 5px;
+             font-weight: 500;">
+          <div class="col-xl-12">
+            Order No. {{ order.Id }}
+          </div>
+        </div>
+
         <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
           <div class="col-xl-12">
 

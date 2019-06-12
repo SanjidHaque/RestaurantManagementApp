@@ -68,8 +68,10 @@ export class MenuComponent implements OnInit {
       });
       this.router.navigate(['pos']);
     } else {
-      this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered'
-        || x.CurrentState === 'Served');
+      if (this.table.Orders !== null) {
+        this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered'
+          || x.CurrentState === 'Served');
+      }
       this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
       this.setFoodItemImage();
     }

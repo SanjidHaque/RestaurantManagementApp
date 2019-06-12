@@ -12,15 +12,12 @@ import {Table} from '../../../../models/table.model';
   styleUrls: ['./table-list.component.scss']
 })
 export class TableListComponent implements OnInit, AfterViewInit {
-
   tables: Table[] = [];
-
-
+  
   displayedColumns: string[] =
     [
       'Name',
-      'CurrentState',
-      'TotalOrders'
+      'CurrentState'
     ];
   dataSource: MatTableDataSource<Table>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -49,5 +46,6 @@ export class TableListComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 
 }

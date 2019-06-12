@@ -39,14 +39,6 @@
           mat-cell *matCellDef="let row"> {{row.CurrentState}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="TotalOrders">
-        <th
-          style="font-size: 14px; font-weight: 500; color: #000; text-align: center;"
-          mat-header-cell *matHeaderCellDef> Total Orders </th>
-        <td
-          style="width: 25%"
-          mat-cell *matCellDef="let row"> {{row.Orders.length}} (s) </td>
-      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"

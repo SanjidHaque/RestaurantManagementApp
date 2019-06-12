@@ -54,10 +54,10 @@
 
 
 <div class="row">
-  <div class="col-xl-6">
+  <div class="col-xl-10">
 
     <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
         <div class="row" style="text-align: left;
 
@@ -97,17 +97,17 @@
           <tr
             *ngFor="let orderedItem of orderSession.OrderedItems
          | paginate: { itemsPerPage: 3, currentPage: pageNumber }">
-            <td>
+            <td style="width: 20%;">
               {{ getFoodItemInformation('Name and Serial', orderedItem.FoodItemId) }}
             </td>
-            <td >
-              {{ getFoodItemInformation('Price', orderedItem.FoodItemId) }}
+            <td style="width: 10%;">
+              {{ getFoodItemInformation('Price', orderedItem.FoodItemId) }} BDT
             </td>
-            <td>
-              {{ orderedItem.FoodItemQuantity }}
+            <td style="width: 8%;">
+              {{ orderedItem.FoodItemQuantity }} (s)
             </td>
-            <td>
-              {{ orderedItem.TotalPrice }}
+            <td style="width: 10%;">
+              {{ orderedItem.TotalPrice }} BDT
             </td>
           </tr>
         </table>
@@ -128,7 +128,7 @@
 
     <div
       class="row">
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
         Total: {{ order.TotalPrice }} BDT
 
@@ -140,7 +140,7 @@
     <div
       *ngIf="setting.VatRate !== null && setting.VatRate !== 0"
       class="row">
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
         Vat {{ setting.VatRate }}%: {{ order.VatAmount.toFixed(2) }} BDT
 
@@ -150,7 +150,7 @@
     <div class="row"
          *ngIf="setting.ServiceChargeRate !== null && setting.ServiceChargeRate !== 0"
         >
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
         Service Charge {{ setting.ServiceChargeRate }}%: {{ order.ServiceChargeAmount.toFixed(2) }} BDT
 
@@ -159,7 +159,7 @@
 
     <div class="row"
          *ngIf="order.DiscountRate !== 0">
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
          <span *ngIf="order.DiscountType === 'Percent'">
            Discount {{ order.DiscountRate }}%: {{ order.DiscountAmount.toFixed(2) }} BDT
@@ -177,7 +177,7 @@
          style="
            font-size: 17px;
            font-weight: 500;">
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
         Gross Total: {{ order.GrossTotalPrice.toFixed(2) }} BDT
 
@@ -186,7 +186,7 @@
     <br>
 
     <div class="row" *ngIf="order.Tendered !== null">
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
         Tendered: {{ order.Tendered }} BDT
 
@@ -196,7 +196,7 @@
 
     <div class="row"
          *ngIf="order.Change !== null" >
-      <div class="col-xl-12">
+      <div class="col-xl-8 col-lg-8">
 
         Change: {{ order.Change }} BDT
 
@@ -207,10 +207,9 @@
   </div>
 </div>
 
-<br>
 
 <div class="row text-xl-left">
-  <div class="col-xl-10">
+  <div class="col-xl-8 col-lg-8">
 
     <button
       [disabled]="isDisabled"

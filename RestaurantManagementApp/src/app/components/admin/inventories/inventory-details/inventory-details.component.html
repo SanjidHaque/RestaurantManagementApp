@@ -58,29 +58,25 @@
 
 
 <div class="row">
-  <div class="col-xl-6">
+  <div class="col-xl-8 col-lg-8">
 
     <table border=1 cellpadding=10 width="100%">
       <tr style="font-weight: 500;">
-        <td>Product's Quantity</td>
-        <td>Product's Unit</td>
-        <td>Buying Price</td>
-        <td>Buying Date</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Date</td>
       </tr>
 
       <tr
         *ngFor="let inventoryHistory of inventory.InventoryHistory
          | paginate: { itemsPerPage: 3, currentPage: pageNumber }">
-        <td>
-          {{ inventoryHistory.BuyingQuantity }}
+        <td style="width: 10%">
+          {{ inventoryHistory.BuyingQuantity }} {{ inventory.Unit }}
         </td>
-        <td >
-          {{ inventory.Unit }}
+        <td style="width: 10%">
+          {{ inventoryHistory.BuyingPrice }} BDT
         </td>
-        <td>
-          {{ inventoryHistory.BuyingPrice }}
-        </td>
-        <td>
+        <td style="width: 15%; word-break: break-word;">
           {{ inventoryHistory.BuyingTime }}
         </td>
       </tr>
@@ -94,7 +90,7 @@
 <br>
 
 <div class="row text-xl-right">
-  <div class="col-xl-6">
+  <div class="col-xl-8 col-lg-8">
     <pagination-controls
       class="my-pagination"
       [autoHide]="true"

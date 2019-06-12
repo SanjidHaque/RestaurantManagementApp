@@ -6,9 +6,9 @@ import {Table} from '../../models/table.model';
 @Injectable()
 export class TableDataStorageService {
   backEndPort = '1548';
-  rootUrl = 'http://localhost:' + this.backEndPort;
+  // rootUrl = 'http://localhost:' + this.backEndPort;
 
-  // rootUrl = 'https://hodoo-headblocks-be.azurewebsites.net';
+  rootUrl = 'https://hodoo-headblocks-be.azurewebsites.net';
   
   constructor(private http: HttpClient) {
   }

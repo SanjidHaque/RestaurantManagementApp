@@ -13,7 +13,7 @@ import {Table} from '../../../../models/table.model';
 })
 export class TableListComponent implements OnInit, AfterViewInit {
   tables: Table[] = [];
-  
+
   displayedColumns: string[] =
     [
       'Name',

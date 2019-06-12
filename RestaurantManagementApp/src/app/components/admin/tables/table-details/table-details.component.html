@@ -21,11 +21,21 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf=" table.Orders !== null; else shoeZero">
   <div class="col-xl-12">
     Total Orders: {{ table.Orders.length }} (s)
   </div>
 </div>
+
+<ng-template #shoeZero>
+
+  <div class="row">
+    <div class="col-xl-12">
+      No orders from this table
+    </div>
+  </div>
+
+</ng-template>
 
 <br>
 

@@ -74,6 +74,7 @@ import {SettingResolverService} from './route-resolvers/setting-resolver.service
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {NgxPrintModule} from 'ngx-print';
 import { OrderCancelOptionComponent } from './bottom-sheets/order-cancel-option/order-cancel-option.component';
+import { RemoveInventoryQuantityComponent } from './components/admin/inventories/remove-inventory-quantity/remove-inventory-quantity.component';
 
 
 
@@ -121,7 +122,8 @@ import { OrderCancelOptionComponent } from './bottom-sheets/order-cancel-option/
     SettingsComponent,
     SettingListComponent,
     EditSettingComponent,
-    OrderCancelOptionComponent
+    OrderCancelOptionComponent,
+    RemoveInventoryQuantityComponent
   ],
   imports: [
     BrowserModule,

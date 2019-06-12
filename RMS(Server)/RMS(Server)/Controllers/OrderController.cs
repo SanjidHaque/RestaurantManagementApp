@@ -268,7 +268,6 @@ namespace RMS_Server_.Controllers
 
         [Route("api/ValidateOrder")]
         [HttpPost]
-        [AllowAnonymous]
         public IHttpActionResult ValidateOrder(Order order)
         {
 
@@ -309,7 +308,6 @@ namespace RMS_Server_.Controllers
 
         [Route("api/DeleteOrder/{orderId}")]
         [HttpDelete]
-        [AllowAnonymous]
         public IHttpActionResult DeleteOrder(int orderId)
         {
             Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orderId);
@@ -324,7 +322,6 @@ namespace RMS_Server_.Controllers
         }
            
         [HttpGet]
-        [AllowAnonymous]
         [Route("api/GetAllOrder")]
         public IHttpActionResult GetAllOrder()
         {

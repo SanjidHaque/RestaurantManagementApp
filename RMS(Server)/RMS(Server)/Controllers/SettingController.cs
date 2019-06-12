@@ -13,7 +13,6 @@ namespace RMS_Server_.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         [Route("api/GetAllSetting")]
         public IHttpActionResult GetAllSetting()
         {
@@ -22,7 +21,6 @@ namespace RMS_Server_.Controllers
         }
 
         [HttpPut]
-        [AllowAnonymous]
         [Route("api/EditSetting")]
         public IHttpActionResult EditSetting(Setting editSetting)
         {

@@ -46,6 +46,7 @@ import {SettingsComponent} from '../components/admin/settings/settings.component
 import {SettingListComponent} from '../components/admin/settings/setting-list/setting-list.component';
 import {SettingResolverService} from '../route-resolvers/setting-resolver.service';
 import {EditSettingComponent} from '../components/admin/settings/edit-setting/edit-setting.component';
+import {RemoveInventoryQuantityComponent} from '../components/admin/inventories/remove-inventory-quantity/remove-inventory-quantity.component';
 
 
 const appRoutes: Routes = [
@@ -202,8 +203,16 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':inventory-id/update-inventory-item',
+                path: ':inventory-id/update-inventory-quantity',
                 component: UpdateInventoryItemComponent,
+                resolve:
+                  {
+                    inventories: InventoryResolverService
+                  }
+              },
+              {
+                path: ':inventory-id/remove-inventory-quantity',
+                component: RemoveInventoryQuantityComponent,
                 resolve:
                   {
                     inventories: InventoryResolverService

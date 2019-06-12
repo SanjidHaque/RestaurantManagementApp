@@ -36,6 +36,11 @@ export class InventoryDataStorageService {
       this.rootUrl + '/api/UpdateInventoryHistory', updateHistory);
   }
 
+  removeInventoryQuantity(inventory: Inventory) {
+    return this.http.put<Inventory>(
+      this.rootUrl + '/api/RemoveInventoryQuantity', inventory);
+  }
+
   deleteInventoryItem(inventoryId: number)  {
     return this.http.delete(
       `${this.rootUrl + '/api/DeleteInventoryItem'}/${inventoryId}`);

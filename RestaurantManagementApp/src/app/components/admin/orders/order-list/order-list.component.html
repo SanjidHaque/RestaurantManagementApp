@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-4 order-list-top">
+        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-12 order-list-top">
 
           <button
             type="submit"
@@ -95,24 +95,6 @@
         <td
           style="width: 15%"
           mat-cell *matCellDef="let row" > {{row.GrossTotalPrice}} BDT </td>
-      </ng-container>
-
-      <ng-container matColumnDef="InventoryCost">
-        <th
-          style="font-size: 14px; font-weight: 500; color: #000;"
-          mat-header-cell *matHeaderCellDef mat-sort-header> Inventory Cost </th>
-        <td
-          style="width: 15%"
-          mat-cell *matCellDef="let row" > {{row.InventoryCost}} BDT</td>
-      </ng-container>
-
-      <ng-container matColumnDef="Profit">
-        <th
-          style="font-size: 14px; font-weight: 500; color: #000;"
-          mat-header-cell *matHeaderCellDef mat-sort-header> Profit </th>
-        <td
-          style="width: 10%"
-          mat-cell *matCellDef="let row" > {{row.Profit}} BDT </td>
       </ng-container>
 
 

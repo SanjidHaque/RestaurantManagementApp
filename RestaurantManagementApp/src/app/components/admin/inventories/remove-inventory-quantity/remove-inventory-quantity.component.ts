@@ -4,16 +4,15 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {Inventory} from '../../../../models/inventory.model';
-import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {AdminService} from '../../../../services/shared/admin.service';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({
-  selector: 'app-update-inventory-item',
-  templateUrl: './update-inventory-item.component.html',
-  styleUrls: ['./update-inventory-item.component.scss']
+  selector: 'app-remove-inventory-quantity',
+  templateUrl: './remove-inventory-quantity.component.html',
+  styleUrls: ['./remove-inventory-quantity.component.scss']
 })
-export class UpdateInventoryItemComponent implements OnInit {
+export class RemoveInventoryQuantityComponent implements OnInit {
   isDisabled = false;
 
   inventoryId: number;
@@ -31,7 +30,6 @@ export class UpdateInventoryItemComponent implements OnInit {
           this.inventoryId = +params['inventory-id'];
         }
       );
-
   }
 
   ngOnInit() {
@@ -54,42 +52,42 @@ export class UpdateInventoryItemComponent implements OnInit {
   }
 
 
-  onUpdateInventoryItem(form: NgForm) {
-    const buyingPrice = form.value.price;
-    const buyingQuantity = form.value.quantity;
-
-    if (!this.adminService.checkPricingConditions(buyingPrice) ||
-      !this.adminService.checkPricingConditions(buyingQuantity) ) {
+  removeInventoryQuantity(form: NgForm) {
+    const removalQuantity = form.value.quantity;
+    if (!this.adminService.checkPricingConditions(removalQuantity)) {
       return;
     }
-
     this.isDisabled = true;
-    const inventoryId = this.inventoryId;
-    const inventoryHistoryId = null;
 
-
-    const buyingTime = new Date().toLocaleString();
-    const updateHistory = new InventoryHistory(
-        inventoryHistoryId,
-        inventoryId,
-        buyingQuantity,
-        buyingTime,
-        buyingPrice
-    );
-
-    this.inventoryDataStorageService.updateInventoryHistory(updateHistory).
-    subscribe(
+    this.inventoryDataStorageService.removeInventoryQuantity(
+      new Inventory(
+        this.inventoryId,
+        null,
+        null,
+        removalQuantity,
+        null,
+        null,
+        [],
+        null
+      )
+    ).subscribe(
       (data: any) => {
-        this.toastr.successToastr('Information is updated', 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
-        form.reset();
-        this.router.navigate(['admin/inventories/', this.inventoryId]);
-      }
-    );
+        if (data === 'Success') {
+          this.toastr.successToastr('Quantity is removed', 'Success', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          form.reset();
+          this.router.navigate(['admin/inventories/', this.inventoryId]);
+        } else {
+          this.isDisabled = false;
+          this.toastr.errorToastr('Too big quantity', 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+        }
+      });
   }
-
-
 }

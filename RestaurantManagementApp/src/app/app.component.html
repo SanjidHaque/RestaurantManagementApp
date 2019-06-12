@@ -12,9 +12,9 @@
         style="
         position: fixed;
         z-index: 3;
-        padding-top: 5px;
+        padding-top: 10px;
         padding-left: 25px;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
         background-color: #fff;
         border-bottom: 1px solid rgba(0,0,0,0.09);">
         <i class="fas fa-bars"
@@ -22,6 +22,7 @@
            font-size: 25px;
            cursor: pointer;"
            (click)="sidenav.toggle()"> &nbsp;
+
           <span
             style="
             font-size: 45px;
@@ -48,15 +49,12 @@
 
 
 
-
-
   <mat-sidenav-container class="example-container">
 
     <mat-sidenav
       style="padding-left: 20px; padding-right: 20px; padding-top: 75px;"
       #sidenav
-      mode="over"
-      [(opened)]="opened">
+      mode="over">
 
 
       <div style="padding-top: 5px; padding-bottom: 5px;">
@@ -67,25 +65,29 @@
           routerLinkActive="active">Point of Sale</a>
       </div>
 
-      <div style="padding-top: 5px; padding-bottom: 5px;">
+      <div
+        *ngIf="userDataStorageService.roleMatch(['Admin'])"
+        style="padding-top: 5px; padding-bottom: 5px;">
         <a
-          *ngIf="userDataStorageService.roleMatch(['Admin'])"
           style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
           routerLink="/admin/inventories"
           routerLinkActive="active">Inventories</a>
       </div>
 
-      <div style="padding-top: 5px; padding-bottom: 5px;">
+      <div
+        *ngIf="userDataStorageService.roleMatch(['Admin'])"
+        style="padding-top: 5px; padding-bottom: 5px;">
         <a
-          *ngIf="userDataStorageService.roleMatch(['Admin'])"
           style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
           routerLink="/admin/food-items"
           routerLinkActive="active">Food Items</a>
       </div>
 
-      <div style="padding-top: 5px; padding-bottom: 5px;">
+      <div
+        *ngIf="userDataStorageService.roleMatch(['Admin'])"
+        style="padding-top: 5px; padding-bottom: 5px;">
         <a
           *ngIf="userDataStorageService.roleMatch(['Admin'])"
           style="text-decoration: none; font-size: 16px; color: black;"
@@ -94,27 +96,30 @@
           routerLinkActive="active">Orders</a>
       </div>
 
-      <div style="padding-top: 5px; padding-bottom: 5px;">
+      <div
+        *ngIf="userDataStorageService.roleMatch(['Admin'])"
+        style="padding-top: 5px; padding-bottom: 5px;">
         <a
-          *ngIf="userDataStorageService.roleMatch(['Admin'])"
           style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
           routerLink="/admin/tables"
           routerLinkActive="active">Tables</a>
       </div>
 
-      <div style="padding-top: 5px; padding-bottom: 5px;">
+      <div
+        *ngIf="userDataStorageService.roleMatch(['Admin'])"
+        style="padding-top: 5px; padding-bottom: 5px;">
         <a
-          *ngIf="userDataStorageService.roleMatch(['Admin'])"
           style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
           routerLink="/admin/user-accounts"
           routerLinkActive="active">Users</a>
       </div>
 
-      <div style="padding-top: 5px; padding-bottom: 5px;">
+      <div
+        *ngIf="userDataStorageService.roleMatch(['Admin'])"
+        style="padding-top: 5px; padding-bottom: 5px;">
         <a
-          *ngIf="userDataStorageService.roleMatch(['Admin'])"
           style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
           routerLink="/admin/settings"
@@ -124,7 +129,9 @@
 
 
       <div style="padding-top: 20px; font-weight: bold; font-size: 13px; word-break: break-all;">
-        <i style="font-weight: bold;" class="fas fa-shield-alt"></i> {{ userName }} &nbsp;
+        <i style="font-weight: bold;" class="fas fa-shield-alt"></i>
+        <span *ngIf="pointOfSaleService.userName === ''"> {{ userName }}  </span>&nbsp;
+        <span *ngIf="pointOfSaleService.userName !== ''"> {{ pointOfSaleService.userName }}  </span>&nbsp;
       </div>
 
       <div style="padding-top: 10px;">

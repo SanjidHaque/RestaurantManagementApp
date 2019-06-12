@@ -18,7 +18,6 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
     [
       'Name',
       'AveragePrice',
-      'Unit',
       'RemainingQuantity',
       'UsedQuantity'
     ];

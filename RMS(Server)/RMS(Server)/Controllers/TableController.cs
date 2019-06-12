@@ -13,9 +13,9 @@ namespace RMS_Server_.Controllers
         {
             _context = new ApplicationDbContext();
         }
+
         [HttpGet]
         [Route("api/GetAllTable")]
-        [AllowAnonymous]
         public IHttpActionResult GetAllTable()
         {
 

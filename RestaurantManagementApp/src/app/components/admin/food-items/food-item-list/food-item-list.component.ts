@@ -20,8 +20,7 @@ export class FoodItemListComponent implements OnInit, AfterViewInit {
       'Name',
       'Price',
       'InventoryCost',
-      'Profit',
-      'TotalSale'
+      'Profit'
     ];
 
   dataSource: MatTableDataSource<FoodItem>;

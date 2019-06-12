@@ -439,14 +439,14 @@
           <td style="text-align: right;">{{ order.TotalPrice.toFixed(2) }}</td>
         </tr>
 
-        <tr *ngIf="setting.VatRate !== null &&  setting.VatRate !== ''">
+        <tr *ngIf="setting.VatRate !== null">
           <td>Vat {{ setting.VatRate }}%</td>
           <td></td>
           <td></td>
           <td style="text-align: right;">{{ order.VatAmount.toFixed(2) }}</td>
         </tr>
 
-        <tr *ngIf="setting.ServiceChargeRate !== null &&  setting.ServiceChargeRate !== ''">
+        <tr *ngIf="setting.ServiceChargeRate !== null">
           <td>Service Charge {{ setting.ServiceChargeRate }}%</td>
           <td></td>
           <td></td>

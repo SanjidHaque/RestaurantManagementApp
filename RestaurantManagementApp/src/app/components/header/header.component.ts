@@ -1,6 +1,7 @@
 import {Router} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+import {PointOfSaleService} from '../../services/shared/point-of-sale.service';
 import {UserAccountDataStorageService} from '../../services/data-storage/user-account-data-storage.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
   opened: boolean;
 
   constructor(private router: Router,
-              private userDataStorageService: UserAccountDataStorageService) {}
+              private pointOfSaleService: PointOfSaleService,
+              public userDataStorageService: UserAccountDataStorageService) {}
 
   ngOnInit() {
     this.userName = JSON.parse(JSON.stringify(localStorage.getItem('userNameForLogin')));
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit {
   logOut() {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userNameForLogin');
+    this.pointOfSaleService.userName = '';
     this.router.navigate(['/login']);
   }
 }

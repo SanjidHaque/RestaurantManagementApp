@@ -17,9 +17,9 @@ export class AdminService {
     return table.Name;
   }
 
-  checkPricingConditions(price: number) {
-    if (price % 1 !== 0) {
-      this.toastr.errorToastr('Price cannot be fractional', 'Error', {
+  checkPricingConditions(value: number) {
+    if (value % 1 !== 0) {
+      this.toastr.errorToastr('Value cannot be fractional', 'Error', {
         toastTimeout: 10000,
         newestOnTop: true,
         showCloseButton: true
@@ -27,8 +27,8 @@ export class AdminService {
       return false;
     }
 
-    if (price <= 0) {
-      this.toastr.errorToastr('Price cannot be negative or zero', 'Error', {
+    if (value <= 0) {
+      this.toastr.errorToastr('Value cannot be negative or zero', 'Error', {
         toastTimeout: 10000,
         newestOnTop: true,
         showCloseButton: true

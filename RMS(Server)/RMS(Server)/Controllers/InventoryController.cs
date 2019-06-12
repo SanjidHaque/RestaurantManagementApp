@@ -58,6 +58,25 @@ namespace RMS_Server_.Controllers
             return NotFound();
         }
 
+        [HttpPut]
+        [Route("api/RemoveInventoryQuantity")]
+        public IHttpActionResult RemoveInventoryQuantity(Inventory inventory)
+        {
+            Inventory getInventory = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+            if (getInventory != null)
+            {
+                if (getInventory.RemainingQuantity < inventory.RemainingQuantity)
+                {
+                    return Ok("Error");
+                }
+                getInventory.RemainingQuantity -= inventory.RemainingQuantity;
+                _context.SaveChanges();
+                return Ok("Success");
+            }
+
+            return NotFound();
+        }
+
 
         [HttpPost]
         [Route("api/UpdateInventoryHistory")]

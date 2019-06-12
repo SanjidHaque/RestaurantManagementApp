@@ -22,13 +22,13 @@
 
 <div class="row">
   <div class="col-xl-12">
-    Available Quantity: {{ inventory.RemainingQuantity }} {{ inventory.Unit }} (s)
+    Available Quantity: {{ inventory.RemainingQuantity.toFixed(2) }} {{ inventory.Unit }} (s)
   </div>
 </div>
 
 <div class="row">
   <div class="col-xl-12">
-    Used Quantity: {{ inventory.UsedQuantity }} {{ inventory.Unit }} (s)
+    Used Quantity: {{ inventory.UsedQuantity.toFixed(2) }} {{ inventory.Unit }} (s)
   </div>
 </div>
 
@@ -38,8 +38,12 @@
   <div class="col-xl-10">
 
     <button
-      routerLink="/admin/inventories/{{inventoryId}}/update-inventory-item"
-      class="btn btn-info">Update</button> &nbsp;
+      routerLink="/admin/inventories/{{inventoryId}}/update-inventory-quantity"
+      class="btn btn-info">Update</button>&nbsp;
+
+    <button
+      routerLink="/admin/inventories/{{inventoryId}}/remove-inventory-quantity"
+      class="btn btn-dark">Remove Quantity</button>&nbsp;
 
     <button
       routerLink="/admin/inventories/{{inventoryId}}/edit-inventory-item"

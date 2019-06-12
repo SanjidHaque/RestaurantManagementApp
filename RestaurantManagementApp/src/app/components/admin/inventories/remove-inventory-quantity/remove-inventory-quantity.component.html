@@ -1,0 +1,51 @@
+
+
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Remove quantity of {{ inventory.Name }}
+  </div>
+</div>
+
+<br>
+
+
+<form (ngSubmit) = "removeInventoryQuantity(form)" #form = "ngForm">
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="quantity">Removal Quantity</label>
+      <input
+        min="1"
+        type="number"
+        id="quantity"
+        class="form-control"
+        ngModel
+        name="quantity"
+        #quantity="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
+        Removal quantity is required!
+      </p>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="form.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Remove</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/inventories/{{inventoryId}}"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+</form>

@@ -28,8 +28,6 @@ export class OrderListComponent implements OnInit, AfterViewInit {
       'Id',
       'DateTime',
       'GrossTotalPrice',
-      'InventoryCost',
-      'Profit',
       'TableId',
       'CurrentState'
     ];

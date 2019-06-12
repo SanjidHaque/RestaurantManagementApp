@@ -9,8 +9,9 @@ import {OrderedItem} from '../../models/ordered-item.model';
 
 @Injectable()
 export class PointOfSaleService {
-
+  userName = '';
   constructor(private toastr: ToastrManager) { }
+
 
   checkIfOrderedItemExist(foodItemId: number, orderedItems: OrderedItem[]) {
     for (let i = 0; i < orderedItems.length; i++) {

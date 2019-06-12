@@ -76,9 +76,9 @@
 
 <ng-template #ingredientsExist>
 
-  <div class="row">
+  <div class="row" style=" padding-top: 20px; font-weight: 500;">
     <div class="col-xl-12">
-      <h6>Ingredients List</h6>
+      Ingredients List
     </div>
   </div>
 
@@ -87,7 +87,7 @@
 
 
   <div class="row">
-    <div class="col-xl-10">
+    <div class="col-xl-12">
 
 
 
@@ -101,20 +101,20 @@
 
         <tr
           *ngFor="let ingredient of foodItem.Ingredients; let i = index">
-          <td>
+          <td style="width: 30%">
             {{ getIngredientInfo(ingredient.InventoryId, 'Name') }}
           </td>
-          <td>
+          <td style="width: 10%">
             {{ ingredient.Quantity }}
             {{ getIngredientInfo(ingredient.InventoryId, 'Unit') }}
           </td>
-          <td>
-            {{ getIngredientInfo(ingredient.InventoryId, 'Price') }}
+          <td style="width: 10%">
+            {{ getIngredientInfo(ingredient.InventoryId, 'Price') }} BDT
           </td>
-          <td>
+          <td style="width: 10%">
             <div class="row">
               <div class="col-xl-6">
-                {{ ingredient.SubTotal.toFixed(3) }}
+                {{ ingredient.SubTotal.toFixed(2) }} BDT
               </div>
             </div>
 
@@ -136,7 +136,7 @@
 <br>
 
 <div class="row text-xl-left">
-  <div class="col-xl-10">
+  <div class="col-xl-12">
 
     <button
       routerLink="/admin/food-items/{{foodItemId}}/edit-food-item"

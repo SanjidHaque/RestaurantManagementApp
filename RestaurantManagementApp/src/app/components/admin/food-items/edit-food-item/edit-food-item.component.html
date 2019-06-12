@@ -190,15 +190,15 @@
 
       <div *ngIf="foodItem.Ingredients.length !== 0">
 
-        <div class="row" style="font-weight: 500;">
+        <div class="row" style="font-weight: 500; padding-top: 20px;">
           <div class="col-xl-6">
             Ingredients List
           </div>
         </div>
+
+
         <div class="row">
-          <div class="col-xl-10">
-
-
+          <div class="col-xl-12">
 
             <table border=1 cellpadding=10 width="100%">
               <tr style="font-weight: 500;">
@@ -210,20 +210,20 @@
 
               <tr
                 *ngFor="let ingredient of foodItem.Ingredients; let i = index">
-                <td>
+                <td style="width: 30%">
                   {{ getIngredientInfo(ingredient.InventoryId, 'Name') }}
                 </td>
-                <td>
+                <td style="width: 10%">
                   {{ ingredient.Quantity }}
                   {{ getIngredientInfo(ingredient.InventoryId, 'Unit') }}
                 </td>
-                <td>
-                  {{ getIngredientInfo(ingredient.InventoryId, 'Price') }}
+                <td style="width: 10%">
+                  {{ getIngredientInfo(ingredient.InventoryId, 'Price') }} BDT
                 </td>
-                <td>
+                <td style="width: 10%">
                   <div class="row">
                     <div class="col-xl-6">
-                      {{ ingredient.SubTotal.toFixed(3) }}
+                      {{ ingredient.SubTotal.toFixed(2) }} BDT
                     </div>
                     <div class="col-xl-6 text-xl-right">
                       <i
@@ -252,13 +252,13 @@
   </ng-template>
 
   <div class="row">
-    <div class="col-xl-10">
+    <div class="col-xl-12">
       <hr>
     </div>
   </div>
 
   <div class="row text-xl-right">
-    <div class="col-xl-10">
+    <div class="col-xl-12">
       <button
         [disabled]="newFoodItem.invalid || isDisabled"
         class="btn btn-success" type="submit">Save</button>&nbsp;

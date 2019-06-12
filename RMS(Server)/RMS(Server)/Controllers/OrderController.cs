@@ -327,6 +327,7 @@ namespace RMS_Server_.Controllers
            
         [HttpGet]
         [Route("api/GetAllOrder")]
+        [AllowAnonymous]
         public IHttpActionResult GetAllOrder()
         {
 

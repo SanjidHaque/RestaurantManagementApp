@@ -179,23 +179,16 @@ export class EditFoodItemComponent implements OnInit {
 
       if (ingredientIndex !== -1) {
 
-        if (quantity < this.foodItem.Ingredients[ingredientIndex].Quantity) {
+        if (quantity <= this.foodItem.Ingredients[ingredientIndex].Quantity) {
 
-          this.foodItem.Ingredients[ingredientIndex].Quantity -= quantity;
-          this.foodItem.Ingredients[ingredientIndex].SubTotal -= subTotal;
-          this.inventoryCost -= subTotal;
+          if (quantity === this.foodItem.Ingredients[ingredientIndex].Quantity) {
+            this.deleteIngredient(ingredientIndex);
 
-
-
-        } else if (quantity === this.foodItem.Ingredients[ingredientIndex].Quantity) {
-          this.inventoryCost -= subTotal;
-          this.deleteIngredient(ingredientIndex);
-          if (this.inventoryCost < 0) {
-            this.inventoryCost = 0;
+          } else {
+            this.foodItem.Ingredients[ingredientIndex].Quantity -= quantity;
+            this.foodItem.Ingredients[ingredientIndex].SubTotal -= subTotal;
+            this.inventoryCost -= subTotal;
           }
-
-
-
         } else {
           this.toastr.errorToastr(
             'Quantity is too large',

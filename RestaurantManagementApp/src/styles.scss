@@ -3,3 +3,9 @@
 .active {
   color: #007bff!important;
 }
+
+@media (max-width: 1199px) {
+  .form-padding{
+    padding-top: 15px;
+  }
+}

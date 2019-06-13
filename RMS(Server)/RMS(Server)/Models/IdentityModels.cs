@@ -10,7 +10,7 @@ namespace RMS_Server_.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public string AddingDateTime { get; set; }
+        public string JoiningDateTime { get; set; }
         public string FullName { get; set; }
         public string CustomPasswordResetToken { get; set; }
         public DateTime CustomPasswordResetTokenIssuedDateTime { get; set; }

@@ -6,7 +6,7 @@ export class UserAccount {
     public Email: string,
     public Password: string,
     public PhoneNumber: string,
-    public AddingDateTime: string,
+    public JoiningDateTime: string,
     public RoleName: string
   ) {}
 }

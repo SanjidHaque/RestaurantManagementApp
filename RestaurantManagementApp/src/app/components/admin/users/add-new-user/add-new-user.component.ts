@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import {NgForm} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -49,7 +50,7 @@ export class AddNewUserComponent implements OnInit {
       form.value.email,
       form.value.password,
       form.value.phoneNumber,
-      '',
+      moment().format('h:mm:ss A, Do MMMM YYYY').toString(),
        form.value.roleName
     );
     this.userAccountDataStorageService.addNewUserAccount(userAccount)

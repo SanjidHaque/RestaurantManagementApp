@@ -57,9 +57,9 @@ namespace RMS_Server_.Controllers
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("api/AddNewUserAccount")]
+        [AllowAnonymous]
         public IHttpActionResult AddNewUserAccount(UserAccount userAccount)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
@@ -71,8 +71,10 @@ namespace RMS_Server_.Controllers
                 Email = userAccount.Email,
                 PhoneNumber = userAccount.PhoneNumber,
                 FullName = userAccount.FullName,
-                AddingDateTime = DateTime.Now.ToString("dddd, dd MMMM yyyy, hh:mm tt")
+                JoiningDateTime = userAccount.JoiningDateTime,
+                CustomPasswordResetTokenIssuedDateTime = DateTime.Now
             };
+        
 
             manager.PasswordValidator = new PasswordValidator
             {
@@ -136,7 +138,7 @@ namespace RMS_Server_.Controllers
                         Email = applicationUser.Email,
                         PhoneNumber = applicationUser.PhoneNumber,
                         Password = "",
-                        AddingDateTime = applicationUser.AddingDateTime,
+                        JoiningDateTime = applicationUser.JoiningDateTime,
                         RoleName = roleName
                     };
                     userAccounts.Add(userAccount);
@@ -236,9 +238,9 @@ namespace RMS_Server_.Controllers
             applicationUser.FullName = editUserAccount.FullName;
             applicationUser.Email = editUserAccount.Email;
             applicationUser.PhoneNumber = editUserAccount.PhoneNumber;
-            await manager.UpdateAsync(applicationUser);
+            IdentityResult result = await manager.UpdateAsync(applicationUser);
 
-            return Ok();
+            return Ok(result);
         }
 
 
@@ -311,7 +313,7 @@ namespace RMS_Server_.Controllers
             TimeSpan difference = DateTime.Now - user.CustomPasswordResetTokenIssuedDateTime;
             int totalMinutes = (int)difference.TotalMinutes;
 
-            if (totalMinutes < 1 && (user.CustomPasswordResetToken == changePassword.PasswordResetCode))
+            if (totalMinutes < 60 && (user.CustomPasswordResetToken == changePassword.PasswordResetCode))
             {
                 var token = manager.GeneratePasswordResetToken(user.Id);
 

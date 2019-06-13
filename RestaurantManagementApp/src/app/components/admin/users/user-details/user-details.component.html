@@ -39,9 +39,9 @@
 </div>
 
 <br>
-<div class="row" *ngIf="userAccount.AddingDateTime !== null">
+<div class="row" *ngIf="userAccount.JoiningDateTime !== null">
   <div class="col-xl-12">
-    Addind Date Time: {{ userAccount.AddingDateTime }}
+    Addind Date Time: {{ userAccount.JoiningDateTime }}
   </div>
 </div>
 
@@ -59,8 +59,8 @@
 
     <button
       [hidden]="
-      userAccount.Id === '6ed0a6d2-e6b1-47a8-b33f-fc40932b2f3d' ||
-      userAccount.Id === 'e9c7a759-7ef7-4dc0-9348-736406d6e8cd'"
+      userAccount.UserName === 'Admin' ||
+      userAccount.UserName === 'Worker'"
       (click)="deleteUser()"
       class="btn btn-danger">Delete</button>
 

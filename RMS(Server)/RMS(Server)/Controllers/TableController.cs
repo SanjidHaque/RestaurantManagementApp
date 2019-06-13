@@ -57,9 +57,6 @@ namespace RMS_Server_.Controllers
             return NotFound();
         }
 
-
-
-
         [HttpDelete]
         [Route("api/DeleteTable/{tableId}")]
         public IHttpActionResult DeleteTable(int tableId)

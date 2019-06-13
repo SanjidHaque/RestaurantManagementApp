@@ -15,6 +15,7 @@
 
       <label for="userName">User Name*</label>
       <input
+        [disabled]="userAccount.UserName === 'Admin' || userAccount.UserName === 'Worker'"
         type="text"
         id="userName"
         class="form-control"
@@ -69,7 +70,7 @@
 
     </div>
 
-    <div class="col-xl-2">
+    <div class="col-xl-2 form-padding">
 
       <label for="phoneNumber">Phone Number</label>
       <input

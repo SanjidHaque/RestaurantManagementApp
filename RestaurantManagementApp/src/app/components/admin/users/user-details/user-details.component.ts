@@ -47,8 +47,8 @@ export class UserDetailsComponent implements OnInit {
   }
 
   deleteUser() {
-    const dialog = confirm('Delete this userAccount account?\n' +
-      'You will lose any kind of data associated with the current userAccount!');
+    const dialog = confirm('Delete this user account?\n' +
+      'You will lose any kind of data associated with the current user account!');
     if (dialog === true) {
       this.confirmEvent();
     }
@@ -57,12 +57,12 @@ export class UserDetailsComponent implements OnInit {
   confirmEvent() {
     this.userAccountDataStorageService.deleteUserAccount(this.userId).subscribe(
       (data: any) => {
-        this.toastr.successToastr('Removed from shop', 'Success', {
+        this.toastr.successToastr('User removed', 'Success', {
           toastTimeout: 10000,
           newestOnTop: true,
           showCloseButton: true
         });
-        this.router.navigate(['admin/userAccounts']);
+        this.router.navigate(['admin/user-accounts']);
       });
   }
 

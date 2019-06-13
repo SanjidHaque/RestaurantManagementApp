@@ -21,7 +21,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
       'UserName',
       'RoleName',
       'PhoneNumber',
-      'AddingDateTime'
+      'JoiningDateTime'
     ];
   dataSource: MatTableDataSource<UserAccount>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

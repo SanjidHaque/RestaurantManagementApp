@@ -63,14 +63,24 @@ export class EditUserComponent implements OnInit {
       '',
       form.value.roleName,
     )).subscribe(
-      (data: any) => {
-        this.toastr.successToastr('Information updated!', 'Success', {
-          toastLife: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
-        form.reset();
-        this.router.navigate(['admin/user-accounts', this.userAccountId]);
+      (result: any) => {
+        if (result.Succeeded) {
+          this.toastr.successToastr('Information updated', 'Success', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          form.reset();
+          this.router.navigate(['admin/user-accounts/', this.userAccountId])
+        } else {
+          this.toastr.errorToastr(result.Errors[0], 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          this.isDisabled = false;
+
+        }
       }
     );
   }

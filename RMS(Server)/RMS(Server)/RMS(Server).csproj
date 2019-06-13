@@ -391,6 +391,18 @@
     <Compile Include="Migrations\201906021204142_orderAGainaa.Designer.cs">
       <DependentUpon>201906021204142_orderAGainaa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906131432008_userModelChanged.cs" />
+    <Compile Include="Migrations\201906131432008_userModelChanged.Designer.cs">
+      <DependentUpon>201906131432008_userModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131434090_userModelChangedAgain.cs" />
+    <Compile Include="Migrations\201906131434090_userModelChangedAgain.Designer.cs">
+      <DependentUpon>201906131434090_userModelChangedAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131604307_userModelChangedAgainAgainGain.cs" />
+    <Compile Include="Migrations\201906131604307_userModelChangedAgainAgainGain.Designer.cs">
+      <DependentUpon>201906131604307_userModelChangedAgainAgainGain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -603,6 +615,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906021204142_orderAGainaa.resx">
       <DependentUpon>201906021204142_orderAGainaa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131432008_userModelChanged.resx">
+      <DependentUpon>201906131432008_userModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131434090_userModelChangedAgain.resx">
+      <DependentUpon>201906131434090_userModelChangedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131604307_userModelChangedAgainAgainGain.resx">
+      <DependentUpon>201906131604307_userModelChangedAgainAgainGain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,7 +3,7 @@ namespace RMS_Server_.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class orderModelChanged : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -18,7 +18,7 @@ namespace RMS_Server_.Migrations
                         InventoryCost = c.Single(nullable: false),
                         Profit = c.Single(nullable: false),
                         TotalSale = c.Int(nullable: false),
-                        FoodItemImage = c.String(),
+                        FoodItemImageName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -27,9 +27,7 @@ namespace RMS_Server_.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
                         Quantity = c.Single(nullable: false),
-                        Unit = c.String(),
                         InventoryId = c.Int(nullable: false),
                         SubTotal = c.Single(nullable: false),
                         FooditemId = c.Int(nullable: false),
@@ -50,64 +48,86 @@ namespace RMS_Server_.Migrations
                         RemainingQuantity = c.Single(nullable: false),
                         Unit = c.String(),
                         AveragePrice = c.Int(nullable: false),
+                        BuyingTime = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.InventoryHistoryModels",
+                "dbo.InventoryHistories",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         InventoryId = c.Int(nullable: false),
-                        UpdatedQuantity = c.Int(nullable: false),
-                        UpdateTime = c.String(),
-                        CurrentPrice = c.Int(nullable: false),
+                        BuyingQuantity = c.Int(nullable: false),
+                        BuyingTime = c.String(),
+                        BuyingPrice = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Inventories", t => t.InventoryId, cascadeDelete: true)
                 .Index(t => t.InventoryId);
             
             CreateTable(
-                "dbo.ModifiedUsers",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserName = c.String(),
-                        Email = c.String(),
-                        Role = c.String(),
-                        DateTime = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.OrderedItems",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        OrderId = c.Int(nullable: false),
+                        OrderSessionId = c.Int(nullable: false),
                         FoodItemId = c.Int(nullable: false),
                         FoodItemQuantity = c.Int(nullable: false),
-                        SubTotal = c.Int(nullable: false),
+                        TotalPrice = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.FoodItems", t => t.FoodItemId, cascadeDelete: true)
-                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
-                .Index(t => t.OrderId)
+                .ForeignKey("dbo.OrderSessions", t => t.OrderSessionId, cascadeDelete: true)
+                .Index(t => t.OrderSessionId)
                 .Index(t => t.FoodItemId);
+            
+            CreateTable(
+                "dbo.OrderSessions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        OrderId = c.Int(nullable: false),
+                        CurrentState = c.String(),
+                        OrderedDateTime = c.String(),
+                        ServedDateTime = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
+                .Index(t => t.OrderId);
             
             CreateTable(
                 "dbo.Orders",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ReceiptNumber = c.String(),
-                        TotalPrice = c.Int(nullable: false),
-                        Tendered = c.Int(nullable: false),
-                        Change = c.Int(nullable: false),
+                        TotalPrice = c.Int(),
+                        GrossTotalPrice = c.Int(),
+                        Tendered = c.Int(),
+                        Change = c.Int(),
                         DateTime = c.String(),
-                        TableNumber = c.String(),
-                        InventoryCost = c.Single(nullable: false),
-                        Profit = c.Single(nullable: false),
+                        InventoryCost = c.Single(),
+                        Profit = c.Single(),
+                        TableId = c.Int(nullable: false),
+                        CurrentState = c.String(),
+                        VatAmount = c.Single(),
+                        ServiceChargeAmount = c.Single(),
+                        DiscountType = c.String(),
+                        DiscountRate = c.Single(),
+                        DiscountAmount = c.Single(),
+                        SalesPersonName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Tables", t => t.TableId, cascadeDelete: true)
+                .Index(t => t.TableId);
+            
+            CreateTable(
+                "dbo.Tables",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        CurrentState = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -135,11 +155,21 @@ namespace RMS_Server_.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Tables",
+                "dbo.Settings",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        ShopName = c.String(),
+                        ShopAddress = c.String(),
+                        ShopPhone = c.String(),
+                        ShopEmail = c.String(),
+                        ShopFacebookPage = c.String(),
+                        VatRate = c.Single(),
+                        VatRegNumber = c.String(),
+                        VatType = c.String(),
+                        ServiceChargeRate = c.Single(),
+                        AdditionalInformation = c.String(),
+                        PrintChefsOrderReceipt = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -148,6 +178,10 @@ namespace RMS_Server_.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        JoiningDateTime = c.String(),
+                        FullName = c.String(),
+                        CustomPasswordResetToken = c.String(),
+                        CustomPasswordResetTokenIssuedDateTime = c.DateTime(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -196,10 +230,12 @@ namespace RMS_Server_.Migrations
             DropForeignKey("dbo.UserLogin", "UserId", "dbo.User");
             DropForeignKey("dbo.UserClaim", "UserId", "dbo.User");
             DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
-            DropForeignKey("dbo.OrderedItems", "OrderId", "dbo.Orders");
+            DropForeignKey("dbo.OrderedItems", "OrderSessionId", "dbo.OrderSessions");
+            DropForeignKey("dbo.Orders", "TableId", "dbo.Tables");
+            DropForeignKey("dbo.OrderSessions", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderedItems", "FoodItemId", "dbo.FoodItems");
             DropForeignKey("dbo.Ingredients", "InventoryId", "dbo.Inventories");
-            DropForeignKey("dbo.InventoryHistoryModels", "InventoryId", "dbo.Inventories");
+            DropForeignKey("dbo.InventoryHistories", "InventoryId", "dbo.Inventories");
             DropForeignKey("dbo.Ingredients", "FooditemId", "dbo.FoodItems");
             DropIndex("dbo.UserLogin", new[] { "UserId" });
             DropIndex("dbo.UserClaim", new[] { "UserId" });
@@ -207,21 +243,24 @@ namespace RMS_Server_.Migrations
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserRole", new[] { "UserId" });
             DropIndex("dbo.Role", "RoleNameIndex");
+            DropIndex("dbo.Orders", new[] { "TableId" });
+            DropIndex("dbo.OrderSessions", new[] { "OrderId" });
             DropIndex("dbo.OrderedItems", new[] { "FoodItemId" });
-            DropIndex("dbo.OrderedItems", new[] { "OrderId" });
-            DropIndex("dbo.InventoryHistoryModels", new[] { "InventoryId" });
+            DropIndex("dbo.OrderedItems", new[] { "OrderSessionId" });
+            DropIndex("dbo.InventoryHistories", new[] { "InventoryId" });
             DropIndex("dbo.Ingredients", new[] { "FooditemId" });
             DropIndex("dbo.Ingredients", new[] { "InventoryId" });
             DropTable("dbo.UserLogin");
             DropTable("dbo.UserClaim");
             DropTable("dbo.User");
-            DropTable("dbo.Tables");
+            DropTable("dbo.Settings");
             DropTable("dbo.UserRole");
             DropTable("dbo.Role");
+            DropTable("dbo.Tables");
             DropTable("dbo.Orders");
+            DropTable("dbo.OrderSessions");
             DropTable("dbo.OrderedItems");
-            DropTable("dbo.ModifiedUsers");
-            DropTable("dbo.InventoryHistoryModels");
+            DropTable("dbo.InventoryHistories");
             DropTable("dbo.Inventories");
             DropTable("dbo.Ingredients");
             DropTable("dbo.FoodItems");

@@ -16,7 +16,7 @@ namespace RMS_Server_.Controllers
         [Route("api/GetAllSetting")]
         public IHttpActionResult GetAllSetting()
         {
-            Setting setting = _context.Settings.FirstOrDefault(x => x.Id == 1);
+            Setting setting = _context.Settings.FirstOrDefault();
             return Ok(setting);
         }
 
@@ -24,7 +24,7 @@ namespace RMS_Server_.Controllers
         [Route("api/EditSetting")]
         public IHttpActionResult EditSetting(Setting editSetting)
         {
-            Setting setting = _context.Settings.FirstOrDefault(x => x.Id == 1);
+            Setting setting = _context.Settings.FirstOrDefault();
             if (setting != null)
             {
                 setting.ShopName = editSetting.ShopName;

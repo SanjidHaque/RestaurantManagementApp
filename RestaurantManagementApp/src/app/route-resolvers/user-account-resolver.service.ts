@@ -1,18 +1,15 @@
-import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
 
-import {UserAccount} from '../models/user-account.model';
 import {UserAccountDataStorageService} from '../services/data-storage/user-account-data-storage.service';
 
 @Injectable()
-export class UserAccountResolverService implements Resolve<UserAccount[]> {
+export class UserAccountResolverService implements Resolve<any> {
 
   constructor(private userAccountDataStorageService: UserAccountDataStorageService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserAccount[]> |
-    Promise<UserAccount[]> | UserAccount[] {
-    return this.userAccountDataStorageService.getAllUserAccount();
+  resolve(route: ActivatedRouteSnapshot) {
+    return this.userAccountDataStorageService.getUserAccount(route.paramMap.get('user-account-id'));
   }
 
 }

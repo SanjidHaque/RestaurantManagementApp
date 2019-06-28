@@ -15,6 +15,10 @@ export class FoodItemDataStorageService {
     this.rootUrl = tableDataStorageService.rootUrl;
   }
 
+  getFoodItem(foodItemId: number) {
+    return this.http.get(`${this.rootUrl + '/api/GetFoodItem'}/${foodItemId}` );
+  }
+
   getAllFoodItem() {
     return this.http.get<FoodItem[]>(this.rootUrl + '/api/GetAllFoodItem');
   }

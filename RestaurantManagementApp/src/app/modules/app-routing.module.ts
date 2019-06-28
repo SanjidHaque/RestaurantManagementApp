@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../auth/auth.guard';
 import {PaymentComponent} from '../components/point-of-sale/payment/payment.component';
-import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
-import {TableResolverService} from '../route-resolvers/table-resolver.service';
-import {FoodItemResolverService} from '../route-resolvers/food-item-resolver.service';
+import {InventoriesResolverService} from '../route-resolvers/inventories-resolver.service';
+import {TablesResolverService} from '../route-resolvers/tables-resolver.service';
+import {FoodItemsResolverService} from '../route-resolvers/food-items-resolver.service';
 import {ForbiddenComponent} from '../components/forbidden/forbidden.component';
 import {PointOfSaleComponent} from '../components/point-of-sale/point-of-sale.component';
 import {MenuComponent} from '../components/point-of-sale/menu/menu.component';
@@ -14,7 +14,7 @@ import {AdminComponent} from '../components/admin/admin.component';
 import {NewPasswordComponent} from '../components/new-password/new-password.component';
 import {OrdersComponent} from '../components/admin/orders/orders.component';
 import {UsersComponent} from '../components/admin/users/users.component';
-import {OrderResolverService} from '../route-resolvers/order-resolver.service';
+import {OrdersResolverService} from '../route-resolvers/orders-resolver.service';
 import {TablesComponent} from '../components/admin/tables/tables.component';
 import {AddNewTableComponent} from '../components/admin/tables/add-new-table/add-new-table.component';
 import {EditTableComponent} from '../components/admin/tables/edit-table/edit-table.component';
@@ -36,17 +36,22 @@ import {AddNewInventoryItemComponent} from '../components/admin/inventories/add-
 import {TableDetailsComponent} from '../components/admin/tables/table-details/table-details.component';
 import {UpdateInventoryItemComponent} from '../components/admin/inventories/update-inventory-item/update-inventory-item.component';
 import {UserListComponent} from '../components/admin/users/user-list/user-list.component';
-import {UserAccountResolverService} from '../route-resolvers/user-account-resolver.service';
+import {UserAccountsResolverService} from '../route-resolvers/user-accounts-resolver.service';
 import {AddNewUserComponent} from '../components/admin/users/add-new-user/add-new-user.component';
 import {UserDetailsComponent} from '../components/admin/users/user-details/user-details.component';
 import {EditUserComponent} from '../components/admin/users/edit-user/edit-user.component';
-import {RoleResolverService} from '../route-resolvers/role-resolver.service';
+import {RolesResolverService} from '../route-resolvers/roles-resolver.service';
 import {ChangePasswordByAdminComponent} from '../components/admin/users/change-password-by-admin/change-password-by-admin.component';
 import {SettingsComponent} from '../components/admin/settings/settings.component';
 import {SettingListComponent} from '../components/admin/settings/setting-list/setting-list.component';
 import {SettingResolverService} from '../route-resolvers/setting-resolver.service';
 import {EditSettingComponent} from '../components/admin/settings/edit-setting/edit-setting.component';
 import {RemoveInventoryQuantityComponent} from '../components/admin/inventories/remove-inventory-quantity/remove-inventory-quantity.component';
+import {TableResolverService} from '../route-resolvers/table-resolver.service';
+import {UserAccountResolverService} from '../route-resolvers/user-account-resolver.service';
+import {OrderResolverService} from '../route-resolvers/order-resolver.service';
+import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
+import {FoodItemResolverService} from '../route-resolvers/food-item-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -57,9 +62,9 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     resolve:
       {
-        inventories: InventoryResolverService,
-        tables: TableResolverService,
-        foodItems: FoodItemResolverService
+        inventories: InventoriesResolverService,
+        tables: TablesResolverService,
+        foodItems: FoodItemsResolverService
       },
     children:
     [
@@ -73,7 +78,7 @@ const appRoutes: Routes = [
         component: SelectTableComponent,
         resolve:
           {
-            tables: TableResolverService
+            tables: TablesResolverService
           }
       },
       {
@@ -81,9 +86,9 @@ const appRoutes: Routes = [
         component: MenuComponent,
         resolve:
           {
-            tables: TableResolverService,
-            foodItems: FoodItemResolverService,
-            inventories: InventoryResolverService,
+            tables: TablesResolverService,
+            foodItems: FoodItemsResolverService,
+            inventories: InventoriesResolverService,
             setting: SettingResolverService
           }
       },
@@ -92,9 +97,9 @@ const appRoutes: Routes = [
         component: PaymentComponent,
         resolve:
           {
-            tables: TableResolverService,
+            tables: TablesResolverService,
             setting: SettingResolverService,
-            foodItems: FoodItemResolverService
+            foodItems: FoodItemsResolverService
           }
       }
     ]
@@ -132,7 +137,7 @@ const appRoutes: Routes = [
                 component: FoodItemListComponent,
                 resolve:
                   {
-                    foodItems: FoodItemResolverService
+                    foodItems: FoodItemsResolverService
                   }
               },
               {
@@ -140,8 +145,8 @@ const appRoutes: Routes = [
                 component: AddNewFoodItemComponent,
                 resolve:
                   {
-                    foodItems: FoodItemResolverService,
-                    inventories: InventoryResolverService
+                    foodItems: FoodItemsResolverService,
+                    inventories: InventoriesResolverService
                   }
               },
               {
@@ -149,8 +154,8 @@ const appRoutes: Routes = [
                 component: FoodItemDetailsComponent,
                 resolve:
                   {
-                    foodItems: FoodItemResolverService,
-                    inventories: InventoryResolverService
+                    foodItem: FoodItemResolverService,
+                    inventories: InventoriesResolverService
                   }
               },
               {
@@ -158,8 +163,8 @@ const appRoutes: Routes = [
                 component: EditFoodItemComponent,
                 resolve:
                   {
-                    foodItems: FoodItemResolverService,
-                    inventories: InventoryResolverService
+                    foodItem: FoodItemResolverService,
+                    inventories: InventoriesResolverService
                   }
               }
             ]
@@ -179,7 +184,7 @@ const appRoutes: Routes = [
                 component: InventoryListComponent,
                 resolve:
                   {
-                    inventories: InventoryResolverService
+                    inventories: InventoriesResolverService
                   }
               },
               {
@@ -191,7 +196,7 @@ const appRoutes: Routes = [
                 component: InventoryDetailsComponent,
                 resolve:
                   {
-                    inventories: InventoryResolverService
+                    inventory: InventoryResolverService
                   }
               },
               {
@@ -199,7 +204,7 @@ const appRoutes: Routes = [
                 component: EditInventoryItemComponent,
                 resolve:
                   {
-                    inventories: InventoryResolverService
+                    inventory: InventoryResolverService
                   }
               },
               {
@@ -207,7 +212,7 @@ const appRoutes: Routes = [
                 component: UpdateInventoryItemComponent,
                 resolve:
                   {
-                    inventories: InventoryResolverService
+                    inventory: InventoryResolverService
                   }
               },
               {
@@ -215,7 +220,7 @@ const appRoutes: Routes = [
                 component: RemoveInventoryQuantityComponent,
                 resolve:
                   {
-                    inventories: InventoryResolverService
+                    inventory: InventoryResolverService
                   }
               }
             ]
@@ -235,8 +240,8 @@ const appRoutes: Routes = [
                 component: OrderListComponent,
                 resolve:
                   {
-                    orders: OrderResolverService,
-                    tables: TableResolverService
+                    orders: OrdersResolverService,
+                    tables: TablesResolverService
                   }
               },
               {
@@ -244,9 +249,9 @@ const appRoutes: Routes = [
                 component: OrderDetailsComponent,
                 resolve:
                   {
-                    orders: OrderResolverService,
-                    tables: TableResolverService,
-                    foodItems: FoodItemResolverService,
+                    order: OrderResolverService,
+                    tables: TablesResolverService,
+                    foodItems: FoodItemsResolverService,
                     setting: SettingResolverService
                   }
               }
@@ -267,7 +272,7 @@ const appRoutes: Routes = [
                 component: TableListComponent,
                 resolve:
                   {
-                    tables: TableResolverService
+                    tables: TablesResolverService
                   }
               },
               {
@@ -279,7 +284,7 @@ const appRoutes: Routes = [
                 component: TableDetailsComponent,
                 resolve:
                   {
-                    tables: TableResolverService
+                    table: TableResolverService
                   }
               },
               {
@@ -287,7 +292,7 @@ const appRoutes: Routes = [
                 component: EditTableComponent,
                 resolve:
                   {
-                    tables: TableResolverService
+                    table: TableResolverService
                   }
               }
             ]
@@ -307,7 +312,7 @@ const appRoutes: Routes = [
                 component: UserListComponent,
                 resolve:
                   {
-                    userAccounts: UserAccountResolverService
+                    userAccounts: UserAccountsResolverService
                   }
               },
               {
@@ -315,7 +320,7 @@ const appRoutes: Routes = [
                 component: AddNewUserComponent,
                 resolve:
                   {
-                    roles: RoleResolverService
+                    roles: RolesResolverService
                   }
               },
               {
@@ -323,7 +328,7 @@ const appRoutes: Routes = [
                 component: UserDetailsComponent,
                 resolve:
                   {
-                    userAccounts: UserAccountResolverService
+                    userAccount: UserAccountResolverService
                   }
               },
               {
@@ -331,8 +336,8 @@ const appRoutes: Routes = [
                 component: EditUserComponent,
                 resolve:
                   {
-                    roles: RoleResolverService,
-                    userAccounts: UserAccountResolverService
+                    roles: RolesResolverService,
+                    userAccount: UserAccountResolverService
                   }
               },
               {
@@ -340,7 +345,7 @@ const appRoutes: Routes = [
                 component: ChangePasswordByAdminComponent,
                 resolve:
                   {
-                    userAccounts: UserAccountResolverService
+                    userAccount: UserAccountResolverService
                   }
               }
             ]

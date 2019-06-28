@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
@@ -20,7 +20,6 @@ export class AddNewFoodItemComponent implements OnInit {
 
   inventories: Inventory[] = [];
   ingredients: Ingredient[] = [];
-  foodItems: FoodItem[] = [];
 
   sellingPrice = 0;
   inventoryCost = 0;
@@ -41,8 +40,7 @@ export class AddNewFoodItemComponent implements OnInit {
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: Inventory[]) => {
-        this.foodItems = data['foodItems'];
+      (data: Data) => {
         this.inventories = data['inventories'];
       }
     );
@@ -82,10 +80,6 @@ export class AddNewFoodItemComponent implements OnInit {
   }
 
 
-
-
-
-
   addIngredients(form: NgForm) {
     const ingredientId = null;
     const inventoryId = +form.value.inventoryId;
@@ -100,7 +94,6 @@ export class AddNewFoodItemComponent implements OnInit {
         this.ingredients[ingredientIndex].SubTotal += subTotal;
 
       } else {
-
         const ingredient = new Ingredient(
           ingredientId,
           quantity,
@@ -178,16 +171,6 @@ export class AddNewFoodItemComponent implements OnInit {
 
   addNewFoodItem(form: NgForm) {
     const serialNumber = form.value.serialNumber;
-
-    if (this.foodItems.filter(e => e.SerialNumber === serialNumber).length > 0) {
-
-      this.toastr.errorToastr('Duplicate serial number', 'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
-      return;
-    }
 
     if (this.ingredients.length === 0) {
 

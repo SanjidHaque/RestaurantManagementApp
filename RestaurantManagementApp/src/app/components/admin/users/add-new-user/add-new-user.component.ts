@@ -1,8 +1,8 @@
 import * as moment from 'moment';
 import {NgForm} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Role} from '../../../../models/role.model';
 import {UserAccount} from '../../../../models/user-account.model';
@@ -26,7 +26,7 @@ export class AddNewUserComponent implements OnInit {
   ngOnInit() {
     this.route.data
       .subscribe(
-        (data: Role[]) => {
+        (data: Data) => {
           this.roles = data['roles'];
         }
       );

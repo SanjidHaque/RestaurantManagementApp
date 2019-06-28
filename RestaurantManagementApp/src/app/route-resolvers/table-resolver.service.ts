@@ -1,20 +1,17 @@
-import {Observable} from 'rxjs';
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-
-import {Table} from '../models/table.model';
+import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
 import {TableDataStorageService} from '../services/data-storage/table-data-storage.service';
+import {Observable} from 'rxjs';
 
-@Injectable()
-export class TableResolverService implements Resolve<Table[]> {
+@Injectable({
+  providedIn: 'root'
+})
+export class TableResolverService implements Resolve<any> {
 
   constructor(private tableDataStorageService: TableDataStorageService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Table[]> |
-      Promise<Table[]> | Table[] {
-    return this.tableDataStorageService.getAllTable();
+  resolve(route: ActivatedRouteSnapshot) {
+    return this.tableDataStorageService.getTable(+route.paramMap.get('table-id'));
   }
 
 }
-
-

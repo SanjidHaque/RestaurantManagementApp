@@ -6,11 +6,15 @@ import {Table} from '../../models/table.model';
 @Injectable()
 export class TableDataStorageService {
   backEndPort = '1548';
-  // rootUrl = 'http://localhost:' + this.backEndPort;
+  rootUrl = 'http://localhost:' + this.backEndPort;
 
-  rootUrl = 'https://hodoo-masterchef-be.azurewebsites.net';
+  // rootUrl = 'https://hodoo-headblocks-be.azurewebsites.net';
   
   constructor(private http: HttpClient) {
+  }
+
+  getTable(tableId: number) {
+    return this.http.get(`${this.rootUrl + '/api/GetTable'}/${tableId}`);
   }
 
   getAllTable() {
@@ -18,11 +22,11 @@ export class TableDataStorageService {
   }
 
   addNewTable(table: Table) {
-    return this.http.post<Table[]>(this.rootUrl + '/api/AddNewTable', table);
+    return this.http.post<Table>(this.rootUrl + '/api/AddNewTable', table);
   }
 
   editTable(table: Table) {
-    return this.http.put<Table[]>(this.rootUrl + '/api/EditTable', table);
+    return this.http.put<Table>(this.rootUrl + '/api/EditTable', table);
   }
 
   deleteTable(tableId: number) {
@@ -30,6 +34,6 @@ export class TableDataStorageService {
   }
 
   changeTableState(table: Table) {
-    return this.http.put<Table[]>(this.rootUrl + '/api/ChangeTableState', table);
+    return this.http.put<Table>(this.rootUrl + '/api/ChangeTableState', table);
   }
 }

@@ -17,6 +17,10 @@ export class OrderDataStorageService {
     this.rootUrl = tableDataStorageService.rootUrl;
   }
 
+  getOrder(orderId: number) {
+    return this.http.get(`${this.rootUrl + '/api/GetOrder'}/${orderId}`);
+  }
+
   getAllOrder() {
     return this.http.get<Order[]>(this.rootUrl + '/api/GetAllOrder');
   }

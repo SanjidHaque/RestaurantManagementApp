@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Inventory} from '../../../../models/inventory.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
@@ -12,31 +12,21 @@ import {InventoryDataStorageService} from '../../../../services/data-storage/inv
 })
 export class InventoryDetailsComponent implements OnInit {
 
- inventoryId: number;
- inventory: Inventory;
- inventories: Inventory[] = [];
- pageNumber = 1;
+  inventory: Inventory;
+  pageNumber = 1;
 
- constructor(private router: Router,
+  constructor(private router: Router,
              private route: ActivatedRoute,
              private toastr: ToastrManager,
-             private inventoryDataStorageService: InventoryDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.inventoryId = +params['inventory-id'];
-        }
-      );
-  }
+             private inventoryDataStorageService: InventoryDataStorageService) { }
 
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: Inventory[]) => {
-        this.inventories = data['inventories'];
-        this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
+      (data: Data) => {
+        this.inventory = data['inventory'];
 
-        if (this.inventory === undefined) {
+        if (this.inventory === undefined || this.inventory === null) {
           this.toastr.errorToastr('Item not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -57,7 +47,7 @@ export class InventoryDetailsComponent implements OnInit {
   }
 
   confirmEvent() {
-    this.inventoryDataStorageService.deleteInventoryItem(this.inventoryId).
+    this.inventoryDataStorageService.deleteInventory(this.inventory.Id).
     subscribe(
       (data: any) => {
 

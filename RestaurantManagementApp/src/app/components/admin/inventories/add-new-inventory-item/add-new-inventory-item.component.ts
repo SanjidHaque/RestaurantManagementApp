@@ -1,6 +1,6 @@
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 import {Inventory} from '../../../../models/inventory.model';
@@ -14,16 +14,13 @@ import {InventoryDataStorageService} from '../../../../services/data-storage/inv
   styleUrls: ['./add-new-inventory-item.component.scss']
 })
 
-export class AddNewInventoryItemComponent implements OnInit {
+export class AddNewInventoryItemComponent {
   isDisabled = false;
 
   constructor(private router: Router,
               private adminService: AdminService,
               private toastr: ToastrManager,
               private inventoryDataStorageService: InventoryDataStorageService) {
-  }
-
-  ngOnInit() {
   }
 
   addNewInventoryItem(form: NgForm) {
@@ -61,7 +58,7 @@ export class AddNewInventoryItemComponent implements OnInit {
         buyingTime
       );
 
-       this.inventoryDataStorageService.addNewInventoryItem(inventory).
+       this.inventoryDataStorageService.addNewInventory(inventory).
        subscribe(
          (data: any) => {
            this.toastr.successToastr('Added to inventory!', 'Success', {

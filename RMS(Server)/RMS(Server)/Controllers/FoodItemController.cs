@@ -17,14 +17,34 @@ namespace RMS_Server_.Controllers
             _context = new ApplicationDbContext();
         }
 
+
+        [Route("api/GetFoodItem/{foodItemId}")]
+        [HttpGet]
+        public IHttpActionResult GetAllFoodItem(int foodItemId)
+        {
+            
+            FoodItem foodItem = _context.FoodItems.FirstOrDefault(x => x.Id == foodItemId);
+
+            List<Ingredient> ingredients = _context.Ingredients.Include(x => x.FoodItem)
+                .ToList();
+
+            return Ok(foodItem);
+        }
+
         [Route("api/GetAllFoodItem")]
         [HttpGet]
         public IHttpActionResult GetAllFoodItem()
         {
+            _context.Configuration.LazyLoadingEnabled = false;
+
             List<FoodItem> foodItems = _context.FoodItems
-                .Include(c => c.Ingredients)
                 .OrderByDescending(x => x.Id)
                 .ToList();
+
+            List<Ingredient> ingredients = _context.Ingredients.Include(x => x.FoodItem)
+                .ToList();
+
+
             return Ok(foodItems);
         }
 

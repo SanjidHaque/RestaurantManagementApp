@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Table} from '../../../../models/table.model';
 import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
@@ -13,30 +13,20 @@ import {TableDataStorageService} from '../../../../services/data-storage/table-d
 })
 export class EditTableComponent implements OnInit {
   isDisabled = false;
-  tableId: number;
 
-  tables: Table[];
   table: Table;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrManager,
-              private tableDataStorageService: TableDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.tableId = +params['table-id'];
-        }
-      );
-  }
+              private tableDataStorageService: TableDataStorageService) { }
 
   ngOnInit() {
     this.route.data.subscribe(
-      ( data: Table[]) => {
-        this.tables = data['tables'];
-        this.table = this.tables.find( x => x.Id === this.tableId);
+      ( data: Data) => {
+        this.table = data['table'];
 
-        if (this.table === undefined) {
+        if (this.table === null || this.table === undefined) {
           this.toastr.errorToastr('Table is not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -57,7 +47,7 @@ export class EditTableComponent implements OnInit {
     if (tableName !== this.table.Name) {
       this.tableDataStorageService.editTable(
         new Table(
-          this.tableId,
+          this.table.Id,
           tableName,
           this.table.CurrentState,
           []
@@ -71,7 +61,7 @@ export class EditTableComponent implements OnInit {
               showCloseButton: true
             });
             form.reset();
-            this.router.navigate(['admin/tables', this.tableId]);
+            this.router.navigate(['admin/tables', this.table.Id]);
           }
         );
     } else {

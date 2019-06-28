@@ -14,20 +14,38 @@ namespace RMS_Server_.Controllers
             _context = new ApplicationDbContext();
         }
 
+
         [HttpGet]
-        [Route("api/GetAllInventoryItem")]
-        public IHttpActionResult GetAllInventoryItem()
+        [Route("api/GetInventory/{inventoryId}")]
+        public IHttpActionResult GetAllInventoryItem(int inventorId)
+        {
+            Inventory inventory = _context.Inventories.FirstOrDefault(x => x.Id == inventorId);
+
+            List<InventoryHistory> inventoryHistories = _context.InventoryHistories.
+                Include(x => x.Inventory).
+                ToList();
+
+            return Ok(inventory);
+        }
+
+        [HttpGet]
+        [Route("api/GetAllInventory")]
+        public IHttpActionResult GetAllInventory()
         {
             List<Inventory> inventories = _context.Inventories
-                .Include(b => b.InventoryHistory)
                 .OrderByDescending(x => x.Id)
                 .ToList();
+
+            List<InventoryHistory> inventoryHistories = _context.InventoryHistories.
+                Include(x => x.Inventory).
+                ToList();
+
             return Ok(inventories);
         }
 
 
         [HttpPost]
-        [Route("api/AddNewInventoryItem")]
+        [Route("api/AddNewInventory")]
         public IHttpActionResult AddNewInventoryItem(Inventory inventory)
         {
             if (inventory == null)
@@ -44,7 +62,7 @@ namespace RMS_Server_.Controllers
 
 
         [HttpPut]
-        [Route("api/EditInventoryItem")]
+        [Route("api/EditInventory")]
         public IHttpActionResult EditInventoryItem(Inventory inventory)
         {
             Inventory editInventoryItem = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
@@ -103,7 +121,7 @@ namespace RMS_Server_.Controllers
         }
 
         [HttpDelete]
-        [Route("api/DeleteInventoryItem/{inventoryId}")]
+        [Route("api/DeleteInventory/{inventoryId}")]
         public IHttpActionResult DeleteInventoryItem(int inventoryId)
         {
             Ingredient ingredient = _context.Ingredients.FirstOrDefault(x => x.InventoryId == inventoryId);

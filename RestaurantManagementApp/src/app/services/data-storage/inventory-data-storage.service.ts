@@ -16,19 +16,20 @@ export class InventoryDataStorageService {
     this.rootUrl = tableDataStorageService.rootUrl;
   }
 
-  getAllInventoryItem() {
-    return this.http.get<Inventory[]>(
-      this.rootUrl + '/api/GetAllInventoryItem');
+  getInventory(inventoryId: number) {
+    return this.http.get(`${this.rootUrl + '/api/GetInventory'}/${inventoryId}`);
   }
 
-  addNewInventoryItem(inventory: Inventory) {
-    return this.http.post<Inventory>(
-      this.rootUrl + '/api/AddNewInventoryItem', inventory);
+  getAllInventory() {
+    return this.http.get<Inventory[]>(this.rootUrl + '/api/GetAllInventory');
   }
 
-  editInventoryItem(inventory: Inventory) {
-    return this.http.put<Inventory>(
-      this.rootUrl + '/api/EditInventoryItem', inventory);
+  addNewInventory(inventory: Inventory) {
+    return this.http.post<Inventory>(this.rootUrl + '/api/AddNewInventory', inventory);
+  }
+
+  editInventory(inventory: Inventory) {
+    return this.http.put<Inventory>(this.rootUrl + '/api/EditInventory', inventory);
   }
 
   updateInventoryHistory(updateHistory: InventoryHistory) {
@@ -41,8 +42,7 @@ export class InventoryDataStorageService {
       this.rootUrl + '/api/RemoveInventoryQuantity', inventory);
   }
 
-  deleteInventoryItem(inventoryId: number)  {
-    return this.http.delete(
-      `${this.rootUrl + '/api/DeleteInventoryItem'}/${inventoryId}`);
+  deleteInventory(inventoryId: number)  {
+    return this.http.delete(`${this.rootUrl + '/api/DeleteInventory'}/${inventoryId}`);
   }
 }

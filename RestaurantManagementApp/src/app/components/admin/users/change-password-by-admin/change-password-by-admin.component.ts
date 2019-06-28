@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {UserAccount} from '../../../../models/user-account.model';
 import {ChangePassword} from '../../../../models/change-password.model';
@@ -13,33 +13,21 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
   styleUrls: ['./change-password-by-admin.component.scss']
 })
 export class ChangePasswordByAdminComponent implements OnInit {
-
   isDisabled = false;
 
-  userAccountId: string;
   userAccount: UserAccount;
-  userAccounts: UserAccount[] = [];
-
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrManager,
-              private userAccountDataStorageService: UserAccountDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.userAccountId = params['user-account-id'];
-        }
-      );
-  }
+              private userAccountDataStorageService: UserAccountDataStorageService) {}
 
   ngOnInit() {
     this.route.data.subscribe(
-      ( data: UserAccount[]) => {
-        this.userAccounts = data['userAccounts'];
-        this.userAccount = this.userAccounts.find(x => x.Id === this.userAccountId);
+      ( data: Data) => {
+        this.userAccount = data['userAccount'];
 
-        if (this.userAccount === undefined) {
+        if (this.userAccount === null || this.userAccount === undefined) {
           this.toastr.errorToastr('User is not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -72,7 +60,7 @@ export class ChangePasswordByAdminComponent implements OnInit {
     this.isDisabled = true;
     this.userAccountDataStorageService.changePasswordByAdmin(
       new ChangePassword(
-        this.userAccountId,
+        this.userAccount.Id,
         '',
         '',
         form.value.newPassword,
@@ -85,7 +73,7 @@ export class ChangePasswordByAdminComponent implements OnInit {
             newestOnTop: true,
             showCloseButton: true
           });
-          this.router.navigate(['admin/user-accounts/', this.userAccountId]);
+          this.router.navigate(['admin/user-accounts/', this.userAccount.Id]);
       }
     )
   }

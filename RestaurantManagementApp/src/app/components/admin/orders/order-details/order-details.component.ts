@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Table} from '../../../../models/table.model';
 import {Order} from '../../../../models/order.model';
@@ -18,37 +18,26 @@ import {OrderDataStorageService} from '../../../../services/data-storage/order-d
 export class OrderDetailsComponent implements OnInit {
   isDisabled = false;
 
-  orderId: number;
   order: Order;
   setting: Setting;
 
-  orders: Order[] = [];
   tables: Table[] = [];
   foodItems: FoodItem[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrManager,
-              private orderDataStorageService: OrderDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.orderId = +params['orderId'];
-        }
-      );
-    }
+              private orderDataStorageService: OrderDataStorageService) { }
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: Order[]) => {
-        this.orders = data['orders'];
+      ( data: Data) => {
+        this.order = data['order'];
         this.tables = data['tables'];
         this.foodItems = data['foodItems'];
         this.setting = data['setting'];
 
-        this.order = this.orders.find( x => x.Id === this.orderId);
-
-        if (this.order === undefined ) {
+        if (this.order === undefined || this.order === null) {
           this.toastr.errorToastr('Order not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -58,7 +47,6 @@ export class OrderDetailsComponent implements OnInit {
         }
       }
     );
-
   }
 
   getSessionTotalPrice(orderSession: OrderSession) {
@@ -89,7 +77,7 @@ export class OrderDetailsComponent implements OnInit {
     }
 
     this.isDisabled = true;
-    this.orderDataStorageService.deleteOrder(this.orderId).subscribe((data: any) => {
+    this.orderDataStorageService.deleteOrder(this.order.Id).subscribe((data: any) => {
       if (data === 'Order not found') {
         this.isDisabled = false;
         this.toastr.errorToastr( data,  'Error', {

@@ -20,6 +20,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.OAuth;
 using RMS_Server_.Models;
 using RMS_Server_.Results;
+using WebGrease.Css.Extensions;
 
 namespace RMS_Server_.Controllers
 {
@@ -108,7 +109,48 @@ namespace RMS_Server_.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
+        [Route("api/GetUserAccount/{userAccountId}")]
+        public IHttpActionResult GetAllUserAccount(string userAccountId)
+        {
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
+
+            ApplicationUser applicationUser = manager.FindById(userAccountId);
+
+            if (applicationUser != null)
+            {
+                string roleName = "";
+
+                applicationUser.Roles.ForEach(x =>
+                {
+                    if (x.RoleId == "1")
+                    {
+                        roleName = "Admin";
+                    }
+                    else
+                    {
+                        roleName = "Worker";
+                    }
+                });
+
+                UserAccount userAccount = new UserAccount()
+                {
+                    Id = applicationUser.Id,
+                    UserName = applicationUser.UserName,
+                    FullName = applicationUser.FullName,
+                    Email = applicationUser.Email,
+                    PhoneNumber = applicationUser.PhoneNumber,
+                    Password = "",
+                    JoiningDateTime = applicationUser.JoiningDateTime,
+                    RoleName = roleName
+                };
+                return Ok(userAccount);
+            }
+
+            return Ok(new UserAccount());
+        }
+
+        [HttpGet]
         [Route("api/GetAllUserAccount")]
         public IHttpActionResult GetAllUserAccount()
         {
@@ -187,7 +229,7 @@ namespace RMS_Server_.Controllers
         }
 
 
-        [Route("api/ChangePasswordyWorker")]
+        [Route("api/ChangePasswordByWorker")]
         [HttpPut]
         [AllowAnonymous]
         public async Task<IHttpActionResult> ChangePasswordyWorker(ChangePassword changePassword)

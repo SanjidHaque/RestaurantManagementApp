@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -42,6 +44,8 @@ namespace RMS_Server_.Models
         {
         }
 
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -66,5 +70,12 @@ namespace RMS_Server_.Models
         {
             return new ApplicationDbContext();
         }
+
+
+
+
+        
     }
+
+
 }

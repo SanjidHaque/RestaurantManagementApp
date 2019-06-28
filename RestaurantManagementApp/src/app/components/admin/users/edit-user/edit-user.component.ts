@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Role} from '../../../../models/role.model';
 import {UserAccount} from '../../../../models/user-account.model';
@@ -15,31 +15,21 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
 export class EditUserComponent implements OnInit {
   isDisabled = false;
 
-  userAccountId: string;
   userAccount: UserAccount;
-  userAccounts: UserAccount[] = [];
   roles: Role[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrManager,
-              private userAccountDataStorageService: UserAccountDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.userAccountId = params['user-account-id'];
-        }
-      );
-  }
+              private userAccountDataStorageService: UserAccountDataStorageService) { }
 
   ngOnInit() {
     this.route.data.subscribe(
-      ( data: UserAccount[]) => {
+      ( data: Data) => {
         this.roles = data['roles'];
-        this.userAccounts = data['userAccounts'];
-        this.userAccount = this.userAccounts.find(x => x.Id === this.userAccountId);
+        this.userAccount = data['userAccount'];
 
-        if (this.userAccount === undefined) {
+        if (this.userAccount === undefined || this.userAccount === null) {
           this.toastr.errorToastr('User is not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -54,7 +44,7 @@ export class EditUserComponent implements OnInit {
   editUserAccount(form: NgForm) {
     this.isDisabled = true;
     this.userAccountDataStorageService.editUserAccount(new UserAccount(
-      this.userAccountId,
+      this.userAccount.Id,
       form.value.userName,
       form.value.fullName,
       form.value.email,
@@ -71,7 +61,7 @@ export class EditUserComponent implements OnInit {
             showCloseButton: true
           });
           form.reset();
-          this.router.navigate(['admin/user-accounts/', this.userAccountId])
+          this.router.navigate(['admin/user-accounts/', this.userAccount.Id])
         } else {
           this.toastr.errorToastr(result.Errors[0], 'Error', {
             toastTimeout: 10000,

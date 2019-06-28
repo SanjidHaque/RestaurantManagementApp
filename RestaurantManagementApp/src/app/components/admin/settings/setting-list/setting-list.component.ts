@@ -1,5 +1,5 @@
-import {ActivatedRoute} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Data} from '@angular/router';
 
 import {Setting} from '../../../../models/setting.model';
 
@@ -14,7 +14,7 @@ export class SettingListComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.subscribe( (data: Setting) => this.setting = data['settings']);
+    this.route.data.subscribe( (data: Data) => this.setting = data['settings']);
   }
 
 }

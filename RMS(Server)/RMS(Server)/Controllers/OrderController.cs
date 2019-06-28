@@ -324,16 +324,37 @@ namespace RMS_Server_.Controllers
 
             return Ok("Order not found");
         }
-           
+
+        [HttpGet]
+        [Route("api/GetOrder/{orderId}")]
+        public IHttpActionResult GetOrder(int orderId)
+        {
+            Order order = _context.Orders.FirstOrDefault(x => x.Id == orderId);
+
+            List<OrderSession> orderSessions = _context.OrderSessions.Include(x => x.Order)
+                .ToList();
+
+            List<OrderedItem> orderedItems = _context.OrderedItems.Include(c => c.OrderSession)
+                .ToList();
+
+            return Ok(order);
+
+        }
+
         [HttpGet]
         [Route("api/GetAllOrder")]
-        [AllowAnonymous]
         public IHttpActionResult GetAllOrder()
         {
 
-            List<Order> orders = _context.Orders.OrderByDescending(x => x.Id).ToList();
-            List<OrderSession> orderSessions = _context.OrderSessions.Include(x => x.Order).ToList();
-            List<OrderedItem> orderedItems = _context.OrderedItems.Include(c => c.OrderSession).ToList();
+            List<Order> orders = _context.Orders.OrderByDescending(x => x.Id)
+                .ToList();
+
+            List<OrderSession> orderSessions = _context.OrderSessions.Include(x => x.Order)
+                .ToList();
+
+            List<OrderedItem> orderedItems = _context.OrderedItems.Include(c => c.OrderSession)
+                .ToList();
+
             return Ok(orders);
         }
 

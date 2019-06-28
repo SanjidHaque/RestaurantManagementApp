@@ -8,14 +8,13 @@ import {TableDataStorageService} from './services/data-storage/table-data-storag
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
-import {TableResolverService} from './route-resolvers/table-resolver.service';
-import {OrderResolverService} from './route-resolvers/order-resolver.service';
-import {InventoryResolverService} from './route-resolvers/inventory-resolver.service';
-import {FoodItemResolverService} from './route-resolvers/food-item-resolver.service';
+import {TablesResolverService} from './route-resolvers/tables-resolver.service';
+import {OrdersResolverService} from './route-resolvers/orders-resolver.service';
+import {InventoriesResolverService} from './route-resolvers/inventories-resolver.service';
 import {AuthGuard} from './auth/auth.guard';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
-import {UserAccountResolverService} from './route-resolvers/user-account-resolver.service';
+import {UserAccountsResolverService} from './route-resolvers/user-accounts-resolver.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {NgProgressHttpModule} from '@ngx-progressbar/http';
@@ -65,7 +64,7 @@ import { AddNewUserComponent } from './components/admin/users/add-new-user/add-n
 import { UserDetailsComponent } from './components/admin/users/user-details/user-details.component';
 import { UserListComponent } from './components/admin/users/user-list/user-list.component';
 import { EditUserComponent } from './components/admin/users/edit-user/edit-user.component';
-import {RoleResolverService} from './route-resolvers/role-resolver.service';
+import {RolesResolverService} from './route-resolvers/roles-resolver.service';
 import { ChangePasswordByAdminComponent } from './components/admin/users/change-password-by-admin/change-password-by-admin.component';
 import { SettingsComponent } from './components/admin/settings/settings.component';
 import { SettingListComponent } from './components/admin/settings/setting-list/setting-list.component';
@@ -75,6 +74,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {NgxPrintModule} from 'ngx-print';
 import { OrderCancelOptionComponent } from './bottom-sheets/order-cancel-option/order-cancel-option.component';
 import { RemoveInventoryQuantityComponent } from './components/admin/inventories/remove-inventory-quantity/remove-inventory-quantity.component';
+import {TableResolverService} from './route-resolvers/table-resolver.service';
+import {FoodItemResolverService} from './route-resolvers/food-item-resolver.service';
+import {FoodItemsResolverService} from './route-resolvers/food-items-resolver.service';
 
 
 
@@ -157,13 +159,15 @@ import { RemoveInventoryQuantityComponent } from './components/admin/inventories
     FoodItemDataStorageService,
     OrderDataStorageService,
     UserAccountDataStorageService,
-    TableResolverService,
-    OrderResolverService,
-    InventoryResolverService,
+    TablesResolverService,
+    OrdersResolverService,
+    InventoriesResolverService,
     FoodItemResolverService,
-    RoleResolverService,
+    FoodItemsResolverService,
+    RolesResolverService,
     SettingResolverService,
-    UserAccountResolverService,
+    UserAccountsResolverService,
+    TableResolverService,
     AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,

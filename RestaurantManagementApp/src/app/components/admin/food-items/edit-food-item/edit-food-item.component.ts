@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
@@ -17,11 +17,8 @@ import {FoodItemDataStorageService} from '../../../../services/data-storage/food
 })
 export class EditFoodItemComponent implements OnInit {
   isDisabled = false;
-  foodItemId: number;
-
 
   inventories: Inventory[] = [];
-  foodItems: FoodItem[] = [];
   foodItem: FoodItem;
 
   sellingPrice = 0;
@@ -38,34 +35,26 @@ export class EditFoodItemComponent implements OnInit {
               private adminService: AdminService,
               private toastr: ToastrManager,
               private tableDataStorageService: TableDataStorageService,
-              private foodItemDataStorageService: FoodItemDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.foodItemId = +params['food-item-id'];
-        }
-      );
-  }
+              private foodItemDataStorageService: FoodItemDataStorageService) { }
 
   ngOnInit() {
     this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
     this.route.data.
     subscribe(
-      ( data: FoodItem[]) => {
-        this.foodItems = data['foodItems'];
+      ( data: Data) => {
+        this.foodItem = data['foodItem'];
         this.inventories = data['inventories'];
         this.setFoodItemImage();
       }
     );
 
-    this.foodItem = this.foodItems.find(x => x.Id === this.foodItemId);
     if (this.foodItem === undefined || this.foodItem === null) {
       this.toastr.errorToastr('Item is not found', 'Error', {
         toastLife: 10000,
         newestOnTop: true,
         showCloseButton: true
       });
-      this.router.navigate(['admin/inventories']);
+      this.router.navigate(['admin/food-items']);
     } else {
       this.sellingPrice = this.foodItem.Price;
       this.inventoryCost = this.foodItem.InventoryCost;
@@ -74,15 +63,10 @@ export class EditFoodItemComponent implements OnInit {
 
 
   setFoodItemImage() {
-    for (let i = 0; i < this.foodItems.length; i++) {
-      if (this.foodItems[i].Id === this.foodItemId) {
-        this.foodItem = this.foodItems[i];
-        if ( this.foodItem.FoodItemImageName === null || this.foodItem.FoodItemImageName === '' ) {
-          this.imageUrl = 'assets/noImage.png';
-        } else {
-          this.imageUrl =  this.rootUrl + this.foodItem.FoodItemImageName;
-        }
-      }
+    if (this.foodItem.FoodItemImageName === null || this.foodItem.FoodItemImageName === '' ) {
+      this.imageUrl = 'assets/noImage.png';
+    } else {
+      this.imageUrl = this.rootUrl + this.foodItem.FoodItemImageName;
     }
   }
 
@@ -118,10 +102,6 @@ export class EditFoodItemComponent implements OnInit {
     }
     return '';
   }
-
-
-
-
 
   handleFileInput(file: FileList) {
     const fileExtension = file.item(0).name.split('.').pop();
@@ -214,17 +194,6 @@ export class EditFoodItemComponent implements OnInit {
   editFoodItem(form: NgForm) {
     const serialNumber = form.value.serialNumber;
 
-    for (const value of this.foodItems) {
-      if (value.SerialNumber === serialNumber && value.Id !== this.foodItemId) {
-        this.toastr.errorToastr('Duplicate serial number', 'Error', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
-        return;
-      }
-    }
-
     if (this.foodItem.Ingredients.length === 0) {
 
       this.toastr.errorToastr('Select at least one ingredient', 'Error', {
@@ -244,16 +213,14 @@ export class EditFoodItemComponent implements OnInit {
     const name = form.value.itemName;
 
 
-
-
     const profit = sellingPrice - this.inventoryCost;
     for (const value of this.foodItem.Ingredients) {
       value.Id = null;
-      value.FoodItemId = this.foodItemId;
+      value.FoodItemId = this.foodItem.Id;
     }
 
     const foodItem = new FoodItem(
-      this.foodItemId,
+      this.foodItem.Id,
       serialNumber,
       name,
       sellingPrice,
@@ -269,7 +236,7 @@ export class EditFoodItemComponent implements OnInit {
         (data: any) => {
           if (this.imageUrl !== 'assets/noImage.png' && this.fileToUpload !== null ) {
             this.foodItemDataStorageService.
-            uploadFoodItemImage(this.foodItemId.toString(), this.fileToUpload)
+            uploadFoodItemImage(this.foodItem.Id.toString(), this.fileToUpload)
               .subscribe(
                 (response: any) => {
                   this.imageUrl = '/assets/noImage.png';
@@ -279,7 +246,7 @@ export class EditFoodItemComponent implements OnInit {
                     newestOnTop: true,
                     showCloseButton: true
                   });
-                  this.router.navigate(['admin/food-items/', this.foodItemId]);
+                  this.router.navigate(['admin/food-items/', this.foodItem.Id]);
                 }
               );
           } else {
@@ -289,11 +256,9 @@ export class EditFoodItemComponent implements OnInit {
               newestOnTop: true,
               showCloseButton: true
             });
-            this.router.navigate(['admin/food-items/', this.foodItemId]);
+            this.router.navigate(['admin/food-items/', this.foodItem.Id]);
           }
         });
-
-
   }
 }
 

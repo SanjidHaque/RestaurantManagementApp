@@ -1,11 +1,11 @@
 import {NgForm} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Inventory} from '../../../../models/inventory.model';
-import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {AdminService} from '../../../../services/shared/admin.service';
+import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({
@@ -15,33 +15,21 @@ import {InventoryDataStorageService} from '../../../../services/data-storage/inv
 })
 export class UpdateInventoryItemComponent implements OnInit {
   isDisabled = false;
-
-  inventoryId: number;
   inventory: Inventory;
-  inventories: Inventory[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private adminService: AdminService,
               private toastr: ToastrManager,
-              private inventoryDataStorageService: InventoryDataStorageService ) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.inventoryId = +params['inventory-id'];
-        }
-      );
-
-  }
+              private inventoryDataStorageService: InventoryDataStorageService ) { }
 
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: Inventory[]) => {
-        this.inventories = data['inventories'];
-        this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
+      (data: Data) => {
+        this.inventory = data['inventory'];
 
-        if (this.inventory === undefined) {
+        if (this.inventory === undefined || this.inventory === null) {
           this.toastr.errorToastr('Item not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -64,7 +52,7 @@ export class UpdateInventoryItemComponent implements OnInit {
     }
 
     this.isDisabled = true;
-    const inventoryId = this.inventoryId;
+    const inventoryId = this.inventory.Id;
     const inventoryHistoryId = null;
 
 
@@ -86,7 +74,7 @@ export class UpdateInventoryItemComponent implements OnInit {
           showCloseButton: true
         });
         form.reset();
-        this.router.navigate(['admin/inventories/', this.inventoryId]);
+        this.router.navigate(['admin/inventories/', this.inventory.Id]);
       }
     );
   }

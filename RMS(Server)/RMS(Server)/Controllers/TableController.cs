@@ -15,14 +15,32 @@ namespace RMS_Server_.Controllers
         }
 
         [HttpGet]
+        [Route("api/GetTable/{tableId}")]
+        public IHttpActionResult GetTable(int tableId)
+        {
+            Table table = _context.Tables.FirstOrDefault(x => x.Id == tableId);
+            List<Order> orders = _context.Orders.Include(x => x.Table).ToList();
+            return Ok(table);
+        }
+
+
+        [HttpGet]
         [Route("api/GetAllTable")]
         public IHttpActionResult GetAllTable()
         {
 
-            List<Table> tables = _context.Tables.OrderByDescending(x => x.Id).ToList();
-            List<Order> orders = _context.Orders.Include(x => x.Table).ToList();
-            List<OrderSession> orderSessions = _context.OrderSessions.Include(c => c.Order).ToList();
-            List<OrderedItem> orderedItems = _context.OrderedItems.Include(c => c.OrderSession).ToList();
+            List<Table> tables = _context.Tables.
+                OrderByDescending(x => x.Id).
+                ToList();
+
+            List<Order> orders = _context.Orders.Include(x => x.Table).
+                ToList();
+
+            List<OrderSession> orderSessions = _context.OrderSessions.Include(c => c.Order).
+                ToList();
+
+            List<OrderedItem> orderedItems = _context.OrderedItems.Include(c => c.OrderSession).
+                ToList();
 
             return Ok(tables);
         }

@@ -29,6 +29,9 @@ export class UserAccountDataStorageService {
   roleMatch(allowedRoles) {
     let isMatch = false;
     const userRole = JSON.parse(JSON.stringify(localStorage.getItem('userRoles')));
+    if (userRole === null || userRole === undefined) {
+      return false;
+    }
     allowedRoles.forEach(element => {
       if (userRole.indexOf(element) > -1) {
         isMatch = true;
@@ -55,9 +58,14 @@ export class UserAccountDataStorageService {
   }
 
   addNewUserAccount(userAccount: UserAccount) {
-    const reqHeader = new HttpHeaders({'No-Auth': 'True'});
     return this.http.post(this.rootUrl + '/api/AddNewUserAccount', userAccount);
   }
+
+  getUserAccount(userAccountId: string) {
+    return this.http.get<UserAccount>(
+      `${this.rootUrl + '/api/GetUserAccount'}/${userAccountId}`);
+  }
+
 
   getAllUserAccount() {
     return this.http.get<UserAccount[]>(this.rootUrl + '/api/GetAllUserAccount');
@@ -68,7 +76,8 @@ export class UserAccountDataStorageService {
   }
 
   deleteUserAccount(userAccountId: string) {
-    return this.http.delete(`${this.rootUrl + '/api/DeleteUserAccount'}/${userAccountId}` );
+    return this.http.delete(
+      `${this.rootUrl + '/api/DeleteUserAccount'}/${userAccountId}`);
   }
 
   changePasswordByAdmin(changePassword: ChangePassword) {

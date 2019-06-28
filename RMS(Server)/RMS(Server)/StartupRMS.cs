@@ -24,6 +24,9 @@ namespace RMS_Server_
             app.UseOAuthAuthorizationServer(option);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
-        }
+
+
     }
+
+}
 

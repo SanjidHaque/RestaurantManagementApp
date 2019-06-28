@@ -1,5 +1,5 @@
-import {ActivatedRoute} from '@angular/router';
 import { MatSort } from '@angular/material/sort';
+import {ActivatedRoute, Data} from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
@@ -32,7 +32,7 @@ export class FoodItemListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: FoodItem[]) => {
+      ( data: Data) => {
         this.foodItems = data['foodItems'];
         this.dataSource = new MatTableDataSource(this.foodItems);
 

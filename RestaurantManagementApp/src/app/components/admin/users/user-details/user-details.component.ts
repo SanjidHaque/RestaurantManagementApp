@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {UserAccount} from '../../../../models/user-account.model';
 import {UserAccountDataStorageService} from '../../../../services/data-storage/user-account-data-storage.service';
@@ -11,36 +11,25 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-
-  userId: string;
   userAccount: UserAccount;
-  userAccounts: UserAccount[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrManager,
-              private userAccountDataStorageService: UserAccountDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.userId = params['user-account-id'];
-        }
-      );
-  }
+              private userAccountDataStorageService: UserAccountDataStorageService) { }
 
   ngOnInit() {
     this.route.data.subscribe(
-      ( data: UserAccount[]) => {
-        this.userAccounts = data['userAccounts'];
-        this.userAccount = this.userAccounts.find(x => x.Id === this.userId);
+      ( data: Data) => {
+        this.userAccount = data['userAccount'];
 
-        if (this.userAccount === undefined) {
+        if (this.userAccount === undefined || this.userAccount === null) {
           this.toastr.errorToastr('User is not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
             showCloseButton: true
           });
-          this.router.navigate(['admin/userAccounts']);
+          this.router.navigate(['admin/user-accounts']);
         }
       }
     );
@@ -55,7 +44,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   confirmEvent() {
-    this.userAccountDataStorageService.deleteUserAccount(this.userId).subscribe(
+    this.userAccountDataStorageService.deleteUserAccount(this.userAccount.Id).subscribe(
       (data: any) => {
         this.toastr.successToastr('User removed', 'Success', {
           toastTimeout: 10000,

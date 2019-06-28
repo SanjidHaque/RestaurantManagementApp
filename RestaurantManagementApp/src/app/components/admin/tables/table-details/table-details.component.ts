@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Table} from '../../../../models/table.model';
 import {TableDataStorageService} from '../../../../services/data-storage/table-data-storage.service';
@@ -11,30 +11,20 @@ import {TableDataStorageService} from '../../../../services/data-storage/table-d
   styleUrls: ['./table-details.component.scss']
 })
 export class TableDetailsComponent implements OnInit {
-
-  tableId: number;
   table: Table;
-  tables: Table[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrManager,
               private tableDataStorageService: TableDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.tableId = +params['table-id'];
-        }
-      );
   }
 
   ngOnInit() {
     this.route.data.subscribe(
-      ( data: Table[]) => {
-        this.tables = data['tables'];
-        this.table = this.tables.find( x => x.Id === this.tableId);
+      (data: Data) => {
+        this.table = data['table'];
 
-        if (this.table === undefined) {
+        if (this.table === null || this.table === undefined) {
           this.toastr.errorToastr('Table not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -55,7 +45,7 @@ export class TableDetailsComponent implements OnInit {
   }
 
   confirmEvent() {
-    this.tableDataStorageService.deleteTable(this.tableId).
+    this.tableDataStorageService.deleteTable(this.table.Id).
     subscribe(
       (data: any) => {
         if (data === 'Failed') {

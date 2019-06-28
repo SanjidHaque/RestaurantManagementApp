@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Inventory} from '../../../../models/inventory.model';
 import {AdminService} from '../../../../services/shared/admin.service';
@@ -14,32 +14,21 @@ import {InventoryDataStorageService} from '../../../../services/data-storage/inv
 })
 export class RemoveInventoryQuantityComponent implements OnInit {
   isDisabled = false;
-
-  inventoryId: number;
   inventory: Inventory;
-  inventories: Inventory[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private adminService: AdminService,
               private toastr: ToastrManager,
-              private inventoryDataStorageService: InventoryDataStorageService ) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.inventoryId = +params['inventory-id'];
-        }
-      );
-  }
+              private inventoryDataStorageService: InventoryDataStorageService ) { }
 
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: Inventory[]) => {
-        this.inventories = data['inventories'];
-        this.inventory = this.inventories.find( x => x.Id === this.inventoryId);
+      (data: Data) => {
+        this.inventory = data['inventory'];
 
-        if (this.inventory === undefined) {
+        if (this.inventory === undefined || this.inventory === null) {
           this.toastr.errorToastr('Item not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -51,7 +40,6 @@ export class RemoveInventoryQuantityComponent implements OnInit {
     );
   }
 
-
   removeInventoryQuantity(form: NgForm) {
     const removalQuantity = form.value.quantity;
     if (!this.adminService.checkPricingConditions(removalQuantity)) {
@@ -61,7 +49,7 @@ export class RemoveInventoryQuantityComponent implements OnInit {
 
     this.inventoryDataStorageService.removeInventoryQuantity(
       new Inventory(
-        this.inventoryId,
+        this.inventory.Id,
         null,
         null,
         removalQuantity,
@@ -79,7 +67,7 @@ export class RemoveInventoryQuantityComponent implements OnInit {
             showCloseButton: true
           });
           form.reset();
-          this.router.navigate(['admin/inventories/', this.inventoryId]);
+          this.router.navigate(['admin/inventories/', this.inventory.Id]);
         } else {
           this.isDisabled = false;
           this.toastr.errorToastr('Too big quantity', 'Error', {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {FoodItem} from '../../../../models/food-item.model';
 import {Inventory} from '../../../../models/inventory.model';
@@ -13,40 +13,28 @@ import {FoodItemDataStorageService} from '../../../../services/data-storage/food
   styleUrls: ['./food-item-details.component.scss']
 })
 export class FoodItemDetailsComponent implements OnInit {
-
   rootUrl = '';
   imageUrl = 'assets/noImage.png';
 
-  foodItems: FoodItem[] = [];
   inventories: Inventory[] = [];
-
   foodItem: FoodItem;
-  foodItemId: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrManager,
               private tableDataStorageService: TableDataStorageService,
-              private foodItemDataStorageService: FoodItemDataStorageService) {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.foodItemId = +params['food-item-id'];
-        }
-      );
-  }
+              private foodItemDataStorageService: FoodItemDataStorageService) { }
 
   ngOnInit() {
     this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
     this.route.data.
     subscribe(
-      ( data: FoodItem[]) => {
-        this.foodItems = data['foodItems'];
+      (data: Data) => {
+        this.foodItem = data['foodItem'];
         this.inventories = data['inventories'];
-
         this.setFoodItemImage();
 
-        if (this.foodItem === undefined) {
+        if (this.foodItem === undefined || this.foodItem === null) {
           this.toastr.errorToastr('Item not found', 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
@@ -60,15 +48,10 @@ export class FoodItemDetailsComponent implements OnInit {
 
 
   setFoodItemImage() {
-    for (let i = 0; i < this.foodItems.length; i++) {
-      if (this.foodItems[i].Id === this.foodItemId) {
-        this.foodItem = this.foodItems[i];
-        if ( this.foodItem.FoodItemImageName === null || this.foodItem.FoodItemImageName === '' ) {
-          this.foodItem.FoodItemImageName = this.imageUrl;
-        } else {
-          this.foodItem.FoodItemImageName =  this.rootUrl + this.foodItem.FoodItemImageName;
-        }
-      }
+    if (this.foodItem.FoodItemImageName === null || this.foodItem.FoodItemImageName === '' ) {
+      this.foodItem.FoodItemImageName = this.imageUrl;
+    } else {
+      this.foodItem.FoodItemImageName =  this.rootUrl + this.foodItem.FoodItemImageName;
     }
   }
 
@@ -89,11 +72,7 @@ export class FoodItemDetailsComponent implements OnInit {
   }
 
   confirmEvent() {
-
-
-
-
-    this.foodItemDataStorageService.deleteFoodItem(this.foodItemId).subscribe(
+    this.foodItemDataStorageService.deleteFoodItem(this.foodItem.Id).subscribe(
       (data: any) => {
 
         if (data === 'Failed') {

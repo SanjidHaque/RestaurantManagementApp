@@ -298,7 +298,9 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\hodoo-backend - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\hodoo-backend - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\hodoo-headblocks-be - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Hodoo-Headblocks-BE.pubxml" />
+    <None Include="Properties\PublishProfiles\hodoo-masterchef-be - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Hodoo-Masterchef-Be.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

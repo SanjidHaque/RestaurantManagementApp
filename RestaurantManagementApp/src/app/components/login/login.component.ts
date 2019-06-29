@@ -23,7 +23,6 @@ export class LoginComponent {
   login(form: NgForm) {
     const userName  = form.value.userName;
     const password  = form.value.password;
-    if (userName === '' || password === '') { return; }
 
     this.isDisabled = true;
     this.userAccountDataStorageService.login(userName, password)

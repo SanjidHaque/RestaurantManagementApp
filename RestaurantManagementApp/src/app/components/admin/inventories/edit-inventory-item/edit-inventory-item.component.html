@@ -32,6 +32,26 @@
     </div>
   </div>
 
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="unit">Unit</label>
+      <input
+        type="text"
+        id="unit"
+        class="form-control"
+        [ngModel]="inventory.Unit"
+        name="unit"
+        #unit="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="unit.invalid && (unit.dirty || unit.touched)">
+        Unit is required!
+      </p>
+    </div>
+  </div>
+
 
 
 

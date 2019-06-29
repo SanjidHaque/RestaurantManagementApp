@@ -46,7 +46,7 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/AddNewInventory")]
-        public IHttpActionResult AddNewInventoryItem(Inventory inventory)
+        public IHttpActionResult AddNewInventory(Inventory inventory)
         {
             if (inventory == null)
             {
@@ -61,12 +61,13 @@ namespace RMS_Server_.Controllers
 
         [HttpPut]
         [Route("api/EditInventory")]
-        public IHttpActionResult EditInventoryItem(Inventory inventory)
+        public IHttpActionResult EditInventory(Inventory inventory)
         {
             Inventory editInventoryItem = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
             if (editInventoryItem != null)
             {
                 editInventoryItem.Name = inventory.Name;
+                editInventoryItem.Unit = inventory.Unit;
                 _context.SaveChanges();
                 return Ok();
             }

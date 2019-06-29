@@ -8,10 +8,9 @@ export class TableDataStorageService {
   backEndPort = '1548';
   rootUrl = 'http://localhost:' + this.backEndPort;
 
-  // rootUrl = 'https://hodoo-headblocks-be.azurewebsites.net';
+ // rootUrl = 'https://hodoo-masterchef-be.azurewebsites.net';
   
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getTable(tableId: number) {
     return this.http.get(`${this.rootUrl + '/api/GetTable'}/${tableId}`);

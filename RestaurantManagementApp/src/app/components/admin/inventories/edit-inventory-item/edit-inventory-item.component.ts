@@ -41,21 +41,19 @@ export class EditInventoryItemComponent implements OnInit {
 
   editInventoryItem(form: NgForm) {
     this.isDisabled = true;
-    const editedInventoryItemName = form.value.name;
 
-    if (editedInventoryItemName !== this.inventory.Name) {
-      const editedInventoryItem = new Inventory(
-        this.inventory.Id,
-        editedInventoryItemName,
-        0,
-        0,
-        '',
-        0,
-        [],
-        ''
+    const editedInventory = new Inventory(
+      this.inventory.Id,
+      form.value.name,
+      0,
+      0,
+      form.value.unit,
+      0,
+      [],
+      ''
       );
 
-      this.inventoryDataStorageService.editInventory(editedInventoryItem).
+      this.inventoryDataStorageService.editInventory(editedInventory).
       subscribe(() => {
           this.toastr.successToastr('Information updated!', 'Success', {
             toastLife: 10000,
@@ -63,16 +61,7 @@ export class EditInventoryItemComponent implements OnInit {
             showCloseButton: true
           });
           this.router.navigate(['admin/inventories', this.inventory.Id]);
-        }
-      );
-    } else {
-      this.toastr.successToastr('Information updated!', 'Success', {
-        toastLife: 10000,
-        newestOnTop: true,
-        showCloseButton: true
       });
-      this.router.navigate(['admin/inventories', this.inventory.Id]);
-    }
   }
 
 }

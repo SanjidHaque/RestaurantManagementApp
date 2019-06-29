@@ -19,7 +19,19 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult GetTable(int tableId)
         {
             Table table = _context.Tables.FirstOrDefault(x => x.Id == tableId);
-            List<Order> orders = _context.Orders.Include(x => x.Table).ToList();
+
+            List<Order> orders = _context.Orders
+                .Where(x => x.TableId == tableId)
+                .ToList();
+
+            List<OrderSession> orderSessions = _context.OrderSessions
+                .Where(x => x.Order.Table.Id == tableId)
+                .ToList();
+
+
+            List<OrderedItem> orderedItems = _context.OrderedItems
+                .Where(x => x.OrderSession.Order.Table.Id == tableId)
+                .ToList();
             return Ok(table);
         }
 

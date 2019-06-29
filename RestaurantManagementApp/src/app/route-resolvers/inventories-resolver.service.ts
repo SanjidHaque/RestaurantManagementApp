@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs';
-import { Injectable } from '@angular/core';
 import {Resolve} from '@angular/router';
+import { Injectable } from '@angular/core';
 
 import {Inventory} from '../models/inventory.model';
 import {InventoryDataStorageService} from '../services/data-storage/inventory-data-storage.service';

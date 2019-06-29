@@ -62,7 +62,7 @@ export class AddNewUserComponent implements OnInit {
               newestOnTop: true,
               showCloseButton: true
             });
-            form.reset();
+            this.router.navigate(['admin/user-accounts']);
           } else {
             this.toastr.errorToastr(result.Errors[0], 'Error', {
               toastTimeout: 10000,

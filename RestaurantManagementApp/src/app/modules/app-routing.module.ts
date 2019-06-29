@@ -50,8 +50,8 @@ import {RemoveInventoryQuantityComponent} from '../components/admin/inventories/
 import {TableResolverService} from '../route-resolvers/table-resolver.service';
 import {UserAccountResolverService} from '../route-resolvers/user-account-resolver.service';
 import {OrderResolverService} from '../route-resolvers/order-resolver.service';
-import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
 import {FoodItemResolverService} from '../route-resolvers/food-item-resolver.service';
+import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -86,7 +86,7 @@ const appRoutes: Routes = [
         component: MenuComponent,
         resolve:
           {
-            tables: TablesResolverService,
+            table: TableResolverService,
             foodItems: FoodItemsResolverService,
             inventories: InventoriesResolverService,
             setting: SettingResolverService
@@ -97,7 +97,7 @@ const appRoutes: Routes = [
         component: PaymentComponent,
         resolve:
           {
-            tables: TablesResolverService,
+            table: TableResolverService,
             setting: SettingResolverService,
             foodItems: FoodItemsResolverService
           }
@@ -245,7 +245,7 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':orderId',
+                path: ':order-id',
                 component: OrderDetailsComponent,
                 resolve:
                   {

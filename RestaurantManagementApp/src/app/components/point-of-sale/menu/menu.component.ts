@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {MatBottomSheet} from '@angular/material';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Params, Router} from '@angular/router';
 
 import {Table} from '../../../models/table.model';
 import {Order} from '../../../models/order.model';
@@ -25,10 +25,7 @@ import {OrderCancelOptionComponent} from '../../../bottom-sheets/order-cancel-op
 })
 
 export class MenuComponent implements OnInit {
-  tableId: number;
   table: Table;
-  tables: Table[] = [];
-
   foodItems: FoodItem[] = [];
   inventories: Inventory[] = [];
   setting: Setting;
@@ -45,22 +42,19 @@ export class MenuComponent implements OnInit {
               private bottomSheet: MatBottomSheet,
               private router: Router,
               private toastr: ToastrManager,
-              private tableDataStorageService: TableDataStorageService) {
-    this.route.params.subscribe((params: Params) => this.tableId = +params['table-id']);
-  }
+              private tableDataStorageService: TableDataStorageService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: any) => {
+    this.route.data.subscribe((data: Data) => {
+      this.table = data['table'];
       this.foodItems = data['foodItems'];
-      this.tables = data['tables'];
       this.inventories = data['inventories'];
       this.setting = data['setting'];
       this.userName = JSON.parse(JSON.stringify(localStorage.getItem('userNameForLogin')));
     });
 
-    this.table = this.tables.find(x => x.Id === this.tableId);
 
-    if (this.table === undefined) {
+    if (this.table === undefined || this.table === null) {
       this.toastr.errorToastr('This table is no longer available', 'Error', {
         toastTimeout: 10000,
         newestOnTop: true,
@@ -154,7 +148,7 @@ export class MenuComponent implements OnInit {
           '',
           0,
           0,
-          this.tableId,
+          this.table.Id,
           'Not Ordered',
           null,
           null,

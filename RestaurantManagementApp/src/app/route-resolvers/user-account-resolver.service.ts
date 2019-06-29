@@ -9,7 +9,8 @@ export class UserAccountResolverService implements Resolve<any> {
   constructor(private userAccountDataStorageService: UserAccountDataStorageService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.userAccountDataStorageService.getUserAccount(route.paramMap.get('user-account-id'));
+    return this.userAccountDataStorageService
+      .getUserAccount(route.paramMap.get('user-account-id'));
   }
 
 }

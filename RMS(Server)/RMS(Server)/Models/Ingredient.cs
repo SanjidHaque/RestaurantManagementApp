@@ -15,6 +15,6 @@ namespace RMS_Server_.Models
         public int InventoryId { get; set; }
         public float SubTotal { get; set; }
         public FoodItem FoodItem { get; set; }
-        public int FooditemId { get; set; }
+        public int FoodItemId { get; set; }
     }
 }

@@ -69,14 +69,21 @@
 
     <div class="col-xl-2 form-padding">
 
-      <label for="phoneNumber">Phone Number</label>
+      <label for="phoneNumber">Phone Number*</label>
       <input
         type="text"
         id="phoneNumber"
         class="form-control"
         ngModel
+        required
+        #phoneNumber="ngModel"
         name="phoneNumber">
 
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+        Phone number is required!
+      </p>
     </div>
 
   </div>

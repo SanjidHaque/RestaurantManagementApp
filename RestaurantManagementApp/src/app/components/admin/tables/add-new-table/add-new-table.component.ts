@@ -12,7 +12,6 @@ import {TableDataStorageService} from '../../../../services/data-storage/table-d
   styleUrls: ['./add-new-table.component.scss']
 })
 export class AddNewTableComponent {
-
   isDisabled = false;
   constructor(private router: Router,
               private toastr: ToastrManager,
@@ -31,15 +30,13 @@ export class AddNewTableComponent {
         'Empty',
         []
       )
-    )
-      .subscribe(
-        (data: any) => {
+    ).subscribe(
+        () => {
           this.toastr.successToastr('Added to shop', 'Success', {
             toastTimeout: 10000,
             newestOnTop: true,
             showCloseButton: true
           });
-          form.reset();
           this.router.navigate(['admin/tables']);
         }
     );

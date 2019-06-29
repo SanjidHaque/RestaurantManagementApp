@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Params, Router} from '@angular/router';
 
 import {Table} from '../../../models/table.model';
 import {Order} from '../../../models/order.model';
@@ -18,15 +18,11 @@ import {OrderDataStorageService} from '../../../services/data-storage/order-data
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
-
   isDisabled = false;
   userName: string;
   percent = 'percent';
 
-  tableId: number;
   table: Table;
-  tables: Table[] = [];
-
   setting: Setting;
   order: Order;
   foodItems: FoodItem[] = [];
@@ -39,19 +35,15 @@ export class PaymentComponent implements OnInit {
               private tableDataStorageService: TableDataStorageService,
               private route: ActivatedRoute,
               private router: Router,
-              private toastr: ToastrManager) {
-    this.route.params.subscribe((params: Params) => this.tableId = +params['table-id']);
-  }
+              private toastr: ToastrManager) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: any) => {
-      this.tables = data['tables'];
+    this.route.data.subscribe((data: Data) => {
+      this.table = data['table'];
       this.setting = data['setting'];
       this.foodItems = data['foodItems'];
 
-      this.table = this.tables.find(x => x.Id === this.tableId);
-
-      if (this.table === undefined) {
+      if (this.table === undefined || this.table === null) {
         this.toastr.errorToastr('This table/order is no longer available', 'Error', {
           toastTimeout: 10000,
           newestOnTop: true,
@@ -187,11 +179,10 @@ export class PaymentComponent implements OnInit {
 
 
   getTableName(tableId: number) {
-    const table = this.tables.find(x => x.Id === tableId);
-    if (table === undefined) {
+    if (this.table === undefined) {
       return '';
     }
-    return table.Name;
+    return this.table.Name;
   }
 
 }

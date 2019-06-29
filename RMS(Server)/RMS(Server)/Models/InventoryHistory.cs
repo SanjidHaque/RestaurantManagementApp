@@ -12,6 +12,6 @@ namespace RMS_Server_.Models
         public int InventoryId { get; set; }
         public int BuyingQuantity { get; set; }
         public string BuyingTime { get; set; }       
-        public int BuyingPrice { get; set; }  
+        public float BuyingPrice { get; set; }  
     }
 }

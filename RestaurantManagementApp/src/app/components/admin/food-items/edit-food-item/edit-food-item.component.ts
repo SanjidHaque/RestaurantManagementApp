@@ -39,9 +39,9 @@ export class EditFoodItemComponent implements OnInit {
 
   ngOnInit() {
     this.rootUrl = this.tableDataStorageService.rootUrl + '/Content/FoodItemImages/';
-    this.route.data.
-    subscribe(
-      ( data: Data) => {
+    this.route.data
+      .subscribe(
+      (data: Data) => {
         this.foodItem = data['foodItem'];
         this.inventories = data['inventories'];
         this.setFoodItemImage();
@@ -120,9 +120,7 @@ export class EditFoodItemComponent implements OnInit {
         newestOnTop: true,
         showCloseButton: true
       });
-
     }
-
   }
 
   deleteIngredient(index: number) {
@@ -234,13 +232,23 @@ export class EditFoodItemComponent implements OnInit {
     this.foodItemDataStorageService.editFoodItem(foodItem)
       .subscribe(
         (data: any) => {
+
+          if (data === 'Error') {
+            this.isDisabled = false;
+            this.toastr.errorToastr('Duplicate serial number', 'Error', {
+              toastTimeout: 10000,
+              newestOnTop: true,
+              showCloseButton: true
+            });
+            return;
+          }
+
           if (this.imageUrl !== 'assets/noImage.png' && this.fileToUpload !== null ) {
             this.foodItemDataStorageService.
             uploadFoodItemImage(this.foodItem.Id.toString(), this.fileToUpload)
               .subscribe(
                 (response: any) => {
                   this.imageUrl = '/assets/noImage.png';
-                  form.reset();
                   this.toastr.successToastr('Information is updated', 'Success', {
                     toastTimeout: 10000,
                     newestOnTop: true,
@@ -250,7 +258,6 @@ export class EditFoodItemComponent implements OnInit {
                 }
               );
           } else {
-            form.reset();
             this.toastr.successToastr('Information is updated', 'Success', {
               toastTimeout: 10000,
               newestOnTop: true,

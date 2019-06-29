@@ -77,6 +77,9 @@ import { RemoveInventoryQuantityComponent } from './components/admin/inventories
 import {TableResolverService} from './route-resolvers/table-resolver.service';
 import {FoodItemResolverService} from './route-resolvers/food-item-resolver.service';
 import {FoodItemsResolverService} from './route-resolvers/food-items-resolver.service';
+import {UserAccountResolverService} from './route-resolvers/user-account-resolver.service';
+import {InventoryResolverService} from './route-resolvers/inventory-resolver.service';
+import {OrderResolverService} from './route-resolvers/order-resolver.service';
 
 
 
@@ -160,6 +163,7 @@ import {FoodItemsResolverService} from './route-resolvers/food-items-resolver.se
     OrderDataStorageService,
     UserAccountDataStorageService,
     TablesResolverService,
+    OrderResolverService,
     OrdersResolverService,
     InventoriesResolverService,
     FoodItemResolverService,
@@ -167,6 +171,8 @@ import {FoodItemsResolverService} from './route-resolvers/food-items-resolver.se
     RolesResolverService,
     SettingResolverService,
     UserAccountsResolverService,
+    UserAccountResolverService,
+    InventoryResolverService,
     TableResolverService,
     AuthGuard,
     {

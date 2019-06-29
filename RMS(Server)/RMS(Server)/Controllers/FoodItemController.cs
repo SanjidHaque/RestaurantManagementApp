@@ -25,7 +25,8 @@ namespace RMS_Server_.Controllers
             
             FoodItem foodItem = _context.FoodItems.FirstOrDefault(x => x.Id == foodItemId);
 
-            List<Ingredient> ingredients = _context.Ingredients.Include(x => x.FoodItem)
+            List<Ingredient> ingredients = _context.Ingredients
+                .Where(x => x.FoodItemId == foodItemId)
                 .ToList();
 
             return Ok(foodItem);
@@ -56,11 +57,41 @@ namespace RMS_Server_.Controllers
             {
                 return NotFound();
             }
+
+            if (CheckDuplicateSerialNumber(foodItem, false))
+            {
+                return Ok("Error");
+            }
+
             _context.FoodItems.Add(foodItem);
-            foodItem.Ingredients.ForEach(x => { x.FooditemId = foodItem.Id; });
-            _context.Ingredients.AddRange(foodItem.Ingredients);
             _context.SaveChanges();
-            return Ok(foodItem.Id);
+            return Ok(foodItem);
+        }
+
+      
+        private bool CheckDuplicateSerialNumber(FoodItem foodItem, bool editMode)
+        {
+            bool isDuplicate = false;
+            List<FoodItem> foodItems = _context.FoodItems.AsNoTracking().ToList();
+            foodItems.ForEach(x =>
+            {
+                if (editMode)
+                {
+                    if (x.SerialNumber == foodItem.SerialNumber && x.Id != foodItem.Id)
+                    {
+                        isDuplicate = true;
+                    }
+                }
+                else
+                {
+                    if (x.SerialNumber == foodItem.SerialNumber)
+                    {
+                        isDuplicate = true;
+                    }
+                }
+            });
+
+            return isDuplicate;
         }
 
 
@@ -73,6 +104,12 @@ namespace RMS_Server_.Controllers
             {
                 return NotFound();
             }
+
+            if (CheckDuplicateSerialNumber(foodItem, true))
+            {
+                return Ok("Error");
+            }
+
             FoodItem editedFoodItem = _context.FoodItems
                 .Include(c => c.Ingredients)
                 .FirstOrDefault(p => p.Id == foodItem.Id);
@@ -100,7 +137,12 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult DeleteFoodItem(int foodItemId)
         {
 
-            var orderedItemsCount = _context.OrderedItems.Where(x => x.Id == foodItemId).ToList().Count;
+            int orderedItemsCount = _context.OrderedItems
+                .Where(x => x.FoodItemId == foodItemId)
+                .AsNoTracking()
+                .ToList()
+                .Count;
+
             if (orderedItemsCount != 0)
             {
                 return Ok("Failed");

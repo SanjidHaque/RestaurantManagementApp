@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
+
 import {TableDataStorageService} from '../services/data-storage/table-data-storage.service';
-import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -9,7 +9,7 @@ namespace RMS_Server_.Models
         public float UsedQuantity { get; set; }
         public float RemainingQuantity { get; set; }  
         public string Unit { get; set; }
-        public int AveragePrice { get; set; }
+        public float AveragePrice { get; set; }
         public List<InventoryHistory> InventoryHistory { get; set; }
         public string BuyingTime { get; set; }
     }

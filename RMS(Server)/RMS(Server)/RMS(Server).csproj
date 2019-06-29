@@ -235,9 +235,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906132059570_Init.cs" />
-    <Compile Include="Migrations\201906132059570_Init.Designer.cs">
-      <DependentUpon>201906132059570_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201906282359196_init.cs" />
+    <Compile Include="Migrations\201906282359196_init.Designer.cs">
+      <DependentUpon>201906282359196_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906290319415_inventoryModelChanged.cs" />
+    <Compile Include="Migrations\201906290319415_inventoryModelChanged.Designer.cs">
+      <DependentUpon>201906290319415_inventoryModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906290358016_inventoryModelChangedAgain.cs" />
+    <Compile Include="Migrations\201906290358016_inventoryModelChangedAgain.Designer.cs">
+      <DependentUpon>201906290358016_inventoryModelChangedAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -336,8 +344,14 @@
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906132059570_Init.resx">
-      <DependentUpon>201906132059570_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906282359196_init.resx">
+      <DependentUpon>201906282359196_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906290319415_inventoryModelChanged.resx">
+      <DependentUpon>201906290319415_inventoryModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906290358016_inventoryModelChangedAgain.resx">
+      <DependentUpon>201906290358016_inventoryModelChangedAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

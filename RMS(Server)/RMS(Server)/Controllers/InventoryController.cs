@@ -17,13 +17,13 @@ namespace RMS_Server_.Controllers
 
         [HttpGet]
         [Route("api/GetInventory/{inventoryId}")]
-        public IHttpActionResult GetAllInventoryItem(int inventorId)
+        public IHttpActionResult GetInventory(int inventoryId)
         {
-            Inventory inventory = _context.Inventories.FirstOrDefault(x => x.Id == inventorId);
+            Inventory inventory = _context.Inventories.FirstOrDefault(x => x.Id == inventoryId);
 
-            List<InventoryHistory> inventoryHistories = _context.InventoryHistories.
-                Include(x => x.Inventory).
-                ToList();
+            List<InventoryHistory> inventoryHistories = _context.InventoryHistories
+                .Where(x => x.InventoryId == inventoryId)
+                .ToList();
 
             return Ok(inventory);
         }
@@ -53,8 +53,6 @@ namespace RMS_Server_.Controllers
                 return NotFound();
             }
             _context.Inventories.Add(inventory);
-            inventory.InventoryHistory.ForEach(x => { x.InventoryId = inventory.Id; });
-            _context.InventoryHistories.AddRange(inventory.InventoryHistory);
             _context.SaveChanges();
             return Ok();
         }
@@ -122,7 +120,7 @@ namespace RMS_Server_.Controllers
 
         [HttpDelete]
         [Route("api/DeleteInventory/{inventoryId}")]
-        public IHttpActionResult DeleteInventoryItem(int inventoryId)
+        public IHttpActionResult DeleteInventory(int inventoryId)
         {
             Ingredient ingredient = _context.Ingredients.FirstOrDefault(x => x.InventoryId == inventoryId);
             if (ingredient != null)
@@ -141,15 +139,15 @@ namespace RMS_Server_.Controllers
 
         private void CalculateAveragePrice(Inventory inventory, List<InventoryHistory> getInventoryHistories)
         {
-            int totalPrice = 0;
-            int totalWeight = 0;
+            float totalPrice = 0;
+            float totalWeight = 0;
             getInventoryHistories.ForEach(x =>
             {
                 totalPrice += (x.BuyingPrice * x.BuyingQuantity);
                 totalWeight += x.BuyingQuantity;
             });
 
-            int averagePrice = totalPrice / totalWeight;
+            float averagePrice = totalPrice / totalWeight;
             inventory.AveragePrice = averagePrice;
             _context.SaveChanges();
         }

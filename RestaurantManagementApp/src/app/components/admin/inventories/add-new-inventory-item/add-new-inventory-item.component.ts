@@ -25,7 +25,7 @@ export class AddNewInventoryItemComponent {
 
   addNewInventoryItem(form: NgForm) {
     const buyingPrice = form.value.price;
-    if (!this.adminService.checkPricingConditions(buyingPrice)) {
+    if (!this.adminService.checkPricingConditions(buyingPrice, 'inventory')) {
       return;
     }
 
@@ -36,8 +36,6 @@ export class AddNewInventoryItemComponent {
       const buyingQuantity = form.value.quantity;
       const unit = form.value.unit;
       const buyingTime = new Date().toLocaleString();
-
-
 
       const inventoryHistories: InventoryHistory[] = [new InventoryHistory(
       updateHistoryId,
@@ -66,7 +64,6 @@ export class AddNewInventoryItemComponent {
              newestOnTop: true,
              showCloseButton: true
            });
-           form.reset();
            this.router.navigate(['admin/inventories']);
          }
        );

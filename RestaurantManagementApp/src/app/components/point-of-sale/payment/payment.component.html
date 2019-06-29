@@ -20,7 +20,7 @@
 
     <button
       type="button"
-      routerLink="/pos/{{ tableId }}/menu"
+      routerLink="/pos/{{ table.Id }}/menu"
       class="btn btn-dark">Menu</button> &nbsp;
 
     <button
@@ -306,9 +306,6 @@
       width: 44mm;
       background: #FFF;">
 
-
-
-
         <div
           *ngIf="setting.ShopName !== ''"
           style="text-align: center; font-weight: 500; font-size: .8em;">
@@ -319,7 +316,7 @@
 
       <div
         *ngIf="setting.ShopAddress !== ''"
-        style="text-align: center; color: #666666; font-size: .5em;">
+        style="text-align: center; font-size: .3em;">
 
         {{ setting.ShopAddress }}
 
@@ -327,7 +324,7 @@
 
       <div
         *ngIf="setting.ShopPhone !== ''"
-        style="text-align: center; color: #666666; font-size: .5em;">
+        style="text-align: center; font-size: .3em;">
 
         Phone: {{ setting.ShopPhone }}
 
@@ -335,66 +332,67 @@
 
       <div
         *ngIf="setting.ShopFacebookPage !== ''"
-        style="text-align: center; color: #666666; font-size: .5em;">
+        style="text-align: center; font-size: .3em;">
 
         Like us at: {{ setting.ShopFacebookPage }}
 
       </div>
 
-      <div style="text-align: center; color: #666666; padding-top: .2mm; margin-bottom: -.5em;">
-        ***************
+      <div style="text-align: center;
+       font-size: .3em;
+       padding-top: .5mm;
+       padding-bottom: .5mm;
+       margin-bottom: -.5em;">
+        *****************************
       </div>
 
       <div
         style="text-align: center;
                   font-weight: 500;
-                  color: #666666;
                   padding-bottom: .5em;
                   font-size: .6em;">
         Invoice
       </div>
 
-      <table style="width: 100%;
-    border-collapse: collapse; font-size: .5em;">
+      <table style="width: 100%; border-collapse: collapse;">
 
-
-        <tr>
+        <tr style="font-size: .5em;">
           <td>Vat Reg No. {{ setting.VatRegNumber }}</td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
 
-        <tr>
-          <td>Vat Reg No. {{ setting.VatType }}</td>
+        <tr style="font-size: .5em;">
+          <td>Vat Type. {{ setting.VatType }}</td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
 
 
-        <tr>
+        <tr style="font-size: .5em;">
           <td>Order No. {{ order.Id }}</td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
 
-        <tr>
+        <tr style="font-size: .5em;">
           <td>Date Time. {{ order.DateTime }}</td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
 
-        <tr>
+        <tr style="font-size: .6em;">
           <td style="font-weight: 500;!important;">Table No. {{ getTableName(order.TableId) }}</td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
 
-        <tr>
+        <tr style="font-size: .5em;">
           <td style="font-weight: 500;!important;">Sold By. {{ order.SalesPersonName }}</td>
           <td></td>
           <td></td>
@@ -408,7 +406,7 @@
       <table style="width: 100%;
     border-collapse: collapse; font-size: .5em;">
 
-        <tr >
+        <tr>
           <td>Name</td>
           <td style="text-align: right;">#</td>
           <td style="text-align: right;">Price</td>
@@ -426,8 +424,10 @@
       </table>
 
 
-      <div style="text-align: center; color: #666666 ">
-        ---------------
+      <div style="
+      text-align: center; font-size: .3em;
+      padding-top: .5mm; padding-bottom: .5mm;">
+        *****************************
       </div>
 
       <table style="width: 100%; border-collapse: collapse; font-size: .5em;">
@@ -494,15 +494,16 @@
       <div
         style="
         text-align: center;
-        color: #666666;
+        font-size: .3em;
+        padding-bottom: .5mm;
         padding-top: .5mm;">
-        ***************
+        *****************************
       </div>
 
 
       <div
-        *ngIf="setting.ShopAddress !== ''"
-        style="text-align: center; color: #666666; font-size: .5em;">
+        *ngIf="setting.AdditionalInformation !== ''"
+        style="text-align: center; font-size: .3em;">
 
         {{ setting.AdditionalInformation }}
 

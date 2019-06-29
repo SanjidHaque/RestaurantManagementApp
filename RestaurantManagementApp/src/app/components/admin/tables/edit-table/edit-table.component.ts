@@ -13,7 +13,6 @@ import {TableDataStorageService} from '../../../../services/data-storage/table-d
 })
 export class EditTableComponent implements OnInit {
   isDisabled = false;
-
   table: Table;
 
   constructor(private route: ActivatedRoute,
@@ -52,15 +51,13 @@ export class EditTableComponent implements OnInit {
           this.table.CurrentState,
           []
         )
-      )
-        .subscribe(
-          (data: any) => {
+      ).subscribe(
+          () => {
             this.toastr.successToastr('Information is updated', 'Success', {
               toastTimeout: 10000,
               newestOnTop: true,
               showCloseButton: true
             });
-            form.reset();
             this.router.navigate(['admin/tables', this.table.Id]);
           }
         );
@@ -70,7 +67,6 @@ export class EditTableComponent implements OnInit {
         newestOnTop: true,
         showCloseButton: true
       });
-      form.reset();
       this.router.navigate(['admin/tables']);
     }
   }

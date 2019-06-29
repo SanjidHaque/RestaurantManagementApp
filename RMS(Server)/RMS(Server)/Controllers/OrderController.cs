@@ -331,10 +331,12 @@ namespace RMS_Server_.Controllers
         {
             Order order = _context.Orders.FirstOrDefault(x => x.Id == orderId);
 
-            List<OrderSession> orderSessions = _context.OrderSessions.Include(x => x.Order)
+            List<OrderSession> orderSessions = _context.OrderSessions
+                .Where(x => x.OrderId == orderId)
                 .ToList();
 
-            List<OrderedItem> orderedItems = _context.OrderedItems.Include(c => c.OrderSession)
+            List<OrderedItem> orderedItems = _context.OrderedItems
+                .Where(c => c.OrderSession.Order.Id == orderId)
                 .ToList();
 
             return Ok(order);

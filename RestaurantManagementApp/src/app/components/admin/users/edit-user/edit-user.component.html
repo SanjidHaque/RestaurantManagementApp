@@ -72,13 +72,21 @@
 
     <div class="col-xl-2 form-padding">
 
-      <label for="phoneNumber">Phone Number</label>
+      <label for="phoneNumber">Phone Number*</label>
       <input
         type="text"
         id="phoneNumber"
         class="form-control"
+        required
         [ngModel]="userAccount.PhoneNumber"
+        #phoneNumber="ngModel"
         name="phoneNumber">
+
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+        Phone number is required!
+      </p>
 
     </div>
 
@@ -133,7 +141,7 @@
       &nbsp;
       <button
         type="button"
-        routerLink="/admin/user-accounts"
+        routerLink="/admin/user-accounts/{{userAccount.Id}}"
         class="btn btn-danger">Discard</button>
     </div>
   </div>

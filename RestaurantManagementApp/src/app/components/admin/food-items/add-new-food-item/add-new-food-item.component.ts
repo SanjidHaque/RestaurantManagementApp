@@ -171,27 +171,22 @@ export class AddNewFoodItemComponent implements OnInit {
 
   addNewFoodItem(form: NgForm) {
     const serialNumber = form.value.serialNumber;
-
     if (this.ingredients.length === 0) {
-
       this.toastr.errorToastr('Select at least one ingredient', 'Error', {
         toastTimeout: 10000,
         newestOnTop: true,
         showCloseButton: true
       });
       return;
-
     }
 
     const sellingPrice = form.value.sellingPrice;
-
     if (!this.adminService.checkPricingConditions(sellingPrice)) {
       return;
     }
 
     this.isDisabled = true;
     const name = form.value.itemName;
-
     const profit = sellingPrice - this.inventoryCost;
 
     const foodItem = new FoodItem(
@@ -208,32 +203,40 @@ export class AddNewFoodItemComponent implements OnInit {
 
     this.foodItemDataStorageService.addNewFoodItem(foodItem)
       .subscribe(
-      (foodItemId: any) => {
+      (response: any) => {
+
+        if (response === 'Error') {
+          this.isDisabled = false;
+          this.toastr.errorToastr('Duplicate serial number', 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          return;
+        }
+
         if (this.imageUrl !== 'assets/noImage.png') {
-          this.foodItemDataStorageService.uploadFoodItemImage(foodItemId, this.fileToUpload)
+          this.foodItemDataStorageService.uploadFoodItemImage(response.Id, this.fileToUpload)
             .subscribe(
               (data: any) => {
                 this.imageUrl = '/assets/noImage.png';
-                form.reset();
                 this.toastr.successToastr('Added to shop', 'Success', {
                   toastTimeout: 10000,
                   newestOnTop: true,
                   showCloseButton: true
                 });
-                this.router.navigate(['admin/food-items/', foodItemId]);
+                this.router.navigate(['admin/food-items/', response.Id]);
               }
             );
         } else {
-          form.reset();
           this.toastr.successToastr('Added to shop', 'Success', {
             toastTimeout: 10000,
             newestOnTop: true,
             showCloseButton: true
           });
-          this.router.navigate(['admin/food-items/', foodItemId]);
+          this.router.navigate(['admin/food-items/', response.Id]);
         }
       });
-
 
   }
 }

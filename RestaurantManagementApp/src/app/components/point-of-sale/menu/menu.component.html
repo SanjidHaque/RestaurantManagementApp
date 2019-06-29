@@ -261,7 +261,7 @@
 
                 <div
                   *ngIf="setting.ShopAddress !== ''"
-                  style="text-align: center; color: #666666; font-size: .5em;">
+                  style="text-align: center; font-size: .4em;">
 
                   {{ setting.ShopAddress }}
 
@@ -269,7 +269,7 @@
 
                 <div
                   *ngIf="setting.ShopPhone !== ''"
-                  style="text-align: center; color: #666666; font-size: .5em;">
+                  style="text-align: center; font-size: .4em;">
 
                   Phone: {{ setting.ShopPhone }}
 
@@ -277,18 +277,19 @@
 
 
                 <div
-                  style="text-align: center;
-                  color: #666666;
-                  padding-top: .2mm;
+                  style="
+                  text-align: center;
+                  padding-top: .5mm;
+                  padding-bottom: .5mm;
+                  font-size: .3em;
                   margin-bottom: -.5em;">
-                  ***************
+                  *****************************
                 </div>
 
 
                 <div
                   style="text-align: center;
                   font-weight: 500;
-                  color: #666666;
                   padding-bottom: .5em;
                   font-size: .6em;">
 
@@ -298,31 +299,31 @@
 
 
 
-                <table style="width: 100%; border-collapse: collapse; font-size: .5em;">
+                <table style="width: 100%; border-collapse: collapse;">
 
 
-                  <tr>
+                  <tr style="font-size: .5em;">
                     <td>Order No. {{ order.Id }}</td>
                     <td></td>
                     <td></td>
                     <td></td>
                   </tr>
 
-                  <tr>
+                  <tr style="font-size: .5em;">
                     <td>Date Time. {{ orderSession.OrderedDateTime }}</td>
                     <td></td>
                     <td></td>
                     <td></td>
                   </tr>
 
-                  <tr>
-                    <td style="font-weight: 500;!important;">Table No. {{ table.Name }}</td>
+                  <tr style="font-size: .6em;">
+                    <td>Table No. {{ table.Name }} </td>
                     <td></td>
                     <td></td>
                     <td></td>
                   </tr>
 
-                  <tr>
+                  <tr style="font-size: .5em;">
                     <td style="font-weight: 500;!important;">Sales Person. {{ order.SalesPersonName }}</td>
                     <td></td>
                     <td></td>
@@ -333,8 +334,7 @@
 
                 <div style="padding-top: .5mm; padding-bottom: .5mm;"></div>
 
-                <table style="width: 100%;
-    border-collapse: collapse; font-size: .5em;">
+                <table style="width: 100%; border-collapse: collapse; font-size: .5em;">
 
                   <tr >
                     <td>SN & Name</td>
@@ -354,8 +354,11 @@
                 </table>
 
 
-                <div style="text-align: center; color: #666666 ">
-                  ---------------
+                <div style="
+                font-size: .3em;
+                text-align: center;
+                padding-top: .5mm;">
+                  *****************************
                 </div>
 
                 <table style="width: 100%; border-collapse: collapse; font-size: .5em;">
@@ -371,8 +374,11 @@
 
 
                 <div
-                  style="text-align: center; color: #666666; padding-top: .5mm;">
-                  ***************
+                  style="
+                  text-align: center;
+                  font-size: .3em;
+                  padding-top: .5mm;">
+                  *****************************
                 </div>
 
               </div>
@@ -437,7 +443,7 @@
 
             <button
               [disabled]="order.CurrentState === 'Not Ordered'"
-              routerLink="/pos/{{ tableId }}/payment"
+              routerLink="/pos/{{ table.Id }}/payment"
               class="btn btn-success">Payment</button>
 
           </div>

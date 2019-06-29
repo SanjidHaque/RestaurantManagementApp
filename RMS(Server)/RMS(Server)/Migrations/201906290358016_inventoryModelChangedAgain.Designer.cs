@@ -7,13 +7,13 @@ namespace RMS_Server_.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class inventoryModelChangedAgain : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inventoryModelChangedAgain));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906132059570_Init"; }
+            get { return "201906290358016_inventoryModelChangedAgain"; }
         }
         
         string IMigrationMetadata.Source

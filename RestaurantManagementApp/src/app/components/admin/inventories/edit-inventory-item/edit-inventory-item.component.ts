@@ -56,14 +56,12 @@ export class EditInventoryItemComponent implements OnInit {
       );
 
       this.inventoryDataStorageService.editInventory(editedInventoryItem).
-      subscribe(
-        (data: any) => {
+      subscribe(() => {
           this.toastr.successToastr('Information updated!', 'Success', {
             toastLife: 10000,
             newestOnTop: true,
             showCloseButton: true
           });
-          form.reset();
           this.router.navigate(['admin/inventories', this.inventory.Id]);
         }
       );

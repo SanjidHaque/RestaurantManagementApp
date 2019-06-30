@@ -60,12 +60,6 @@ const appRoutes: Routes = [
     path: 'pos',
     component: PointOfSaleComponent,
     canActivate: [AuthGuard],
-    resolve:
-      {
-        inventories: InventoriesResolverService,
-        tables: TablesResolverService,
-        foodItems: FoodItemsResolverService
-      },
     children:
     [
       {

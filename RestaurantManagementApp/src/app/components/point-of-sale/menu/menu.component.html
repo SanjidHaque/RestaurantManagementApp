@@ -310,7 +310,7 @@
                   </tr>
 
                   <tr style="font-size: .5em;">
-                    <td>Date Time. {{ orderSession.OrderedDateTime }}</td>
+                    <td id="date-time"></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -334,22 +334,7 @@
 
                 <div style="padding-top: .5mm; padding-bottom: .5mm;"></div>
 
-                <table style="width: 100%; border-collapse: collapse; font-size: .5em;">
-
-                  <tr >
-                    <td>SN & Name</td>
-                    <td style="text-align: right;">#</td>
-                    <td style="text-align: right;">Price</td>
-                    <td style="text-align: right;">S.Total</td>
-                  </tr>
-
-
-                  <tr *ngFor="let item of orderSession.OrderedItems">
-                    <td> {{ getFoodItemInformation('Name and Serial', item.FoodItemId) }}</td>
-                    <td style="text-align: right;"> {{ item.FoodItemQuantity }}</td>
-                    <td style="text-align: right;"> {{ getFoodItemInformation('Price', item.FoodItemId) }}</td>
-                    <td style="text-align: right;" >{{ item.TotalPrice }}</td>
-                  </tr>
+                <table id="ordered-items" style="width: 100%; border-collapse: collapse; font-size: .5em;">
 
                 </table>
 
@@ -409,10 +394,9 @@
                     class="btn btn-info">Served</button> &nbsp;
 
                   <button
+                    (click)="print(orderSession)"
                     [disabled]="!setting.PrintChefsOrderReceipt
                     || orderSession.CurrentState === 'Not Ordered'"
-                    ngxPrint
-                    printSectionId="receipt"
                     class="btn btn-success">Print</button> &nbsp;
 
                   <button

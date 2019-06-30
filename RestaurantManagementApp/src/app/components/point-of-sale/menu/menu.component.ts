@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {MatBottomSheet} from '@angular/material';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Data, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Table} from '../../../models/table.model';
 import {Order} from '../../../models/order.model';
@@ -35,6 +35,7 @@ export class MenuComponent implements OnInit {
 
   imageUrl = 'assets/noImage.png';
   rootUrl = '';
+  printIndex: number;
 
   constructor(private pointOfSaleService: PointOfSaleService,
               private orderDataStorageService: OrderDataStorageService,
@@ -53,6 +54,7 @@ export class MenuComponent implements OnInit {
       this.userName = JSON.parse(JSON.stringify(localStorage.getItem('userNameForLogin')));
     });
 
+    this.printIndex = this.pointOfSaleService.i;
 
     if (this.table === undefined || this.table === null) {
       this.toastr.errorToastr('This table is no longer available', 'Error', {
@@ -71,6 +73,8 @@ export class MenuComponent implements OnInit {
     }
   }
 
+
+
   setFoodItemImage() {
     for (let i = 0; i < this.foodItems.length; i++) {
       if (this.foodItems[i].FoodItemImageName === null
@@ -80,6 +84,92 @@ export class MenuComponent implements OnInit {
         this.foodItems[i].FoodItemImageName =
           this.rootUrl + this.foodItems[i].FoodItemImageName;
       }
+    }
+  }
+
+
+  print(orderSession: OrderSession) {
+
+    const dateTime  = document.createElement('span');
+    dateTime.innerHTML = 'Date Time. ' + orderSession.OrderedDateTime;
+    document.getElementById('date-time').appendChild(dateTime);
+
+    const tr1  = document.createElement('tr');
+
+    const td1 = document.createElement('td');
+    const td2 = document.createElement('td');
+    const td3 = document.createElement('td');
+    const td4 = document.createElement('td');
+
+    td1.innerHTML = 'SN and Name';
+
+    td2.innerHTML = '#';
+    td2.style.textAlign = 'right';
+
+    td3.innerHTML = 'Price';
+    td3.style.textAlign = 'right';
+
+    td4.innerHTML = 'S.Total';
+    td4.style.textAlign = 'right';
+
+    tr1.appendChild(td1);
+    tr1.appendChild(td2);
+    tr1.appendChild(td3);
+    tr1.appendChild(td4);
+
+    document.getElementById('ordered-items').appendChild(tr1);
+
+    for (let i = 0; i < orderSession.OrderedItems.length; i++) {
+      const tr2  = document.createElement('tr');
+
+      const getNameAndSerial = this.getFoodItemInformation('Name and Serial',
+        orderSession.OrderedItems[i].FoodItemId);
+
+      const getPrice = this.getFoodItemInformation('Price',
+        orderSession.OrderedItems[i].FoodItemId);
+
+      const td5 = document.createElement('td');
+      td5.innerHTML = getNameAndSerial.toString();
+
+      const td6 = document.createElement('td');
+      td6.innerHTML = orderSession.OrderedItems[i].FoodItemQuantity.toString();
+      td6.style.textAlign = 'right';
+
+      const td7 = document.createElement('td');
+      td7.innerHTML = getPrice.toString();
+      td7.style.textAlign = 'right';
+
+      const td8 = document.createElement('td');
+      td8.innerHTML = orderSession.OrderedItems[i].TotalPrice.toString();
+      td8.style.textAlign = 'right';
+
+      tr2.appendChild(td5);
+      tr2.appendChild(td6);
+      tr2.appendChild(td7);
+      tr2.appendChild(td8);
+
+      document.getElementById('ordered-items').appendChild(tr2);
+    }
+
+    let printContents, popupWin;
+    printContents = document.getElementById('receipt').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
+    const removeDateTime = document.getElementById('date-time');
+    while (removeDateTime.firstChild) {
+      removeDateTime.removeChild(removeDateTime.firstChild);
+    }
+
+    const removeOrderedItems = document.getElementById('ordered-items');
+    while (removeOrderedItems.firstChild) {
+      removeOrderedItems.removeChild(removeOrderedItems.firstChild);
     }
   }
 

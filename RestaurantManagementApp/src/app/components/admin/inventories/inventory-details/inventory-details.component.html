@@ -69,7 +69,7 @@
 
       <tr
         *ngFor="let inventoryHistory of inventory.InventoryHistory
-         | paginate: { itemsPerPage: 3, currentPage: pageNumber }">
+         | paginate: { itemsPerPage: 10, currentPage: pageNumber }">
         <td style="width: 10%">
           {{ inventoryHistory.BuyingQuantity }} {{ inventory.Unit }}
         </td>

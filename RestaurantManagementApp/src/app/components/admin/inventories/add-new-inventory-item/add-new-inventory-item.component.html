@@ -50,51 +50,7 @@
       </p>
     </div>
   </div>
-
-
-  <div class="row form-group">
-    <div class="col-xl-6">
-
-      <label for="quantity">Initial Quantity</label>
-      <input
-        type="number"
-        min="1"
-        id="quantity"
-        class="form-control"
-        ngModel
-        name="quantity"
-        #quantity="ngModel"
-        required>
-      <p
-        style="color: red; margin-bottom: 0;"
-        *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
-        Initial quantity is required!
-      </p>
-    </div>
-  </div>
-
-
-  <div class="row form-group">
-    <div class="col-xl-6">
-
-      <label for="price">Buying Price Per Unit</label>
-      <input
-        type="number"
-        min="1"
-        id="price"
-        class="form-control"
-        ngModel
-        name="price"
-        #price="ngModel"
-        required>
-      <p
-        style="color: red; margin-bottom: 0;"
-        *ngIf="price.invalid && (price.dirty || price.touched)">
-        Buying price per unit  is required!
-      </p>
-
-    </div>
-  </div>
+  
 
 
   <div class="row">

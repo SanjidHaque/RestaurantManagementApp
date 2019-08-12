@@ -68,6 +68,8 @@ namespace RMS_Server_.Controllers
             {
                 editInventoryItem.Name = inventory.Name;
                 editInventoryItem.Unit = inventory.Unit;
+
+                _context.Entry(editInventoryItem).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok();
             }
@@ -87,6 +89,8 @@ namespace RMS_Server_.Controllers
                     return Ok("Error");
                 }
                 getInventory.RemainingQuantity -= inventory.RemainingQuantity;
+
+                _context.Entry(getInventory).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok("Success");
             }
@@ -108,10 +112,13 @@ namespace RMS_Server_.Controllers
             {
                 _context.InventoryHistories.Add(inventoryHistory);
                 inventory.RemainingQuantity += inventoryHistory.BuyingQuantity;
-                _context.SaveChanges();
+                _context.Entry(inventory).State = EntityState.Modified;
+
+
                 List<InventoryHistory> getInventoryHistories = _context.InventoryHistories
                         .Where(q => q.InventoryId == inventoryHistory.InventoryId)
                         .ToList();
+
                 CalculateAveragePrice(inventory, getInventoryHistories);
                 return Ok();
             }
@@ -150,6 +157,7 @@ namespace RMS_Server_.Controllers
 
             float averagePrice = totalPrice / totalWeight;
             inventory.AveragePrice = averagePrice;
+            _context.Entry(inventory).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

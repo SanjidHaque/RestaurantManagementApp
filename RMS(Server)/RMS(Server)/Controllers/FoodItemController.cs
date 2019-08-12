@@ -36,7 +36,6 @@ namespace RMS_Server_.Controllers
         [HttpGet]
         public IHttpActionResult GetAllFoodItem()
         {
-            _context.Configuration.LazyLoadingEnabled = false;
 
             List<FoodItem> foodItems = _context.FoodItems
                 .OrderByDescending(x => x.Id)
@@ -122,6 +121,8 @@ namespace RMS_Server_.Controllers
                 editedFoodItem.Profit = foodItem.Profit;
                 _context.Ingredients.RemoveRange(editedFoodItem.Ingredients);
                 _context.Ingredients.AddRange(foodItem.Ingredients);
+
+                _context.Entry(editedFoodItem).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok();
             }

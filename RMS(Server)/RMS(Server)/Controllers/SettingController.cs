@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Http;
 using RMS_Server_.Models;
 
@@ -38,6 +39,8 @@ namespace RMS_Server_.Controllers
                 setting.ServiceChargeRate = editSetting.ServiceChargeRate;
                 setting.AdditionalInformation = editSetting.AdditionalInformation;
                 setting.PrintChefsOrderReceipt = editSetting.PrintChefsOrderReceipt;
+
+                _context.Entry(setting).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok();
             }

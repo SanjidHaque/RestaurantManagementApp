@@ -24,6 +24,8 @@ namespace RMS_Server_.Controllers
                 .Where(x => x.TableId == tableId)
                 .ToList();
 
+
+
             List<OrderSession> orderSessions = _context.OrderSessions
                 .Where(x => x.Order.Table.Id == tableId)
                 .ToList();
@@ -59,7 +61,6 @@ namespace RMS_Server_.Controllers
 
         [HttpPost]
         [Route("api/AddNewTable")]
-
         public IHttpActionResult AddNewTable(Table table)
         {
             if (table != null)
@@ -80,6 +81,7 @@ namespace RMS_Server_.Controllers
             if (getEdited != null)
             {
                 getEdited.Name = table.Name;
+                _context.Entry(getEdited).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok();
             }
@@ -115,10 +117,11 @@ namespace RMS_Server_.Controllers
         [Route("api/ChangeTableState")]
         public IHttpActionResult ChangeTableState(Table table)
         {
-            Table changeTabeStateDefault = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
-            if (changeTabeStateDefault != null)
+            Table getTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+            if (getTable != null)
             {
-                changeTabeStateDefault.CurrentState = table.CurrentState;
+                getTable.CurrentState = table.CurrentState;
+                _context.Entry(getTable).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok();
             }

@@ -35,7 +35,6 @@ export class MenuComponent implements OnInit {
 
   imageUrl = 'assets/noImage.png';
   rootUrl = '';
-  printIndex: number;
 
   constructor(private pointOfSaleService: PointOfSaleService,
               private orderDataStorageService: OrderDataStorageService,
@@ -53,8 +52,6 @@ export class MenuComponent implements OnInit {
       this.setting = data['setting'];
       this.userName = JSON.parse(JSON.stringify(localStorage.getItem('userNameForLogin')));
     });
-
-    this.printIndex = this.pointOfSaleService.i;
 
     if (this.table === undefined || this.table === null) {
       this.toastr.errorToastr('This table is no longer available', 'Error', {

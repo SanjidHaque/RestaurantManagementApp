@@ -123,7 +123,7 @@
 
 
 
-      <div *ngIf="order !== undefined && order !== null; else orderExists">
+      <div *ngIf="order !== undefined; else orderExists">
 
         <div class="row"
              *ngIf="order.Id !== null && order.Id !== -1"

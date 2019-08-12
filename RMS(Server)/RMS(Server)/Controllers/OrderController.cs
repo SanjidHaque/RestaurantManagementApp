@@ -69,11 +69,12 @@ namespace RMS_Server_.Controllers
                                 {
                                     inventory.RemainingQuantity -= inventoryQuantity;
                                     inventory.UsedQuantity += inventoryQuantity;
-                                    _context.SaveChanges();
+                                    _context.Entry(inventory).State = EntityState.Modified;
                                 }
                             }
 
                             foodItem.TotalSale++;
+                            _context.Entry(foodItem).State = EntityState.Modified;
                             _context.SaveChanges();
                         }
                     }
@@ -106,6 +107,8 @@ namespace RMS_Server_.Controllers
                     getExistingOrder.GrossTotalPrice = order.TotalPrice;
                     getExistingOrder.Profit = order.Profit;
                     getExistingOrder.InventoryCost = order.InventoryCost;
+
+                    _context.Entry(getExistingOrder).State = EntityState.Modified;
                     _context.SaveChanges();
                 }
             }
@@ -115,6 +118,7 @@ namespace RMS_Server_.Controllers
             if (orderSession != null)
             {
                 orderSession.CurrentState = "Ordered";
+                _context.Entry(orderSession).State = EntityState.Modified;
                 _context.SaveChanges();
             }
 
@@ -145,11 +149,12 @@ namespace RMS_Server_.Controllers
                         {
                             inventory.RemainingQuantity += inventoryQuantity;
                             inventory.UsedQuantity -= inventoryQuantity;
-                            _context.SaveChanges();
+                            _context.Entry(inventory).State = EntityState.Modified;
                         }
                     }
 
                     foodItem.TotalSale--;
+                    _context.Entry(foodItem).State = EntityState.Modified;
                     _context.SaveChanges();
                 }
             }
@@ -179,8 +184,6 @@ namespace RMS_Server_.Controllers
                 orderSession.OrderedItems.ForEach(x =>
                 {
                     order.TotalPrice -= x.TotalPrice;
-                   
-
                     FoodItem foodItem = foodItems.FirstOrDefault(y => y.Id == x.FoodItemId);
                     if (foodItem != null)
                     {
@@ -188,11 +191,13 @@ namespace RMS_Server_.Controllers
                         order.InventoryCost -= totalInventoryCost;
                     }
 
+                    _context.Entry(order).State = EntityState.Modified;
                     _context.SaveChanges();
                 });
 
                 order.GrossTotalPrice = order.TotalPrice;
                 order.Profit = order.TotalPrice - order.InventoryCost;
+                _context.Entry(order).State = EntityState.Modified;
                 _context.SaveChanges();
 
               
@@ -204,7 +209,6 @@ namespace RMS_Server_.Controllers
                 }
                 else
                 {
-
                     var completeOrders = order.OrderSessions.Where(
                         x => x.CurrentState == "Ordered"
                     ).ToList();
@@ -217,6 +221,8 @@ namespace RMS_Server_.Controllers
                     {
                         order.CurrentState = "Served";
                     }
+
+                    _context.Entry(order).State = EntityState.Modified;
                     _context.SaveChanges();
                 }
 
@@ -234,6 +240,7 @@ namespace RMS_Server_.Controllers
             {
                 getOrderSession.CurrentState = "Served";
                 getOrderSession.ServedDateTime = orderSession.ServedDateTime;
+                _context.Entry(getOrderSession).State = EntityState.Modified;
                 _context.SaveChanges();
 
                 Order order = _context.Orders.FirstOrDefault(x => x.Id == getOrderSession.OrderId);
@@ -258,6 +265,7 @@ namespace RMS_Server_.Controllers
                         order.CurrentState = "Ordered";
                     }
 
+                    _context.Entry(order).State = EntityState.Modified;
                     _context.SaveChanges();
                     return Ok("Order served successfully");
                 }
@@ -299,6 +307,7 @@ namespace RMS_Server_.Controllers
                 x.CurrentState = "Paid";
             });
 
+            _context.Entry(getOrder).State = EntityState.Modified;
             _context.SaveChanges();
             
             return Ok();

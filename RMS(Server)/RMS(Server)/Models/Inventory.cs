@@ -11,6 +11,5 @@ namespace RMS_Server_.Models
         public string Unit { get; set; }
         public float AveragePrice { get; set; }
         public List<InventoryHistory> InventoryHistory { get; set; }
-        public string BuyingTime { get; set; }
     }
 }

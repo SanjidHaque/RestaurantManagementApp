@@ -52,6 +52,10 @@ namespace RMS_Server_.Controllers
             {
                 return NotFound();
             }
+            if (_context.Inventories.Any(o => o.Name == inventory.Name))
+            {
+                return Ok("Duplicate");
+            }
             _context.Inventories.Add(inventory);
             _context.SaveChanges();
             return Ok();

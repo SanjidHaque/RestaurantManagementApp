@@ -24,42 +24,37 @@ export class AddNewInventoryItemComponent {
   }
 
   addNewInventoryItem(form: NgForm) {
-    const buyingPrice = form.value.price;
-    if (!this.adminService.checkPricingConditions(buyingPrice, 'inventory')) {
-      return;
-    }
-
       this.isDisabled = true;
       const inventoryId = null;
-      const updateHistoryId = null;
       const inventoryItemName = form.value.name;
-      const buyingQuantity = form.value.quantity;
       const unit = form.value.unit;
       const buyingTime = new Date().toLocaleString();
 
-      const inventoryHistories: InventoryHistory[] = [new InventoryHistory(
-      updateHistoryId,
-      inventoryId,
-      buyingQuantity,
-      buyingTime,
-      buyingPrice
-    )];
-
       const inventory = new Inventory(
-        inventoryId,
-        inventoryItemName,
+         inventoryId,
+         inventoryItemName,
         0,
-        buyingQuantity,
-        unit,
-        buyingPrice,
-        inventoryHistories,
-        buyingTime
+        0,
+         unit,
+        0,
+        [],
+         buyingTime
       );
 
-       this.inventoryDataStorageService.addNewInventory(inventory).
-       subscribe(
+       this.inventoryDataStorageService.addNewInventory(inventory)
+         .subscribe(
          (data: any) => {
-           this.toastr.successToastr('Added to inventory!', 'Success', {
+           if (data === 'Duplicate') {
+             this.toastr.errorToastr('Item already exists', 'Error', {
+               toastLife: 10000,
+               newestOnTop: true,
+               showCloseButton: true
+             });
+             this.isDisabled = false;
+             return;
+           }
+
+           this.toastr.successToastr('Added to inventory', 'Success', {
              toastLife: 10000,
              newestOnTop: true,
              showCloseButton: true

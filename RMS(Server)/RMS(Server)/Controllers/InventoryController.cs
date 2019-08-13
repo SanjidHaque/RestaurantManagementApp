@@ -50,15 +50,17 @@ namespace RMS_Server_.Controllers
         {
             if (inventory == null)
             {
-                return NotFound();
+                return Ok(new { StatusText = "Something went wrong"});
             }
+
             if (_context.Inventories.Any(o => o.Name == inventory.Name))
             {
-                return Ok("Duplicate item name");
+                return Ok(new { StatusText = "Duplicate item name" });
             }
+
             _context.Inventories.Add(inventory);
             _context.SaveChanges();
-            return Ok();
+             return Ok(new { StatusText = "Success" });
         }
 
 
@@ -68,17 +70,24 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult EditInventory(Inventory inventory)
         {
             Inventory editInventoryItem = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+
+
             if (editInventoryItem != null)
             {
+                if (_context.Inventories.Any(o => o.Name == inventory.Name && o.Name != editInventoryItem.Name))
+                {
+                    return Ok(new { StatusText = "Duplicate item name" });
+                }
+
                 editInventoryItem.Name = inventory.Name;
                 editInventoryItem.Unit = inventory.Unit;
 
                 _context.Entry(editInventoryItem).State = EntityState.Modified;
                 _context.SaveChanges();
-                return Ok();
+                return Ok(new { StatusText = "Success" });
             }
 
-            return NotFound();
+            return Ok(new { StatusText = "Item not found" });
         }
 
         [HttpPut]

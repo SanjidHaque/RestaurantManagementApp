@@ -55,8 +55,7 @@ export class RemoveInventoryQuantityComponent implements OnInit {
         removalQuantity,
         null,
         null,
-        [],
-        null
+        []
       )
     ).subscribe(
       (data: any) => {

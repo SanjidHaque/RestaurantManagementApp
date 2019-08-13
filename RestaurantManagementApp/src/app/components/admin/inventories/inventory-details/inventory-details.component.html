@@ -49,54 +49,71 @@
   </div>
 </div>
 
-<br>
-<div class="row">
-  <div class="col-xl-12">
-    <h6>Update Histories</h6>
-  </div>
+<div
+  style="font-weight: 500; padding-top: 20px; padding-bottom: 20px;"
+  *ngIf="inventory.InventoryHistory === null; else inventoryHistoryExists">
+
+
+  No update histories.
+
+
+
 </div>
 
+<ng-template #inventoryHistoryExists>
 
-<div class="row">
-  <div class="col-xl-8 col-lg-8">
+  <br>
+  <div class="row">
+    <div class="col-xl-12">
+      <h6>Update Histories</h6>
+    </div>
+  </div>
 
-    <table border=1 cellpadding=10 width="100%">
-      <tr style="font-weight: 500;">
-        <td>Quantity</td>
-        <td>Price</td>
-        <td>Date</td>
-      </tr>
 
-      <tr
-        *ngFor="let inventoryHistory of inventory.InventoryHistory
+  <div class="row">
+    <div class="col-xl-8 col-lg-8">
+
+      <table border=1 cellpadding=10 width="100%">
+        <tr style="font-weight: 500;">
+          <td>Quantity</td>
+          <td>Price</td>
+          <td>Date</td>
+        </tr>
+
+        <tr
+          *ngFor="let inventoryHistory of inventory.InventoryHistory
          | paginate: { itemsPerPage: 10, currentPage: pageNumber }">
-        <td style="width: 10%">
-          {{ inventoryHistory.BuyingQuantity }} {{ inventory.Unit }}
-        </td>
-        <td style="width: 10%">
-          {{ inventoryHistory.BuyingPrice }} BDT
-        </td>
-        <td style="width: 15%; word-break: break-word;">
-          {{ inventoryHistory.BuyingTime }}
-        </td>
-      </tr>
-    </table>
+          <td style="width: 10%">
+            {{ inventoryHistory.BuyingQuantity }} {{ inventory.Unit }}
+          </td>
+          <td style="width: 10%">
+            {{ inventoryHistory.BuyingPrice }} BDT
+          </td>
+          <td style="width: 15%; word-break: break-word;">
+            {{ inventoryHistory.BuyingTime }}
+          </td>
+        </tr>
+      </table>
 
 
 
+    </div>
   </div>
-</div>
 
-<br>
+  <br>
 
-<div class="row text-xl-right">
-  <div class="col-xl-8 col-lg-8">
-    <pagination-controls
-      class="my-pagination"
-      [autoHide]="true"
-      (pageChange)="pageNumber = $event"></pagination-controls>
+  <div class="row text-xl-right">
+    <div class="col-xl-8 col-lg-8">
+      <pagination-controls
+        class="my-pagination"
+        [autoHide]="true"
+        (pageChange)="pageNumber = $event"></pagination-controls>
+    </div>
   </div>
-</div>
+
+</ng-template>
+
+
 
 
 <div class="row text-xl-left">

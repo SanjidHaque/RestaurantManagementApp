@@ -59,7 +59,12 @@ namespace RMS_Server_.Controllers
 
             if (CheckDuplicateSerialNumber(foodItem, false))
             {
-                return Ok("Error");
+                return Ok("Duplicate serial number");
+            }
+
+            if (_context.FoodItems.Any(o => o.Name == foodItem.Name))
+            {
+                return Ok("Duplicate item name");
             }
 
             _context.FoodItems.Add(foodItem);

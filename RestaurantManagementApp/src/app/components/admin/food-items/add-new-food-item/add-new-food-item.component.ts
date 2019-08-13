@@ -170,7 +170,7 @@ export class AddNewFoodItemComponent implements OnInit {
 
 
   addNewFoodItem(form: NgForm) {
-    const serialNumber = form.value.serialNumber;
+
     if (this.ingredients.length === 0) {
       this.toastr.errorToastr('Select at least one ingredient', 'Error', {
         toastTimeout: 10000,
@@ -186,6 +186,7 @@ export class AddNewFoodItemComponent implements OnInit {
     }
 
     this.isDisabled = true;
+    const serialNumber = form.value.serialNumber;
     const name = form.value.itemName;
     const profit = sellingPrice - this.inventoryCost;
 
@@ -205,20 +206,31 @@ export class AddNewFoodItemComponent implements OnInit {
       .subscribe(
       (response: any) => {
 
-        if (response === 'Error') {
+        if (response === 'Duplicate serial number') {
           this.isDisabled = false;
-          this.toastr.errorToastr('Duplicate serial number', 'Error', {
+          this.toastr.errorToastr(response, 'Error', {
             toastTimeout: 10000,
             newestOnTop: true,
             showCloseButton: true
           });
+          this.isDisabled = false;
+          return;
+        }
+
+        if (response === 'Duplicate item name') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(response, 'Error', {
+            toastTimeout: 10000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+          this.isDisabled = false;
           return;
         }
 
         if (this.imageUrl !== 'assets/noImage.png') {
           this.foodItemDataStorageService.uploadFoodItemImage(response.Id, this.fileToUpload)
-            .subscribe(
-              (data: any) => {
+            .subscribe(() => {
                 this.imageUrl = '/assets/noImage.png';
                 this.toastr.successToastr('Added to shop', 'Success', {
                   toastTimeout: 10000,

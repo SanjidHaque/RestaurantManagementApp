@@ -28,7 +28,6 @@ export class AddNewInventoryItemComponent {
       const inventoryId = null;
       const inventoryItemName = form.value.name;
       const unit = form.value.unit;
-      const buyingTime = new Date().toLocaleString();
 
       const inventory = new Inventory(
          inventoryId,
@@ -37,15 +36,14 @@ export class AddNewInventoryItemComponent {
         0,
          unit,
         0,
-        [],
-         buyingTime
+        []
       );
 
        this.inventoryDataStorageService.addNewInventory(inventory)
          .subscribe(
          (data: any) => {
-           if (data === 'Duplicate') {
-             this.toastr.errorToastr('Item already exists', 'Error', {
+           if (data === 'Duplicate item name') {
+             this.toastr.errorToastr(data, 'Error', {
                toastLife: 10000,
                newestOnTop: true,
                showCloseButton: true

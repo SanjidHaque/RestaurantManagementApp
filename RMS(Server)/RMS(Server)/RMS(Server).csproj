@@ -273,6 +273,7 @@
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\StatusTextService.cs" />
     <Compile Include="StartupRMS.cs" />
   </ItemGroup>
   <ItemGroup>

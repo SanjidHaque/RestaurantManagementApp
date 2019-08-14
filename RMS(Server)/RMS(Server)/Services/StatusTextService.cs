@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace RMS_Server_.Services
+﻿namespace RMS_Server_.Services
 {
     public class StatusTextService
     {
@@ -12,5 +7,7 @@ namespace RMS_Server_.Services
         public string DuplicateItemName = "Duplicate item name";
         public string SomethingWentWorng = "Some thing went worng";
         public string ItemNotFound = "Item not found";
+        public string QuantityIsTooLarge = "Quantity is too large";
+        public string ReportingPurposeIssue = "This item can't be deleted for reporting purpose";
     }
 }

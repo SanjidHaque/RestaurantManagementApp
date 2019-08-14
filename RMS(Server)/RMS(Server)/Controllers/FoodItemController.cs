@@ -54,7 +54,7 @@ namespace RMS_Server_.Controllers
         {
             if (foodItem == null)
             {
-                return NotFound();
+                return Ok();
             }
 
             if (CheckDuplicateSerialNumber(foodItem, false))
@@ -117,8 +117,15 @@ namespace RMS_Server_.Controllers
             FoodItem editedFoodItem = _context.FoodItems
                 .Include(c => c.Ingredients)
                 .FirstOrDefault(p => p.Id == foodItem.Id);
+
             if (editedFoodItem != null)
             {
+                if (_context.FoodItems.Any(o => o.Name == foodItem.Name && o.Name != foodItem.Name))
+                {
+                    return Ok(new { StatusText = "Duplicate item name" });
+                }
+
+
                 editedFoodItem.Name = foodItem.Name;
                 editedFoodItem.Price = foodItem.Price;
                 editedFoodItem.SerialNumber = foodItem.SerialNumber;

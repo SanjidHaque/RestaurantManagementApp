@@ -46,10 +46,10 @@ namespace RMS_Server_.Controllers
 
                 _context.Entry(setting).State = EntityState.Modified;
                 _context.SaveChanges();
-                return Ok();
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return NotFound();
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
     }
 }

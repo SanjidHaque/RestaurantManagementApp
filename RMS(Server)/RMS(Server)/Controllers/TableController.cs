@@ -28,12 +28,9 @@ namespace RMS_Server_.Controllers
                 .Where(x => x.TableId == tableId)
                 .ToList();
 
-
-
             List<OrderSession> orderSessions = _context.OrderSessions
                 .Where(x => x.Order.Table.Id == tableId)
                 .ToList();
-
 
             List<OrderedItem> orderedItems = _context.OrderedItems
                 .Where(x => x.OrderSession.Order.Table.Id == tableId)
@@ -46,7 +43,6 @@ namespace RMS_Server_.Controllers
         [Route("api/GetAllTable")]
         public IHttpActionResult GetAllTable()
         {
-
             List<Table> tables = _context.Tables.
                 OrderByDescending(x => x.Id).
                 ToList();
@@ -71,10 +67,10 @@ namespace RMS_Server_.Controllers
             {
                 _context.Tables.Add(table);
                 _context.SaveChanges();
-                return Ok();
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return NotFound();
+            return Ok(new { StatusText = _statusTextService.SomethingWentWorng });
         }
 
         [HttpPut]
@@ -87,29 +83,27 @@ namespace RMS_Server_.Controllers
                 getEdited.Name = table.Name;
                 _context.Entry(getEdited).State = EntityState.Modified;
                 _context.SaveChanges();
-                return Ok();
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return NotFound();
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
         [HttpDelete]
         [Route("api/DeleteTable/{tableId}")]
         public IHttpActionResult DeleteTable(int tableId)
         {
-
             Table deleteTable = _context.Tables.Include(x => x.Orders).FirstOrDefault(p => p.Id == tableId);
             if (deleteTable == null)
             {
-                return NotFound();
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
             
             if (deleteTable.Orders.Count != 0)
             {
-                return Ok("Failed");
+                return Ok(new { StatusText = _statusTextService.ReportingPurposeIssue });
             }
-
-            
+           
             _context.Tables.Remove(deleteTable);
             _context.SaveChanges();
             return Ok();
@@ -127,10 +121,10 @@ namespace RMS_Server_.Controllers
                 getTable.CurrentState = table.CurrentState;
                 _context.Entry(getTable).State = EntityState.Modified;
                 _context.SaveChanges();
-                return Ok();
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return NotFound();
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
     }
 }

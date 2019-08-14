@@ -58,22 +58,23 @@ namespace RMS_Server_.Controllers
         {
             if (foodItem == null)
             {
-                return Ok();
+                return Ok(new { StatusText = _statusTextService.SomethingWentWorng });
             }
 
             if (CheckDuplicateSerialNumber(foodItem, false))
             {
-                return Ok("Duplicate serial number");
+                return Ok(new { StatusText = _statusTextService.DuplicateSerialNumber });
             }
 
             if (_context.FoodItems.Any(o => o.Name == foodItem.Name))
             {
-                return Ok("Duplicate item name");
+                return Ok(new { StatusText = _statusTextService.DuplicateItemName });
             }
 
             _context.FoodItems.Add(foodItem);
             _context.SaveChanges();
-            return Ok(foodItem);
+
+            return Ok(new { StatusText = _statusTextService.Success, foodItem });
         }
 
       
@@ -110,12 +111,12 @@ namespace RMS_Server_.Controllers
         {
             if (foodItem == null)
             {
-                return NotFound();
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
 
             if (CheckDuplicateSerialNumber(foodItem, true))
             {
-                return Ok("Error");
+                return Ok(new { StatusText = _statusTextService.DuplicateSerialNumber });
             }
 
             FoodItem editedFoodItem = _context.FoodItems
@@ -126,7 +127,7 @@ namespace RMS_Server_.Controllers
             {
                 if (_context.FoodItems.Any(o => o.Name == foodItem.Name && o.Name != foodItem.Name))
                 {
-                    return Ok(new { StatusText = "Duplicate item name" });
+                    return Ok(new { StatusText = _statusTextService.DuplicateItemName });
                 }
 
 
@@ -140,10 +141,11 @@ namespace RMS_Server_.Controllers
 
                 _context.Entry(editedFoodItem).State = EntityState.Modified;
                 _context.SaveChanges();
-                return Ok();
+                
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return NotFound();
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
 
@@ -153,16 +155,9 @@ namespace RMS_Server_.Controllers
         [Route("api/DeleteFoodItem/{foodItemId}")]
         public IHttpActionResult DeleteFoodItem(int foodItemId)
         {
-
-            int orderedItemsCount = _context.OrderedItems
-                .Where(x => x.FoodItemId == foodItemId)
-                .AsNoTracking()
-                .ToList()
-                .Count;
-
-            if (orderedItemsCount != 0)
+            if (_context.OrderedItems.Any(o => o.FoodItemId == foodItemId))
             {
-                return Ok("Failed");
+                return Ok(new { StatusText = _statusTextService.ReportingPurposeIssue });
             }
 
             FoodItem deleteFoodItem = _context.FoodItems.FirstOrDefault(p => p.Id == foodItemId);
@@ -172,10 +167,11 @@ namespace RMS_Server_.Controllers
                 DeleteFoodItemImage(deleteFoodItem);
                 _context.FoodItems.Remove(deleteFoodItem);
                 _context.SaveChanges();
-                return Ok();
+                
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return NotFound();
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
 
@@ -203,7 +199,7 @@ namespace RMS_Server_.Controllers
                 foodItem.FoodItemImageName = imageName;
             }
             _context.SaveChanges();
-            return Ok();          
+            return Ok(new { StatusText = _statusTextService.Success });
         }
 
 
@@ -211,9 +207,9 @@ namespace RMS_Server_.Controllers
         private void DeleteFoodItemImage(FoodItem foodItem)
         {
             string filePath = HttpContext.Current.Server.MapPath("~/Content/FoodItemImages/" + foodItem.FoodItemImageName);
-            if ((System.IO.File.Exists(filePath)))
+            if (File.Exists(filePath))
             {
-                System.IO.File.Delete(filePath);
+                File.Delete(filePath);
             }
         }
 

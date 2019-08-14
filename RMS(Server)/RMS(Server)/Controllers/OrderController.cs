@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Data.Entity;
 using RMS_Server_.Models;
+using RMS_Server_.Services;
 
 
 namespace RMS_Server_.Controllers
@@ -10,9 +11,12 @@ namespace RMS_Server_.Controllers
     public class OrderController : ApiController
     {
         private readonly ApplicationDbContext _context;
+        private readonly StatusTextService _statusTextService;
+
         private OrderController()
         {
             _context = new ApplicationDbContext();
+            _statusTextService = new StatusTextService();
         }      
 
 
@@ -22,27 +26,24 @@ namespace RMS_Server_.Controllers
         {
             List<Inventory> inventories = _context.Inventories.ToList();
 
-            foreach (var orderOrderSession in order.OrderSessions)
+            foreach (OrderSession orderOrderSession in order.OrderSessions)
             {
                 if (orderOrderSession.CurrentState == "Not Ordered")
                 {
-                    foreach (var orderedItem in orderOrderSession.OrderedItems)
+                    foreach (OrderedItem orderedItem in orderOrderSession.OrderedItems)
                     {
                         FoodItem foodItem = _context.FoodItems.Include(x => x.Ingredients).FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
                         if (foodItem != null)
                         {
-                            foreach (var foodItemIngredient in foodItem.Ingredients)
+                            foreach (Ingredient foodItemIngredient in foodItem.Ingredients)
                             {
-                                var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+                                float inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
 
                                 Inventory inventory =
                                     inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
-                                if (inventory != null)
+                                if (inventoryQuantity > inventory?.RemainingQuantity)
                                 {
-                                    if (inventoryQuantity > inventory.RemainingQuantity)
-                                    {
-                                        return Ok( new { Text = "Insufficient inventories"});
-                                    }
+                                    return Ok(new { StatusText = _statusTextService.InsufficientInventories });
                                 }
                             }
                         }
@@ -50,18 +51,18 @@ namespace RMS_Server_.Controllers
                 }
             }
 
-            foreach (var orderOrderSession in order.OrderSessions)
+            foreach (OrderSession orderOrderSession in order.OrderSessions)
             {
                 if (orderOrderSession.CurrentState == "Not Ordered")
                 {
-                    foreach (var orderedItem in orderOrderSession.OrderedItems)
+                    foreach (OrderedItem orderedItem in orderOrderSession.OrderedItems)
                     {
                         FoodItem foodItem = _context.FoodItems.FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
                         if (foodItem != null)
                         {
-                            foreach (var foodItemIngredient in foodItem.Ingredients)
+                            foreach (Ingredient foodItemIngredient in foodItem.Ingredients)
                             {
-                                var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+                                float inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
 
                                 Inventory inventory =
                                     inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
@@ -122,8 +123,7 @@ namespace RMS_Server_.Controllers
                 _context.SaveChanges();
             }
 
-
-            return Ok( new { Text = "Order placed successfully", Order = order });
+            return Ok(new { StatusText = _statusTextService.Success, order });
         }
 
 
@@ -134,14 +134,14 @@ namespace RMS_Server_.Controllers
         {
             List<Inventory> inventories = _context.Inventories.ToList();
 
-            foreach (var orderedItem in orderSession.OrderedItems)
+            foreach (OrderedItem orderedItem in orderSession.OrderedItems)
             {
                 FoodItem foodItem = _context.FoodItems.Include(x => x.Ingredients).FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
                 if (foodItem != null)
                 {
-                    foreach (var foodItemIngredient in foodItem.Ingredients)
+                    foreach (Ingredient foodItemIngredient in foodItem.Ingredients)
                     {
-                        var inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+                        float inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
 
                         Inventory inventory =
                             inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
@@ -159,7 +159,7 @@ namespace RMS_Server_.Controllers
                 }
             }
 
-            return Ok();
+            return Ok(new { StatusText = _statusTextService.Success });
         }
 
 
@@ -228,7 +228,7 @@ namespace RMS_Server_.Controllers
 
             }
            
-            return Ok();
+            return Ok(new { StatusText = _statusTextService.Success });
         }
 
         [Route("api/ServeOrder")]
@@ -267,11 +267,11 @@ namespace RMS_Server_.Controllers
 
                     _context.Entry(order).State = EntityState.Modified;
                     _context.SaveChanges();
-                    return Ok("Order served successfully");
+                    return Ok(new { StatusText = _statusTextService.Success });
                 }
             }
 
-            return Ok("Order not found");
+            return Ok(new { StatusText = _statusTextService.SomethingWentWorng });
         }
 
         [Route("api/ValidateOrder")]
@@ -279,15 +279,11 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult ValidateOrder(Order order)
         {
 
-            if (order == null)
-            {
-                return Ok("Order not found");
-            }
             Order getOrder = _context.Orders.Include(x => x.OrderSessions).FirstOrDefault(x => x.Id == order.Id);
             
             if (getOrder == null)
             {
-                return Ok("Order not found");
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
 
             getOrder.Change = order.Change;
@@ -310,7 +306,7 @@ namespace RMS_Server_.Controllers
             _context.Entry(getOrder).State = EntityState.Modified;
             _context.SaveChanges();
             
-            return Ok();
+            return Ok(new { StatusText = _statusTextService.Success });
         }
 
 
@@ -320,18 +316,19 @@ namespace RMS_Server_.Controllers
         public IHttpActionResult DeleteOrder(int orderId)
         {
             Order deleteOrder = _context.Orders.FirstOrDefault(a => a.Id == orderId);
+
             if (deleteOrder != null)
             {
                 if (deleteOrder.CurrentState == "Ordered" || deleteOrder.CurrentState == "Served")
                 {
-                    return Ok("Order is active now");
+                    return Ok(new { StatusText = _statusTextService.ReportingPurposeIssue });
                 }
                 _context.Orders.Remove(deleteOrder);
                 _context.SaveChanges();
-                return Ok();
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return Ok("Order not found");
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
         [HttpGet]

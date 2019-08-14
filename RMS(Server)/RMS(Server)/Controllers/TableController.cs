@@ -3,15 +3,19 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using RMS_Server_.Models;
+using RMS_Server_.Services;
 
 namespace RMS_Server_.Controllers
 {
     public class TableController : ApiController
     {
         private readonly ApplicationDbContext _context;
+        private readonly StatusTextService _statusTextService;
+
         private TableController()
         {
             _context = new ApplicationDbContext();
+            _statusTextService = new StatusTextService();
         }
 
         [HttpGet]

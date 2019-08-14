@@ -6,15 +6,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using RMS_Server_.Models;
+using RMS_Server_.Services;
 
 namespace RMS_Server_.Controllers
 {
     public class FoodItemController : ApiController
     {
         private readonly ApplicationDbContext _context;
+        private readonly StatusTextService _statusTextService;
+
         private FoodItemController()
         {
             _context = new ApplicationDbContext();
+            _statusTextService = new StatusTextService();
         }
 
 

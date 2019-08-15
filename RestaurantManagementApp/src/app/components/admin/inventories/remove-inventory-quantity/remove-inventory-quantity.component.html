@@ -33,6 +33,30 @@
     </div>
   </div>
 
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label  for="price">Price Per Unit</label>
+      <input
+        min="1"
+        type="number"
+        id="price"
+        class="form-control"
+        [ngModel]="0"
+        name="price"
+        #price="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="price.invalid && (price.dirty || price.touched)">
+        Price per unit is required!
+      </p>
+
+    </div>
+  </div>
+
+
+
 
   <div class="row">
     <div class="col-xl-6 text-xl-right">

@@ -34,7 +34,6 @@ import {AddNewFoodItemComponent} from '../components/admin/food-items/add-new-fo
 import {EditInventoryItemComponent} from '../components/admin/inventories/edit-inventory-item/edit-inventory-item.component';
 import {AddNewInventoryItemComponent} from '../components/admin/inventories/add-new-inventory-item/add-new-inventory-item.component';
 import {TableDetailsComponent} from '../components/admin/tables/table-details/table-details.component';
-import {UpdateInventoryItemComponent} from '../components/admin/inventories/update-inventory-item/update-inventory-item.component';
 import {UserListComponent} from '../components/admin/users/user-list/user-list.component';
 import {UserAccountsResolverService} from '../route-resolvers/user-accounts-resolver.service';
 import {AddNewUserComponent} from '../components/admin/users/add-new-user/add-new-user.component';
@@ -52,6 +51,7 @@ import {UserAccountResolverService} from '../route-resolvers/user-account-resolv
 import {OrderResolverService} from '../route-resolvers/order-resolver.service';
 import {FoodItemResolverService} from '../route-resolvers/food-item-resolver.service';
 import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
+import {AddInventoryQuantityComponent} from '../components/admin/inventories/add-inventory-quantity/add-inventory-quantity.component';
 
 
 const appRoutes: Routes = [
@@ -202,8 +202,8 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':inventory-id/update-inventory-quantity',
-                component: UpdateInventoryItemComponent,
+                path: ':inventory-id/add-inventory-quantity',
+                component: AddInventoryQuantityComponent,
                 resolve:
                   {
                     inventory: InventoryResolverService

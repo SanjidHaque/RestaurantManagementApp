@@ -9,11 +9,11 @@ import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({
-  selector: 'app-update-inventory-item',
-  templateUrl: './update-inventory-item.component.html',
-  styleUrls: ['./update-inventory-item.component.scss']
+  selector: 'app-add-inventory-quantity',
+  templateUrl: './add-inventory-quantity.component.html',
+  styleUrls: ['./add-inventory-quantity.component.scss']
 })
-export class UpdateInventoryItemComponent implements OnInit {
+export class AddInventoryQuantityComponent implements OnInit {
   isDisabled = false;
   inventory: Inventory;
 
@@ -42,32 +42,32 @@ export class UpdateInventoryItemComponent implements OnInit {
   }
 
 
-  onUpdateInventoryItem(form: NgForm) {
-    const buyingPrice = form.value.price;
-    const buyingQuantity = form.value.quantity;
+  addInventoryQuantity(form: NgForm) {
+    const price = form.value.price;
+    const quantity = form.value.quantity;
 
-    if (!this.adminService.checkPricingConditions(buyingPrice) ||
-      !this.adminService.checkPricingConditions(buyingQuantity) ) {
+    if (!this.adminService.checkNumericConditions(price, 'inventory') ||
+      !this.adminService.checkNumericConditions(quantity, 'inventory') ) {
       return;
     }
 
     this.isDisabled = true;
     const inventoryId = this.inventory.Id;
     const inventoryHistoryId = null;
+    const dateTime = new Date().toLocaleString();
 
-
-    const buyingTime = new Date().toLocaleString();
-    const updateHistory = new InventoryHistory(
+    const inventoryHistory = new InventoryHistory(
         inventoryHistoryId,
         inventoryId,
-        buyingQuantity,
-        buyingTime,
-        buyingPrice
+        quantity,
+        dateTime,
+        price,
+      'Add',
+      ''
     );
 
-    this.inventoryDataStorageService.updateInventoryHistory(updateHistory).
-    subscribe(
-      (data: any) => {
+    this.inventoryDataStorageService.addInventoryQuantity(inventoryHistory)
+      .subscribe((data: any) => {
         this.toastr.successToastr('Information is updated', 'Success', {
           toastTimeout: 10000,
           newestOnTop: true,

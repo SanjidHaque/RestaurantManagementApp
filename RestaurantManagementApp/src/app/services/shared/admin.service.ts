@@ -17,7 +17,7 @@ export class AdminService {
     return table.Name;
   }
 
-  checkPricingConditions(value: number, mode?: string) {
+  checkNumericConditions(value: number, mode?: string) {
     if (value % 1 !== 0 && mode !== 'inventory') {
       this.toastr.errorToastr('Value cannot be fractional', 'Error', {
         toastTimeout: 10000,

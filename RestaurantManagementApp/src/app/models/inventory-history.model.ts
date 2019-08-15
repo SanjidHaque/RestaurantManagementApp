@@ -1,20 +1,26 @@
 export class InventoryHistory {
   public Id: number;
   public InventoryId: number;
-  public BuyingQuantity: number;
-  public BuyingTime: string;
-  public BuyingPrice: number;
+  public Quantity: number;
+  public DateTime: string;
+  public Price: number;
+  public Type: string;
+  public Comment: string;
 
   constructor(id: number,
               inventoryId: number,
-              buyingQuantity: number,
-              buyingTime: string,
-              buyingPrice: number
+              quantity: number,
+              dateTime: string,
+              price: number,
+              type: string,
+              comment: string
   ) {
     this.Id = id;
     this.InventoryId = inventoryId;
-    this.BuyingQuantity = buyingQuantity;
-    this.BuyingTime = buyingTime;
-    this.BuyingPrice = buyingPrice;
+    this.Quantity = quantity;
+    this.DateTime = dateTime;
+    this.Price = price;
+    this.Type = type;
+    this.Comment = comment;
   }
  }

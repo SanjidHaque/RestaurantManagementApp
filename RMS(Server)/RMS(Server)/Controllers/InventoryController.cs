@@ -91,61 +91,78 @@ namespace RMS_Server_.Controllers
                 return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return Ok(new { StatusText = _statusTextService.ItemNotFound });
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
-        [HttpPut]
-        [Route("api/RemoveInventoryQuantity")]
-        public IHttpActionResult RemoveInventoryQuantity(Inventory inventory)
+        
+        [HttpPost]
+        [Route("api/AddInventoryQuantity")]
+        public IHttpActionResult AddInventoryQuantity(InventoryHistory inventoryHistory)
         {
-            Inventory getInventory = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
-            if (getInventory != null)
-            {
-                if (getInventory.RemainingQuantity < inventory.RemainingQuantity)
-                {
-                    return Ok(new { StatusText = _statusTextService.QuantityIsTooLarge });
-                }
-                getInventory.RemainingQuantity -= inventory.RemainingQuantity;
+            Inventory inventory = _context.Inventories
+                .FirstOrDefault(p => p.Id == inventoryHistory.InventoryId);
 
-                _context.Entry(getInventory).State = EntityState.Modified;
+            if (inventory != null)
+            {
+                _context.InventoryHistories.Add(inventoryHistory);
+                _context.SaveChanges();
+
+                List<InventoryHistory> inventoryHistories = _context.InventoryHistories
+                        .Where(q => q.InventoryId == inventoryHistory.InventoryId)
+                        .ToList();
+
+                inventory.AveragePrice = CalculateAveragePrice(inventory, inventoryHistories);
+                inventory.RemainingQuantity += inventoryHistory.Quantity;
+
+                _context.Entry(inventory).State = EntityState.Modified;
                 _context.SaveChanges();
 
                 return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return Ok(new { StatusText = _statusTextService.ItemNotFound });
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
 
-        [HttpPost]
-        [Route("api/UpdateInventoryHistory")]
-        public IHttpActionResult UpdateInventoryHistory(InventoryHistory inventoryHistory)
+        [HttpPut]
+        [Route("api/RemoveInventoryQuantity")]
+        public IHttpActionResult RemoveInventoryQuantity(InventoryHistory inventoryHistory)
         {
+            Inventory inventory = _context.Inventories
+                .FirstOrDefault(p => p.Id == inventoryHistory.InventoryId);
 
-            Inventory inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryHistory.InventoryId);
             if (inventory != null)
             {
+                if (inventory.RemainingQuantity < inventoryHistory.Quantity)
+                {
+                    return Ok(new { StatusText = _statusTextService.QuantityIsTooLarge });
+                }
+
                 _context.InventoryHistories.Add(inventoryHistory);
-                inventory.RemainingQuantity += inventoryHistory.BuyingQuantity;
+                _context.SaveChanges();
+
+                List<InventoryHistory> inventoryHistories = _context.InventoryHistories
+                    .Where(q => q.InventoryId == inventoryHistory.InventoryId)
+                    .ToList();
+
+                inventory.RemainingQuantity -= inventoryHistory.Quantity;
+                inventory.UsedQuantity += inventoryHistory.Quantity;
+                inventory.AveragePrice = CalculateAveragePrice(inventory, inventoryHistories); 
+
                 _context.Entry(inventory).State = EntityState.Modified;
+                _context.SaveChanges();
 
-
-                List<InventoryHistory> getInventoryHistories = _context.InventoryHistories
-                        .Where(q => q.InventoryId == inventoryHistory.InventoryId)
-                        .ToList();
-
-                CalculateAveragePrice(inventory, getInventoryHistories);
                 return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return Ok(new { StatusText = _statusTextService.ItemNotFound });
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
+
 
         [HttpDelete]
         [Route("api/DeleteInventory/{inventoryId}")]
         public IHttpActionResult DeleteInventory(int inventoryId)
-        {
-           
+        {          
             Ingredient ingredient = _context.Ingredients.FirstOrDefault(x => x.InventoryId == inventoryId);
             if (ingredient != null)
             {
@@ -162,20 +179,18 @@ namespace RMS_Server_.Controllers
             return Ok(new { StatusText = _statusTextService.Success });
         }
 
-        private void CalculateAveragePrice(Inventory inventory, List<InventoryHistory> getInventoryHistories)
+        private float CalculateAveragePrice(Inventory inventory, List<InventoryHistory> inventoryHistories)
         {
             float totalPrice = 0;
             float totalWeight = 0;
-            getInventoryHistories.ForEach(x =>
+            inventoryHistories.ForEach(x =>
             {
-                totalPrice += (x.BuyingPrice * x.BuyingQuantity);
-                totalWeight += x.BuyingQuantity;
+                totalPrice += (x.Price * x.Quantity);
+                totalWeight += x.Quantity;
             });
 
             float averagePrice = totalPrice / totalWeight;
-            inventory.AveragePrice = averagePrice;
-            _context.Entry(inventory).State = EntityState.Modified;
-            _context.SaveChanges();
+            return averagePrice;
         }
     }
 }

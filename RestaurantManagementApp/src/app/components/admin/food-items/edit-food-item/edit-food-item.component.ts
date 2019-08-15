@@ -203,7 +203,7 @@ export class EditFoodItemComponent implements OnInit {
 
     }
     const sellingPrice = form.value.sellingPrice;
-    if (!this.adminService.checkPricingConditions(sellingPrice)) {
+    if (!this.adminService.checkNumericConditions(sellingPrice)) {
       return;
     }
 

@@ -278,7 +278,6 @@ namespace RMS_Server_.Controllers
         [HttpPost]
         public IHttpActionResult ValidateOrder(Order order)
         {
-
             Order getOrder = _context.Orders.Include(x => x.OrderSessions).FirstOrDefault(x => x.Id == order.Id);
             
             if (getOrder == null)

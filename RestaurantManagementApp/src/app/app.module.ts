@@ -46,7 +46,6 @@ import { TableDetailsComponent } from './components/admin/tables/table-details/t
 import {OrderListComponent} from './components/admin/orders/order-list/order-list.component';
 import {InventoryListComponent} from './components/admin/inventories/inventory-list/inventory-list.component';
 import {InventoryDetailsComponent} from './components/admin/inventories/inventory-details/inventory-details.component';
-import {UpdateInventoryItemComponent} from './components/admin/inventories/update-inventory-item/update-inventory-item.component';
 import {OrderDetailsComponent} from './components/admin/orders/order-details/order-details.component';
 import {FoodItemDetailsComponent} from './components/admin/food-items/food-item-details/food-item-details.component';
 import {FoodItemListComponent} from './components/admin/food-items/food-item-list/food-item-list.component';
@@ -80,6 +79,7 @@ import {FoodItemsResolverService} from './route-resolvers/food-items-resolver.se
 import {UserAccountResolverService} from './route-resolvers/user-account-resolver.service';
 import {InventoryResolverService} from './route-resolvers/inventory-resolver.service';
 import {OrderResolverService} from './route-resolvers/order-resolver.service';
+import {AddInventoryQuantityComponent} from './components/admin/inventories/add-inventory-quantity/add-inventory-quantity.component';
 
 
 
@@ -109,7 +109,7 @@ import {OrderResolverService} from './route-resolvers/order-resolver.service';
     FoodItemDetailsComponent,
     InventoryListComponent,
     InventoryDetailsComponent,
-    UpdateInventoryItemComponent,
+    AddInventoryQuantityComponent,
     EditTableComponent,
     PageNotFoundComponent,
     ForbiddenComponent,

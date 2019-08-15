@@ -32,14 +32,14 @@ export class InventoryDataStorageService {
     return this.http.put<Inventory>(this.rootUrl + '/api/EditInventory', inventory);
   }
 
-  updateInventoryHistory(updateHistory: InventoryHistory) {
-    return this.http.post<Inventory>(
-      this.rootUrl + '/api/UpdateInventoryHistory', updateHistory);
+  addInventoryQuantity(inventoryHistory: InventoryHistory) {
+    return this.http.post<InventoryHistory>(
+      this.rootUrl + '/api/AddInventoryQuantity', inventoryHistory);
   }
 
-  removeInventoryQuantity(inventory: Inventory) {
-    return this.http.put<Inventory>(
-      this.rootUrl + '/api/RemoveInventoryQuantity', inventory);
+  removeInventoryQuantity(inventoryHistory: InventoryHistory) {
+    return this.http.put<InventoryHistory>(
+      this.rootUrl + '/api/RemoveInventoryQuantity', inventoryHistory);
   }
 
   deleteInventory(inventoryId: number)  {

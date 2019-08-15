@@ -39,8 +39,8 @@
   <div class="col-xl-12 col-12">
 
     <button
-      routerLink="/admin/inventories/{{inventory.Id}}/update-inventory-quantity"
-      class="btn btn-info">Update Quantity</button>&nbsp;
+      routerLink="/admin/inventories/{{inventory.Id}}/add-inventory-quantity"
+      class="btn btn-info">Add Quantity</button>&nbsp;
 
     <button
       routerLink="/admin/inventories/{{inventory.Id}}/remove-inventory-quantity"
@@ -84,13 +84,13 @@
           *ngFor="let inventoryHistory of inventory.InventoryHistory
          | paginate: { itemsPerPage: 10, currentPage: pageNumber }">
           <td style="width: 10%">
-            {{ inventoryHistory.BuyingQuantity }} {{ inventory.Unit }}
+            {{ inventoryHistory.Quantity }} {{ inventory.Unit }}
           </td>
           <td style="width: 10%">
-            {{ inventoryHistory.BuyingPrice }} BDT
+            {{ inventoryHistory.Price }} BDT
           </td>
           <td style="width: 15%; word-break: break-word;">
-            {{ inventoryHistory.BuyingTime }}
+            {{ inventoryHistory.DateTime }}
           </td>
         </tr>
       </table>

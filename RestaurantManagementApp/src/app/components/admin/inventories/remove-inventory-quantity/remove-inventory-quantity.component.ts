@@ -6,6 +6,7 @@ import {ActivatedRoute, Data, Router} from '@angular/router';
 import {Inventory} from '../../../../models/inventory.model';
 import {AdminService} from '../../../../services/shared/admin.service';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
+import {InventoryHistory} from '../../../../models/inventory-history.model';
 
 @Component({
   selector: 'app-remove-inventory-quantity',
@@ -41,24 +42,33 @@ export class RemoveInventoryQuantityComponent implements OnInit {
   }
 
   removeInventoryQuantity(form: NgForm) {
-    const removalQuantity = form.value.quantity;
-    if (!this.adminService.checkPricingConditions(removalQuantity)) {
+    const quantity = form.value.quantity;
+    const price = form.value.price;
+
+    if (!this.adminService.checkNumericConditions(price, 'inventory') ||
+      !this.adminService.checkNumericConditions(quantity, 'inventory')) {
       return;
     }
-    this.isDisabled = true;
 
-    this.inventoryDataStorageService.removeInventoryQuantity(
-      new Inventory(
-        this.inventory.Id,
-        null,
-        null,
-        removalQuantity,
-        null,
-        null,
-        []
-      )
-    ).subscribe(
-      (data: any) => {
+    this.isDisabled = true;
+    const inventoryId = this.inventory.Id;
+    const inventoryHistoryId = null;
+    const dateTime = new Date().toLocaleString();
+
+
+    const inventoryHistory = new InventoryHistory(
+      inventoryHistoryId,
+      inventoryId,
+      quantity,
+      dateTime,
+      price,
+      'Remove',
+      ''
+    );
+
+
+    this.inventoryDataStorageService.removeInventoryQuantity(inventoryHistory)
+      .subscribe((data: any) => {
         if (data === 'Success') {
           this.toastr.successToastr('Quantity is removed', 'Success', {
             toastTimeout: 10000,

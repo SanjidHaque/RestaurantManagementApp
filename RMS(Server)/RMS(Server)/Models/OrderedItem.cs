@@ -9,6 +9,7 @@
         public int FoodItemId { get; set; }
         public int FoodItemQuantity { get; set; }
         public int TotalPrice { get; set; }
-        public string OrderedItemStatus { get; set; }  
+        public string Status { get; set; }
+        public string CancellationReason { get; set; } 
     }
 }

@@ -45,10 +45,10 @@ export class EditInventoryItemComponent implements OnInit {
     const editedInventory = new Inventory(
       1,
       form.value.name,
-      0,
-      0,
+      null,
+      null,
       form.value.unit,
-      0,
+      null,
       []
       );
 

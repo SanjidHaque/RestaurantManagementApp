@@ -255,6 +255,14 @@
     <Compile Include="Migrations\201908131103364_inventoryModelChanged1.Designer.cs">
       <DependentUpon>201908131103364_inventoryModelChanged1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908141615075_orderedItemandInvenoryHistroyModelChanged.cs" />
+    <Compile Include="Migrations\201908141615075_orderedItemandInvenoryHistroyModelChanged.Designer.cs">
+      <DependentUpon>201908141615075_orderedItemandInvenoryHistroyModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908151607441_inventoryModelChanged2.cs" />
+    <Compile Include="Migrations\201908151607441_inventoryModelChanged2.Designer.cs">
+      <DependentUpon>201908151607441_inventoryModelChanged2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ChangePassword.cs" />
@@ -369,6 +377,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908131103364_inventoryModelChanged1.resx">
       <DependentUpon>201908131103364_inventoryModelChanged1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908141615075_orderedItemandInvenoryHistroyModelChanged.resx">
+      <DependentUpon>201908141615075_orderedItemandInvenoryHistroyModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908151607441_inventoryModelChanged2.resx">
+      <DependentUpon>201908151607441_inventoryModelChanged2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

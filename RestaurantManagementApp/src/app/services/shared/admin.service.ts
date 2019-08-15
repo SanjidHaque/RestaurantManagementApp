@@ -8,6 +8,10 @@ import {Table} from '../../models/table.model';
 })
 export class AdminService {
   constructor(private toastr: ToastrManager) {}
+  inventoryHistoryComments = [
+    'B',
+    'C'
+  ];
 
   getTableName(tables: Table[], tableId: number) {
     const table = tables.find(x => x.Id === tableId);

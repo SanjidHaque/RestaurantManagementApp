@@ -16,6 +16,10 @@ import {InventoryDataStorageService} from '../../../../services/data-storage/inv
 export class AddInventoryQuantityComponent implements OnInit {
   isDisabled = false;
   inventory: Inventory;
+  inventoryHistoryComments = [];
+  defaultInventoryHistoryComment = 'A';
+
+
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -24,10 +28,9 @@ export class AddInventoryQuantityComponent implements OnInit {
               private inventoryDataStorageService: InventoryDataStorageService ) { }
 
   ngOnInit() {
-    this.route.data.
-    subscribe(
-      (data: Data) => {
+    this.route.data.subscribe((data: Data) => {
         this.inventory = data['inventory'];
+        this.inventoryHistoryComments = this.adminService.inventoryHistoryComments;
 
         if (this.inventory === undefined || this.inventory === null) {
           this.toastr.errorToastr('Item not found', 'Error', {
@@ -41,6 +44,14 @@ export class AddInventoryQuantityComponent implements OnInit {
     );
   }
 
+
+  getComment(event: any) {
+    this.defaultInventoryHistoryComment = event.target.value;
+
+    if (this.defaultInventoryHistoryComment === '') {
+      this.defaultInventoryHistoryComment = 'A'
+    }
+  }
 
   addInventoryQuantity(form: NgForm) {
     const price = form.value.price;
@@ -56,6 +67,10 @@ export class AddInventoryQuantityComponent implements OnInit {
     const inventoryHistoryId = null;
     const dateTime = new Date().toLocaleString();
 
+    if (this.defaultInventoryHistoryComment === '') {
+      this.defaultInventoryHistoryComment = 'A';
+    }
+
     const inventoryHistory = new InventoryHistory(
         inventoryHistoryId,
         inventoryId,
@@ -63,8 +78,9 @@ export class AddInventoryQuantityComponent implements OnInit {
         dateTime,
         price,
       'Add',
-      ''
+      this.defaultInventoryHistoryComment
     );
+
 
     this.inventoryDataStorageService.addInventoryQuantity(inventoryHistory)
       .subscribe((data: any) => {

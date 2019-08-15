@@ -169,10 +169,10 @@ namespace RMS_Server_.Controllers
                 return Ok(new { StatusText = _statusTextService.ReportingPurposeIssue });
             }
 
-            Inventory getDeleted = _context.Inventories.FirstOrDefault(p => p.Id == inventoryId);
-            if (getDeleted != null)
+            Inventory inventory = _context.Inventories.FirstOrDefault(p => p.Id == inventoryId);
+            if (inventory != null)
             {
-                _context.Inventories.Remove(getDeleted);
+                _context.Inventories.Remove(inventory);
             }
 
             _context.SaveChanges();

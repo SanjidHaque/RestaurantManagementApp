@@ -35,27 +35,84 @@
     </div>
   </div>
 
+
+
+
   <div class="row form-group">
     <div class="col-xl-6">
 
-        <label  for="price">Price Per Unit</label>
-        <input
-          min="1"
-          type="number"
-          id="price"
-          class="form-control"
-          ngModel
-          name="price"
-          #price="ngModel"
-          required>
+      <label  for="price">Price Per Unit</label>
+      <input
+        min="1"
+        type="number"
+        id="price"
+        class="form-control"
+        ngModel
+        name="price"
+        #price="ngModel"
+        required>
       <p
         style="color: red; margin-bottom: 0;"
         *ngIf="price.invalid && (price.dirty || price.touched)">
-         Price per unit is required!
+        Price per unit is required!
       </p>
 
-      </div>
     </div>
+  </div>
+
+
+  <!--<div class="row form-group">-->
+
+    <!--<select name="saa" [(ngModel)]="name" (change)="onChange()">-->
+      <!--<option *ngFor="let item of data" [value]="item.name"> {{item.name}} </option>-->
+    <!--</select>-->
+
+
+  <!--</div>-->
+
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="comment">Comment*</label>
+      <select
+        (change)="getComment($event)"
+
+        style="cursor: pointer;"
+        id="comment"
+        class="form-control"
+        ngModel
+        #comment="ngModel"
+        name="comment">
+        <option value="" selected>A</option>
+        <option
+          style="cursor: pointer;"
+          *ngFor="let inventoryHistoryComment of inventoryHistoryComments"
+          [value]="inventoryHistoryComment">
+          {{ inventoryHistoryComment }}
+        </option>
+      </select>
+
+
+
+    </div>
+  </div>
+
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <textarea
+        style="width: 100%; padding-left: 12px;"
+        name="commentBox"
+        [(ngModel)]="defaultInventoryHistoryComment">
+      </textarea>
+
+    </div>
+  </div>
+
+
+
 
 
   <div class="row">
@@ -63,7 +120,7 @@
       <button
         [disabled]="addInventoryQuanytityForm.invalid || isDisabled"
         type="submit"
-        class="btn btn-success">Update</button>
+        class="btn btn-success">Add</button>
       &nbsp;
       <button
         type="button"

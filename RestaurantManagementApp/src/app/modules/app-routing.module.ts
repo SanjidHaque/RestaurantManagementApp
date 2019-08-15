@@ -52,6 +52,9 @@ import {OrderResolverService} from '../route-resolvers/order-resolver.service';
 import {FoodItemResolverService} from '../route-resolvers/food-item-resolver.service';
 import {InventoryResolverService} from '../route-resolvers/inventory-resolver.service';
 import {AddInventoryQuantityComponent} from '../components/admin/inventories/add-inventory-quantity/add-inventory-quantity.component';
+import {CancelledOrdersComponent} from '../components/admin/cancelled-orders/cancelled-orders.component';
+import {CancelledOrdersListComponent} from '../components/admin/cancelled-orders/cancelled-orders-list/cancelled-orders-list.component';
+import {CancelledOrdersDetailsComponent} from '../components/admin/cancelled-orders/cancelled-orders-details/cancelled-orders-details.component';
 
 
 const appRoutes: Routes = [
@@ -251,6 +254,40 @@ const appRoutes: Routes = [
               }
             ]
         },
+
+        {
+          path: 'cancelled-orders',
+          component: CancelledOrdersComponent,
+          children:
+            [
+              {
+                path: '',
+                redirectTo: 'cancelled-order-list',
+                pathMatch: 'full'
+              },
+              {
+                path: 'cancelled-order-list',
+                component: CancelledOrdersListComponent,
+                resolve:
+                  {
+                    orders: OrdersResolverService,
+                    tables: TablesResolverService
+                  }
+              },
+              {
+                path: ':id',
+                component: CancelledOrdersDetailsComponent,
+                resolve:
+                  {
+                    order: OrderResolverService,
+                    tables: TablesResolverService,
+                    foodItems: FoodItemsResolverService,
+                    setting: SettingResolverService
+                  }
+              }
+            ]
+        },
+
         {
           path: 'tables',
           component: TablesComponent,

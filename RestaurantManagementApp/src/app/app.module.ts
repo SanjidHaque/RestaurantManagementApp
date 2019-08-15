@@ -80,6 +80,9 @@ import {UserAccountResolverService} from './route-resolvers/user-account-resolve
 import {InventoryResolverService} from './route-resolvers/inventory-resolver.service';
 import {OrderResolverService} from './route-resolvers/order-resolver.service';
 import {AddInventoryQuantityComponent} from './components/admin/inventories/add-inventory-quantity/add-inventory-quantity.component';
+import { CancelledOrdersComponent } from './components/admin/cancelled-orders/cancelled-orders.component';
+import { CancelledOrdersListComponent } from './components/admin/cancelled-orders/cancelled-orders-list/cancelled-orders-list.component';
+import { CancelledOrdersDetailsComponent } from './components/admin/cancelled-orders/cancelled-orders-details/cancelled-orders-details.component';
 
 
 
@@ -128,7 +131,10 @@ import {AddInventoryQuantityComponent} from './components/admin/inventories/add-
     SettingListComponent,
     EditSettingComponent,
     OrderCancelOptionComponent,
-    RemoveInventoryQuantityComponent
+    RemoveInventoryQuantityComponent,
+    CancelledOrdersComponent,
+    CancelledOrdersListComponent,
+    CancelledOrdersDetailsComponent
   ],
   imports: [
     BrowserModule,

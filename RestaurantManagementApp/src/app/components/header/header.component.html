@@ -68,6 +68,17 @@
       style="
           text-decoration: none;
           font-size: 17px; color: black;"
+      routerLink="admin/cancelled-orders"
+      routerLinkActive="active">Cancelled Orders</a>
+  </div>
+
+  <div
+    *ngIf="userDataStorageService.roleMatch(['Admin'])"
+    style="padding-left: 5px;padding-right: 5px; padding-top: 20px;">
+    <a
+      style="
+          text-decoration: none;
+          font-size: 17px; color: black;"
       routerLink="admin/tables"
       routerLinkActive="active">Tables</a>
   </div>

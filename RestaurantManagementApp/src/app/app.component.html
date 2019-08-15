@@ -96,11 +96,20 @@
         *ngIf="userDataStorageService.roleMatch(['Admin'])"
         style="padding-top: 5px; padding-bottom: 5px;">
         <a
-          *ngIf="userDataStorageService.roleMatch(['Admin'])"
           style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
           routerLink="/admin/orders"
           routerLinkActive="active">Orders</a>
+      </div>
+
+      <div
+        *ngIf="userDataStorageService.roleMatch(['Admin'])"
+        style="padding-top: 5px; padding-bottom: 5px;">
+        <a
+          style="text-decoration: none; font-size: 16px; color: black;"
+          (click)="sidenav.close()"
+          routerLink="/admin/cancelled-orders"
+          routerLinkActive="active">Cancelled Orders</a>
       </div>
 
       <div
@@ -120,7 +129,7 @@
           style="text-decoration: none; font-size: 16px; color: black;"
           (click)="sidenav.close()"
           routerLink="/admin/user-accounts"
-          routerLinkActive="active">Users</a>
+          routerLinkActive="active">User Accounts</a>
       </div>
 
       <div

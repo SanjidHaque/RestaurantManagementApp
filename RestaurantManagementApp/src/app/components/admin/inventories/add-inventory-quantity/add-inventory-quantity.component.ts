@@ -16,8 +16,8 @@ import {InventoryDataStorageService} from '../../../../services/data-storage/inv
 export class AddInventoryQuantityComponent implements OnInit {
   isDisabled = false;
   inventory: Inventory;
-  inventoryHistoryComments = [];
-  defaultInventoryHistoryComment = 'A';
+  inventoryAdditionComments = [];
+  defaultComment = 'A';
 
 
 
@@ -30,7 +30,7 @@ export class AddInventoryQuantityComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: Data) => {
         this.inventory = data['inventory'];
-        this.inventoryHistoryComments = this.adminService.inventoryHistoryComments;
+        this.inventoryAdditionComments = this.adminService.inventoryAdditionComments;
 
         if (this.inventory === undefined || this.inventory === null) {
           this.toastr.errorToastr('Item not found', 'Error', {
@@ -46,10 +46,10 @@ export class AddInventoryQuantityComponent implements OnInit {
 
 
   getComment(event: any) {
-    this.defaultInventoryHistoryComment = event.target.value;
+    this.defaultComment = event.target.value;
 
-    if (this.defaultInventoryHistoryComment === '') {
-      this.defaultInventoryHistoryComment = 'A'
+    if (this.defaultComment === '') {
+      this.defaultComment = 'A'
     }
   }
 
@@ -62,13 +62,18 @@ export class AddInventoryQuantityComponent implements OnInit {
       return;
     }
 
+    if (!confirm('Remove ' + quantity + this.inventory.Unit + ' of ' + this.inventory.Name
+    + ' ' + price + ' BDT' + ' per unit?')) {
+      return;
+    }
+
     this.isDisabled = true;
     const inventoryId = this.inventory.Id;
     const inventoryHistoryId = null;
     const dateTime = new Date().toLocaleString();
 
-    if (this.defaultInventoryHistoryComment === '') {
-      this.defaultInventoryHistoryComment = 'A';
+    if (this.defaultComment === '') {
+      this.defaultComment = 'A';
     }
 
     const inventoryHistory = new InventoryHistory(
@@ -77,8 +82,8 @@ export class AddInventoryQuantityComponent implements OnInit {
         quantity,
         dateTime,
         price,
-      'Add',
-      this.defaultInventoryHistoryComment
+      'Addition',
+      this.defaultComment
     );
 
 

@@ -61,14 +61,6 @@
   </div>
 
 
-  <!--<div class="row form-group">-->
-
-    <!--<select name="saa" [(ngModel)]="name" (change)="onChange()">-->
-      <!--<option *ngFor="let item of data" [value]="item.name"> {{item.name}} </option>-->
-    <!--</select>-->
-
-
-  <!--</div>-->
 
 
   <div class="row form-group">
@@ -87,9 +79,9 @@
         <option value="" selected>A</option>
         <option
           style="cursor: pointer;"
-          *ngFor="let inventoryHistoryComment of inventoryHistoryComments"
-          [value]="inventoryHistoryComment">
-          {{ inventoryHistoryComment }}
+          *ngFor="let inventoryAdditionComment of inventoryAdditionComments"
+          [value]="inventoryAdditionComment">
+          {{ inventoryAdditionComment }}
         </option>
       </select>
 
@@ -105,7 +97,7 @@
       <textarea
         style="width: 100%; padding-left: 12px;"
         name="commentBox"
-        [(ngModel)]="defaultInventoryHistoryComment">
+        [(ngModel)]="defaultComment">
       </textarea>
 
     </div>

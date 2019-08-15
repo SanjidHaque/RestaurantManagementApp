@@ -86,7 +86,6 @@ export class MenuComponent implements OnInit {
 
 
   print(orderSession: OrderSession) {
-
     const dateTime  = document.createElement('span');
     dateTime.innerHTML = 'Date Time. ' + orderSession.OrderedDateTime;
     document.getElementById('date-time').appendChild(dateTime);

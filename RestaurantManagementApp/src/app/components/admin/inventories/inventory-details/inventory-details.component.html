@@ -71,26 +71,36 @@
 
 
   <div class="row">
-    <div class="col-xl-8 col-lg-8">
+    <div class="col-xl-10 col-lg-10">
 
       <table border=1 cellpadding=10 width="100%">
         <tr style="font-weight: 500;">
           <td>Quantity</td>
           <td>Price</td>
           <td>Date</td>
+          <td>Type</td>
+          <td>Comment</td>
         </tr>
 
         <tr
+          [ngClass]="[inventoryHistory.Type === 'Addition' ? 'addition' : 'removal']"
           *ngFor="let inventoryHistory of inventory.InventoryHistory
          | paginate: { itemsPerPage: 10, currentPage: pageNumber }">
+
           <td style="width: 10%">
             {{ inventoryHistory.Quantity }} {{ inventory.Unit }}
           </td>
           <td style="width: 10%">
             {{ inventoryHistory.Price }} BDT
           </td>
-          <td style="width: 15%; word-break: break-word;">
+          <td style="width: 15%">
             {{ inventoryHistory.DateTime }}
+          </td>
+          <td style="width: 10%">
+            {{ inventoryHistory.Type }}
+          </td>
+          <td style="width: 30%">
+            {{ inventoryHistory.Comment }}
           </td>
         </tr>
       </table>

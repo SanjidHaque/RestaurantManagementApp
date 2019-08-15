@@ -57,6 +57,47 @@
 
 
 
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="comment">Comment*</label>
+      <select
+        (change)="getComment($event)"
+        style="cursor: pointer;"
+        id="comment"
+        class="form-control"
+        ngModel
+        #comment="ngModel"
+        name="comment">
+        <option value="" selected>A</option>
+        <option
+          style="cursor: pointer;"
+          *ngFor="let inventoryRemovalComment of inventoryRemovalComments"
+          [value]="inventoryRemovalComment">
+          {{ inventoryRemovalComment }}
+        </option>
+      </select>
+
+
+
+    </div>
+  </div>
+
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <textarea
+        style="width: 100%; padding-left: 12px;"
+        name="commentBox"
+        [(ngModel)]="defaultComment">
+      </textarea>
+
+    </div>
+  </div>
+
+
+
 
   <div class="row">
     <div class="col-xl-6 text-xl-right">

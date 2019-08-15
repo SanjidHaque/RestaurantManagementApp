@@ -16,6 +16,8 @@ import {InventoryHistory} from '../../../../models/inventory-history.model';
 export class RemoveInventoryQuantityComponent implements OnInit {
   isDisabled = false;
   inventory: Inventory;
+  inventoryRemovalComments = [];
+  defaultComment = 'A';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,6 +30,7 @@ export class RemoveInventoryQuantityComponent implements OnInit {
     subscribe(
       (data: Data) => {
         this.inventory = data['inventory'];
+        this.inventoryRemovalComments = this.adminService.inventoryRemovalComments;
 
         if (this.inventory === undefined || this.inventory === null) {
           this.toastr.errorToastr('Item not found', 'Error', {
@@ -41,6 +44,14 @@ export class RemoveInventoryQuantityComponent implements OnInit {
     );
   }
 
+  getComment(event: any) {
+    this.defaultComment = event.target.value;
+
+    if (this.defaultComment === '') {
+      this.defaultComment = 'A'
+    }
+  }
+
   removeInventoryQuantity(form: NgForm) {
     const quantity = form.value.quantity;
     const price = form.value.price;
@@ -50,11 +61,19 @@ export class RemoveInventoryQuantityComponent implements OnInit {
       return;
     }
 
+    if (!confirm('Add ' + quantity + this.inventory.Unit + ' of ' + this.inventory.Name
+      + ' ' + price + ' BDT' + ' per unit?')) {
+      return;
+    }
+
     this.isDisabled = true;
     const inventoryId = this.inventory.Id;
     const inventoryHistoryId = null;
     const dateTime = new Date().toLocaleString();
 
+    if (this.defaultComment === '') {
+      this.defaultComment = 'A';
+    }
 
     const inventoryHistory = new InventoryHistory(
       inventoryHistoryId,
@@ -62,8 +81,8 @@ export class RemoveInventoryQuantityComponent implements OnInit {
       quantity,
       dateTime,
       price,
-      'Remove',
-      ''
+      'Removal',
+      this.defaultComment
     );
 
 

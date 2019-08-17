@@ -71,7 +71,6 @@ import { EditSettingComponent } from './components/admin/settings/edit-setting/e
 import {SettingResolverService} from './route-resolvers/setting-resolver.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {NgxPrintModule} from 'ngx-print';
-import { OrderCancelOptionComponent } from './bottom-sheets/order-cancel-option/order-cancel-option.component';
 import { RemoveInventoryQuantityComponent } from './components/admin/inventories/remove-inventory-quantity/remove-inventory-quantity.component';
 import {TableResolverService} from './route-resolvers/table-resolver.service';
 import {FoodItemResolverService} from './route-resolvers/food-item-resolver.service';
@@ -83,6 +82,8 @@ import {AddInventoryQuantityComponent} from './components/admin/inventories/add-
 import { CancelledOrdersComponent } from './components/admin/cancelled-orders/cancelled-orders.component';
 import { CancelledOrdersListComponent } from './components/admin/cancelled-orders/cancelled-orders-list/cancelled-orders-list.component';
 import { CancelledOrdersDetailsComponent } from './components/admin/cancelled-orders/cancelled-orders-details/cancelled-orders-details.component';
+import {OrderCancellationOptionComponent} from './bottom-sheets/order-cancellation-option/order-cancellation-option.component';
+import { OrderCancellationReasonComponent } from './bottom-sheets/order-cancellation-reason/order-cancellation-reason.component';
 
 
 
@@ -130,11 +131,12 @@ import { CancelledOrdersDetailsComponent } from './components/admin/cancelled-or
     SettingsComponent,
     SettingListComponent,
     EditSettingComponent,
-    OrderCancelOptionComponent,
+    OrderCancellationOptionComponent,
     RemoveInventoryQuantityComponent,
     CancelledOrdersComponent,
     CancelledOrdersListComponent,
-    CancelledOrdersDetailsComponent
+    CancelledOrdersDetailsComponent,
+    OrderCancellationReasonComponent
   ],
   imports: [
     BrowserModule,

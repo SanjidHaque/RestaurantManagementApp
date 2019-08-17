@@ -12,7 +12,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 import {NgxPaginationModule} from 'ngx-pagination';
-import {OrderCancelOptionComponent} from '../bottom-sheets/order-cancel-option/order-cancel-option.component';
+import {OrderCancellationOptionComponent} from '../bottom-sheets/order-cancellation-option/order-cancellation-option.component';
 
 
 @NgModule({
@@ -43,7 +43,7 @@ import {OrderCancelOptionComponent} from '../bottom-sheets/order-cancel-option/o
     NgxPaginationModule
   ],
   entryComponents: [
-    OrderCancelOptionComponent
+    OrderCancellationOptionComponent
   ],
   providers: [
     {provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS,

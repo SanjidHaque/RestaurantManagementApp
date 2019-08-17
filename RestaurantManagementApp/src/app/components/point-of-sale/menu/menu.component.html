@@ -139,7 +139,8 @@
         <div class="row" *ngFor="let orderSession of order.OrderSessions; let i = index">
           <div class="col-xl-12">
 
-            <div *ngIf="orderSession.OrderedItems.length !== 0">
+            <div *ngIf="orderSession.OrderedItems.length !== 0
+            || orderSession.CurrentState !== 'Cancelled'">
 
               <div class="row" style="text-align: left;
                  font-weight: 500;
@@ -201,34 +202,39 @@
               <div style="font-size: 13px; padding-top: 10px;"
                    *ngFor="let orderedItem of orderSession.OrderedItems; let j = index">
 
-                <div class="row">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" style="word-break: break-word">
-                    {{ getFoodItemInformation('Name and Serial', orderedItem.FoodItemId) }}
+                <div *ngIf="orderedItem.CurrentState !== 'Cancelled'">
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" style="word-break: break-word">
+                      {{ getFoodItemInformation('Name and Serial', orderedItem.FoodItemId) }}
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+                      {{ getFoodItemInformation('Price', orderedItem.FoodItemId) }}
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+                      {{ orderedItem.FoodItemQuantity }}
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
+                      {{ orderedItem.TotalPrice }}
+                    </div>
                   </div>
 
-                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
-                    {{ getFoodItemInformation('Price', orderedItem.FoodItemId) }}
+                  <div class="row" *ngIf="orderSession.CurrentState === 'Not Ordered'">
+                    <div class="col-xl-12" style="text-align: right;">
+                      <i
+                        title="Remove from list"
+                        style="cursor: pointer"
+                        (click)="removeFromCart(j, orderSession)"
+                        class="fa fa-times-circle-o"
+                        aria-hidden="true"></i>
+
+                    </div>
                   </div>
 
-                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
-                    {{ orderedItem.FoodItemQuantity }}
-                  </div>
 
-                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="word-break: break-word">
-                    {{ orderedItem.TotalPrice }}
-                  </div>
-                </div>
 
-                <div class="row" *ngIf="orderSession.CurrentState === 'Not Ordered'">
-                  <div class="col-xl-12" style="text-align: right;">
-                    <i
-                      title="Remove from list"
-                      style="cursor: pointer"
-                      (click)="removeFromCart(j, orderSession)"
-                      class="fa fa-times-circle-o"
-                      aria-hidden="true"></i>
-
-                  </div>
                 </div>
 
                 <hr>
@@ -373,7 +379,7 @@
 
                   <button
                     *ngIf="orderSession.CurrentState !== 'Not Ordered'"
-                    (click)="cancelOrder(orderSession)"
+                    (click)="cancelAllOrderedItem(orderSession)"
                     class="btn btn-danger">Cancel Order</button> &nbsp;
 
                   <button
@@ -394,7 +400,7 @@
                     class="btn btn-info">Served</button> &nbsp;
 
                   <button
-                    (click)="print(orderSession)"
+                    (click)="printChefReceipt(orderSession)"
                     [disabled]="!setting.PrintChefsOrderReceipt
                     || orderSession.CurrentState === 'Not Ordered'"
                     class="btn btn-success">Print</button> &nbsp;

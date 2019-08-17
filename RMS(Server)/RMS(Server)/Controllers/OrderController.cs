@@ -167,68 +167,79 @@ namespace RMS_Server_.Controllers
         [HttpPut]
         public IHttpActionResult CancelOrder(OrderSession orderSession)
         {
-         
-            OrderSession getOrderSession = _context.OrderSessions.FirstOrDefault(x => x.Id == orderSession.Id);
+            OrderSession getOrderSession = _context.OrderSessions
+                .FirstOrDefault(x => x.Id == orderSession.Id);
+
+            List<OrderedItem> orderedItems = _context.OrderedItems
+                .Where(c => c.OrderSessionId == orderSession.Id)
+                .ToList();
+
+
             if (getOrderSession != null)
             {
-                _context.OrderSessions.Remove(getOrderSession);
-                _context.SaveChanges();
-            }
-
-            Order order = _context.Orders.Include(c => c.OrderSessions).FirstOrDefault(x => x.Id == orderSession.OrderId);
-
-            List<FoodItem> foodItems = _context.FoodItems.ToList();
-
-            if (order != null)
-            {
-                orderSession.OrderedItems.ForEach(x =>
+                getOrderSession.OrderedItems.ForEach(x =>
                 {
-                    order.TotalPrice -= x.TotalPrice;
-                    FoodItem foodItem = foodItems.FirstOrDefault(y => y.Id == x.FoodItemId);
-                    if (foodItem != null)
-                    {
-                        float totalInventoryCost = x.FoodItemQuantity * foodItem.InventoryCost;
-                        order.InventoryCost -= totalInventoryCost;
-                    }
+                    x.CurrentState = "Cancelled";
+                    x.CancellationReason = orderSession.OrderedItems[0].CancellationReason;
+                });
+                getOrderSession.CurrentState = "Cancelled";
+                _context.SaveChanges();
 
+                Order order = _context.Orders.Include(c => c.OrderSessions)
+                    .FirstOrDefault(x => x.Id == orderSession.OrderId);
+
+                List<OrderSession> orderSessions = _context.OrderSessions
+                    .Where(c => c.OrderId == orderSession.OrderId)
+                    .ToList();
+
+                List<FoodItem> foodItems = _context.FoodItems.ToList();
+
+                if (order != null)
+                {
+                    orderSession.OrderedItems.ForEach(x =>
+                    {
+                        order.TotalPrice -= x.TotalPrice;
+                        FoodItem foodItem = foodItems.FirstOrDefault(y => y.Id == x.FoodItemId);
+                        if (foodItem != null)
+                        {
+                            float totalInventoryCost = x.FoodItemQuantity * foodItem.InventoryCost;
+                            order.InventoryCost -= totalInventoryCost;
+                        }
+
+
+                        _context.Entry(order).State = EntityState.Modified;
+                        _context.SaveChanges();
+                    });
+
+                    order.GrossTotalPrice = order.TotalPrice;
+                    order.Profit = order.TotalPrice - order.InventoryCost;
                     _context.Entry(order).State = EntityState.Modified;
                     _context.SaveChanges();
-                });
 
-                order.GrossTotalPrice = order.TotalPrice;
-                order.Profit = order.TotalPrice - order.InventoryCost;
-                _context.Entry(order).State = EntityState.Modified;
-                _context.SaveChanges();
 
-              
-                if (order.OrderSessions.Count == 0)
-                {
-                  
-                    _context.Orders.Remove(order);
-                    _context.SaveChanges();
-                }
-                else
-                {
-                    var completeOrders = order.OrderSessions.Where(
-                        x => x.CurrentState == "Ordered"
-                    ).ToList();
-
-                    if (completeOrders.Count > 0)
+                    if (order.OrderSessions.Where(x => x.CurrentState == "Cancelled").ToList().Count
+                        == order.OrderSessions.ToList().Count)
                     {
-                        order.CurrentState = "Ordered";
+                        order.CurrentState = "Cancelled";
                     }
                     else
                     {
-                        order.CurrentState = "Served";
+                        List<OrderSession> completeOrders = order.OrderSessions.Where(
+                            x => x.CurrentState == "Ordered"
+                        ).ToList();
+
+                        order.CurrentState = completeOrders.Count > 0 ? "Ordered" : "Served";
                     }
 
                     _context.Entry(order).State = EntityState.Modified;
                     _context.SaveChanges();
-                }
 
+                    return Ok(new { StatusText = _statusTextService.Success });
+
+                }
             }
            
-            return Ok(new { StatusText = _statusTextService.Success });
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
         [Route("api/ServeOrder")]
@@ -271,7 +282,7 @@ namespace RMS_Server_.Controllers
                 }
             }
 
-            return Ok(new { StatusText = _statusTextService.SomethingWentWorng });
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
         [Route("api/ValidateOrder")]

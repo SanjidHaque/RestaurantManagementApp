@@ -13,6 +13,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderCancellationOptionComponent} from '../bottom-sheets/order-cancellation-option/order-cancellation-option.component';
+import {OrderCancellationReasonComponent} from '../bottom-sheets/order-cancellation-reason/order-cancellation-reason.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {OrderCancellationOptionComponent} from '../bottom-sheets/order-cancellat
     NgxPaginationModule
   ],
   entryComponents: [
-    OrderCancellationOptionComponent
+    OrderCancellationOptionComponent,
+    OrderCancellationReasonComponent
   ],
   providers: [
     {provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS,
@@ -51,7 +53,6 @@ import {OrderCancellationOptionComponent} from '../bottom-sheets/order-cancellat
         {
           hasBackdrop: true,
           disableClose: true
-
         }
     }
   ]

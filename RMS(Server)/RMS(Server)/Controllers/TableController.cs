@@ -70,7 +70,7 @@ namespace RMS_Server_.Controllers
                 return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return Ok(new { StatusText = _statusTextService.SomethingWentWorng });
+            return Ok(new { StatusText = _statusTextService.SomethingWentWrong });
         }
 
         [HttpPut]

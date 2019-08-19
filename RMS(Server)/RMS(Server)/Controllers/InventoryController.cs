@@ -55,7 +55,7 @@ namespace RMS_Server_.Controllers
         {
             if (inventory == null)
             {
-                return Ok(new { StatusText = _statusTextService.SomethingWentWorng});
+                return Ok(new { StatusText = _statusTextService.SomethingWentWrong});
             }
 
             if (_context.Inventories.Any(o => o.Name == inventory.Name))

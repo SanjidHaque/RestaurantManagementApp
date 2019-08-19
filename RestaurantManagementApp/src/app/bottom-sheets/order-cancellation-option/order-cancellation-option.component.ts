@@ -8,8 +8,8 @@ import {MatBottomSheetRef} from '@angular/material';
 })
 export class OrderCancellationOptionComponent {
   constructor(private bottomSheetRef: MatBottomSheetRef<OrderCancellationOptionComponent>) {
-
   }
+
   closeSheet(action: string) {
     this.bottomSheetRef.dismiss(action);
   }

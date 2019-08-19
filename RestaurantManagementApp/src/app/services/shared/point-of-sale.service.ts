@@ -11,6 +11,12 @@ import {OrderedItem} from '../../models/ordered-item.model';
 export class PointOfSaleService {
   userName = '';
   constructor(private toastr: ToastrManager) { }
+  orderCancellationReasons = [
+    'B',
+    'C'
+  ];
+
+
 
   checkIfOrderedItemExist(foodItemId: number, orderedItems: OrderedItem[]) {
     for (let i = 0; i < orderedItems.length; i++) {

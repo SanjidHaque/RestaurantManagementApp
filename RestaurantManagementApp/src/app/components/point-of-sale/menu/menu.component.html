@@ -123,10 +123,14 @@
 
 
 
-      <div *ngIf="order !== undefined; else orderExists">
+      <div *ngIf="
+      order !== undefined && order.CurrentState !== 'Cancelled';
+      else orderDoesNotExists">
 
         <div class="row"
-             *ngIf="order.Id !== null && order.Id !== -1"
+             *ngIf = "order.Id !== null
+              && order.Id !== -1
+              && order.CurrentState !== 'Cancelled'"
              style="text-align: center;
              padding-top: 5px;
              padding-bottom: 5px;
@@ -221,7 +225,8 @@
                     </div>
                   </div>
 
-                  <div class="row" *ngIf="orderSession.CurrentState === 'Not Ordered'">
+                  <div class="row"
+                       *ngIf="orderSession.CurrentState === 'Not Ordered'">
                     <div class="col-xl-12" style="text-align: right;">
                       <i
                         title="Remove from list"
@@ -233,11 +238,25 @@
                     </div>
                   </div>
 
+                  <div class="row"
+                       *ngIf="orderSession.CurrentState === 'Ordered'
+                       || orderSession.CurrentState === 'Served'">
+                    <div class="col-xl-12" style="text-align: right;">
+                      <i
+                        title="Cancel order"
+                        style="cursor: pointer"
+                        (click)="cancelSingleOrderedItem(orderedItem)"
+                        class="fa fa-times-circle-o"
+                        aria-hidden="true"></i>
 
+                    </div>
+                  </div>
+
+                  <hr>
 
                 </div>
 
-                <hr>
+
 
               </div>
 
@@ -443,7 +462,7 @@
 
       </div>
 
-      <ng-template #orderExists>
+      <ng-template #orderDoesNotExists>
 
 
         <div style="padding-top: 10px;"></div>

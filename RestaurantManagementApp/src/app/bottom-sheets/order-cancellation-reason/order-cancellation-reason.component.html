@@ -1,3 +1,52 @@
-<p>
-  order-cancellation-reason works!
-</p>
+
+
+<div class="row form-group">
+  <div class="col-xl-12">
+
+    <label
+      style="padding-top: 3px; padding-bottom: 3px; font-size: initial;"
+      for="comment">Cancellation reason*</label>
+    <select
+      (change)="getReason($event)"
+
+      style="cursor: pointer;"
+      id="comment"
+      class="form-control"
+      ngModel
+      #comment="ngModel"
+      name="comment">
+      <option value="" selected>A</option>
+      <option
+        style="cursor: pointer;"
+        *ngFor="let orderCancellationReason of orderCancellationReasons"
+        [value]="orderCancellationReason">
+        {{ orderCancellationReason }}
+      </option>
+    </select>
+
+
+
+  </div>
+</div>
+
+
+<div class="row form-group">
+  <div class="col-xl-12">
+
+      <textarea
+        class="form-control"
+        style="width: 100%; padding-left: 12px;"
+        name="commentBox"
+        [(ngModel)]="defaultReason">
+      </textarea>
+
+  </div>
+</div>
+
+
+<div>
+
+  <button (click)="submitReason()" class="btn btn-primary">Submit</button> &nbsp;
+  <button (click)="dismiss()" class="btn btn-danger">Dismiss</button>
+
+</div>

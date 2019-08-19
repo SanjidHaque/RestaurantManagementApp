@@ -130,13 +130,17 @@ namespace RMS_Server_.Controllers
 
         [Route("api/RevertInventory")]
         [HttpPut]
-        public IHttpActionResult RevertInventory(OrderSession orderSession)
+        public IHttpActionResult RevertInventory(List<OrderedItem> orderedItems)
         {
             List<Inventory> inventories = _context.Inventories.ToList();
 
-            foreach (OrderedItem orderedItem in orderSession.OrderedItems)
+            foreach (OrderedItem orderedItem in orderedItems)
             {
-                FoodItem foodItem = _context.FoodItems.Include(x => x.Ingredients).FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+                FoodItem foodItem = _context.FoodItems
+                    .Include(x => x.Ingredients)
+                    .FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+
+
                 if (foodItem != null)
                 {
                     foreach (Ingredient foodItemIngredient in foodItem.Ingredients)
@@ -145,6 +149,7 @@ namespace RMS_Server_.Controllers
 
                         Inventory inventory =
                             inventories.FirstOrDefault(x => x.Id == foodItemIngredient.InventoryId);
+
                         if (inventory != null)
                         {
                             inventory.RemainingQuantity += inventoryQuantity;
@@ -156,16 +161,22 @@ namespace RMS_Server_.Controllers
                     foodItem.TotalSale--;
                     _context.Entry(foodItem).State = EntityState.Modified;
                     _context.SaveChanges();
+
                 }
+                else
+                {
+                    return Ok(new { StatusText = _statusTextService.ResourceNotFound });
+                }
+               
             }
 
             return Ok(new { StatusText = _statusTextService.Success });
         }
 
 
-        [Route("api/CancelOrder")]
+        [Route("api/CancelAllOrderedItem")]
         [HttpPut]
-        public IHttpActionResult CancelOrder(OrderSession orderSession)
+        public IHttpActionResult CancelAllOrderedItem(OrderSession orderSession)
         {
             OrderSession getOrderSession = _context.OrderSessions
                 .FirstOrDefault(x => x.Id == orderSession.Id);
@@ -241,6 +252,70 @@ namespace RMS_Server_.Controllers
            
             return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
+
+
+        [Route("api/CancelSingleOrderedItem")]
+        [HttpPut]
+        public IHttpActionResult CancelSingleOrderedItem(OrderedItem orderedItem)
+        {
+            OrderedItem getOrderedItem = _context.OrderedItems
+                .FirstOrDefault(x => x.Id == orderedItem.Id);
+
+            if (getOrderedItem == null)
+            {
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
+            }
+
+            getOrderedItem.CurrentState = "Cancelled";
+            _context.Entry(getOrderedItem).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            OrderSession orderSession = _context.OrderSessions
+                .FirstOrDefault(x => x.Id == orderedItem.OrderSessionId);
+
+            int numberOfCancelledOrderedItems = orderSession.OrderedItems
+                .Where(x => x.CurrentState == "Cancelled")
+                .ToList()
+                .Count;
+
+
+            if (numberOfCancelledOrderedItems == orderSession.OrderedItems.Count)
+            {
+                orderSession.CurrentState = "Cancelled";
+                _context.Entry(orderSession).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+
+            Order order = _context.Orders.FirstOrDefault(x => x.Id == orderSession.OrderId);
+
+            if (order == null)
+            {
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
+            }
+
+            int numberOfCancelledOrderedSessions =
+                order.OrderSessions.Where(x => x.CurrentState == "Cancelled").ToList().Count;
+
+            if (numberOfCancelledOrderedSessions == order.OrderSessions.Count)
+            {
+                order.CurrentState = "Cancelled";
+            }
+            else
+            {
+                List<OrderSession> completeOrders = order.OrderSessions
+                    .Where(x => x.CurrentState == "Ordered")
+                    .ToList();
+
+                order.CurrentState = completeOrders.Count > 0 ? "Ordered" : "Served";
+            }
+
+            _context.Entry(order).State = EntityState.Modified;
+            _context.SaveChanges();
+
+       
+            return Ok(new { StatusText = _statusTextService.Success });
+        }
+
 
         [Route("api/ServeOrder")]
         [HttpPut]

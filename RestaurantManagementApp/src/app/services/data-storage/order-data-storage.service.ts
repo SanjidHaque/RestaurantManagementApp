@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Order} from '../../models/order.model';
 import {OrderSession} from '../../models/order-session.model';
 import {TableDataStorageService} from './table-data-storage.service';
+import {OrderedItem} from '../../models/ordered-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,15 +38,21 @@ export class OrderDataStorageService {
     return this.http.post<Order>(this.rootUrl + '/api/ValidateOrder', order);
   }
 
-  cancelOrder(orderSession: OrderSession) {
-    return this.http.put<OrderSession>(this.rootUrl + '/api/CancelOrder', orderSession);
+  cancelAllOrderedItem(orderSession: OrderSession) {
+    return this.http.put<OrderSession>(this.rootUrl + '/api/CancelAllOrderedItem', orderSession);
+  }
+
+  cancelSingleOrderedItem(orderedItem: OrderedItem) {
+    return this.http.put<OrderSession>(this.rootUrl + '/api/CancelSingleOrderedItem', orderedItem);
   }
 
   deleteOrder(orderId: number) {
     return this.http.delete(`${this.rootUrl + '/api/DeleteOrder'}/${orderId}`);
   }
 
-  revertInventory(orderSession: OrderSession) {
-    return this.http.put<OrderSession>(this.rootUrl + '/api/RevertInventory', orderSession);
+  revertInventory(orderedItems: OrderedItem[]) {
+    return this.http.put<OrderedItem[]>(this.rootUrl + '/api/RevertInventory', orderedItems);
   }
+
+
 }

@@ -16,6 +16,7 @@ import {PointOfSaleService} from '../../../services/shared/point-of-sale.service
 import {TableDataStorageService} from '../../../services/data-storage/table-data-storage.service';
 import {OrderDataStorageService} from '../../../services/data-storage/order-data-storage.service';
 import {OrderCancellationOptionComponent} from '../../../bottom-sheets/order-cancellation-option/order-cancellation-option.component';
+import {OrderCancellationReasonComponent} from '../../../bottom-sheets/order-cancellation-reason/order-cancellation-reason.component';
 
 
 @Component({
@@ -221,7 +222,7 @@ export class MenuComponent implements OnInit {
         const orderSessions: OrderSession[] = [];
         orderSessions.push(orderSession);
 
-        const order = new Order(
+        this.order = new Order(
           -1,
           orderSessions,
           0,
@@ -240,8 +241,6 @@ export class MenuComponent implements OnInit {
           0,
           this.userName
         );
-
-        this.order = order;
       } else {
         let orderSession = this.order.OrderSessions.find(x => x.CurrentState === 'Not Ordered');
         if (orderSession === undefined) {
@@ -405,11 +404,11 @@ export class MenuComponent implements OnInit {
 
         if (data.StatusText !== 'Success') {
           this.toastr.successToastr(data.StatusText, 'Error');
-
           return;
         }
 
         orderSession.CurrentState = 'Served';
+        
         let count = 0;
         for (let i = 0; i < this.order.OrderSessions.length; i++) {
           if (this.order.OrderSessions[i].CurrentState === 'Served') {
@@ -447,43 +446,53 @@ export class MenuComponent implements OnInit {
   }
 
 
+
   cancelAllOrderedItem(orderSession: OrderSession) {
-    let action = '';
     this.bottomSheet.open(OrderCancellationOptionComponent).afterDismissed().subscribe(
       (data: any) => {
-        action = data;
-
+        const action = data;
 
     if (action === 'Dismiss') {
       return;
     }
+
+    this.bottomSheet.open(OrderCancellationReasonComponent).afterDismissed().subscribe(
+      (cancellationReason: string) => {
+        if (cancellationReason === 'Dismiss') {
+          return;
+        }
+
 
     const dialog = confirm('Are you sure?');
       if (!dialog) {
       return;
     }
 
+    const tableId = this.order.TableId;
 
-    const orderedItems = this.order.OrderSessions
+    const getOrderedItems = this.order.OrderSessions
       .find(x => x.Id === orderSession.Id).OrderedItems;
 
-      if (orderedItems === undefined) {
-        this.toastr.successToastr( 'Something went wrong', 'Error');
+      if (getOrderedItems === undefined) {
+        this.toastr.successToastr('Something went wrong', 'Error');
         return;
       }
 
-      orderedItems.forEach( (x) => {
+        getOrderedItems.forEach((x) => {
         this.order.TotalPrice -= x.TotalPrice;
         x.CurrentState = 'Cancelled';
+        x.CancellationReason = cancellationReason;
       });
 
-      orderSession.CurrentState = 'Cancelled';
-      
 
-    const tableId = this.order.TableId;
+      orderSession.CurrentState = 'Cancelled';
+
+
 
     if (this.order.OrderSessions.length
-      === this.order.OrderSessions.filter(x => x.CurrentState === 'Cancelled').length) {
+      === this.order.OrderSessions
+        .filter(x => x.CurrentState === 'Cancelled').length) {
+
       this.order = undefined;
       this.table.CurrentState = 'Empty';
     } else {
@@ -500,16 +509,21 @@ export class MenuComponent implements OnInit {
         this.table.CurrentState = 'Served';
       }
 
+      const numberOfCancelledOrderSession = this.order.OrderSessions
+        .filter(x => x.CurrentState === 'Cancelled').length;
+
       const lastIndex = this.order.OrderSessions.length - 1;
       if (this.order.OrderSessions[lastIndex].Id === null
-        && this.order.OrderSessions.length === 1) {
-
+        && (numberOfCancelledOrderSession === this.order.OrderSessions.length - 1)) {
         this.order.Id = -1;
-        this.order.CurrentState = 'Not Ordered';
+        this.order.CurrentState = 'Cancelled';
         this.table.CurrentState = 'Empty';
       }
     }
-    this.orderDataStorageService.cancelOrder(orderSession)
+
+
+
+    this.orderDataStorageService.cancelAllOrderedItem(orderSession)
       .subscribe((response: any) => {
 
       if (response.StatusText !== 'Success') {
@@ -518,11 +532,11 @@ export class MenuComponent implements OnInit {
       }
 
       if (action === 'Revert') {
-        this.orderDataStorageService.revertInventory(orderSession).subscribe(
+        this.orderDataStorageService.revertInventory(orderSession.OrderedItems).subscribe(
           (result: any) => {
 
             if (result.StatusText !== 'Success') {
-              this.toastr.successToastr(response.StatusText, 'Error');
+              this.toastr.successToastr(result.StatusText, 'Error');
               return;
             }
 
@@ -534,7 +548,7 @@ export class MenuComponent implements OnInit {
             )).subscribe((roger: any) => {
 
               if (roger.StatusText !== 'Success') {
-                this.toastr.successToastr(response.StatusText, 'Error');
+                this.toastr.successToastr(roger.StatusText, 'Error');
                 return;
               }
 
@@ -556,9 +570,139 @@ export class MenuComponent implements OnInit {
           }
           this.toastr.successToastr('Order canceled successfully', 'Success');
 
-        }); } }); });
+        }); } }); }); });
   }
 
+
+
+  cancelSingleOrderedItem(orderedItem: OrderedItem) {
+    this.bottomSheet.open(OrderCancellationOptionComponent).afterDismissed().subscribe(
+      (data: string) => {
+        const action = data;
+
+        if (action === 'Dismiss') {
+          return;
+        }
+
+        this.bottomSheet.open(OrderCancellationReasonComponent).afterDismissed().subscribe(
+          (cancellationReason: string) => {
+
+
+            if (cancellationReason === 'Dismiss') {
+              return;
+            }
+
+
+        const dialog = confirm('Are you sure?');
+        if (!dialog) {
+          return;
+        }
+
+
+        const tableId = this.order.TableId;
+        orderedItem.CurrentState = 'Cancelled';
+
+        const getOrderSession = this.order.OrderSessions
+          .find(x => x.Id === orderedItem.OrderSessionId);
+
+
+        if (getOrderSession.OrderedItems
+          .filter(x => x.CurrentState === 'Cancelled').length ===
+          getOrderSession.OrderedItems.length) {
+
+          getOrderSession.CurrentState = 'Cancelled';
+        }
+
+        if (this.order.OrderSessions
+            .filter(x => x.CurrentState === 'Cancelled').length ===
+          this.order.OrderSessions.length) {
+
+          this.order.CurrentState = 'Cancelled';
+          this.table.CurrentState = 'Empty'
+        } else {
+
+          const completeOrders = this.order.OrderSessions.filter(
+            x => x.CurrentState === 'Ordered'
+          );
+
+          if (completeOrders.length > 0) {
+            this.order.CurrentState = 'Ordered';
+            this.table.CurrentState = 'Ordered';
+          } else {
+            this.order.CurrentState = 'Served';
+            this.table.CurrentState = 'Served';
+          }
+
+
+          const numberOfCancelledOrderSession = this.order.OrderSessions
+            .filter(x => x.CurrentState === 'Cancelled').length;
+
+          const lastIndex = this.order.OrderSessions.length - 1;
+
+          if (this.order.OrderSessions[lastIndex].Id === null
+            && (numberOfCancelledOrderSession === this.order.OrderSessions.length - 1)) {
+            this.order.Id = -1;
+            this.order.CurrentState = 'Cancelled';
+            this.table.CurrentState = 'Empty';
+          }
+        }
+
+
+        const orderedItems = [];
+        orderedItem.CancellationReason = cancellationReason;
+        orderedItems.push(orderedItem);
+
+        this.orderDataStorageService.cancelSingleOrderedItem(orderedItem)
+          .subscribe((response: any) => {
+
+            if (response.StatusText !== 'Success') {
+              this.toastr.successToastr( response.StatusText, 'Error');
+              return;
+            }
+
+            if (action === 'Revert') {
+              this.orderDataStorageService.revertInventory(orderedItems).subscribe(
+                (result: any) => {
+
+                  if (result.StatusText !== 'Success') {
+                    this.toastr.successToastr(response.StatusText, 'Error');
+                    return;
+                  }
+
+                  this.tableDataStorageService.changeTableState(new Table(
+                    tableId,
+                    '',
+                    this.table.CurrentState,
+                    []
+                  )).subscribe((roger: any) => {
+
+                    if (roger.StatusText !== 'Success') {
+                      this.toastr.successToastr(response.StatusText, 'Error');
+                      return;
+                    }
+
+                    this.toastr.successToastr('Order canceled successfully', 'Success');
+                  });
+                });
+
+            } else {
+              this.tableDataStorageService.changeTableState(new Table(
+                tableId,
+                '',
+                this.table.CurrentState,
+                []
+              )).subscribe((copy: any) => {
+
+                if (copy.StatusText !== 'Success') {
+                  this.toastr.successToastr(response.StatusText, 'Error');
+                  return;
+                }
+                this.toastr.successToastr('Order canceled successfully', 'Success');
+
+              }); } });
+
+          });  });
+  }
 
 
   getSessionTotalPrice(orderSession: OrderSession) {

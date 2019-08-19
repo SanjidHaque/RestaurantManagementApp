@@ -58,7 +58,7 @@ namespace RMS_Server_.Controllers
         {
             if (foodItem == null)
             {
-                return Ok(new { StatusText = _statusTextService.SomethingWentWorng });
+                return Ok(new { StatusText = _statusTextService.SomethingWentWrong });
             }
 
             if (CheckDuplicateSerialNumber(foodItem, false))

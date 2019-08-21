@@ -55,6 +55,7 @@ import {AddInventoryQuantityComponent} from '../components/admin/inventories/add
 import {CancelledOrdersComponent} from '../components/admin/cancelled-orders/cancelled-orders.component';
 import {CancelledOrdersListComponent} from '../components/admin/cancelled-orders/cancelled-orders-list/cancelled-orders-list.component';
 import {CancelledOrdersDetailsComponent} from '../components/admin/cancelled-orders/cancelled-orders-details/cancelled-orders-details.component';
+import {CancelledOrderedItemsResolverService} from '../route-resolvers/cancelled-ordered-items-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -271,6 +272,7 @@ const appRoutes: Routes = [
                 resolve:
                   {
                     orders: OrdersResolverService,
+                    cancelledOrderedItems: CancelledOrderedItemsResolverService,
                     tables: TablesResolverService,
                     foodItems: FoodItemsResolverService
                   }

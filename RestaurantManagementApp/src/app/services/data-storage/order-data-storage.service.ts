@@ -26,6 +26,10 @@ export class OrderDataStorageService {
     return this.http.get<Order[]>(this.rootUrl + '/api/GetAllOrder');
   }
 
+  getAllCancelledOrderedItem() {
+    return this.http.get<OrderedItem[]>(this.rootUrl + '/api/GetAllCancelledOrderedItem');
+  }
+
   placeOrder(order: Order) {
     return this.http.put<Order>(this.rootUrl + '/api/PlaceOrder', order);
   }
@@ -49,7 +53,6 @@ export class OrderDataStorageService {
   deleteOrder(orderId: number) {
     return this.http.delete(`${this.rootUrl + '/api/DeleteOrder'}/${orderId}`);
   }
-
 
   deleteCancelledOrderedItem(orderedItemId: number) {
     return this.http.delete(`${this.rootUrl + '/api/DeleteCancelledOrderedItem'}/${orderedItemId}`);

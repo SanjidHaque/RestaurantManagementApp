@@ -42,48 +42,19 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
     subscribe(
       ( data: Data) => {
         this.orders = data['orders'];
+        this.cancelledOrderedItems = data['cancelledOrderedItems'];
+
         this.tables = data['tables'];
         this.foodItems = data['foodItems'];
-
-        this.cancelledOrderedItems = this.getCancelledOrderedItems();
         this.dataSource = new MatTableDataSource(this.cancelledOrderedItems);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
         this.filteredCancelledOrderedItems = this.cancelledOrderedItems;
-
       }
     );
   }
 
   ngAfterViewInit() {
-
-  }
-
-  getCancelledOrderedItems() {
-    const cancelledOrderedItems: OrderedItem[] = [];
-
-    // this.orders.forEach((order) => {
-    //   order.OrderSessions.forEach((orderSession) => {
-    //     orderSession.OrderedItems.forEach((orderedItem) => {
-    //       if (orderedItem.CurrentState === 'Cancelled') {
-    //         cancelledOrderedItems.push(orderedItem);
-    //       }
-    //     });
-    //   });
-    // });
-
-
-    for (let i = 0; i < this.orders.length; i++) {
-      for (let j = 0; j < this.orders[i].OrderSessions.length; j++) {
-        for (let k = 0; k < this.orders[i].OrderSessions[j].OrderedItems.length; k++) {
-          if (this.orders[i].OrderSessions[j].OrderedItems[k].CurrentState === 'Cancelled') {
-            cancelledOrderedItems.push(this.orders[i].OrderSessions[j].OrderedItems[k]);
-          }
-        }
-      }
-    }
-
-    return cancelledOrderedItems;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
 

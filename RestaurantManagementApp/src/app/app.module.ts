@@ -84,6 +84,7 @@ import { CancelledOrdersListComponent } from './components/admin/cancelled-order
 import { CancelledOrdersDetailsComponent } from './components/admin/cancelled-orders/cancelled-orders-details/cancelled-orders-details.component';
 import {OrderCancellationOptionComponent} from './bottom-sheets/order-cancellation-option/order-cancellation-option.component';
 import { OrderCancellationReasonComponent } from './bottom-sheets/order-cancellation-reason/order-cancellation-reason.component';
+import {CancelledOrderedItemsResolverService} from './route-resolvers/cancelled-ordered-items-resolver.service';
 
 
 
@@ -177,6 +178,7 @@ import { OrderCancellationReasonComponent } from './bottom-sheets/order-cancella
     FoodItemResolverService,
     FoodItemsResolverService,
     RolesResolverService,
+    CancelledOrderedItemsResolverService,
     SettingResolverService,
     UserAccountsResolverService,
     UserAccountResolverService,

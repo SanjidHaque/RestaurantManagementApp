@@ -15,6 +15,7 @@ import {AdminService} from '../../../../services/shared/admin.service';
   styleUrls: ['./cancelled-orders-details.component.scss']
 })
 export class CancelledOrdersDetailsComponent implements OnInit {
+  isDisabled = false;
   orders: Order[] = [];
   cancelledOrderedItem: OrderedItem;
 
@@ -25,7 +26,8 @@ export class CancelledOrdersDetailsComponent implements OnInit {
               private router: Router,
               public adminService: AdminService,
               private toastr: ToastrManager,
-              private orderDataStorageService: OrderDataStorageService) { }
+              private orderDataStorageService: OrderDataStorageService) {
+  }
 
   ngOnInit() {
     this.route.data
@@ -104,9 +106,25 @@ export class CancelledOrdersDetailsComponent implements OnInit {
     } else {
       return foodItem.Price;
     }
-
   }
 
 
+  deleteCancelledOrderedItem() {
+    if (!confirm('Delete this record?\n' +
+      'You will lose any kind of data associated with the current record!')) {
+      return;
+    }
 
+    this.isDisabled = true;
+    this.orderDataStorageService.deleteCancelledOrderedItem(this.cancelledOrderedItem.Id)
+      .subscribe((data: any) => {
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
+          return;
+        }
+        this.toastr.successToastr('Record deleted successfully', 'Success');
+        this.router.navigate(['admin/cancelled-orders']);
+      });
+  }
 }

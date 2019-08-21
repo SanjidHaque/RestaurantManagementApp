@@ -107,12 +107,6 @@ export class OrderDetailsComponent implements OnInit {
 
       this.router.navigate(['admin/orders']);
     });
-
-  }
-
-
-  deleteCancelledOrderedItem() {
-
   }
 
 }

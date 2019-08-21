@@ -50,6 +50,11 @@ export class OrderDataStorageService {
     return this.http.delete(`${this.rootUrl + '/api/DeleteOrder'}/${orderId}`);
   }
 
+
+  deleteCancelledOrderedItem(orderedItemId: number) {
+    return this.http.delete(`${this.rootUrl + '/api/DeleteCancelledOrderedItem'}/${orderedItemId}`);
+  }
+
   revertInventory(orderedItems: OrderedItem[]) {
     return this.http.put<OrderedItem[]>(this.rootUrl + '/api/RevertInventory', orderedItems);
   }

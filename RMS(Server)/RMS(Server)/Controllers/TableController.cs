@@ -65,6 +65,10 @@ namespace RMS_Server_.Controllers
         {
             if (table != null)
             {
+                if (_context.Tables.Any(o => o.Name == table.Name))
+                {
+                    return Ok(new { StatusText = _statusTextService.DuplicateItemName });
+                }
                 _context.Tables.Add(table);
                 _context.SaveChanges();
                 return Ok(new { StatusText = _statusTextService.Success });
@@ -77,11 +81,16 @@ namespace RMS_Server_.Controllers
         [Route("api/EditTable")]
         public IHttpActionResult EditTable(Table table)
         {
-            Table getEdited = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
-            if (getEdited != null)
+            Table getTable = _context.Tables.FirstOrDefault(p => p.Id == table.Id);
+            if (getTable != null)
             {
-                getEdited.Name = table.Name;
-                _context.Entry(getEdited).State = EntityState.Modified;
+                if (_context.Tables.Any(o => o.Name == table.Name && o.Name != getTable.Name))
+                {
+                    return Ok(new { StatusText = _statusTextService.DuplicateItemName });
+                }
+
+                getTable.Name = table.Name;
+                _context.Entry(getTable).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok(new { StatusText = _statusTextService.Success });
             }

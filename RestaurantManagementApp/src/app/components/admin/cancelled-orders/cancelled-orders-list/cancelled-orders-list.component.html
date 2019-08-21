@@ -1,3 +1,151 @@
-<p>
-  cancelled-orders-list works!
-</p>
+
+
+
+
+<div class="row" *ngIf="orders.length === 0; else notEmpty">
+  <div class="col-md-12">
+    No cancelled orders is arrived yet.
+  </div>
+</div>
+
+
+
+
+<ng-template #notEmpty>
+
+  <form (ngSubmit)="filterOrdersByDate(orderFilterForm)" #orderFilterForm = "ngForm">
+
+    <div class="row">
+
+      <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12">
+
+        <button
+          (click)="defaultOrders()"
+          type="button"
+          class="btn btn-primary">Default</button>
+
+      </div>
+
+
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-6 col-8 order-list-top">
+
+        <input
+          type="text"
+          id="date"
+          autocomplete="off"
+          onkeydown="return false"
+          ngModel
+          name="date"
+          required
+          class="form-control"
+          placeholder="Date range"
+          [bsConfig]="{ rangeInputFormat: 'Do MMMM YYYY', containerClass: 'theme-dark-blue'}"
+          bsDaterangepicker/>
+
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-12 order-list-top">
+
+        <button
+          type="submit"
+          [disabled] = "orderFilterForm.invalid"
+          class="btn btn-primary">Filter</button>
+
+      </div>
+    </div>
+
+  </form>
+
+
+
+
+  <mat-form-field style="padding-top: 20px;">
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Search...">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8" style="box-shadow: none!important;">
+    <table  mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="OrderSessionId">
+        <th
+          style="font-size: 14px;  font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> DateTime </th>
+        <td
+          style="width: 20%"
+          mat-cell *matCellDef="let row">
+          {{ getOrderedItemInformation(row.OrderSessionId) }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="FoodItemId">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000; text-align: center;"
+          mat-header-cell *matHeaderCellDef> Sn & Name </th>
+        <td style="width: 20%; word-break: break-word;" mat-cell *matCellDef = "let row">
+          {{ getFoodItemName(row.FoodItemId ) }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="FoodItemQuantity">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Quantity</th>
+        <td
+          style="width: 5%"
+          mat-cell *matCellDef="let row" > {{row.FoodItemQuantity}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="TotalPrice">
+        <th
+          style="font-size: 14px; font-weight: 500; color: #000;"
+          mat-header-cell *matHeaderCellDef mat-sort-header> Total Price </th>
+        <td
+          style="width: 12%"
+          mat-cell *matCellDef="let row" > {{row.TotalPrice}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          style="cursor: pointer;"
+          title="See details"
+          routerLink="/admin">
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[100, 250, 500, 1000]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+  <div class="row" style="font-size: 17px; font-weight: 500;">
+    <div class="col-xl-12">
+
+      Reports
+
+    </div>
+  </div>
+  <hr>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Cancelled Ordered Items: {{ filteredCancelledOrderedItems.length }}(s)
+
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+    <div class="col-xl-12">
+
+      Total Amount: {{ getTotalCancelledOrderedPrice() }} BDT
+
+    </div>
+  </div>
+
+
+</ng-template>

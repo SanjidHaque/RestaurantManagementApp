@@ -42,7 +42,7 @@ export class OrderListComponent implements OnInit, AfterViewInit {
     this.route.data.
     subscribe(
       ( data: Data) => {
-        this.orders = data['orders'];
+        this.orders = data['orders'].filter(x => x.CurrentState !== 'Cancelled');
         this.tables = data['tables'];
         this.filteredOrders = this.orders;
         this.dataSource = new MatTableDataSource(this.orders);

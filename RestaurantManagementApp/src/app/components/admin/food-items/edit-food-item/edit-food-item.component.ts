@@ -49,11 +49,7 @@ export class EditFoodItemComponent implements OnInit {
     );
 
     if (this.foodItem === undefined || this.foodItem === null) {
-      this.toastr.errorToastr('Item is not found', 'Error', {
-        toastLife: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+      this.toastr.errorToastr('Item is not found', 'Error');
       this.router.navigate(['admin/food-items']);
     } else {
       this.sellingPrice = this.foodItem.Price;
@@ -115,11 +111,7 @@ export class EditFoodItemComponent implements OnInit {
       reader.readAsDataURL(this.fileToUpload);
     } else {
       this.imageUrl = 'assets/noImage.png';
-      this.toastr.errorToastr('Unsupported file format', 'Error', {
-        toastLife: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+      this.toastr.errorToastr('Unsupported file format', 'Error');
     }
   }
 
@@ -168,22 +160,10 @@ export class EditFoodItemComponent implements OnInit {
             this.inventoryCost -= subTotal;
           }
         } else {
-          this.toastr.errorToastr(
-            'Quantity is too large',
-            'Error',
-            {
-              newestOnTop: true,
-              showCloseButton: true
-            });
+          this.toastr.errorToastr('Quantity is too large', 'Error');
         }
       } else {
-        this.toastr.errorToastr(
-          'This item does not exist. Add to ingredient list first',
-          'Error',
-          {
-            newestOnTop: true,
-            showCloseButton: true
-          });
+        this.toastr.errorToastr('This item does not exist. Add to ingredient list first', 'Error');
       }
     }
     form.controls['quantity'].reset();
@@ -193,17 +173,17 @@ export class EditFoodItemComponent implements OnInit {
     const serialNumber = form.value.serialNumber;
 
     if (this.foodItem.Ingredients.length === 0) {
-
-      this.toastr.errorToastr('Select at least one ingredient', 'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+      this.toastr.errorToastr('Select at least one ingredient', 'Error');
       return;
-
     }
+
     const sellingPrice = form.value.sellingPrice;
     if (!this.adminService.checkNumericConditions(sellingPrice)) {
+      return;
+    }
+
+    if (sellingPrice < this.inventoryCost) {
+      this.toastr.errorToastr('Price is too small', 'Error');
       return;
     }
 
@@ -235,11 +215,7 @@ export class EditFoodItemComponent implements OnInit {
 
           if (data === 'Error') {
             this.isDisabled = false;
-            this.toastr.errorToastr('Duplicate serial number', 'Error', {
-              toastTimeout: 10000,
-              newestOnTop: true,
-              showCloseButton: true
-            });
+            this.toastr.errorToastr('Duplicate serial number', 'Error');
             return;
           }
 
@@ -249,20 +225,12 @@ export class EditFoodItemComponent implements OnInit {
               .subscribe(
                 (response: any) => {
                   this.imageUrl = '/assets/noImage.png';
-                  this.toastr.successToastr('Information is updated', 'Success', {
-                    toastTimeout: 10000,
-                    newestOnTop: true,
-                    showCloseButton: true
-                  });
+                  this.toastr.successToastr('Information is updated', 'Success');
                   this.router.navigate(['admin/food-items/', this.foodItem.Id]);
                 }
               );
           } else {
-            this.toastr.successToastr('Information is updated', 'Success', {
-              toastTimeout: 10000,
-              newestOnTop: true,
-              showCloseButton: true
-            });
+            this.toastr.successToastr('Information is updated', 'Success');
             this.router.navigate(['admin/food-items/', this.foodItem.Id]);
           }
         });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PointOfSaleService} from '../../services/shared/point-of-sale.service';
 import {MatBottomSheetRef} from '@angular/material';
+import {PointOfSaleService} from '../../services/shared/point-of-sale.service';
 
 @Component({
   selector: 'app-order-cancellation-reason',

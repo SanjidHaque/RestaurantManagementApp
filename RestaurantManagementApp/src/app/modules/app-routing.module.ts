@@ -271,7 +271,8 @@ const appRoutes: Routes = [
                 resolve:
                   {
                     orders: OrdersResolverService,
-                    tables: TablesResolverService
+                    tables: TablesResolverService,
+                    foodItems: FoodItemsResolverService
                   }
               },
               {

@@ -203,14 +203,14 @@ namespace RMS_Server_.Controllers
                     .Where(c => c.OrderId == orderSession.OrderId)
                     .ToList();
 
-                List<FoodItem> foodItems = _context.FoodItems.ToList();
+             
 
                 if (order != null)
                 {
                     orderSession.OrderedItems.ForEach(x =>
                     {
                         order.TotalPrice -= x.TotalPrice;
-                        FoodItem foodItem = foodItems.FirstOrDefault(y => y.Id == x.FoodItemId);
+                        FoodItem foodItem = _context.FoodItems.FirstOrDefault(y => y.Id == x.FoodItemId);
                         if (foodItem != null)
                         {
                             float totalInventoryCost = x.FoodItemQuantity * foodItem.InventoryCost;
@@ -273,6 +273,9 @@ namespace RMS_Server_.Controllers
             OrderSession orderSession = _context.OrderSessions
                 .FirstOrDefault(x => x.Id == orderedItem.OrderSessionId);
 
+            List<OrderedItem> orderedItems =
+                _context.OrderedItems.Where(x => x.OrderSessionId == orderedItem.OrderSessionId).ToList();
+
             int numberOfCancelledOrderedItems = orderSession.OrderedItems
                 .Where(x => x.CurrentState == "Cancelled")
                 .ToList()
@@ -292,6 +295,17 @@ namespace RMS_Server_.Controllers
             {
                 return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
+
+            order.TotalPrice -= orderedItem.TotalPrice;
+            FoodItem foodItem = _context.FoodItems.FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+
+            if (foodItem != null)
+            {
+                float totalInventoryCost = orderedItem.FoodItemQuantity * foodItem.InventoryCost;
+                order.InventoryCost -= totalInventoryCost;
+            }
+
+
 
             int numberOfCancelledOrderedSessions =
                 order.OrderSessions.Where(x => x.CurrentState == "Cancelled").ToList().Count;
@@ -333,16 +347,19 @@ namespace RMS_Server_.Controllers
                 if (order != null)
                 {
 
+                    List<OrderSession> activatedOrderSessions = order.OrderSessions
+                        .Where(x => x.CurrentState == "Ordered" || x.CurrentState == "Served").ToList();
+
                     int count = 0;
-                    for (int i = 0; i < order.OrderSessions.Count; i++)
+                    for (int i = 0; i < activatedOrderSessions.Count; i++)
                     {
-                        if (order.OrderSessions[i].CurrentState == "Served")
+                        if (activatedOrderSessions[i].CurrentState == "Served")
                         {
                             count++;
                         }
                     }
 
-                    if (count == order.OrderSessions.Count)
+                    if (count == activatedOrderSessions.Count)
                     {
                         order.CurrentState = "Served";                      
                     }

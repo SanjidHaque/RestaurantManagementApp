@@ -193,7 +193,6 @@ export class MenuComponent implements OnInit {
       const orderedItem = new OrderedItem(
         null,
         null,
-        null,
         foodItem.Id,
         quantity,
         subTotal,
@@ -408,15 +407,19 @@ export class MenuComponent implements OnInit {
         }
 
         orderSession.CurrentState = 'Served';
-        
+
+
+        const activatedOrderSessions =  this.order.OrderSessions
+          .filter(x => x.CurrentState === 'Ordered' || x.CurrentState === 'Served');
+
         let count = 0;
-        for (let i = 0; i < this.order.OrderSessions.length; i++) {
-          if (this.order.OrderSessions[i].CurrentState === 'Served') {
+        for (let i = 0; i < activatedOrderSessions.length; i++) {
+          if (activatedOrderSessions[i].CurrentState === 'Served') {
             count++;
           }
         }
 
-        if (count === this.order.OrderSessions.length) {
+        if (count === activatedOrderSessions.length) {
           this.order.CurrentState = 'Served';
           this.table.CurrentState = 'Served';
         } else {
@@ -516,7 +519,7 @@ export class MenuComponent implements OnInit {
       if (this.order.OrderSessions[lastIndex].Id === null
         && (numberOfCancelledOrderSession === this.order.OrderSessions.length - 1)) {
         this.order.Id = -1;
-        this.order.CurrentState = 'Cancelled';
+        this.order.CurrentState = 'Not Ordered';
         this.table.CurrentState = 'Empty';
       }
     }
@@ -601,6 +604,7 @@ export class MenuComponent implements OnInit {
 
         const tableId = this.order.TableId;
         orderedItem.CurrentState = 'Cancelled';
+        this.order.TotalPrice -= orderedItem.TotalPrice;
 
         const getOrderSession = this.order.OrderSessions
           .find(x => x.Id === orderedItem.OrderSessionId);

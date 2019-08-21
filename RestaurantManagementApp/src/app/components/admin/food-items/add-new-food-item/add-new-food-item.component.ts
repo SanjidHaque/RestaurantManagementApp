@@ -128,13 +128,7 @@ export class AddNewFoodItemComponent implements OnInit {
           });
         }
       } else {
-        this.toastr.errorToastr(
-          'This item does not exist. Add to ingredient list first',
-          'Error',
-          {
-            newestOnTop: true,
-            showCloseButton: true
-          });
+        this.toastr.errorToastr('This item does not exist. Add to ingredient list first', 'Error');
       }
     }
     form.controls['quantity'].reset();
@@ -152,12 +146,7 @@ export class AddNewFoodItemComponent implements OnInit {
       reader.readAsDataURL(this.fileToUpload);
     } else {
       this.imageUrl = 'assets/noImage.png';
-      this.toastr.errorToastr('Unsupported file format', 'Error', {
-        toastLife: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
-
+      this.toastr.errorToastr('Unsupported file format', 'Error');
     }
 
   }
@@ -170,18 +159,18 @@ export class AddNewFoodItemComponent implements OnInit {
 
 
   addNewFoodItem(form: NgForm) {
-
     if (this.ingredients.length === 0) {
-      this.toastr.errorToastr('Select at least one ingredient', 'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+      this.toastr.errorToastr('Select at least one ingredient', 'Error');
       return;
     }
 
     const sellingPrice = form.value.sellingPrice;
     if (!this.adminService.checkNumericConditions(sellingPrice)) {
+      return;
+    }
+
+    if (sellingPrice < this.inventoryCost) {
+      this.toastr.errorToastr('Price is too small', 'Error');
       return;
     }
 
@@ -208,22 +197,14 @@ export class AddNewFoodItemComponent implements OnInit {
 
         if (response === 'Duplicate serial number') {
           this.isDisabled = false;
-          this.toastr.errorToastr(response, 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr(response, 'Error');
           this.isDisabled = false;
           return;
         }
 
         if (response === 'Duplicate item name') {
           this.isDisabled = false;
-          this.toastr.errorToastr(response, 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr(response, 'Error');
           this.isDisabled = false;
           return;
         }
@@ -232,11 +213,7 @@ export class AddNewFoodItemComponent implements OnInit {
           this.foodItemDataStorageService.uploadFoodItemImage(response.Id, this.fileToUpload)
             .subscribe(() => {
                 this.imageUrl = '/assets/noImage.png';
-                this.toastr.successToastr('Added to shop', 'Success', {
-                  toastTimeout: 10000,
-                  newestOnTop: true,
-                  showCloseButton: true
-                });
+                this.toastr.successToastr('Added to shop', 'Success');
                 this.router.navigate(['admin/food-items/', response.Id]);
               }
             );

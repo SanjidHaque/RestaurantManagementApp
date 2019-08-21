@@ -29,9 +29,9 @@ export class OrderDetailsComponent implements OnInit {
               private toastr: ToastrManager,
               private orderDataStorageService: OrderDataStorageService) { }
   ngOnInit() {
-    this.route.data.
-    subscribe(
-      ( data: Data) => {
+    this.route.data
+      .subscribe(
+      (data: Data) => {
         this.order = data['order'];
         this.tables = data['tables'];
         this.foodItems = data['foodItems'];
@@ -107,6 +107,11 @@ export class OrderDetailsComponent implements OnInit {
 
       this.router.navigate(['admin/orders']);
     });
+
+  }
+
+
+  deleteCancelledOrderedItem() {
 
   }
 

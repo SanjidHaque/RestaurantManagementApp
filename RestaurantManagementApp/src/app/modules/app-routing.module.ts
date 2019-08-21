@@ -280,10 +280,9 @@ const appRoutes: Routes = [
                 component: CancelledOrdersDetailsComponent,
                 resolve:
                   {
-                    order: OrderResolverService,
+                    orders: OrdersResolverService,
                     tables: TablesResolverService,
-                    foodItems: FoodItemsResolverService,
-                    setting: SettingResolverService
+                    foodItems: FoodItemsResolverService
                   }
               }
             ]

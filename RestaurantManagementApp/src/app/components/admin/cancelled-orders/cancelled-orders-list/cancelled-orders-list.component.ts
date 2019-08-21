@@ -41,7 +41,7 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.route.data.
     subscribe(
-      ( data: Data) => {
+      (data: Data) => {
         this.orders = data['orders'];
         this.tables = data['tables'];
         this.foodItems = data['foodItems'];

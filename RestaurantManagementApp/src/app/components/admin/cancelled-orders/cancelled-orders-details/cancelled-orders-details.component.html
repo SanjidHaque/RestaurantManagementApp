@@ -1,3 +1,78 @@
-<p>
-  cancelled-orders-details works!
-</p>
+<div class="row">
+  <div class="col-xl-12">
+    <h6>General Information</h6>
+  </div>
+</div>
+
+<hr>
+<div class="row" style="font-weight: 500; font-size: 20px;">
+  <div class="col-xl-12">
+    Reason: {{ cancelledOrderedItem.CancellationReason }}
+  </div>
+</div>
+
+
+<div class="row" style="font-weight: 500; font-size: 20px;">
+  <div class="col-xl-12">
+    Date time: {{ getOrderedItemInformation('dateTime') }}
+  </div>
+</div>
+
+
+<br>
+
+
+<div class="row" style="font-weight: 500; font-size: 17px;">
+  <div class="col-xl-12">
+    Sales Person: {{ getOrderedItemInformation('salesPerson') }}
+  </div>
+</div>
+
+
+<div class="row" style="font-weight: 500; font-size: 17px;">
+  <div class="col-xl-12">
+    Table: {{ getOrderedItemInformation('tableName') }}
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-xl-8 col-lg-8">
+
+    <table border=1 cellpadding=10 width="100%">
+      <tr style="font-weight: 500;">
+        <td>SN & Name</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Total</td>
+      </tr>
+
+      <tr>
+        <td style="width: 20%;">
+          {{ getFoodItemInformation('Name and Serial') }}
+        </td>
+        <td style="width: 10%;">
+          {{ getFoodItemInformation('Price') }} BDT
+        </td>
+        <td style="width: 8%;">
+          {{ cancelledOrderedItem.FoodItemQuantity }} (s)
+        </td>
+        <td style="width: 10%;">
+          {{ cancelledOrderedItem.TotalPrice }} BDT
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-xl-12">
+    <button (click)="deleteCancelledOrderedItem()" class="btn btn-danger">Delete</button>
+  </div>
+</div>
+
+

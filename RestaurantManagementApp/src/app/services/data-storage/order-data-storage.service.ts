@@ -30,6 +30,10 @@ export class OrderDataStorageService {
     return this.http.get<OrderedItem[]>(this.rootUrl + '/api/GetAllCancelledOrderedItem');
   }
 
+  getCancelledOrderedItem(cancelledOrderedItemId: number) {
+    return this.http.get(`${this.rootUrl + '/api/GetCancelledOrderedItem'}/${cancelledOrderedItemId}`);
+  }
+
   placeOrder(order: Order) {
     return this.http.put<Order>(this.rootUrl + '/api/PlaceOrder', order);
   }

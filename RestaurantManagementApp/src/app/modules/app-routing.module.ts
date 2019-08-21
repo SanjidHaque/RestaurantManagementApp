@@ -56,6 +56,7 @@ import {CancelledOrdersComponent} from '../components/admin/cancelled-orders/can
 import {CancelledOrdersListComponent} from '../components/admin/cancelled-orders/cancelled-orders-list/cancelled-orders-list.component';
 import {CancelledOrdersDetailsComponent} from '../components/admin/cancelled-orders/cancelled-orders-details/cancelled-orders-details.component';
 import {CancelledOrderedItemsResolverService} from '../route-resolvers/cancelled-ordered-items-resolver.service';
+import {CancelledOrderedItemResolverService} from '../route-resolvers/cancelled-ordered-item-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -278,11 +279,12 @@ const appRoutes: Routes = [
                   }
               },
               {
-                path: ':id',
+                path: ':cancelled-ordered-item-id',
                 component: CancelledOrdersDetailsComponent,
                 resolve:
                   {
                     orders: OrdersResolverService,
+                    cancelledOrderedItem: CancelledOrderedItemResolverService,
                     tables: TablesResolverService,
                     foodItems: FoodItemsResolverService
                   }

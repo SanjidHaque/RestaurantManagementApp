@@ -33,10 +33,10 @@ export class CancelledOrdersDetailsComponent implements OnInit {
     this.route.data
       .subscribe(
         (data: Data) => {
-          const cancelledOrderedItemId = +this.route.snapshot.paramMap.get('id');
           this.orders = data['orders'];
-          this.cancelledOrderedItem = this.getCancelledOrderedItem(cancelledOrderedItemId);
-          if (this.cancelledOrderedItem === undefined) {
+          this.cancelledOrderedItem = data['cancelledOrderedItem'];
+
+          if (this.cancelledOrderedItem === undefined ) {
             this.toastr.errorToastr('Error', 'Resource not found');
             this.router.navigate(['admin/cancelled-orders']);
           }
@@ -46,21 +46,7 @@ export class CancelledOrdersDetailsComponent implements OnInit {
         });
   }
 
-  getCancelledOrderedItem(cancelledOrderedItemId: number) {
-    const cancelledOrderedItems: OrderedItem[] = [];
-
-    this.orders.forEach((order) => {
-      order.OrderSessions.forEach((orderSession) => {
-        orderSession.OrderedItems.forEach((orderedItem) => {
-          if (orderedItem.CurrentState === 'Cancelled') {
-            cancelledOrderedItems.push(orderedItem);
-          }
-        });
-      });
-    });
-
-    return cancelledOrderedItems.find(x => x.Id === cancelledOrderedItemId);
-  }
+ 
 
 
   getOrderedItemInformation(type: string) {

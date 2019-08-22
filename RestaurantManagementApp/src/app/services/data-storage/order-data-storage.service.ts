@@ -66,5 +66,8 @@ export class OrderDataStorageService {
     return this.http.put<OrderedItem[]>(this.rootUrl + '/api/RevertInventory', orderedItems);
   }
 
+  addToInventoryWastedList(orderedItems: OrderedItem[]) {
+    return this.http.put<OrderedItem[]>(this.rootUrl + '/api/AddToInventoryWastedList', orderedItems);
+  }
 
 }

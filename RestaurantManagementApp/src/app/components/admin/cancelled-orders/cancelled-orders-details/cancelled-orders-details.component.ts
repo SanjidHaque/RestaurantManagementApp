@@ -46,7 +46,7 @@ export class CancelledOrdersDetailsComponent implements OnInit {
         });
   }
 
- 
+
 
 
   getOrderedItemInformation(type: string) {

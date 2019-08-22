@@ -525,7 +525,6 @@ export class MenuComponent implements OnInit {
     }
 
 
-
     this.orderDataStorageService.cancelAllOrderedItem(orderSession)
       .subscribe((response: any) => {
 
@@ -534,7 +533,33 @@ export class MenuComponent implements OnInit {
         return;
       }
 
-      if (action === 'Revert') {
+
+      if (action === 'Do not revert') {
+        this.orderDataStorageService.addToInventoryWastedList(orderSession.OrderedItems).subscribe(
+          (result: any) => {
+
+            if (result.StatusText !== 'Success') {
+              this.toastr.successToastr(result.StatusText, 'Error');
+              return;
+            }
+
+            this.tableDataStorageService.changeTableState(new Table(
+              tableId,
+              '',
+              this.table.CurrentState,
+              []
+            )).subscribe((roger: any) => {
+
+              if (roger.StatusText !== 'Success') {
+                this.toastr.successToastr(roger.StatusText, 'Error');
+                return;
+              }
+
+              this.toastr.successToastr('Order canceled successfully', 'Success');
+              return;
+            });
+          });
+      } else if (action === 'Revert') {
         this.orderDataStorageService.revertInventory(orderSession.OrderedItems).subscribe(
           (result: any) => {
 
@@ -573,7 +598,9 @@ export class MenuComponent implements OnInit {
           }
           this.toastr.successToastr('Order canceled successfully', 'Success');
 
-        }); } }); }); });
+        }); } });
+
+      }); });
   }
 
 
@@ -663,8 +690,31 @@ export class MenuComponent implements OnInit {
               this.toastr.successToastr( response.StatusText, 'Error');
               return;
             }
+            if (action === 'Do not revert') {
+              this.orderDataStorageService.addToInventoryWastedList(orderedItems).subscribe(
+                (result: any) => {
 
-            if (action === 'Revert') {
+                  if (result.StatusText !== 'Success') {
+                    this.toastr.successToastr(result.StatusText, 'Error');
+                    return;
+                  }
+
+                  this.tableDataStorageService.changeTableState(new Table(
+                    tableId,
+                    '',
+                    this.table.CurrentState,
+                    []
+                  )).subscribe((roger: any) => {
+
+                    if (roger.StatusText !== 'Success') {
+                      this.toastr.successToastr(roger.StatusText, 'Error');
+                      return;
+                    }
+
+                    this.toastr.successToastr('Order canceled successfully', 'Success');
+                  });
+                });
+            } else if (action === 'Revert') {
               this.orderDataStorageService.revertInventory(orderedItems).subscribe(
                 (result: any) => {
 

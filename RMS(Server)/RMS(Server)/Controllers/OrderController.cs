@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Data.Entity;
@@ -125,6 +126,49 @@ namespace RMS_Server_.Controllers
 
             return Ok(new { StatusText = _statusTextService.Success, order });
         }
+
+
+        [Route("api/AddToInventoryWastedList")]
+        [HttpPut]
+        public IHttpActionResult AddToInventoryWastedList(List<OrderedItem> orderedItems)
+        {
+            List<Inventory> inventories = _context.Inventories.ToList();
+
+            foreach (OrderedItem orderedItem in orderedItems)
+            {
+                FoodItem foodItem = _context.FoodItems
+                    .Include(x => x.Ingredients)
+                    .FirstOrDefault(x => x.Id == orderedItem.FoodItemId);
+
+
+                if (foodItem != null)
+                {
+                    foreach (Ingredient foodItemIngredient in foodItem.Ingredients)
+                    {
+                        float inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+                        InventoryHistory inventoryHistory = new InventoryHistory
+                        {
+                            Comment = "Wasted",
+                            Quantity = inventoryQuantity,
+                            DateTime = DateTime.Now.ToString("MM/dd/yyyy, h:mm tt"),
+                            InventoryId = foodItemIngredient.InventoryId,
+                            Price = 0,
+                            Type = "Removal"
+                        };
+                        _context.InventoryHistories.Add(inventoryHistory);
+                    }                  
+                }
+
+                else
+                {
+                    return Ok(new { StatusText = _statusTextService.ResourceNotFound });
+                }
+
+            }
+            _context.SaveChanges();
+            return Ok(new { StatusText = _statusTextService.Success });
+        }
+    
 
 
 
@@ -433,6 +477,23 @@ namespace RMS_Server_.Controllers
             return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
+
+        [Route("api/DeleteCancelledOrderedItem/{orderedItemId}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteCancelledOrderedItem(int orderedItemId)
+        {
+            OrderedItem orderedItem= _context.OrderedItems.FirstOrDefault(a => a.Id == orderedItemId);
+
+            if (orderedItem != null)
+            {
+                _context.OrderedItems.Remove(orderedItem);
+                _context.SaveChanges();
+                return Ok(new { StatusText = _statusTextService.Success });
+            }
+
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
+        }
+
         [HttpGet]
         [Route("api/GetOrder/{orderId}")]
         public IHttpActionResult GetOrder(int orderId)
@@ -467,6 +528,33 @@ namespace RMS_Server_.Controllers
 
             return Ok(orders);
         }
+
+
+        [HttpGet]
+        [Route("api/GetAllCancelledOrderedItem")]
+        public IHttpActionResult GetAllCancelledOrderedItem()
+        {
+            List<OrderedItem> cancelledOrderedItems = _context.OrderedItems
+                .Where(c => c.CurrentState == "Cancelled")
+                .AsNoTracking()
+                .ToList();
+
+            return Ok(cancelledOrderedItems);
+
+        }
+
+        [HttpGet]
+        [Route("api/GetCancelledOrderedItem/{cancelledOrderedItemId}")]
+        public IHttpActionResult GetCancelledOrderedItem(int cancelledOrderedItemId)
+        {
+            OrderedItem cancelledOrderedItem = _context.OrderedItems
+                .FirstOrDefault(c => c.Id == cancelledOrderedItemId);
+             
+            return Ok(cancelledOrderedItem);
+
+        }
+
+   
 
     }
 }

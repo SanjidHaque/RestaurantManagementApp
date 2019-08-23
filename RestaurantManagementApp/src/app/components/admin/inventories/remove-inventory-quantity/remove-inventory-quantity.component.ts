@@ -33,11 +33,7 @@ export class RemoveInventoryQuantityComponent implements OnInit {
         this.inventoryRemovalComments = this.adminService.inventoryRemovalComments;
 
         if (this.inventory === undefined || this.inventory === null) {
-          this.toastr.errorToastr('Item not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('Item not found', 'Error');
           this.router.navigate(['admin/inventories']);
         }
       }
@@ -88,22 +84,14 @@ export class RemoveInventoryQuantityComponent implements OnInit {
 
     this.inventoryDataStorageService.removeInventoryQuantity(inventoryHistory)
       .subscribe((data: any) => {
-        if (data === 'Success') {
-          this.toastr.successToastr('Quantity is removed', 'Success', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
-          form.reset();
-          this.router.navigate(['admin/inventories/', this.inventory.Id]);
-        } else {
+        if (data.StatusText !== 'Success') {
           this.isDisabled = false;
-          this.toastr.errorToastr('Too big quantity', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr(data.StatusText, 'Error');
+          return;
         }
+
+        this.toastr.successToastr('Successfully removed', 'Success');
+        this.router.navigate(['admin/inventories/', this.inventory.Id]);
       });
   }
 }

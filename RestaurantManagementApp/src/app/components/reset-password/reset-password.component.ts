@@ -30,30 +30,29 @@ export class ResetPasswordComponent {
         ''
       )
     ).subscribe((data: any) => {
-       if (data === 'User name found') {
-         localStorage.setItem('userNameForResetPassword', form.value.userName);
-         form.reset();
-         this.toastr.successToastr(
-           'A password reset code has sent to your email',
-           'Success',
-           {
-           toastTimeout: 20000,
-           newestOnTop: true,
-           showCloseButton: true
-         });
-         this.router.navigate(['/new-password']);
-      } else {
-         this.isDisabled = false;
-         this.toastr.errorToastr(
-           'Incorrect user name',
-           'Error',
-           {
-             toastTimeout: 20000,
-             newestOnTop: true,
-             showCloseButton: true
-           });
-      }
-    });
 
+      if (data.StatusText !== 'Success') {
+        this.isDisabled = false;
+        this.toastr.errorToastr('Incorrect user name', 'Error',
+          {
+            toastTimeout: 20000,
+            newestOnTop: true,
+            showCloseButton: true
+          });
+        return;
+      }
+
+      localStorage.setItem('userNameForResetPassword', form.value.userName);
+      form.reset();
+      this.toastr.successToastr(
+        'A password reset code has sent to your email',
+        'Success',
+        {
+          toastTimeout: 20000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
+      this.router.navigate(['/new-password']);
+    });
   }
 }

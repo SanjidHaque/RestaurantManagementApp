@@ -13,6 +13,7 @@ import {FoodItemDataStorageService} from '../../../../services/data-storage/food
   styleUrls: ['./food-item-details.component.scss']
 })
 export class FoodItemDetailsComponent implements OnInit {
+  isDisabled = false;
   rootUrl = '';
   imageUrl = 'assets/noImage.png';
 
@@ -35,11 +36,7 @@ export class FoodItemDetailsComponent implements OnInit {
         this.setFoodItemImage();
 
         if (this.foodItem === undefined || this.foodItem === null) {
-          this.toastr.errorToastr('Item not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('Item not found', 'Error');
           this.router.navigate(['admin/food-items']);
         }
       }
@@ -75,22 +72,13 @@ export class FoodItemDetailsComponent implements OnInit {
     this.foodItemDataStorageService.deleteFoodItem(this.foodItem.Id).subscribe(
       (data: any) => {
 
-        if (data === 'Failed') {
-          this.toastr.errorToastr('This food cannot be deleted for reporting purpose',
-            'Error', {
-              toastTimeout: 10000,
-              newestOnTop: true,
-              showCloseButton: true
-            });
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
           return;
         }
 
-
-        this.toastr.successToastr('Removed from shop', 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+        this.toastr.successToastr('Removed from shop', 'Success');
         this.router.navigate(['admin/food-items']);
       }
     );

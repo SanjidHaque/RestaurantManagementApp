@@ -134,6 +134,7 @@
       class="btn btn-warning">Edit</button> &nbsp;
 
     <button
+      [disabled]="isDisabled"
       (click)="deleteInventoryItem()"
       class="btn btn-danger">Delete</button>
 

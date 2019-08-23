@@ -11,6 +11,7 @@ import {TableDataStorageService} from '../../../../services/data-storage/table-d
   styleUrls: ['./table-details.component.scss']
 })
 export class TableDetailsComponent implements OnInit {
+  isDisabled = false;
   table: Table;
 
   constructor(private router: Router,
@@ -25,15 +26,10 @@ export class TableDetailsComponent implements OnInit {
         this.table = data['table'];
 
         if (this.table === null || this.table === undefined) {
-          this.toastr.errorToastr('Table not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('Table not found', 'Error');
           this.router.navigate(['admin/tables']);
         }
-      }
-    );
+      });
   }
 
   deleteTable() {
@@ -48,21 +44,13 @@ export class TableDetailsComponent implements OnInit {
     this.tableDataStorageService.deleteTable(this.table.Id).
     subscribe(
       (data: any) => {
-        if (data === 'Failed') {
-          this.toastr.errorToastr('This table cannot be deleted for reporting purpose',
-            'Error', {
-              toastTimeout: 10000,
-              newestOnTop: true,
-              showCloseButton: true
-            });
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
           return;
         }
 
-        this.toastr.successToastr('Removed from shop', 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+        this.toastr.successToastr('Removed from shop', 'Success');
         this.router.navigate(['admin/tables']);
       });
   }

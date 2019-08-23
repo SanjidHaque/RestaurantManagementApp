@@ -38,11 +38,7 @@ export class OrderDetailsComponent implements OnInit {
         this.setting = data['setting'];
 
         if (this.order === undefined || this.order === null) {
-          this.toastr.errorToastr('Order not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('Order not found', 'Error');
           this.router.navigate(['admin/orders']);
         }
       }
@@ -78,33 +74,13 @@ export class OrderDetailsComponent implements OnInit {
 
     this.isDisabled = true;
     this.orderDataStorageService.deleteOrder(this.order.Id).subscribe((data: any) => {
-      if (data === 'Order not found') {
+      if (data.StatusText !== 'Success') {
         this.isDisabled = false;
-        this.toastr.errorToastr( data,  'Error', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+        this.toastr.errorToastr(data.StatusText, 'Error');
         return;
       }
 
-      if (data === 'Order is active now') {
-        this.isDisabled = false;
-        this.toastr.errorToastr( data,  'Error', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
-        return;
-      }
-
-
-      this.toastr.successToastr( 'Order deleted successfully',  'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
-
+      this.toastr.successToastr( 'Order deleted successfully',  'Success');
       this.router.navigate(['admin/orders']);
     });
   }

@@ -1,7 +1,7 @@
 import {NgForm} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {ToastrManager} from 'ng6-toastr-notifications';
-import {ActivatedRoute, Data, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Table} from '../../../models/table.model';
 import {Order} from '../../../models/order.model';
@@ -44,11 +44,7 @@ export class PaymentComponent implements OnInit {
       this.foodItems = data['foodItems'];
 
       if (this.table === undefined || this.table === null) {
-        this.toastr.errorToastr('This table/order is no longer available', 'Error', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+        this.toastr.errorToastr('This table/order is no longer available', 'Error');
         this.router.navigate(['pos']);
       } else {
         this.order = this.table.Orders.find(x => x.CurrentState === 'Ordered'
@@ -150,29 +146,30 @@ export class PaymentComponent implements OnInit {
     this.order.Profit = this.order.GrossTotalPrice - this.order.InventoryCost;
     this.order.SalesPersonName = this.userName;
 
-    this.orderDataStorageService.validateOrder(this.order).subscribe((data: any) => {
+    this.orderDataStorageService.validateOrder(this.order)
+      .subscribe((data: any) => {
 
-      if (data === 'Order not found') {
+      if (data.StatusText !== 'Success') {
         this.isDisabled = false;
-        this.toastr.errorToastr(data, 'Error', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+        this.toastr.errorToastr(data.StatusText, 'Error');
         return;
       }
+
       this.tableDataStorageService.changeTableState(new Table(
         this.order.TableId,
         '',
         'Empty',
         []
       )).subscribe((response: any) => {
+
+        if (response.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(response.StatusText, 'Error');
+          return;
+        }
+
         this.order.CurrentState = 'Paid';
-        this.toastr.successToastr('Order validated', 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+        this.toastr.successToastr('Order validated, print the receipt', 'Success');
       });
     });
   }

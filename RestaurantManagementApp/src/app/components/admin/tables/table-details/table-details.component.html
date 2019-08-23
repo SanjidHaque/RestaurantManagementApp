@@ -47,6 +47,7 @@
       class="btn btn-warning">Edit</button> &nbsp;
 
     <button
+      [disabled]="isDisabled"
       (click)="deleteTable()"
       class="btn btn-danger">Delete</button>
 

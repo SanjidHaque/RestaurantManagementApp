@@ -14,7 +14,6 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
 })
 export class ChangePasswordByAdminComponent implements OnInit {
   isDisabled = false;
-
   userAccount: UserAccount;
 
   constructor(private router: Router,
@@ -28,11 +27,7 @@ export class ChangePasswordByAdminComponent implements OnInit {
         this.userAccount = data['userAccount'];
 
         if (this.userAccount === null || this.userAccount === undefined) {
-          this.toastr.errorToastr('User is not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('User is not found', 'Error');
           this.router.navigate(['admin/user-accounts']);
         }
       }
@@ -41,22 +36,14 @@ export class ChangePasswordByAdminComponent implements OnInit {
 
   changePasswordByAdmin(form: NgForm) {
     if (form.value.newPassword !==  form.value.confirmNewPassword) {
-      this.toastr.errorToastr('Password do not match', 'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+      this.toastr.errorToastr('Password do not match', 'Error');
       return;
     }
     if (form.value.newPassword.length < 6) {
-      this.toastr.errorToastr('Password must be at least 6 characters long',
-        'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+      this.toastr.errorToastr('Password must be at least 6 characters long');
       return;
     }
+
     this.isDisabled = true;
     this.userAccountDataStorageService.changePasswordByAdmin(
       new ChangePassword(
@@ -68,12 +55,14 @@ export class ChangePasswordByAdminComponent implements OnInit {
       )
     ).subscribe(
       (data: any) => {
-          this.toastr.successToastr('Password changed successfully', 'Success', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
-          this.router.navigate(['admin/user-accounts/', this.userAccount.Id]);
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
+          return;
+        }
+
+        this.toastr.successToastr('Password changed successfully', 'Success');
+        this.router.navigate(['admin/user-accounts/', this.userAccount.Id]);
       }
     )
   }

@@ -14,7 +14,7 @@ export class SettingListComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.subscribe( (data: Data) => this.setting = data['settings']);
+    this.route.data.subscribe((data: Data) => this.setting = data['settings']);
   }
 
 }

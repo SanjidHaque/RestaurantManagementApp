@@ -30,11 +30,7 @@ export class EditUserComponent implements OnInit {
         this.userAccount = data['userAccount'];
 
         if (this.userAccount === undefined || this.userAccount === null) {
-          this.toastr.errorToastr('User is not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('User is not found', 'Error');
           this.router.navigate(['admin/user-accounts']);
         }
       }
@@ -54,22 +50,19 @@ export class EditUserComponent implements OnInit {
       form.value.roleName,
     )).subscribe(
       (result: any) => {
-        if (result.Succeeded) {
-          this.toastr.successToastr('Information updated', 'Success', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
-          form.reset();
-          this.router.navigate(['admin/user-accounts/', this.userAccount.Id])
-        } else {
-          this.toastr.errorToastr(result.Errors[0], 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+        if (result.StatusText === 'Resource not found') {
           this.isDisabled = false;
+          this.toastr.errorToastr(result.StatusText, 'Error');
+          return;
 
+        } else if (!result.Succeeded) {
+          this.isDisabled = false;
+          this.toastr.errorToastr(result.Errors[0], 'Error');
+          return;
+
+        } else {
+          this.toastr.successToastr('Information updated', 'Success');
+          this.router.navigate(['admin/user-accounts/', this.userAccount.Id])
         }
       }
     );

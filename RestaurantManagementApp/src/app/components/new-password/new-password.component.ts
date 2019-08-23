@@ -51,10 +51,11 @@ export class NewPasswordComponent {
           form.value.passwordResetCode
         )
       ).subscribe((data: any) => {
-        if (data === 'User not found') {
+
+        if (data.StatusText === 'Resource not found') {
           this.isDisabled = false;
           this.toastr.errorToastr(
-            data,
+            'User not found',
             'Error',
             {
               toastTimeout: 20000,

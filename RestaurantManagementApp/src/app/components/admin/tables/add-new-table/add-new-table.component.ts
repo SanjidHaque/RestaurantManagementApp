@@ -31,12 +31,14 @@ export class AddNewTableComponent {
         []
       )
     ).subscribe(
-        () => {
-          this.toastr.successToastr('Added to shop', 'Success', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+        (data: any) => {
+          if (data.StatusText !== 'Success') {
+            this.isDisabled = false;
+            this.toastr.errorToastr(data.StatusText, 'Error');
+            return;
+          }
+
+          this.toastr.successToastr('Added to shop', 'Success');
           this.router.navigate(['admin/tables']);
         }
     );

@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Order} from '../../../../models/order.model';
+import {ToastrManager} from 'ng6-toastr-notifications';
+import {ActivatedRoute, Data, Router} from '@angular/router';
+
 import {Table} from '../../../../models/table.model';
 import {FoodItem} from '../../../../models/food-item.model';
-import {ActivatedRoute, Data, Router} from '@angular/router';
-import {ToastrManager} from 'ng6-toastr-notifications';
-import {OrderDataStorageService} from '../../../../services/data-storage/order-data-storage.service';
 import {OrderedItem} from '../../../../models/ordered-item.model';
 import {OrderSession} from '../../../../models/order-session.model';
 import {AdminService} from '../../../../services/shared/admin.service';
+import {OrderDataStorageService} from '../../../../services/data-storage/order-data-storage.service';
 
 @Component({
   selector: 'app-cancelled-orders-details',

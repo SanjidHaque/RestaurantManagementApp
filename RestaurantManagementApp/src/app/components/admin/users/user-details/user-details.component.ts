@@ -11,6 +11,7 @@ import {UserAccountDataStorageService} from '../../../../services/data-storage/u
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
+  isDisabled = false;
   userAccount: UserAccount;
 
   constructor(private router: Router,
@@ -24,11 +25,7 @@ export class UserDetailsComponent implements OnInit {
         this.userAccount = data['userAccount'];
 
         if (this.userAccount === undefined || this.userAccount === null) {
-          this.toastr.errorToastr('User is not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('User is not found', 'Error');
           this.router.navigate(['admin/user-accounts']);
         }
       }
@@ -46,11 +43,14 @@ export class UserDetailsComponent implements OnInit {
   confirmEvent() {
     this.userAccountDataStorageService.deleteUserAccount(this.userAccount.Id).subscribe(
       (data: any) => {
-        this.toastr.successToastr('User removed', 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
+          return;
+        }
+
+        this.toastr.successToastr('User removed', 'Success');
         this.router.navigate(['admin/user-accounts']);
       });
   }

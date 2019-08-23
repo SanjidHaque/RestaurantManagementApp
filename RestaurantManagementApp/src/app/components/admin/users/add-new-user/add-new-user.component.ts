@@ -34,11 +34,7 @@ export class AddNewUserComponent implements OnInit {
 
   addNewUserAccount(form: NgForm) {
     if (form.value.password !== form.value.confirmPassword) {
-      this.toastr.errorToastr('Passwords do not match', 'Error', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+      this.toastr.errorToastr('Passwords do not match', 'Error');
       return;
     }
 
@@ -51,7 +47,7 @@ export class AddNewUserComponent implements OnInit {
       form.value.password,
       form.value.phoneNumber,
       moment().format('h:mm:ss A, Do MMMM YYYY').toString(),
-       form.value.roleName
+      form.value.roleName
     );
     this.userAccountDataStorageService.addNewUserAccount(userAccount)
       .subscribe(

@@ -46,12 +46,14 @@ export class EditSettingComponent implements OnInit {
         form.value.additionalInformation,
         this.setting.PrintChefsOrderReceipt
       )
-    ).subscribe( (data: any) => {
-      this.toastr.successToastr('Information updated', 'Success', {
-        toastTimeout: 10000,
-        newestOnTop: true,
-        showCloseButton: true
-      });
+    ).subscribe((data: any) => {
+      if (data.StatusText !== 'Success') {
+        this.isDisabled = false;
+        this.toastr.errorToastr(data.StatusText, 'Error');
+        return;
+      }
+
+      this.toastr.successToastr('Information updated', 'Success');
       this.router.navigate(['admin/settings']);
     });
   }

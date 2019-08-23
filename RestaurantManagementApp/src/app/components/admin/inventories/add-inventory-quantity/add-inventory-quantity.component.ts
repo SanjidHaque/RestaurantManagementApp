@@ -33,11 +33,7 @@ export class AddInventoryQuantityComponent implements OnInit {
         this.inventoryAdditionComments = this.adminService.inventoryAdditionComments;
 
         if (this.inventory === undefined || this.inventory === null) {
-          this.toastr.errorToastr('Item not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('Item not found', 'Error');
           this.router.navigate(['admin/inventories']);
         }
       }
@@ -89,16 +85,15 @@ export class AddInventoryQuantityComponent implements OnInit {
 
     this.inventoryDataStorageService.addInventoryQuantity(inventoryHistory)
       .subscribe((data: any) => {
-        this.toastr.successToastr('Information is updated', 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
-        form.reset();
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
+          return;
+        }
+
+        this.toastr.successToastr('Information is updated', 'Success');
         this.router.navigate(['admin/inventories/', this.inventory.Id]);
       }
     );
   }
-
-
 }

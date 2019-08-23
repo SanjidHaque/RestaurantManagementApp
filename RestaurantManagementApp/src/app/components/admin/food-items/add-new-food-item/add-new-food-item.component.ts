@@ -156,8 +156,6 @@ export class AddNewFoodItemComponent implements OnInit {
     this.ingredients.splice(index, 1);
   }
 
-
-
   addNewFoodItem(form: NgForm) {
     if (this.ingredients.length === 0) {
       this.toastr.errorToastr('Select at least one ingredient', 'Error');
@@ -195,34 +193,22 @@ export class AddNewFoodItemComponent implements OnInit {
       .subscribe(
       (response: any) => {
 
-        if (response === 'Duplicate serial number') {
+        if (response.StatusText !== 'Success') {
           this.isDisabled = false;
-          this.toastr.errorToastr(response, 'Error');
-          this.isDisabled = false;
-          return;
-        }
-
-        if (response === 'Duplicate item name') {
-          this.isDisabled = false;
-          this.toastr.errorToastr(response, 'Error');
-          this.isDisabled = false;
+          this.toastr.errorToastr(response.StatusText, 'Error');
           return;
         }
 
         if (this.imageUrl !== 'assets/noImage.png') {
-          this.foodItemDataStorageService.uploadFoodItemImage(response.Id, this.fileToUpload)
+          this.foodItemDataStorageService
+            .uploadFoodItemImage(response.foodItem.Id, this.fileToUpload)
             .subscribe(() => {
                 this.imageUrl = '/assets/noImage.png';
                 this.toastr.successToastr('Added to shop', 'Success');
                 this.router.navigate(['admin/food-items/', response.Id]);
-              }
-            );
+              });
         } else {
-          this.toastr.successToastr('Added to shop', 'Success', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.successToastr('Added to shop', 'Success');
           this.router.navigate(['admin/food-items/', response.Id]);
         }
       });

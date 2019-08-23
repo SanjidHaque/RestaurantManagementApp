@@ -28,11 +28,7 @@ export class EditInventoryItemComponent implements OnInit {
         this.inventory = data['inventory'];
 
         if (this.inventory === undefined || this.inventory === null) {
-          this.toastr.errorToastr('Item not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('Item not found', 'Error');
           this.router.navigate(['admin/inventories']);
         }
       }
@@ -55,25 +51,11 @@ export class EditInventoryItemComponent implements OnInit {
       this.inventoryDataStorageService.editInventory(editedInventory)
         .subscribe((data: any) => {
 
-        if (data === 'Duplicate item name') {
-          this.toastr.errorToastr(data, 'Error', {
-            toastLife: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
-          this.isDisabled = false;
-          return;
-        }
-
-        if (data === 'Item not found') {
-          this.toastr.errorToastr(data, 'Error', {
-            toastLife: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
-          this.isDisabled = false;
-          return;
-        }
+          if (data.StatusText !== 'Success') {
+            this.isDisabled = false;
+            this.toastr.errorToastr(data.StatusText, 'Error');
+            return;
+          }
 
         this.toastr.successToastr('Information updated!', 'Success', {
             toastLife: 10000,

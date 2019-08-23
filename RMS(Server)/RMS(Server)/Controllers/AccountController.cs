@@ -20,6 +20,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.OAuth;
 using RMS_Server_.Models;
 using RMS_Server_.Results;
+using RMS_Server_.Services;
 using WebGrease.Css.Extensions;
 
 namespace RMS_Server_.Controllers
@@ -30,10 +31,12 @@ namespace RMS_Server_.Controllers
         private readonly ApplicationDbContext _context;
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private readonly StatusTextService _statusTextService;
 
         public AccountController()
         {
             _context = new ApplicationDbContext();
+            _statusTextService = new StatusTextService();
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -110,7 +113,7 @@ namespace RMS_Server_.Controllers
 
         [HttpGet]
         [Route("api/GetUserAccount/{userAccountId}")]
-        public IHttpActionResult GetAllUserAccount(string userAccountId)
+        public IHttpActionResult GetUserAccount(string userAccountId)
         {
             UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
             UserManager<ApplicationUser> manager = new UserManager<ApplicationUser>(userStore);
@@ -202,9 +205,9 @@ namespace RMS_Server_.Controllers
             {
                 _context.Users.Remove(user);
                 _context.SaveChanges();
-                return Ok();
+                return Ok(new { StatusText = _statusTextService.Success });
             }
-            return NotFound();
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
 
@@ -219,13 +222,13 @@ namespace RMS_Server_.Controllers
 
             if (applicationUser == null)
             {
-                return NotFound();
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
 
             string hashedNewPassword = manager.PasswordHasher.HashPassword(changePassword.NewPassword);
             await userStore.SetPasswordHashAsync(applicationUser, hashedNewPassword);
             await userStore.UpdateAsync(applicationUser);
-            return Ok();
+            return Ok(new { StatusText = _statusTextService.Success });
         }
 
 
@@ -240,7 +243,7 @@ namespace RMS_Server_.Controllers
 
             if (applicationUser == null)
             {
-                return NotFound();
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
 
             IdentityResult result = await manager.ChangePasswordAsync(changePassword.UserAccountId, changePassword.OldPassword,changePassword.NewPassword);
@@ -250,7 +253,7 @@ namespace RMS_Server_.Controllers
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok(new { StatusText = _statusTextService.Success });
         }
 
         [Route("api/EditUserAccount")]
@@ -264,7 +267,7 @@ namespace RMS_Server_.Controllers
             ApplicationUser applicationUser = manager.FindById(editUserAccount.Id);
             if (applicationUser == null)
             {
-                return NotFound();
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
 
             string roleId = applicationUser.Roles.SingleOrDefault()?.RoleId;
@@ -287,7 +290,7 @@ namespace RMS_Server_.Controllers
 
 
 
-
+            
         [HttpPost]
         [Route("api/ResetPassword")]
         [AllowAnonymous]
@@ -330,10 +333,10 @@ namespace RMS_Server_.Controllers
                 NetworkCredential nc = new NetworkCredential(fromaddr, password);
                 smtp.Credentials = nc;
                 smtp.Send(msg);
-                return Ok("User name found");
+                return Ok(new { StatusText = _statusTextService.Success });
             }
 
-            return Ok("User name not found");
+            return Ok(new { StatusText = _statusTextService.ResourceNotFound });
         }
 
         [HttpPost]
@@ -349,7 +352,7 @@ namespace RMS_Server_.Controllers
             ApplicationUser user = manager.FindByName(changePassword.UserAccountName);
             if (user == null)
             {
-                return Ok("User not found");
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
             }
 
             TimeSpan difference = DateTime.Now - user.CustomPasswordResetTokenIssuedDateTime;
@@ -363,7 +366,6 @@ namespace RMS_Server_.Controllers
 
                 if (result.Succeeded)
                 {
-
                     user.CustomPasswordResetToken = null;
                     user.CustomPasswordResetTokenIssuedDateTime = DateTime.Now.AddDays(-100);
                     await manager.UpdateAsync(user);
@@ -373,7 +375,7 @@ namespace RMS_Server_.Controllers
                 return Ok(result);
             }
 
-            return Ok("Token invalid or has expired");
+            return Ok(new { StatusText = _statusTextService.TokenInvalidOrExpired });
         }
 
         // GET api/Account/UserInfo

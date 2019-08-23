@@ -11,7 +11,7 @@ import {InventoryDataStorageService} from '../../../../services/data-storage/inv
   styleUrls: ['./inventory-details.component.scss']
 })
 export class InventoryDetailsComponent implements OnInit {
-
+  isDisabled = false;
   inventory: Inventory;
   pageNumber = 1;
 
@@ -27,11 +27,7 @@ export class InventoryDetailsComponent implements OnInit {
         this.inventory = data['inventory'];
 
         if (this.inventory === undefined || this.inventory === null) {
-          this.toastr.errorToastr('Item not found', 'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          this.toastr.errorToastr('Item not found', 'Error');
           this.router.navigate(['admin/inventories']);
         }
       }
@@ -51,21 +47,13 @@ export class InventoryDetailsComponent implements OnInit {
     subscribe(
       (data: any) => {
 
-        if (data === 'Failed') {
-          this.toastr.errorToastr('This item cannot be deleted for reporting purpose',
-            'Error', {
-            toastTimeout: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
           return;
         }
 
-        this.toastr.successToastr('Removed from shop', 'Success', {
-          toastTimeout: 10000,
-          newestOnTop: true,
-          showCloseButton: true
-        });
+        this.toastr.successToastr('Removed from shop', 'Success');
         this.router.navigate(['admin/inventories']);
       }
     );

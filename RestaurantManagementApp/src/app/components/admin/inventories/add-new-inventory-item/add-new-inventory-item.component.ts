@@ -5,7 +5,6 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 
 import {Inventory} from '../../../../models/inventory.model';
 import {AdminService} from '../../../../services/shared/admin.service';
-import {InventoryHistory} from '../../../../models/inventory-history.model';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
 @Component({
@@ -42,21 +41,13 @@ export class AddNewInventoryItemComponent {
        this.inventoryDataStorageService.addNewInventory(inventory)
          .subscribe(
          (data: any) => {
-           if (data === 'Duplicate item name') {
-             this.toastr.errorToastr(data, 'Error', {
-               toastLife: 10000,
-               newestOnTop: true,
-               showCloseButton: true
-             });
+           if (data.StatusText !== 'Success') {
              this.isDisabled = false;
+             this.toastr.errorToastr(data.StatusText, 'Error');
              return;
            }
 
-           this.toastr.successToastr('Added to inventory', 'Success', {
-             toastLife: 10000,
-             newestOnTop: true,
-             showCloseButton: true
-           });
+           this.toastr.successToastr('Added to inventory', 'Success');
            this.router.navigate(['admin/inventories']);
          }
        );

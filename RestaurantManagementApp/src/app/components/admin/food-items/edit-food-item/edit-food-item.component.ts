@@ -213,17 +213,16 @@ export class EditFoodItemComponent implements OnInit {
       .subscribe(
         (data: any) => {
 
-          if (data === 'Error') {
+          if (data.StatusText !== 'Success') {
             this.isDisabled = false;
-            this.toastr.errorToastr('Duplicate serial number', 'Error');
+            this.toastr.errorToastr(data.StatusText, 'Error');
             return;
           }
 
           if (this.imageUrl !== 'assets/noImage.png' && this.fileToUpload !== null ) {
             this.foodItemDataStorageService.
             uploadFoodItemImage(this.foodItem.Id.toString(), this.fileToUpload)
-              .subscribe(
-                (response: any) => {
+              .subscribe(() => {
                   this.imageUrl = '/assets/noImage.png';
                   this.toastr.successToastr('Information is updated', 'Success');
                   this.router.navigate(['admin/food-items/', this.foodItem.Id]);

@@ -4,21 +4,22 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 
 import {Inventory} from '../../../../models/inventory.model';
+import {AdminService} from '../../../../services/shared/admin.service';
 import {InventoryDataStorageService} from '../../../../services/data-storage/inventory-data-storage.service';
 
-
 @Component({
-  selector: 'app-edit-inventory-item',
-  templateUrl: './edit-inventory-item.component.html',
-  styleUrls: ['./edit-inventory-item.component.scss']
+  selector: 'app-override-price',
+  templateUrl: './override-inventory-price.component.html',
+  styleUrls: ['./override-inventory-price.component.scss']
 })
-export class EditInventoryItemComponent implements OnInit {
+export class OverrideInventoryPriceComponent implements OnInit {
   isDisabled = false;
   inventory: Inventory;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private toastr: ToastrManager,
+              private adminService: AdminService,
               private inventoryDataStorageService: InventoryDataStorageService) { }
 
   ngOnInit() {
@@ -35,33 +36,38 @@ export class EditInventoryItemComponent implements OnInit {
     );
   }
 
-  editInventoryItem(form: NgForm) {
+  overrideInventoryPrice(form: NgForm) {
     this.isDisabled = true;
+    const price = form.value.price;
+
+    if (!this.adminService.checkNumericConditions(price, 'inventory')) {
+      return;
+    }
 
     const inventory = new Inventory(
       this.inventory.Id,
-      form.value.name,
+      '',
       null,
       null,
-      form.value.unit,
-      null,
+      '',
+      price,
       []
-      );
+    );
 
-      this.inventoryDataStorageService.editInventory(inventory)
-        .subscribe((data: any) => {
+    this.inventoryDataStorageService.overrideInventoryPrice(inventory)
+      .subscribe((data: any) => {
 
-          if (data.StatusText !== 'Success') {
-            this.isDisabled = false;
-            this.toastr.errorToastr(data.StatusText, 'Error');
-            return;
-          }
+        if (data.StatusText !== 'Success') {
+          this.isDisabled = false;
+          this.toastr.errorToastr(data.StatusText, 'Error');
+          return;
+        }
 
         this.toastr.successToastr('Information updated!', 'Success', {
-            toastLife: 10000,
-            newestOnTop: true,
-            showCloseButton: true
-          });
+          toastLife: 10000,
+          newestOnTop: true,
+          showCloseButton: true
+        });
         this.router.navigate(['admin/inventories', this.inventory.Id]);
       });
   }

@@ -28,6 +28,10 @@ export class InventoryDataStorageService {
     return this.http.post<Inventory>(this.rootUrl + '/api/AddNewInventory', inventory);
   }
 
+  overrideInventoryPrice(inventory: Inventory) {
+    return this.http.put<Inventory>(this.rootUrl + '/api/OverrideInventoryPrice', inventory);
+  }
+
   editInventory(inventory: Inventory) {
     return this.http.put<Inventory>(this.rootUrl + '/api/EditInventory', inventory);
   }

@@ -17,7 +17,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] =
     [
       'Name',
-      'AveragePrice',
+      'Price',
       'RemainingQuantity',
       'UsedQuantity'
     ];

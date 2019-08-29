@@ -57,6 +57,7 @@ import {CancelledOrdersListComponent} from '../components/admin/cancelled-orders
 import {CancelledOrdersDetailsComponent} from '../components/admin/cancelled-orders/cancelled-orders-details/cancelled-orders-details.component';
 import {CancelledOrderedItemsResolverService} from '../route-resolvers/cancelled-ordered-items-resolver.service';
 import {CancelledOrderedItemResolverService} from '../route-resolvers/cancelled-ordered-item-resolver.service';
+import {OverrideInventoryPriceComponent} from '../components/admin/inventories/override-inventory-price/override-inventory-price.component';
 
 
 const appRoutes: Routes = [
@@ -217,6 +218,14 @@ const appRoutes: Routes = [
               {
                 path: ':inventory-id/remove-inventory-quantity',
                 component: RemoveInventoryQuantityComponent,
+                resolve:
+                  {
+                    inventory: InventoryResolverService
+                  }
+              },
+              {
+                path: ':inventory-id/override-inventory-price',
+                component: OverrideInventoryPriceComponent,
                 resolve:
                   {
                     inventory: InventoryResolverService

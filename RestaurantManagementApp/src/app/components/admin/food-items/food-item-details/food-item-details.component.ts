@@ -62,7 +62,7 @@ export class FoodItemDetailsComponent implements OnInit {
         return inventory.Unit;
       }
       if (specifier === 'Price') {
-        return inventory.AveragePrice;
+        return inventory.Price;
       }
     }
     return '';

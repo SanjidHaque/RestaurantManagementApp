@@ -15,7 +15,7 @@
 
 <div class="row" style="font-weight: 500; font-size: 17px;">
   <div class="col-xl-12">
-    Average Price: {{ inventory.AveragePrice }} BDT
+    Price: {{ inventory.Price }} BDT
   </div>
 </div>
 <br>
@@ -48,6 +48,20 @@
 
   </div>
 </div>
+
+<br>
+
+<div class="row text-xl-left">
+  <div class="col-xl-12 col-12">
+
+    <button
+      routerLink="/admin/inventories/{{inventory.Id}}/override-inventory-price"
+      class="btn btn-primary">Override Price</button>&nbsp;
+
+  </div>
+</div>
+
+
 
 <div
   style="font-weight: 500; padding-top: 20px; padding-bottom: 20px;"

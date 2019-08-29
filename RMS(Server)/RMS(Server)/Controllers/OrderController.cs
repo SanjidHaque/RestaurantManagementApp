@@ -146,13 +146,16 @@ namespace RMS_Server_.Controllers
                     foreach (Ingredient foodItemIngredient in foodItem.Ingredients)
                     {
                         float inventoryQuantity = orderedItem.FoodItemQuantity * foodItemIngredient.Quantity;
+
+
+
                         InventoryHistory inventoryHistory = new InventoryHistory
                         {
                             Comment = "Wasted",
                             Quantity = inventoryQuantity,
                             DateTime = DateTime.Now.ToString("MM/dd/yyyy, h:mm tt"),
                             InventoryId = foodItemIngredient.InventoryId,
-                            Price = 0,
+                            Price = GetInventoryPrice(inventories, foodItemIngredient.InventoryId),
                             Type = "Removal"
                         };
                         _context.InventoryHistories.Add(inventoryHistory);
@@ -554,7 +557,18 @@ namespace RMS_Server_.Controllers
 
         }
 
-   
+
+        public float GetInventoryPrice(List<Inventory> inventories, int inventoryId)
+        {
+            Inventory inventory = inventories.FirstOrDefault(p => p.Id == inventoryId);
+
+            if (inventory == null)
+            {
+                return 0;
+            }
+
+            return inventory.Price;
+        }
 
     }
 }

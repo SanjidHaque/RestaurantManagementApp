@@ -74,19 +74,19 @@ namespace RMS_Server_.Controllers
         [Route("api/EditInventory")]
         public IHttpActionResult EditInventory(Inventory inventory)
         {
-            Inventory editInventoryItem = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+            Inventory getInventory = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
 
-            if (editInventoryItem != null)
+            if (getInventory != null)
             {
-                if (_context.Inventories.Any(o => o.Name == inventory.Name && o.Name != editInventoryItem.Name))
+                if (_context.Inventories.Any(o => o.Name == inventory.Name && o.Name != getInventory.Name))
                 {
                     return Ok(new { StatusText = _statusTextService.DuplicateItemName });
                 }
 
-                editInventoryItem.Name = inventory.Name;
-                editInventoryItem.Unit = inventory.Unit;
+                getInventory.Name = inventory.Name;
+                getInventory.Unit = inventory.Unit;
 
-                _context.Entry(editInventoryItem).State = EntityState.Modified;
+                _context.Entry(getInventory).State = EntityState.Modified;
                 _context.SaveChanges();
                 return Ok(new { StatusText = _statusTextService.Success });
             }
@@ -104,14 +104,8 @@ namespace RMS_Server_.Controllers
 
             if (inventory != null)
             {
-                _context.InventoryHistories.Add(inventoryHistory);
-                _context.SaveChanges();
-
-                List<InventoryHistory> inventoryHistories = _context.InventoryHistories
-                        .Where(q => q.InventoryId == inventoryHistory.InventoryId)
-                        .ToList();
-
-                inventory.AveragePrice = CalculateAveragePrice(inventory, inventoryHistories);
+                _context.InventoryHistories.Add(inventoryHistory);              
+                inventory.Price = inventoryHistory.Price;
                 inventory.RemainingQuantity += inventoryHistory.Quantity;
 
                 _context.Entry(inventory).State = EntityState.Modified;
@@ -139,15 +133,9 @@ namespace RMS_Server_.Controllers
                 }
 
                 _context.InventoryHistories.Add(inventoryHistory);
-                _context.SaveChanges();
-
-                List<InventoryHistory> inventoryHistories = _context.InventoryHistories
-                    .Where(q => q.InventoryId == inventoryHistory.InventoryId)
-                    .ToList();
-
                 inventory.RemainingQuantity -= inventoryHistory.Quantity;
                 inventory.UsedQuantity += inventoryHistory.Quantity;
-                inventory.AveragePrice = CalculateAveragePrice(inventory, inventoryHistories); 
+              
 
                 _context.Entry(inventory).State = EntityState.Modified;
                 _context.SaveChanges();
@@ -156,6 +144,24 @@ namespace RMS_Server_.Controllers
             }
 
             return Ok(new { StatusText = _statusTextService.ResourceNotFound });
+        }
+
+        [HttpPut]
+        [Route("api/OverrideInventoryPrice")]
+        public IHttpActionResult OverrideInventoryPrice(Inventory inventory)
+        {
+            Inventory getInventory = _context.Inventories.FirstOrDefault(p => p.Id == inventory.Id);
+
+            if (getInventory == null)
+            {
+                return Ok(new { StatusText = _statusTextService.ResourceNotFound });
+            }
+
+            getInventory.Price = inventory.Price;
+            _context.SaveChanges();
+            _context.Entry(getInventory).State = EntityState.Modified;
+
+            return Ok(new { StatusText = _statusTextService.Success });
         }
 
 
@@ -179,7 +185,7 @@ namespace RMS_Server_.Controllers
             return Ok(new { StatusText = _statusTextService.Success });
         }
 
-        private float CalculateAveragePrice(Inventory inventory, List<InventoryHistory> inventoryHistories)
+        private float CalculateAveragePrice(List<InventoryHistory> inventoryHistories)
         {
             float totalPrice = 0;
             float totalWeight = 0;

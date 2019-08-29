@@ -73,7 +73,7 @@ export class AddNewFoodItemComponent implements OnInit {
         return inventory.Unit;
       }
       if (specifier === 'Price') {
-        return inventory.AveragePrice;
+        return inventory.Price;
       }
     }
     return '';
@@ -84,7 +84,7 @@ export class AddNewFoodItemComponent implements OnInit {
     const ingredientId = null;
     const inventoryId = +form.value.inventoryId;
     const quantity = form.value.quantity;
-    const averagePrice = this.inventories.find(x => x.Id === inventoryId).AveragePrice;
+    const averagePrice = this.inventories.find(x => x.Id === inventoryId).Price;
     const subTotal = quantity * averagePrice;
     const ingredientIndex = this.checkIfIngredientsExist(inventoryId);
 

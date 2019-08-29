@@ -57,7 +57,7 @@ export class RemoveInventoryQuantityComponent implements OnInit {
       return;
     }
 
-    if (!confirm('Add ' + quantity + this.inventory.Unit + ' of ' + this.inventory.Name
+    if (!confirm('Remove ' + quantity + this.inventory.Unit + ' of ' + this.inventory.Name
       + ' ' + price + ' BDT' + ' per unit?')) {
       return;
     }

@@ -86,6 +86,7 @@ import {OrderCancellationOptionComponent} from './bottom-sheets/order-cancellati
 import { OrderCancellationReasonComponent } from './bottom-sheets/order-cancellation-reason/order-cancellation-reason.component';
 import {CancelledOrderedItemsResolverService} from './route-resolvers/cancelled-ordered-items-resolver.service';
 import {CancelledOrderedItemResolverService} from './route-resolvers/cancelled-ordered-item-resolver.service';
+import {OverrideInventoryPriceComponent} from './components/admin/inventories/override-inventory-price/override-inventory-price.component';
 
 
 
@@ -138,7 +139,8 @@ import {CancelledOrderedItemResolverService} from './route-resolvers/cancelled-o
     CancelledOrdersComponent,
     CancelledOrdersListComponent,
     CancelledOrdersDetailsComponent,
-    OrderCancellationReasonComponent
+    OrderCancellationReasonComponent,
+    OverrideInventoryPriceComponent
   ],
   imports: [
     BrowserModule,

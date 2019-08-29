@@ -1,0 +1,49 @@
+
+<div class="row" style="font-weight: 500;">
+  <div class="col-xl-12">
+    Override price of {{ inventory.Name }}
+  </div>
+</div>
+
+<br>
+
+
+<form (ngSubmit) = "overrideInventoryPrice(form)" #form= "ngForm">
+
+  <div class="row form-group">
+    <div class="col-xl-6">
+
+      <label for="price">Price</label>
+      <input
+        type="number"
+        id="price"
+        class="form-control"
+        [ngModel]="inventory.Price"
+        name="price"
+        #price="ngModel"
+        required>
+      <p
+        style="color: red; margin-bottom: 0;"
+        *ngIf="price.invalid && (price.dirty || price.touched)">
+        Price is required!
+      </p>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xl-6 text-xl-right">
+      <button
+        [disabled]="form.invalid || isDisabled"
+        type="submit"
+        class="btn btn-success">Update</button>
+      &nbsp;
+      <button
+        type="button"
+        routerLink="/admin/inventories/{{inventory.Id}}"
+        class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+
+
+</form>

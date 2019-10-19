@@ -78,14 +78,25 @@ export class PaymentComponent implements OnInit {
 
   calculateOrderDiscount(form: NgForm) {
     this.setOrderGrossTotalPrice();
+
+
     if (form.value.discountType === 'flat') {
-      this.order.DiscountType = 'Flat';
-      this.order.DiscountRate = form.value.discountRate;
-      this.order.DiscountAmount = form.value.discountRate;
+
+      if ((form.value.discountRate <= this.order.TotalPrice) && (form.value.discountRate > 0)) {
+        this.order.DiscountType = 'Flat';
+        this.order.DiscountRate = form.value.discountRate;
+        this.order.DiscountAmount = form.value.discountRate;
+      } else {
+        this.toastr.errorToastr('Invalid value', 'Error');
+      }
     } else {
-      this.order.DiscountType = 'Percent';
-      this.order.DiscountRate = form.value.discountRate;
-      this.order.DiscountAmount = (this.order.GrossTotalPrice * form.value.discountRate) / 100;
+      if ((form.value.discountRate <= 100) && (form.value.discountRate > 0)) {
+        this.order.DiscountType = 'Percent';
+        this.order.DiscountRate = form.value.discountRate;
+        this.order.DiscountAmount = (this.order.GrossTotalPrice * form.value.discountRate) / 100;
+      } else {
+        this.toastr.errorToastr('Invalid value', 'Error');
+      }
     }
     this.order.GrossTotalPrice -= this.order.DiscountAmount;
     this.order.GrossTotalPrice = Math.ceil(this.order.GrossTotalPrice);

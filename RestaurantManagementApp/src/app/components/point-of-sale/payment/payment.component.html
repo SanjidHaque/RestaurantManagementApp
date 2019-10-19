@@ -122,7 +122,7 @@
 
               <label for="discountType">Type</label>
               <select
-                [(ngModel)]=  "percent"
+                [(ngModel)]="percent"
                 required
                 class="form-control" name="discountType" id="discountType">
                 <option value="flat" selected = "selected">Flat</option>
@@ -267,7 +267,7 @@
            </span>
 
          <span *ngIf="order.DiscountType === 'Flat'">
-           Flat Discount {{ order.DiscountRate }} BDT
+           Flat Discount: {{ order.DiscountRate }} BDT
           <i
             title="Remove discount"
             style="cursor: pointer"

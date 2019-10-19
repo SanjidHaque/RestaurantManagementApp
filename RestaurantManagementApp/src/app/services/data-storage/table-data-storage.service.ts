@@ -8,7 +8,7 @@ export class TableDataStorageService {
   backEndPort = '1548';
   rootUrl = 'http://localhost:' + this.backEndPort;
 
- // rootUrl = 'https://hodoo-masterchef-be.azurewebsites.net';
+  // rootUrl = 'http://18.190.19.146:5202/';
   
   constructor(private http: HttpClient) { }
 

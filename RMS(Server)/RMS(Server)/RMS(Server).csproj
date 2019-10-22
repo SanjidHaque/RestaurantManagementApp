@@ -296,6 +296,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\FoodItemImages\photo-1511191007175.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -320,13 +321,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\hodoo-backend - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\hodoo-backend - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\hodoo-headblocks-be - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Hodoo-Headblocks-BE.pubxml" />
     <None Include="Properties\PublishProfiles\hodoo-masterchef-be - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Hodoo-Masterchef-Be.pubxml" />
+    <None Include="Properties\PublishProfiles\HodooProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -367,7 +368,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\FoodItemImages\" />
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>

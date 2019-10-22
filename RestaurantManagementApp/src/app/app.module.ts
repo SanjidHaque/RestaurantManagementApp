@@ -6,7 +6,7 @@ import {AppRoutingModule} from './modules/app-routing.module';
 import {PointOfSaleService} from './services/shared/point-of-sale.service';
 import {TableDataStorageService} from './services/data-storage/table-data-storage.service';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
 import {TablesResolverService} from './route-resolvers/tables-resolver.service';
 import {OrdersResolverService} from './route-resolvers/orders-resolver.service';
@@ -87,8 +87,7 @@ import { OrderCancellationReasonComponent } from './bottom-sheets/order-cancella
 import {CancelledOrderedItemsResolverService} from './route-resolvers/cancelled-ordered-items-resolver.service';
 import {CancelledOrderedItemResolverService} from './route-resolvers/cancelled-ordered-item-resolver.service';
 import {OverrideInventoryPriceComponent} from './components/admin/inventories/override-inventory-price/override-inventory-price.component';
-
-
+import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 
 @NgModule({
   declarations: [
@@ -150,6 +149,7 @@ import {OverrideInventoryPriceComponent} from './components/admin/inventories/ov
     HttpClientModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
     HttpClientModule,
@@ -163,7 +163,9 @@ import {OverrideInventoryPriceComponent} from './components/admin/inventories/ov
     }),
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    NgxPrintModule
+    NgxPrintModule,
+    SatDatepickerModule,
+    SatNativeDateModule
   ],
 
   providers: [

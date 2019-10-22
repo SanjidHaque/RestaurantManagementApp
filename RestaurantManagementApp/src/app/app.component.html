@@ -3,7 +3,7 @@
 
 
 
-<div class="container-fluid" *ngIf="screenWidth < 992">
+<div class="container-fluid" *ngIf="screenWidth < 1100">
 
   <div class="row">
     <div
@@ -47,7 +47,7 @@
     class="container-fluid"
     style="position: fixed; z-index: 3; background-color: #fff;"
     *ngIf="
-    screenWidth >= 992 &&
+    screenWidth >= 1100 &&
     router.url !== '/login' &&
     router.url !== '/new-password' &&
     router.url !== '/reset-password'" >

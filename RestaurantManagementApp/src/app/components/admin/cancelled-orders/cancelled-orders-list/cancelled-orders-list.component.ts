@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {ActivatedRoute, Data} from '@angular/router';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
@@ -22,6 +22,7 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
 
   cancelledOrderedItems: OrderedItem[] = [];
   filteredCancelledOrderedItems: OrderedItem[] = [];
+  dateForm: FormGroup;
 
   displayedColumns: string[] =
     [
@@ -38,8 +39,11 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.
-    subscribe(
+    this.dateForm = new FormGroup({
+      date: new FormControl('')
+    });
+
+    this.route.data.subscribe(
       ( data: Data) => {
         this.orders = data['orders'];
         this.cancelledOrderedItems = data['cancelledOrderedItems'];
@@ -55,6 +59,10 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  s() {
+    console.log(this.dateForm.controls['date'].value.begin);
   }
 
 
@@ -78,9 +86,10 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
     this.filteredCancelledOrderedItems = this.cancelledOrderedItems;
   }
 
-  filterOrdersByDate(form: NgForm) {
-    const startDate = moment(form.value.date[0], 'h:mm:ss A, Do MMMM YYYY');
-    const endDate = moment(form.value.date[1], 'h:mm:ss A, Do MMMM YYYY');
+  filterOrdersByDate() {
+    const startDate = moment(this.dateForm.controls['date'].value.begin, 'h:mm:ss A, Do MMMM YYYY');
+    const endDate = moment(this.dateForm.controls['date'].value.end, 'h:mm:ss A, Do MMMM YYYY');
+
     this.filteredCancelledOrderedItems = [];
     this.dataSource.data = [];
 

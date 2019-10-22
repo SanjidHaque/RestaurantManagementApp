@@ -11,13 +11,16 @@
 
 
 
+
 <ng-template #notEmpty>
 
-  <form (ngSubmit)="filterOrdersByDate(orderFilterForm)" #orderFilterForm = "ngForm">
+  <form (ngSubmit)="filterOrdersByDate()"
+        [formGroup]="dateForm"
+        #form = "ngForm">
 
     <div class="row">
 
-      <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12">
+      <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-12">
 
         <button
           (click)="defaultOrders()"
@@ -26,36 +29,37 @@
 
       </div>
 
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-8 order-list-top">
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-6 col-8 order-list-top">
-
-        <input
-          type="text"
-          id="date"
-          autocomplete="off"
-          onkeydown="return false"
-          ngModel
-          name="date"
-          required
-          class="form-control"
-          placeholder="Date range"
-          [bsConfig]="{ rangeInputFormat: 'Do MMMM YYYY', containerClass: 'theme-dark-blue'}"
-          bsDaterangepicker/>
+      <mat-form-field>
+        <input matInput
+               readonly
+               (click)="picker2.open()"
+               [satDatepicker]="picker2"
+               formControlName="date">
+        <sat-datepicker
+          #picker2
+          [rangeMode]="true">
+        </sat-datepicker>
+        <sat-datepicker-toggle
+          matSuffix
+          [for]="picker2">
+        </sat-datepicker-toggle>
+      </mat-form-field>
 
       </div>
 
-      <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-12 order-list-top">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-12 order-list-top">
 
         <button
           type="submit"
-          [disabled] = "orderFilterForm.invalid"
+          [disabled] = "form.invalid"
           class="btn btn-primary">Filter</button>
 
       </div>
     </div>
 
   </form>
-
 
 
 

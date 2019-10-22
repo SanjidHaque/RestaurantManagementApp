@@ -20,3 +20,12 @@ table {
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 767px) {
+
+  .order-list-top {
+    padding-top: 7px;
+  }
+
+}
+

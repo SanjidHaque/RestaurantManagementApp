@@ -205,11 +205,9 @@ export class AddNewFoodItemComponent implements OnInit {
             .subscribe(() => {
                 this.imageUrl = '/assets/noImage.png';
                 this.toastr.successToastr('Added to shop', 'Success');
-                this.router.navigate(['admin/food-items/', response.Id]);
               });
         } else {
           this.toastr.successToastr('Added to shop', 'Success');
-          this.router.navigate(['admin/food-items/', response.Id]);
         }
       });
 

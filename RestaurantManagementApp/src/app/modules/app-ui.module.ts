@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {MatListModule} from '@angular/material/list';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
-import {MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import {MatDatepickerModule, MatNativeDateModule, MatButtonModule} from '@angular/material';
+import {MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
-import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderCancellationOptionComponent} from '../bottom-sheets/order-cancellation-option/order-cancellation-option.component';
 import {OrderCancellationReasonComponent} from '../bottom-sheets/order-cancellation-reason/order-cancellation-reason.component';
-
 
 @NgModule({
   declarations: [],
@@ -33,7 +33,9 @@ import {OrderCancellationReasonComponent} from '../bottom-sheets/order-cancellat
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SatDatepickerModule,
+    SatNativeDateModule
   ],
   exports: [
     MatTableModule,
@@ -48,6 +50,8 @@ import {OrderCancellationReasonComponent} from '../bottom-sheets/order-cancellat
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    SatDatepickerModule,
+    SatNativeDateModule,
     NgxPaginationModule
   ],
   entryComponents: [

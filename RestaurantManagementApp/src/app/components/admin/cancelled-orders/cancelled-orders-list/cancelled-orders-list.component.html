@@ -15,8 +15,7 @@
 <ng-template #notEmpty>
 
   <form (ngSubmit)="filterOrdersByDate()"
-        [formGroup]="dateForm"
-        #form = "ngForm">
+        [formGroup]="dateForm">
 
     <div class="row">
 
@@ -53,11 +52,11 @@
 
         <button
           type="submit"
-          [disabled] = "form.invalid"
           class="btn btn-primary">Filter</button>
 
       </div>
     </div>
+
 
   </form>
 

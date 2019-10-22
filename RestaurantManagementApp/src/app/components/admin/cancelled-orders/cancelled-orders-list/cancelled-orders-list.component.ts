@@ -1,6 +1,6 @@
 import * as moment from 'moment';
-import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {ActivatedRoute, Data} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
@@ -40,7 +40,7 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.dateForm = new FormGroup({
-      date: new FormControl('')
+      'date': new FormControl('')
     });
 
     this.route.data.subscribe(
@@ -59,10 +59,6 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-  }
-
-  s() {
-    console.log(this.dateForm.controls['date'].value.begin);
   }
 
 
@@ -87,6 +83,9 @@ export class CancelledOrdersListComponent implements OnInit, AfterViewInit {
   }
 
   filterOrdersByDate() {
+
+    if (this.dateForm.controls['date'].value === '') { return; }
+
     const startDate = moment(this.dateForm.controls['date'].value.begin, 'h:mm:ss A, Do MMMM YYYY');
     const endDate = moment(this.dateForm.controls['date'].value.end, 'h:mm:ss A, Do MMMM YYYY');
 

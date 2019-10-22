@@ -87,7 +87,8 @@ import { OrderCancellationReasonComponent } from './bottom-sheets/order-cancella
 import {CancelledOrderedItemsResolverService} from './route-resolvers/cancelled-ordered-items-resolver.service';
 import {CancelledOrderedItemResolverService} from './route-resolvers/cancelled-ordered-item-resolver.service';
 import {OverrideInventoryPriceComponent} from './components/admin/inventories/override-inventory-price/override-inventory-price.component';
-import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
+
+
 
 @NgModule({
   declarations: [
@@ -163,9 +164,7 @@ import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
     }),
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    NgxPrintModule,
-    SatDatepickerModule,
-    SatNativeDateModule
+    NgxPrintModule
   ],
 
   providers: [
@@ -204,6 +203,4 @@ import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule {}

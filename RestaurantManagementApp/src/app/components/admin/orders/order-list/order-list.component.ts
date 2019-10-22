@@ -1,7 +1,7 @@
 import * as moment from 'moment';
-import {NgForm} from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import {ActivatedRoute, Data} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
@@ -21,6 +21,7 @@ export class OrderListComponent implements OnInit, AfterViewInit {
   filteredOrders: Order[] = [];
 
   tables: Table[] = [];
+  dateForm: FormGroup;
 
   displayedColumns: string[] =
     [
@@ -39,6 +40,10 @@ export class OrderListComponent implements OnInit, AfterViewInit {
               public adminService: AdminService) { }
 
   ngOnInit() {
+    this.dateForm = new FormGroup({
+      'date': new FormControl('')
+    });
+
     this.route.data.
     subscribe(
       ( data: Data) => {
@@ -72,9 +77,12 @@ export class OrderListComponent implements OnInit, AfterViewInit {
     this.filteredOrders = this.orders;
   }
 
-  filterOrdersByDate(form: NgForm) {
-    const startDate = moment(form.value.date[0], 'h:mm:ss A, Do MMMM YYYY');
-    const endDate = moment(form.value.date[1], 'h:mm:ss A, Do MMMM YYYY');
+  filterOrdersByDate() {
+    if (this.dateForm.controls['date'].value === '') { return; }
+
+    const startDate = moment(this.dateForm.controls['date'].value.begin, 'h:mm:ss A, Do MMMM YYYY');
+    const endDate = moment(this.dateForm.controls['date'].value.end, 'h:mm:ss A, Do MMMM YYYY');
+
     this.filteredOrders = [];
     this.dataSource.data = [];
 
